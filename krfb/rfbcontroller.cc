@@ -184,7 +184,7 @@ void KeyboardEvent::initKeycodes() {
 	XDisplayKeycodes(dpy,&minkey,&maxkey);
 	ASSERT(minkey >= 8);
 	ASSERT(maxkey < 256);
-	keymap = XGetKeyboardMapping(dpy, minkey,
+	keymap = (KeySym*) XGetKeyboardMapping(dpy, minkey,
 				     (maxkey - minkey + 1),
 				     &syms_per_keycode);
 	ASSERT(keymap);
@@ -728,6 +728,10 @@ void RFBController::sendSessionEstablished()
 {
         emit sessionEstablished();
 }
+
+#ifdef __osf__
+extern "C" Bool XShmQueryExtension(Display*);
+#endif
 
 bool RFBController::checkX11Capabilities() {
 	int bp1, bp2, majorv, minorv;
