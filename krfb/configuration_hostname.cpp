@@ -13,7 +13,6 @@
 /* WirLab 29.1.2002 */
 #include <sys/errno.h>
 /* WirLab 31.1.2002 */
-#include <features.h>
 #include <net/if_arp.h>
 #include <net/route.h>
 #include <sys/ioctl.h>
