@@ -273,6 +273,7 @@ rfbNewTCPOrUDPClient(rfbScreen,sock,isUDP)
       cl->enableCursorShapeUpdates = FALSE;
       cl->useRichCursorEncoding = FALSE;
       cl->enableLastRectEncoding = FALSE;
+      cl->disableBackground = FALSE;
 
       cl->compStreamInited = FALSE;
       cl->compStream.total_in = 0;
@@ -299,6 +300,7 @@ rfbNewTCPOrUDPClient(rfbScreen,sock,isUDP)
 
     cl->clientData = NULL;
     cl->clientGoneHook = doNothingWithClient;
+    cl->negotiationFinishedHook = doNothingWithClient;
     switch (cl->screen->newClientHook(cl)) {
     case RFB_CLIENT_ON_HOLD:
 	    cl->onHold = TRUE;
@@ -663,6 +665,7 @@ rfbProcessClientNormalMessage(cl)
 	cl->useCopyRect = FALSE;
 	cl->enableCursorShapeUpdates = FALSE;
 	cl->enableLastRectEncoding = FALSE;
+	cl->disableBackground = FALSE;
 
         for (i = 0; i < msg.se.nEncodings; i++) {
             if ((n = ReadExact(cl, (char *)&enc, 4)) <= 0) {
@@ -749,6 +752,11 @@ rfbProcessClientNormalMessage(cl)
 		    cl->enableLastRectEncoding = TRUE;
 		}
 		break;
+	    case rfbEncodingBackground:
+	        rfbLog("Disabling background for client "
+		      "%s\n", cl->host);
+	        cl->disableBackground = TRUE;
+	        break;
 #ifdef BACKCHANNEL
 	    case rfbEncodingBackChannel:
 	        if (!cl->enableBackChannel) {
@@ -779,6 +787,8 @@ rfbProcessClientNormalMessage(cl)
         if (cl->preferredEncoding == -1) {
             cl->preferredEncoding = rfbEncodingRaw;
         }
+
+	cl->negotiationFinishedHook(cl);
 
         return;
     }

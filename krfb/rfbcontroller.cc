@@ -151,6 +151,11 @@ static void clientGoneHook(rfbClientPtr)
 	self->handleClientGone();
 }
 
+static void negotiationFinishedHook(rfbClientPtr cl)
+{
+	self->handleNegotiationFinished(cl);
+}
+
 
 
 void ConnectionDialog::closeEvent(QCloseEvent *)
@@ -311,6 +316,8 @@ void SessionEstablishedEvent::exec() {
 RFBController::RFBController(Configuration *c) :
 	allowDesktopControl(false),
 	configuration(c),
+	disableBackgroundPending(false),
+	disableBackgroundState(false),
 	closePending(false),
 	forcedClose(false)
 {
@@ -370,9 +377,9 @@ void RFBController::startServer(int inetdFd, bool xtestGrab)
 
 	if ( server->rfbServerFormat.bitsPerPixel == 8 ) {
 		server->rfbServerFormat.redShift = 0;
-		server->rfbServerFormat.greenShift = 2;
-		server->rfbServerFormat.blueShift = 5;
-		server->rfbServerFormat.redMax   = 3;
+		server->rfbServerFormat.greenShift = 3;
+		server->rfbServerFormat.blueShift = 6;
+		server->rfbServerFormat.redMax   = 7;
 		server->rfbServerFormat.greenMax = 7;
 		server->rfbServerFormat.blueMax  = 3;
 	} else {
@@ -485,6 +492,7 @@ void RFBController::refuseConnection()
 bool RFBController::checkAsyncEvents()
 {
 	bool closed = false;
+	bool backgroundActionRequired = false;
 	asyncMutex.lock();
 	VNCEvent *e;
 	for (e = asyncQueue.first(); e; e = asyncQueue.next())
@@ -495,17 +503,25 @@ bool RFBController::checkAsyncEvents()
 		closed = true;
 		closePending = false;
 	}
+	if (disableBackgroundPending != disableBackgroundState) 
+		backgroundActionRequired = true;
 	asyncMutex.unlock();
+
+	if (backgroundActionRequired && (!closed) && !configuration->disableBackground())
+		disableBackground(disableBackgroundPending);
+
 	return closed;
 }
 
-void RFBController::restoreBackground() {
-	if (configuration->disableBackground()) {
-		DCOPRef ref("kdesktop", "KBackgroundIface");
-		ref.setDCOPClient(KApplication::dcopClient());
+void RFBController::disableBackground(bool state) {
+	if (disableBackgroundState == state)
+		return;
 
-		ref.send("setBackgroundEnabled(bool)", bool(true));
-	}
+	disableBackgroundState = state;
+	DCOPRef ref("kdesktop", "KBackgroundIface");
+	ref.setDCOPClient(KApplication::dcopClient());
+
+	ref.send("setBackgroundEnabled(bool)", bool(!state));
 }
 
 void RFBController::connectionClosed()
@@ -515,7 +531,7 @@ void RFBController::connectionClosed()
 			     .arg(remoteIp));
 
 	idleTimer.stop();
-	restoreBackground();
+	disableBackground(false);
 	state = RFB_WAITING;
 	if (forcedClose)
 	        emit quitApp();
@@ -527,7 +543,7 @@ void RFBController::closeConnection()
 {
         forcedClose = true;
 	if (state == RFB_CONNECTED) {
-		restoreBackground();
+	        disableBackground(false);
 
 		if (!checkAsyncEvents()) {
 			asyncMutex.lock();
@@ -571,7 +587,7 @@ void RFBController::idleSlot()
 		defaultPtrAddEvent(0, p.x(),p.y(), server->rfbClientHead);
 	asyncMutex.unlock();
 
-	checkAsyncEvents();
+	checkAsyncEvents(); // check 2nd time (see 3rd line)
 }
 
 void RFBController::dialogAccepted()
@@ -657,6 +673,7 @@ bool RFBController::handleCheckPassword(rfbClientPtr cl,
 enum rfbNewClientAction RFBController::handleNewClient(rfbClientPtr cl)
 {
 	int socket = cl->sock;
+	cl->negotiationFinishedHook = negotiationFinishedHook;
 
 	QString host, port;
 	KSocketAddress *ksa = KExtendedSocket::peerAddress(socket);
@@ -712,6 +729,13 @@ void RFBController::handleClientGone()
 	asyncMutex.unlock();
 }
 
+void RFBController::handleNegotiationFinished(rfbClientPtr cl)
+{
+	asyncMutex.lock();
+	disableBackgroundPending = cl->disableBackground;
+	asyncMutex.unlock();
+}
+
 void RFBController::handleKeyEvent(bool down, KeySym keySym) {
 	if (!allowDesktopControl)
 		return;
@@ -747,12 +771,8 @@ void RFBController::sendKNotifyEvent(const QString &n, const QString &d)
 
 void RFBController::sendSessionEstablished()
 {
-	if (configuration->disableBackground()) {
-		DCOPRef ref("kdesktop", "KBackgroundIface");
-		ref.setDCOPClient(KApplication::dcopClient());
-
-		ref.send("setBackgroundEnabled(bool)", bool(false));
-	}
+	if (configuration->disableBackground())
+		disableBackground(true);
         emit sessionEstablished(remoteIp);
 }
 

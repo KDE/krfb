@@ -391,6 +391,7 @@ typedef struct sraRegion* sraRegionPtr;
  */
 
 typedef void (*ClientGoneHookPtr)(struct _rfbClientRec* cl);
+typedef void (*NegotiationFinishedHookPtr)(struct _rfbClientRec* cl);
 
 typedef struct _rfbClientRec {
   
@@ -404,7 +405,11 @@ typedef struct _rfbClientRec {
      * This is useful if the IO functions have to behave client specific.
      */
     void* clientData;
+
     ClientGoneHookPtr clientGoneHook;
+
+    /* negotiationFinishedHook is called when the negotiation phase has ended */
+    NegotiationFinishedHookPtr negotiationFinishedHook;
 
     SOCKET sock;
     char *host;
@@ -526,6 +531,7 @@ typedef struct _rfbClientRec {
   
     Bool enableLastRectEncoding;   /* client supports LastRect encoding */
     Bool enableSoftCursorUpdates;  /* client supports softcursor updates */
+    Bool disableBackground;        /* client wants to disable background */
     Bool enableCursorShapeUpdates; /* client supports cursor shape updates */
     Bool useRichCursorEncoding;    /* rfbEncodingRichCursor is preferred */
     Bool cursorWasChanged;         /* cursor shape update should be sent */

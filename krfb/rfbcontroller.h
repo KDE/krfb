@@ -138,6 +138,7 @@ public:
 	void handlePointerEvent(int button_mask, int x, int y);
 	enum rfbNewClientAction handleNewClient(rfbClientPtr cl);
 	void handleClientGone();
+	void handleNegotiationFinished(rfbClientPtr cl);
 	int getPort();
 	void startServer(int inetdFd = -1, bool xtestGrab = true);
 
@@ -160,7 +161,7 @@ private:
 	void sendKNotifyEvent(const QString &name, const QString &desc);
 	bool checkAsyncEvents();
 	void sendSessionEstablished();
-	void restoreBackground();
+	void disableBackground(bool state);
 	
 	QString remoteIp;
 	bool allowDesktopControl;
@@ -179,6 +180,8 @@ private:
 	QMutex asyncMutex;
 	QPtrList<VNCEvent> asyncQueue;
 
+	bool disableBackgroundPending; // background, as desired by libvncserver
+	bool disableBackgroundState; // real background state
 	bool closePending; // set when libvncserver detected close
 	bool forcedClose;  // set when user closed connection
 private slots:

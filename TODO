@@ -2,7 +2,6 @@
 For 3.2:
 - write SLP service template for remote desktop protocols
   (documentation)
-- extend VNC to enable/disable desktop wallpaper
 - enhance RFB with SASL authentication (Kerberos)
 - encrypted connections (using SASL and/or SSL/TLS)
 - with kerberos/ssl: display name of remote user in connection dialog,
