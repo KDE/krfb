@@ -43,11 +43,12 @@ K_EXPORT_COMPONENT_FACTORY( libkcm_krfb, KcmKRfbFactory("kcm_krfb") );
 
 KcmKRfb::KcmKRfb(QWidget *p, const char *name, const QStringList &) :
 	KCModule(p, name),
-	m_configuration(KRFB_CONFIGURATION_MODE),
-	m_confWidget(this) {
+	m_configuration(KRFB_CONFIGURATION_MODE) {
+
+        m_confWidget = new ConfigurationWidget(this);
 
 	QVBoxLayout *l = new QVBoxLayout(this, 0, KDialog::spacingHint());
-	l->add(&m_confWidget);
+	l->add(m_confWidget);
 
 	setButtons(Default|Apply|Reset);
 
@@ -60,13 +61,13 @@ KcmKRfb::KcmKRfb(QWidget *p, const char *name, const QStringList &) :
 
 	load();
 
-	connect(m_confWidget.passwordInput, SIGNAL(textChanged(const QString&)), SLOT(configChanged()) );
-	connect(m_confWidget.allowUninvitedCB, SIGNAL(clicked()), SLOT(configChanged()) );
-	connect(m_confWidget.confirmConnectionsCB, SIGNAL(clicked()), SLOT(configChanged()) );
-	connect(m_confWidget.allowDesktopControlCB, SIGNAL(clicked()), SLOT(configChanged()) );
-	connect((QObject*)m_confWidget.createInvitation, SIGNAL(clicked()), 
+	connect(m_confWidget->passwordInput, SIGNAL(textChanged(const QString&)), SLOT(configChanged()) );
+	connect(m_confWidget->allowUninvitedCB, SIGNAL(clicked()), SLOT(configChanged()) );
+	connect(m_confWidget->confirmConnectionsCB, SIGNAL(clicked()), SLOT(configChanged()) );
+	connect(m_confWidget->allowDesktopControlCB, SIGNAL(clicked()), SLOT(configChanged()) );
+	connect((QObject*)m_confWidget->createInvitation, SIGNAL(clicked()), 
 		&m_configuration, SLOT(showInvitationDialog()) );
-	connect((QObject*)m_confWidget.manageInvitations, SIGNAL(clicked()), 
+	connect((QObject*)m_confWidget->manageInvitations, SIGNAL(clicked()), 
 		&m_configuration, SLOT(showManageInvitationsDialog()) );
 }
 
@@ -103,20 +104,20 @@ void KcmKRfb::load() {
 	bool kinetdAvailable, krfbAvailable;
 	checkKInetd(kinetdAvailable, krfbAvailable);
 
-	m_confWidget.allowUninvitedCB->setChecked(m_configuration.allowUninvitedConnections());
-	m_confWidget.confirmConnectionsCB->setChecked(m_configuration.askOnConnect());
-	m_confWidget.allowDesktopControlCB->setChecked(m_configuration.allowDesktopControl());
-	m_confWidget.passwordInput->setText(m_configuration.password());
+	m_confWidget->allowUninvitedCB->setChecked(m_configuration.allowUninvitedConnections());
+	m_confWidget->confirmConnectionsCB->setChecked(m_configuration.askOnConnect());
+	m_confWidget->allowDesktopControlCB->setChecked(m_configuration.allowDesktopControl());
+	m_confWidget->passwordInput->setText(m_configuration.password());
 }
 
 void KcmKRfb::save() {
 
         m_configuration.update();
-	bool allowUninvited = m_confWidget.allowUninvitedCB->isChecked();
+	bool allowUninvited = m_confWidget->allowUninvitedCB->isChecked();
 	m_configuration.setAllowUninvited(allowUninvited);
-	m_configuration.setAskOnConnect(m_confWidget.confirmConnectionsCB->isChecked());
-	m_configuration.setAllowDesktopControl(m_confWidget.allowDesktopControlCB->isChecked());
-	m_configuration.setPassword(m_confWidget.passwordInput->text());
+	m_configuration.setAskOnConnect(m_confWidget->confirmConnectionsCB->isChecked());
+	m_configuration.setAllowDesktopControl(m_confWidget->allowDesktopControlCB->isChecked());
+	m_configuration.setPassword(m_confWidget->passwordInput->text());
 	m_configuration.save();
 }
 
@@ -124,10 +125,10 @@ void KcmKRfb::defaults() {
 	bool kinetdAvailable, krfbAvailable;
 	checkKInetd(kinetdAvailable, krfbAvailable);
 
-	m_confWidget.allowUninvitedCB->setChecked(false);
-	m_confWidget.confirmConnectionsCB->setChecked(false);
-	m_confWidget.allowDesktopControlCB->setChecked(false);
-	m_confWidget.passwordInput->setText("");
+	m_confWidget->allowUninvitedCB->setChecked(false);
+	m_confWidget->confirmConnectionsCB->setChecked(false);
+	m_confWidget->allowDesktopControlCB->setChecked(false);
+	m_confWidget->passwordInput->setText("");
 }
 
 const KAboutData *KcmKRfb::aboutData() const

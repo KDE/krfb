@@ -29,7 +29,7 @@ class KcmKRfb : public KCModule {
 	Q_OBJECT
 private:
 	Configuration m_configuration;
-	ConfigurationWidget m_confWidget;
+	ConfigurationWidget *m_confWidget;
 	KAboutData *m_about;
 	void checkKInetd(bool&, bool&);
 public:
