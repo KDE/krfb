@@ -90,8 +90,9 @@ void TrayIcon::prepareQuit() {
         quitting = true;
 }
 
+
+
 void TrayIcon::showConnectedMessage() {
-	enableControlAction->setChecked(configuration->allowDesktopControl());
 
         setPixmap(trayIconOpen);
         KPassivePopup2 *p = KPassivePopup2::message(i18n("Desktop Sharing"), 
@@ -110,6 +111,10 @@ void TrayIcon::showDisconnectedMessage() {
 						    trayIconClosed,
 						    this);
 	connect(p, SIGNAL(closed()), this, SIGNAL(diconnectedMessageDisplayed()));
+}
+
+void TrayIcon::contextMenuAboutToShow(KPopupMenu*) {
+	enableControlAction->setChecked(configuration->allowDesktopControl());
 }
 
 #include "trayicon.moc"

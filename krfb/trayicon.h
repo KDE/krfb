@@ -67,7 +67,11 @@ public slots:
         void showConnectedMessage();
         void showDisconnectedMessage();
 
+protected:
+	void contextMenuAboutToShow(KPopupMenu*);
+
 private:
+
   	KPixmap trayIconOpen;
   	KPixmap trayIconClosed;
 	Configuration *configuration;
