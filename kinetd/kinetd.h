@@ -27,6 +27,7 @@
 #include <qstring.h>
 #include <qdatetime.h>
 #include <qtimer.h>
+#include <dnssd/publicservice.h>
 
 #include "kserviceregistry.h"
 
@@ -37,6 +38,8 @@ private:
 	QString m_serviceName;
 	QString m_serviceURL, m_serviceAttributes;
 	QStringList m_registeredServiceURLs;
+	QString m_dnssdName, m_dnssdType;
+	QMap<QString,QString> m_dnssdData;
 	int m_serviceLifetime;
 	int m_port;
 	int m_portBase, m_autoPortRange;
@@ -46,6 +49,7 @@ private:
 	QString m_argument;
 	bool m_enabled;
 	bool m_serviceRegistered, m_registerService;
+	bool m_dnssdRegister, m_dnssdRegistered;
 	QDateTime m_expirationTime;
 	QDateTime m_slpLifetimeEnd;
 	QString m_uuid;
@@ -55,10 +59,12 @@ private:
 
 	KConfig *m_config;
 	KServiceRegistry *m_srvreg;
+	DNSSD::PublicService *m_dnssdreg;
 
 	void freePort();
 	void loadConfig(KService::Ptr s);
 	void setEnabledInternal(bool e, const QDateTime &ex);
+	void dnssdRegister(bool enabled);
 	void setServiceRegistrationEnabledInternal(bool enabled);
 
 public:

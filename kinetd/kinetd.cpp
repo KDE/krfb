@@ -42,7 +42,8 @@ PortListener::PortListener(KService::Ptr s,
 	m_serviceRegistered(false),
 	m_socket(0),
 	m_config(config),
-	m_srvreg(srvreg)
+	m_srvreg(srvreg),
+	m_dnssdreg(0)
 {
 	m_uuid = createUUID();
 	loadConfig(s);
@@ -78,8 +79,11 @@ bool PortListener::acquirePort() {
 		SLOT(accepted(KSocket*)));
 
 	bool s = m_registerService;
+	bool sd =m_dnssdRegister;
 	setServiceRegistrationEnabledInternal(false);
+	dnssdRegister(false);
 	setServiceRegistrationEnabledInternal(s);
+	dnssdRegister(sd);
 	return true;
 }
 
@@ -89,6 +93,7 @@ void PortListener::freePort() {
 		delete m_socket;
 	m_socket = 0;
 	setServiceRegistrationEnabledInternal(m_registerService);
+	dnssdRegister(false);
 }
 
 void PortListener::loadConfig(KService::Ptr s) {
@@ -99,7 +104,7 @@ void PortListener::loadConfig(KService::Ptr s) {
 	m_multiInstance = false;
 
 	QVariant vid, vport, vautoport, venabled, vargument, vmultiInstance, vurl,
-	  vsattributes, vslifetime;
+	  vsattributes, vslifetime, vdname, vdtype, vddata;
 
 	m_execPath = s->exec().utf8();
 	vid = s->property("X-KDE-KINETD-id");
@@ -111,6 +116,9 @@ void PortListener::loadConfig(KService::Ptr s) {
 	vurl = s->property("X-KDE-KINETD-serviceURL");
 	vsattributes = s->property("X-KDE-KINETD-serviceAttributes");
 	vslifetime = s->property("X-KDE-KINETD-serviceLifetime");
+	vdname = s->property("X-KDE-KINETD-DNSSD-Name");
+	vdtype = s->property("X-KDE-KINETD-DNSSD-Type");
+	vddata = s->property("X-KDE-KINETD-DNSSD-Properties");
 
 	if (!vid.isValid()) {
 		kdDebug() << "Kinetd cannot load service "<<m_serviceName
@@ -152,6 +160,24 @@ void PortListener::loadConfig(KService::Ptr s) {
 	}
 	else
 		m_serviceAttributes = "";
+	if (vddata.isValid()) {
+		QStringList attrs = vddata.toStringList();
+		for (QStringList::iterator it=attrs.begin();
+		it!=attrs.end();it++) {
+		    QString key = (*it).section('=',0,0);
+		    QString value =  processServiceTemplate((*it).section('=',1))[0];
+		    if (!key.isEmpty()) m_dnssdData[key]=value;
+		    }
+	}
+	if (vdname.isValid() && vdtype.isValid()) {
+		m_dnssdName = processServiceTemplate(vdname.toString())[0];
+		m_dnssdType = vdtype.toString();
+		m_dnssdRegister = true;
+		kdDebug() << "DNS-SD register is enabled\n";
+	}
+	else 
+	        m_dnssdRegister = false;
+		
 
 	m_slpLifetimeEnd = QDateTime::currentDateTime().addSecs(m_serviceLifetime);
 	m_defaultPortBase = m_portBase;
@@ -281,6 +307,7 @@ void PortListener::setEnabledInternal(bool e, const QDateTime &ex) {
 		if (m_port < 0)
 			acquirePort();
 		m_enabled = m_port >= 0;
+
 	}
 	else {
 		freePort();
@@ -298,6 +325,7 @@ bool PortListener::isServiceRegistrationEnabled() {
 
 void PortListener::setServiceRegistrationEnabled(bool e) {
 	setServiceRegistrationEnabledInternal(e);
+	dnssdRegister(e && m_enabled);
 	m_config->setGroup("ListenerConfig");
 	m_config->writeEntry("enable_srvreg_" + m_serviceName, e);
 	m_config->sync();
@@ -332,6 +360,23 @@ void PortListener::setServiceRegistrationEnabledInternal(bool e) {
 		while (it != m_registeredServiceURLs.end())
 			m_srvreg->unregisterService(*(it++));
 		m_serviceRegistered = false;
+	}
+}
+
+void PortListener::dnssdRegister(bool e) {
+	if (m_dnssdName.isNull() || m_dnssdType.isNull())
+		return;
+	if (m_dnssdRegistered ==  e)
+		return;
+	if (e) {
+		m_dnssdRegistered=true;
+		m_dnssdreg = new DNSSD::PublicService(m_dnssdName,m_dnssdType,m_port);
+		m_dnssdreg->setTextData(m_dnssdData);
+		m_dnssdreg->publishAsync();
+	} else {
+		m_dnssdRegistered=false;
+		delete m_dnssdreg;
+		m_dnssdreg=0;
 	}
 }
 
