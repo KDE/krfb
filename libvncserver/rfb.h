@@ -65,16 +65,22 @@ typedef unsigned long KeySym;
 #include <machine/endian.h>
 #define _BYTE_ORDER BYTE_ORDER
 #define _LITTLE_ENDIAN LITTLE_ENDIAN
-#elif sparc
-#define _LITTLE_ENDIAN 1234
-#define _BYTE_ORDER _LITTLE_ENDIAN
+#elif defined (__SVR4) && defined (__sun) /* Solaris */
+#include <sys/types.h>
+#if defined(__sparc)
+  /* SPARC here (big endian) */
+#define _BYTE_ORDER 4321
+#elif defined(__i386)
+#define _BYTE_ORDER 1234
+#else
+#error Solaris 2.5.1 had ppc support did it not? :-)
+#endif
 #undef Bool
 #define Bool char
 #undef SIGNED
 #define SIGNED
 #include <sys/types.h>
 /* typedef unsigned int pthread_t; */
-/* SUN cc seems to have problems with inclusion of sys/types! */
 #elif defined(WIN32)
 #define _LITTLE_ENDIAN 1234
 #define _BYTE_ORDER _LITTLE_ENDIAN
@@ -88,7 +94,7 @@ typedef unsigned long KeySym;
 #define _BYTE_ORDER __BYTE_ORDER
 #endif
 
-#ifndef _LITTLE_ENDIAN
+#if !defined(_LITTLE_ENDIAN) && defined(__LITTLE_ENDIAN)
 #define _LITTLE_ENDIAN __LITTLE_ENDIAN
 #endif
 
@@ -102,6 +108,10 @@ typedef unsigned long KeySym;
 #include <sys/time.h>
 #include <netinet/in.h>
 #define SOCKET int
+#endif
+
+#ifndef INADDR_NONE
+#define                INADDR_NONE     ((in_addr_t) 0xffffffff)
 #endif
 
 #ifdef HAVE_PTHREADS
@@ -556,7 +566,7 @@ extern void rfbInitSockets(rfbScreenInfoPtr rfbScreen);
 extern void rfbDisconnectUDPSock(rfbScreenInfoPtr rfbScreen);
 extern void rfbCloseClient(rfbClientPtr cl);
 extern int ReadExact(rfbClientPtr cl, char *buf, int len);
-extern int ReadExactTimeout(rfbClientPtr cl, char *buf, int len, int timeout);
+extern int ReadExactTimeout(rfbClientPtr cl, char *buf, int len,int timeout);
 extern int WriteExact(rfbClientPtr cl, const char *buf, int len);
 extern void rfbCheckFds(rfbScreenInfoPtr rfbScreen,long usec);
 extern int rfbConnect(rfbScreenInfoPtr rfbScreen, char* host, int port);
@@ -747,7 +757,7 @@ void rfbDrawLine(rfbScreenInfoPtr s,int x1,int y1,int x2,int y2,Pixel col);
    with a NULL.
    It returns the index in the list or -1 if cancelled or something else
    wasn't kosher. */
-typedef void (*SelectionChangedHookPtr)(int);
+typedef void (*SelectionChangedHookPtr)(int _index);
 extern int rfbSelectBox(rfbScreenInfoPtr rfbScreen,
 			rfbFontDataPtr font, char** list,
 			int x1, int y1, int x2, int y2,
@@ -757,6 +767,7 @@ extern int rfbSelectBox(rfbScreenInfoPtr rfbScreen,
 /* cargs.c */
 
 extern void rfbUsage(void);
+extern void rfbPurgeArguments(int* argc,int* position,int count,char *argv[]);
 extern void rfbProcessArguments(rfbScreenInfoPtr rfbScreen,int* argc, char *argv[]);
 extern void rfbProcessSizeArguments(int* width,int* height,int* bpp,int* argc, char *argv[]);
 

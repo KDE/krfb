@@ -64,12 +64,15 @@ struct timeval
 }
 ;
 #endif
-#ifndef INADDR_NONE
-#define                INADDR_NONE     ((in_addr_t) 0xffffffff)
-#endif
-
 #include <fcntl.h>
 #include <errno.h>
+
+#ifdef USE_LIBWRAP
+#include <syslog.h>
+#include <tcpd.h>
+int allow_severity=LOG_INFO;
+int deny_severity=LOG_WARNING;
+#endif
 
 #include "rfb.h"
 
@@ -177,7 +180,7 @@ rfbCheckFds(rfbScreenInfoPtr rfbScreen,long usec)
     fd_set fds;
     struct timeval tv;
     struct sockaddr_in addr;
-    unsigned int addrlen = sizeof(addr);
+    socklen_t addrlen = sizeof(addr);
     char buf[6];
     const int one = 1;
     int sock;
@@ -226,6 +229,16 @@ rfbCheckFds(rfbScreenInfoPtr rfbScreen,long usec)
 	    close(sock);
 	    return;
 	}
+
+#ifdef USE_LIBWRAP
+	if(!hosts_ctl("vnc",STRING_UNKNOWN,inet_ntoa(addr.sin_addr),
+		      STRING_UNKNOWN)) {
+	  rfbLog("Rejected connection from client %s\n",
+		 inet_ntoa(addr.sin_addr));
+	  close(sock);
+	  return;
+	}
+#endif
 
 	rfbLog("Got connection from client %s\n", inet_ntoa(addr.sin_addr));
 
@@ -298,7 +311,7 @@ rfbCloseClient(cl)
     LOCK(cl->updateMutex);
     if (cl->sock != -1) {
       FD_CLR(cl->sock,&(cl->screen->allFds));
-      shutdown(cl->sock, SHUT_RDWR);
+      shutdown(cl->sock,SHUT_RDWR);
       close(cl->sock);
       cl->sock = -1;
     }
@@ -357,28 +370,12 @@ rfbConnect(rfbScreen, host, port)
  */
 
 int
-ReadExact(cl, buf, len)
-     rfbClientPtr cl;
-     char *buf;
-     int len;
-{
-    return ReadExactTimeout(cl, buf, len, rfbMaxClientWait);
-}
-
-/*
- * ReadExact with customizable timeout (in ms).
- */
-int
-ReadExactTimeout(cl, buf, len, timeout)
-     rfbClientPtr cl;
-     char *buf;
-     int len;
+ReadExactTimeout(rfbClientPtr cl, char* buf, int len, int timeout)
 {
     int sock = cl->sock;
     int n;
     fd_set fds;
     struct timeval tv;
-    int totalTimeWaited = 0;
 
     while (len > 0) {
         n = read(sock, buf, len);
@@ -400,36 +397,28 @@ ReadExactTimeout(cl, buf, len, timeout)
                 return n;
             }
 
-            /* Retry every 5 seconds until we exceed the timeout.  We
-               need to do this because select doesn't necessarily return
-               immediately when the other end has gone away */
-
             FD_ZERO(&fds);
             FD_SET(sock, &fds);
-
-            tv.tv_sec = 5;
-            tv.tv_usec = 0;
-
+            tv.tv_sec = timeout / 1000;
+            tv.tv_usec = (timeout % 1000) * 1000;
             n = select(sock+1, &fds, NULL, &fds, &tv);
             if (n < 0) {
                 rfbLogPerror("ReadExact: select");
                 return n;
             }
             if (n == 0) {
-	        totalTimeWaited += 5000;
-                if (totalTimeWaited >= timeout) {
-		    errno = ETIMEDOUT;
-		    return -1;
-		}
-            } else {
-                totalTimeWaited = 0;
+                errno = ETIMEDOUT;
+                return -1;
             }
         }
     }
     return 1;
 }
 
-
+int ReadExact(rfbClientPtr cl,char* buf,int len)
+{
+  return(ReadExactTimeout(cl,buf,len,rfbMaxClientWait));
+}
 
 /*
  * WriteExact writes an exact number of bytes to a client.  Returns 1 if

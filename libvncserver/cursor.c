@@ -143,7 +143,7 @@ rfbSendCursorShape(cl)
 	 bpp2=cl->format.bitsPerPixel/8;
        (*cl->translateFn)(cl->translateLookupTable,
 		       &(cl->screen->rfbServerFormat),
-                       &cl->format, (char*)pCursor->richSource,
+                       &cl->format, pCursor->richSource,
 		       &cl->updateBuf[cl->ublen],
                        pCursor->width*bpp1, pCursor->width, pCursor->height);
 
@@ -241,7 +241,7 @@ rfbCursorPtr rfbMakeXCursor(int width,int height,char* cursorString,char* maskSt
 	for(i=0,bit=0x80;i<width;i++,bit=(bit&1)?0x80:bit>>1,cp++)
 	  if(*cp!=' ') cursor->mask[j*w+i/8]|=bit;
    } else
-     cursor->mask = (unsigned char*)rfbMakeMaskForXCursor(width,height,(char*)cursor->source);
+     cursor->mask = (unsigned char*)rfbMakeMaskForXCursor(width,height,cursor->source);
 
    return(cursor);
 }
@@ -272,6 +272,8 @@ char* rfbMakeMaskForXCursor(int width,int height,char* source)
 void rfbFreeCursor(rfbCursorPtr cursor)
 {
    if(cursor) {
+      if(cursor->richSource)
+	 free(cursor->richSource);
       free(cursor->source);
       free(cursor->mask);
       free(cursor);
@@ -308,12 +310,12 @@ void MakeRichCursorFromXCursor(rfbScreenInfoPtr rfbScreen,rfbCursorPtr cursor)
    rfbPixelFormat* format=&rfbScreen->rfbServerFormat;
    int i,j,w=(cursor->width+7)/8,bpp=format->bitsPerPixel/8;
    CARD32 background,foreground;
-   char *cp,*back=(char*)&background,*fore=(char*)&foreground;
+   char *back=(char*)&background,*fore=(char*)&foreground;
+   unsigned char *cp;
    unsigned char bit;
 
-   cp=(char*)calloc(cursor->width*bpp,cursor->height);
-   cursor->richSource = (unsigned char*) cp;
-
+   cp=cursor->richSource=(unsigned char*)calloc(cursor->width*bpp,cursor->height);
+   
    if(format->bigEndian) {
       back+=4-bpp;
       fore+=4-bpp;
@@ -435,8 +437,8 @@ void rfbDrawCursor(rfbScreenInfoPtr s)
 }
 
 /* for debugging */
-/*
-static void rfbPrintXCursor(rfbCursorPtr cursor)
+
+void rfbPrintXCursor(rfbCursorPtr cursor)
 {
    int i,i1,j,w=(cursor->width+7)/8;
    unsigned char bit;
@@ -449,7 +451,6 @@ static void rfbPrintXCursor(rfbCursorPtr cursor)
       putchar('\n');
    }
 }
-*/
 
 extern void rfbSetCursor(rfbScreenInfoPtr rfbScreen,rfbCursorPtr c,Bool freeOld)
 {

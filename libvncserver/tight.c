@@ -449,7 +449,7 @@ CheckSolidTile(cl, x, y, w, h, colorPtr, needSameColor)
 #define DEFINE_CHECK_SOLID_FUNCTION(bpp)                                      \
                                                                               \
 static Bool                                                                   \
-CheckSolidTile##bpp(cl, x, y, w, h, colorPtr, needSameColor)                      \
+CheckSolidTile##bpp(cl, x, y, w, h, colorPtr, needSameColor)                  \
     rfbClientPtr cl;  \
     int x, y, w, h;                                                           \
     CARD32 *colorPtr;                                                         \

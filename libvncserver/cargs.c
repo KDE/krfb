@@ -14,7 +14,8 @@
 
 #include "rfb.h"
 
-void rfbUsage(void)
+void
+rfbUsage(void)
 {
     fprintf(stderr, "-rfbport port          TCP port for RFB protocol\n");
     fprintf(stderr, "-rfbwait time          max time in ms to wait for RFB client\n");
@@ -32,6 +33,17 @@ void rfbUsage(void)
                     "                       connection comes in (refuse new connection "
                                                                 "instead)\n");
     exit(1);
+}
+
+/* purges COUNT arguments from ARGV at POSITION and decrements ARGC.
+   POSITION points to the first non purged argument afterwards. */
+void rfbPurgeArguments(int* argc,int* position,int count,char *argv[])
+{
+  int amount=(*argc)-(*position)-count;
+  if(amount)
+    memmove(argv+(*position),argv+(*position)+count,sizeof(char*)*amount);
+  (*argc)-=count;
+  (*position)--;
 }
 
 void 
@@ -79,25 +91,21 @@ rfbProcessArguments(rfbScreenInfoPtr rfbScreen,int* argc, char *argv[])
                rfbScreen->height = atoi(argv[++i]);
         } else {
 	    /* we just remove the processed arguments from the list */
-	    if(i != i1) {
-	        memmove(argv+i1,argv+i,sizeof(char*)*(*argc-i));
-		*argc -= i-i1;
-	    }
+	    if(i != i1)
+	        rfbPurgeArguments(argc,&i,i1-i,argv);
 	    i1++;
-	    i = i1-1;
+	    i++;
         }
     }
     *argc -= i-i1;
 }
 
-/*
-static void rfbSizeUsage()
+void rfbSizeUsage()
 {
     fprintf(stderr, "-width                 sets the width of the framebuffer\n");
     fprintf(stderr, "-height                sets the height of the framebuffer\n");
     exit(1);
 }
-*/
 
 void 
 rfbProcessSizeArguments(int* width,int* height,int* bpp,int* argc, char *argv[])

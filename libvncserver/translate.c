@@ -38,7 +38,7 @@ Bool rfbEconomicTranslate = FALSE;
  */
 
 static const rfbPixelFormat BGR233Format = {
-  8, 8, 0, 1, 7, 7, 3, 0, 3, 6, 0, 0
+    8, 8, 0, 1, 7, 7, 3, 0, 3, 6, 0, 0
 };
 
 
@@ -359,7 +359,8 @@ rfbSetTranslateFunction(cl)
  */
 
 static Bool
-rfbSetClientColourMapBGR233(rfbClientPtr cl)
+rfbSetClientColourMapBGR233(cl)
+    rfbClientPtr cl;
 {
     char buf[sz_rfbSetColourMapEntriesMsg + 256 * 3 * 2];
     rfbSetColourMapEntriesMsg *scme = (rfbSetColourMapEntriesMsg *)buf;

@@ -296,8 +296,13 @@ subrectEncode##bpp(rfbClientPtr cl, CARD##bpp *data, int w, int h,              
  */                                                                             \
                                                                                 \
 static void                                                                     \
-testColours##bpp(CARD##bpp *data, int size, Bool *mono, Bool *solid,            \
-                 CARD##bpp *bg, CARD##bpp* fg)                                  \
+testColours##bpp(data,size,mono,solid,bg,fg)                                    \
+    CARD##bpp *data;                                                            \
+    int size;                                                                   \
+    Bool *mono;                                                                 \
+    Bool *solid;                                                                \
+    CARD##bpp *bg;                                                              \
+    CARD##bpp *fg;                                                              \
 {                                                                               \
     CARD##bpp colour1 = 0, colour2 = 0;                                         \
     int n1 = 0, n2 = 0;                                                         \
