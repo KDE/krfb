@@ -19,8 +19,8 @@ typedef struct {
   enum { SELECTING, OK, CANCEL } state;
 } rfbSelectData;
 
-static const char* okStr="OK";
-static const char* cancelStr="Cancel";
+static const char okStr[] = "OK";
+static const char cancelStr[] = "Cancel";
 
 static void selPaintButtons(rfbSelectData* m,Bool invertOk,Bool invertCancel)
 {

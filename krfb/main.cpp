@@ -41,7 +41,7 @@
 
 #define VERSION "1.0"
 
-static const char *description = I18N_NOOP("VNC-compatible server to share "
+static const char description[] = I18N_NOOP("VNC-compatible server to share "
 					   "KDE desktops");
 #define ARG_KINETD "kinetd"
 
