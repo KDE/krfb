@@ -19,7 +19,7 @@ type=DATA
 [Config for BinMakefileAm]
 bin_program=krfb
 cxxflags=-O0 -g3 -Wall
-ldadd=\s-lXext -lX11 $(LIB_QT) $(LIB_KDECORE) $(LIB_KDEUI)
+ldadd=\s$(LIB_QT) $(LIB_KDECORE) $(LIB_KDEUI)
 ldflags=\s
 
 [General]
@@ -52,7 +52,7 @@ User Interface=*.kdevdlg,*.ui,*.rc
 groups=Headers,Sources,User Interface,Translations,GNU,Others
 
 [Makefile.am]
-files=krfb.kdevprj,AUTHORS,COPYING,ChangeLog,INSTALL,README,TODO,krfb.lsm
+files=krfb.kdevprj,admin,AUTHORS,COPYING,ChangeLog,INSTALL,README,TODO,krfb.lsm
 sub_dirs=krfb,po,doc
 type=normal
 
@@ -63,6 +63,12 @@ install_location=
 type=DATA
 
 [TODO]
+dist=true
+install=false
+install_location=
+type=DATA
+
+[admin]
 dist=true
 install=false
 install_location=
@@ -109,7 +115,7 @@ type=SOURCE
 [krfb/krfb.desktop]
 dist=true
 install=true
-install_location=$$(kde_appsdir)/Applications/krfb.desktop
+install_location=$$(kde_datadir)/kicker/applets/krfb.desktop
 type=DATA
 
 [krfb/krfb.h]

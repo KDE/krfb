@@ -15,13 +15,13 @@ libkrfb_la_SOURCES = myview.ui krfb.cpp
 EXTRA_DIST = krfb.cpp krfb.h myview.ui krfb.desktop lo32-app-krfb.png 
 
 install-data-local:
-	$(mkinstalldirs) $(kde_appsdir)/Applications/
-	$(INSTALL_DATA) $(srcdir)/krfb.desktop $(kde_appsdir)/Applications/krfb.desktop
+	$(mkinstalldirs) $(kde_datadir)/kicker/applets/
+	$(INSTALL_DATA) $(srcdir)/krfb.desktop $(kde_datadir)/kicker/applets/krfb.desktop
 	$(mkinstalldirs) $(kde_icondir)/locolor/32x32/apps/
 	$(INSTALL_DATA) $(srcdir)/lo32-app-krfb.png $(kde_icondir)/locolor/32x32/apps/krfb.png
 
 uninstall-local:
-	-rm -f $(kde_appsdir)/Applications/krfb.desktop
+	-rm -f $(kde_datadir)/kicker/applets/krfb.desktop
 	-rm -f $(kde_icondir)/locolor/32x32/apps/krfb.png
 
 ####### kdevelop will overwrite this part!!! (end)############
@@ -39,11 +39,7 @@ uninstall-local:
 # kde_wallpaperdir  Where general wallpapers should go to.
 
 # set the include path for X, qt and KDE
-INCLUDES= $(all_includes)
 METASOURCES = AUTO
-
-# Set to install the library
-lib_LTLIBRARIES = libkrfb.la
 
 # them while "make clean", use CLEANFILES
 DISTCLEANFILES = $(METASOURCES)
@@ -65,12 +61,4 @@ messages:
 	if test -n "$$LIST"; then \
 		 $(XGETTEXT) -C -ki18n -x $(kde_includes)/kde.pot $$LIST -o ../po/krfb.pot; \
 	fi
-
-install-data-local:
-	$(mkinstalldirs) $(kde_datadir)/kicker/applets/
-	$(INSTALL_DATA) krfb.desktop $(kde_datadir)/kicker/applets/krfb.desktop
- 
-uninstall-local:
-	-rm -f $(kde_datadir)/kicker/applets/krfb.desktop  
-
 

@@ -2,7 +2,7 @@
 
 SUBDIRS = krfb po doc 
 
-EXTRA_DIST = krfb.kdevprj AUTHORS COPYING ChangeLog INSTALL README TODO krfb.lsm 
+EXTRA_DIST = krfb.kdevprj admin AUTHORS COPYING ChangeLog INSTALL README TODO krfb.lsm 
 
 ####### kdevelop will overwrite this part!!! (end)############
 # not a GNU package. You can remove this line, if 
@@ -23,8 +23,6 @@ MAINTAINERCLEANFILES = subdirs configure.in acinclude.m4 configure.files
 package-messages:
 	$(MAKE) -f admin/Makefile.common package-messages
 	$(MAKE) -C po merge
-
-EXTRA_DIST = admin 
 
 dist-hook:
 	cd $(top_distdir) && perl admin/am_edit -padmin
