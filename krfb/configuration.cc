@@ -423,15 +423,21 @@ void Configuration::inviteEmail() {
                      "Otherwise you can use any VNC client with the following parameters:\n\n"
 		     "Host: %4:%5\n"
 		     "Password: %6\n\n"
-		     "For security reasons this invitation will expire at %7.")
+		     "Alternatively you can click on the link below to start the VNC session\n"
+		     "within your webbrowser.\n"
+		     "\n"
+		     "	http://%7:%8/\n"
+		     "\n"
+		     "For security reasons this invitation will expire at %9.")
 			.arg(inv.password())
 			.arg(hostname())
 			.arg(port())
 			.arg(hostname())
 			.arg(port())
 			.arg(inv.password())
+			.arg(hostname())
+			.arg(5800) // determine with dcop ... later ...
 			.arg(KGlobal::locale()->formatDateTime(inv.expirationTime())));
-
 }
 
 #include "configuration.moc"
