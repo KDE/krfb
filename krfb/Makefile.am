@@ -15,7 +15,7 @@ krfb_LDADD   = libkrfbconfig.la ../libvncserver/libvncserver.la ../srvloc/libsrv
 krfb_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 krfb_COMPILE_FIRST = manageinvitations.h personalinvitation.h invite.h
 
-noinst_HEADER = configuration.h invitation.h invite.h krfbiface.h \
+noinst_HEADERS = configuration.h invitation.h invite.h krfbiface.h \
                 krfbifaceimpl.h rfbcontroller.h trayicon.h xupdatescanner.h
 
 
