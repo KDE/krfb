@@ -95,9 +95,6 @@
                     <property name="text">
                         <string>&amp;Refuse Connection</string>
                     </property>
-                    <property name="accel">
-                        <string>Alt+R</string>
-                    </property>
                     <property name="default">
                         <bool>true</bool>
                     </property>
