@@ -28,6 +28,7 @@
 #include <qdatastream.h>
 #include <kapplication.h>
 #include <kdialog.h>
+#include <knuminput.h>
 #include <klocale.h>
 #include <kaboutdata.h>
 #include <kconfig.h>
@@ -66,12 +67,13 @@ KcmKRfb::KcmKRfb(QWidget *p, const char *name, const QStringList &) :
 	connect(m_confWidget->allowUninvitedCB, SIGNAL(clicked()), SLOT(configChanged()) );
 	connect(m_confWidget->confirmConnectionsCB, SIGNAL(clicked()), SLOT(configChanged()) );
 	connect(m_confWidget->allowDesktopControlCB, SIGNAL(clicked()), SLOT(configChanged()) );
+	connect(m_confWidget->autoPortCB, SIGNAL(clicked()), SLOT(configChanged()) );
+	connect(m_confWidget->portInput, SIGNAL(valueChanged(int)), SLOT(configChanged()) );
 	connect((QObject*)m_confWidget->createInvitation, SIGNAL(clicked()), 
 		&m_configuration, SLOT(showInvitationDialog()) );
 	connect((QObject*)m_confWidget->manageInvitations, SIGNAL(clicked()), 
 		&m_configuration, SLOT(showManageInvitationsDialog()) );
 }
-
 KcmKRfb::~KcmKRfb() {
 	delete m_about;
 }
@@ -109,6 +111,9 @@ void KcmKRfb::load() {
 	m_confWidget->confirmConnectionsCB->setChecked(m_configuration.askOnConnect());
 	m_confWidget->allowDesktopControlCB->setChecked(m_configuration.allowDesktopControl());
 	m_confWidget->passwordInput->setText(m_configuration.password());
+	m_confWidget->autoPortCB->setChecked(m_configuration.preferredPort()<0);
+	m_confWidget->portInput->setValue(m_configuration.preferredPort()> 0 ?
+		m_configuration.preferredPort() : 5900);
 }
 
 void KcmKRfb::save() {
@@ -119,6 +124,10 @@ void KcmKRfb::save() {
 	m_configuration.setAskOnConnect(m_confWidget->confirmConnectionsCB->isChecked());
 	m_configuration.setAllowDesktopControl(m_confWidget->allowDesktopControlCB->isChecked());
 	m_configuration.setPassword(m_confWidget->passwordInput->text());
+	if (m_confWidget->autoPortCB->isChecked())
+		m_configuration.setPreferredPort(-1);
+	else
+		m_configuration.setPreferredPort(m_confWidget->portInput->value());
 	m_configuration.save();
 }
 
@@ -130,6 +139,8 @@ void KcmKRfb::defaults() {
 	m_confWidget->confirmConnectionsCB->setChecked(false);
 	m_confWidget->allowDesktopControlCB->setChecked(false);
 	m_confWidget->passwordInput->setText("");
+	m_confWidget->autoPortCB->setChecked(true);
+	m_confWidget->portInput->setValue(5900);
 }
 
 const KAboutData *KcmKRfb::aboutData() const

@@ -8,8 +8,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>394</width>
-            <height>260</height>
+            <width>532</width>
+            <height>325</height>
         </rect>
     </property>
     <property name="caption">
@@ -28,185 +28,326 @@
         <property name="spacing">
             <number>6</number>
         </property>
-        <widget class="QGroupBox">
+        <widget class="QTabWidget">
             <property name="name">
-                <cstring>GroupBox1</cstring>
+                <cstring>TabWidget2</cstring>
             </property>
-            <property name="title">
-                <string>Invitations</string>
-            </property>
-            <grid>
+            <widget class="QWidget">
                 <property name="name">
-                    <cstring>unnamed</cstring>
+                    <cstring>tab</cstring>
                 </property>
-                <property name="margin">
-                    <number>11</number>
-                </property>
-                <property name="spacing">
-                    <number>6</number>
-                </property>
-                <widget class="QPushButton" row="1" column="0">
+                <attribute name="title">
+                    <string>Acc&amp;ess</string>
+                </attribute>
+                <vbox>
                     <property name="name">
-                        <cstring>createInvitation</cstring>
+                        <cstring>unnamed</cstring>
                     </property>
-                    <property name="text">
-                        <string>Create Invitation...</string>
+                    <property name="margin">
+                        <number>11</number>
                     </property>
-                    <property name="toolTip" stdset="0">
-                        <string></string>
+                    <property name="spacing">
+                        <number>6</number>
                     </property>
-                    <property name="whatsThis" stdset="0">
-                        <string>Click to create a new invitation.</string>
-                    </property>
-                </widget>
-                <widget class="QPushButton" row="1" column="1">
-                    <property name="name">
-                        <cstring>manageInvitations</cstring>
-                    </property>
-                    <property name="text">
-                        <string>Manage Invitations...</string>
-                    </property>
-                    <property name="whatsThis" stdset="0">
-                        <string>Click to view or delete the open invitations.</string>
-                    </property>
-                </widget>
-            </grid>
-        </widget>
-        <widget class="QButtonGroup">
-            <property name="name">
-                <cstring>ButtonGroup7</cstring>
-            </property>
-            <property name="sizePolicy">
-                <sizepolicy>
-                    <hsizetype>5</hsizetype>
-                    <vsizetype>1</vsizetype>
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                </sizepolicy>
-            </property>
-            <property name="title">
-                <string>Uninvited Connections</string>
-            </property>
-            <vbox>
-                <property name="name">
-                    <cstring>unnamed</cstring>
-                </property>
-                <property name="margin">
-                    <number>11</number>
-                </property>
-                <property name="spacing">
-                    <number>6</number>
-                </property>
-                <widget class="QCheckBox">
-                    <property name="name">
-                        <cstring>allowUninvitedCB</cstring>
-                    </property>
-                    <property name="text">
-                        <string>Allow &amp;uninvited connections</string>
-                    </property>
-                    <property name="checked">
-                        <bool>true</bool>
-                    </property>
-                    <property name="whatsThis" stdset="0">
-                        <string>Select this option to allow connecting without inviting. This is useful if you want to access your desktop remotely.</string>
-                    </property>
-                </widget>
-                <widget class="QCheckBox">
-                    <property name="name">
-                        <cstring>confirmConnectionsCB</cstring>
-                    </property>
-                    <property name="text">
-                        <string>&amp;Confirm uninvited connections before accepting</string>
-                    </property>
-                    <property name="whatsThis" stdset="0">
-                        <string>If enabled a dialog will appear when somebody attempts to connect, asking you whether you want to accept the connection.</string>
-                    </property>
-                </widget>
-                <widget class="QCheckBox">
-                    <property name="name">
-                        <cstring>allowDesktopControlCB</cstring>
-                    </property>
-                    <property name="text">
-                        <string>Allow u&amp;ninvited connections to control the desktop</string>
-                    </property>
-                    <property name="whatsThis" stdset="0">
-                        <string>Enable this option to allow uninvited user to control your desktop (using mouse and keyboard).</string>
-                    </property>
-                </widget>
-                <widget class="QFrame">
-                    <property name="name">
-                        <cstring>Frame4</cstring>
-                    </property>
-                    <property name="sizePolicy">
-                        <sizepolicy>
-                            <hsizetype>5</hsizetype>
-                            <vsizetype>0</vsizetype>
-                            <horstretch>0</horstretch>
-                            <verstretch>0</verstretch>
-                        </sizepolicy>
-                    </property>
-                    <property name="frameShape">
-                        <enum>NoFrame</enum>
-                    </property>
-                    <property name="frameShadow">
-                        <enum>Plain</enum>
-                    </property>
-                    <property name="layoutMargin" stdset="0">
-                    </property>
-                    <vbox>
+                    <widget class="QGroupBox">
                         <property name="name">
-                            <cstring>unnamed</cstring>
+                            <cstring>GroupBox1</cstring>
                         </property>
-                        <property name="margin">
-                            <number>6</number>
+                        <property name="title">
+                            <string>Invitations</string>
                         </property>
-                        <property name="spacing">
-                            <number>6</number>
-                        </property>
-                        <widget class="QLabel">
+                        <grid>
                             <property name="name">
-                                <cstring>TextLabel1</cstring>
+                                <cstring>unnamed</cstring>
                             </property>
-                            <property name="sizePolicy">
-                                <sizepolicy>
-                                    <hsizetype>1</hsizetype>
-                                    <vsizetype>0</vsizetype>
-                                    <horstretch>0</horstretch>
-                                    <verstretch>0</verstretch>
-                                </sizepolicy>
+                            <property name="margin">
+                                <number>11</number>
                             </property>
-                            <property name="text">
-                                <string>Password:</string>
+                            <property name="spacing">
+                                <number>6</number>
                             </property>
-                        </widget>
-                        <widget class="QLineEdit">
+                            <widget class="QPushButton" row="1" column="0">
+                                <property name="name">
+                                    <cstring>createInvitation</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>Create &amp;Invitation...</string>
+                                </property>
+                                <property name="toolTip" stdset="0">
+                                    <string></string>
+                                </property>
+                                <property name="whatsThis" stdset="0">
+                                    <string>Click to create a new invitation.</string>
+                                </property>
+                            </widget>
+                            <widget class="QPushButton" row="1" column="1">
+                                <property name="name">
+                                    <cstring>manageInvitations</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>&amp;Manage Invitations...</string>
+                                </property>
+                                <property name="whatsThis" stdset="0">
+                                    <string>Click to view or delete the open invitations.</string>
+                                </property>
+                            </widget>
+                        </grid>
+                    </widget>
+                    <widget class="QButtonGroup">
+                        <property name="name">
+                            <cstring>ButtonGroup7</cstring>
+                        </property>
+                        <property name="sizePolicy">
+                            <sizepolicy>
+                                <hsizetype>5</hsizetype>
+                                <vsizetype>1</vsizetype>
+                                <horstretch>0</horstretch>
+                                <verstretch>0</verstretch>
+                            </sizepolicy>
+                        </property>
+                        <property name="title">
+                            <string>Uninvited Connections</string>
+                        </property>
+                        <vbox>
                             <property name="name">
-                                <cstring>passwordInput</cstring>
+                                <cstring>unnamed</cstring>
                             </property>
-                            <property name="maxLength">
-                                <number>9</number>
+                            <property name="margin">
+                                <number>11</number>
                             </property>
-                            <property name="echoMode">
-                                <enum>Password</enum>
+                            <property name="spacing">
+                                <number>6</number>
                             </property>
-                            <property name="whatsThis" stdset="0">
-                                <string>If you allow uninvited connections it is highly recommended to set a password in order to protect your computer from unauthorized access.</string>
+                            <widget class="QCheckBox">
+                                <property name="name">
+                                    <cstring>allowUninvitedCB</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>Allow &amp;uninvited connections</string>
+                                </property>
+                                <property name="checked">
+                                    <bool>true</bool>
+                                </property>
+                                <property name="whatsThis" stdset="0">
+                                    <string>Select this option to allow connecting without inviting. This is useful if you want to access your desktop remotely.</string>
+                                </property>
+                            </widget>
+                            <widget class="QCheckBox">
+                                <property name="name">
+                                    <cstring>confirmConnectionsCB</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>&amp;Confirm uninvited connections before accepting</string>
+                                </property>
+                                <property name="whatsThis" stdset="0">
+                                    <string>If enabled a dialog will appear when somebody attempts to connect, asking you whether you want to accept the connection.</string>
+                                </property>
+                            </widget>
+                            <widget class="QCheckBox">
+                                <property name="name">
+                                    <cstring>allowDesktopControlCB</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>Allow u&amp;ninvited connections to control the desktop</string>
+                                </property>
+                                <property name="whatsThis" stdset="0">
+                                    <string>Enable this option to allow uninvited user to control your desktop (using mouse and keyboard).</string>
+                                </property>
+                            </widget>
+                            <widget class="QFrame">
+                                <property name="name">
+                                    <cstring>Frame4</cstring>
+                                </property>
+                                <property name="sizePolicy">
+                                    <sizepolicy>
+                                        <hsizetype>5</hsizetype>
+                                        <vsizetype>0</vsizetype>
+                                        <horstretch>0</horstretch>
+                                        <verstretch>0</verstretch>
+                                    </sizepolicy>
+                                </property>
+                                <property name="frameShape">
+                                    <enum>NoFrame</enum>
+                                </property>
+                                <property name="frameShadow">
+                                    <enum>Plain</enum>
+                                </property>
+                                <property name="layoutMargin" stdset="0">
+                                </property>
+                                <vbox>
+                                    <property name="name">
+                                        <cstring>unnamed</cstring>
+                                    </property>
+                                    <property name="margin">
+                                        <number>6</number>
+                                    </property>
+                                    <property name="spacing">
+                                        <number>6</number>
+                                    </property>
+                                    <widget class="QLabel">
+                                        <property name="name">
+                                            <cstring>TextLabel1</cstring>
+                                        </property>
+                                        <property name="sizePolicy">
+                                            <sizepolicy>
+                                                <hsizetype>1</hsizetype>
+                                                <vsizetype>0</vsizetype>
+                                                <horstretch>0</horstretch>
+                                                <verstretch>0</verstretch>
+                                            </sizepolicy>
+                                        </property>
+                                        <property name="text">
+                                            <string>Password:</string>
+                                        </property>
+                                    </widget>
+                                    <widget class="QLineEdit">
+                                        <property name="name">
+                                            <cstring>passwordInput</cstring>
+                                        </property>
+                                        <property name="maxLength">
+                                            <number>9</number>
+                                        </property>
+                                        <property name="echoMode">
+                                            <enum>Password</enum>
+                                        </property>
+                                        <property name="whatsThis" stdset="0">
+                                            <string>If you allow uninvited connections it is highly recommended to set a password in order to protect your computer from unauthorized access.</string>
+                                        </property>
+                                    </widget>
+                                </vbox>
+                            </widget>
+                        </vbox>
+                    </widget>
+                    <widget class="QFrame">
+                        <property name="name">
+                            <cstring>Frame13</cstring>
+                        </property>
+                        <property name="frameShape">
+                            <enum>NoFrame</enum>
+                        </property>
+                        <property name="frameShadow">
+                            <enum>Plain</enum>
+                        </property>
+                    </widget>
+                </vbox>
+            </widget>
+            <widget class="QWidget">
+                <property name="name">
+                    <cstring>tab</cstring>
+                </property>
+                <attribute name="title">
+                    <string>&amp;Network</string>
+                </attribute>
+                <vbox>
+                    <property name="name">
+                        <cstring>unnamed</cstring>
+                    </property>
+                    <property name="margin">
+                        <number>11</number>
+                    </property>
+                    <property name="spacing">
+                        <number>6</number>
+                    </property>
+                    <widget class="QGroupBox">
+                        <property name="name">
+                            <cstring>GroupBox3</cstring>
+                        </property>
+                        <property name="title">
+                            <string>Network Port</string>
+                        </property>
+                        <vbox>
+                            <property name="name">
+                                <cstring>unnamed</cstring>
                             </property>
-                        </widget>
-                    </vbox>
-                </widget>
-            </vbox>
-        </widget>
-        <widget class="QFrame">
-            <property name="name">
-                <cstring>Frame13</cstring>
-            </property>
-            <property name="frameShape">
-                <enum>NoFrame</enum>
-            </property>
-            <property name="frameShadow">
-                <enum>Plain</enum>
-            </property>
+                            <property name="margin">
+                                <number>11</number>
+                            </property>
+                            <property name="spacing">
+                                <number>6</number>
+                            </property>
+                            <widget class="QCheckBox">
+                                <property name="name">
+                                    <cstring>autoPortCB</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>Assign &amp;port automatically</string>
+                                </property>
+                                <property name="checked">
+                                    <bool>true</bool>
+                                </property>
+                                <property name="whatsThis" stdset="0">
+                                    <string>Check this opion to assign the network port automatically. This is recommended unless you network setup requires you to use a fixed port, for example because of a firewall.</string>
+                                </property>
+                            </widget>
+                            <widget class="QFrame">
+                                <property name="name">
+                                    <cstring>portInputFrame</cstring>
+                                </property>
+                                <property name="enabled">
+                                    <bool>false</bool>
+                                </property>
+                                <property name="frameShape">
+                                    <enum>NoFrame</enum>
+                                </property>
+                                <property name="frameShadow">
+                                    <enum>Plain</enum>
+                                </property>
+                                <hbox>
+                                    <property name="name">
+                                        <cstring>unnamed</cstring>
+                                    </property>
+                                    <property name="margin">
+                                        <number>11</number>
+                                    </property>
+                                    <property name="spacing">
+                                        <number>6</number>
+                                    </property>
+                                    <widget class="QLabel">
+                                        <property name="name">
+                                            <cstring>TextLabel1_2</cstring>
+                                        </property>
+                                        <property name="text">
+                                            <string>Port:</string>
+                                        </property>
+                                    </widget>
+                                    <widget class="KIntNumInput">
+                                        <property name="name">
+                                            <cstring>portInput</cstring>
+                                        </property>
+                                        <property name="value">
+                                            <number>5900</number>
+                                        </property>
+                                        <property name="minValue">
+                                            <number>1024</number>
+                                        </property>
+                                        <property name="maxValue">
+                                            <number>32767</number>
+                                        </property>
+                                        <property name="toolTip" stdset="0">
+                                            <string>Enter the TCP port number here</string>
+                                        </property>
+                                        <property name="whatsThis" stdset="0">
+                                            <string>Use this field to set a static port number for the desktop sharing service. Note that if the port is already in use the Desktop Sharing service will not be accessible until you free it. It is recommended to assign the port automatically unless you know what you are doing.
+Most VNC clients use a display number instead of the actual port. This display number is the offset to port 5900, so port 5901 has the display number 1.</string>
+                                        </property>
+                                    </widget>
+                                </hbox>
+                            </widget>
+                        </vbox>
+                    </widget>
+                    <widget class="QFrame">
+                        <property name="name">
+                            <cstring>Frame8</cstring>
+                        </property>
+                        <property name="frameShape">
+                            <enum>NoFrame</enum>
+                        </property>
+                        <property name="frameShadow">
+                            <enum>Plain</enum>
+                        </property>
+                    </widget>
+                </vbox>
+            </widget>
         </widget>
     </vbox>
 </widget>
@@ -217,23 +358,22 @@
 </images>
 <connections>
     <connection>
-        <sender>allowUninvitedCB</sender>
+        <sender>autoPortCB</sender>
         <signal>toggled(bool)</signal>
-        <receiver>confirmConnectionsCB</receiver>
-        <slot>setEnabled(bool)</slot>
-    </connection>
-    <connection>
-        <sender>allowUninvitedCB</sender>
-        <signal>toggled(bool)</signal>
-        <receiver>allowDesktopControlCB</receiver>
-        <slot>setEnabled(bool)</slot>
-    </connection>
-    <connection>
-        <sender>allowUninvitedCB</sender>
-        <signal>toggled(bool)</signal>
-        <receiver>passwordInput</receiver>
-        <slot>setEnabled(bool)</slot>
+        <receiver>portInputFrame</receiver>
+        <slot>setDisabled(bool)</slot>
     </connection>
 </connections>
+<tabstops>
+    <tabstop>autoPortCB</tabstop>
+    <tabstop>TabWidget2</tabstop>
+    <tabstop>createInvitation</tabstop>
+    <tabstop>manageInvitations</tabstop>
+    <tabstop>allowUninvitedCB</tabstop>
+    <tabstop>confirmConnectionsCB</tabstop>
+    <tabstop>allowDesktopControlCB</tabstop>
+    <tabstop>passwordInput</tabstop>
+    <tabstop>portInput</tabstop>
+</tabstops>
 <layoutdefaults spacing="6" margin="11"/>
 </UI>

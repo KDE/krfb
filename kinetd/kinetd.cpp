@@ -39,7 +39,6 @@ PortListener::PortListener(KService::Ptr s, KConfig *config) :
 }
 
 bool PortListener::acquirePort() {
-kdDebug() << "acquire, base="<<m_portBase<<" range="<<m_autoPortRange<<endl;
 	if (m_socket) {
 		if ((m_port >= m_portBase) &&
 		    (m_port < (m_portBase + m_autoPortRange)))
@@ -165,6 +164,9 @@ int PortListener::port() {
 }
 
 bool PortListener::setPort(int port, int autoPortRange) {
+	if ((port == m_portBase) && (autoPortRange == m_autoPortRange))
+		return (m_port != -1);
+
 	m_config->setGroup("ListenerConfig");
 	if (port > 0) {
 		m_portBase = port;
@@ -180,7 +182,7 @@ bool PortListener::setPort(int port, int autoPortRange) {
 		m_config->deleteEntry("port_base_" + m_serviceName);
 		m_config->deleteEntry("auto_port_range_"+m_serviceName);
 	}
-kdDebug() << "set port, new base="<<m_portBase<<" range="<<m_autoPortRange<<endl;
+
 	m_config->sync();
 	if (m_enabled)
 		return acquirePort();
@@ -294,9 +296,6 @@ void KInetD::setPortRetryTimer(bool retry) {
 				unmappedPorts++;
 		pl = m_portListeners.next();
 	}
-
-if (unmappedPorts > 0)
-kdDebug() << "re-check timer set"<<endl;
 
 	if (unmappedPorts > 0)
 		m_portRetryTimer.start(30000, false);

@@ -80,10 +80,12 @@ public:
 	QString password() const;
 	QString hostname() const;
 	int port() const;
+	int preferredPort() const;
 
         void setAllowUninvited(bool allowUninvited);
         void setAskOnConnect(bool askOnConnect);
 	void setPassword(QString password);
+	void setPreferredPort(int p);
 	void save();
 	void update();
 
@@ -107,9 +109,10 @@ private:
         void saveToDialogs();
 	Invitation createInvitation();
 	void closeInvDlg();
-	void setKInetd(const QDateTime &date);
-	void setKInetd(bool enabled);
-	void setPortKInetd();
+	void setKInetdEnabled(const QDateTime &date);
+	void setKInetdEnabled(bool enabled);
+	void getPortFromKInetd();
+	void setKInetdPort(int port);
 	void doKinetdConf();
 
 	krfb_mode m_mode;
@@ -123,7 +126,7 @@ private:
 	bool allowDesktopControlFlag;
 	bool allowUninvitedFlag;
 
-	int portNum;
+	int portNum, preferredPortNum; 
 
 	QString passwordString;
 	QValueList<Invitation> invitationList;

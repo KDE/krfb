@@ -83,7 +83,7 @@ Configuration::~Configuration() {
         save();
 }
 
-void Configuration::setKInetd(bool enabled) {
+void Configuration::setKInetdEnabled(bool enabled) {
 	DCOPClient *d = KApplication::dcopClient();
 
 	QByteArray sdata;
@@ -93,7 +93,7 @@ void Configuration::setKInetd(bool enabled) {
 	d->send ("kded", "kinetd", "setEnabled(QString,bool)", sdata);
 }
 
-void Configuration::setKInetd(const QDateTime &date) {
+void Configuration::setKInetdEnabled(const QDateTime &date) {
 	DCOPClient *d = KApplication::dcopClient();
 
 	QByteArray sdata;
@@ -103,7 +103,7 @@ void Configuration::setKInetd(const QDateTime &date) {
 	d->send ("kded", "kinetd", "setEnabled(QString,QDateTime)", sdata);
 }
 
-void Configuration::setPortKInetd() {
+void Configuration::getPortFromKInetd() {
 	DCOPClient *d = KApplication::dcopClient();
 
 	QByteArray sdata, rdata;
@@ -120,16 +120,28 @@ void Configuration::setPortKInetd() {
 	answer >> portNum;
 }
 
+void Configuration::setKInetdPort(int p) {
+	DCOPClient *d = KApplication::dcopClient();
+
+	QByteArray sdata, rdata;
+	QCString replyType;
+	QDataStream arg(sdata, IO_WriteOnly);
+	arg << QString("krfb") << p << 1;
+	if (!d->call ("kded", "kinetd", "setPort(QString,int,int)", sdata, replyType, rdata))
+		return; // nicer error here
+}
+
 void Configuration::removeInvitation(QValueList<Invitation>::iterator it) {
 	invitationList.remove(it);
 	save();
 }
 
 void Configuration::doKinetdConf() {
+	setKInetdPort(preferredPortNum);
 
 	if (allowUninvitedFlag) {
-		setKInetd(true);
-		setPortKInetd();
+		setKInetdEnabled(true);
+		getPortFromKInetd();
 		return;
 	}
 
@@ -143,12 +155,12 @@ void Configuration::doKinetdConf() {
 		it++;
 	}
 	if (lastExpiration.isNull() || (lastExpiration < QDateTime::currentDateTime())) {
-		setKInetd(false);
+		setKInetdEnabled(false);
 		portNum = -1;
 	}
 	else {
-		setKInetd(lastExpiration);
-		setPortKInetd();
+		setKInetdEnabled(lastExpiration);
+		getPortFromKInetd();
 	}
 }
 
@@ -159,6 +171,7 @@ void Configuration::loadFromKConfig() {
 	askOnConnectFlag = c.readBoolEntry("confirmUninvitedConnection", true);
 	allowDesktopControlFlag = c.readBoolEntry("allowDesktopControl", false);
 	passwordString = c.readEntry("uninvitedPassword", "");
+	preferredPortNum = c.readNumEntry("preferredPort", -1);
 
 	invitationList.clear();
 	c.setGroup("invitations");
@@ -176,6 +189,7 @@ void Configuration::saveToKConfig() {
 	c.writeEntry("allowDesktopControl", allowDesktopControlFlag);
 	c.writeEntry("allowUninvited", allowUninvitedFlag);
 	c.writeEntry("uninvitedPassword", passwordString);
+	c.writeEntry("preferredPort", preferredPortNum);
 
 	c.setGroup("invitations");
 	int num = invitationList.count();
@@ -279,6 +293,17 @@ int Configuration::port() const
 		return portNum;
 	else
 		return portNum - 5900;
+}
+
+// use p=-1 for defaults
+void Configuration::setPreferredPort(int p)
+{
+	preferredPortNum = p;		
+}
+
+int Configuration::preferredPort() const
+{
+	return preferredPortNum;
 }
 
 

@@ -1,7 +1,7 @@
 METASOURCES = AUTO
 
 # Code
-lib_LTLIBRARIES = libkcm_krfb.la
+kde_module_LTLIBRARIES = libkcm_krfb.la
 
 libkcm_krfb_la_SOURCES = configurationwidget.ui kcm_krfb.cpp 
 libkcm_krfb_la_LDFLAGS  = $(all_libraries) -module -avoid-version -no-undefined
