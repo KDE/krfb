@@ -32,6 +32,9 @@
 #include <klocale.h>
 #include <kglobal.h>
 
+#include <unistd.h>
+#include <fcntl.h>
+
 PortListener::PortListener(KService::Ptr s,
 			   KConfig *config,
 			   KServiceRegistry *srvreg) :
@@ -187,6 +190,9 @@ void PortListener::accepted(KSocket *sock) {
 		delete sock;
 		return;
 	}
+
+	// disable CLOEXEC flag, fixes #77412
+	fcntl(sock->socket(), F_SETFD, fcntl(sock->socket(), F_GETFD) & ~FD_CLOEXEC);
 
 	m_process.clearArguments();
 	m_process << m_execPath << m_argument << QString::number(sock->socket());
