@@ -310,7 +310,7 @@
                                     <bool>true</bool>
                                 </property>
                                 <property name="whatsThis" stdset="0">
-                                    <string>Check this opion to assign the network port automatically. This is recommended unless your network setup requires you to use a fixed port, for example because of a firewall.</string>
+                                    <string>Check this option to assign the network port automatically. This is recommended unless your network setup requires you to use a fixed port, for example because of a firewall.</string>
                                 </property>
                             </widget>
                             <widget class="QFrame">
