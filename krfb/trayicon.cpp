@@ -47,7 +47,7 @@ KPassivePopup2 *KPassivePopup2::message( const QString &caption, const QString &
 }
 
 
-TrayIcon::TrayIcon(KDialog *d, Configuration *c) : 
+TrayIcon::TrayIcon(KDialog *d, Configuration *c) :
 	KSystemTray(0, "krfb trayicon"),
 	configuration(c),
 	aboutDialog(d),
@@ -60,14 +60,15 @@ TrayIcon::TrayIcon(KDialog *d, Configuration *c) :
 	setPixmap(trayIconClosed);
 	QToolTip::add(this, i18n("Desktop Sharing - connecting"));
 
-	manageInvitationsAction = new KAction(i18n("Manage &Invitations"), QString::null, 
-					      0, this, SIGNAL(showManageInvitations()), 
+	manageInvitationsAction = new KAction(i18n("Manage &Invitations"), QString::null,
+					      0, this, SIGNAL(showManageInvitations()),
 					      &actionCollection);
 	manageInvitationsAction->plug(contextMenu());
 
 	contextMenu()->insertSeparator();
 
 	enableControlAction = new KToggleAction(i18n("Enable Remote Control"));
+	enableControlAction->setCheckedState(i18n("Disable Remote Control"));
 	enableControlAction->plug(contextMenu());
 	enableControlAction->setEnabled(false);
 	connect(enableControlAction, SIGNAL(toggled(bool)), SIGNAL(enableDesktopControl(bool)));
@@ -96,8 +97,8 @@ void TrayIcon::prepareQuit() {
 void TrayIcon::showConnectedMessage(QString host) {
 
         setPixmap(trayIconOpen);
-        KPassivePopup2::message(i18n("Desktop Sharing"), 
-				i18n("The remote user has been authenticated and is now connected."), 
+        KPassivePopup2::message(i18n("Desktop Sharing"),
+				i18n("The remote user has been authenticated and is now connected."),
 				trayIconOpen,
 				this);
 	QToolTip::add(this, i18n("Desktop Sharing - connected with %1").arg(host));
@@ -109,8 +110,8 @@ void TrayIcon::showDisconnectedMessage() {
 
 	QToolTip::add(this, i18n("Desktop Sharing - disconnected"));
         setPixmap(trayIconClosed);
-        KPassivePopup2 *p = KPassivePopup2::message(i18n("Desktop Sharing"), 
-						    i18n("The remote user has closed the connection."), 
+        KPassivePopup2 *p = KPassivePopup2::message(i18n("Desktop Sharing"),
+						    i18n("The remote user has closed the connection."),
 						    trayIconClosed,
 						    this);
 	connect(p, SIGNAL(hidden()), this, SIGNAL(diconnectedMessageDisplayed()));
