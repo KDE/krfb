@@ -1,0 +1,4 @@
+#MIN_CONFIG
+
+AM_INIT_AUTOMAKE(krfb,0.1)
+

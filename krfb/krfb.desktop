@@ -1,0 +1,4 @@
+[Desktop Entry]
+Comment=A panel applet called Krfb
+Name=krfb
+X-KDE-Library=libkrfb
