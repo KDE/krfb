@@ -66,7 +66,7 @@ void PortListener::loadConfig(KService::Ptr s) {
 
 	QVariant vid, vport, vautoport, venabled, vargument, vmultiInstance;
 
-	execPath = s->exec();
+	execPath = s->exec().utf8();
 	vid = s->property("X-KDE-KINETD-id");
 	vport = s->property("X-KDE-KINETD-port");
 	vautoport = s->property("X-KDE-KINETD-autoPortRange");
