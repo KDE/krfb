@@ -162,7 +162,7 @@
                 <cstring>deleteAllButton</cstring>
             </property>
             <property name="text">
-                <string>Delete all</string>
+                <string>Delete All</string>
             </property>
             <property name="toolTip" stdset="0">
                 <string>Delete all invitations</string>

@@ -150,7 +150,7 @@
                         <cstring>createInvitationButton</cstring>
                     </property>
                     <property name="text">
-                        <string>Create &amp;personal invitation...</string>
+                        <string>Create &amp;Personal Invitation...</string>
                     </property>
                     <property name="toolTip" stdset="0">
                         <string></string>

@@ -50,7 +50,7 @@
                         <cstring>createInvitation</cstring>
                     </property>
                     <property name="text">
-                        <string>Create invitation...</string>
+                        <string>Create Invitation...</string>
                     </property>
                     <property name="toolTip" stdset="0">
                         <string></string>
@@ -64,7 +64,7 @@
                         <cstring>manageInvitations</cstring>
                     </property>
                     <property name="text">
-                        <string>Manage invitations...</string>
+                        <string>Manage Invitations...</string>
                     </property>
                     <property name="whatsThis" stdset="0">
                         <string>Click to view or delete the open invitations.</string>
