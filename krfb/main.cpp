@@ -62,7 +62,7 @@ static KCmdLineOptions options[] =
 	{ "c", 0, 0},
 	{ ARG_REMOTE_CONTROL, I18N_NOOP("Allow remote side to control this computer."), 0},
 	{ "s", 0, 0},
-	{ ARG_STAND_ALONE, I18N_NOOP("Stand-alone mode, do not use daemon."), 0},
+	{ ARG_STAND_ALONE, I18N_NOOP("Standalone mode: do not use daemon."), 0},
 	{ ARG_KINETD " ", I18N_NOOP("Used for calling from kinetd."), 0},
 	{ 0, 0, 0 }
 };
@@ -138,7 +138,7 @@ int main(int argc, char *argv[])
 			    I18N_NOOP("original VNC encoders and "
 				      "protocol design"));
 	aboutData.addCredit("Jens Wagner (heXoNet Support GmbH)",
-			    I18N_NOOP("x11 update scanner, "
+			    I18N_NOOP("X11 update scanner, "
 				      "original code base"));
 	aboutData.addCredit("Jason Spisak",
 			    I18N_NOOP("Connection side image"),
@@ -180,14 +180,14 @@ int main(int argc, char *argv[])
 				if (!kinetdA) {
 					KMessageBox::error(0,
 						i18n("Cannot find KInetD. "
-							"Have you re-started KDE after installation?"),
+							"Have you restarted KDE after installation?"),
 						i18n("Desktop Sharing Error"));
 					return 1;
 				}
 				if (!krfbA) {
 					KMessageBox::error(0,
 						i18n("Cannot find KInetD service for Desktop Sharing (KRfb). "
-							"Have you re-started KDE after installation?"),
+							"Have you restarted KDE after installation?"),
 						i18n("Desktop Sharing Error"));
 					return 1;
 				}

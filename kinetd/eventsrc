@@ -4,7 +4,7 @@ Comment=KInetD
 
 [IncomingConnection]
 Name=IncomingConnection
-Comment=Got incoming connection
+Comment=Received incoming connection
 default_presentation=4
 
 [ProcessFailed]

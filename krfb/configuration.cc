@@ -495,7 +495,7 @@ void Configuration::inviteEmail() {
 	KApplication *app = KApplication::kApplication();
 	app->invokeMailer(QString::null, QString::null, QString::null,
 		i18n("Desktop Sharing (VNC) invitation"),
-		i18n("You have been invited to a VNC session. To connect start "
+		i18n("You have been invited to a VNC session. To connect, start "
 		     "a VNC client with the following parameters:\n\n"
 		     "Host: %1:%2\n"
 		     "Password: %3\n\n"

@@ -599,7 +599,7 @@ enum rfbNewClientAction RFBController::handleNewClient(rfbClientPtr cl)
 	}
 
 	sendKNotifyEvent("NewConnectionOnHold",
-				i18n("Got connection from %1, on hold (waiting for confirmation)")
+				i18n("Received connection from %1, on hold (waiting for confirmation)")
 				.arg(remoteIp));
 
 	dialog.ipLabel->setText(remoteIp);

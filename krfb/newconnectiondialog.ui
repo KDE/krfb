@@ -102,7 +102,7 @@
                         <bool>true</bool>
                     </property>
                     <property name="whatsThis" stdset="0">
-                        <string>This button will refuse the connection. You should chose this unless you trust the requesting user.</string>
+                        <string>This button will refuse the connection. You should choose this unless you trust the requesting user.</string>
                     </property>
                 </widget>
             </hbox>
@@ -208,8 +208,8 @@
                                 <number>5</number>
                             </property>
                             <property name="text">
-                                <string>Somebody requests a RFB (VNC) connection to your computer. 
-This means that she can see everything on your screen and, if the option below is enabled, she can also control it. Refuse the connection unless you trust the person.</string>
+                                <string>Somebody is requesting a RFB (VNC) connection to your computer. 
+This means that they can see everything on your screen and, if the option below is enabled, can also control it. Refuse the connection unless you trust the person.</string>
                             </property>
                             <property name="textFormat">
                                 <enum>AutoText</enum>

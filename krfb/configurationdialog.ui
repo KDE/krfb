@@ -83,7 +83,7 @@
                         <string>Confirm connection &amp;before accepting</string>
                     </property>
                     <property name="whatsThis" stdset="0">
-                        <string>If this option is enabled you will be asked whenever a remote user tries to connect to your display. This allows you to deny the request or to remove things that the remote user should not see before he connects. It is highly recommended to turn this on while you are working on this computer. If you do not enable this option your only hint that somebody is connected is the small icon in your panel showing an open eye.</string>
+                        <string>If this option is enabled, you will be asked whenever a remote user tries to connect to your display. This allows you to deny the request or to remove things that the remote user should not see before he connects. It is highly recommended to turn this on while you are working on this computer. If you do not enable this option, your only hint that somebody is connected is the small icon in your panel, showing an open eye.</string>
                     </property>
                 </widget>
                 <widget class="QCheckBox">
@@ -94,7 +94,7 @@
                         <string>Allow &amp;remote client to control the desktop</string>
                     </property>
                     <property name="whatsThis" stdset="0">
-                        <string>If you turn this option on the remote user can enter keystrokes and use your mouse pointer. This gives him full control over your computer, so be careful.  When the option is disabled the remote user can only watch your screen.</string>
+                        <string>If you turn this option on, the remote user can enter keystrokes and use your mouse pointer. This gives him full control over your computer, so be careful.  When the option is disabled the remote user can only watch your screen.</string>
                     </property>
                 </widget>
             </vbox>
@@ -156,7 +156,7 @@
                         <enum>Password</enum>
                     </property>
                     <property name="whatsThis" stdset="0">
-                        <string>If you want to protect your system with a password enter one here. It is highly recommended that you either do this or enable "ask before remote client connects".</string>
+                        <string>If you want to protect your system with a password, enter one here. It is highly recommended that you either do this or enable "ask before remote client connects".</string>
                     </property>
                 </widget>
             </vbox>

@@ -10,4 +10,4 @@ X-KDE-Kded-autoload=true
 X-KDE-Kded-load-on-demand=true
 
 Name=KDE Internet Daemon
-Comment=An internet daemon that starts network services on demand
+Comment=An Internet daemon that starts network services on demand

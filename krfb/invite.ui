@@ -164,7 +164,7 @@
                         <cstring>createInvitationEMailButton</cstring>
                     </property>
                     <property name="text">
-                        <string>Invite via &amp;EMail...</string>
+                        <string>Invite via &amp;Email...</string>
                     </property>
                     <property name="whatsThis" stdset="0">
                         <string>This button will start your email application with a pre-configured text that explains to the recipient how to connect to your computer. </string>
@@ -178,7 +178,7 @@
                         <string>&amp;Do not show this dialog on startup</string>
                     </property>
                     <property name="whatsThis" stdset="0">
-                        <string>If you enable this option this screen will not be shows at each startup in the future.</string>
+                        <string>If you enable this option, this screen will not be shown at each startup in the future.</string>
                     </property>
                 </widget>
                 <widget class="QLabel" row="1" column="0" rowspan="1" colspan="2">
@@ -186,7 +186,7 @@
                         <cstring>TextLabel1</cstring>
                     </property>
                     <property name="text">
-                        <string>KDE Desktop Sharing allows you to invite somebody at a remote location to watch and possibly control your desktop. To invite somebody using EMail, press the 'Invite via EMail' button. If you would like to tell somebody how to login personally or via telephone, use the 'Create Invitation' button.</string>
+                        <string>KDE Desktop Sharing allows you to invite somebody at a remote location to watch and possibly control your desktop. To invite somebody using email, press the 'Invite via Email' button. If you would like to tell somebody how to login personally, or via telephone, use the 'Create Invitation' button.</string>
                     </property>
                     <property name="alignment">
                         <set>WordBreak|AlignTop</set>

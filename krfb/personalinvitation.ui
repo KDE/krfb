@@ -150,7 +150,7 @@
                         <cstring>TextLabel3</cstring>
                     </property>
                     <property name="text">
-                        <string>In order to connect to your computer the other person can use any VNC client. There must be a network connection between both computers. If there are any firewalls betwen your computers they must have been configured accordingly. Below is the information that you need to tell the other person. Note that everybody who knows the password can connect, so be careful. 
+                        <string>In order to connect to your computer the other person can use any VNC client. There must be a network connection between both computers. If there are any firewalls between your computers they must have been configured accordingly. Below is the information that you need to give to the other person. Note that everybody who knows the password can connect, so be careful. 
 For security reasons this invitation is only valid for one hour.</string>
                     </property>
                     <property name="alignment">

@@ -19,7 +19,7 @@ default_presentation=4
 
 [InvalidPassword]
 Name=InvalidPassword
-Comment=The invalid password.
+Comment=Invalid password
 default_presentation=4
 
 [InvalidPasswordInvitations]
@@ -45,6 +45,6 @@ default_logfile=
 
 [UnexpectedConnection]
 Name=UnexpectedConnection
-Comment=Got unexpected connection, abort
+Comment=Received unexpected connection, abort
 default_presentation=4
 
