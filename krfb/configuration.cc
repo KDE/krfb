@@ -24,6 +24,7 @@
 #include <kmessagebox.h>
 #include <kprocess.h>
 #include <ksockaddr.h>
+#include <kactivelabel.h>
 
 #include <qdatastream.h>
 #include <dcopclient.h>

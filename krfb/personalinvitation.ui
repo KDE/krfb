@@ -8,8 +8,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>639</width>
-            <height>376</height>
+            <width>636</width>
+            <height>373</height>
         </rect>
     </property>
     <property name="caption">
@@ -122,7 +122,7 @@
                     <number>11</number>
                 </property>
                 <property name="spacing">
-                    <number>6</number>
+                    <number>0</number>
                 </property>
                 <widget class="QLabel">
                     <property name="name">
@@ -185,76 +185,76 @@ For security reasons this invitation is only valid for one hour.</string>
                         <property name="spacing">
                             <number>6</number>
                         </property>
-                        <widget class="QLabel" row="0" column="0">
-                            <property name="name">
-                                <cstring>TextLabel4</cstring>
-                            </property>
-                            <property name="font">
-                                <font>
-                                    <bold>1</bold>
-                                </font>
-                            </property>
-                            <property name="text">
-                                <string>Host (address and display):</string>
-                            </property>
-                        </widget>
-                        <widget class="QLabel" row="2" column="0">
-                            <property name="name">
-                                <cstring>TextLabel6</cstring>
-                            </property>
-                            <property name="font">
-                                <font>
-                                    <bold>1</bold>
-                                </font>
-                            </property>
-                            <property name="text">
-                                <string>Expiration time:</string>
-                            </property>
-                        </widget>
-                        <widget class="QLineEdit" row="2" column="1">
-                            <property name="name">
-                                <cstring>expirationLabel</cstring>
-                            </property>
-                            <property name="text">
-                                <string>17:12</string>
-                            </property>
-                            <property name="readOnly">
-                                <bool>true</bool>
-                            </property>
-                        </widget>
-                        <widget class="QLineEdit" row="1" column="1">
-                            <property name="name">
-                                <cstring>passwordLabel</cstring>
-                            </property>
-                            <property name="text">
-                                <string>123456</string>
-                            </property>
-                            <property name="readOnly">
-                                <bool>true</bool>
-                            </property>
-                        </widget>
-                        <widget class="QLineEdit" row="0" column="1">
+                        <widget class="KActiveLabel" row="0" column="1">
                             <property name="name">
                                 <cstring>hostLabel</cstring>
                             </property>
                             <property name="text">
                                 <string>cookie.tjansen.de:0</string>
                             </property>
-                            <property name="readOnly">
-                                <bool>true</bool>
-                            </property>
                         </widget>
-                        <widget class="QLabel" row="1" column="0">
+                        <widget class="KActiveLabel" row="1" column="1">
                             <property name="name">
-                                <cstring>TextLabel5</cstring>
-                            </property>
-                            <property name="font">
-                                <font>
-                                    <bold>1</bold>
-                                </font>
+                                <cstring>passwordLabel</cstring>
                             </property>
                             <property name="text">
-                                <string>Password:</string>
+                                <string>12345</string>
+                            </property>
+                        </widget>
+                        <widget class="KActiveLabel" row="2" column="1">
+                            <property name="name">
+                                <cstring>expirationLabel</cstring>
+                            </property>
+                            <property name="text">
+                                <string>17:12</string>
+                            </property>
+                        </widget>
+                        <widget class="KActiveLabel" row="0" column="0">
+                            <property name="name">
+                                <cstring>kActiveLabel5</cstring>
+                            </property>
+                            <property name="sizePolicy">
+                                <sizepolicy>
+                                    <hsizetype>0</hsizetype>
+                                    <vsizetype>7</vsizetype>
+                                    <horstretch>0</horstretch>
+                                    <verstretch>0</verstretch>
+                                </sizepolicy>
+                            </property>
+                            <property name="text">
+                                <string>&lt;b&gt;Host (address and display):&lt;/b&gt;</string>
+                            </property>
+                        </widget>
+                        <widget class="KActiveLabel" row="1" column="0">
+                            <property name="name">
+                                <cstring>kActiveLabel6</cstring>
+                            </property>
+                            <property name="sizePolicy">
+                                <sizepolicy>
+                                    <hsizetype>0</hsizetype>
+                                    <vsizetype>7</vsizetype>
+                                    <horstretch>0</horstretch>
+                                    <verstretch>0</verstretch>
+                                </sizepolicy>
+                            </property>
+                            <property name="text">
+                                <string>&lt;b&gt;Password:&lt;/b&gt;</string>
+                            </property>
+                        </widget>
+                        <widget class="KActiveLabel" row="2" column="0">
+                            <property name="name">
+                                <cstring>kActiveLabel7</cstring>
+                            </property>
+                            <property name="sizePolicy">
+                                <sizepolicy>
+                                    <hsizetype>0</hsizetype>
+                                    <vsizetype>7</vsizetype>
+                                    <horstretch>0</horstretch>
+                                    <verstretch>0</verstretch>
+                                </sizepolicy>
+                            </property>
+                            <property name="text">
+                                <string>&lt;b&gt;Expiration time:&lt;/b&gt;</string>
                             </property>
                         </widget>
                     </grid>
@@ -291,4 +291,12 @@ For security reasons this invitation is only valid for one hour.</string>
     </connection>
 </connections>
 <layoutdefaults spacing="6" margin="11"/>
+<includehints>
+    <includehint>kactivelabel.h</includehint>
+    <includehint>kactivelabel.h</includehint>
+    <includehint>kactivelabel.h</includehint>
+    <includehint>kactivelabel.h</includehint>
+    <includehint>kactivelabel.h</includehint>
+    <includehint>kactivelabel.h</includehint>
+</includehints>
 </UI>
