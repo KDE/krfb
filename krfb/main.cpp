@@ -138,7 +138,7 @@ int main(int argc, char *argv[])
 			 &controller, SLOT(closeConnection()));
 
 	QObject::connect(&dcopiface, SIGNAL(exitApp()),
-			 &controller, SLOT(quit()));
+			 &app, SLOT(quit()));
 
 	QObject::connect(config, SIGNAL(portChanged()),
 			 &controller, SLOT(rebind()));

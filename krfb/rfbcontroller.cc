@@ -210,7 +210,7 @@ PointerEvent::PointerEvent(int b, int _x, int _y) :
 	y(_y) {
 	if (!initialized) {
 		initialized = true;
-		Display *dpy = qt_xdisplay();
+		dpy = qt_xdisplay();
 		buttonMask = 0;
 	}
 }
@@ -415,7 +415,7 @@ void RFBController::closeConnection()
 	if (state == RFB_CONNECTED) {
 		if (!checkAsyncEvents()) {
 			asyncMutex.lock();
-			if (!closePending)	
+			if (!closePending)
 				rfbCloseClient(server->rfbClientHead);
 			asyncMutex.unlock();
 		}
@@ -447,10 +447,9 @@ void RFBController::idleSlot()
 
 	QPoint p = QCursor::pos();
 	asyncMutex.lock();
-	if (!closePending)	
+	if (!closePending)
 		defaultPtrAddEvent(0, p.x(),p.y(), server->rfbClientHead);
 	asyncMutex.unlock();
-
 
 	checkAsyncEvents();
 }
