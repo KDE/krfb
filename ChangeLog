@@ -1,3 +1,17 @@
+2002-01-14  Tim Jansen  <tim@tjansen.de>
+
+	* lib/Makefile.am: removed CoRRE encoder from project (see NOTES)
+
+2002-01-13  Tim Jansen  <tim@tjansen.de>
+
+	* lib/encodeRectangleRRE.cc: ported RRE encoder from TightVNC's 
+	  winvnc server
+
+2002-01-12  Tim Jansen  <tim@tjansen.de>
+
+	* lib/rfbServer.cc: removed throttling code as the xvncviewer
+	  didn't like it and frequently crashed
+
 2002-01-10  Tim Jansen  <tim@tjansen.de>
 
 	* krfb/XUpdateScanner.cc: improved finding of hints (join adjacent
@@ -19,6 +33,9 @@
 
 	* lib/rfbServer.cc: start to replace all standard rfblib encodings 
 	  with those from TightVNC because they compress better
+
+	* lib/encodeRectangleHextile.cc:  ported Hextile encoder from
+	  TightVNC's winvnc server
 
 	* lib/Connection.cc: reserve more space when resizing, added 
 	  functions for simulated writing, delayed sending (reserve 

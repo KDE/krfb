@@ -15,6 +15,18 @@ Some comments on various aspects of KRfb:
   issues like setting a password
 - design goal of KRfb is to make it as easy to use as possible. I tried to
   limit functionality whereever possible. 
+- to limit the required testing efforts I try to limit the number of provided 
+  codecs.
+  As far as I can tell there are three major classes of VNC clients: the
+  original ones that support RRE, CoRRE and Hextiles, the Tridia ones
+  with additional ZLib and sometimes HexZLib support and the TightVNC one
+  with additional TightVNC encoding. So I will have four primary codecs to
+  support: Raw as a fall-back and for local traffic, Hextiles for original
+  VNC clients, ZLib for the Tridia ones and TightVNC. I'll keep RRE 
+  because I already ported it, but should it make any trouble I'll kick it
+  out. CoRRE won't be supported, and probably neither HexZLib. 4 codecs
+  ought to be enough for everybody. TightVNC is the preferred codec and the
+  one that clients should use.
 - the original x0rfbserver has a features for selecting the port number
   automatically. I skipped that because it is too complicated on the client
   side, but I may change my opinion when KDE supports SLP or a similar

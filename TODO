@@ -1,12 +1,10 @@
 Todo:
 - clip framebuffer updates to requested region!
-- reminder: enable non-raw in hextile, enable sendSingleHint
 - i18n
 - docs
 - knotify
 - kcontrol module?
 - encrypted connections: http://web.mit.edu/thouis/vnc/
-- TightVNC extensions
 - do something against potential denial-of-service attacks by repeatedly
   trying to connect to users until they agree. Maybe a message box
   after the third attempt offering the user to stop KRfb, block the IP or 

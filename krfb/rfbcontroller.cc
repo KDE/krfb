@@ -172,6 +172,7 @@ void RFBController::socketReadable() {
 		return;
 	int fd = socket->socket();
 	BufferedConnection *bc = connection->connection;
+
 	int count = read(fd,
 			 bc->receiverBuffer.data,
                          bc->receiverBuffer.size);
@@ -188,8 +189,9 @@ void RFBController::socketReadable() {
 	bc->receiverBuffer.pos = 0;
 	bc->receiverBuffer.end = 0;
 
-	if (!connection->currentState)
+	if (!connection->currentState) {
 		closeSession();
+	}
 }
 
 void RFBController::socketWritable() {
