@@ -28,8 +28,7 @@ Some comments on various aspects of KRfb:
   use.
 - the original x0rfbserver has a features for selecting the port number
   automatically. I skipped that because it is too complicated on the client
-  side, but I may change my opinion when KDE supports SLP or a similar
-  auto-discovery mechanism.
+  side, but I this will change when there are mechanisms for inviting people.
 - the command line args are intended for starting KRfb from a system like
   Jabber, thats the reason why there is no preferences dialog when 
   command line args have been used and it's also the reason 

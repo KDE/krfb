@@ -7,11 +7,13 @@ to share your X11 session instead of creating a new X11 session.
 It is based on x0rfbserver, available from 
 http://www.hexonet.de/software/x0rfbserver/.
 
-
-For more information about KRfb visit http://www.tjansen.de/krfb
-
-Read the NOTES file for various notes on KRfb.
+For the latest information about KRfb visit http://www.tjansen.de/krfb
 
 
-
+Guide to documentation:
+README_KDE3 - docs for using it under KDE3
+ROADMAP - KRfb roadmap, progress and future features
+TODO - unscheduled things to be done
+NOTES - reasons for various decisions
+ChangeLog - more detailed changes with dates
 

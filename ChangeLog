@@ -1,3 +1,9 @@
+2002-01-21  Tim Jansen  <tim@tjansen.de>
+
+	* moved read/write from RFBController to Connection
+
+	* added some "flushing points" to remove latencies
+
 2002-01-20  Tim Jansen  <tim@tjansen.de>
 
 	* removed RRE encoding
@@ -32,7 +38,7 @@
 
 2002-01-10  Tim Jansen  <tim@tjansen.de>
 
-	* krfb/XUpdateScanner.cc: improved finding of hints (join adjacent
+	* krfb/XUpdateScanner.cc: improved hints searching (join adjacent
 	  hint regions, get rid of unneccessary comparisons)
 
 2002-01-09  Tim Jansen  <tim@tjansen.de>

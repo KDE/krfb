@@ -153,13 +153,14 @@ void RFBController::idleSlot() {
 	if (connection) {
                 connection->scanUpdates();
 		connection->sendIncrementalFramebufferUpdate();
+		connection->connection->write();
 		checkWriteBuffer();
 	}
 }
 
 void RFBController::checkWriteBuffer() {
 	BufferedConnection *bc = connection->connection;	
-	bool bufferEmpty = (bc->senderBuffer.end - bc->senderBuffer.pos) == 0;
+	bool bufferEmpty = !bc->hasSenderBufferData();
        	socket->enableWrite(!bufferEmpty);
 	if (bufferEmpty && !idleUpdateScheduled && connection) {
 		QTimer::singleShot(0, this, SLOT(idleSlot()));
@@ -170,15 +171,10 @@ void RFBController::checkWriteBuffer() {
 void RFBController::socketReadable() {
 	if ((!socket) || (!connection))
 		return;
-	int fd = socket->socket();
-	BufferedConnection *bc = connection->connection;
 
-	int count = read(fd,
-			 bc->receiverBuffer.data,
-                         bc->receiverBuffer.size);
-	if (count >= 0)
-		bc->receiverBuffer.end += count;
-	else {
+	BufferedConnection *bc = connection->connection;
+	int count = bc->read();
+	if (count < 0) {
 		closeSession();
 		return;
 	}
@@ -186,8 +182,6 @@ void RFBController::socketReadable() {
 		connection->update();
 		checkWriteBuffer();
 	}
-	bc->receiverBuffer.pos = 0;
-	bc->receiverBuffer.end = 0;
 
 	if (!connection->currentState) {
 		closeSession();
@@ -197,19 +191,13 @@ void RFBController::socketReadable() {
 void RFBController::socketWritable() {
 	if ((!socket) || (!connection))
 		return;
-	int fd = socket->socket();
 
 	BufferedConnection *bc = connection->connection;
-	ASSERT((bc->senderBuffer.end - bc->senderBuffer.pos) > 0);
-	int count = write(fd,
-			  bc->senderBuffer.data + bc->senderBuffer.pos,
-			  bc->senderBuffer.end - bc->senderBuffer.pos);
-	if (count >= 0) {
-		bc->senderBuffer.pos += count;
+	int count = bc->write();
+	if (count >= 0)
 		checkWriteBuffer();
-	} else {
+	else
 		closeSession();
-	}
 }
 
 void RFBController::closeSession() {
