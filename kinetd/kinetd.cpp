@@ -205,10 +205,10 @@ QString PortListener::processServiceTemplate(const QString &a) {
 	delete kia;
 	KUser u;
 	QString x = a; // replace does not work in const QString. Why??
-	return x.replace(QRegExp("%h"), hostName)
+	return x.replace(QRegExp("%h"), KServiceRegistry::encodeAttributeValue(hostName))
 		.replace(QRegExp("%p"), QString::number(m_port))
-		.replace(QRegExp("%u"), u.loginName())
-		.replace(QRegExp("%f"), u.fullName());
+		.replace(QRegExp("%u"), KServiceRegistry::encodeAttributeValue(u.loginName()))
+		.replace(QRegExp("%f"), KServiceRegistry::encodeAttributeValue(u.fullName()));
 }
 
 bool PortListener::setPort(int port, int autoPortRange) {
