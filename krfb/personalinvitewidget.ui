@@ -37,6 +37,9 @@
                     <verstretch>0</verstretch>
                 </sizepolicy>
             </property>
+            <property name="focusPolicy">
+                <enum>NoFocus</enum>
+            </property>
             <property name="text">
                 <string>&lt;h2&gt;Personal Invitation&lt;/h2&gt;
 Give the information below to the person that you want to invite (&lt;a href="whatsthis:Desktop Sharing uses the VNC protocol. You can use any VNC client to connect. In KDE the client is called 'Remote Desktop Connection'. Enter the host information into the client and it will connect.."&gt;how to connect&lt;/a&gt;). Note that everybody who gets the password can connect, so be careful.</string>
@@ -122,6 +125,9 @@ Give the information below to the person that you want to invite (&lt;a href="wh
                     <verstretch>0</verstretch>
                 </sizepolicy>
             </property>
+            <property name="focusPolicy">
+                <enum>NoFocus</enum>
+            </property>
             <property name="text">
                 <string>cookie.tjansen.de:0</string>
             </property>
@@ -170,6 +176,9 @@ Give the information below to the person that you want to invite (&lt;a href="wh
                     <verstretch>0</verstretch>
                 </sizepolicy>
             </property>
+            <property name="focusPolicy">
+                <enum>NoFocus</enum>
+            </property>
             <property name="text">
                 <string>12345</string>
             </property>
@@ -185,6 +194,9 @@ Give the information below to the person that you want to invite (&lt;a href="wh
                     <horstretch>0</horstretch>
                     <verstretch>0</verstretch>
                 </sizepolicy>
+            </property>
+            <property name="focusPolicy">
+                <enum>NoFocus</enum>
             </property>
             <property name="text">
                 <string>17:12</string>
