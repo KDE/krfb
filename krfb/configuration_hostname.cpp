@@ -28,6 +28,10 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <string.h>
+#include <errno.h>
+#ifdef USE_SOLARIS
+#include <sys/sockio.h>
+#endif
 
 
 static char *dissipate_our_fqdn = NULL;

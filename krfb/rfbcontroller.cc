@@ -25,6 +25,10 @@
 #include <unistd.h>
 #include <fcntl.h>
 
+#ifdef USE_SOLARIS
+#include <strings.h>
+#endif
+
 #include <kapplication.h>
 #include <knotifyclient.h>
 #include <kdebug.h>
