@@ -95,7 +95,7 @@ void PortListener::loadConfig(KService::Ptr s) {
 	m_argument = QString::null;
 	m_multiInstance = false;
 
-	QVariant vid, vport, vautoport, venabled, vargument, vmultiInstance, vurl, 
+	QVariant vid, vport, vautoport, venabled, vargument, vmultiInstance, vurl,
 	  vsattributes, vslifetime;
 
 	m_execPath = s->exec().utf8();
@@ -173,6 +173,10 @@ void PortListener::loadConfig(KService::Ptr s) {
 void PortListener::accepted(KSocket *sock) {
 	QString host, port;
 	KSocketAddress *ksa = KExtendedSocket::peerAddress(sock->socket());
+	if ((!ksa) || !ksa->address()) {
+		delete sock;
+		return;
+	}
 	KExtendedSocket::resolve(ksa, host, port);
 	KNotifyClient::event("IncomingConnection",
 		i18n("Connection from %1").arg(host));
