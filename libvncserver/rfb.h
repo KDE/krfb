@@ -151,6 +151,10 @@ typedef unsigned long KeySym;
 #define TINI_MUTEX(mutex) pthread_mutex_destroy(&(mutex))
 #define TSIGNAL(cond) pthread_cond_signal(&(cond))
 #define WAIT(cond,mutex) pthread_cond_wait(&(cond),&(mutex))
+#define TIMEDWAIT(cond,mutex,t) {struct timeval tv;\
+  tv.tv_sec = (t) / 1000;\
+  tv.tv_usec = ((t) % 1000) * 1000;\
+  pthread_cond_timedwait(&(cond),&(mutex),&tv);}
 #define COND(cond) pthread_cond_t (cond)
 #define INIT_COND(cond) pthread_cond_init(&(cond),NULL)
 #define TINI_COND(cond) pthread_cond_destroy(&(cond))
@@ -203,6 +207,7 @@ typedef Bool (*SetTranslateFunctionProcPtr)(struct _rfbClientRec* cl);
 typedef Bool (*PasswordCheckProcPtr)(struct _rfbClientRec* cl,const char* encryptedPassWord,int len);
 typedef enum rfbNewClientAction (*NewClientHookPtr)(struct _rfbClientRec* cl);
 typedef void (*DisplayHookPtr)(struct _rfbClientRec* cl);
+typedef void (*InetdDisconnectPtr)();
 
 typedef struct {
   CARD32 count;
@@ -340,12 +345,14 @@ typedef struct _rfbScreenInfo
     SetXCutTextProcPtr setXCutText;
     GetCursorProcPtr getCursorPtr;
     SetTranslateFunctionProcPtr setTranslateFunction;
-  
+
     /* newClientHook is called just after a new client is created */
     NewClientHookPtr newClientHook;
     /* displayHook is called just before a frame buffer update */
     DisplayHookPtr displayHook;
-
+    /* inetdDisconnectHook is called when the connection has been
+       interrupted before a client could connect. */
+    InetdDisconnectPtr inetdDisconnectHook;
 #ifdef HAVE_PTHREADS
     MUTEX(cursorMutex);
     Bool backgroundLoop;
@@ -620,6 +627,7 @@ extern void rfbProcessClientMessage(rfbClientPtr cl);
 extern void rfbClientConnFailed(rfbClientPtr cl, char *reason);
 extern void rfbNewUDPConnection(rfbScreenInfoPtr rfbScreen,int sock);
 extern void rfbProcessUDPInput(rfbScreenInfoPtr rfbScreen);
+extern Bool rfbSendPing(rfbClientPtr cl);
 extern Bool rfbSendFramebufferUpdate(rfbClientPtr cl, sraRegionPtr updateRegion);
 extern Bool rfbSendRectEncodingRaw(rfbClientPtr cl, int x,int y,int w,int h);
 extern Bool rfbSendUpdateBuf(rfbClientPtr cl);

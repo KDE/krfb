@@ -14,7 +14,7 @@ krfb_SOURCES = rfbcontroller.cc xupdatescanner.cc main.cpp \
 krfb_LDADD   = libkrfbconfig.la ../libvncserver/libvncserver.la ../srvloc/libsrvloc.la -lXtst $(LIB_KDEUI) $(LIBJPEG) 
 krfb_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 
-noinst_HEADER = configuration.h invitation.h invite.h krfbiface.h \
+noinst_HEADERS = configuration.h invitation.h invite.h krfbiface.h \
                 krfbifaceimpl.h rfbcontroller.h trayicon.h xupdatescanner.h
 
 

@@ -183,7 +183,7 @@ rfbCheckFds(rfbScreenInfoPtr rfbScreen,long usec)
     fd_set fds;
     struct timeval tv;
     struct sockaddr_in addr;
-    socklen_t addrlen = sizeof(addr);
+    size_t addrlen = sizeof(addr);
     char buf[6];
     const int one = 1;
     int sock;
@@ -369,7 +369,8 @@ rfbConnect(rfbScreen, host, port)
 /*
  * ReadExact reads an exact number of bytes from a client.  Returns 1 if
  * those bytes have been read, 0 if the other end has closed, or -1 if an error
- * occurred (errno is set to ETIMEDOUT if it timed out).
+ * occurred (errno is set to ETIMEDOUT if it timed out). 
+ * timeout is the timeout in ms, 0 for no timeout.
  */
 
 int
@@ -379,6 +380,9 @@ ReadExactTimeout(rfbClientPtr cl, char* buf, int len, int timeout)
     int n;
     fd_set fds;
     struct timeval tv;
+    int to = 20000;
+    if (timeout)
+	to = timeout;
 
     while (len > 0) {
         n = read(sock, buf, len);
@@ -402,14 +406,14 @@ ReadExactTimeout(rfbClientPtr cl, char* buf, int len, int timeout)
 
             FD_ZERO(&fds);
             FD_SET(sock, &fds);
-            tv.tv_sec = timeout / 1000;
-            tv.tv_usec = (timeout % 1000) * 1000;
+            tv.tv_sec = to / 1000;
+            tv.tv_usec = (to % 1000) * 1000;
             n = select(sock+1, &fds, NULL, &fds, &tv);
             if (n < 0) {
                 rfbLogPerror("ReadExact: select");
                 return n;
             }
-            if (n == 0) {
+            if ((n == 0) && timeout) {
                 errno = ETIMEDOUT;
                 return -1;
             }
@@ -420,7 +424,7 @@ ReadExactTimeout(rfbClientPtr cl, char* buf, int len, int timeout)
 
 int ReadExact(rfbClientPtr cl,char* buf,int len)
 {
-  return(ReadExactTimeout(cl,buf,len,rfbMaxClientWait));
+    return ReadExactTimeout(cl, buf, len, 0);
 }
 
 /*

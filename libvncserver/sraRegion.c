@@ -83,8 +83,7 @@ void
 sraSpanCheck(const sraSpan *span, const char *text) {
   /* Check the span is valid! */
   if (span->start == span->end) {
-    printf(text); 
-    printf(":%d-%d\n", span->start, span->end);
+    printf("%s:%d-%d\n", text, span->start, span->end); 
     exit(0);
   }
 }
