@@ -96,7 +96,7 @@
                                     </sizepolicy>
                                 </property>
                                 <property name="text">
-                                    <string>Create and &amp;Manage Invitations...</string>
+                                    <string>Create &amp;&amp; &amp;Manage Invitations...</string>
                                 </property>
                                 <property name="whatsThis" stdset="0">
                                     <string>Click to view or delete the open invitations.</string>
@@ -242,12 +242,6 @@
                         <property name="sizeType">
                             <enum>Expanding</enum>
                         </property>
-                        <property name="sizeHint">
-                            <size>
-                                <width>0</width>
-                                <height>20</height>
-                            </size>
-                        </property>
                     </spacer>
                 </vbox>
             </widget>
@@ -367,12 +361,6 @@ Most VNC clients use a display number instead of the actual port. This display n
                         </property>
                         <property name="sizeType">
                             <enum>Expanding</enum>
-                        </property>
-                        <property name="sizeHint">
-                            <size>
-                                <width>0</width>
-                                <height>20</height>
-                            </size>
                         </property>
                     </spacer>
                 </vbox>
