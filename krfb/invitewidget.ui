@@ -1,0 +1,206 @@
+<!DOCTYPE UI><UI version="3.3" stdsetdef="1">
+<class>InviteWidget</class>
+<widget class="QWidget">
+    <property name="name">
+        <cstring>InviteWidget</cstring>
+    </property>
+    <property name="geometry">
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>521</width>
+            <height>328</height>
+        </rect>
+    </property>
+    <property name="caption">
+        <string>InviteWidget</string>
+    </property>
+    <grid>
+        <property name="name">
+            <cstring>unnamed</cstring>
+        </property>
+        <property name="margin">
+            <number>0</number>
+        </property>
+        <property name="resizeMode">
+            <enum>Fixed</enum>
+        </property>
+        <widget class="QLabel" row="0" column="1" rowspan="1" colspan="3">
+            <property name="name">
+                <cstring>TextLabel2</cstring>
+            </property>
+            <property name="font">
+                <font>
+                    <bold>1</bold>
+                </font>
+            </property>
+            <property name="text">
+                <string>Welcome to KDE Desktop Sharing</string>
+            </property>
+        </widget>
+        <widget class="KActiveLabel" row="1" column="1" rowspan="1" colspan="3">
+            <property name="name">
+                <cstring>kActiveLabel1</cstring>
+            </property>
+            <property name="text">
+                <string>KDE Desktop Sharing allows you to invite somebody at a remote location to watch and possibly control your desktop.
+&lt;a href="whatsthis:&lt;p&gt;An invitation creates a one-time password that allows the receiver to connect to your desktop. It is valid for only one successful connection and will expire after an hour if it has not been used. When somebody connects to your computer a dialog will appear and ask you for permission. The connection will not be established before you accept it. In this dialog you can also restrict the other person to view your desktop only, without the ability to move your mouse pointer or press keys.&lt;/p&gt;&lt;p&gt;If you want to create a permanent password for Desktop Sharing, allow 'Uninvited Connections' in the configuration."&gt;More about invitations...&lt;/a&gt;</string>
+            </property>
+        </widget>
+        <widget class="QLabel" row="0" column="0" rowspan="7" colspan="1">
+            <property name="name">
+                <cstring>pixmapLabel</cstring>
+            </property>
+            <property name="sizePolicy">
+                <sizepolicy>
+                    <hsizetype>0</hsizetype>
+                    <vsizetype>0</vsizetype>
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                </sizepolicy>
+            </property>
+            <property name="minimumSize">
+                <size>
+                    <width>108</width>
+                    <height>318</height>
+                </size>
+            </property>
+            <property name="maximumSize">
+                <size>
+                    <width>108</width>
+                    <height>318</height>
+                </size>
+            </property>
+            <property name="frameShape">
+                <enum>WinPanel</enum>
+            </property>
+            <property name="frameShadow">
+                <enum>Sunken</enum>
+            </property>
+            <property name="scaledContents">
+                <bool>true</bool>
+            </property>
+            <property name="alignment">
+                <set>AlignTop</set>
+            </property>
+        </widget>
+        <spacer row="4" column="3">
+            <property name="name">
+                <cstring>spacer4</cstring>
+            </property>
+            <property name="orientation">
+                <enum>Horizontal</enum>
+            </property>
+            <property name="sizeType">
+                <enum>Expanding</enum>
+            </property>
+            <property name="sizeHint">
+                <size>
+                    <width>40</width>
+                    <height>20</height>
+                </size>
+            </property>
+        </spacer>
+        <widget class="QPushButton" row="3" column="2">
+            <property name="name">
+                <cstring>btnCreateInvite</cstring>
+            </property>
+            <property name="text">
+                <string>Create &amp;Personal Invitation...</string>
+            </property>
+            <property name="accel">
+                <string>Alt+P</string>
+            </property>
+            <property name="toolTip" stdset="0">
+                <string></string>
+            </property>
+            <property name="whatsThis" stdset="0">
+                <string>Create a new invitation and display the connection data. Use this option if you want to invite somebody personally, for example, to give the connection data over the phone.</string>
+            </property>
+        </widget>
+        <spacer row="6" column="2">
+            <property name="name">
+                <cstring>spacer5</cstring>
+            </property>
+            <property name="orientation">
+                <enum>Vertical</enum>
+            </property>
+            <property name="sizeType">
+                <enum>Fixed</enum>
+            </property>
+            <property name="sizeHint">
+                <size>
+                    <width>20</width>
+                    <height>24</height>
+                </size>
+            </property>
+        </spacer>
+        <spacer row="4" column="1">
+            <property name="name">
+                <cstring>spacer3</cstring>
+            </property>
+            <property name="orientation">
+                <enum>Horizontal</enum>
+            </property>
+            <property name="sizeType">
+                <enum>Expanding</enum>
+            </property>
+            <property name="sizeHint">
+                <size>
+                    <width>40</width>
+                    <height>20</height>
+                </size>
+            </property>
+        </spacer>
+        <widget class="QPushButton" row="5" column="2">
+            <property name="name">
+                <cstring>btnManageInvite</cstring>
+            </property>
+            <property name="text">
+                <string>&amp;Manage Invitations (%1)...</string>
+            </property>
+            <property name="accel">
+                <string>Alt+M</string>
+            </property>
+        </widget>
+        <widget class="QPushButton" row="4" column="2">
+            <property name="name">
+                <cstring>btnEmailInvite</cstring>
+            </property>
+            <property name="text">
+                <string>Invite via &amp;Email...</string>
+            </property>
+            <property name="accel">
+                <string>Alt+E</string>
+            </property>
+            <property name="whatsThis" stdset="0">
+                <string>This button will start your email application with a pre-configured text that explains to the recipient how to connect to your computer. </string>
+            </property>
+        </widget>
+        <spacer row="2" column="2">
+            <property name="name">
+                <cstring>spacer2</cstring>
+            </property>
+            <property name="orientation">
+                <enum>Vertical</enum>
+            </property>
+            <property name="sizeType">
+                <enum>MinimumExpanding</enum>
+            </property>
+            <property name="sizeHint">
+                <size>
+                    <width>20</width>
+                    <height>89</height>
+                </size>
+            </property>
+        </spacer>
+    </grid>
+</widget>
+<signals>
+    <signal>createInviteClicked()</signal>
+    <signal>emailInviteClicked()</signal>
+    <signal>manageInviteClicked()</signal>
+</signals>
+<layoutdefaults spacing="6" margin="11"/>
+<layoutfunctions spacing="KDialog::spacingHint" margin="KDialog::marginHint"/>
+</UI>

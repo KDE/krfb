@@ -44,8 +44,8 @@
 Configuration::Configuration(krfb_mode mode) :
 	m_mode(mode),
 	invMngDlg(0, 0, true),
-	invDlg(0, 0, true),
-	persInvDlg(0, 0, true),
+	invDlg(0, "InviteDialog"),
+	persInvDlg(0, "PersonalInviteDialog"),
 	portNum(-1),
 	kinetdRef("kded", "kinetd")
 {
@@ -62,15 +62,16 @@ Configuration::Configuration(krfb_mode mode) :
 	invMngDlg.listView->setSelectionMode(QListView::Extended);
 	invMngDlg.listView->setMinimumSize(QSize(400, 100)); // QTs size is much to small
 
-	connect(invDlg.createInvitationButton, SIGNAL(clicked()),
+	connect(&invDlg, SIGNAL(createInviteClicked()),
 		SLOT(showPersonalInvitationDialog()));
-	connect(invDlg.createInvitationEMailButton, SIGNAL(clicked()),
+	connect(&invDlg, SIGNAL(emailInviteClicked()),
 		SLOT(inviteEmail()));
-	connect(invDlg.manageInvitationsButton, SIGNAL(clicked()),
+	connect(&invDlg, SIGNAL(manageInviteClicked()),
 		SLOT(showManageInvitationsDialog()));
-	connect(invDlg.configurationButton, SIGNAL(clicked()),
+	connect(&invDlg, SIGNAL(configureClicked()),
 		SLOT(showConfigurationModule()));
-	connect(this, SIGNAL(invitationNumChanged(int)), this, SLOT(changeInvDlgNum(int)));
+	connect(this, SIGNAL(invitationNumChanged(int)),
+		&invDlg, SLOT(setInviteCount(int)));
 	connect(this, SIGNAL(invitationNumChanged(int)),
 		&invMngDlg, SLOT(listSizeChanged(int)));
         emit invitationNumChanged(invitationList.size());
@@ -388,10 +389,6 @@ void Configuration::showInvitationDialog() {
 	saveToKConfig();
 }
 
-void Configuration::changeInvDlgNum(int newNum) {
-	invDlg.manageInvitationsButton->setText( i18n("&Manage Invitations (%1)...").arg(newNum) );
-}
-
 ////////////// personal invitation dialog //////////////////////////
 
 void Configuration::showPersonalInvitationDialog() {
@@ -400,16 +397,15 @@ void Configuration::showPersonalInvitationDialog() {
 	save();
 	emit invitationNumChanged(invitationList.size());
 
-	invDlg.createInvitationButton->setEnabled(false);
+	invDlg.enableInviteButton(false);
 	invMngDlg.newPersonalInvitationButton->setEnabled(false);
 
-	persInvDlg.hostLabel->setText(QString("%1:%2").arg(hostname()).arg(port()));
-	persInvDlg.passwordLabel->setText(inv.password());
-	persInvDlg.expirationLabel->setText(
-		inv.expirationTime().toString(Qt::LocalDate));
+	persInvDlg.setHost(hostname(), port());
+	persInvDlg.setPassword(inv.password());
+	persInvDlg.setExpiration(inv.expirationTime());
 
 	persInvDlg.exec();
-	invDlg.createInvitationButton->setEnabled(true);
+	invDlg.enableInviteButton(true);
 	invMngDlg.newPersonalInvitationButton->setEnabled(true);
 }
 

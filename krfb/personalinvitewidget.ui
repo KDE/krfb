@@ -1,0 +1,229 @@
+<!DOCTYPE UI><UI version="3.3" stdsetdef="1">
+<class>PersonalInviteWidget</class>
+<widget class="QWidget">
+    <property name="name">
+        <cstring>Form1</cstring>
+    </property>
+    <property name="geometry">
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>519</width>
+            <height>328</height>
+        </rect>
+    </property>
+    <property name="caption">
+        <string></string>
+    </property>
+    <grid>
+        <property name="name">
+            <cstring>unnamed</cstring>
+        </property>
+        <property name="margin">
+            <number>0</number>
+        </property>
+        <property name="resizeMode">
+            <enum>Fixed</enum>
+        </property>
+        <widget class="KActiveLabel" row="0" column="1" rowspan="1" colspan="3">
+            <property name="name">
+                <cstring>mainTextLabel</cstring>
+            </property>
+            <property name="sizePolicy">
+                <sizepolicy>
+                    <hsizetype>7</hsizetype>
+                    <vsizetype>1</vsizetype>
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                </sizepolicy>
+            </property>
+            <property name="text">
+                <string>&lt;h2&gt;Personal Invitation&lt;/h2&gt;
+Give the information below to the person that you want to invite (&lt;a href="whatsthis:Desktop Sharing uses the VNC protocol. You can use any VNC client to connect. In KDE the client is called 'Remote Desktop Connection'. Enter the host information into the client and it will connect.."&gt;how to connect&lt;/a&gt;). Note that everybody who gets the password can connect, so be careful.</string>
+            </property>
+        </widget>
+        <spacer row="1" column="2">
+            <property name="name">
+                <cstring>spacer9</cstring>
+            </property>
+            <property name="orientation">
+                <enum>Vertical</enum>
+            </property>
+            <property name="sizeType">
+                <enum>Expanding</enum>
+            </property>
+            <property name="sizeHint">
+                <size>
+                    <width>20</width>
+                    <height>34</height>
+                </size>
+            </property>
+        </spacer>
+        <widget class="QLabel" row="0" column="0" rowspan="6" colspan="1">
+            <property name="name">
+                <cstring>pixmapLabel</cstring>
+            </property>
+            <property name="sizePolicy">
+                <sizepolicy>
+                    <hsizetype>0</hsizetype>
+                    <vsizetype>0</vsizetype>
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                </sizepolicy>
+            </property>
+            <property name="minimumSize">
+                <size>
+                    <width>108</width>
+                    <height>318</height>
+                </size>
+            </property>
+            <property name="maximumSize">
+                <size>
+                    <width>108</width>
+                    <height>318</height>
+                </size>
+            </property>
+            <property name="frameShape">
+                <enum>WinPanel</enum>
+            </property>
+            <property name="frameShadow">
+                <enum>Sunken</enum>
+            </property>
+            <property name="scaledContents">
+                <bool>true</bool>
+            </property>
+        </widget>
+        <spacer row="5" column="2">
+            <property name="name">
+                <cstring>spacer10</cstring>
+            </property>
+            <property name="orientation">
+                <enum>Vertical</enum>
+            </property>
+            <property name="sizeType">
+                <enum>Expanding</enum>
+            </property>
+            <property name="sizeHint">
+                <size>
+                    <width>20</width>
+                    <height>30</height>
+                </size>
+            </property>
+        </spacer>
+        <widget class="QLabel" row="2" column="2">
+            <property name="name">
+                <cstring>hostLabel</cstring>
+            </property>
+            <property name="sizePolicy">
+                <sizepolicy>
+                    <hsizetype>3</hsizetype>
+                    <vsizetype>1</vsizetype>
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                </sizepolicy>
+            </property>
+            <property name="text">
+                <string>cookie.tjansen.de:0</string>
+            </property>
+        </widget>
+        <widget class="QLabel" row="3" column="1">
+            <property name="name">
+                <cstring>kActiveLabel6</cstring>
+            </property>
+            <property name="sizePolicy">
+                <sizepolicy>
+                    <hsizetype>3</hsizetype>
+                    <vsizetype>1</vsizetype>
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                </sizepolicy>
+            </property>
+            <property name="text">
+                <string>&lt;b&gt;Password:&lt;/b&gt;</string>
+            </property>
+        </widget>
+        <widget class="QLabel" row="4" column="1">
+            <property name="name">
+                <cstring>kActiveLabel7</cstring>
+            </property>
+            <property name="sizePolicy">
+                <sizepolicy>
+                    <hsizetype>3</hsizetype>
+                    <vsizetype>1</vsizetype>
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                </sizepolicy>
+            </property>
+            <property name="text">
+                <string>&lt;b&gt;Expiration time:&lt;/b&gt;</string>
+            </property>
+        </widget>
+        <widget class="QLabel" row="3" column="2">
+            <property name="name">
+                <cstring>passwordLabel</cstring>
+            </property>
+            <property name="sizePolicy">
+                <sizepolicy>
+                    <hsizetype>3</hsizetype>
+                    <vsizetype>1</vsizetype>
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                </sizepolicy>
+            </property>
+            <property name="text">
+                <string>12345</string>
+            </property>
+        </widget>
+        <widget class="QLabel" row="4" column="2">
+            <property name="name">
+                <cstring>expirationLabel</cstring>
+            </property>
+            <property name="sizePolicy">
+                <sizepolicy>
+                    <hsizetype>3</hsizetype>
+                    <vsizetype>1</vsizetype>
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                </sizepolicy>
+            </property>
+            <property name="text">
+                <string>17:12</string>
+            </property>
+        </widget>
+        <widget class="QLabel" row="2" column="1">
+            <property name="name">
+                <cstring>kActiveLabel5</cstring>
+            </property>
+            <property name="sizePolicy">
+                <sizepolicy>
+                    <hsizetype>3</hsizetype>
+                    <vsizetype>1</vsizetype>
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                </sizepolicy>
+            </property>
+            <property name="text">
+                <string>&lt;b&gt;Host:&lt;/b&gt;</string>
+            </property>
+        </widget>
+        <widget class="KActiveLabel" row="2" column="3">
+            <property name="name">
+                <cstring>hostHelpLabel</cstring>
+            </property>
+            <property name="sizePolicy">
+                <sizepolicy>
+                    <hsizetype>3</hsizetype>
+                    <vsizetype>1</vsizetype>
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                </sizepolicy>
+            </property>
+            <property name="text">
+                <string>(&lt;a href="whatsthis:This field contains the address of your computer and the display number, separated by a colon. The address is just a hint - you can use any address that can reach your computer. Desktop Sharing tries to guess your address from your network configuration, but does not always succeed in doing so. If your computer is behind a firewall it may have a different address or be unreachable for other computers."&gt;Help&lt;/a&gt;)</string>
+            </property>
+        </widget>
+    </grid>
+</widget>
+<layoutdefaults spacing="6" margin="11"/>
+<layoutfunctions spacing="KDialog::spacingHint" margin="KDialog::marginHint"/>
+</UI>

@@ -21,8 +21,8 @@
 #include "invitation.h"
 
 #include "manageinvitations.h"
-#include "personalinvitation.h"
-#include "invite.h"
+#include "personalinvitedialog.h"
+#include "invitedialog.h"
 
 #include <dcopref.h>
 #include <kconfig.h>
@@ -104,8 +104,8 @@ private:
 	krfb_mode m_mode;
 
 	ManageInvitationsDialog invMngDlg;
-	InvitationDialog invDlg;
-	PersonalInvitationDialog persInvDlg;
+	InviteDialog invDlg;
+	PersonalInviteDialog persInvDlg;
 	QTimer refreshTimer;
 
 	bool askOnConnectFlag;
@@ -127,8 +127,6 @@ private slots:
 
 	void invMngDlgDeleteOnePressed();
 	void invMngDlgDeleteAllPressed();
-
-	void changeInvDlgNum(int newNum);
 };
 
 #endif
