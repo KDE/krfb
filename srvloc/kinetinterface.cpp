@@ -242,8 +242,10 @@ QValueVector<KInetInterface> KInetInterface::getAllInterfaces(bool includeLoopba
 					   convertFlags(a->ifa_flags),
 					   createAddress(a->ifa_addr),
 					   createAddress(a->ifa_netmask),
-					   createAddress(a->ifa_broadaddr),
-					   createAddress(a->ifa_dstaddr)));
+					   (flags & IFF_BROADCAST) ?
+					   createAddress(a->ifa_broadaddr) : 0,
+					   (flags & IFF_POINTOPOINT) ? 
+					   createAddress(a->ifa_dstaddr) : 0));
 		a = a->ifa_next;
 	}
 	
