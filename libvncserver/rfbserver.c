@@ -724,6 +724,8 @@ rfbProcessClientNormalMessage(cl)
 		}
 		break;
 	    case rfbEncodingXCursor:
+		if (cl->enableSoftCursorUpdates)
+		  break;
 		if(!cl->screen->dontConvertRichCursorToXCursor) {
 		    rfbLog("Enabling X-style cursor updates for client %s\n",
 			   cl->host);
@@ -734,9 +736,11 @@ rfbProcessClientNormalMessage(cl)
 	    case rfbEncodingRichCursor:
 	        rfbLog("Enabling full-color cursor updates for client "
 		      "%s\n", cl->host);
-	        cl->enableCursorShapeUpdates = TRUE;
-	        cl->useRichCursorEncoding = TRUE;
-	        cl->cursorWasChanged = TRUE;
+		if (cl->enableSoftCursorUpdates)
+		  break;
+		cl->enableCursorShapeUpdates = TRUE;
+		cl->useRichCursorEncoding = TRUE;
+		cl->cursorWasChanged = TRUE;
 	        break;
 	    case rfbEncodingSoftCursor:
 	        rfbLog("Enabling soft cursor updates for client "
@@ -744,6 +748,8 @@ rfbProcessClientNormalMessage(cl)
 	        cl->enableSoftCursorUpdates = TRUE;
 	        cl->cursorWasChanged = TRUE;
 	        cl->cursorWasMoved = TRUE;
+		cl->enableCursorShapeUpdates = FALSE;
+		cl->useRichCursorEncoding = FALSE;
 	        break;
 	    case rfbEncodingLastRect:
 		if (!cl->enableLastRectEncoding) {
