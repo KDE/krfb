@@ -109,4 +109,4 @@ Keywords[sr]=desktop sharing,krfb,vnc,sharing,krdc,remote desktop connection,inv
 Keywords[sv]=dela skrivbord,krfb,vnc,dela,krdc,fjärrskrivbordsanslutning,inbjudan,port,slp
 Keywords[xx]=xxdesktop sharing,krfb,vnc,sharing,krdc,remote desktop connection,invitation,port,slp,uninvitedxx
 
-Categories=Qt;KDE;Settings;X-KDE-settings-network
+Categories=Qt;KDE;X-KDE-settings-network
