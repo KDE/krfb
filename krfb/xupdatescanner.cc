@@ -49,6 +49,9 @@ int scanlines[32] = {  0, 16,  8, 24,
 		       29, 13,  5, 21 };
 #define MAX_ADJ_TOLERANCE 8
 
+#define abs(x) (((x) >= 0) ? (x) : -(x))
+
+
 XUpdateScanner::XUpdateScanner(Display *_dpy,
 			       Window _window,
 			       unsigned char *_fb,
@@ -327,15 +330,20 @@ void XUpdateScanner::createHintFromTile(int x, int y, int th, Hint &hint)
 	hint.h = h;
 }
 
-bool XUpdateScanner::addTileToHint(int x, int y, int x0, int th, Hint &hint)
+bool XUpdateScanner::addTileToHint(int x, int y, int wInTiles, 
+				   int th, Hint &hint)
 {
-// todo: refuse to add hint if this one is much smaller or bigger (use x0)
 	int w = width - x;
 	int h = height - y;
 	if (w > tileWidth) 
 		w = tileWidth;
 	if (h > th) 
 		h = th;
+
+	if ((wInTiles*abs(hint.y-y)) > MAX_ADJ_TOLERANCE)
+		return false;
+	if ((wInTiles*abs((hint.y+hint.h)-(y+h))) > MAX_ADJ_TOLERANCE)
+		return false;
 
 	if (hint.x > x) {
 		hint.w += hint.x - x;
@@ -461,7 +469,7 @@ void XUpdateScanner::createHints(QPtrList<Hint> &hintList)
 			}
 			if (!addTileToHint(x * tileWidth, 
 					   (y * tileHeight) + ty, 
-					   x0,
+					   x0 - x + 1,
 					   th,
 					   hint)) {
 				flushHint(x, y, x0, hint, hintList);

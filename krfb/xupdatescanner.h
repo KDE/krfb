@@ -86,7 +86,7 @@ class XUpdateScanner
 	void createHints(QPtrList<Hint> &hintList);
 	bool addTileToHint(int x, int y, int x0, int th, Hint &hint);
 	void createHintFromTile(int x, int y, int th, Hint &hint);
-	void extendHintY(int x, int y, int x0, Hint &h);
+	void extendHintY(int x, int y, int wInTiles, Hint &h);
 	int findFirstLine(int maxH, unsigned char *&ssrc, 
 			  unsigned char *&sdest, int halfWidthBytes,
 			  bool &left);
