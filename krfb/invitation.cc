@@ -18,7 +18,6 @@
 
 #include "invitation.h"
 
-
 /*
  * Function for (en/de)crypting strings for config file, taken from KMail
  * Author: Stefan Taferner <taferner@alpin.or.at>
@@ -31,11 +30,35 @@ QString cryptStr(const QString &aStr) {
         return result;
 }
 
+// a random string that doesn't contain i, I, o, O, 1, 0
+// based on KApplication::randomString()
+static QString readableRandomString(int length) {
+   QString str;
+   while (length)
+   {
+      int r = KApplication::random() % 62;
+      r += 48;
+      if (r > 57) 
+	      r += 7;
+      if (r > 90) 
+	      r += 6;
+      char c = char(r);
+      if ((c == 'i') || 
+	  (c == 'I') ||
+	  (c == '1') ||
+	  (c == 'o') ||
+	  (c == 'O') ||
+	  (c == '0'))
+	      continue;
+      str += c;
+      length--;
+   }
+   return str;
+}
+
 Invitation::Invitation() :
 	m_viewItem(0) {
-	m_password = KApplication::randomString(4)+
-		"-"+
-		KApplication::randomString(4);
+	m_password = readableRandomString(4)+"-"+readableRandomString(3);
 	m_creationTime = QDateTime::currentDateTime();
 	m_expirationTime = QDateTime::currentDateTime().addSecs(INVITATION_DURATION);
 }
