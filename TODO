@@ -4,7 +4,7 @@ For 3.1:
 
 For 3.2:
 - enhance RFB with SASL authentication (Kerberos)
-- encrypted connection (using SASL and/or SSL/TLS)
+- encrypted connections (using SASL and/or SSL/TLS)
 
 Todo (unscheduled features):
 - NAT traversal support if I can find an acceptable implementation

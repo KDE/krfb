@@ -8,8 +8,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>420</width>
-            <height>354</height>
+            <width>421</width>
+            <height>445</height>
         </rect>
     </property>
     <property name="caption">
@@ -145,6 +145,20 @@
                             </widget>
                             <widget class="QCheckBox">
                                 <property name="name">
+                                    <cstring>enableSLPCB</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>Announce &amp;service on the network</string>
+                                </property>
+                                <property name="checked">
+                                    <bool>true</bool>
+                                </property>
+                                <property name="whatsThis" stdset="0">
+                                    <string>If you allow uninvited connections and enable this option, Desktop Sharing will announce the service and your identity on the local network, so people can find you and your computer.</string>
+                                </property>
+                            </widget>
+                            <widget class="QCheckBox">
+                                <property name="name">
                                     <cstring>confirmConnectionsCB</cstring>
                                 </property>
                                 <property name="text">
@@ -159,7 +173,7 @@
                                     <cstring>allowDesktopControlCB</cstring>
                                 </property>
                                 <property name="text">
-                                    <string>Allow u&amp;ninvited connections to control the desktop</string>
+                                    <string>A&amp;llow uninvited connections to control the desktop</string>
                                 </property>
                                 <property name="whatsThis" stdset="0">
                                     <string>Enable this option to allow uninvited user to control your desktop (using mouse and keyboard).</string>
@@ -241,6 +255,12 @@
                         </property>
                         <property name="sizeType">
                             <enum>Expanding</enum>
+                        </property>
+                        <property name="sizeHint">
+                            <size>
+                                <width>0</width>
+                                <height>50</height>
+                            </size>
                         </property>
                     </spacer>
                 </vbox>
@@ -361,6 +381,12 @@ Most VNC clients use a display number instead of the actual port. This display n
                         </property>
                         <property name="sizeType">
                             <enum>Expanding</enum>
+                        </property>
+                        <property name="sizeHint">
+                            <size>
+                                <width>0</width>
+                                <height>20</height>
+                            </size>
                         </property>
                     </spacer>
                 </vbox>

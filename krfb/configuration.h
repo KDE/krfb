@@ -77,12 +77,14 @@ public:
 	bool askOnConnect() const;
 	bool allowDesktopControl() const;
 	bool allowUninvitedConnections() const;
+	bool enableSLP() const;
 	QString password() const;
 	QString hostname() const;
 	int port() const;
 	int preferredPort() const;
 
         void setAllowUninvited(bool allowUninvited);
+	void setEnableSLP(bool e);
         void setAskOnConnect(bool askOnConnect);
 	void setPassword(QString password);
 	void setPreferredPort(int p);
@@ -127,6 +129,7 @@ private:
 	bool askOnConnectFlag;
 	bool allowDesktopControlFlag;
 	bool allowUninvitedFlag;
+	bool enableSLPFlag;
 
 	int portNum, preferredPortNum; 
 

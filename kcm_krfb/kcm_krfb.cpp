@@ -66,6 +66,7 @@ KcmKRfb::KcmKRfb(QWidget *p, const char *name, const QStringList &) :
 
 	connect(m_confWidget->passwordInput, SIGNAL(textChanged(const QString&)), SLOT(configChanged()) );
 	connect(m_confWidget->allowUninvitedCB, SIGNAL(clicked()), SLOT(configChanged()) );
+	connect(m_confWidget->enableSLPCB, SIGNAL(clicked()), SLOT(configChanged()) );
 	connect(m_confWidget->confirmConnectionsCB, SIGNAL(clicked()), SLOT(configChanged()) );
 	connect(m_confWidget->allowDesktopControlCB, SIGNAL(clicked()), SLOT(configChanged()) );
 	connect(m_confWidget->autoPortCB, SIGNAL(clicked()), SLOT(configChanged()) );
@@ -117,6 +118,7 @@ void KcmKRfb::load() {
 	checkKInetd(kinetdAvailable, krfbAvailable);
 
 	m_confWidget->allowUninvitedCB->setChecked(m_configuration.allowUninvitedConnections());
+	m_confWidget->enableSLPCB->setChecked(m_configuration.enableSLP());
 	m_confWidget->confirmConnectionsCB->setChecked(m_configuration.askOnConnect());
 	m_confWidget->allowDesktopControlCB->setChecked(m_configuration.allowDesktopControl());
 	m_confWidget->passwordInput->setText(m_configuration.password());
@@ -130,6 +132,7 @@ void KcmKRfb::save() {
         m_configuration.update();
 	bool allowUninvited = m_confWidget->allowUninvitedCB->isChecked();
 	m_configuration.setAllowUninvited(allowUninvited);
+	m_configuration.setEnableSLP(m_confWidget->enableSLPCB->isChecked());
 	m_configuration.setAskOnConnect(m_confWidget->confirmConnectionsCB->isChecked());
 	m_configuration.setAllowDesktopControl(m_confWidget->allowDesktopControlCB->isChecked());
 	m_configuration.setPassword(m_confWidget->passwordInput->text());
@@ -145,6 +148,7 @@ void KcmKRfb::defaults() {
 	checkKInetd(kinetdAvailable, krfbAvailable);
 
 	m_confWidget->allowUninvitedCB->setChecked(false);
+	m_confWidget->enableSLPCB->setChecked(true);
 	m_confWidget->confirmConnectionsCB->setChecked(false);
 	m_confWidget->allowDesktopControlCB->setChecked(false);
 	m_confWidget->passwordInput->setText("");

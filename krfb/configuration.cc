@@ -159,7 +159,7 @@ void Configuration::doKinetdConf() {
 
 	if (allowUninvitedFlag) {
 		setKInetdEnabled(true);
-		setKInetdServiceRegistrationEnabled(true);
+		setKInetdServiceRegistrationEnabled(enableSLPFlag);
 		getPortFromKInetd();
 		return;
 	}
@@ -188,6 +188,7 @@ void Configuration::loadFromKConfig() {
 
 	KConfig c("krfbrc");
 	allowUninvitedFlag = c.readBoolEntry("allowUninvited", false);
+	enableSLPFlag = c.readBoolEntry("enableSLP", true);
 	askOnConnectFlag = c.readBoolEntry("confirmUninvitedConnection", true);
 	allowDesktopControlFlag = c.readBoolEntry("allowDesktopControl", false);
 	preferredPortNum = c.readNumEntry("preferredPort", -1);
@@ -214,6 +215,7 @@ void Configuration::saveToKConfig() {
 	c.writeEntry("confirmUninvitedConnection", askOnConnectFlag);
 	c.writeEntry("allowDesktopControl", allowDesktopControlFlag);
 	c.writeEntry("allowUninvited", allowUninvitedFlag);
+	c.writeEntry("enableSLP", enableSLPFlag);
 	c.writeEntry("preferredPort", preferredPortNum);
 	c.writeEntry("uninvitedPasswordCrypted", cryptStr(passwordString));
 	c.deleteEntry("uninvitedPassword");
@@ -303,6 +305,10 @@ bool Configuration::allowUninvitedConnections() const {
 	return allowUninvitedFlag;
 }
 
+bool Configuration::enableSLP() const {
+	return enableSLPFlag;
+}
+
 QString Configuration::password() const {
 	return passwordString;
 }
@@ -313,6 +319,10 @@ QValueList<Invitation> &Configuration::invitations() {
 
 void Configuration::setAllowUninvited(bool allowUninvited) {
 	allowUninvitedFlag = allowUninvited;
+}
+
+void Configuration::setEnableSLP(bool e) {
+	enableSLPFlag = e;
 }
 
 void Configuration::setAskOnConnect(bool askOnConnect)
