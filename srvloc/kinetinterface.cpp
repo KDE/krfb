@@ -73,10 +73,22 @@ public:
 	KInetInterfacePrivate& operator =(const KInetInterfacePrivate& i) {
 		name = i.name;
 		flags = i.flags;
-		address = new KInetSocketAddress(*i.address);
-		netmask = new KInetSocketAddress(*i.netmask);
-		broadcast = new KInetSocketAddress(*i.broadcast);
-		destination = new KInetSocketAddress(*i.destination);
+		if (i.address)
+			address = new KInetSocketAddress(*i.address);
+		else
+			address = 0;
+		if (i.netmask)
+			netmask = new KInetSocketAddress(*i.netmask);
+		else
+			netmask = 0;
+		if (i.broadcast)
+			broadcast = new KInetSocketAddress(*i.broadcast);
+		else
+			broadcast = 0;
+		if (i.destination)
+			destination = new KInetSocketAddress(*i.destination);
+		else
+			destination = 0;
 		return *this;
 	}
 

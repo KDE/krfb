@@ -126,7 +126,8 @@ public:
    * Returns the address of the interface.
    * The returned object is valid as long as this object
    * exists.
-   * @return the address of this interface
+   * @return the address of this interface, can be 0 if the interface
+   *         does not have an address
    */
   KInetSocketAddress *address() const;
 
@@ -134,7 +135,8 @@ public:
    * Returns the netmask of the interface.
    * The returned object is valid as long as this object
    * exists.
-   * @return the netmask of this interface
+   * @return the netmask of this interface, can be 0 if the interface
+   *         does not have an address
    */
   KInetSocketAddress *netmask() const;
 
