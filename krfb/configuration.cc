@@ -24,12 +24,13 @@
 #include <qlineedit.h>
 #include <qcheckbox.h>
 
-Configuration::Configuration()
+Configuration::Configuration() :
+	preconfiguredFlag(false),
+	oneConnectionFlag(false)
 {
 	loadFromKConfig();
 	saveToDialog();
 
-	
 	portValidator = new QIntValidator(0, 65535, 
 					  confDlg.displayNumberInput);
 	confDlg.displayNumberInput->setValidator(portValidator);
@@ -42,16 +43,32 @@ Configuration::Configuration()
 		SLOT(applyPressed()));
 }
 
+Configuration::Configuration(bool oneConnection, bool askOnConnect, 
+			     bool allowDesktopControl, QString password, 
+			     int port) :
+	preconfiguredFlag(true),
+	oneConnectionFlag(oneConnection),
+	askOnConnectFlag(askOnConnect),
+	allowDesktopControlFlag(allowDesktopControl),
+	passwordString(password)
+{
+	if ((port >= 5900) && (port < 6000))
+		portNumber = port-5900;
+	else
+		portNumber = port;
+}
+
+
 Configuration::~Configuration() {
 }
 
 void Configuration::loadFromKConfig() {
+	if (preconfigured())
+		return;
 	KConfig *config = KGlobal::config();
 	askOnConnectFlag = config->readBoolEntry("askOnConnect", true);
 	allowDesktopControlFlag = config->readBoolEntry("allowDesktopControl", 
 							false);
-	showMousePointerFlag = config->readBoolEntry("showMousePointer", 
-						     true);
 	passwordString = config->readEntry("password", "");
 	portNumber = config->readNumEntry("port", 0);
 }
@@ -59,7 +76,6 @@ void Configuration::loadFromKConfig() {
 void Configuration::loadFromDialog() {
 	askOnConnectFlag = confDlg.askOnConnectCB->isChecked();
 	allowDesktopControlFlag = confDlg.allowDesktopControlCB->isChecked();
-	showMousePointerFlag = confDlg.showMousePointerCB->isChecked(); 
 	passwordString = confDlg.passwordInput->text();
 	int p = confDlg.displayNumberInput->text().toInt();
 	if (p != portNumber) {
@@ -69,10 +85,11 @@ void Configuration::loadFromDialog() {
 }
 
 void Configuration::saveToKConfig() {
+	if (preconfigured())
+		return;
 	KConfig *config = KGlobal::config();
 	config->writeEntry("askOnConnect", askOnConnectFlag);
 	config->writeEntry("allowDesktopControl", allowDesktopControlFlag);
-	config->writeEntry("showMousePointer", showMousePointerFlag);
 	config->writeEntry("password", passwordString);
 	config->writeEntry("port", portNumber);
 }
@@ -80,9 +97,16 @@ void Configuration::saveToKConfig() {
 void Configuration::saveToDialog() {
 	confDlg.askOnConnectCB->setChecked(askOnConnectFlag);
 	confDlg.allowDesktopControlCB->setChecked(allowDesktopControlFlag);
-	confDlg.showMousePointerCB->setChecked(showMousePointerFlag); 
 	confDlg.passwordInput->setText(passwordString);
 	confDlg.displayNumberInput->setText(QString().setNum(portNumber));
+}
+
+bool Configuration::preconfigured() const {
+	return preconfiguredFlag;
+}
+
+bool Configuration::oneConnection() const {
+	return oneConnectionFlag;
 }
 
 bool Configuration::askOnConnect() const {
@@ -91,10 +115,6 @@ bool Configuration::askOnConnect() const {
 
 bool Configuration::allowDesktopControl() const {
 	return allowDesktopControlFlag;
-}
-
-bool Configuration::showMousePointer() const {
-	return showMousePointerFlag;
 }
 
 QString Configuration::password() const {

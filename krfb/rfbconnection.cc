@@ -50,7 +50,7 @@ RFBConnection::RFBConnection(Display *_dpy,
   	bufferedConnection = new BufferedConnection(32768, 32768);
   	connection = bufferedConnection;
 
-	XTestGrabControl(dpy, true);
+	XTestGrabControl(dpy, true); 
 	createFramebuffer();
 
 	InitBlocks(32, 32);
@@ -62,10 +62,9 @@ RFBConnection::~RFBConnection() {
  	DeleteBlocks();
 
 	destroyFramebuffer();
-	XTestDiscard( dpy );
+//	XTestDiscard(dpy); // (makes problems with Qt??)
 
  	delete bufferedConnection;
-	close(fd);
 }
 
 void RFBConnection::handleKeyEvent(KeyEvent &keyEvent) {

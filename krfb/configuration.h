@@ -33,11 +33,14 @@ class Configuration : public QObject {
    	Q_OBJECT
 public:
 	Configuration();
+	Configuration(bool oneConnection, bool askOnConnect, 
+		      bool allowDesktopControl, QString password, int port);
 	~Configuration();
 
+	bool preconfigured() const;
+	bool oneConnection() const;
 	bool askOnConnect() const; 
 	bool allowDesktopControl() const;
-	bool showMousePointer() const;
 
 	QString password() const;
 	int port() const;
@@ -57,9 +60,10 @@ private:
         ConfigurationDialog confDlg;
 	QIntValidator *portValidator;
 
+	bool preconfiguredFlag;
 	bool askOnConnectFlag;
 	bool allowDesktopControlFlag;
-	bool showMousePointerFlag;
+	bool oneConnectionFlag;
 	QString passwordString;
 	int portNumber;
 

@@ -12,7 +12,7 @@
             <x>0</x>
             <y>0</y>
             <width>318</width>
-            <height>284</height>
+            <height>257</height>
         </rect>
     </property>
     <property stdset="1">
@@ -98,21 +98,6 @@
                         <string>If you turn this option on the remote user can enter keystrokes and use your mouse pointer. This gives him full control over your computer, so be careful.  When the option is disabled the remote user can only watch your screen.</string>
                     </property>
                 </widget>
-                <widget>
-                    <class>QCheckBox</class>
-                    <property stdset="1">
-                        <name>name</name>
-                        <cstring>showMousePointerCB</cstring>
-                    </property>
-                    <property stdset="1">
-                        <name>text</name>
-                        <string>&amp;show mouse pointer on remote client</string>
-                    </property>
-                    <property>
-                        <name>whatsThis</name>
-                        <string>If you enable this option the remote client can see the mouse pointer of this display additionally to his own. Especially if you have a slow network connection (modem, ISDN) this will make the remote display appear more sloppy. On the other hand the cursor will let the remote user orienting on the screen because the cursor moves slower on a remote connection.</string>
-                    </property>
-                </widget>
             </vbox>
         </widget>
         <widget>
@@ -182,7 +167,8 @@
                     </property>
                     <property>
                         <name>whatsThis</name>
-                        <string>Enter the display number/port here. Unless you have more than one server running on the machine just enter 0. Regular RFB/VNC port numbers are between 0 and 99. If you enter a higher number it will be used as TCP port. Note that ports below 1024 require root privileges.</string>
+                        <string>Enter the display number/port here. Unless you have more than one server running on the machine just enter 0. 
+Regular RFB/VNC port numbers are between 0 and 99. If you enter a higher number it will be used as TCP port. Note that ports below 1024 require root privileges.</string>
                     </property>
                 </widget>
             </vbox>

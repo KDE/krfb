@@ -27,6 +27,8 @@
 #include <fcntl.h>
 
 #include <kdebug.h>
+#include <kmessagebox.h>
+#include <klocale.h>
 #include <qwindowdefs.h>
 #include <qtimer.h>
 #include <qcheckbox.h>
@@ -48,7 +50,8 @@ RFBController::RFBController(Configuration *c) :
 }
 
 RFBController::~RFBController() {
-	delete serversocket;
+	if (serversocket) 
+		delete serversocket;
 	if (socket)
 		delete socket;
 	if (connection) 
@@ -58,8 +61,24 @@ RFBController::~RFBController() {
 void RFBController::startServer() {
 	serversocket = new KServerSocket(configuration->port(), false);
 	connect(serversocket, SIGNAL(accepted(KSocket*)), SLOT(accepted(KSocket*)));
-	serversocket->bindAndListen();
-	// TODO: error message if bindAndListen fails (port in use)
+	if (!serversocket->bindAndListen()) {
+		delete serversocket;
+		serversocket = 0;
+		KMessageBox::error(0, 
+				   i18n("KRfb Server cannot run, port %1 is already in use. ")
+				     .arg(configuration->port()),
+				   i18n("KRfb Error"));
+	}
+}
+
+RFBState RFBController::state() {
+	if (!serversocket)
+		return RFB_ERROR;
+	if (!socket)
+		return RFB_WAITING;
+	if (!connection)
+		return RFB_CONNECTING;
+	return RFB_CONNECTED;
 }
 
 void RFBController::rebind() {
@@ -107,35 +126,27 @@ void RFBController::acceptConnection(bool allowDesktopControl) {
 	connection = new RFBConnection(qt_xdisplay(), s->socket(), 
 				       configuration->password(),
 				       allowDesktopControl,
-				       configuration->showMousePointer());
+				       false);
 
 	emit sessionEstablished();
 }
 
-void RFBController::checkWriteBuffer() {
-	BufferedConnection *bc = connection->bufferedConnection;	
-	socket->enableWrite((bc->senderBuffer.end - bc->senderBuffer.pos) > 0);
-}
-
 void RFBController::idleSlot() {
-kdDebug() << "Idle 1" << endl;
 	idleUpdateScheduled = false;
 	if (connection) {
-kdDebug() << "Idle 2" << endl;
                 connection->scanUpdates();
 		connection->sendIncrementalFramebufferUpdate();
 		checkWriteBuffer();
 	}
 }
 
-void RFBController::prepareIdleUpdate() {
-	kdDebug() << "test schedule, isScheduled? " << idleUpdateScheduled<< endl;
+void RFBController::checkWriteBuffer() {
 	BufferedConnection *bc = connection->bufferedConnection;	
-	if (((bc->senderBuffer.end - bc->senderBuffer.pos) == 0) && 
-	    !idleUpdateScheduled) {
+	bool bufferEmpty = (bc->senderBuffer.end - bc->senderBuffer.pos) == 0;
+       	socket->enableWrite(!bufferEmpty);
+	if (bufferEmpty && !idleUpdateScheduled && connection) {
 		QTimer::singleShot(0, this, SLOT(idleSlot()));
 		idleUpdateScheduled = true;
-kdDebug() << "Scheduled!" << endl;
 	}
 }
 
@@ -149,7 +160,10 @@ void RFBController::socketReadable() {
 	if (count >= 0)
 		bc->receiverBuffer.end += count;
 	else {
-		// TODO: what to do if write failed
+		closeSession();
+		KMessageBox::error(0, 
+				   i18n("An error occurred while reading from the remote client. The connection will be terminated."),
+				   i18n("KRfb Error"));
 	}
 	while (connection->currentState && bc->hasReceiverBufferData()) {
 		connection->update();
@@ -164,21 +178,20 @@ void RFBController::socketReadable() {
 
 void RFBController::socketWritable() {
 	ASSERT(socket);
-kdDebug() << "write slot" << endl;
 	int fd = socket->socket();
 	BufferedConnection *bc = connection->bufferedConnection;
 	ASSERT((bc->senderBuffer.end - bc->senderBuffer.pos) > 0);
-	// TODO: what to do if fd < 0?
 	int count = write(fd,
 			  bc->senderBuffer.data + bc->senderBuffer.pos,
 			  bc->senderBuffer.end - bc->senderBuffer.pos);
 	if (count >= 0) {
 		bc->senderBuffer.pos += count;
 	} else {
-		// TODO: what to do if write failed
+		KMessageBox::error(0, 
+				   i18n("An error occurred while writing to the remote client. The connection will be terminated."),
+				   i18n("KRfb Error"));
 	}
-kdDebug() << "written " << count << " left " << (bc->senderBuffer.end - bc->senderBuffer.pos) << endl;
-	prepareIdleUpdate();
+
 	checkWriteBuffer();
 }
 
@@ -207,6 +220,7 @@ void RFBController::dialogRefused() {
 	
 	closeSocket();
 	dialog.hide();
+	emit sessionRefused();
 }
 
 void RFBController::closeSocket() {

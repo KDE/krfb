@@ -32,6 +32,13 @@
 
 using namespace rfb;
 
+typedef enum {
+	RFB_ERROR,
+	RFB_WAITING,
+	RFB_CONNECTING,
+	RFB_CONNECTED
+} RFBState;
+
 /**
  * Manages sockets, drives the RGBConnection and triggers the connection
  * dialog.
@@ -47,6 +54,8 @@ public:
 	RFBController(Configuration *c);
 	~RFBController();
 
+	RFBState state();
+	
 public slots:	
 	void rebind();
 	void closeSession();
@@ -54,11 +63,11 @@ public slots:
 signals:
         void sessionEstablished();
 	void sessionFinished(); 
+	void sessionRefused();
  
 private:	
 	void startServer();
 	void checkWriteBuffer();
-	void prepareIdleUpdate();
 	void acceptConnection(bool ask);
 	void closeSocket();
 

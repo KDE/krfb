@@ -18,10 +18,14 @@
 #ifndef TRAYICON_H
 #define TRAYICON_H
 
+#include "configuration.h"
+
 #include <qwidget.h>
 #include <kpixmap.h>
 #include <kaction.h>
 #include <ksystemtray.h>
+
+class KDialog;
 
 /**
   *@author Tim Jansen
@@ -30,22 +34,27 @@
 class TrayIcon : public KSystemTray {
    	Q_OBJECT
 public: 
-	TrayIcon();
+	TrayIcon(KDialog*, Configuration*);
 	~TrayIcon();
 
 public slots:
   	void closeConnection();
 	void openConnection();
 
-private:
-  	KPixmap trayIconOpen;
-  	KPixmap trayIconClosed;
-  	KAction* closeConnectionAction;
-  	KAction* configureAction;
-
 signals:
   	void connectionClosed();
 	void showConfigure();
+
+private:
+  	KPixmap trayIconOpen;
+  	KPixmap trayIconClosed;
+	KDialog* aboutDialog;
+  	KAction* closeConnectionAction;
+  	KAction* configureAction;
+  	KAction* aboutAction;
+
+private slots:
+	void showAbout();
 };
 
 #endif

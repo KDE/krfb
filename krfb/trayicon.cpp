@@ -16,23 +16,35 @@
  ***************************************************************************/
 
 #include "trayicon.h"
+#include <kdebug.h>
 #include <klocale.h>
+#include <kdialog.h>
 #include <kglobal.h>
 #include <kiconloader.h>
 #include <kpopupmenu.h>
 
-TrayIcon::TrayIcon() : KSystemTray() {
+TrayIcon::TrayIcon(KDialog *d, Configuration *c) : 
+	KSystemTray(),
+	aboutDialog(d) 
+{
 	KIconLoader *loader = KGlobal::iconLoader();
 	trayIconOpen = loader->loadIcon("eyes-open24", KIcon::User);
 	trayIconClosed = loader->loadIcon("eyes-closed24", KIcon::User);
 	setPixmap(trayIconClosed);
 
 	configureAction = new KAction(i18n("&Configure KRfb")); 	
-	configureAction->plug(contextMenu());
+	if (!c->preconfigured()) 
+		configureAction->plug(contextMenu());
+
 	closeConnectionAction = new KAction(i18n("Close connection"));
 	closeConnectionAction->plug(contextMenu());
 	closeConnectionAction->setEnabled(false);
+
+	contextMenu()->insertSeparator();
+	aboutAction = new KAction(i18n("&About KRfb")); 	
+	aboutAction->plug(contextMenu());
 	connect(configureAction, SIGNAL(activated()), SIGNAL(showConfigure()));
+	connect(aboutAction, SIGNAL(activated()), SLOT(showAbout()));
 	connect(closeConnectionAction, SIGNAL(activated()), 
 		SIGNAL(connectionClosed()));
 	show();
@@ -49,4 +61,8 @@ void TrayIcon::openConnection(){
 void TrayIcon::closeConnection(){
 	setPixmap(trayIconClosed);
 	closeConnectionAction->setEnabled(false);
+}
+
+void TrayIcon::showAbout() {
+	aboutDialog->show();
 }
