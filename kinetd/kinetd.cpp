@@ -26,7 +26,9 @@
 #include <kextsock.h>
 #include <klocale.h>
 
-PortListener::PortListener(KService::Ptr s)
+PortListener::PortListener(KService::Ptr s) :
+	socket(0),
+	config(0)
 {
 	loadConfig(s);
 
