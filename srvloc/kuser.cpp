@@ -49,8 +49,8 @@ public:
 };
 
 
-KUser::KUser() {
-	fillPasswd(getpwuid(getuid()));
+KUser::KUser(bool effective) {
+	fillPasswd(getpwuid(effective ? geteuid() : getuid()));
 }
 
 KUser::KUser(long uid) {
@@ -59,6 +59,28 @@ KUser::KUser(long uid) {
 
 KUser::KUser(const QString& name) {
 	fillPasswd(getpwnam(name.latin1()));
+}
+
+KUser::KUser(const KUser &user) {
+	d = new KUserPrivate(user.uid(),
+			     user.loginName(),
+			     user.fullName());
+}
+
+KUser& KUser::operator =(const KUser& user) {
+	delete d;
+	d = new KUserPrivate(user.uid(),
+			     user.loginName(),
+			     user.fullName());
+}
+
+bool KUser::operator ==(const KUser& user) {
+    if (isValid() != user.isValid())
+	return false;
+    if (isValid())
+	return uid() == user.uid();
+    else
+	return true;
 }
 
 void KUser::fillPasswd(struct passwd *p) {
@@ -85,6 +107,10 @@ long KUser::uid() const {
 		return d->uid;
 	else
 		return -1;
+}
+
+bool KUser::isSuperUser() const {
+	return uid() == 0;
 }
 
 QString KUser::loginName() const {

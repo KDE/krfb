@@ -169,6 +169,8 @@ private:
 	XUpdateScanner *scanner;
 	ConnectionDialog dialog;
 
+	QString desktopName;
+
 	rfbScreenInfoPtr server;
 
 	XImage *framebufferImage;

@@ -24,6 +24,7 @@
  */
 
 #include "rfbcontroller.h"
+#include "kuser.h"
 
 #include <netinet/tcp.h>
 #include <netinet/in.h>
@@ -324,6 +325,11 @@ RFBController::RFBController(Configuration *c) :
 	asyncQueue.setAutoDelete(true);
 
 	KeyboardEvent::initKeycodes();
+
+	char hostname[256];
+	if (gethostname(hostname, 256))
+		hostname[0] = 0;
+	desktopName = QString(i18n("%1@%2 (shared desktop)")).arg(KUser().loginName()).arg(hostname);
 }
 
 RFBController::~RFBController()
@@ -394,6 +400,8 @@ void RFBController::startServer(int inetdFd, bool xtestGrab)
 	server->ptrAddEvent = pointerHook;
 	server->newClientHook = newClientHook;
 	server->passwordCheck = passwordCheck;
+
+	server->desktopName = desktopName.latin1();
 
 	if (!myCursor)
 		myCursor = rfbMakeXCursor(19, 19, (char*) cur, (char*) mask);

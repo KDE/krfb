@@ -1,10 +1,7 @@
-For 3.1:
-- write SLP service template for remote desktop protocols
-  (documentation)
 
 For 3.2:
-- set desktop name (username@hostname)
-- apply multi-desktop patch
+- write SLP service template for remote desktop protocols
+  (documentation)
 - trayicon mouse-over text
 - when krfb is started with URL arguments and without connection
   quality, add some kind of smart algorithm to determine whether the

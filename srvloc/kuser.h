@@ -36,15 +36,22 @@ struct passwd;
  *
  * @author Tim Jansen <tim@tjansen.de>
  * @short Represents a user on your system
+ * @since 3.2
  */
 class KUser {
 
 public:
   /**
    * Creates an object that contains information about the current user.
-   * (As returned by getuid(2)).
+   * (as returned by getuid(2) or geteuid(2)).
+   * @param effective if true, returns the effective user. If false, the 
+   *        real user will be returned. The difference is that when the 
+   *        user uses a command like "su", this will change the effective 
+   *        user, but not the real user. Use the effective user when 
+   *        checking permissions, and the real user for displaying
+   *        information about the user
    */
-  KUser();
+  KUser(bool effective = false);
 
   /**
    * Creates an object for the user with the given user id.
@@ -62,6 +69,24 @@ public:
   KUser(const QString& name);
 
   /**
+   * Copy constructor.
+   * Makes a deep copy.
+   */
+  KUser(const KUser &user);
+
+  /**
+   * Assignment operator.
+   * Makes a deep copy.
+   */
+  KUser& operator =(const KUser& user);
+
+  /**
+   * Two KUser objects are equal if @ref isValid() and the uid() are
+   * identical.
+   */
+  bool operator ==(const KUser& user);
+
+  /**
    * Returns true if the user is valid. A KUser object can be invalid if 
    * you created it with an non-existing uid or name.
    * @return true if the user is valid
@@ -73,6 +98,12 @@ public:
    * @return the id of the user or -1 if user is invalid
    */
   long uid() const;
+
+  /**
+   * Checks whether the user it the super user (root).
+   * @return true if the user is root
+   */
+  bool isSuperUser() const;
 
   /**
    * The login name of the user.
