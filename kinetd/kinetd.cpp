@@ -18,8 +18,10 @@
 
 /*
  * TODOs: 
- * - override configuration in KDEHOME
+ * - setup servicetype
+ * - override configuration in KDEHOME with a KConfig
  * - set listening ip address
+ * - implement autoPortRange
  */
 
 #include "kinetd.h"
@@ -27,30 +29,65 @@
 #include <kservice.h>
 #include <kdebug.h>
 
-PortListener::PortListener(KService::Ptr s) {
+PortListener::PortListener(KService::Ptr s) :
+	valid(true),
+	autoPortRange(0),
+	multiInstance(false),
+	enabled(true)
+{
 
+	QVariant vport, vautoport, venabled, vargument, vmultiInstance;
 	serviceName = s->name();
-
-	// TODO: load KConfig to override these settings
-
-	port = s->property("port");
-	enabled = s->property("enabled");
 	execPath = s->exec();
+	vport = s->property("X-KDE-KINETD-port");
+	vautoport = s->property("X-KDE-KINETD-autoPortRange");
+	venabled = s->property("X-KDE-KINETD-enabled");
+        vargument = s->property("X-KDE-KINETD-argument");
+        vmultiInstance = s->property("X-KDE-KINETD-multiInstance");
+	
+	if (!vport.isValid())
+		valid = false;
+	else
+		port = vport.toInt();
+	if (vautoport.isValid())
+		autoPortRange = vautoport.toInt();
+	if (venabled.isValid())
+		enabled = venabled.toBool();
+	if (vargument.isValid())
+		argument = vargument.toString();
+	if (vmultiInstance.isValid())
+		multiInstance = vmultiInstance.toBool();
 
-	socket = new KSocket(defaultPort, false);
+	socket = new KServerSocket(port, false);
 	connect(socket, SIGNAL(accepted(KSocket*)), 
 		SLOT(accepted(KSocket*)));
 
+	process.setExecutable(execPath);
+
 	if (!socket->bindAndListen()) {
-		// TODO: do something
+		// TODO: do something, implement autoport
 		kdDebug() << "bind failed" <<endl;
 	}
 }
 
-PortListener::accepted(KSocket *sock) {
-	// TODO: do the inetd thing
+void PortListener::accepted(KSocket *sock) {
 	kdDebug() << "got connection" << endl;
+
+	if ((!enabled) || 
+	    ((!multiInstance) && process.isRunning())) {
+		delete sock;
+		return;
+	}
+
+	process.clearArguments();
+	// TODO: call now:
+	// process << argument << sock->socket();
+	// process.start(DontCare);
 	delete sock;
+}
+
+bool PortListener::isValid() {
+	return valid;
 }
 
 PortListener::~PortListener() {
@@ -59,33 +96,30 @@ PortListener::~PortListener() {
 }
 
 
-class KInetD : public KDEDModule {
-	KInetD::KInetD(QCString &n) :
-		KDEDModule(n)
-	{
-		portListeners.setAutoDelete(true);
-		loadServiceList();
-	}
+KInetD::KInetD(QCString &n) :
+	KDEDModule(n)
+{
+	portListeners.setAutoDelete(true);
+	loadServiceList();
+}
 
-	void KInetD::loadServiceList() 
-	{
-		portListeners.clear();
-
-		KService::List kinetdModules = 
-			KServiceType::offers("KInetDModule");
-		for(KService::List::ConstIterator it = kinetdModules.begin(); 
-		    it != kinetdModules.end(); 
-		    it++) {
-			KService::Ptr s = *it;
-			portListeners.append(new PortListener(s));
-		}
-		
+void KInetD::loadServiceList() 
+{
+	portListeners.clear();
+	
+	KService::List kinetdModules = 
+		KServiceType::offers("KInetDModule");
+	for(KService::List::ConstIterator it = kinetdModules.begin(); 
+	    it != kinetdModules.end(); 
+	    it++) {
+		KService::Ptr s = *it;
+		portListeners.append(new PortListener(s));
 	}
 }
 
 
 extern "C" {
-	KDEDModule *create_kinetd(QCString *name)
+	KDEDModule *create_kinetd(QCString &name)
 	{
 		return new KInetD(name);
 	}

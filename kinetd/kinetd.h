@@ -21,22 +21,31 @@
 
 #include <kdedmodule.h>
 #include <kservice.h>
+#include <ksock.h>
+#include <kprocess.h>
 
-class PortListener {
+class PortListener : public QObject {
+	Q_OBJECT
 private:
+	bool valid;
 	QString serviceName;
-	int port;
+	int port, autoPortRange;
+	bool multiInstance;
 	QCString execPath;
+	QString argument;
 	bool enabled;
 
 	KServerSocket *socket;
+	KProcess process;
 public:
 	PortListener(KService::Ptr s);
 	~PortListener();
+	
+	bool isValid();
 
 private slots:
 	void accepted(KSocket*);
-}
+};
 
 class KInetD : public KDEDModule {
 	Q_OBJECT
@@ -45,13 +54,13 @@ class KInetD : public KDEDModule {
 
  public:
 	KInetD(QCString &n);
-	loadServiceList();
+	void loadServiceList();
 	
 	
 
 	// DCOP functions
 	void reloadPortListenerList();
-}
+};
 
 
 #endif

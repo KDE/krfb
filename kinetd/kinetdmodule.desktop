@@ -1,0 +1,22 @@
+[Desktop Entry]
+Type=ServiceType
+X-KDE-ServiceType=KInetDModule
+Name=KInetD Module Type
+
+[PropertyDef::X-KDE-Kinetd-port]
+Type=int
+
+[PropertyDef::X-KDE-Kinetd-autoPortRange]
+Type=int
+
+[PropertyDef::X-KDE-Kinetd-enabled]
+Type=bool
+
+[PropertyDef::X-KDE-Kinetd-argument]
+Type=QString
+
+[PropertyDef::X-KDE-Kinetd-multiInstance]
+Type=bool
+
+
+
