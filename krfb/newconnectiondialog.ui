@@ -209,7 +209,7 @@
                             </property>
                             <property name="text">
                                 <string>Somebody is requesting a RFB (VNC) connection to your computer. 
-This means that they can see everything on your screen and, if the option below is enabled, can also control it. Refuse the connection unless you trust the person.</string>
+Granting this will allow them to see everything on your screen and, if the option below is enabled, be able to control it. Refuse the connection unless you trust the person.</string>
                             </property>
                             <property name="textFormat">
                                 <enum>AutoText</enum>
@@ -301,7 +301,7 @@ This means that they can see everything on your screen and, if the option below 
                         <string>Allow remote user to &amp;control keyboard and mouse</string>
                     </property>
                     <property name="whatsThis" stdset="0">
-                        <string>If you turn this option on the remote user can enter keystrokes and use your mouse pointer. This gives him full control over your computer, so be careful.  When the option is disabled the remote user can only watch your screen.</string>
+                        <string>If you turn this option on, the remote user can enter keystrokes and use your mouse pointer. This gives them full control over your computer, so be careful.  When the option is disabled the remote user can only watch your screen.</string>
                     </property>
                 </widget>
             </vbox>
