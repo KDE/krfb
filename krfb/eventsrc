@@ -4,6 +4,7 @@ Comment=Desktop Sharing
 Comment[af]=werkskerm deeling
 Comment[bs]=Dijeljenje desktopa
 Comment[ca]=Compartició de l'escriptori
+Comment[cs]=Sdílení pracovní plochy
 Comment[da]=Skrivebordsdeling
 Comment[de]=Arbeitsfläche freigeben
 Comment[el]=Μοίρασμα επιφάνειας εργασίας
@@ -22,6 +23,7 @@ Comment[tr]=Masaüstü Paylaşımı
 [UserAcceptsConnection]
 Name=UserAcceptsConnection
 Name[ca]=L'usuari accepta la connexió
+Name[cs]=Uživatel přijímá spojení
 Name[da]=BrugerAcceptererForbindelse
 Name[de]=BenutzerBestätigtVerbindung
 Name[el]=Ο χρήστης δέχεται σύνδεση
@@ -56,6 +58,7 @@ default_presentation=4
 [UserRefusesConnection]
 Name=UserRefusesConnection
 Name[ca]=L'usuari refusa la connexió
+Name[cs]=Uživatel odmítá spojení
 Name[da]=BrugerAfslårForbindelse
 Name[de]=BenutzerLehntVerbindungAb
 Name[el]=Ο χρήστης δε δέχεται σύνδεση
@@ -90,6 +93,7 @@ default_presentation=4
 [ConnectionClosed]
 Name=ConnectionClosed
 Name[ca]=Connexió tancada
+Name[cs]=Spojení ukončeno
 Name[da]=ForbindelseLukket
 Name[de]=VerbindungGeschlossen
 Name[el]=Η σύνδεση έκλεισε
@@ -126,6 +130,7 @@ default_presentation=4
 Name=InvalidPassword
 Name[be]=Некарэктны пароль
 Name[ca]=Contrasenya no vàlida
+Name[cs]=Neplatné heslo
 Name[da]=UgyldigtKodeord
 Name[de]=UngültigesPasswort
 Name[el]=Λάθος κωδικός πρόσβασης
@@ -162,6 +167,7 @@ default_presentation=4
 [InvalidPasswordInvitations]
 Name=InvalidPasswordInvitations
 Name[ca]=Contrasenya convidats no vàlides
+Name[cs]=Neplatné hesla výzev
 Name[da]=UgyldigtKodeordInvitationer
 Name[de]=UngültigePasswortAnfragen
 Name[es]=Invitación de contraseñas erróneas
@@ -192,6 +198,7 @@ default_presentation=2
 [NewConnectionOnHold]
 Name=NewConnectionOnHold
 Name[ca]=Nova connexió en espera
+Name[cs]=Nové spojení pozdrženo
 Name[da]=NyForbindelseSatPåHold
 Name[de]=NeueVerbindungWartet
 Name[el]=Νέα σύνδεση σε αναμονή
@@ -224,6 +231,7 @@ default_presentation=4
 [NewConnectionAutoAccepted]
 Name=NewConnectionAutoAccepted
 Name[ca]=Nova connexió auto-acceptada
+Name[cs]=Nové spojení automaticky přijato
 Name[da]=NyForbindelseAutomatiskAccepteret
 Name[de]=NeueVerbindungAutomatischAkzeptiert
 Name[el]=Αυτόματη αποδοχή νέας σύνδεσης
@@ -257,6 +265,7 @@ default_presentation=4
 [TooManyConnections]
 Name=TooManyConnections
 Name[ca]=Masses connexions
+Name[cs]=Příliš mnoho spojení
 Name[da]=ForMangeForbindelser
 Name[de]=ZuVieleVerbindungen
 Name[el]=Πάρα πολλές συνδέσεις
@@ -292,6 +301,7 @@ default_logfile=
 [UnexpectedConnection]
 Name=UnexpectedConnection
 Name[ca]=Connexió inesperada
+Name[cs]=Neočekáváné spojení
 Name[da]=UventetForbindelse
 Name[de]=UnerwarteteVerbindung
 Name[el]=Μη αναμενόμενη σύνδεση

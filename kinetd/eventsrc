@@ -6,6 +6,7 @@ Comment[sv]=Kinetd
 [IncomingConnection]
 Name=IncomingConnection
 Name[ca]=Connexió entrant
+Name[cs]=Příchozí spojení
 Name[da]=IndkommendeForbindelse
 Name[de]=Eingehende Verbindung
 Name[el]=Εισερχόμενη σύνδεση
@@ -43,6 +44,7 @@ default_presentation=4
 [ProcessFailed]
 Name=ProcessFailed
 Name[ca]=Procés fallit
+Name[cs]=Proces selhal
 Name[da]=ProcesMislykkedes
 Name[de]=Prozess fehlgeschlagen
 Name[el]=Η επεξεργασία απέτυχε
