@@ -121,7 +121,7 @@ public:
  */
 class RFBController : public QObject  {
 	Q_OBJECT
-	
+
 	friend class SessionEstablishedEvent;
 public:
 	RFBController(Configuration *c);
@@ -159,13 +159,13 @@ signals:
 private:
 	void stopServer(bool xtestUngrab = true);
 	void sendKNotifyEvent(const QString &name, const QString &desc);
-	bool checkAsyncEvents();
 	void sendSessionEstablished();
 	void disableBackground(bool state);
-	
+
 	QString remoteIp;
 	bool allowDesktopControl;
 
+	QTimer initIdleTimer;
 	QTimer idleTimer;
 	Configuration *configuration;
 	XUpdateScanner *scanner;
@@ -185,6 +185,7 @@ private:
 	bool closePending; // set when libvncserver detected close
 	bool forcedClose;  // set when user closed connection
 private slots:
+	bool checkAsyncEvents();
 	void idleSlot();
 	void dialogAccepted();
 	void dialogRefused();

@@ -20,7 +20,7 @@
 
 /*
  *  OSXvnc Copyright (C) 2001 Dan McGuirk <mcguirk@incompleteness.net>.
- *  Original Xvnc code Copyright (C) 1999 AT&T Laboratories Cambridge.  
+ *  Original Xvnc code Copyright (C) 1999 AT&T Laboratories Cambridge.
  *  All Rights Reserved.
  *
  *  This is free software; you can redistribute it and/or modify
@@ -61,7 +61,7 @@
 typedef int socklen_t;
 #endif
 #if defined(__linux__) && defined(NEED_TIMEVAL)
-struct timeval 
+struct timeval
 {
    long int tv_sec,tv_usec;
 }
@@ -191,7 +191,7 @@ rfbCheckFds(rfbScreenInfoPtr rfbScreen,long usec)
     rfbClientPtr cl;
 
     if (!rfbScreen->inetdInitDone && rfbScreen->inetdSock != -1) {
-	rfbNewClientConnection(rfbScreen,rfbScreen->inetdSock); 
+	rfbNewClientConnection(rfbScreen,rfbScreen->inetdSock);
 	rfbScreen->inetdInitDone = TRUE;
     }
 
@@ -246,7 +246,7 @@ rfbCheckFds(rfbScreenInfoPtr rfbScreen,long usec)
 	rfbLog("Got connection from client %s\n", inet_ntoa(addr.sin_addr));
 
 	rfbNewClient(rfbScreen,sock);
-	
+
 	FD_CLR(rfbScreen->rfbListenSock, &fds);
 	if (--nfds == 0)
 	    return;
@@ -369,7 +369,7 @@ rfbConnect(rfbScreen, host, port)
 /*
  * ReadExact reads an exact number of bytes from a client.  Returns 1 if
  * those bytes have been read, 0 if the other end has closed, or -1 if an error
- * occurred (errno is set to ETIMEDOUT if it timed out). 
+ * occurred (errno is set to ETIMEDOUT if it timed out).
  * timeout is the timeout in ms, 0 for no timeout.
  */
 

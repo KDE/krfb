@@ -4,7 +4,7 @@
  *
  *  LibVNCServer (C) 2001 Johannes E. Schindelin <Johannes.Schindelin@gmx.de>
  *  Original OSXvnc (C) 2001 Dan McGuirk <mcguirk@incompleteness.net>.
- *  Original Xvnc (C) 1999 AT&T Laboratories Cambridge.  
+ *  Original Xvnc (C) 1999 AT&T Laboratories Cambridge.
  *  All Rights Reserved.
  *
  *  see GPL (latest version) for full details
@@ -89,12 +89,12 @@ void rfbLogPerror(const char *str)
 }
 
 void rfbScheduleCopyRegion(rfbScreenInfoPtr rfbScreen,sraRegionPtr copyRegion,int dx,int dy)
-{  
+{
    rfbClientIteratorPtr iterator;
    rfbClientPtr cl;
 
    rfbUndrawCursor(rfbScreen);
-  
+
    iterator=rfbGetClientIterator(rfbScreen);
    while((cl=rfbClientIteratorNext(iterator))) {
      LOCK(cl->updateMutex);
@@ -117,7 +117,7 @@ void rfbScheduleCopyRegion(rfbScreenInfoPtr rfbScreen,sraRegionPtr copyRegion,in
 	     sraRgnDestroy(modifiedRegionBackup);
 	  }
        }
-	  
+
        sraRgnOr(cl->copyRegion,copyRegion);
        cl->copyDX = dx;
        cl->copyDY = dy;
@@ -166,7 +166,7 @@ void rfbDoCopyRegion(rfbScreenInfoPtr rfbScreen,sraRegionPtr copyRegion,int dx,i
    char *in,*out;
 
    rfbUndrawCursor(rfbScreen);
-  
+
    /* copy it, really */
    i = sraRgnGetReverseIterator(copyRegion,dx<0,dy<0);
    while(sraRgnIteratorNext(i,&rect)) {
@@ -183,7 +183,7 @@ void rfbDoCopyRegion(rfbScreenInfoPtr rfbScreen,sraRegionPtr copyRegion,int dx,i
 	 memmove(out,in,widthInBytes);
      }
    }
-  
+
    rfbScheduleCopyRegion(rfbScreen,copyRegion,dx,dy);
 }
 
@@ -224,12 +224,12 @@ void rfbMarkRectAsModified(rfbScreenInfoPtr rfbScreen,int x1,int y1,int x2,int y
    if(x1<0) x1=0;
    if(x2>=rfbScreen->width) x2=rfbScreen->width-1;
    if(x1==x2) return;
-   
+
    if(y1>y2) { i=y1; y1=y2; y2=i; }
    if(y1<0) y1=0;
    if(y2>=rfbScreen->height) y2=rfbScreen->height-1;
    if(y1==y2) return;
-   
+
    region = sraRgnCreateRect(x1,y1,x2,y2);
    rfbMarkRegionAsModified(rfbScreen,region);
    sraRgnDestroy(region);
@@ -327,15 +327,17 @@ listenerRun(void *data)
 
     if (rfbScreen->inetdSock != -1) {
        cl = rfbNewClient(rfbScreen, rfbScreen->inetdSock);
-              if (cl && !cl->onHold )
-                rfbStartOnHoldClient(cl);
+       if (cl && !cl->onHold)
+           rfbStartOnHoldClient(cl);
+       else if (rfbScreen->inetdDisconnectHook)
+           rfbScreen->inetdDisconnectHook();
        return 0;
     }
 
     len = sizeof(peer);
 
     /* TODO: this thread wont die by restarting the server */
-    while ((client_fd = accept(rfbScreen->rfbListenSock, 
+    while ((client_fd = accept(rfbScreen->rfbListenSock,
                                (struct sockaddr*)&peer, &len)) >= 0) {
         cl = rfbNewClient(rfbScreen,client_fd);
         len = sizeof(peer);
@@ -346,7 +348,7 @@ listenerRun(void *data)
     return NULL;
 }
 
-void 
+void
 rfbStartOnHoldClient(rfbClientPtr cl)
 {
     pthread_create(&cl->client_thread, NULL, clientInput, (void *)cl);
@@ -354,7 +356,7 @@ rfbStartOnHoldClient(rfbClientPtr cl)
 
 #else
 
-void 
+void
 rfbStartOnHoldClient(rfbClientPtr cl)
 {
 	cl->onHold = FALSE;
@@ -362,7 +364,7 @@ rfbStartOnHoldClient(rfbClientPtr cl)
 
 #endif
 
-void 
+void
 rfbRefuseOnHoldClient(rfbClientPtr cl)
 {
     rfbCloseClient(cl);
@@ -397,7 +399,7 @@ void defaultSetXCutText(char* text, int len, rfbClientPtr cl)
 /* TODO: add a nice VNC or RFB cursor */
 
 #if defined(WIN32) || defined(sparc) || defined(_AIX) || defined(__osf__)
-static rfbCursor myCursor = 
+static rfbCursor myCursor =
 {
    "\000\102\044\030\044\102\000",
    "\347\347\176\074\176\347\347",
@@ -407,7 +409,7 @@ static rfbCursor myCursor =
    0
 };
 #else
-static rfbCursor myCursor = 
+static rfbCursor myCursor =
 {
    source: "\000\102\044\030\044\102\000",
    mask:   "\347\347\176\074\176\347\347",
@@ -524,7 +526,7 @@ rfbScreenInfoPtr rfbGetScreen(int* argc,char** argv,
    rfbScreen->rfbNeverShared = FALSE;
    rfbScreen->rfbDontDisconnect = FALSE;
    rfbScreen->rfbAuthPasswdData = 0;
-   
+
    rfbScreen->width = width;
    rfbScreen->height = height;
    rfbScreen->bitsPerPixel = rfbScreen->depth = 8*bytesPerPixel;
@@ -606,6 +608,7 @@ rfbScreenInfoPtr rfbGetScreen(int* argc,char** argv,
    rfbScreen->setTranslateFunction = rfbSetTranslateFunction;
    rfbScreen->newClientHook = defaultNewClientHook;
    rfbScreen->displayHook = 0;
+   rfbScreen->inetdDisconnectHook = 0;
 
    /* initialize client list and iterator mutex */
    rfbClientListInit(rfbScreen);
@@ -623,7 +626,7 @@ void rfbScreenCleanup(rfbScreenInfoPtr rfbScreen)
     cl1=cl;
   }
   rfbReleaseClientIterator(i);
-    
+
   /* TODO: hang up on all clients and free all reserved memory */
 #define FREE_IF(x) if(rfbScreen->x) free(rfbScreen->x)
   FREE_IF(colourMap.data.bytes);

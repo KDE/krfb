@@ -7,7 +7,7 @@
 
 /*
  *  OSXvnc Copyright (C) 2001 Dan McGuirk <mcguirk@incompleteness.net>.
- *  Original Xvnc code Copyright (C) 1999 AT&T Laboratories Cambridge.  
+ *  Original Xvnc code Copyright (C) 1999 AT&T Laboratories Cambridge.
  *  All Rights Reserved.
  *
  *  This is free software; you can redistribute it and/or modify
@@ -207,6 +207,7 @@ typedef Bool (*SetTranslateFunctionProcPtr)(struct _rfbClientRec* cl);
 typedef Bool (*PasswordCheckProcPtr)(struct _rfbClientRec* cl,const char* encryptedPassWord,int len);
 typedef enum rfbNewClientAction (*NewClientHookPtr)(struct _rfbClientRec* cl);
 typedef void (*DisplayHookPtr)(struct _rfbClientRec* cl);
+typedef void (*InetdDisconnectPtr)();
 
 typedef struct {
   CARD32 count;
@@ -240,7 +241,7 @@ typedef struct _rfbScreenInfo
      * same time while using the same functions.
      */
     void* screenData;
-  
+
     /* The following two members are used to minimise the amount of unnecessary
        drawing caused by cursor movement.  Whenever any drawing affects the
        part of the screen where the cursor is, the cursor is removed first and
@@ -281,7 +282,7 @@ typedef struct _rfbScreenInfo
     Bool cursorIsDrawn;		    /* TRUE if the cursor is currently drawn */
     Bool dontSendFramebufferUpdate; /* TRUE while removing or drawing the
 				       cursor */
-   
+
     /* additions by libvncserver */
 
     rfbPixelFormat rfbServerFormat;
@@ -335,7 +336,7 @@ typedef struct _rfbScreenInfo
     struct rfbCursor* cursor;
 
     /* the frameBufferhas to be supplied by the serving process.
-     * The buffer will not be freed by 
+     * The buffer will not be freed by
      */
     char* frameBuffer;
     KbdAddEventProcPtr kbdAddEvent;
@@ -344,12 +345,14 @@ typedef struct _rfbScreenInfo
     SetXCutTextProcPtr setXCutText;
     GetCursorProcPtr getCursorPtr;
     SetTranslateFunctionProcPtr setTranslateFunction;
-  
+
     /* newClientHook is called just after a new client is created */
     NewClientHookPtr newClientHook;
     /* displayHook is called just before a frame buffer update */
     DisplayHookPtr displayHook;
-
+    /* inetdDisconnectHook is called when the connection has been
+       interrupted before a client could connect. */
+    InetdDisconnectPtr inetdDisconnectHook;
 #ifdef HAVE_PTHREADS
     MUTEX(cursorMutex);
     Bool backgroundLoop;
@@ -369,7 +372,7 @@ typedef void (*rfbTranslateFnType)(char *table, rfbPixelFormat *in,
                                    int width, int height);
 
 
-/* 
+/*
  * vncauth.h - describes the functions provided by the vncauth library.
  */
 
@@ -394,10 +397,10 @@ typedef void (*ClientGoneHookPtr)(struct _rfbClientRec* cl);
 typedef void (*NegotiationFinishedHookPtr)(struct _rfbClientRec* cl);
 
 typedef struct _rfbClientRec {
-  
+
     /* back pointer to the screen */
     rfbScreenInfoPtr screen;
-  
+
     /* private data. You should put any application client specific data
      * into a struct and let clientData point to it. Don't forget to
      * free the struct via clientGoneHook!
@@ -528,7 +531,7 @@ typedef struct _rfbClientRec {
     int softSourceLen;
     rfbSoftCursorSetImage *softCursorImages[rfbSoftCursorMaxImages];
     int nextUnusedSoftCursorImage;
-  
+
     Bool enableLastRectEncoding;   /* client supports LastRect encoding */
     Bool enableSoftCursorUpdates;  /* client supports softcursor updates */
     Bool disableBackground;        /* client wants to disable background */

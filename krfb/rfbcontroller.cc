@@ -51,6 +51,7 @@
 #include <qglobal.h>
 #include <qlabel.h>
 #include <qmutex.h>
+#include <qdesktopwidget.h>
 
 #include <X11/Xutil.h>
 #include <X11/extensions/XTest.h>
@@ -156,6 +157,10 @@ static void negotiationFinishedHook(rfbClientPtr cl)
 	self->handleNegotiationFinished(cl);
 }
 
+static void inetdDisconnectHook()
+{
+	self->handleClientGone();
+}
 
 
 void ConnectionDialog::closeEvent(QCloseEvent *)
@@ -184,9 +189,9 @@ void KeyboardEvent::initKeycodes() {
 	int i,j,minkey,maxkey,syms_per_keycode;
 
 	dpy = qt_xdisplay();
-	
+
 	memset(modifiers,-1,sizeof(modifiers));
-	
+
 	XDisplayKeycodes(dpy,&minkey,&maxkey);
 	ASSERT(minkey >= 8);
 	ASSERT(maxkey < 256);
@@ -203,21 +208,21 @@ void KeyboardEvent::initKeycodes() {
 				modifiers[key]=j;
 			}
 		}
-	
+
 	leftShiftCode = XKeysymToKeycode(dpy, XK_Shift_L);
 	rightShiftCode = XKeysymToKeycode(dpy, XK_Shift_R);
 	altGrCode = XKeysymToKeycode(dpy, XK_Mode_switch);
-	
+
 	XFree ((char *)keymap);
 }
 
 /* this function adjusts the modifiers according to mod (as from modifiers) and ModifierState */
 void KeyboardEvent::tweakModifiers(char mod, bool down) {
-	
+
 	bool isShift = ModifierState & (LEFTSHIFT|RIGHTSHIFT);
-	if(mod < 0) 
+	if(mod < 0)
 		return;
-	
+
 	if(isShift && mod != 1) {
 		if(ModifierState & LEFTSHIFT)
 			XTestFakeKeyEvent(dpy, leftShiftCode,
@@ -226,11 +231,11 @@ void KeyboardEvent::tweakModifiers(char mod, bool down) {
 				XTestFakeKeyEvent(dpy, rightShiftCode,
 						  !down, CurrentTime);
 	}
-	
+
 	if(!isShift && mod==1)
 		XTestFakeKeyEvent(dpy, leftShiftCode,
 				  down, CurrentTime);
-	
+
 	if((ModifierState&ALTGR) && mod != 2)
 		XTestFakeKeyEvent(dpy, altGrCode,
 				  !down, CurrentTime);
@@ -242,19 +247,19 @@ void KeyboardEvent::tweakModifiers(char mod, bool down) {
 void KeyboardEvent::exec() {
 #define ADJUSTMOD(sym,state) \
   if(keySym==sym) { if(down) ModifierState|=state; else ModifierState&=~state; }
-	
+
 	ADJUSTMOD(XK_Shift_L,LEFTSHIFT);
 	ADJUSTMOD(XK_Shift_R,RIGHTSHIFT);
 	ADJUSTMOD(XK_Mode_switch,ALTGR);
-	
+
 	if(keySym>=' ' && keySym<0x100) {
 		KeyCode k;
 		if (down)
 			tweakModifiers(modifiers[keySym],True);
 		k = keycodes[keySym];
-		if (k != NoSymbol) 
+		if (k != NoSymbol)
 			XTestFakeKeyEvent(dpy, k, down, CurrentTime);
-		
+
 		if (down)
 			tweakModifiers(modifiers[keySym],False);
 	} else {
@@ -280,7 +285,12 @@ PointerEvent::PointerEvent(int b, int _x, int _y) :
 }
 
 void PointerEvent::exec() {
-	XTestFakeMotionEvent(dpy, 0, x, y, CurrentTime);
+	static QDesktopWidget desktopWidget;
+
+	int screen = desktopWidget.screenNumber();
+	if (screen < 0)
+		screen = 0;
+	XTestFakeMotionEvent(dpy, screen, x, y, CurrentTime);
 	for(int i = 0; i < 5; i++)
 		if ((buttonMask&(1<<i))!=(button_mask&(1<<i)))
 			XTestFakeButtonEvent(dpy,
@@ -327,6 +337,7 @@ RFBController::RFBController(Configuration *c) :
 	connect(dialog.refuseConnectionButton, SIGNAL(clicked()),
 		SLOT(dialogRefused()));
 	connect(&dialog, SIGNAL(closed()), SLOT(dialogRefused()));
+	connect(&initIdleTimer, SIGNAL(timeout()), SLOT(checkAsyncEvents()));
 	connect(&idleTimer, SIGNAL(timeout()), SLOT(idleSlot()));
 
 	asyncQueue.setAutoDelete(true);
@@ -407,6 +418,7 @@ void RFBController::startServer(int inetdFd, bool xtestGrab)
 	server->kbdAddEvent = keyboardHook;
 	server->ptrAddEvent = pointerHook;
 	server->newClientHook = newClientHook;
+	server->inetdDisconnectHook = inetdDisconnectHook;
 	server->passwordCheck = passwordCheck;
 
 	server->desktopName = desktopName.latin1();
@@ -432,6 +444,7 @@ void RFBController::startServer(int inetdFd, bool xtestGrab)
 	}
 
 	rfbRunEventLoop(server, -1, TRUE);
+	initIdleTimer.start(IDLE_PAUSE);
 }
 
 void RFBController::stopServer(bool xtestUngrab)
@@ -455,6 +468,7 @@ void RFBController::connectionAccepted(bool aRC)
 
 	allowDesktopControl = aRC;
 	emit desktopControlSettingChanged(aRC);
+	initIdleTimer.stop();
 	idleTimer.start(IDLE_PAUSE);
 
 	server->rfbClientHead->clientGoneHook = clientGoneHook;
@@ -503,7 +517,7 @@ bool RFBController::checkAsyncEvents()
 		closed = true;
 		closePending = false;
 	}
-	if (disableBackgroundPending != disableBackgroundState) 
+	if (disableBackgroundPending != disableBackgroundState)
 		backgroundActionRequired = true;
 	asyncMutex.unlock();
 
@@ -531,6 +545,7 @@ void RFBController::connectionClosed()
 			     .arg(remoteIp));
 
 	idleTimer.stop();
+	initIdleTimer.stop();
 	disableBackground(false);
 	state = RFB_WAITING;
 	if (forcedClose)
@@ -666,7 +681,7 @@ bool RFBController::handleCheckPassword(rfbClientPtr cl,
 	asyncMutex.lock();
 	asyncQueue.append(new SessionEstablishedEvent(this));
 	asyncMutex.unlock();
-        
+
 	return TRUE;
 }
 
@@ -684,7 +699,7 @@ enum rfbNewClientAction RFBController::handleNewClient(rfbClientPtr cl)
 		he = gethostbyaddr((const char*)&ia4,
 				   sizeof(ia4),
 				   AF_INET);
-		
+
 		if (he && he->h_name)
 			host = QString(he->h_name);
 		else
