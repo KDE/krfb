@@ -122,7 +122,7 @@ public:
 class RFBController : public QObject  {
 	Q_OBJECT
 	
-	friend SessionEstablishedEvent;
+	friend class SessionEstablishedEvent;
 public:
 	RFBController(Configuration *c);
 	virtual ~RFBController();
