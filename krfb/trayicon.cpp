@@ -58,14 +58,14 @@ TrayIcon::TrayIcon(KDialog *d, Configuration *c) :
 	trayIconClosed = loader->loadIcon("eyes-closed24", KIcon::User);
 	setPixmap(trayIconClosed);
 
-	manageInvitationsAction = new KAction(i18n("Manage &invitations"), QString::null, 
+	manageInvitationsAction = new KAction(i18n("Manage &Invitations"), QString::null, 
 					      0, this, SIGNAL(showManageInvitations()), 
 					      &actionCollection);
 	manageInvitationsAction->plug(contextMenu());
 
 	contextMenu()->insertSeparator();
 
-	enableControlAction = new KToggleAction(i18n("Enable remote control"));
+	enableControlAction = new KToggleAction(i18n("Enable Remote Control"));
 	enableControlAction->plug(contextMenu());
 	connect(enableControlAction, SIGNAL(toggled(bool)), 
 		SIGNAL(enableDesktopControl(bool)));
