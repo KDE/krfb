@@ -1,7 +1,7 @@
 /***************************************************************************
-                          main.cpp  -  description
+                          trayicon.h  -  description
                              -------------------
-    begin                : Sat Dec  8 03:23:02 CET 2001
+    begin                : Tue Dec 11 2001
     copyright            : (C) 2001 by Tim Jansen
     email                : tim@tjansen.de
  ***************************************************************************/
@@ -15,38 +15,34 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "trayicon.h"
+#ifndef TRAYICON_H
+#define TRAYICON_H
 
+#include <qwidget.h>
 #include <kpixmap.h>
 #include <kaction.h>
-#include <kapplication.h>
 #include <ksystemtray.h>
-#include <kcmdlineargs.h>
-#include <kaboutdata.h>
-#include <klocale.h>
 
-#define VERSION "0.1"
+/**
+  *@author Tim Jansen
+  */
 
-static const char *description = I18N_NOOP("Krfb");
+class TrayIcon : public KSystemTray {
+   	Q_OBJECT
+public: 
+	TrayIcon();
+	~TrayIcon();
 
-	
-static KCmdLineOptions options[] =
-{
-	{ 0, 0, 0 }
-  // INSERT YOUR COMMANDLINE OPTIONS HERE
+  	void closeConnection();
+	void openConnection();
+private:
+  	KPixmap trayIconOpen;
+  	KPixmap trayIconClosed;
+  	KAction* closeConnectionAction;
+  	KAction* configureAction;
+signals:
+  	void connectionClosed();
+	void showConfigure();
 };
 
-int main(int argc, char *argv[])
-{
-	KAboutData aboutData( "krfb", I18N_NOOP("Krfb"),
-		VERSION, description, KAboutData::License_GPL,
-		"(c) 2001, Tim Jansen", 0, 0, "tim@tjansen.de");
-	aboutData.addAuthor("Tim Jansen",0, "tim@tjansen.de");
-	KCmdLineArgs::init( argc, argv, &aboutData );
-	KCmdLineArgs::addCmdLineOptions( options );
-
- 	KApplication app;
- 	TrayIcon tray;
- 		
-	return app.exec();
-}
+#endif

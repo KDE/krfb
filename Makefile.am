@@ -1,10 +1,8 @@
-####### kdevelop will overwrite this part!!! (begin)##########
 
-SUBDIRS = krfb po doc lib include 
+SUBDIRS = krfb po doc include 
 
-EXTRA_DIST = krfb.kdevprj admin AUTHORS COPYING ChangeLog INSTALL README TODO krfb.lsm 
+EXTRA_DIST = admin AUTHORS COPYING ChangeLog INSTALL README TODO krfb.lsm 
 
-####### kdevelop will overwrite this part!!! (end)############
 # not a GNU package. You can remove this line, if 
 # have all needed files, that a GNU package needs
 AUTOMAKE_OPTIONS = foreign 

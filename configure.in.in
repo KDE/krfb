@@ -2,3 +2,6 @@
 
 AM_INIT_AUTOMAKE(krfb,0.1)
 
+AC_CHECK_HEADER(X11/extensions/XTest.h, 
+	[],
+	AC_MSG_ERROR([XTest extension header not found]))

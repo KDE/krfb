@@ -1,7 +1,7 @@
 /***************************************************************************
-                          main.cpp  -  description
+                          trayicon.cpp  -  description
                              -------------------
-    begin                : Sat Dec  8 03:23:02 CET 2001
+    begin                : Tue Dec 11 2001
     copyright            : (C) 2001 by Tim Jansen
     email                : tim@tjansen.de
  ***************************************************************************/
@@ -16,37 +16,32 @@
  ***************************************************************************/
 
 #include "trayicon.h"
-
-#include <kpixmap.h>
-#include <kaction.h>
-#include <kapplication.h>
-#include <ksystemtray.h>
-#include <kcmdlineargs.h>
-#include <kaboutdata.h>
 #include <klocale.h>
+#include <kglobal.h>
+#include <kiconloader.h>
+#include <kpopupmenu.h>
 
-#define VERSION "0.1"
+TrayIcon::TrayIcon() : KSystemTray() {
+	KIconLoader *loader = KGlobal::iconLoader();
+	trayIconOpen = loader->loadIcon("eyes-open24", KIcon::User);
+	trayIconClosed = loader->loadIcon("eyes-closed24", KIcon::User);
+	setPixmap(trayIconClosed);
 
-static const char *description = I18N_NOOP("Krfb");
+	configureAction = new KAction(i18n("&Configure KRfb")); 	
+	configureAction->plug(contextMenu());
+	closeConnectionAction = new KAction(i18n("Close connection"));
+	show();
+}
 
-	
-static KCmdLineOptions options[] =
-{
-	{ 0, 0, 0 }
-  // INSERT YOUR COMMANDLINE OPTIONS HERE
-};
+TrayIcon::~TrayIcon(){
+}
 
-int main(int argc, char *argv[])
-{
-	KAboutData aboutData( "krfb", I18N_NOOP("Krfb"),
-		VERSION, description, KAboutData::License_GPL,
-		"(c) 2001, Tim Jansen", 0, 0, "tim@tjansen.de");
-	aboutData.addAuthor("Tim Jansen",0, "tim@tjansen.de");
-	KCmdLineArgs::init( argc, argv, &aboutData );
-	KCmdLineArgs::addCmdLineOptions( options );
+void TrayIcon::openConnection(){
+	setPixmap(trayIconOpen);
+	closeConnectionAction->plug(contextMenu());	
+}
 
- 	KApplication app;
- 	TrayIcon tray;
- 		
-	return app.exec();
+void TrayIcon::closeConnection(){
+	setPixmap(trayIconClosed);
+	closeConnectionAction->unplug(contextMenu());
 }

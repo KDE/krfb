@@ -1,32 +1,30 @@
-####### kdevelop will overwrite this part!!! (begin)##########
 bin_PROGRAMS = krfb
-krfb_SOURCES = XUpdateScanner.cc rfbserver.cpp main.cpp 
+krfb_SOURCES = trayicon.cpp XUpdateScanner.cc rfbserver.cpp main.cpp configurationdialog.ui newconnectiondialog.ui configuration.cpp
 krfb_LDADD   = ./lib/liblib.a  $(LIB_QT) $(LIB_KDECORE) $(LIB_KDEUI)  $(LIBSOCKET)
 
 SUBDIRS = lib 
 
-EXTRA_DIST = main.cpp krfb.desktop lo32-app-krfb.png lo16-app-krfb.png rfbserver.cpp rfbserver.h eyes-closed24.png eyes-open24.png XUpdateScanner.cc XUpdateScanner.h 
+EXTRA_DIST = main.cpp krfb.desktop lo32-app-krfb.png lo16-app-krfb.png rfbserver.cpp rfbserver.h eyes-closed24.png eyes-open24.png XUpdateScanner.cc XUpdateScanner.h trayicon.cpp trayicon.h 
 
 install-data-local:
-	$(mkinstalldirs) $$(kde_appsdir)/Applications/
-	$(INSTALL_DATA) $(srcdir)/krfb.desktop $$(kde_appsdir)/Applications/krfb.desktop
-	$(mkinstalldirs) $$(kde_icondir)/locolor/32x32/apps/
-	$(INSTALL_DATA) $(srcdir)/lo32-app-krfb.png $$(kde_icondir)/locolor/32x32/apps/krfb.png
-	$(mkinstalldirs) $$(kde_icondir)/locolor/16x16/apps/
-	$(INSTALL_DATA) $(srcdir)/lo16-app-krfb.png $$(kde_icondir)/locolor/16x16/apps/krfb.png
-	$(mkinstalldirs) $$(kde_icondir)/hicolor/22x22/apps/
-	$(INSTALL_DATA) $(srcdir)/eyes-closed24.png $$(kde_icondir)/hicolor/22x22/apps/krfb.png
-	$(mkinstalldirs) $$(kde_icondir)/hicolor/22x22/apps/
-	$(INSTALL_DATA) $(srcdir)/eyes-open24.png $$(kde_icondir)/hicolor/22x22/apps/krfb.png
+	$(mkinstalldirs) $(kde_appsdir)/Applications/
+	$(INSTALL_DATA) $(srcdir)/krfb.desktop $(kde_appsdir)/Applications/krfb.desktop
+	$(mkinstalldirs) $(kde_icondir)/locolor/32x32/apps/
+	$(INSTALL_DATA) $(srcdir)/lo32-app-krfb.png $(kde_icondir)/locolor/32x32/apps/krfb.png
+	$(mkinstalldirs) $(kde_icondir)/locolor/16x16/apps/
+	$(INSTALL_DATA) $(srcdir)/lo16-app-krfb.png $(kde_icondir)/locolor/16x16/apps/krfb.png
+	$(mkinstalldirs) $(kde_datadir)/krfb/pics
+	$(INSTALL_DATA) $(srcdir)/eyes-closed24.png $(kde_datadir)/krfb/pics/eyes-closed24.png
+	$(mkinstalldirs) $(kde_datadir)/krfb/pics
+	$(INSTALL_DATA) $(srcdir)/eyes-open24.png $(kde_datadir)/krfb/pics/eyes-open24.png
 
 uninstall-local:
-	-rm -f $$(kde_appsdir)/Applications/krfb.desktop
-	-rm -f $$(kde_icondir)/locolor/32x32/apps/krfb.png
-	-rm -f $$(kde_icondir)/locolor/16x16/apps/krfb.png
-	-rm -f $$(kde_icondir)/hicolor/22x22/apps/krfb.png
-	-rm -f $$(kde_icondir)/hicolor/22x22/apps/krfb.png
+	-rm -f $(kde_appsdir)/Applications/krfb.desktop
+	-rm -f $(kde_icondir)/locolor/32x32/apps/krfb.png
+	-rm -f $(kde_icondir)/locolor/16x16/apps/krfb.png
+	-rm -f $(kde_datadir)/krfb/pics
+	-rm -f $(kde_datadir)/krfb/pics
 
-####### kdevelop will overwrite this part!!! (end)############
 # this 10 paths are KDE specific. Use them:
 # kde_htmldir       Where your docs should go to. (contains lang subdirs)
 # kde_appsdir       Where your application file (.kdelnk) should go to. 
