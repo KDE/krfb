@@ -42,9 +42,9 @@ class KInetAddressPrivate;
 
 
 /**
- * An Inet (IPv4 or IPv6) address.
+ * An Inet (IPv4) address.
  *
- * This class represents an internet (IPv4 or IPv6) address. The difference
+ * This class represents an internet (IPv4) address. The difference
  * between KInetAddress and KInetSocketAddress is that the socket address
  * consists of the address and the port, KInetAddress peresents only the 
  * address itself.
@@ -65,13 +65,6 @@ public:
    * @param len		the socket address length
    */
   KInetAddress(const struct in_addr& in);
-
-  /**
-   * Creates an IPv6 socket from in6_addr
-   * @param in6       	a in_addr6 structure to copy from
-   * @param len		the socket address length
-   */
-  KInetAddress(const struct in6_addr& in6);
 
   /**
    * Creates a socket from text representation. Be careful with names
@@ -104,23 +97,11 @@ public:
    * Returns the in_addr structure. The pointer is valid as long as
    * the KInetAddress object lives.
    * This will be NULL if this is not a v4 address.
-   * @see addressV6
    */
   const struct in_addr* addressV4() const;
 
-  /**
-   * Returns the in6_addr structure. The pointer is valid as long as
-   * the KInetAddress object lives.
-   * This will be NULL if this is not a v6 address.
-   * @see addressV4
-   */
-  const struct in6_addr* addressV6() const;
-
   operator const struct in_addr*() const
   { return addressV4(); }
-
-  operator const struct in6_addr*() const
-  { return addressV6(); }
 
   /**
    * Returns an address that can be used for communication with
