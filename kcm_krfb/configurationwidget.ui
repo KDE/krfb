@@ -304,13 +304,13 @@
                                     <cstring>disableBackgroundCB</cstring>
                                 </property>
                                 <property name="text">
-                                    <string>Disable &amp;background image</string>
+                                    <string>Always disable &amp;background image</string>
                                 </property>
                                 <property name="checked">
                                     <bool>false</bool>
                                 </property>
                                 <property name="whatsThis" stdset="0">
-                                    <string>Check this option to disable the background image during a remote session.</string>
+                                    <string>Check this option to always disable the background image during a remote session. Otherwise the client decides whether the background will be enabled or disabled.</string>
                                 </property>
                             </widget>
                         </vbox>
