@@ -732,6 +732,13 @@ rfbProcessClientNormalMessage(cl)
 	        cl->useRichCursorEncoding = TRUE;
 	        cl->cursorWasChanged = TRUE;
 	        break;
+	    case rfbEncodingSoftCursor:
+	        rfbLog("Enabling soft cursor updates for client "
+		      "%s\n", cl->host);
+	        cl->enableSoftCursorUpdates = TRUE;
+	        cl->cursorWasChanged = TRUE;
+	        cl->cursorWasMoved = TRUE;
+	        break;
 	    case rfbEncodingLastRect:
 		if (!cl->enableLastRectEncoding) {
 		    rfbLog("Enabling LastRect protocol extension for client "
@@ -918,6 +925,7 @@ rfbSendFramebufferUpdate(cl, givenUpdateRegion)
     sraRegionPtr updateRegion,updateCopyRegion,tmpRegion;
     int dx, dy;
     Bool sendCursorShape = FALSE;
+    int sendSoftCursorRects = 0;
 
     if(cl->screen->displayHook)
       cl->screen->displayHook(cl);
@@ -934,6 +942,15 @@ rfbSendFramebufferUpdate(cl, givenUpdateRegion)
       if (!cl->screen->cursorIsDrawn && cl->cursorWasChanged &&
 	  cl->readyForSetColourMapEntries)
 	  sendCursorShape = TRUE;
+    }
+    else if (cl->enableSoftCursorUpdates) {
+      if (cl->screen->cursorIsDrawn) {
+	rfbUndrawCursor(cl->screen);
+      }
+      if (cl->cursorWasChanged)
+	sendSoftCursorRects=2;
+      else if (cl->cursorWasMoved)
+	sendSoftCursorRects=1;
     } else {
       if (!cl->screen->cursorIsDrawn) {
 	rfbDrawCursor(cl->screen);
@@ -959,7 +976,8 @@ rfbSendFramebufferUpdate(cl, givenUpdateRegion)
 
     updateRegion = sraRgnCreateRgn(givenUpdateRegion);
     sraRgnOr(updateRegion,cl->copyRegion);
-    if(!sraRgnAnd(updateRegion,cl->requestedRegion) && !sendCursorShape) {
+    if(!sraRgnAnd(updateRegion,cl->requestedRegion) && 
+       !(sendCursorShape || sendSoftCursorRects)) {
       sraRgnDestroy(updateRegion);
       UNLOCK(cl->updateMutex);
       return TRUE;
@@ -1059,7 +1077,8 @@ rfbSendFramebufferUpdate(cl, givenUpdateRegion)
     fu->type = rfbFramebufferUpdate;
     if (nUpdateRegionRects != 0xFFFF) {
 	fu->nRects = Swap16IfLE((CARD16)(sraRgnCountRects(updateCopyRegion)
-				+ nUpdateRegionRects + !!sendCursorShape));
+				+ nUpdateRegionRects 
+				+ !!sendCursorShape + sendSoftCursorRects));
     } else {
 	fu->nRects = 0xFFFF;
     }
@@ -1072,7 +1091,16 @@ rfbSendFramebufferUpdate(cl, givenUpdateRegion)
 	    return FALSE;
 	}
     }
-   
+
+   if (sendSoftCursorRects) {
+	cl->cursorWasChanged = FALSE;
+	cl->cursorWasMoved = FALSE;
+	if (!rfbSendSoftCursor(cl)) {
+	    sraRgnDestroy(updateRegion);
+	    return FALSE;
+	}
+    }
+
     if (!sraRgnEmpty(updateCopyRegion)) {
 	if (!rfbSendCopyRegion(cl,updateCopyRegion,dx,dy)) {
 	    sraRgnDestroy(updateRegion);

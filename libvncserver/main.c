@@ -370,6 +370,7 @@ void
 defaultPtrAddEvent(int buttonMask, int x, int y, rfbClientPtr cl)
 {
    if(x!=cl->screen->cursorX || y!=cl->screen->cursorY) {
+      cl->cursorWasMoved = TRUE;
       if(cl->screen->cursorIsDrawn)
 	rfbUndrawCursor(cl->screen);
       LOCK(cl->screen->cursorMutex);
