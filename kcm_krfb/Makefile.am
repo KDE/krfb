@@ -8,8 +8,7 @@ kcm_krfb_la_LDFLAGS  = $(all_libraries) $(KDE_PLUGIN) -module
 kcm_krfb_la_LIBADD   = ../krfb/libkrfbconfig.la $(LIB_KDEUI)
 
 # Services
-kcmdir = $(kde_appsdir)/Settings/Network
-kcm_DATA = kcmkrfb.desktop
+xdg_apps_DATA = kcmkrfb.desktop
 
 EXTRA_DIST = $(kcm_krfb_la_SOURCES)\
              $(kcm_DATA)
