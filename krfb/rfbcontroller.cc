@@ -390,7 +390,7 @@ void RFBController::startServer(int inetdFd, bool xtestGrab)
 	server->passwordCheck = passwordCheck;
 
 	if (!myCursor)
-		myCursor = rfbMakeXCursor(19, 19, cur, mask);
+		myCursor = rfbMakeXCursor(19, 19, (char*) cur, (char*) mask);
 	server->cursor = myCursor;
 
 	passwordChanged();
