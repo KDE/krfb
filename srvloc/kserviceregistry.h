@@ -18,6 +18,10 @@
  *  Boston, MA 02111-1307, USA.
  */
 
+/*
+ * TODO: put private variables and SLP-dependencies in private class
+ */
+
 #ifndef __KSERVICEREGISTRY_H
 #define __KSERVICEREGISTRY_H
 
@@ -30,8 +34,8 @@
 #endif
 
 #include <qstring.h>
+#include <qstringlist.h>
 #include <qmap.h>
-#include <qvaluelist.h>
 
 /**
  * KServiceRegistry allows you to announce your service using SLP (RFC 2608).
@@ -100,6 +104,23 @@ class KServiceRegistry {
 	 * @return true if service registration seems to be possible
 	 */
 	bool available();
+
+	/**
+	 * Creates a comma-separated string of lists, as required by many functions.
+	 * @param map the items of this list will be converted
+	 * @return the comma-separated list
+	 */
+	static QString createCommaList(const QStringList &values);
+
+	/**
+	 * Encodes an QString for use as a attribute value. This will escape
+	 * all characters that are not allowed. This method is only available
+	 * when a SLP library is available, otherwise it will return the
+	 * given value.
+	 * @param value the value string to encode
+	 * @return the encoded value string
+	 */
+	static QString encodeAttributeValue(const QString &value);
 
 	/**
 	 * Registers the given service. 

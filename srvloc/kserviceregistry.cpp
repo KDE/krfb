@@ -110,6 +110,16 @@ void KServiceRegistry::unregisterService(const QString &serviceURL) {
 		 this);		 
 }
 
+QString KServiceRegistry::encodeAttributeValue(const QString &value) {
+	char *n;
+	if (SLPEscape(value.latin1(), &n, SLP_TRUE) == SLP_OK) {
+		QString r(n);
+		SLPFree(n);
+		return r;
+	}
+	return QString::null;
+}
+
 #else
 
 KServiceRegistry::KServiceRegistry(const QString &lang) :
@@ -139,4 +149,15 @@ bool KServiceRegistry::registerService(const QString &, QMap<QString,QString>, u
 void KServiceRegistry::unregisterService(const QString &) {
 }
 
+QString KServiceRegistry::encodeAttributeValue(const QString &value) {
+	return value;
+}
+
 #endif
+
+QString KServiceRegistry::createCommaList(const QStringList &values) {
+	return values.join(",");
+}
+
+
+
