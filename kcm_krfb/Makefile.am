@@ -11,7 +11,7 @@ kcm_krfb_la_LIBADD   = ../krfb/libkrfbconfig.la $(LIB_KDEUI)
 xdg_apps_DATA = kcmkrfb.desktop
 
 EXTRA_DIST = $(kcm_krfb_la_SOURCES)\
-             $(kcm_DATA)
+             $(xdg_apps_DATA)
 
 # set the include path for X, qt and KDE
 INCLUDES= -I../krfb $(all_includes)
