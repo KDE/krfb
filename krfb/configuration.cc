@@ -78,7 +78,9 @@ Configuration::Configuration(krfb_mode mode) :
 	connect(invDlg.manageInvitationButton, SIGNAL(clicked()),
 		SLOT(showManageInvitationsDialog()));
 	connect(this, SIGNAL(invitationNumChanged(int)), this, SLOT(changeInvDlgNum(int)));
-	changeInvDlgNum(invitationList.size());
+	connect(this, SIGNAL(invitationNumChanged(int)), 
+		&invMngDlg, SLOT(listSizeChanged(int)));
+        emit invitationNumChanged(invitationList.size());
 
 	connect(persInvDlg.closeButton, SIGNAL(clicked()), SLOT(persInvDlgClosed()));
 	connect(&persInvDlg, SIGNAL(closed()), SLOT(persInvDlgClosed()));
@@ -239,7 +241,6 @@ void Configuration::saveToDialogs() {
 				inv.creationTime().toString(Qt::LocalDate),
 				inv.expirationTime().toString(Qt::LocalDate)));
 	}
-
 	invMngDlg.adjustSize();
 }
 
