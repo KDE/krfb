@@ -64,43 +64,46 @@ struct TileChangeRegion {
 
 class XUpdateScanner
 {
-  public:
-    XUpdateScanner( Display *_dpy,
-                    Window _window,
-                    unsigned char *_fb,
-		    int _width, int _height,
-		    int _bitsPerPixel, int _bytesPerLine,
-                    unsigned int _tileWidth = 32,
-                    unsigned int _tileHeight = 32);
-
-    ~XUpdateScanner();
-
-    bool copyTile(int x, int y, int tx, int ty);
-    void copyAllTiles();
-    void searchUpdates( QPtrList<Hint> &hintList);
-    void flushHint(int x, int y, int &x0, Hint &hint, 
-		   QPtrList<Hint> &hintList);
-    void createHints(QPtrList<Hint> &hintList);
-    void addTileToHint(int x, int y, Hint &hint);
-    void createHintFromTile(int x, int y, Hint &hint);
-
-    Display *dpy;
-    Window window;
-    unsigned char *fb;
-    int width, height;
-    int bitsPerPixel, bytesPerLine;
-    unsigned int tileWidth, tileHeight;
-    unsigned int count;
-
-    XImage *scanline;
-    XShmSegmentInfo shminfo_scanline;
-
-    XImage *tile;
-    XShmSegmentInfo shminfo_tile;
-
-    unsigned int tilesX, tilesY;
-    bool *tileMap;
-    struct TileChangeRegion *tileRegionMap;
+ public:
+	XUpdateScanner( Display *_dpy,
+			Window _window,
+			unsigned char *_fb,
+			int _width, int _height,
+			int _bitsPerPixel, int _bytesPerLine,
+			unsigned int _tileWidth = 32,
+			unsigned int _tileHeight = 32);
+	
+	~XUpdateScanner();
+	
+	void searchUpdates( QPtrList<Hint> &hintList);
+	
+ private:
+	bool copyTile(int x, int y, int tx, int ty);
+	void copyAllTiles();
+	void flushHint(int x, int y, int &x0, Hint &hint, 
+		       QPtrList<Hint> &hintList);
+	void createHints(QPtrList<Hint> &hintList);
+	void addTileToHint(int x, int y, int th, Hint &hint);
+	void createHintFromTile(int x, int y, int th, Hint &hint);
+	void extendHintY(int x, int y, int x0, Hint &h);
+	
+	Display *dpy;
+	Window window;
+	unsigned char *fb;
+	int width, height;
+	int bitsPerPixel, bytesPerLine;
+	unsigned int tileWidth, tileHeight;
+	unsigned int count;
+	
+	XImage *scanline;
+	XShmSegmentInfo shminfo_scanline;
+	
+	XImage *tile;
+	XShmSegmentInfo shminfo_tile;
+	
+	unsigned int tilesX, tilesY;
+	bool *tileMap;
+	struct TileChangeRegion *tileRegionMap;
 };
 
 

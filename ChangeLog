@@ -1,3 +1,14 @@
+2002-02-20  Tim Jansen  <tjansen@tjansen.de>
+
+	* krfb/Makefile.am: fixed a bug for people who "make install" for the
+	  first time (did not create share/krfb dir for eventrc)
+
+	* krfb/xupdatescanner.cc: improved scanning algorithm and renamed the file. 
+	  Result seems to be a reduction between 25% (web browsing) and 40% (text 
+	  editing) of transmitted raw data. Note that the effectiveness of some 
+	  encoders decreases with less adjacent regions, so the real reduction is 
+	  probably less.
+
 2002-02-18  Tim Jansen  <tjansen@tjansen.de>
 
 	* released 0.6
