@@ -47,7 +47,7 @@ KDE_ICON = krfb
 # kde_wallpaperdir  Where general wallpapers should go to.
 
 # set the include path for X, qt and KDE
-INCLUDES= $(all_includes) -I../libvncserver
+INCLUDES= -I$(top_srcdir)/krfb/libvncserver $(all_includes)
 
 # the library search path. 
 krfb_LDFLAGS = $(all_libraries) $(KDE_RPATH)
