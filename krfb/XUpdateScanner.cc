@@ -80,11 +80,11 @@ XUpdateScanner::XUpdateScanner(Display *_dpy,
 
 	tilesX = (fb->width + tileWidth - 1) / tileWidth;
 	tilesY = (fb->height + tileHeight - 1) / tileHeight;
-	tileMap = (char*) malloc(tilesX * tilesY);
+	tileMap = new bool[tilesX * tilesY];
 	
 	unsigned int i;
 	for (i = 0; i < tilesX * tilesY; i++) 
-		tileMap[i] = 0;
+		tileMap[i] = false;
 
 	scanline = XShmCreateImage(dpy,
 				   DefaultVisual(dpy, 0),
@@ -112,7 +112,7 @@ XUpdateScanner::~XUpdateScanner()
 	XDestroyImage(scanline);
 	shmdt(shminfo_scanline.shmaddr);
 	shmctl(shminfo_scanline.shmid, IPC_RMID, 0);
-	free(tileMap);
+	delete tileMap;
 	XShmDetach(dpy, &shminfo_tile);
 	XDestroyImage(tile);
 	shmdt(shminfo_tile.shmaddr);
@@ -120,7 +120,7 @@ XUpdateScanner::~XUpdateScanner()
 }
 
 
-void XUpdateScanner::checkTile(int x, int y, list<Hint> &hintList)
+void XUpdateScanner::copyTile(int x, int y)
 {
 	unsigned int maxWidth = fb->width - x;
 	unsigned int maxHeight = fb->height - y;
@@ -136,38 +136,152 @@ void XUpdateScanner::checkTile(int x, int y, list<Hint> &hintList)
 			     AllPlanes, ZPixmap, tile, 0, 0);
 	}
 	unsigned int line;
-	bool changed = false;
 	int pixelsize = fb->pixelFormat.bits_per_pixel >> 3;
 	unsigned char *src = (unsigned char*) tile->data;
 	unsigned char *dest = fb->data + y * fb->bytesPerLine + x * pixelsize;
 	for (line = 0; line < maxHeight; line++) {
-		if ( changed || memcmp(dest, src, maxWidth * pixelsize) ) {
-			changed = true;
-			memcpy(dest, src, maxWidth * pixelsize );
-		}
+		memcpy(dest, src, maxWidth * pixelsize );
 		src += tile->bytes_per_line;
 		dest += fb->bytesPerLine;
 	}
+}
 
-	if (changed) {
-		Hint hint;
-		hint.type = hintRefresh;
+void XUpdateScanner::copyAllTiles()
+{
+	unsigned int x, y;
+	// TODO: is it useful to compare again instead of only copying?
+	for (y = 0; y < tilesY; y++) {
+		for (x = 0; x < tilesX; x++) {
+			if (tileMap[x + y * tilesX])
+				copyTile(x*tileWidth, y*tileHeight);
+		}
+	}
+	
+}
+
+void XUpdateScanner::initHint(Hint &hint)
+{
+	hint.type = hintRefresh;
+	hint.hint.refresh.x = 0;
+	hint.hint.refresh.y = 0;
+	hint.hint.refresh.width = 0;
+	hint.hint.refresh.height = 0;
+}
+
+void XUpdateScanner::createHintFromTile(int x, int y, Hint &hint)
+{
+	unsigned int w = fb->width - x;
+	unsigned int h = fb->height - y;
+	if (w > tileWidth) 
+		w = tileWidth;
+	if (h > tileHeight) 
+		h = tileHeight;
+	
+	hint.hint.refresh.x = x;
+	hint.hint.refresh.y = y;
+	hint.hint.refresh.width = w;
+	hint.hint.refresh.height = h;
+}
+
+void XUpdateScanner::addTileToHint(int x, int y, Hint &hint)
+{
+	unsigned int w = fb->width - x;
+	unsigned int h = fb->height - y;
+	if (w > tileWidth) 
+		w = tileWidth;
+	if (h > tileHeight) 
+		h = tileHeight;
+
+	if (hint.hint.refresh.x > x) {
+		hint.hint.refresh.width += hint.hint.refresh.x - x;
 		hint.hint.refresh.x = x;
+	}
+
+	if (hint.hint.refresh.y > y) {
+		hint.hint.refresh.height += hint.hint.refresh.y - y;
 		hint.hint.refresh.y = y;
-		hint.hint.refresh.width = maxWidth;
-		hint.hint.refresh.height = maxHeight;
-		hintList.push_back(hint);
+	}
+
+	if ((hint.hint.refresh.x+hint.hint.refresh.width) < (x+w)) {
+		hint.hint.refresh.width = (x+w) - hint.hint.refresh.x;
+	}
+
+	if ((hint.hint.refresh.y+hint.hint.refresh.height) < (y+h)) {
+		hint.hint.refresh.height = (y+h) - hint.hint.refresh.y;
+	}
+}
+
+void XUpdateScanner::flushHint(int x, int y, int &x0, 
+			       Hint &hint, list<Hint> &hintList)
+{
+	if (x0 < 0)
+		return;
+
+	int h = 1;
+	for (int i = y+1; i < tilesY; i++) {
+		bool lk = true;
+		for (int j = x0; j < x; j++) {
+			if (!tileMap[j + i * tilesX]) {
+				lk = false;
+				break;
+			}
+		}
+		if (!lk)
+			break;
+		
+		for (int j = x0; j < x; j++) 
+			tileMap[j + i * tilesX] = false;
+		h++;
+	}
+	
+	hint.hint.refresh.height = h * tileHeight;
+	if ((hint.hint.refresh.y + hint.hint.refresh.height) > fb->height)
+		hint.hint.refresh.height = fb->height - hint.hint.refresh.y;
+
+	x0 = -1;
+
+	hintList.push_back(hint);
+	initHint(hint);
+}
+
+void XUpdateScanner::createHints(list<Hint> &hintList)
+{
+	Hint hint;
+	initHint(hint);
+	int x0 = -1;
+
+	for (int y = 0; y < tilesY; y++) {
+		int x;
+		for (x = 0; x < tilesX; x++) {
+			if (tileMap[x + y * tilesX]) {
+				if (x0 < 0) {
+					createHintFromTile(x * tileWidth, 
+							   y * tileHeight, 
+							   hint);
+					x0 = x;
+				}
+				else
+					addTileToHint(x * tileWidth, 
+						      y * tileHeight, 
+						      hint);
+			}
+			else
+				flushHint(x, y, x0, hint, hintList);
+		}
+		flushHint(x, y, x0, hint, hintList);
 	}
 }
 
 void XUpdateScanner::searchUpdates(list<Hint> &hintList)
 {
+	count++;
 	count %= 32;
+
 	unsigned int i;
 	unsigned int x, y;
 
 	for (i = 0; i < (tilesX * tilesY); i++) {
-		tileMap[i] = 0;
+		tileMap[i] = false;
 	}
 
 	y = scanlines[count];
@@ -180,24 +294,18 @@ void XUpdateScanner::searchUpdates(list<Hint> &hintList)
 				x * pixelsize;
 			unsigned char *dest = fb->data + 
 				y * fb->bytesPerLine + x * pixelsize;
-			if (memcmp(dest, src, 32 * pixelsize)) {
+			int w = (x + 32) > fb->width ? (fb->width-x) : 32;
+			if (memcmp(dest, src, w * pixelsize)) 
 				tileMap[(x / tileWidth) + 
-					(y / tileHeight) * tilesX] = 1;
-			}
+					(y / tileHeight) * tilesX] = true;
 			x += 32;
 		}
 		y += 32;
 	}
 
-	for (y = 0; y < tilesY; y++) {
-		for (x = 0; x < tilesX; x++) {
-			if (tileMap[x + y * tilesX] > 0)
-				checkTile(x*tileWidth, y*tileHeight, 
-					  hintList);
-		}
-	}
+	copyAllTiles();
 
-	count++;
+	createHints(hintList);
 }
 
 } // namespace rfb

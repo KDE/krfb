@@ -1,4 +1,5 @@
 Todo:
+- clip framebuffer updates to requested region!
 - reminder: enable non-raw in hextile, enable sendSingleHint
 - i18n
 - docs

@@ -1,3 +1,8 @@
+2002-01-10  Tim Jansen  <tim@tjansen.de>
+
+	* krfb/XUpdateScanner.cc: improved finding of hints (join adjacent
+	  hint regions, get rid of unneccessary comparisons)
+
 2002-01-09  Tim Jansen  <tim@tjansen.de>
 
 	* Fixed problems with closing dialogs 

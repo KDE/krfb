@@ -43,9 +43,14 @@ class XUpdateScanner
 
     ~XUpdateScanner();
 
-    void checkTile( int x, int y, list< Hint > &hintList );
+    void copyTile( int x, int y);
+    void copyAllTiles();
     void searchUpdates( list< Hint > &hintList);
-    
+    void initHint(Hint &hint);
+    void flushHint(int x, int y, int &x0, Hint &hint, list<Hint> &hintList);
+    void createHints(list<Hint> &hintList);
+    void addTileToHint(int x, int y, Hint &hint);
+    void createHintFromTile(int x, int y, Hint &hint);
 
     Display *dpy;
     Window window;
@@ -60,7 +65,7 @@ class XUpdateScanner
     XShmSegmentInfo shminfo_tile;
 
     unsigned int tilesX, tilesY;
-    char *tileMap;
+    bool *tileMap;
 };
 
 
