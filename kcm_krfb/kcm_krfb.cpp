@@ -17,6 +17,7 @@
  ***************************************************************************/
 
 #include "kcm_krfb.h"
+#include "kcm_krfb.moc"
 
 #include <qlayout.h>
 #include <qcheckbox.h>

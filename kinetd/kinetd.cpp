@@ -17,6 +17,7 @@
  ***************************************************************************/
 
 #include "kinetd.h"
+#include "kinetd.moc"
 #include <kservicetype.h>
 #include <kdebug.h>
 #include <kstandarddirs.h>
