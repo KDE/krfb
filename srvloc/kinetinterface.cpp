@@ -217,9 +217,11 @@ namespace {
 		else if (a->sa_family == AF_INET)
 			return new KInetSocketAddress((struct sockaddr_in*) a,
 						      sizeof(struct sockaddr_in));
+#ifdef AF_INET6
 		else if (a->sa_family == AF_INET6)
 			return new KInetSocketAddress((struct sockaddr_in6*) a,
 						      sizeof(struct sockaddr_in6));
+#endif
 		else
 			return 0;
 	}
