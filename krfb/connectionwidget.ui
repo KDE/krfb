@@ -1,0 +1,214 @@
+<!DOCTYPE UI><UI version="3.3" stdsetdef="1">
+<class>ConnectionWidget</class>
+<widget class="QWidget">
+    <property name="name">
+        <cstring>NewConnectWidget</cstring>
+    </property>
+    <property name="geometry">
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>521</width>
+            <height>328</height>
+        </rect>
+    </property>
+    <property name="caption">
+        <string>NewConnectWidget</string>
+    </property>
+    <grid>
+        <property name="name">
+            <cstring>unnamed</cstring>
+        </property>
+        <property name="margin">
+            <number>0</number>
+        </property>
+        <widget class="QLabel" row="0" column="1" rowspan="1" colspan="2">
+            <property name="name">
+                <cstring>TextLabel5</cstring>
+            </property>
+            <property name="sizePolicy">
+                <sizepolicy>
+                    <hsizetype>1</hsizetype>
+                    <vsizetype>0</vsizetype>
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                </sizepolicy>
+            </property>
+            <property name="font">
+                <font>
+                    <pointsize>13</pointsize>
+                    <bold>1</bold>
+                </font>
+            </property>
+            <property name="text">
+                <string>Attention</string>
+            </property>
+            <property name="indent">
+                <number>0</number>
+            </property>
+        </widget>
+        <widget class="QLabel" row="1" column="1" rowspan="1" colspan="2">
+            <property name="name">
+                <cstring>mainTextLabel</cstring>
+            </property>
+            <property name="sizePolicy">
+                <sizepolicy>
+                    <hsizetype>5</hsizetype>
+                    <vsizetype>0</vsizetype>
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                </sizepolicy>
+            </property>
+            <property name="lineWidth">
+                <number>-1</number>
+            </property>
+            <property name="margin">
+                <number>0</number>
+            </property>
+            <property name="midLineWidth">
+                <number>5</number>
+            </property>
+            <property name="text">
+                <string>Somebody is requesting a connection to your computer. Granting this will allow the remote user to watch your desktop. </string>
+            </property>
+            <property name="textFormat">
+                <enum>AutoText</enum>
+            </property>
+            <property name="alignment">
+                <set>WordBreak|AlignVCenter|AlignLeft</set>
+            </property>
+            <property name="indent">
+                <number>0</number>
+            </property>
+            <property name="wordwrap" stdset="0">
+            </property>
+        </widget>
+        <widget class="QLabel" row="0" column="0" rowspan="6" colspan="1">
+            <property name="name">
+                <cstring>pixmapLabel</cstring>
+            </property>
+            <property name="sizePolicy">
+                <sizepolicy>
+                    <hsizetype>0</hsizetype>
+                    <vsizetype>0</vsizetype>
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                </sizepolicy>
+            </property>
+            <property name="minimumSize">
+                <size>
+                    <width>108</width>
+                    <height>318</height>
+                </size>
+            </property>
+            <property name="maximumSize">
+                <size>
+                    <width>108</width>
+                    <height>318</height>
+                </size>
+            </property>
+            <property name="frameShape">
+                <enum>WinPanel</enum>
+            </property>
+            <property name="frameShadow">
+                <enum>Sunken</enum>
+            </property>
+            <property name="lineWidth">
+                <number>0</number>
+            </property>
+            <property name="margin">
+                <number>0</number>
+            </property>
+            <property name="scaledContents">
+                <bool>true</bool>
+            </property>
+            <property name="indent">
+                <number>0</number>
+            </property>
+        </widget>
+        <widget class="QLabel" row="3" column="2">
+            <property name="name">
+                <cstring>remoteHost</cstring>
+            </property>
+            <property name="font">
+                <font>
+                    <bold>1</bold>
+                </font>
+            </property>
+            <property name="text">
+                <string>123.234.123.234</string>
+            </property>
+        </widget>
+        <widget class="QCheckBox" row="5" column="1" rowspan="1" colspan="2">
+            <property name="name">
+                <cstring>cbAllowRemoteControl</cstring>
+            </property>
+            <property name="sizePolicy">
+                <sizepolicy>
+                    <hsizetype>1</hsizetype>
+                    <vsizetype>0</vsizetype>
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                </sizepolicy>
+            </property>
+            <property name="text">
+                <string>Allow remote user to &amp;control keyboard and mouse</string>
+            </property>
+            <property name="accel">
+                <string>Alt+C</string>
+            </property>
+            <property name="whatsThis" stdset="0">
+                <string>If you turn this option on, the remote user can enter keystrokes and use your mouse pointer. This gives them full control over your computer, so be careful. When the option is disabled the remote user can only watch your screen.</string>
+            </property>
+        </widget>
+        <widget class="QLabel" row="3" column="1">
+            <property name="name">
+                <cstring>TextLabel1</cstring>
+            </property>
+            <property name="font">
+                <font>
+                    <bold>1</bold>
+                </font>
+            </property>
+            <property name="text">
+                <string>Remote system:</string>
+            </property>
+        </widget>
+        <spacer row="4" column="1">
+            <property name="name">
+                <cstring>spacer23</cstring>
+            </property>
+            <property name="orientation">
+                <enum>Vertical</enum>
+            </property>
+            <property name="sizeType">
+                <enum>Minimum</enum>
+            </property>
+            <property name="sizeHint">
+                <size>
+                    <width>20</width>
+                    <height>84</height>
+                </size>
+            </property>
+        </spacer>
+        <spacer row="2" column="1">
+            <property name="name">
+                <cstring>spacer22</cstring>
+            </property>
+            <property name="orientation">
+                <enum>Vertical</enum>
+            </property>
+            <property name="sizeType">
+                <enum>Minimum</enum>
+            </property>
+            <property name="sizeHint">
+                <size>
+                    <width>20</width>
+                    <height>80</height>
+                </size>
+            </property>
+        </spacer>
+    </grid>
+</widget>
+<layoutdefaults spacing="6" margin="11"/>
+</UI>

@@ -170,12 +170,6 @@ static void clipboardHook(char* str,int len, rfbClientPtr)
 	self->clipboardToServer(QString::fromUtf8(str, len));
 }
 
-
-void ConnectionDialog::closeEvent(QCloseEvent *)
-{
-	emit closed();
-}
-
 VNCEvent::~VNCEvent() {
 }
 
@@ -351,23 +345,19 @@ void SessionEstablishedEvent::exec() {
         controller->sendSessionEstablished();
 }
 
-
-
 RFBController::RFBController(Configuration *c) :
 	allowDesktopControl(false),
 	lastClipboardDirection(LAST_SYNC_TO_SERVER),
 	configuration(c),
+	dialog( 0, "ConnectionDialog" ),
 	disableBackgroundPending(false),
 	disableBackgroundState(false),
 	closePending(false),
 	forcedClose(false)
 {
 	self = this;
-	connect(dialog.acceptConnectionButton, SIGNAL(clicked()),
-		SLOT(dialogAccepted()));
-	connect(dialog.refuseConnectionButton, SIGNAL(clicked()),
-		SLOT(dialogRefused()));
-	connect(&dialog, SIGNAL(closed()), SLOT(dialogRefused()));
+	connect(&dialog, SIGNAL(okClicked()), SLOT(dialogAccepted()));
+	connect(&dialog, SIGNAL(cancelClicked()), SLOT(dialogRefused()));
 	connect(&initIdleTimer, SIGNAL(timeout()), SLOT(checkAsyncEvents()));
 	connect(&idleTimer, SIGNAL(timeout()), SLOT(idleSlot()));
 
@@ -647,7 +637,7 @@ void RFBController::idleSlot()
 void RFBController::dialogAccepted()
 {
 	dialog.hide();
-	acceptConnection(dialog.allowRemoteControlCB->isChecked());
+	acceptConnection(dialog.allowRemoteControl());
 }
 
 void RFBController::dialogRefused()
@@ -769,8 +759,8 @@ enum rfbNewClientAction RFBController::handleNewClient(rfbClientPtr cl)
 				i18n("Received connection from %1, on hold (waiting for confirmation)")
 				.arg(remoteIp));
 
-	dialog.ipLabel->setText(remoteIp);
-	dialog.allowRemoteControlCB->setChecked(true);
+	dialog.setRemoteHost(remoteIp);
+	dialog.setAllowRemoteControl( true );
 	dialog.setFixedSize(dialog.sizeHint());
 	dialog.show();
 	return RFB_CLIENT_ON_HOLD;

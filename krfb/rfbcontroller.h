@@ -24,7 +24,7 @@
 #define RFBCONTROLLER_H
 
 #include "configuration.h"
-#include "newconnectiondialog.h"
+#include "connectiondialog.h"
 #include "xupdatescanner.h"
 #include <ksock.h>
 #include <qobject.h>
@@ -48,15 +48,6 @@ typedef enum {
 	RFB_CONNECTING,
 	RFB_CONNECTED
 } RFBState;
-
-class ConnectionDialog : public KRFBConnectionDialog {
-	Q_OBJECT
-public:
-	virtual void closeEvent(QCloseEvent *);
-
-signals:
-	void closed();
-};
 
 class VNCEvent {
 public:

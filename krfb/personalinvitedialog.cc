@@ -17,13 +17,14 @@
    Boston, MA 02111-1307, USA.
 */
 
-#include <qlabel.h>
-
-#include <kiconloader.h>
-#include <klocale.h>
-
 #include "personalinvitedialog.h"
 #include "personalinvitewidget.h"
+
+#include <qlabel.h>
+
+#include <kactivelabel.h>
+#include <kiconloader.h>
+#include <klocale.h>
 
 PersonalInviteDialog::PersonalInviteDialog( QWidget *parent, const char *name )
     : KDialogBase( parent, name, true, i18n( "Personal Invitation" ),
@@ -31,7 +32,7 @@ PersonalInviteDialog::PersonalInviteDialog( QWidget *parent, const char *name )
 {
   m_inviteWidget = new PersonalInviteWidget( this, "PersonalInviteWidget" );
   m_inviteWidget->pixmapLabel->setPixmap( 
-      UserIcon(  "connection-side-image.png" ) );
+      UserIcon( "connection-side-image.png" ) );
 
   setMainWidget( m_inviteWidget );
 }
