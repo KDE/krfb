@@ -3,7 +3,7 @@ KDE_CXXFLAGS = $(USE_THREADS)
 METASOURCES = AUTO
 
 noinst_LTLIBRARIES = libkrfbconfig.la
-libkrfbconfig_la_SOURCES = configuration.cc manageinvitations.ui \
+libkrfbconfig_la_SOURCES = configuration.cc configuration.skel manageinvitations.ui \
                            personalinvitation.ui invite.ui invitation.cc
 libkrfbconfig_la_LIBADD = ../srvloc/libsrvloc.la $(LIB_KDEUI)
 

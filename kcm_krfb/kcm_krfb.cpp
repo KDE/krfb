@@ -47,7 +47,7 @@ typedef KGenericFactory<KcmKRfb, QWidget> KcmKRfbFactory;
 extern "C" {
   void *init_kcm_krfb() {
     KGlobal::locale()->insertCatalogue("krfb"); // For invitation translations
-    return new KcmKRfbFactory("kcm_krfb"); 
+    return new KcmKRfbFactory("kcm_krfb");
   }
 }
 
@@ -80,9 +80,9 @@ KcmKRfb::KcmKRfb(QWidget *p, const char *name, const QStringList &) :
 	connect(m_confWidget->allowDesktopControlCB, SIGNAL(clicked()), SLOT(configChanged()) );
 	connect(m_confWidget->autoPortCB, SIGNAL(clicked()), SLOT(configChanged()) );
 	connect(m_confWidget->portInput, SIGNAL(valueChanged(int)), SLOT(configChanged()) );
-	connect((QObject*)m_confWidget->manageInvitations, SIGNAL(clicked()), 
+	connect((QObject*)m_confWidget->manageInvitations, SIGNAL(clicked()),
 		&m_configuration, SLOT(showManageInvitationsDialog()) );
-	connect(&m_configuration, SIGNAL(invitationNumChanged(int)), 
+	connect(&m_configuration, SIGNAL(invitationNumChanged(int)),
 		this, SLOT(setInvitationNum(int)));
 	setInvitationNum(m_configuration.invitations().size());
 	connect(m_confWidget->disableBackgroundCB, SIGNAL(clicked()), SLOT(configChanged()) );
@@ -151,6 +151,7 @@ void KcmKRfb::save() {
 		m_configuration.setPreferredPort(m_confWidget->portInput->value());
 	m_configuration.setDisableBackground(m_confWidget->disableBackgroundCB->isChecked());
 	m_configuration.save();
+        kapp->dcopClient()->emitDCOPSignal("KRFB::ConfigChanged", "KRFB_ConfigChanged()", QByteArray());
 	emit changed(false);
 }
 

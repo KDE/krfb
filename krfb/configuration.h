@@ -38,17 +38,19 @@ enum krfb_mode {
 	KRFB_CONFIGURATION_MODE
 };
 
+#include <dcopobject.h>
 
 /**
  * This class stores the app's configuration, manages the
  * standalone-config-dialog and all the invitation dialogs
  * @author Tim Jansen
  */
-class Configuration : public QObject {
+class Configuration : public QObject, public DCOPObject {
+    K_DCOP
    	Q_OBJECT
 public:
 	Configuration(krfb_mode mode);
-	~Configuration();
+	virtual ~Configuration();
 
 	krfb_mode mode() const;
 	bool askOnConnect() const;
@@ -122,6 +124,12 @@ private:
 
 	bool disableBackgroundFlag;
 	bool disableXShmFlag;
+	
+k_dcop:
+    // Connected to the DCOP signal
+    void updateKConfig();
+
+
 private slots:
         void refreshTimeout();
 
