@@ -383,7 +383,7 @@ RFBController::RFBController(Configuration *c) :
 	if (gethostname(hostname, 255))
 		hostname[0] = 0;
 	hostname[255] = 0;
-	desktopName = QString(i18n("%1@%2 (shared desktop)")).arg(KUser().loginName()).arg(hostname);
+	desktopName = i18n("%1@%2 (shared desktop)").arg(KUser().loginName()).arg(hostname);
 }
 
 RFBController::~RFBController()
