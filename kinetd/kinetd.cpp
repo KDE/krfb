@@ -165,6 +165,10 @@ void PortListener::loadConfig(KService::Ptr s) {
 void PortListener::accepted(KSocket *sock) {
 	QString host, port;
 	KSocketAddress *ksa = KExtendedSocket::peerAddress(sock->socket());
+	if ((!ksa) || !ksa->address()) {
+		delete sock;
+		return;
+	}
 	KExtendedSocket::resolve(ksa, host, port);
 	KNotifyClient::event("IncomingConnection",
 		i18n("Connection from %1").arg(host));
