@@ -1,3 +1,7 @@
+2002-03-18  Tim Jansen  <tjansen@tjansen.de>
+
+	* removed vertical splitting of tiles, simplifies code.
+
 2002-03-11  Tim Jansen  <tjansen@tjansen.de>
 
 	* integrated KCModule

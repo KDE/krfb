@@ -299,14 +299,14 @@ listenerRun(void *data)
     rfbClientPtr cl;
     int len;
 
-    len = sizeof(peer);
-
     if (rfbScreen->inetdSock != -1) {
 	cl = rfbNewClient(rfbScreen, rfbScreen->inetdSock);
-	rfbStartOnHoldClient(cl);
+	if (cl && !cl->onHold )
+		rfbStartOnHoldClient(cl);
 	return;
     }
-
+    
+    len = sizeof(peer);
     /* TODO: this thread wont die by restarting the server */
     while ((client_fd = accept(rfbScreen->rfbListenSock,
                                (struct sockaddr*)&peer, &len)) >= 0) {

@@ -251,7 +251,7 @@ RFBController::RFBController(Configuration *c) :
 	KeyboardEvent::initKeycodes();
 }
 
-RFBController::~RFBController() 
+RFBController::~RFBController()
 {
 	stopServer();
 }
@@ -342,7 +342,7 @@ void RFBController::startServer(int inetdFd, bool xtestGrab)
 	rfbRunEventLoop(server, -1, TRUE);
 }
 
-void RFBController::stopServer(bool xtestUngrab) 
+void RFBController::stopServer(bool xtestUngrab)
 {
 	rfbScreenCleanup(server);
 	state = RFB_STOPPED;

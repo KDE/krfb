@@ -47,7 +47,7 @@ static const char *description = I18N_NOOP("VNC-compatible server to share "
 #define ARG_DONT_CONFIRM_CONNECT "dont-confirm-connect"
 #define ARG_REMOTE_CONTROL "remote-control"
 #define ARG_STAND_ALONE "stand-alone"
-#define ARG_KINETD "kinetd "
+#define ARG_KINETD "kinetd"
 
 
 static KCmdLineOptions options[] =
@@ -62,7 +62,7 @@ static KCmdLineOptions options[] =
 	{ ARG_REMOTE_CONTROL, I18N_NOOP("Allow remote side to control this computer."), 0},
 	{ "s", 0, 0},
 	{ ARG_STAND_ALONE, I18N_NOOP("Stand-alone mode, do not use daemon."), 0},
-	{ ARG_KINETD, I18N_NOOP("Used for calling from kinetd."), 0},
+	{ ARG_KINETD " ", I18N_NOOP("Used for calling from kinetd."), 0},
 	{ 0, 0, 0 }
 };
 
@@ -170,15 +170,16 @@ int main(int argc, char *argv[])
 					   allowDesktopControl, password);
 		mode = KRFB_STAND_ALONE_CMDARG;
 	}
-	else if (args->isSet(ARG_STAND_ALONE)) {
-		mode = KRFB_STAND_ALONE;
-	}
-	else if (args->isSet(ARG_KINETD)) {
-		fdString = args->getOption(ARG_KINETD);
-		mode = KRFB_KINETD_MODE;
-	}
-	else
+	else {
+		if (args->isSet(ARG_STAND_ALONE)) {
+			mode = KRFB_STAND_ALONE;
+		}
+		else if (args->isSet(ARG_KINETD)) {
+			fdString = args->getOption(ARG_KINETD);
+			mode = KRFB_KINETD_MODE;
+		}
 		config = new Configuration();
+	}
 	args->clear();
 
 	if (mode == KRFB_UNKNOWN_MODE)
@@ -186,6 +187,7 @@ int main(int argc, char *argv[])
 
 	if (mode == KRFB_INVITATION_MODE) {
 		// TODO: display invitation
+		kdDebug() << "invitation mode" <<endl;
 		return app.exec();
 	}
 
@@ -252,3 +254,4 @@ int main(int argc, char *argv[])
 
 	return app.exec();
 }
+

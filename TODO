@@ -1,5 +1,6 @@
-Todo:
+Todo (unscheduled features):
 - SLP support (or UPnP, or whatever KDE will use)
+- NAT traversal support (MIDCOM stun/turn, UPnP)
 - look into adding extension to xfree to improve speed (get noticed of
   screen updates)
 

@@ -21,7 +21,6 @@
  * December 15th 2001: removed coments, mouse pointer options and some
  * other stuff
  * January 10th 2002: improved hint creation (join adjacent hints)
- * February 20th 2002: shrink tiles to match actual changes
  * 
  *                   Tim Jansen <tim@tjansen.de>
  */   
@@ -39,18 +38,15 @@
 
 #include "xupdatescanner.h"
 
-int scanlines[32] = {  0, 16,  8, 24,
-		       4, 20, 12, 28,
-		       10, 26, 18,  2,
-		       22,  6, 30, 14,
-		       1, 17,  9, 25,
-		       7, 23, 15, 31,
-		       19,  3, 27, 11,
-		       29, 13,  5, 21 };
+unsigned int scanlines[32] = {  0, 16,  8, 24,
+                                4, 20, 12, 28,
+			       10, 26, 18,  2,
+			       22,  6, 30, 14,
+			        1, 17,  9, 25,
+			        7, 23, 15, 31,
+			       19,  3, 27, 11,
+			       29, 13,  5, 21 };
 #define MAX_ADJ_TOLERANCE 8
-
-#define abs(x) (((x) >= 0) ? (x) : -(x))
-
 
 XUpdateScanner::XUpdateScanner(Display *_dpy,
 			       Window _window,
@@ -97,7 +93,8 @@ XUpdateScanner::XUpdateScanner(Display *_dpy,
 	tileMap = new bool[tilesX * tilesY];
         tileRegionMap = new struct TileChangeRegion[tilesX * tilesY];
 
-	for (int i = 0; i < tilesX * tilesY; i++) 
+	unsigned int i;
+	for (i = 0; i < tilesX * tilesY; i++) 
 		tileMap[i] = false;
 
 	scanline = XShmCreateImage(dpy,
@@ -134,92 +131,11 @@ XUpdateScanner::~XUpdateScanner()
 	shmctl(shminfo_tile.shmid, IPC_RMID, 0);
 }
 
-// check whether at the given line there is a right half in the tile
-bool XUpdateScanner::checkRight(unsigned char *src,
-				unsigned char *dest,
-				int halfWidthBytes) 
-{
-	return memcmp(dest + halfWidthBytes, 
-		      src + halfWidthBytes, 
-		      halfWidthBytes) != 0;
-}
-
-// check whether the half exists in the tile
-bool XUpdateScanner::checkSide(unsigned char *src,
-			       unsigned char *dest,
-			       int halfWidthBytes,
-			       int n) 
-{
-	for (int i = 0; i < n; i++) {
-		if (memcmp(dest + halfWidthBytes, 
-			   src + halfWidthBytes, 
-			   halfWidthBytes))
-			return true;
-		src += tile->bytes_per_line;
-		dest += bytesPerLine;
-        }
-	return false;
-}
-
-// finds the first changed line in the tile
-int XUpdateScanner::findFirstLine(int maxHeight, 
-				  unsigned char *&ssrc,
-				  unsigned char *&sdest,
-				  int halfWidthBytes,
-				  bool &left) {
-	int firstLine = maxHeight;
-	left = true;
-	for (int line = 0; line < maxHeight; line++) {
-		if (memcmp(sdest, ssrc, halfWidthBytes)) {
-			firstLine = line;
-			break;
-		}
-		if (memcmp(sdest + halfWidthBytes, 
-			   ssrc + halfWidthBytes, 
-			   halfWidthBytes)) {
-			firstLine = line;
-			left = false;
-			break;
-		}
-		ssrc += tile->bytes_per_line;
-		sdest += bytesPerLine;
-        }
-	return firstLine;
-}
-
-// finds the last changed line in the tile
-int XUpdateScanner::findLastLine(int maxHeight, 
-				 int firstLine,
-				 unsigned char *msrc,
-				 unsigned char *mdest,
-				 int halfWidthBytes,
-				 bool &left) {
-        int lastLine = firstLine;
-	left = true;
-
-        for (int line = maxHeight-1; line > firstLine; line--) {
-		msrc -= tile->bytes_per_line;
-		mdest -= bytesPerLine;
-		if (memcmp(mdest, msrc, halfWidthBytes)) {
-			lastLine = line;
-			break;
-		}
-		if (memcmp(mdest + halfWidthBytes,
-			   msrc + halfWidthBytes, 
-			   halfWidthBytes)) {
-			lastLine = line;
-			left = false;
-			break;
-		}
-        }
-	return lastLine;
-}
-				   
 
 bool XUpdateScanner::copyTile(int x, int y, int tx, int ty)
 {
-	int maxWidth = width - x;
-	int maxHeight = height - y;
+	unsigned int maxWidth = width - x;
+	unsigned int maxHeight = height - y;
 	if (maxWidth > tileWidth) 
 		maxWidth = tileWidth;
 	if (maxHeight > tileHeight) 
@@ -231,94 +147,59 @@ bool XUpdateScanner::copyTile(int x, int y, int tx, int ty)
 		XGetSubImage(dpy, window, x, y, maxWidth, maxHeight, 
 			     AllPlanes, ZPixmap, tile, 0, 0);
 	}
-
+	unsigned int line;
 	int pixelsize = bitsPerPixel >> 3;
-	int halfWidthBytes = (maxWidth*pixelsize)>>1;
-	bool hitLeft = true;
-	bool leftConfirmed = false;
-	bool rightConfirmed = false;
 	unsigned char *src = (unsigned char*) tile->data;
 	unsigned char *dest = fb + y * bytesPerLine + x * pixelsize;
 
         unsigned char *ssrc = src;
         unsigned char *sdest = dest;
-	// search first changed line
-        int firstLine = findFirstLine(maxHeight, ssrc, sdest, 
-				      halfWidthBytes, hitLeft);
+        int firstLine = maxHeight;
 	
-	// if no changes, leave
+	for (line = 0; line < maxHeight; line++) {
+		if (memcmp(sdest, ssrc, maxWidth * pixelsize)) {
+			firstLine = line;
+			break;
+		}
+		ssrc += tile->bytes_per_line;
+		sdest += bytesPerLine;
+        }
+	
         if (firstLine == maxHeight) {
 		tileMap[tx + ty * tilesX] = false;
 		return false;
         }
-
-	// try to get more information whether left&right half both changed
-	if (hitLeft) {
-		leftConfirmed = true;
-		rightConfirmed = checkRight(ssrc, sdest, halfWidthBytes);
-	}
-	else
-		rightConfirmed = true;
 	
         unsigned char *msrc = src + (tile->bytes_per_line * maxHeight);
         unsigned char *mdest = dest + (bytesPerLine * maxHeight);
-	// find the last line in the tile
-        int lastLine = findLastLine(maxHeight, firstLine, msrc, mdest,
-				    halfWidthBytes, hitLeft);
-	// try to get more information whether left&right half both changed
-	if (hitLeft) {
-		leftConfirmed = true;
-		if (!rightConfirmed)
-			rightConfirmed = checkRight(ssrc, sdest, halfWidthBytes);
-	}
-	else
-		rightConfirmed = true;
-
-	// now complete information about right&left half
-	if (!leftConfirmed)
-		leftConfirmed = checkSide(sdest, ssrc, halfWidthBytes, 
-					  lastLine-firstLine+1);
-	if (!rightConfirmed)
-		rightConfirmed = checkSide(sdest+halfWidthBytes, 
-					  ssrc+halfWidthBytes,
-					  halfWidthBytes, 
-					  lastLine-firstLine+1);
-
-	// identify what halfes to copy
-	int cw;
-	if (leftConfirmed && rightConfirmed)
-		cw = maxWidth * pixelsize;
-	else {
-		cw = halfWidthBytes;
-		if (rightConfirmed) {
-			sdest += halfWidthBytes;
-			ssrc += halfWidthBytes;
+        int lastLine = firstLine;
+	
+        for (line = maxHeight-1; line > firstLine; line--) {
+		msrc -= tile->bytes_per_line;
+		mdest -= bytesPerLine;
+		if (memcmp(mdest, msrc, maxWidth * pixelsize)) {
+			lastLine = line;
+			break;
 		}
-		else
-			assert(leftConfirmed);
-	}
+        }
 
-	// copy the stuff into the framebuffer
-	for (int line = firstLine; line <= lastLine; line++) {
-                memcpy(sdest, ssrc, cw);
+        for (line = firstLine; line <= lastLine; line++) {
+                memcpy(sdest, ssrc, maxWidth * pixelsize );
                 ssrc += tile->bytes_per_line;
 		sdest += bytesPerLine;
 	}
 
-	// set the descriptor
         struct TileChangeRegion *r = &tileRegionMap[tx + (ty * tilesX)];
         r->firstLine = firstLine;
         r->lastLine = lastLine;
-	r->leftSide = leftConfirmed;
-	r->rightSide = rightConfirmed;
 	
         return lastLine == (maxHeight-1);
 }
 
 void XUpdateScanner::copyAllTiles()
 {
-	for (int y = 0; y < tilesY; y++) {
-		for (int x = 0; x < tilesX; x++) {
+	for (unsigned int y = 0; y < tilesY; y++) {
+		for (unsigned int x = 0; x < tilesX; x++) {
                         if (tileMap[x + y * tilesX])
                                 if (copyTile(x*tileWidth, y*tileHeight, x, y) &&
                                     ((y+1) < tilesY))
@@ -328,20 +209,12 @@ void XUpdateScanner::copyAllTiles()
 	
 }
 
-void XUpdateScanner::createHintFromTile(int x, int y, int th, Hint &hint, 
-					struct TileChangeRegion *r)
+void XUpdateScanner::createHintFromTile(int x, int y, int th, Hint &hint)
 {
-	int tw = tileWidth;
-	if (r->leftSide ^ r->rightSide) {
-		tw = tileWidth>>1;
-		if (r->rightSide)
-			x += tw;
-	}
-
-	int w = width - x;
-	int h = height - y;
-	if (w > tw)
-		w = tw;
+	unsigned int w = width - x;
+	unsigned int h = height - y;
+	if (w > tileWidth)
+		w = tileWidth;
 	if (h > th) 
 		h = th;
 	
@@ -351,35 +224,15 @@ void XUpdateScanner::createHintFromTile(int x, int y, int th, Hint &hint,
 	hint.h = h;
 }
 
-// adds a tile to the right of the given existing tile
-bool XUpdateScanner::addTileToHint(int x, int y, int wInTiles, 
-				   int th, Hint &hint,
-				   struct TileChangeRegion *r)
+void XUpdateScanner::addTileToHint(int x, int y, int th, Hint &hint)
 {
-	// tiles are always added to the right, so if this one has no left half..
-	if (!r->leftSide)
-		return false;
-	// or the previous one no right half, leave
-	struct TileChangeRegion *prev = r-1;
-	if (!prev->rightSide)
-		return false;
-
-	// half width for tiles without right half
-	int tw = tileWidth;
-	if (!r->rightSide)
-		tw = tileWidth>>1;
-
-	int w = width - x;
-	int h = height - y;
-	if (w > tw) 
-		w = tw;
+// todo: refuse to add hint if this one is much smaller or bigger (use x0)
+	unsigned int w = width - x;
+	unsigned int h = height - y;
+	if (w > tileWidth) 
+		w = tileWidth;
 	if (h > th) 
 		h = th;
-
-	if ((wInTiles*abs(hint.y-y)) > MAX_ADJ_TOLERANCE)
-		return false;
-	if ((wInTiles*abs((hint.y+hint.h)-(y+h))) > MAX_ADJ_TOLERANCE)
-		return false;
 
 	if (hint.x > x) {
 		hint.w += hint.x - x;
@@ -398,25 +251,16 @@ bool XUpdateScanner::addTileToHint(int x, int y, int wInTiles,
 	if ((hint.y+hint.h) < (y+h)) {
 		hint.h = (y+h) - hint.y;
 	}
-	return true;
 }
 
-// examines and possibly joins tiles under the hint with the hint
 void XUpdateScanner::extendHintY(int x, int y, int x0, Hint &hint) 
 {
 	int eh = 0;
 	int lastLine = -1;
 	int w = x - x0 + 1;
-	bool leftHalf = !tileRegionMap[x0 + y * tilesX].leftSide;
-	bool rightHalf = !tileRegionMap[x - 1 + y * tilesX].rightSide;
-
 	for (int i = y+1; i < tilesY; i++) {
 		bool lk = true;
 		int ll = 0;
-		if (leftHalf && tileRegionMap[x0 + i * tilesX].leftSide)
-			break;
-	        if (rightHalf && tileRegionMap[x - 1 + i * tilesX].rightSide)
-			break;
 		for (int j = x0; j < x; j++) {
 			int idx = j + i * tilesX;
 			if ((!tileMap[idx]) ||
@@ -464,10 +308,9 @@ static void printStatistics(Hint &hint) {
 	ssum += p;
 	snum++;
 	float avg = ssum / snum;
-	kdDebug() << "avg size saved: "<< avg <<"%"<<endl;
+	kdDebug() << "avg size: "<< avg <<"%"<<endl;
 }
 
-// takes the hint, calls extendHintY if possible and then puts hint into list
 void XUpdateScanner::flushHint(int x, int y, int &x0, 
 			       Hint &hint, QPtrList<Hint> &hintList)
 {
@@ -485,12 +328,10 @@ void XUpdateScanner::flushHint(int x, int y, int &x0,
 	assert (hint.h > 0);
 
 //printStatistics(hint);
-kdDebug() << "size: "<< hint.w << "/"<<hint.h<<endl;
 
 	hintList.append(new Hint(hint));
 }
 
-// creates a list of hints
 void XUpdateScanner::createHints(QPtrList<Hint> &hintList)
 {
 	Hint hint;
@@ -500,31 +341,25 @@ void XUpdateScanner::createHints(QPtrList<Hint> &hintList)
 		int x;
 		for (x = 0; x < tilesX; x++) {
 			int idx = x + y * tilesX;
-			if (!tileMap[idx]) {
+			if (tileMap[idx]) {
+				int ty = tileRegionMap[idx].firstLine;
+				int th = tileRegionMap[idx].lastLine - ty +1;
+				if (x0 < 0) {
+					createHintFromTile(x * tileWidth, 
+							   (y * tileHeight) + ty, 
+							   th,
+							   hint);
+					x0 = x;
+				}
+				else {
+					addTileToHint(x * tileWidth, 
+						      (y * tileHeight) + ty, 
+						      th,
+						      hint);
+				}
+			}
+			else
 				flushHint(x, y, x0, hint, hintList);
-				continue;
-			}
-			struct TileChangeRegion *r = &tileRegionMap[idx];
-			int ty = r->firstLine;
-			int th = r->lastLine - ty +1;
-			if (x0 < 0) {
-				createHintFromTile(x * tileWidth, 
-						   (y * tileHeight) + ty, 
-						   th, hint, r);
-				x0 = x;
-				continue;
-			}
-			if (!addTileToHint(x * tileWidth, 
-					   (y * tileHeight) + ty, 
-					   x0 - x + 1,
-					   th, hint, r)) {
-				flushHint(x, y, x0, hint, hintList);
-				createHintFromTile(x * tileWidth, 
-						   (y * tileHeight) + ty, 
-						   th, hint, r);
-				x0 = x;
-				
-			}
 		}
 		flushHint(x, y, x0, hint, hintList);
 	}
@@ -535,8 +370,8 @@ void XUpdateScanner::searchUpdates(QPtrList<Hint> &hintList)
 	count++;
 	count %= 32;
 
-	int i;
-	int x, y;
+	unsigned int i;
+	unsigned int x, y;
 
 	for (i = 0; i < (tilesX * tilesY); i++) {
 		tileMap[i] = false;

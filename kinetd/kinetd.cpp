@@ -32,8 +32,6 @@ PortListener::PortListener(KService::Ptr s)
 {
 	loadConfig(s);
 
-	process.setExecutable(execPath);
-
 	port = portBase;
 	socket = new KServerSocket(port, false);
 	while (!socket->bindAndListen()) {
@@ -109,10 +107,15 @@ void PortListener::accepted(KSocket *sock) {
 	}
 
 	process.clearArguments();
-	process << argument << sock->socket();
+	process << execPath << argument << QString::number(sock->socket());
 	if (!process.start(KProcess::DontCare)) {
-		kdDebug() << "kinetd: Calling process failed" << endl;
+		kdDebug() << "kinetd: Process \"" << execPath << " " <<
+			argument << " "<< sock->socket() <<
+			"\" call failed" << endl;
 	}
+	else
+		kdDebug() << "kinetd: Calling process, ok" << endl;
+
 	delete sock;
 }
 

@@ -12,10 +12,11 @@ Version 0.7: Better integration with KDE, improved GUI
  -> remove debug msgs, better error handling
  -> fetch new services while running
 - invitation support
- -> check for xp dialogs
+ -> check xp dialogs as model
+ -> make sure request is completely ignored if password is available
 - kcontrol module
 -> on startup a dialog appears that allows the user to invite somebody
-   using email (and later other mechanisms). Dialog can be turned off forever, 
+   using email (and later other mechanisms). Dialog can be turned off forever,
    of course
 -> remove STDOUT/STDERR logging
 -> add isConnected() dcop call
