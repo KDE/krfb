@@ -28,10 +28,10 @@ KPassivePopup2::KPassivePopup2(QWidget *parent) :
    KPassivePopup(parent){
 }
 
-void KPassivePopup2::closeEvent( QCloseEvent *e )
+void KPassivePopup2::hideEvent( QHideEvent *e )
 {
-    KPassivePopup::closeEvent(e);
-    emit closed();
+    KPassivePopup::hideEvent(e);
+    emit hidden();
 }
 
 KPassivePopup2 *KPassivePopup2::message( const QString &caption, const QString &text,
@@ -95,10 +95,10 @@ void TrayIcon::prepareQuit() {
 void TrayIcon::showConnectedMessage() {
 
         setPixmap(trayIconOpen);
-        KPassivePopup2 *p = KPassivePopup2::message(i18n("Desktop Sharing"), 
-						    i18n("The remote user has been authenticated and is now connected."), 
-						    trayIconOpen,
-						    this);
+        KPassivePopup2::message(i18n("Desktop Sharing"), 
+				i18n("The remote user has been authenticated and is now connected."), 
+				trayIconOpen,
+				this);
 }
 
 void TrayIcon::showDisconnectedMessage() {
@@ -110,7 +110,7 @@ void TrayIcon::showDisconnectedMessage() {
 						    i18n("The remote user has closed the connection."), 
 						    trayIconClosed,
 						    this);
-	connect(p, SIGNAL(closed()), this, SIGNAL(diconnectedMessageDisplayed()));
+	connect(p, SIGNAL(hidden()), this, SIGNAL(diconnectedMessageDisplayed()));
 }
 
 void TrayIcon::contextMenuAboutToShow(KPopupMenu*) {

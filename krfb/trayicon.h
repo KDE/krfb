@@ -37,13 +37,13 @@ public:
 					QWidget *parent);
 
 signals:
-	void closed();
+	void hidden();
 
 protected:
         /**
-         * Reimplemented to detect close events.
+         * Reimplemented to detect hide events.
          */
-        virtual void closeEvent( QCloseEvent *e );
+        virtual void hideEvent( QHideEvent *e );
 };
 
 /**
