@@ -39,6 +39,7 @@
 
 
 class QCloseEvent;
+class QClipboard;
 class RFBController;
 
 typedef enum {
@@ -60,6 +61,7 @@ signals:
 class VNCEvent {
 public:
 	virtual void exec() = 0;
+	virtual ~VNCEvent();
 };
 
 
@@ -94,6 +96,14 @@ public:
 	virtual void exec();
 };
 
+class ClipboardEvent : public VNCEvent {
+	RFBController *controller;
+	QString text;
+public:
+	ClipboardEvent(RFBController *c, const QString &text);
+	virtual void exec();
+};
+
 class KNotifyEvent : public VNCEvent {
 	QString name;
 	QString desc;
@@ -103,7 +113,7 @@ public:
 	virtual void exec();
 };
 
-class SessionEstablishedEvent : public VNCEvent{
+class SessionEstablishedEvent : public VNCEvent {
         RFBController *controller;
 public:
 	SessionEstablishedEvent(RFBController *c);
@@ -123,6 +133,7 @@ class RFBController : public QObject  {
 	Q_OBJECT
 
 	friend class SessionEstablishedEvent;
+	friend class ClipboardEvent;
 public:
 	RFBController(Configuration *c);
 	virtual ~RFBController();
@@ -137,6 +148,7 @@ public:
 	void handleKeyEvent(bool down, KeySym keySym);
 	void handlePointerEvent(int button_mask, int x, int y);
 	enum rfbNewClientAction handleNewClient(rfbClientPtr cl);
+	void clipboardToServer(const QString &text);
 	void handleClientGone();
 	void handleNegotiationFinished(rfbClientPtr cl);
 	int getPort();
@@ -163,10 +175,18 @@ private:
 	void disableBackground(bool state);
 
 	QString remoteIp;
-	bool allowDesktopControl;
+	volatile bool allowDesktopControl;
 
 	QTimer initIdleTimer;
 	QTimer idleTimer;
+
+	enum {
+		LAST_SYNC_TO_SERVER,
+		LAST_SYNC_TO_CLIENT
+	} lastClipboardDirection;
+	QString lastClipboardText;
+	QClipboard *clipboard;
+
 	Configuration *configuration;
 	XUpdateScanner *scanner;
 	ConnectionDialog dialog;
@@ -189,6 +209,8 @@ private slots:
 	void idleSlot();
 	void dialogAccepted();
 	void dialogRefused();
+	void selectionChanged();
+	void clipboardChanged();
 };
 
 /*

@@ -51,6 +51,8 @@
 #include <qglobal.h>
 #include <qlabel.h>
 #include <qmutex.h>
+#include <qdeepcopy.h>
+#include <qclipboard.h>
 #include <qdesktopwidget.h>
 
 #include <X11/Xutil.h>
@@ -61,6 +63,7 @@
 #endif
 
 #define IDLE_PAUSE (1000/50)
+#define MAX_SELECTION_LENGTH (4096)
 
 static XTestDisabler disabler;
 
@@ -162,10 +165,18 @@ static void inetdDisconnectHook()
 	self->handleClientGone();
 }
 
+static void clipboardHook(char* str,int len, rfbClientPtr)
+{
+	self->clipboardToServer(QString::fromUtf8(str, len));
+}
+
 
 void ConnectionDialog::closeEvent(QCloseEvent *)
 {
 	emit closed();
+}
+
+VNCEvent::~VNCEvent() {
 }
 
 Display *KeyboardEvent::dpy;
@@ -301,6 +312,25 @@ void PointerEvent::exec() {
 	buttonMask = button_mask;
 }
 
+
+ClipboardEvent::ClipboardEvent(RFBController *c, const QString &ctext) :
+	controller(c),
+	text(QDeepCopy<QString>(ctext)) {
+}
+
+void ClipboardEvent::exec() {
+	if ((controller->lastClipboardDirection == RFBController::LAST_SYNC_TO_CLIENT) &&
+	    (controller->lastClipboardText == text)) {
+		return;
+	}
+	controller->lastClipboardDirection = RFBController::LAST_SYNC_TO_SERVER;
+	controller->lastClipboardText = text;
+
+	controller->clipboard->setText(text, QClipboard::Clipboard);
+	controller->clipboard->setText(text, QClipboard::Selection);
+}
+
+
 KNotifyEvent::KNotifyEvent(const QString &n, const QString &d) :
 	name(n),
 	desc(d) {
@@ -325,6 +355,7 @@ void SessionEstablishedEvent::exec() {
 
 RFBController::RFBController(Configuration *c) :
 	allowDesktopControl(false),
+	lastClipboardDirection(LAST_SYNC_TO_SERVER),
 	configuration(c),
 	disableBackgroundPending(false),
 	disableBackgroundState(false),
@@ -339,6 +370,10 @@ RFBController::RFBController(Configuration *c) :
 	connect(&dialog, SIGNAL(closed()), SLOT(dialogRefused()));
 	connect(&initIdleTimer, SIGNAL(timeout()), SLOT(checkAsyncEvents()));
 	connect(&idleTimer, SIGNAL(timeout()), SLOT(idleSlot()));
+
+	clipboard = QApplication::clipboard();
+	connect(clipboard, SIGNAL(selectionChanged()), this, SLOT(selectionChanged()));
+	connect(clipboard, SIGNAL(dataChanged()), this, SLOT(clipboardChanged()));
 
 	asyncQueue.setAutoDelete(true);
 
@@ -420,6 +455,7 @@ void RFBController::startServer(int inetdFd, bool xtestGrab)
 	server->newClientHook = newClientHook;
 	server->inetdDisconnectHook = inetdDisconnectHook;
 	server->passwordCheck = passwordCheck;
+	server->setXCutText = clipboardHook;
 
 	server->desktopName = desktopName.latin1();
 
@@ -767,6 +803,57 @@ void RFBController::handlePointerEvent(int button_mask, int x, int y) {
 	asyncMutex.lock();
 	asyncQueue.append(new PointerEvent(button_mask, x, y));
 	asyncMutex.unlock();
+}
+
+
+void RFBController::clipboardToServer(const QString &ctext) {
+	if (!allowDesktopControl)
+		return;
+
+	asyncMutex.lock();
+	asyncQueue.append(new ClipboardEvent(this, ctext));
+	asyncMutex.unlock();
+}
+
+void RFBController::clipboardChanged() {
+	if (state != RFB_CONNECTED)
+		return;
+	if (clipboard->ownsClipboard())
+		return;
+
+	QString text = clipboard->text(QClipboard::Clipboard);
+
+	// avoid ping-pong between client&server
+	if ((lastClipboardDirection == LAST_SYNC_TO_SERVER) &&
+	    (lastClipboardText == text))
+		return;
+	if ((text.length() > MAX_SELECTION_LENGTH) || text.isNull())
+		return;
+
+	lastClipboardDirection = LAST_SYNC_TO_CLIENT;
+	lastClipboardText = text;
+	QCString ctext = text.utf8();
+	rfbSendServerCutText(server, ctext.data(), ctext.length());
+}
+
+void RFBController::selectionChanged() {
+	if (state != RFB_CONNECTED)
+		return;
+	if (clipboard->ownsSelection())
+		return;
+
+	QString text = clipboard->text(QClipboard::Selection);
+	// avoid ping-pong between client&server
+	if ((lastClipboardDirection == LAST_SYNC_TO_SERVER) &&
+	    (lastClipboardText == text))
+		return;
+	if ((text.length() > MAX_SELECTION_LENGTH) || text.isNull())
+		return;
+
+	lastClipboardDirection = LAST_SYNC_TO_CLIENT;
+	lastClipboardText = text;
+	QCString ctext = text.utf8();
+	rfbSendServerCutText(server, ctext.data(), ctext.length());
 }
 
 void RFBController::passwordChanged() {
