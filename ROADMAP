@@ -2,8 +2,9 @@ Version 0.5 (2002/01/02): First release
 - first release
 - port x0rfbserver with simplified KDE/Qt interface
 
-Version 0.6 (2002/02/17): Improved RFB backend
+Version 0.6 (2002/02/18): Improved RFB backend
 - replace x0rfbserver's backend with libvncserver
+- dcop support
 - knotify
 
 Version 0.7: Better integration with KDE, improved GUI

@@ -235,7 +235,8 @@ RFBController::RFBController(Configuration *c) :
 	allowRemoteControl(false),
 	connectionNum(0),
 	configuration(c),
-	closePending(false)
+	closePending(false),
+	asyncKNotifyEvent(false)
 {
 	self = this;
 	connect(dialog.acceptConnectionButton, SIGNAL(clicked()),
@@ -505,10 +506,9 @@ bool RFBController::handleCheckPassword(rfbClientPtr cl,
 		KExtendedSocket::resolve(KExtendedSocket::peerAddress(cl->sock),
 					 host, port);
 
-		KNotifyClient::event("InvalidPassword",
-				     i18n("Connecting system: %1")
-				     .arg(remoteIp));
-		
+		sendDelayedKNotifyEvent("InvalidPassword",
+					i18n("Connecting system: %1")
+					.arg(remoteIp));
 		return FALSE;
 	}
 	return TRUE;
@@ -524,27 +524,26 @@ enum rfbNewClientAction RFBController::handleNewClient(rfbClientPtr cl)
 
 	if ((connectionNum > 0) ||
 	    (state != RFB_WAITING)) {
-		KNotifyClient::event("TooManyConnections",
-				     i18n("Connecting system: %1")
-				     .arg(host));
+		sendDelayedKNotifyEvent("TooManyConnections",
+					i18n("Connecting system: %1")
+					.arg(host));
 		return RFB_CLIENT_REFUSE;
 	}
-
 	remoteIp = host;
 	state = RFB_CONNECTING;
 
 	if (!configuration->askOnConnect()) {
-		KNotifyClient::event("NewConnectionAutoAccepted",
-				     i18n("Connecting system: %1")
-				     .arg(remoteIp));
+		sendDelayedKNotifyEvent("NewConnectionAutoAccepted",
+					i18n("Connecting system: %1")
+					.arg(remoteIp));
 		
 		connectionAccepted(configuration->allowDesktopControl());
 		return RFB_CLIENT_ACCEPT;
 	}
 
-	KNotifyClient::event("NewConnectionOnHold",
-				     i18n("Connecting system: %1")
-				     .arg(remoteIp));
+	sendDelayedKNotifyEvent("NewConnectionOnHold",
+				i18n("Connecting system: %1")
+				.arg(remoteIp));
 
 	dialog.ipLabel->setText(remoteIp);
 	dialog.allowRemoteControlCB->setChecked(configuration->allowDesktopControl());
@@ -579,13 +578,35 @@ void RFBController::handlePointerEvent(int button_mask, int x, int y) {
 }
 
 void RFBController::passwordChanged() {
-	server->rfbAuthPasswdData = (const char*) 
+	server->rfbAuthPasswdData = (void*) 
 		((configuration->password().length() == 0) ? 0 :  1);
 }
 
 int RFBController::getPort()
 {
 	return server->rfbPort;
+}
+
+void RFBController::sendDelayedKNotifyEvent(QString name,
+					    QString desc) 
+{
+	if (asyncKNotifyEvent)
+		return;
+
+	asyncKNotifyEventName = name;
+	asyncKNotifyEventDesc= desc;
+	asyncKNotifyEvent = true;
+	QTimer::singleShot(0, this, SLOT(sendKNotifyEvent()));
+}
+
+void RFBController::sendKNotifyEvent() 
+{
+	if (!asyncKNotifyEvent)
+		return;
+
+	KNotifyClient::event(asyncKNotifyEventName,
+			     asyncKNotifyEventDesc);
+	asyncKNotifyEvent = false;
 }
 
 bool RFBController::checkX11Capabilities() {

@@ -139,6 +139,7 @@ private:
 	void startServer(bool xtestGrab = true);
 	void stopServer(bool xtestUngrab = true);
 	bool checkAsyncEvents();
+	void sendDelayedKNotifyEvent(QString name, QString desc);
 
 	bool allowRemoteControl;
 	int connectionNum;
@@ -157,10 +158,14 @@ private:
 	QPtrList<VNCEvent> asyncQueue;
 	bool closePending;
 
+	bool asyncKNotifyEvent;
+	QString asyncKNotifyEventName;
+	QString asyncKNotifyEventDesc;
 private slots:
 	void idleSlot();
 	void dialogAccepted();
 	void dialogRefused();
+	void sendKNotifyEvent();
 };
 
 /*

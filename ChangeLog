@@ -1,4 +1,12 @@
+2002-02-18  Tim Jansen  <tjansen@tjansen.de>
+
+	* released 0.6
+
 2002-02-17  Tim Jansen  <tjansen@tjansen.de>
+
+	* Replaced port configuration with auto-probing (because
+	  changing ports is not possible with libvncserver and makes
+	  too many problems anyway)
 
 	* rfbcontroller.cc: added KNotify support
 

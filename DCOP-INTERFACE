@@ -1,4 +1,5 @@
 DCOP Interfaces:
+
 // Disconnects the current session
 void disconnect()
 // Exits the application
