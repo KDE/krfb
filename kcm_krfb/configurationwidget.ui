@@ -287,7 +287,7 @@
                             <cstring>GroupBox4</cstring>
                         </property>
                         <property name="title">
-                            <string>Session preferences</string>
+                            <string>Session Preferences</string>
                         </property>
                         <vbox>
                             <property name="name">
