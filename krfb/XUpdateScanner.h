@@ -21,41 +21,69 @@
 #ifndef _hexonet_rfb_XUpdateScanner_h_
 #define _hexonet_rfb_XUpdateScanner_h_
 
-
-#include "../include/rfbServer.h"
-
+#include <qlist.h>
 #include <X11/Xlib.h>
 #include <X11/extensions/XShm.h>
 
 
-namespace rfb {
+class Hint {
+ public:
+	int x, y, w, h;
+
+	Hint() : 
+		x(0),
+		y(0),
+		w(0),
+		h(0)
+	{}
+	Hint(Hint &h) :
+		x(h.x),
+		y(h.y),
+		w(h.w),
+		h(h.h)
+	{
+	}
+	int left() {
+		return x;
+	}
+	int right() {
+		return x+w;
+	}
+	int top() {
+		return y;
+	}
+	int bottom() {
+		return y+h;
+	}
+};
 
 class XUpdateScanner
 {
   public:
     XUpdateScanner( Display *_dpy,
                     Window _window,
-                    Framebuffer *_fb,
+                    unsigned char *_fb,
+		    int _width, int _height,
+		    int _bitsPerPixel, int _bytesPerLine,
                     unsigned int _tileWidth = 32,
-                    unsigned int _tileHeight = 32,
-                    unsigned int _blockWidth = 9,
-                    unsigned int _blockHeight = 9);
+                    unsigned int _tileHeight = 32);
 
     ~XUpdateScanner();
 
     void copyTile( int x, int y);
     void copyAllTiles();
-    void searchUpdates( list< Hint > &hintList);
-    void initHint(Hint &hint);
-    void flushHint(int x, int y, int &x0, Hint &hint, list<Hint> &hintList);
-    void createHints(list<Hint> &hintList);
+    void searchUpdates( QList<Hint> &hintList);
+    void flushHint(int x, int y, int &x0, Hint &hint, QList<Hint> &hintList);
+    void createHints(QList<Hint> &hintList);
     void addTileToHint(int x, int y, Hint &hint);
     void createHintFromTile(int x, int y, Hint &hint);
 
     Display *dpy;
     Window window;
-    Framebuffer *fb;
-    unsigned int tileWidth, tileHeight, blockWidth, blockHeight;
+    unsigned char *fb;
+    int width, height;
+    int bitsPerPixel, bytesPerLine;
+    unsigned int tileWidth, tileHeight;
     unsigned int count;
 
     XImage *scanline;
@@ -68,7 +96,5 @@ class XUpdateScanner
     bool *tileMap;
 };
 
-
-} // namespace rfb
 
 #endif // _hexonet_rfb_XUpdateScanner_h_

@@ -1,8 +1,1 @@
-For KDE 3.0, you need to do the following:
-
-* the .ui files must be recompiled, you can enforce this by touching them:
-	touch krfb/*.ui
-
-* main.cpp and trayicon.cpp include the file kapp.h. It has been renamed to 
-  kapplication.h, so you must change the sources accordingly.
-
+3.0 support has been removed for this release, but will re-appear soon.

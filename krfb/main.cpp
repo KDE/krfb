@@ -34,6 +34,8 @@
 
 #include <signal.h>
 
+#include <X11/extensions/XTest.h>
+
 #define VERSION "0.6"
 
 static const char *description = I18N_NOOP("VNC-compatible server to share "
@@ -136,9 +138,6 @@ int main(int argc, char *argv[])
 
  	TrayIcon trayicon(new KAboutApplication(&aboutData), config);
 	RFBController controller(config);
-
-	if (controller.state() == RFB_ERROR)
-		return 1;
 
 	QObject::connect(&app, SIGNAL(lastWindowClosed()),
 			 &controller, SLOT(closeSession()));

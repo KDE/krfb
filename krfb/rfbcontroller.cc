@@ -7,11 +7,6 @@
  ***************************************************************************/
 
 /***************************************************************************
- * Contains portions & concept from rfb's x0rfbserver.cc
- * Copyright (C) 2000 heXoNet Support GmbH, D-66424 Homburg.
- ***************************************************************************/
-
-/***************************************************************************
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -26,6 +21,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 
+#include <kapp.h>
 #include <kdebug.h>
 #include <kmessagebox.h>
 #include <klocale.h>
@@ -37,21 +33,78 @@
 #include <qglobal.h>
 #include <qlabel.h>
 
+#include <X11/Xutil.h>
+#include <X11/extensions/XTest.h>
+
 #ifndef ASSERT
 #define ASSERT(x) Q_ASSERT(x)
 #endif
+
+#define IDLE_PAUSE (1000/50)
+
+static XTestDisabler disabler;
+
+// only one controller exists, so we can do this workaround for functions:
+static RFBController *self;
+
+class AppLocker
+{
+public:
+	AppLocker() {
+		KApplication::kApplication()->lock();
+	}
+	
+	~AppLocker() {
+		KApplication::kApplication()->unlock();
+	}
+};
+
+static void keyboardHook(Bool down, KeySym keySym, rfbClientPtr cl)
+{
+	AppLocker a;
+	self->handleKeyEvent(down?true:false, keySym);
+}
+
+static void pointerHook(int bm, int x, int y, rfbClientPtr cl)
+{
+	AppLocker a;
+	self->handlePointerEvent(bm, x, y);
+}
+
+static enum rfbNewClientAction newClientHook(struct _rfbClientRec *cl) 
+{
+	AppLocker a;
+	return self->handleNewClient(cl);
+}
+
+static Bool passwordCheck(rfbClientPtr cl, 
+			  char* encryptedPassword,
+			  int len)
+{
+	AppLocker a;
+	self->handleCheckPassword(encryptedPassword, len);
+}
+
+static void clientGoneHook(rfbClientPtr cl) 
+{
+	AppLocker a;
+	self->handleClientGone();
+}
+
 
 void ConnectionDialog::closeEvent(QCloseEvent *) 
 {
 	emit closed();
 }
 
+
+
 RFBController::RFBController(Configuration *c) :
-	configuration(c),
-	socket(0),
-	connection(0),
-	idleUpdateScheduled(false)
+	allowRemoteControl(false),
+	connectionNum(0),
+	configuration(c)
 {
+	self = this;
 	connect(dialog.acceptConnectionButton, SIGNAL(clicked()),
 		SLOT(dialogAccepted()));
 	connect(dialog.refuseConnectionButton, SIGNAL(clicked()),
@@ -61,178 +114,302 @@ RFBController::RFBController(Configuration *c) :
 	startServer();
 }
 
-RFBController::~RFBController() {
-	if (serversocket) 
-		delete serversocket;
-	if (socket)
-		delete socket;
-	if (connection) 
-		delete connection;
+RFBController::~RFBController() 
+{
+	stopServer();
 }
 
-void RFBController::startServer() {
-	serversocket = new KServerSocket(configuration->port(), false);
-	connect(serversocket, SIGNAL(accepted(KSocket*)), SLOT(accepted(KSocket*)));
-	if (!serversocket->bindAndListen()) {
-		delete serversocket;
-		serversocket = 0;
-		KMessageBox::error(0, 
-				   i18n("KRfb Server cannot run, port %1 is already in use. ")
-				     .arg(configuration->port()),
-				   i18n("KRfb Error"));
+
+
+void RFBController::startServer(bool xtestGrab) 
+{
+	framebufferImage = XGetImage(qt_xdisplay(),
+				     QApplication::desktop()->winId(),
+				     0,
+				     0,
+				     QApplication::desktop()->width(),
+				     QApplication::desktop()->height(),
+				     AllPlanes,
+				     ZPixmap);
+
+	int w = framebufferImage->width;
+	int h = framebufferImage->height;
+	int bpp = framebufferImage->depth;
+	char *fb = framebufferImage->data;
+
+	server = rfbGetScreen(0, 0, w, h,
+			      (bpp==4) ? 8 : 5,
+			      0, bpp);
+	server->frameBuffer = fb;
+	server->rfbPort = configuration->port();
+	//server->udpPort = configuration->port();
+	
+	server->kbdAddEvent = keyboardHook;
+	server->ptrAddEvent = pointerHook;
+	server->newClientHook = newClientHook;
+	server->passwordCheck = passwordCheck;
+
+	scanner = new XUpdateScanner(qt_xdisplay(), 
+				     QApplication::desktop()->winId(), 
+				     (unsigned char*)fb, 
+				     w, h, bpp, (bpp/8)*w);
+
+	rfbInitServer(server);
+	state = RFB_WAITING;
+
+	if (xtestGrab) {
+		disabler.disable = false;
+		XTestGrabControl(qt_xdisplay(), true); 
 	}
+
+	rfbRunEventLoop(server, -1, TRUE);
 }
 
-RFBState RFBController::state() {
-	if (!serversocket)
-		return RFB_ERROR;
-	if (!socket)
-		return RFB_WAITING;
-	if (!connection)
-		return RFB_CONNECTING;
-	return RFB_CONNECTED;
+void RFBController::stopServer(bool xtestUngrab) {
+	rfbScreenCleanup(server);
+	state = RFB_STOPPED;
+	delete scanner;
+
+	XDestroyImage(framebufferImage);
+
+	if (xtestUngrab) {
+		disabler.disable = true;
+		QTimer::singleShot(0, &disabler, SLOT(exec()));
+	}
 }
 
 void RFBController::rebind() {
-	delete serversocket;
-	startServer();
+	stopServer(false);
+	startServer(false);
 }
 
-/* called when KServerSocket accepted a connection.
-   Refuses the connection if there is already a connection.
- */
-void RFBController::accepted(KSocket *s) {
-	int sockFd = s->socket();
-	if (sockFd < 0)
-		kdError() << "Got negative socket (error)" << endl;
-
-	if (socket) {
-		kdWarning() << "refuse 2nd connection" << endl;
-		// TODO: send connection failed with reason 
-		delete s;
+void RFBController::acceptConnection(bool aRC) {
+	if (state != RFB_CONNECTING)
 		return;
-	}
 
-	int one = 1;
-	setsockopt(sockFd, IPPROTO_TCP, TCP_NODELAY, 
-		   (char *)&one, sizeof(one));
-	fcntl(sockFd, F_SETFL, O_NONBLOCK);
-	socket = s;
+	allowRemoteControl = aRC;
+	connectionNum++;
+	idleTimer.start(IDLE_PAUSE);
 
-	if (configuration->askOnConnect()) {
-		QString host, port;
-		KExtendedSocket::resolve(KExtendedSocket::peerAddress(sockFd),
-					 host, port);
-		dialog.ipLabel->setText(host);
-		dialog.allowRemoteControlCB->setChecked(
-			configuration->allowDesktopControl());
-		dialog.setFixedSize(dialog.sizeHint());
-		dialog.show();
-	}
-	else {
-		acceptConnection(configuration->allowDesktopControl());
-	}
-}
+	client->clientGoneHook = clientGoneHook;
+	rfbStartOnHoldClient(client);
 
-void RFBController::acceptConnection(bool allowDesktopControl) {
-	KSocket *s = socket;
-	connect(s, SIGNAL(readEvent(KSocket*)), SLOT(socketReadable()));
-	connect(s, SIGNAL(writeEvent(KSocket*)), SLOT(socketWritable()));
-	connect(s, SIGNAL(closeEvent(KSocket*)), SLOT(closeSession()));
-	s->enableRead(true);
-	s->enableWrite(true);
-	connection = new RFBConnection(qt_xdisplay(), s->socket(), 
-				       configuration->password(),
-				       allowDesktopControl);
-
+	state = RFB_CONNECTED;
 	emit sessionEstablished();
 }
 
-void RFBController::idleSlot() {
-	idleUpdateScheduled = false;
-	if (connection) {
-                connection->scanUpdates();
-		connection->sendIncrementalFramebufferUpdate();
-		connection->connection->write();
-		checkWriteBuffer();
-	}
+void RFBController::refuseConnection() {
+	if (state != RFB_CONNECTING)
+		return;
+	rfbRefuseOnHoldClient(client);
+	state = RFB_WAITING;
 }
 
-void RFBController::checkWriteBuffer() {
-	BufferedConnection *bc = connection->connection;	
-	bool bufferEmpty = !bc->hasSenderBufferData();
-       	socket->enableWrite(!bufferEmpty);
-	if (bufferEmpty && !idleUpdateScheduled && connection) {
-		QTimer::singleShot(0, this, SLOT(idleSlot()));
-		idleUpdateScheduled = true;
-	}
+void RFBController::connectionClosed() 
+{
+	idleTimer.stop();
+	connectionNum--;
+	state = RFB_WAITING;
+	client = 0;
+	emit sessionFinished();
 }
 
-void RFBController::socketReadable() {
-	if ((!socket) || (!connection))
-		return;
-
-	BufferedConnection *bc = connection->connection;
-	int count = bc->read();
-	if (count < 0) {
-		closeSession();
-		return;
-	}
-	while (connection->currentState && bc->hasReceiverBufferData()) {
-		connection->update();
-		checkWriteBuffer();
-	}
-
-	if (!connection->currentState) {
-		closeSession();
-	}
+void RFBController::closeConnection() 
+{
+	rfbCloseClient(client);
 }
 
-void RFBController::socketWritable() {
-	if ((!socket) || (!connection))
-		return;
+void RFBController::idleSlot() 
+{
+	rfbUndrawCursor(server);
 
-	BufferedConnection *bc = connection->connection;
-	int count = bc->write();
-	if (count >= 0)
-		checkWriteBuffer();
-	else
-		closeSession();
+	QList<Hint> v;
+	v.setAutoDelete(true);
+	scanner->searchUpdates(v);
+	
+	Hint *h;
+
+	for (h = v.first(); h != 0; h = v.next()) 
+		rfbMarkRectAsModified(server, h->left(),
+				      h->top(),
+				      h->right(),
+				      h->bottom());
+
+	QPoint p = QCursor::pos();
+	defaultPtrAddEvent(0, p.x(),p.y(), client);
 }
 
-void RFBController::closeSession() {
-	if (!socket)
-		return;
-	if (connection) {
-		delete connection;
-		connection = 0;
-		emit sessionFinished();
-	}
-	closeSocket();
-}
-
-void RFBController::dialogAccepted() {
-	if (!socket)
-		return;
-	ASSERT(!connection);
-
+void RFBController::dialogAccepted() 
+{
 	dialog.hide();
 	acceptConnection(dialog.allowRemoteControlCB->isChecked());
 }
 
-void RFBController::dialogRefused() {
-	if (!socket)
-		return;
-	ASSERT(!connection);
-	
-	closeSocket();
+void RFBController::dialogRefused() 
+{
+	refuseConnection();
 	dialog.hide();
 	emit sessionRefused();
 }
 
-void RFBController::closeSocket() {
-	delete socket;
-	socket = 0;
+bool RFBController::handleCheckPassword(const char *p, int len) 
+{
+	return TRUE;
+	// TODO
+}
+
+enum rfbNewClientAction RFBController::handleNewClient(rfbClientPtr cl) 
+{	
+	int socket = cl->sock;
+
+	if ((connectionNum > 0) ||
+	    (state != RFB_WAITING)) 
+		return RFB_CLIENT_REFUSE;
+
+	client = cl;
+
+	state = RFB_CONNECTING;
+
+	if (!configuration->askOnConnect()) {
+		acceptConnection(configuration->allowDesktopControl());
+		return RFB_CLIENT_ACCEPT;
+	}
+	
+	dialog.allowRemoteControlCB->setChecked(configuration->allowDesktopControl());
+	// TODO: get & set client host name
+
+	dialog.show();
+
+	return RFB_CLIENT_ON_HOLD;
+}
+
+void RFBController::handleClientGone() 
+{
+	connectionClosed();
+}
+
+
+
+#define LEFTSHIFT 1
+#define RIGHTSHIFT 2
+#define ALTGR 4
+char ModifierState = 0;
+
+/* this function adjusts the modifiers according to mod (as from modifiers) and ModifierState */
+
+void RFBController::tweakModifiers(char mod, bool down)
+{
+	Display *dpy = qt_xdisplay();
+
+	bool isShift = ModifierState & (LEFTSHIFT|RIGHTSHIFT);
+	if(mod < 0) 
+		return;
+	
+	if(isShift && mod != 1) {
+		if(ModifierState & LEFTSHIFT)
+			XTestFakeKeyEvent(dpy, leftShiftCode,
+					  !down, CurrentTime);
+		if(ModifierState & RIGHTSHIFT)
+			XTestFakeKeyEvent(dpy, rightShiftCode,
+					  !down, CurrentTime);
+	}
+	
+	if(!isShift && mod==1)
+		XTestFakeKeyEvent(dpy, leftShiftCode,
+				  down, CurrentTime);
+
+	if(ModifierState&ALTGR && mod != 2)
+		XTestFakeKeyEvent(dpy, altGrCode,
+				  !down, CurrentTime);
+	if(!(ModifierState&ALTGR) && mod==2)
+		XTestFakeKeyEvent(dpy, altGrCode,
+				  down, CurrentTime);
+}
+
+void RFBController::initKeycodes()
+{
+	Display *dpy = qt_xdisplay();
+	KeySym key,*keymap;
+	int i,j,minkey,maxkey,syms_per_keycode;
+	
+	memset(modifiers,-1,sizeof(modifiers));
+	
+	XDisplayKeycodes(dpy,&minkey,&maxkey);
+	keymap=XGetKeyboardMapping(dpy,minkey,(maxkey - minkey + 1),&syms_per_keycode);
+
+	for (i = minkey; i <= maxkey; i++)
+		for(j=0;j<syms_per_keycode;j++) {
+			key=keymap[(i-minkey)*syms_per_keycode+j];
+			if(key>=' ' && key<0x100 && i==XKeysymToKeycode(dpy,key)) {
+				keycodes[key]=i;
+				modifiers[key]=j;
+			}
+		}
+	
+	leftShiftCode = XKeysymToKeycode(dpy,XK_Shift_L);
+	rightShiftCode = XKeysymToKeycode(dpy,XK_Shift_R);
+	altGrCode = XKeysymToKeycode(dpy,XK_Mode_switch);
+
+	XFree ((char *)keymap);
+}
+
+void RFBController::handleKeyEvent(bool down, KeySym keySym) {
+	if (!allowRemoteControl)
+		return;
+
+	Display *dpy = qt_xdisplay();
+
+#define ADJUSTMOD(sym,state) \
+  if(keySym==sym) { if(down) ModifierState|=state; else ModifierState&=~state; }
+	
+	ADJUSTMOD(XK_Shift_L,LEFTSHIFT);
+	ADJUSTMOD(XK_Shift_R,RIGHTSHIFT);
+	ADJUSTMOD(XK_Mode_switch,ALTGR);
+
+	if(keySym>=' ' && keySym<0x100) {
+		KeyCode k;
+		if (down)
+			tweakModifiers(modifiers[keySym],True);
+		//tweakModifiers(modifiers[keySym],down);
+		//k = XKeysymToKeycode( dpy,keySym );
+		k = keycodes[keySym];
+		if(k!=NoSymbol) 
+			XTestFakeKeyEvent(dpy,k,down,CurrentTime);
+
+		/*XTestFakeKeyEvent(dpy,keycodes[keySym],down,CurrentTime);*/
+		if (down)
+			tweakModifiers(modifiers[keySym],False);
+	} else {
+		KeyCode k = XKeysymToKeycode( dpy,keySym );
+		if(k!=NoSymbol)
+			XTestFakeKeyEvent(dpy,k,down,CurrentTime);
+	}
+}
+
+void RFBController::handlePointerEvent(int button_mask, int x, int y) {
+	if (!allowRemoteControl)
+		return;
+
+	Display *dpy = qt_xdisplay();
+  	XTestFakeMotionEvent(dpy, 0, x, y, CurrentTime);
+	for(int i = 0; i < 5; i++) 
+		if ((buttonMask&(1<<i))!=(button_mask&(1<<i)))
+			XTestFakeButtonEvent(dpy,
+					     i+1,
+					     (button_mask&(1<<i))?True:False,
+					     CurrentTime);
+
+	buttonMask = button_mask;
+}
+
+
+XTestDisabler::XTestDisabler() :
+	disable(false) {
+}
+
+void XTestDisabler::exec() {
+	if (disable)
+		XTestDiscard(qt_xdisplay());
 }
 
 #include "rfbcontroller.moc"

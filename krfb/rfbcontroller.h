@@ -25,17 +25,21 @@
 
 #include "configuration.h"
 #include "newconnectiondialog.h"
+#include "XUpdateScanner.h"
 #include <ksock.h>
 #include <qobject.h>
+#include <qtimer.h>
 // rfbconnection must be last because of X11 headers
-#include "rfbconnection.h"
+#include "rfb.h"
+
+#include <X11/Xlib.h>
+
+
 
 class QCloseEvent;
 
-using namespace rfb;
-
 typedef enum {
-	RFB_ERROR,
+	RFB_STOPPED,
 	RFB_WAITING,
 	RFB_CONNECTING,
 	RFB_CONNECTED
@@ -65,11 +69,20 @@ public:
 	RFBController(Configuration *c);
 	virtual ~RFBController();
 
-	RFBState state();
-	
+	RFBState state;
+
+	void acceptConnection(bool allowRemoteConnection);
+	void refuseConnection();
+	void connectionClosed();
+	bool handleCheckPassword(const char *p, int len);
+	void handleKeyEvent(bool down, KeySym keySym);
+	void handlePointerEvent(int button_mask, int x, int y);
+	enum rfbNewClientAction handleNewClient(rfbClientPtr cl);
+	void handleClientGone();
+
 public slots:	
 	void rebind();
-	void closeSession();
+	void closeConnection();
 
 signals:
         void sessionEstablished();
@@ -77,25 +90,45 @@ signals:
 	void sessionRefused();
  
 private:	
-	void startServer();
-	void checkWriteBuffer();
-	void acceptConnection(bool ask);
-	void closeSocket();
+	void startServer(bool xtestGrab = true);
+	void stopServer(bool xtestUngrab = true);
+	void tweakModifiers(char mod, bool down);
+	void initKeycodes();
 
+	bool allowRemoteControl;
+	int connectionNum;
+
+	QTimer idleTimer;
 	Configuration *configuration;
-	KServerSocket *serversocket;
-	KSocket *socket;
-	RFBConnection *connection;
+	XUpdateScanner *scanner;
 	ConnectionDialog dialog;
-	bool idleUpdateScheduled;
+
+	rfbScreenInfoPtr server;
+	rfbClientPtr client;
+
+	XImage *framebufferImage;
+	int buttonMask;
+	char modifiers[0x100];
+	KeyCode keycodes[0x100], leftShiftCode, rightShiftCode, altGrCode;
 
 private slots:
 	void idleSlot();
-	void accepted(KSocket*);
-        void socketReadable(); 
-        void socketWritable(); 
 	void dialogAccepted();
 	void dialogRefused();
+};
+
+/*
+ * Class to call XTestDiscard at idle time (because otherwise
+ * it will not work with QT)
+ */
+class XTestDisabler : public QObject {
+	Q_OBJECT
+public:
+	XTestDisabler();
+	bool disable;
+	Display *dpy;
+public slots:
+	void exec();
 };
 
 #endif

@@ -1,10 +1,10 @@
 METASOURCES = AUTO
 
 bin_PROGRAMS = krfb
-krfb_SOURCES = rfbcontroller.cc configuration.cc trayicon.cpp XUpdateScanner.cc rfbconnection.cc main.cpp configurationdialog.ui newconnectiondialog.ui
-krfb_LDADD   = ../lib/librfbserver.a -lz $(LIB_QT) $(LIB_KDECORE) $(LIB_KDEUI)  $(LIBSOCKET)
+krfb_SOURCES = rfbcontroller.cc configuration.cc trayicon.cpp XUpdateScanner.cc main.cpp configurationdialog.ui newconnectiondialog.ui
+krfb_LDADD   = ../libvncserver/libvncserver.a -lz -lpthread -ljpeg -lXtst $(LIB_QT) $(LIB_KDECORE) $(LIB_KDEUI)  $(LIBSOCKET)
 
-EXTRA_DIST = $(krfb_SOURCES) krfb.desktop lo32-app-krfb.png lo16-app-krfb.png rfbcontroller.h rfbconnection.h eyes-closed24.png eyes-open24.png XUpdateScanner.h trayicon.h configuration.h
+EXTRA_DIST = $(krfb_SOURCES) krfb.desktop lo32-app-krfb.png lo16-app-krfb.png rfbcontroller.h eyes-closed24.png eyes-open24.png XUpdateScanner.h trayicon.h configuration.h
 
 install-data-local:
 	$(mkinstalldirs) $(kde_appsdir)/Applications/
@@ -35,10 +35,12 @@ KDE_ICON = krfb
 # kde_wallpaperdir  Where general wallpapers should go to.
 
 # set the include path for X, qt and KDE
-INCLUDES= $(all_includes) -I../include
+INCLUDES= $(all_includes) -I../libvncserver
 
 # the library search path. 
-krfb_LDFLAGS = $(all_libraries) $(KDE_RPATH) -lXtst
+krfb_LDFLAGS = $(all_libraries) $(KDE_RPATH)
+
+CXXFLAGS = @CXXFLAGS@ -DQT_THREAD_SUPPORT
 
 # Uncomment the following two lines if you add a ui.rc file for your application to make use of
 # KDE´s XML GUI builing

@@ -31,8 +31,6 @@
 
 #include "XUpdateScanner.h"
 
-namespace rfb {
-
 unsigned int scanlines[32] = {  0, 16,  8, 24,
                                 4, 20, 12, 28,
 			       10, 26, 18,  2,
@@ -44,25 +42,29 @@ unsigned int scanlines[32] = {  0, 16,  8, 24,
 
 XUpdateScanner::XUpdateScanner(Display *_dpy,
 			       Window _window,
-			       Framebuffer *_fb,
+			       unsigned char *_fb,
+			       int _width,
+			       int _height,
+			       int _bitsPerPixel,
+			       int _bytesPerLine,
 			       unsigned int _tileWidth,
-			       unsigned int _tileHeight,
-			       unsigned int _blockWidth,
-			       unsigned int _blockHeight) : 
+			       unsigned int _tileHeight) : 
 	dpy(_dpy), 
 	window(_window),
 	fb(_fb), 
+	width(_width),
+	height(_height),
+	bitsPerPixel(_bitsPerPixel),
+	bytesPerLine(_bytesPerLine),
 	tileWidth(_tileWidth), 
 	tileHeight(_tileHeight), 
-	blockWidth(_blockWidth), 
-	blockHeight(_blockHeight), 
 	count (0), 
 	scanline(NULL), 
 	tile(NULL)
 {
 	tile = XShmCreateImage(dpy,
 			       DefaultVisual( dpy, 0 ),
-			       fb->pixelFormat.bits_per_pixel,
+			       bitsPerPixel,
 			       ZPixmap,
 			       NULL,
 			       &shminfo_tile,
@@ -78,8 +80,8 @@ XUpdateScanner::XUpdateScanner(Display *_dpy,
   
 	XShmAttach(dpy, &shminfo_tile);
 
-	tilesX = (fb->width + tileWidth - 1) / tileWidth;
-	tilesY = (fb->height + tileHeight - 1) / tileHeight;
+	tilesX = (width + tileWidth - 1) / tileWidth;
+	tilesY = (height + tileHeight - 1) / tileHeight;
 	tileMap = new bool[tilesX * tilesY];
 	
 	unsigned int i;
@@ -88,11 +90,11 @@ XUpdateScanner::XUpdateScanner(Display *_dpy,
 
 	scanline = XShmCreateImage(dpy,
 				   DefaultVisual(dpy, 0),
-				   fb->pixelFormat.bits_per_pixel,
+				   bitsPerPixel,
 				   ZPixmap,
 				   NULL,
 				   &shminfo_scanline,
-				   fb->width,
+				   width,
 				   1);
                                   
 	shminfo_scanline.shmid = shmget(IPC_PRIVATE,
@@ -122,8 +124,8 @@ XUpdateScanner::~XUpdateScanner()
 
 void XUpdateScanner::copyTile(int x, int y)
 {
-	unsigned int maxWidth = fb->width - x;
-	unsigned int maxHeight = fb->height - y;
+	unsigned int maxWidth = width - x;
+	unsigned int maxHeight = height - y;
 	if (maxWidth > tileWidth) 
 		maxWidth = tileWidth;
 	if (maxHeight > tileHeight) 
@@ -136,13 +138,13 @@ void XUpdateScanner::copyTile(int x, int y)
 			     AllPlanes, ZPixmap, tile, 0, 0);
 	}
 	unsigned int line;
-	int pixelsize = fb->pixelFormat.bits_per_pixel >> 3;
+	int pixelsize = bitsPerPixel >> 3;
 	unsigned char *src = (unsigned char*) tile->data;
-	unsigned char *dest = fb->data + y * fb->bytesPerLine + x * pixelsize;
+	unsigned char *dest = fb + y * bytesPerLine + x * pixelsize;
 	for (line = 0; line < maxHeight; line++) {
 		memcpy(dest, src, maxWidth * pixelsize );
 		src += tile->bytes_per_line;
-		dest += fb->bytesPerLine;
+		dest += bytesPerLine;
 	}
 }
 
@@ -159,60 +161,51 @@ void XUpdateScanner::copyAllTiles()
 	
 }
 
-void XUpdateScanner::initHint(Hint &hint)
-{
-	hint.type = hintRefresh;
-	hint.hint.refresh.x = 0;
-	hint.hint.refresh.y = 0;
-	hint.hint.refresh.width = 0;
-	hint.hint.refresh.height = 0;
-}
-
 void XUpdateScanner::createHintFromTile(int x, int y, Hint &hint)
 {
-	unsigned int w = fb->width - x;
-	unsigned int h = fb->height - y;
+	unsigned int w = width - x;
+	unsigned int h = height - y;
 	if (w > tileWidth) 
 		w = tileWidth;
 	if (h > tileHeight) 
 		h = tileHeight;
 	
-	hint.hint.refresh.x = x;
-	hint.hint.refresh.y = y;
-	hint.hint.refresh.width = w;
-	hint.hint.refresh.height = h;
+	hint.x = x;
+	hint.y = y;
+	hint.w = w;
+	hint.h = h;
 }
 
 void XUpdateScanner::addTileToHint(int x, int y, Hint &hint)
 {
-	unsigned int w = fb->width - x;
-	unsigned int h = fb->height - y;
+	unsigned int w = width - x;
+	unsigned int h = height - y;
 	if (w > tileWidth) 
 		w = tileWidth;
 	if (h > tileHeight) 
 		h = tileHeight;
 
-	if (hint.hint.refresh.x > x) {
-		hint.hint.refresh.width += hint.hint.refresh.x - x;
-		hint.hint.refresh.x = x;
+	if (hint.x > x) {
+		hint.w += hint.x - x;
+		hint.x = x;
 	}
 
-	if (hint.hint.refresh.y > y) {
-		hint.hint.refresh.height += hint.hint.refresh.y - y;
-		hint.hint.refresh.y = y;
+	if (hint.y > y) {
+		hint.h += hint.y - y;
+		hint.y = y;
 	}
 
-	if ((hint.hint.refresh.x+hint.hint.refresh.width) < (x+w)) {
-		hint.hint.refresh.width = (x+w) - hint.hint.refresh.x;
+	if ((hint.x+hint.w) < (x+w)) {
+		hint.w = (x+w) - hint.x;
 	}
 
-	if ((hint.hint.refresh.y+hint.hint.refresh.height) < (y+h)) {
-		hint.hint.refresh.height = (y+h) - hint.hint.refresh.y;
+	if ((hint.y+hint.h) < (y+h)) {
+		hint.h = (y+h) - hint.y;
 	}
 }
 
 void XUpdateScanner::flushHint(int x, int y, int &x0, 
-			       Hint &hint, list<Hint> &hintList)
+			       Hint &hint, QList<Hint> &hintList)
 {
 	if (x0 < 0)
 		return;
@@ -234,20 +227,18 @@ void XUpdateScanner::flushHint(int x, int y, int &x0,
 		h++;
 	}
 	
-	hint.hint.refresh.height = h * tileHeight;
-	if ((hint.hint.refresh.y + hint.hint.refresh.height) > fb->height)
-		hint.hint.refresh.height = fb->height - hint.hint.refresh.y;
+	hint.h = h * tileHeight;
+	if ((hint.y + hint.h) > height)
+		h = height - hint.y;
 
 	x0 = -1;
 
-	hintList.push_back(hint);
-	initHint(hint);
+	hintList.append(new Hint(hint));
 }
 
-void XUpdateScanner::createHints(list<Hint> &hintList)
+void XUpdateScanner::createHints(QList<Hint> &hintList)
 {
 	Hint hint;
-	initHint(hint);
 	int x0 = -1;
 
 	for (int y = 0; y < tilesY; y++) {
@@ -272,7 +263,7 @@ void XUpdateScanner::createHints(list<Hint> &hintList)
 	}
 }
 
-void XUpdateScanner::searchUpdates(list<Hint> &hintList)
+void XUpdateScanner::searchUpdates(QList<Hint> &hintList)
 {
 	count++;
 	count %= 32;
@@ -285,16 +276,16 @@ void XUpdateScanner::searchUpdates(list<Hint> &hintList)
 	}
 
 	y = scanlines[count];
-	while (y < fb->height) {
+	while (y < height) {
 		XShmGetImage(dpy, window, scanline, 0, y, AllPlanes);
 		x = 0;
-		while (x < fb->width) {
-			int pixelsize = fb->pixelFormat.bits_per_pixel >> 3;
+		while (x < width) {
+			int pixelsize = bitsPerPixel >> 3;
 			unsigned char *src = (unsigned char*) scanline->data + 
 				x * pixelsize;
-			unsigned char *dest = fb->data + 
-				y * fb->bytesPerLine + x * pixelsize;
-			int w = (x + 32) > fb->width ? (fb->width-x) : 32;
+			unsigned char *dest = fb + 
+				y * bytesPerLine + x * pixelsize;
+			int w = (x + 32) > width ? (width-x) : 32;
 			if (memcmp(dest, src, w * pixelsize)) 
 				tileMap[(x / tileWidth) + 
 					(y / tileHeight) * tilesX] = true;
@@ -308,6 +299,5 @@ void XUpdateScanner::searchUpdates(list<Hint> &hintList)
 	createHints(hintList);
 }
 
-} // namespace rfb
 
 
