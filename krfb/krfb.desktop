@@ -1,6 +1,5 @@
 # KDE Config File  
 [Desktop Entry]
-OnlyShowIn=KDE;
 Type=Application
 Exec=krfb -caption "%c" %i %m
 Icon=krfb
