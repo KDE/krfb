@@ -28,6 +28,8 @@
 
 const int INVITATION_DURATION = 60*60;
 
+QString cryptStr(const QString &aStr);
+
 class Invitation {
 public:
 	Invitation();

@@ -28,11 +28,14 @@
 #include <qdatetime.h>
 #include <qtimer.h>
 
+#include "kserviceregistry.h"
+
 class PortListener : public QObject {
 	Q_OBJECT
 private:
 	bool m_valid;
 	QString m_serviceName;
+	QString m_serviceURL, m_serviceAttributes;
 	int m_port;
 	int m_portBase, m_autoPortRange;
 	int m_defaultPortBase, m_defaultAutoPortRange;
@@ -40,17 +43,22 @@ private:
 	QString m_execPath;
 	QString m_argument;
 	bool m_enabled;
+	bool m_serviceRegistered, m_registerService;
 	QDateTime m_expirationTime;
 
 	KServerSocket *m_socket;
 	KProcess m_process;
 
 	KConfig *m_config;
+	KServiceRegistry *m_srvreg;
 
+	void freePort();
 	void loadConfig(KService::Ptr s);
 	void setEnabledInternal(bool e, const QDateTime &ex);
+	void setServiceRegistrationEnabledInternal(bool enabled);
+
 public:
-	PortListener(KService::Ptr s, KConfig *c);
+	PortListener(KService::Ptr s, KConfig *c, KServiceRegistry *srvreg);
 	~PortListener();
 
 	bool acquirePort();
@@ -58,9 +66,12 @@ public:
 	QString name();
 	void setEnabled(bool enabled);
 	void setEnabled(const QDateTime &expiration);
+	void setServiceRegistrationEnabled(bool enabled);
+	bool isServiceRegistrationEnabled();
 	QDateTime expiration();
 	bool isEnabled();
 	int port();
+	QString serviceURL();
 	bool setPort(int port = -1, int autoProbeRange = 1);
 
 private slots:
@@ -130,11 +141,30 @@ k_dcop:
 	 */
 	bool isInstalled(QString service);
 
+	/**
+	 * Enables or disables the SLP registration. Ignored if the service does
+	 * not have a service URL. If the service is disabled the service will
+	 * registered as soon as it is enabled.
+	 * @param service name of a service as specified in its .desktop file
+	 * @param enable true to enable, false to disable.
+	 */
+	void setServiceRegistrationEnabled(QString service, bool enabled);
+
+	/**
+	 * Returns true if service registration for the given service is enabled.
+	 * Note that this does not mean that the service is currently registered,
+	 * because the service may be disabled.
+	 * @param service name of a service as specified in its .desktop file
+	 * @return true if service registration is enabled
+	 */
+	bool isServiceRegistrationEnabled(QString service);
+
  private:
 	QDateTime getNextExpirationTime();
 	void setPortRetryTimer(bool retry);
 
 	KConfig *m_config;
+	KServiceRegistry *m_srvreg;
 	QPtrList<PortListener> m_portListeners;
 	QTimer m_expirationTimer;
 	QTimer m_portRetryTimer;
@@ -145,6 +175,7 @@ k_dcop:
 
  public:
 	KInetD(QCString &n);
+	virtual ~KInetD();
 	void loadServiceList();
 	PortListener *getListenerByName(QString name);
 };

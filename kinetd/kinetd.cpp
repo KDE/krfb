@@ -18,6 +18,8 @@
 
 #include "kinetd.h"
 #include "kinetd.moc"
+#include "kinetaddr.h"
+#include <qregexp.h>
 #include <kservicetype.h>
 #include <kdebug.h>
 #include <kstandarddirs.h>
@@ -27,10 +29,14 @@
 #include <kextsock.h>
 #include <klocale.h>
 
-PortListener::PortListener(KService::Ptr s, KConfig *config) :
+PortListener::PortListener(KService::Ptr s, 
+			   KConfig *config,
+			   KServiceRegistry *srvreg) :
 	m_port(-1),
+	m_serviceRegistered(false),
 	m_socket(0),
-	m_config(config)
+	m_config(config),
+	m_srvreg(srvreg)
 {
 	loadConfig(s);
 
@@ -63,7 +69,19 @@ bool PortListener::acquirePort() {
 	}
 	connect(m_socket, SIGNAL(accepted(KSocket*)),
 		SLOT(accepted(KSocket*)));
+
+	bool s = m_registerService;
+	setServiceRegistrationEnabledInternal(false);
+	setServiceRegistrationEnabledInternal(s); 
 	return true;
+}
+
+void PortListener::freePort() {
+	m_port = -1;
+	if (m_socket)
+		delete m_socket;
+	m_socket = 0;
+	setServiceRegistrationEnabledInternal(m_registerService); 
 }
 
 void PortListener::loadConfig(KService::Ptr s) {
@@ -73,7 +91,7 @@ void PortListener::loadConfig(KService::Ptr s) {
 	m_argument = QString::null;
 	m_multiInstance = false;
 
-	QVariant vid, vport, vautoport, venabled, vargument, vmultiInstance;
+	QVariant vid, vport, vautoport, venabled, vargument, vmultiInstance, vurl, vsattributes;
 
 	m_execPath = s->exec().utf8();
 	vid = s->property("X-KDE-KINETD-id");
@@ -82,6 +100,8 @@ void PortListener::loadConfig(KService::Ptr s) {
 	venabled = s->property("X-KDE-KINETD-enabled");
 	vargument = s->property("X-KDE-KINETD-argument");
 	vmultiInstance = s->property("X-KDE-KINETD-multiInstance");
+	vurl = s->property("X-KDE-KINETD-serviceURL");
+	vsattributes = s->property("X-KDE-KINETD-serviceAttributes");
 
 	if (!vid.isValid()) {
 		kdDebug() << "Kinetd cannot load service "<<m_serviceName
@@ -107,6 +127,19 @@ void PortListener::loadConfig(KService::Ptr s) {
 		m_argument = vargument.toString();
 	if (vmultiInstance.isValid())
 		m_multiInstance = vmultiInstance.toBool();
+	if (vurl.isValid()) {
+		m_serviceURL = vurl.toString();
+		m_registerService = true;
+	}
+	else {
+		m_serviceURL = QString::null;
+		m_registerService = false;
+	}
+	if (vsattributes.isValid()) {
+		m_serviceAttributes = vsattributes.toString();
+	}
+	else
+		m_serviceAttributes = "";
 
 	m_defaultPortBase = m_portBase;
 	m_defaultAutoPortRange = m_autoPortRange;
@@ -119,10 +152,12 @@ void PortListener::loadConfig(KService::Ptr s) {
 	m_autoPortRange = m_config->readNumEntry("auto_port_range_" + m_serviceName, 
 						 m_autoPortRange);
 	QDateTime nullTime;
-	m_expirationTime = m_config->readDateTimeEntry("enabled_expiration_"+m_serviceName, 
+	m_expirationTime = m_config->readDateTimeEntry("enabled_expiration_"+m_serviceName,
 						     &nullTime);
 	if ((!m_expirationTime.isNull()) && (m_expirationTime < QDateTime::currentDateTime()))
 		m_enabled = false;
+	m_registerService = m_config->readBoolEntry("enabled_srvreg_"+m_serviceName,
+						     m_registerService);
 }
 
 void PortListener::accepted(KSocket *sock) {
@@ -163,6 +198,14 @@ int PortListener::port() {
 	return m_port;
 }
 
+QString PortListener::serviceURL() {
+	KInetAddress *a = KInetAddress::getLocalAddress();
+	QString hostName = a->nodeName();
+	delete a;
+	return m_serviceURL.replace(QRegExp("%h"), hostName)
+		.replace(QRegExp("%p"), QString::number(m_port));
+}
+
 bool PortListener::setPort(int port, int autoPortRange) {
 	if ((port == m_portBase) && (autoPortRange == m_autoPortRange))
 		return (m_port != -1);
@@ -195,32 +238,56 @@ void PortListener::setEnabled(bool e) {
 }
 
 void PortListener::setEnabledInternal(bool e, const QDateTime &ex) {
+	m_config->setGroup("ListenerConfig");
+	m_config->writeEntry("enabled_" + m_serviceName, e);
+	m_config->writeEntry("enabled_expiration_"+m_serviceName, ex);
+	m_config->sync();
+
 	m_expirationTime = ex;
+
 	if (e) {
 		if (m_port < 0)
 			acquirePort();
-		if (m_port < 0) {
-			m_enabled = false;
-			return;
-		}
+		m_enabled = m_port >= 0;
 	}
 	else {
-		m_port = -1;
-		if (m_socket)
-			delete m_socket;
-		m_socket = 0;
+		freePort();
+		m_enabled = false;
 	}
-
-	m_enabled = e;
-
-	m_config->setGroup("ListenerConfig");
-	m_config->writeEntry("enabled_" + m_serviceName, m_enabled);
-	m_config->writeEntry("enabled_expiration_"+m_serviceName, ex);
-	m_config->sync();
 }
 
 void PortListener::setEnabled(const QDateTime &ex) {
 	setEnabledInternal(true, ex);
+}
+
+bool PortListener::isServiceRegistrationEnabled() {
+	return m_registerService;
+}
+
+void PortListener::setServiceRegistrationEnabled(bool e) {
+	setServiceRegistrationEnabledInternal(e);
+	m_config->setGroup("ListenerConfig");
+	m_config->writeEntry("enable_srvreg_" + m_serviceName, e);
+	m_config->sync();
+}
+
+void PortListener::setServiceRegistrationEnabledInternal(bool e) {
+	m_registerService = e;
+
+	if ((!m_srvreg) || m_serviceURL.isNull())
+		return;
+	if (m_serviceRegistered == (m_enabled && e)) 
+		return;
+
+        if (m_enabled && e) {
+		m_serviceRegistered = m_srvreg->registerService(serviceURL(), 
+								m_serviceAttributes);
+		if (!m_serviceRegistered) 
+                      kdDebug(7021) << "Failure registering SLP service (no slpd running?)"<< endl;
+	} else {
+		m_srvreg->unregisterService(serviceURL());
+		m_serviceRegistered = false;
+	}
 }
 
 QDateTime PortListener::expiration() {
@@ -232,6 +299,7 @@ QString PortListener::name() {
 }
 
 PortListener::~PortListener() {
+	setServiceRegistrationEnabledInternal(false);
 	if (m_socket)
 		delete m_socket;
 	if (m_config)
@@ -243,6 +311,12 @@ KInetD::KInetD(QCString &n) :
 	KDEDModule(n)
 {
 	m_config = new KConfig("kinetdrc");
+	m_srvreg = new KServiceRegistry();
+	if (!m_srvreg->available()) {
+		kdDebug(7021) << "SLP not available"<< endl;
+		delete m_srvreg;
+		m_srvreg = 0;
+	}
 	m_portListeners.setAutoDelete(true);
 	connect(&m_expirationTimer, SIGNAL(timeout()), SLOT(setExpirationTimer()));
 	connect(&m_portRetryTimer, SIGNAL(timeout()), SLOT(portRetryTimer()));
@@ -260,7 +334,7 @@ void KInetD::loadServiceList()
 		it != kinetdModules.end();
 		it++) {
 		KService::Ptr s = *it;
-		PortListener *pl = new PortListener(s, m_config);
+		PortListener *pl = new PortListener(s, m_config, m_srvreg);
 		if (pl->isValid())
 			m_portListeners.append(pl);
 	}
@@ -398,6 +472,30 @@ void KInetD::setEnabled(QString service, QDateTime expiration)
 	setExpirationTimer();
 }
 
+void KInetD::setServiceRegistrationEnabled(QString service, bool enable)
+{
+	PortListener *pl = getListenerByName(service);
+	if (!pl)
+		return;
+
+	pl->setServiceRegistrationEnabled(enable);
+}
+
+bool KInetD::isServiceRegistrationEnabled(QString service)
+{
+	PortListener *pl = getListenerByName(service);
+	if (!pl)
+		return false;
+
+	return pl->isServiceRegistrationEnabled();
+}
+
+KInetD::~KInetD() {
+	m_portListeners.clear();
+	delete m_config;
+	if (m_srvreg)
+		delete m_srvreg;
+}
 
 extern "C" {
 	KDEDModule *create_kinetd(QCString &name)

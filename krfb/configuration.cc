@@ -16,6 +16,7 @@
  ***************************************************************************/
 
 #include "configuration.h"
+#include "kinetaddr.h"
 
 #include <kglobal.h>
 #include <klocale.h>
@@ -110,6 +111,16 @@ void Configuration::setKInetdEnabled(const QDateTime &date) {
 	d->send ("kded", "kinetd", "setEnabled(QString,QDateTime)", sdata);
 }
 
+void Configuration::setKInetdServiceRegistrationEnabled(bool enabled) {
+	DCOPClient *d = KApplication::dcopClient();
+
+	QByteArray sdata;
+	QDataStream arg(sdata, IO_WriteOnly);
+	arg << QString("krfb");
+	arg << enabled;
+	d->send ("kded", "kinetd", "setServiceRegistrationEnabled(QString,bool)", sdata);
+}
+
 void Configuration::getPortFromKInetd() {
 	DCOPClient *d = KApplication::dcopClient();
 
@@ -148,6 +159,7 @@ void Configuration::doKinetdConf() {
 
 	if (allowUninvitedFlag) {
 		setKInetdEnabled(true);
+		setKInetdServiceRegistrationEnabled(true);
 		getPortFromKInetd();
 		return;
 	}
@@ -166,21 +178,10 @@ void Configuration::doKinetdConf() {
 		portNum = -1;
 	}
 	else {
+		setKInetdServiceRegistrationEnabled(false);
 		setKInetdEnabled(lastExpiration);
 		getPortFromKInetd();
 	}
-}
-
-/*
- * Function for (en/de)crypting strings for config file, taken from KMail
- * Author: Stefan Taferner <taferner@alpin.or.at>
- */
-QString cryptStr(const QString &aStr) {
-	QString result;
-	for (unsigned int i = 0; i < aStr.length(); i++)
-		result += (aStr[i].unicode() < 0x20) ? aStr[i] :
-			QChar(0x1001F - aStr[i].unicode());
-	return result;
 }
 
 void Configuration::loadFromKConfig() {
@@ -194,7 +195,6 @@ void Configuration::loadFromKConfig() {
 		passwordString = cryptStr(c.readEntry("uninvitedPasswordCrypted", ""));
 	else
 		passwordString = c.readEntry("uninvitedPassword", "");
-
 
 	unsigned int invNum = invitationList.size();
 	invitationList.clear();
@@ -275,6 +275,14 @@ void Configuration::refreshTimeout() {
 		saveToDialogs();
 		emit invitationNumChanged(invitationList.size());
 	}
+}
+
+QString Configuration::hostname() const
+{
+  	KInetAddress *a = KInetAddress::getPrivateInetAddress();
+	QString hostName = a->nodeName();
+	delete a;
+	return hostName;
 }
 
 ///////// properties ///////////////////////////

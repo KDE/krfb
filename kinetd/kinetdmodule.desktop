@@ -4,6 +4,17 @@
 Type=ServiceType
 X-KDE-ServiceType=KInetDModule
 Name=KInetD Module Type
+Name[bs]=KInetD tip modula
+Name[da]=KInetD-modultype
+Name[el]=Τύπος αρθρώματος KInetD
+Name[es]=Tipo de módulo KInetD
+Name[fi]=KInetD modulityyppi
+Name[he]=סוג מודול של KInetD
+Name[hr]=Tip KInetD Modula
+Name[pt_BR]=Módulo KInetD
+Name[ro]=Tip modul KInetD
+Name[sv]=Kinetd-modultyp
+Name[tr]=KDED Modül Türü
 
 # id to manipulate the service
 [PropertyDef::X-KDE-KINETD-id]
@@ -13,22 +24,36 @@ Type=QString
 [PropertyDef::X-KDE-KINETD-port]
 Type=int
 
-# if set and >0 the number of ports kinetd should probe if the port is in use
+# if set and >0, the number of ports kinetd should probe if the port is in use
 [PropertyDef::X-KDE-KINETD-autoPortRange]
 Type=int
 
-# if enabled kinetd will listen on the port. Can be overridden using the
+# if enabled, kinetd will listen on the port. Can be overridden using the
 # dcop interface.
 [PropertyDef::X-KDE-KINETD-enabled]
 Type=bool
 
-# if set this argument if given to the app to start, followed by the number
+# if set, this argument is given to the app to start, followed by the number
 # of the socket's fd
 [PropertyDef::X-KDE-KINETD-argument]
 Type=QString
 
-# if true kinetd can accepts several connections at the same time. Otherwise
+# if true, kinetd can accepts several connections at the same time. Otherwise
 # it will block the port when a connection has been established.
 [PropertyDef::X-KDE-KINETD-multiInstance]
 Type=bool
+
+# if set, kinetd will register the given URL at the local SLP SA while 
+# the port is open. The following strings will be substituted:
+# %h with the local IP address
+# %p with the port number
+[PropertyDef::X-KDE-KINETD-serviceURL]
+Type=QString
+
+# if kinetd registers a service URL, this string will be used for its attributes.
+# The following strings will be substituted:
+# %h with the local IP address
+# %p with the port number
+[PropertyDef::X-KDE-KINETD-serviceAttributes]
+Type=QString
 

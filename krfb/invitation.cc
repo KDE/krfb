@@ -3,6 +3,7 @@
                              -------------------
     begin                : Sat Mar 30 2002
     copyright            : (C) 2002 by Tim Jansen
+                           (C) Stefan Taferner (password encryption)
     email                : tim@tjansen.de
  ***************************************************************************/
 
@@ -16,6 +17,19 @@
  ***************************************************************************/
 
 #include "invitation.h"
+
+
+/*
+ * Function for (en/de)crypting strings for config file, taken from KMail
+ * Author: Stefan Taferner <taferner@alpin.or.at>
+ */
+QString cryptStr(const QString &aStr) {
+        QString result;
+        for (unsigned int i = 0; i < aStr.length(); i++)
+                result += (aStr[i].unicode() < 0x20) ? aStr[i] :
+                                QChar(0x1001F - aStr[i].unicode());
+        return result;
+}
 
 Invitation::Invitation() :
 	m_viewItem(0) {
@@ -34,7 +48,7 @@ Invitation::Invitation(const Invitation &x) :
 }
 
 Invitation::Invitation(KConfig* config, int num) {
-	m_password = config->readEntry(QString("password%1").arg(num), "");
+	m_password = cryptStr(config->readEntry(QString("password%1").arg(num), ""));
 	m_creationTime = config->readDateTimeEntry(QString("creation%1").arg(num));
 	m_expirationTime = config->readDateTimeEntry(QString("expiration%1").arg(num));
 	m_viewItem = 0;
@@ -56,7 +70,7 @@ Invitation &Invitation::operator= (const Invitation&x) {
 }
 
 void Invitation::save(KConfig *config, int num) const {
-	config->writeEntry(QString("password%1").arg(num), m_password);
+	config->writeEntry(QString("password%1").arg(num), cryptStr(m_password));
 	config->writeEntry(QString("creation%1").arg(num), m_creationTime);
 	config->writeEntry(QString("expiration%1").arg(num), m_expirationTime);
 }

@@ -112,6 +112,7 @@ private:
 	void invalidateOldInvitations();
 	void setKInetdEnabled(const QDateTime &date);
 	void setKInetdEnabled(bool enabled);
+	void setKInetdServiceRegistrationEnabled(bool enabled);
 	void getPortFromKInetd();
 	void setKInetdPort(int port);
 	void doKinetdConf();
