@@ -11,9 +11,11 @@ Name[es]=Conexión entrante
 Name[fi]=Saapuva yhteys
 Name[he]=חיבור נכנס
 Name[hr]=DolaznaVeza
+Name[ja]=内向き接続
 Name[pt_BR]=Conexões de Entrada
 Name[ro]=Conexiune de intrare
 Name[sv]=Inkommande anslutning
+Name[tr]=Gelen Bağlantı
 Comment=Received incoming connection
 Comment[af]=ontvang inkomende verbinding
 Comment[bs]=Primio dolaznu konekciju
@@ -23,9 +25,11 @@ Comment[es]=Recibida conexión entrante
 Comment[fi]=Vastaanotettiin saapuva yhteys
 Comment[he]=נתקבל חיבור נכנס
 Comment[hr]=Primio dolaznu vezu
+Comment[ja]=内向きの接続を受け取りました
 Comment[pt_BR]=Recebendo conexão de entrada
 Comment[ro]=Conexiune de intrare recepţionată
 Comment[sv]=Tar emot inkommande anslutning
+Comment[tr]=Gelen bağlantı alınıyor
 default_presentation=4
 
 [ProcessFailed]
