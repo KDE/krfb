@@ -190,6 +190,9 @@ Give the information below to the person that you want to invite (&lt;a href="wh
                             <property name="name">
                                 <cstring>kActiveLabel5</cstring>
                             </property>
+                            <property name="enabled">
+                                <bool>false</bool>
+                            </property>
                             <property name="sizePolicy">
                                 <sizepolicy>
                                     <hsizetype>0</hsizetype>
@@ -206,6 +209,9 @@ Give the information below to the person that you want to invite (&lt;a href="wh
                             <property name="name">
                                 <cstring>kActiveLabel6</cstring>
                             </property>
+                            <property name="enabled">
+                                <bool>false</bool>
+                            </property>
                             <property name="sizePolicy">
                                 <sizepolicy>
                                     <hsizetype>0</hsizetype>
@@ -221,6 +227,9 @@ Give the information below to the person that you want to invite (&lt;a href="wh
                         <widget class="KActiveLabel" row="2" column="0">
                             <property name="name">
                                 <cstring>kActiveLabel7</cstring>
+                            </property>
+                            <property name="enabled">
+                                <bool>false</bool>
                             </property>
                             <property name="sizePolicy">
                                 <sizepolicy>
@@ -277,6 +286,9 @@ Give the information below to the person that you want to invite (&lt;a href="wh
                         <widget class="KActiveLabel" row="2" column="1">
                             <property name="name">
                                 <cstring>expirationLabel</cstring>
+                            </property>
+                            <property name="enabled">
+                                <bool>false</bool>
                             </property>
                             <property name="sizePolicy">
                                 <sizepolicy>
