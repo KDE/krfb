@@ -248,8 +248,8 @@ rfbSendSoftCursor(rfbClientPtr cl, Bool cursorWasChanged)
     /* Send buffer contents if needed. */
 
     if ( cl->ublen + sizeof(rfbSoftCursorMove) + 
-	 ((scNindex >= 0) ? 
-	 (sizeof(rfbSoftCursorSetImage) + imgLen) : 0)) {
+	 ((scNindex >= 0 && cursorWasChanged) ? 
+	 (sizeof(rfbSoftCursorSetImage) + imgLen) : 0) > UPDATE_BUF_SIZE) {
 			    
 	if (!rfbSendUpdateBuf(cl))
 	    return FALSE;
@@ -257,7 +257,7 @@ rfbSendSoftCursor(rfbClientPtr cl, Bool cursorWasChanged)
 
     saved_ublen = cl->ublen;
 
-    if (scNindex >= 0) {
+    if (scNindex >= 0 && cursorWasChanged) {
 	rect.encoding = Swap32IfLE(rfbEncodingSoftCursor);
 	if (pCursor) {
 	    rect.r.x = Swap16IfLE(pCursor->xhot);
