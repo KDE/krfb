@@ -56,6 +56,50 @@
 
 static XTestDisabler disabler;
 
+static const char* cur=
+"                   "
+" x                 "
+" xx                "
+" xxx               "
+" xxxx              "
+" xxxxx             "
+" xxxxxx            "
+" xxxxxxx           "
+" xxxxxxxx          "
+" xxxxxxxxx         "
+" xxxxxxxxxx        "
+" xxxxx             "
+" xx xxx            "
+" x  xxx            "
+"     xxx           "
+"     xxx           "
+"      xxx          "
+"      xxx          "
+"                   ";
+
+static const char* mask=
+"xx                 "
+"xxx                "
+"xxxx               "
+"xxxxx              "
+"xxxxxx             "
+"xxxxxxx            "
+"xxxxxxxx           "
+"xxxxxxxxx          "
+"xxxxxxxxxx         "
+"xxxxxxxxxxx        "
+"xxxxxxxxxxxx       "
+"xxxxxxxxxx         "
+"xxxxxxxx           "
+"xxxxxxxx           "
+"xx  xxxxx          "
+"    xxxxx          "
+"     xxxxx         "
+"     xxxxx         "
+"      xxx          ";
+
+static rfbCursorPtr myCursor;
+
 // only one controller exists, so we can do this workaround for functions:
 static RFBController *self;
 
@@ -344,6 +388,10 @@ void RFBController::startServer(int inetdFd, bool xtestGrab)
 	server->ptrAddEvent = pointerHook;
 	server->newClientHook = newClientHook;
 	server->passwordCheck = passwordCheck;
+
+	if (!myCursor)
+		myCursor = rfbMakeXCursor(19, 19, cur, mask);
+	server->cursor = myCursor;
 
 	passwordChanged();
 
