@@ -91,6 +91,9 @@
             <property name="hScrollBarMode">
                 <enum>AlwaysOff</enum>
             </property>
+            <property name="allColumnsShowFocus">
+                <bool>true</bool>
+            </property>
             <property name="fullWidth">
                 <bool>true</bool>
             </property>
@@ -211,8 +214,8 @@
     <include location="local" impldecl="in implementation">manageinvitations.ui.h</include>
 </includes>
 <slots>
+    <slot>listSizeChanged( int i )</slot>
     <slot>listSelectionChanged()</slot>
-    <slot>listSizeChanged(int i)</slot>
 </slots>
 <layoutdefaults spacing="6" margin="11"/>
 </UI>
