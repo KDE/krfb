@@ -24,6 +24,14 @@
 #include <qvalidator.h>
 #include <qstring.h>
 
+class ConfigurationDialog2 : public ConfigurationDialog {
+	Q_OBJECT
+public:
+	virtual void closeEvent(QCloseEvent *);
+signals:
+	void closed();
+};
+
 /**
  * This class stores the app's configuration and also 'drives'
  * the configuration dialog.
@@ -57,7 +65,7 @@ private:
         void saveToKConfig(); 
         void saveToDialog(); 
 
-        ConfigurationDialog confDlg;
+        ConfigurationDialog2 confDlg;
 	QIntValidator *portValidator;
 
 	bool preconfiguredFlag;

@@ -53,13 +53,11 @@ public:
 	RFBConnection(Display *dpy, int fd, 
 		      const QString &cpassword, 
 		      bool allowInput);
-	~RFBConnection();
+	virtual ~RFBConnection();
 	virtual void handleKeyEvent(KeyEvent &keyEvent);
 	virtual void handlePointerEvent(PointerEvent &pointerEvent);
 	virtual void getServerInitialisation( ServerInitialisation &_serverInitialisation );
 	void scanUpdates();
-
-	BufferedConnection *bufferedConnection;	
 
 private:	
 	void createFramebuffer();

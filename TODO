@@ -1,4 +1,5 @@
 Todo:
+- reminder: enable non-raw in hextile, enable sendSingleHint
 - i18n
 - docs
 - knotify

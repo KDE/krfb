@@ -32,6 +32,8 @@
 #include <qobject.h>
 #include <qwindowdefs.h>
 
+#include <signal.h>
+
 #define VERSION "0.6"
 
 static const char *description = I18N_NOOP("VNC-compatible server to share "
@@ -107,7 +109,7 @@ int main(int argc, char *argv[])
 	    args->isSet(ARG_PASSWORD) ||
 	    args->isSet(ARG_REMOTE_CONTROL) ||
 	    args->isSet(ARG_DONT_CONFIRM_CONNECT)) {
-		
+
 		bool oneConnection = args->isSet(ARG_ONE_SESSION);
 		bool askOnConnect = !args->isSet(ARG_DONT_CONFIRM_CONNECT);
 		bool allowDesktopControl = args->isSet(ARG_REMOTE_CONTROL);
@@ -127,13 +129,16 @@ int main(int argc, char *argv[])
 		return 1;
 
 	QObject::connect(&app, SIGNAL(lastWindowClosed()),
-			 &app, SLOT(quit()));
+			 &controller, SLOT(closeSession()));
 
-	QObject::connect(&trayicon, SIGNAL(showConfigure()),
-			 config, SLOT(showDialog()));
+	QObject::connect(&app, SIGNAL(lastWindowClosed()),
+			 &app, SLOT(quit()));
 
 	QObject::connect(&trayicon, SIGNAL(connectionClosed()),
 			 &controller, SLOT(closeSession()));
+
+	QObject::connect(&trayicon, SIGNAL(showConfigure()),
+			 config, SLOT(showDialog()));
 
 	QObject::connect(config, SIGNAL(portChanged()),
 			 &controller, SLOT(rebind()));
@@ -149,6 +154,11 @@ int main(int argc, char *argv[])
 		QObject::connect(&controller, SIGNAL(sessionFinished()),
 				 &trayicon, SLOT(closeConnection()));
 	}
+
+	sigset_t sigs;
+	sigemptyset(&sigs);
+	sigaddset(&sigs, SIGPIPE);
+	sigprocmask(SIG_BLOCK, &sigs, 0);
 	
 	return app.exec();
 }

@@ -1,4 +1,3 @@
-
 SUBDIRS = lib krfb po doc include 
 
 EXTRA_DIST = admin AUTHORS COPYING ChangeLog INSTALL README TODO NOTES \

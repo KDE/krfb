@@ -1,6 +1,27 @@
+2002-01-09  Tim Jansen  <tim@tjansen.de>
+
+	* Fixed problems with closing dialogs 
+
+	* krfb/main.cpp (main): Bugfix: better cleanup if quit is called
+	  during connection dialog
+
+2002-01-07  Tim Jansen  <tim@tjansen.de>
+
+	* krfb/main.cpp (main): blocks SIGPIPE to avoid crashes on 
+	  unexpected client death
+
+2002-01-06  Tim Jansen  <tim@tjansen.de>
+
+	* lib/rfbServer.cc: start to replace all standard rfblib encodings 
+	  with those from TightVNC because they compress better
+
+	* lib/Connection.cc: reserve more space when resizing, added 
+	  functions for simulated writing, delayed sending (reserve 
+	  buffer, write later)
+
 2002-01-05  Tim Jansen  <tim@tjansen.de>
 
-	* lib/rfbServer.cc (update): removed blocks, added more sophistacated
+	* lib/rfbServer.cc (update): removed blocks, added more sophisticated
 	  Hint handling in preparation for ZLib and Tight encodings
 
 	* lib/encodeRectangleHextile.cc:  replaced cut&paste code with macros,

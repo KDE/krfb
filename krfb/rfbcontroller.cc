@@ -41,6 +41,11 @@
 #define ASSERT(x) Q_ASSERT(x)
 #endif
 
+void ConnectionDialog::closeEvent(QCloseEvent *) 
+{
+	emit closed();
+}
+
 RFBController::RFBController(Configuration *c) :
 	configuration(c),
 	socket(0),
@@ -51,6 +56,7 @@ RFBController::RFBController(Configuration *c) :
 		SLOT(dialogAccepted()));
 	connect(dialog.refuseConnectionButton, SIGNAL(clicked()),
 		SLOT(dialogRefused()));
+	connect(&dialog, SIGNAL(closed()), SLOT(dialogRefused()));
 
 	startServer();
 }
@@ -152,7 +158,7 @@ void RFBController::idleSlot() {
 }
 
 void RFBController::checkWriteBuffer() {
-	BufferedConnection *bc = connection->bufferedConnection;	
+	BufferedConnection *bc = connection->connection;	
 	bool bufferEmpty = (bc->senderBuffer.end - bc->senderBuffer.pos) == 0;
        	socket->enableWrite(!bufferEmpty);
 	if (bufferEmpty && !idleUpdateScheduled && connection) {
@@ -165,7 +171,7 @@ void RFBController::socketReadable() {
 	if ((!socket) || (!connection))
 		return;
 	int fd = socket->socket();
-	BufferedConnection *bc = connection->bufferedConnection;
+	BufferedConnection *bc = connection->connection;
 	int count = read(fd,
 			 bc->receiverBuffer.data,
                          bc->receiverBuffer.size);
@@ -173,9 +179,6 @@ void RFBController::socketReadable() {
 		bc->receiverBuffer.end += count;
 	else {
 		closeSession();
-		KMessageBox::error(0, 
-				   i18n("An error occurred while reading from the remote client. The connection will be terminated."),
-				   i18n("KRfb Error"));
 		return;
 	}
 	while (connection->currentState && bc->hasReceiverBufferData()) {
@@ -194,7 +197,7 @@ void RFBController::socketWritable() {
 		return;
 	int fd = socket->socket();
 
-	BufferedConnection *bc = connection->bufferedConnection;
+	BufferedConnection *bc = connection->connection;
 	ASSERT((bc->senderBuffer.end - bc->senderBuffer.pos) > 0);
 	int count = write(fd,
 			  bc->senderBuffer.data + bc->senderBuffer.pos,
@@ -204,9 +207,6 @@ void RFBController::socketWritable() {
 		checkWriteBuffer();
 	} else {
 		closeSession();
-		KMessageBox::error(0, 
-				   i18n("An error occurred while writing to the remote client. The connection will be terminated."),
-				   i18n("KRfb Error"));
 	}
 }
 
@@ -222,7 +222,8 @@ void RFBController::closeSession() {
 }
 
 void RFBController::dialogAccepted() {
-	ASSERT(socket);
+	if (!socket)
+		return;
 	ASSERT(!connection);
 
 	dialog.hide();
@@ -230,7 +231,8 @@ void RFBController::dialogAccepted() {
 }
 
 void RFBController::dialogRefused() {
-	ASSERT(socket);
+	if (!socket)
+		return;
 	ASSERT(!connection);
 	
 	closeSocket();

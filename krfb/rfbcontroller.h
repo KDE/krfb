@@ -30,6 +30,8 @@
 // rfbconnection must be last because of X11 headers
 #include "rfbconnection.h"
 
+class QCloseEvent;
+
 using namespace rfb;
 
 typedef enum {
@@ -38,6 +40,15 @@ typedef enum {
 	RFB_CONNECTING,
 	RFB_CONNECTED
 } RFBState;
+
+class ConnectionDialog : public KRFBConnectionDialog {
+	Q_OBJECT
+public:
+	virtual void closeEvent(QCloseEvent *);
+
+signals:
+	void closed();
+};
 
 /**
  * Manages sockets, drives the RGBConnection and triggers the connection
@@ -52,7 +63,7 @@ class RFBController : public QObject  {
 	Q_OBJECT
 public: 
 	RFBController(Configuration *c);
-	~RFBController();
+	virtual ~RFBController();
 
 	RFBState state();
 	
@@ -75,7 +86,7 @@ private:
 	KServerSocket *serversocket;
 	KSocket *socket;
 	RFBConnection *connection;
-	KRFBConnectionDialog dialog;
+	ConnectionDialog dialog;
 	bool idleUpdateScheduled;
 
 private slots:

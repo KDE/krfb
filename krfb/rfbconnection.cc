@@ -47,8 +47,7 @@ RFBConnection::RFBConnection(Display *_dpy,
 		strncpy(password, cpassword.latin1(), 
 			(8 <= cpassword.length()) ? 8 : cpassword.length());
 
-  	bufferedConnection = new BufferedConnection(32768, 32768);
-  	connection = bufferedConnection;
+  	connection = new BufferedConnection(32768, 16384);
 
 	XTestGrabControl(dpy, true); 
 	disabler.disable = false;
@@ -60,7 +59,7 @@ RFBConnection::RFBConnection(Display *_dpy,
 
 RFBConnection::~RFBConnection() {
 	destroyFramebuffer();
- 	delete bufferedConnection;
+ 	delete connection;
 
 	disabler.disable = true;
 	disabler.dpy = dpy;

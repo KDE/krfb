@@ -24,6 +24,11 @@
 #include <qlineedit.h>
 #include <qcheckbox.h>
 
+void ConfigurationDialog2::closeEvent(QCloseEvent *) 
+{
+	emit closed();
+}
+
 Configuration::Configuration() :
 	preconfiguredFlag(false),
 	oneConnectionFlag(false)
@@ -41,6 +46,7 @@ Configuration::Configuration() :
 		SLOT(cancelPressed()));
 	connect(confDlg.applyButton, SIGNAL(clicked()), 
 		SLOT(applyPressed()));
+	connect(&confDlg, SIGNAL(closed()), SLOT(cancelPressed()));
 }
 
 Configuration::Configuration(bool oneConnection, bool askOnConnect, 
