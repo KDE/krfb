@@ -31,25 +31,25 @@
 class PortListener : public QObject {
 	Q_OBJECT
 private:
-	bool valid;
-	QString serviceName;
-	int portNum, portBase, autoPortRange;
-	bool multiInstance;
-	QString execPath;
-	QString argument;
-	bool enabled;
-	QDateTime expirationTime;
+	bool m_valid;
+	QString m_serviceName;
+	int m_port, m_portBase, m_autoPortRange;
+	bool m_multiInstance;
+	QString m_execPath;
+	QString m_argument;
+	bool m_enabled;
+	QDateTime m_expirationTime;
 
-	KServerSocket *socket;
-	KProcess process;
+	KServerSocket *m_socket;
+	KProcess m_process;
 
-	KConfig *config;
+	KConfig *m_config;
 
 	void loadConfig(KService::Ptr s);
 	void acquirePort();
 	void setEnabledInternal(bool e, const QDateTime &ex);
 public:
-	PortListener(KService::Ptr s);
+	PortListener(KService::Ptr s, KConfig *c);
 	~PortListener();
 
 	bool isValid();
@@ -119,8 +119,9 @@ k_dcop:
  private:
 	QDateTime getNextExpirationTime();
 
-	QPtrList<PortListener> portListeners;
-	QTimer expirationTimer;
+	KConfig *m_config;
+	QPtrList<PortListener> m_portListeners;
+	QTimer m_expirationTimer;
 
  private slots:
 	void setTimer();
