@@ -151,6 +151,7 @@ void KcmKRfb::save() {
 		m_configuration.setPreferredPort(m_confWidget->portInput->value());
 	m_configuration.setDisableBackground(m_confWidget->disableBackgroundCB->isChecked());
 	m_configuration.save();
+	kapp->dcopClient()->emitDCOPSignal("KRFB::ConfigChanged", "KRFB_ConfigChanged()", QByteArray());
 	emit changed(false);
 }
 

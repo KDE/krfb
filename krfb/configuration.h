@@ -31,6 +31,8 @@
 #include <qvalidator.h>
 #include <qstring.h>
 
+#include <dcopobject.h>
+
 enum krfb_mode {
 	KRFB_UNKNOWN_MODE = 0,
 	KRFB_KINETD_MODE,
@@ -44,11 +46,12 @@ enum krfb_mode {
  * standalone-config-dialog and all the invitation dialogs
  * @author Tim Jansen
  */
-class Configuration : public QObject {
+class Configuration : public QObject, public DCOPObject {
+		K_DCOP
    	Q_OBJECT
 public:
 	Configuration(krfb_mode mode);
-	~Configuration();
+	virtual ~Configuration();
 
 	krfb_mode mode() const;
 	bool askOnConnect() const;
@@ -122,6 +125,10 @@ private:
 
 	bool disableBackgroundFlag;
 	bool disableXShmFlag;
+
+k_dcop:
+    // Connected to the DCOP signal
+    void updateKConfig();	
 private slots:
         void refreshTimeout();
 

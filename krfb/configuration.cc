@@ -54,6 +54,8 @@ Configuration::Configuration(krfb_mode mode) :
 	saveToDialogs();
 	doKinetdConf();
 
+    connectDCOPSignal( 0, "KRFB::ConfigChanged", "KRFB_ConfigChanged()",
+						"updateKConfig()", false );
 	connect(invMngDlg.newPersonalInvitationButton, SIGNAL(clicked()),
 		SLOT(showPersonalInvitationDialog()));
 	connect(invMngDlg.newEmailInvitationButton, SIGNAL(clicked()), SLOT(inviteEmail()));
@@ -82,6 +84,11 @@ Configuration::Configuration(krfb_mode mode) :
 
 Configuration::~Configuration() {
         save();
+}
+
+void Configuration::updateKConfig()
+{
+    loadFromKConfig();
 }
 
 void Configuration::setKInetdEnabled(bool enabled) {
