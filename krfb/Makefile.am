@@ -4,7 +4,7 @@ bin_PROGRAMS = krfb
 krfb_SOURCES = rfbcontroller.cc configuration.cc trayicon.cpp \
   xupdatescanner.cc main.cpp configurationdialog.ui newconnectiondialog.ui \
   krfbifaceimpl.cc krfbiface.skel manageinvitations.ui personalinvitation.ui \
-  invite.ui
+  invite.ui invitation.cc
 krfb_LDADD   = ../libvncserver/libvncserver.a -lz -lpthread -ljpeg -lXtst \
   $(LIB_QT) $(LIB_KDECORE) $(LIB_KDEUI)  $(LIBSOCKET)
 
@@ -13,7 +13,7 @@ kde_services_DATA = kinetd_krfb.desktop
 EXTRA_DIST = $(krfb_SOURCES) $(kde_services_DATA) krfb.desktop \
   lo32-app-krfb.png lo16-app-krfb.png rfbcontroller.h \
   eyes-closed24.png eyes-open24.png xupdatescanner.h trayicon.h \
-  configuration.h krfbiface.h krfbiface.kidl eventsrc
+  configuration.h invitation.h krfbiface.h krfbiface.kidl eventsrc 
 
 install-data-local:
 	$(mkinstalldirs) $(kde_appsdir)/Applications/

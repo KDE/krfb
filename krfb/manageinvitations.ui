@@ -1,0 +1,182 @@
+<!DOCTYPE UI><UI version="3.0" stdsetdef="1">
+<class>ManageInvitationsDialog</class>
+<widget class="QDialog">
+    <property name="name">
+        <cstring>ManageInvitationsDialog</cstring>
+    </property>
+    <property name="geometry">
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>409</width>
+            <height>291</height>
+        </rect>
+    </property>
+    <property name="caption">
+        <string>Manage Invitations - Desktop Sharing</string>
+    </property>
+    <property name="icon">
+        <pixmap>image0</pixmap>
+    </property>
+    <grid>
+        <property name="name">
+            <cstring>unnamed</cstring>
+        </property>
+        <property name="margin">
+            <number>11</number>
+        </property>
+        <property name="spacing">
+            <number>6</number>
+        </property>
+        <widget class="KListView" row="0" column="0" rowspan="4" colspan="1">
+            <column>
+                <property name="text">
+                    <string>Created</string>
+                </property>
+                <property name="clickable">
+                    <bool>false</bool>
+                </property>
+                <property name="resizeable">
+                    <bool>false</bool>
+                </property>
+            </column>
+            <column>
+                <property name="text">
+                    <string>Expiration</string>
+                </property>
+                <property name="clickable">
+                    <bool>true</bool>
+                </property>
+                <property name="resizeable">
+                    <bool>true</bool>
+                </property>
+            </column>
+            <property name="name">
+                <cstring>listView</cstring>
+            </property>
+            <property name="hScrollBarMode">
+                <enum>AlwaysOff</enum>
+            </property>
+            <property name="fullWidth">
+                <bool>true</bool>
+            </property>
+            <property name="toolTip" stdset="0">
+                <string></string>
+            </property>
+            <property name="whatsThis" stdset="0">
+                <string>Displays the open invitations. Use the buttons on the right to delete them or create a new invitation.</string>
+            </property>
+        </widget>
+        <widget class="QPushButton" row="5" column="1">
+            <property name="name">
+                <cstring>closeButton</cstring>
+            </property>
+            <property name="text">
+                <string>&amp;Close</string>
+            </property>
+            <property name="toolTip" stdset="0">
+                <string>Closes this window.</string>
+            </property>
+            <property name="whatsThis" stdset="0">
+                <string>Closes this window.</string>
+            </property>
+        </widget>
+        <widget class="Line" row="4" column="0" rowspan="1" colspan="2">
+            <property name="name">
+                <cstring>Line1</cstring>
+            </property>
+            <property name="frameShape" stdset="0">
+                <enum>HLine</enum>
+            </property>
+            <property name="frameShadow">
+                <enum>Sunken</enum>
+            </property>
+            <property name="orientation">
+                <enum>Horizontal</enum>
+            </property>
+        </widget>
+        <spacer row="5" column="0">
+            <property name="name" stdset="0">
+                <cstring>Spacer10</cstring>
+            </property>
+            <property name="orientation">
+                <enum>Horizontal</enum>
+            </property>
+            <property name="sizeType">
+                <enum>Expanding</enum>
+            </property>
+            <property name="sizeHint">
+                <size>
+                    <width>20</width>
+                    <height>20</height>
+                </size>
+            </property>
+        </spacer>
+        <spacer row="0" column="1">
+            <property name="name" stdset="0">
+                <cstring>Spacer7</cstring>
+            </property>
+            <property name="orientation">
+                <enum>Vertical</enum>
+            </property>
+            <property name="sizeType">
+                <enum>Expanding</enum>
+            </property>
+            <property name="sizeHint">
+                <size>
+                    <width>20</width>
+                    <height>20</height>
+                </size>
+            </property>
+        </spacer>
+        <widget class="QPushButton" row="3" column="1">
+            <property name="name">
+                <cstring>deleteOneButton</cstring>
+            </property>
+            <property name="text">
+                <string>&amp;Delete</string>
+            </property>
+            <property name="toolTip" stdset="0">
+                <string>Delete the selected invitation</string>
+            </property>
+            <property name="whatsThis" stdset="0">
+                <string>Delete the selected invitation. The invited person will not be able to connect using this invitation anymore.</string>
+            </property>
+        </widget>
+        <widget class="QPushButton" row="1" column="1">
+            <property name="name">
+                <cstring>newButton</cstring>
+            </property>
+            <property name="text">
+                <string>&amp;New...</string>
+            </property>
+            <property name="toolTip" stdset="0">
+                <string>Create a new invitation...</string>
+            </property>
+            <property name="whatsThis" stdset="0">
+                <string>Click this button to create a new invitation.</string>
+            </property>
+        </widget>
+        <widget class="QPushButton" row="2" column="1">
+            <property name="name">
+                <cstring>deleteAllButton</cstring>
+            </property>
+            <property name="text">
+                <string>Delete all</string>
+            </property>
+            <property name="toolTip" stdset="0">
+                <string>Delete all invitations</string>
+            </property>
+            <property name="whatsThis" stdset="0">
+                <string>Deletes all open invitations.</string>
+            </property>
+        </widget>
+    </grid>
+</widget>
+<images>
+    <image name="image0">
+        <data format="XPM.GZ" length="8078">789cdd98c7721cc91186ef7c0a04f3c650d4b637a1d001de5b8200880d1db2da604038c29b0dbdbb32ffeceec582b30448015a85fa2726e69b32592633ab9abf7c98d8db589df8f0cbbbcb2bbe3aac26aa115f4c7ca8af4f4eee7ffde73f7e7bf73e2926e45f144413d1fbbfbd7bbf7935514dac9d9d360a540a50204f91827707f6e09d9ecb045c0c8c726e7be600e579cfde787960eb7f69e01cbc38b08d67a6e7cadaef0d8cc15336b0f5b73270095e1898c1d33dd7d65f3a30ca997b6eac7c75e00a3cdf738bf9f36dc789f5cfdd78c3a8e3bb9ebbfa67c651d0b4e059e3b4ecca0fc06110e636ff29701224b5958fc07990e7982f1f838ba0c863d4bfeb990bf06dcfb65eecc0555065980faff45cdafc6e94c57c5085e0497012266cfd7f06a761da98fd7be3346d6d3e042ec222857d5eee39afc14b3d97369e4d30879cc31e1f82abb04a8dbf2847611426d6df09b8888a18fdd145cf564ee7039bbd4fe0322a131baf0773c4dd78578de3dcfc81bf1a6741577e04aea22a36ffb4f2366a538cdf61be71a002c37f623c688f7889b3986d3c740dce55ca1efb19972a947f04b30a7c05ae5460ac775cabd0ff3eb851c13ee697a8c398ff263d77fe760ad60db5f5c57e26910aed2b70ac42f95ec789ad1f617f123c28dfedd8a7660ff3497215cae14f89ec4e6bf383ff279cb0ad1f617f13af427dc46bd2a850bedf73b71f5bc659d2f9f38331e7564e985faa0e6af35b372eb8b6f961fc69a44239e22b8d55e035e33ca96dbf108f291e30fc2fcd5560c45f5aa49dbfd343cfa5cd7f71602b877fa4a50ae3413e49598572f853ea5528477e936013a11cf34f5b1518fb95052ad4477916aac073e04805463ece6215da07e04485f20d70aa02637db24285f94c0f0cfb0ef3cd4a15fac3fa659c716bf9cfec3377f1e642709575f9c7213eb24605b6f1b42af477a98c70c1781dfc01ee65feb7615c8a03a17c1b8c0d427bc4439ea9c0c87f391eb4afc1850aede17f79a902233fe75e0546fce5950a6ced1b1518f92c6f5560c46fa109d8e263aee7ce5fd1bed08465fb83f82f621518fe05f7b2fd803f633b301f1781310130fcadc083fe91bfc4f94428473e90c34104463e2abc0aeb61e5f5b01e8db10a8cfd281a15ea6f1bcbf6dbfa20df16ad0a8c7c50062a30e2bfd4846cf385bf20fd59fc7d34f67965ed11cf65a2c27c62b0844fe74fc83f703fac8747fc9479ef1fd41aabd03fe683e5b0f9e1bc2ef18011dfa55781719e9655d99d8f0ef9a0ac55b067fd377dff0ee74fd9aac028e780bbfb9047bc72d8f7478db10af5b15fac0794e527c4030febe30f3aeec7931aab501ff1cdc9b0bf38df905ecc7f70bf630d50ac175bfba2efdf4d1b73777f7038afb954c13efc957def8fdec65f0dfe3569ac42ff8877ae5311eab3f130be0b631518e7918f5460ecb78f55609cbf382e2cfe71fff4591cc6b67e386fe0ce367e9c5fd84e1b1fee239e55606b5fa9c0b82ff95a85fe111fbef56d63fb8178ab8234b0f3cee1fe54e985c5ce1b8cb78afaf3c0e17cc3f16dfb83f8a9121518f9bd2afaf561ac078663f1087fa9e5f6d79d7fe71db71d633feb34f4a1ddcf118f75a502aff7dcd59f346eea8e919f6a3cd81fe4c7bad11b0f18f9b389faf5a559631518ebd170d3e577c27e3778c0c8cf4807666fbe63dfd547be40b8d8f981fcd9e251debc7a5bfd3fd970f4b6ea6cb0f3ae7a1379c79d0def6ad7bc896ae73b1b9550fb266a5cf5071b076ef48a3318497fdfda18b9c357dc8943e9ef5b1bc2afe84f439fdfda18efe3eecb78fd594cfc6fd9403f47eed89db85377e6beba737c5ec86f47ee12ba72d7eee65b7b2fb1d18df356dadfc1c6bd7b7093d2df949b76336e56becdb979b720658b6ec92dbb15b7ea7ecec68d5b73eb9d8d0de97bd36db98f6e5b2cad49ff7332ab4f52b2e376dd9eb4fe211bd2fb9e8cebb3accb2c32c0a6db7781f4baef42c8beebe7ba8bc4eeb1cc65512c0d6bf6021bb72e76898c3b95fe16e4db9cacd4becb9e7c6ebb5c4a75fd1624166a996d2163bb79a18d52685dfa08c9c96865e5895c46fce433971a819b222f9f3955549346f7f5f33630df496aa5fd9cf4f3209f0734a2c331fa227bd4d721cc6ec10574841ebe6fe356b4a4eb43c774e20ee994cee82b9dd3c5139dcbaf67526a3aa64bf7402c6b78891ebe6fa3141d637d8ec5c2155d4b5f37744b774f742bbf7e9552d3bd58913594b98cd0c3f76d8c44fbb63e92d7127aa0499aa2699a79a269f975524a5b95ccbb5fbd7df1e6fbefdba04b99f59c3b84029aa5399aa705e973919668b9d392d00cadd02aadd13a6dd026cdcabea38dcc678bb69eb1712ffa28b557685b2c7c1a6c2cd10eed76da119aa13db1f299f6c5caa6d49ba56d8976b1213bbff0cc5a8928704b144acb88624a28a58c722aa864c7e2b4eca814ca75c5e4a5de7325354da15be25a6672fcbc0d6eac8dbc257866f4d5f2018ff810a587f2ed80db3136b44df3fcf9f1a73646fc858f507a24df466f62e3984ffa338e4f84feaa79c8ce4b0efa791b2fd90ff1603e7d990dc955f0abdf6d8cf5ab8c523ee3af7cde8de8c2ad0f169ecfbb44a77cc9577ccd3712012b120963e2836ff98eeff98127bb55bab4de5f98dbe517b132c5d37c2d91bc2a56c6c439cff02ccff124cf77abb4f023365047577ec15df2222ff132af3ccd57bcca6bbcce1bac2f5f8dd45b787cdff8817bc97023e3cda77997b7f823eb4938d4f9c9bbcfef363e3d3d3f788777794f6efcffa18d71d69eeaf5ee893faabfdec6ab69bc0dbc7ff067de7f95b7c3f1ef1f788fa223b9535db9377a8fe280438e38e6c48d38e54cbe871cd87b1d37b84b8ce49e7b80d1ac0ddf1f973eae33f67d90732eb8f4ce935bf3ec3d97c27957774dee43aa44eef1adfc25c3f7c7a58feb8cb5e12bce7ded1b2fe3f40762a516aebaba07729b55ddc93b482b7f77c3f7c7a58feb3cb1e147725b997a0bd1961ffd17ff2fe36d6dfcebefeffe0dd22dc353</data>
+    </image>
+</images>
+<layoutdefaults spacing="6" margin="11"/>
+</UI>

@@ -1,8 +1,8 @@
 <!DOCTYPE UI><UI version="3.0" stdsetdef="1">
-<class>InviteForm</class>
+<class>InvitationDialog</class>
 <widget class="QDialog">
     <property name="name">
-        <cstring>InviteForm</cstring>
+        <cstring>InvitationDialog</cstring>
     </property>
     <property name="geometry">
         <rect>

@@ -2,7 +2,7 @@
                               configuration.cpp
                              -------------------
     begin                : Tue Dec 11 2001
-    copyright            : (C) 2001 by Tim Jansen
+    copyright            : (C) 2001-2002 by Tim Jansen
     email                : tim@tjansen.de
  ***************************************************************************/
 
@@ -20,100 +20,23 @@
 #include <kglobal.h>
 #include <kapplication.h>
 
+#include <qlabel.h>
 #include <qpushbutton.h>
 #include <qlineedit.h>
 #include <qcheckbox.h>
 
-const int INVITATION_DURATION = 60*60;
-
 void ConfigurationDialog2::closeEvent(QCloseEvent *)
-{
-	emit closed();
-}
-
+{ emit closed(); }
 void ManageInvitationsDialog2::closeEvent(QCloseEvent *)
-{
-	emit closed();
-}
+{ emit closed(); }
+void InvitationDialog2::closeEvent(QCloseEvent *)
+{ emit closed(); }
+void PersonalInvitationDialog2::closeEvent(QCloseEvent *)
+{ emit closed(); }
 
 // TODO:
-// invitation manage dialog
-// dialog to add/delete invitation
-
-Invitation::Invitation() :
-	m_viewItem(0) {
-	m_password = KApplication::randomString(4)+
-		"-"+
-		KApplication::randomString(4);
-	m_creationTime = QDateTime::currentDateTime();
-	m_expirationTime = QDateTime::currentDateTime().addSecs(INVITATION_DURATION);
-}
-
-Invitation::Invitation(const QString &tmpPassword,
-	const QDateTime &expirationTime,
-	const QDateTime &creationTime) :
-	m_password(tmpPassword),
-	m_creationTime(creationTime),
-	m_expirationTime(expirationTime),
-	m_viewItem(0) {
-}
-
-Invitation::Invitation(const Invitation &x) :
-	m_password(x.m_password),
-	m_creationTime(x.m_creationTime),
-	m_expirationTime(x.m_expirationTime),
-	m_viewItem(0) {
-}
-
-Invitation &Invitation::operator= (const Invitation&x) {
-	m_password = x.m_password;
-	m_creationTime = x.m_creationTime;
-	m_expirationTime = x.m_expirationTime;
-	if (m_viewItem)
-		delete m_viewItem;
-	m_viewItem = 0;
-	return *this;
-}
-
-Invitation::Invitation(KConfig* config, int num) {
-	m_password = config->readEntry(QString("password%1").arg(num), "");
-	m_creationTime = config->readDateTimeEntry(QString("creation%1").arg(num));
-	m_expirationTime = config->readDateTimeEntry(QString("expiration%1").arg(num));
-	m_viewItem = 0;
-}
-
-Invitation::~Invitation() {
-	if (m_viewItem)
-		delete m_viewItem;
-}
-
-void Invitation::save(KConfig *config, int num) const {
-	config->writeEntry(QString("password%1").arg(num), m_password);
-	config->writeEntry(QString("creation%1").arg(num), m_creationTime);
-	config->writeEntry(QString("expiration%1").arg(num), m_expirationTime);
-}
-
-QString Invitation::password() const {
-	return m_password;
-}
-
-QDateTime Invitation::expirationTime() const {
-	return m_expirationTime;
-}
-
-QDateTime Invitation::creationTime() const {
-	return m_creationTime;
-}
-
-void Invitation::setViewItem(KListViewItem *i) {
-	if (m_viewItem)
-		delete m_viewItem;
-	m_viewItem = i;
-}
-
-KListViewItem *Invitation::getViewItem() const{
-	return m_viewItem;
-}
+// get host address
+// email inv
 
 Configuration::Configuration(krfb_mode mode) :
 	m_mode(mode),
@@ -132,13 +55,31 @@ Configuration::Configuration(krfb_mode mode) :
 	connect(confDlg.askOnConnectCB, SIGNAL(clicked()), SLOT(configChanged()) );
 	connect(confDlg.allowDesktopControlCB, SIGNAL(clicked()), SLOT(configChanged()) );
 
+	connect(invMngDlg.closeButton, SIGNAL(clicked()), SLOT(invMngDlgClosed()));
+	connect(&invMngDlg, SIGNAL(closed()), SLOT(invMngDlgClosed()));
+	connect(invMngDlg.newButton, SIGNAL(clicked()), SLOT(showInvitationDialog()));
+	connect(invMngDlg.deleteOneButton, SIGNAL(clicked()), SLOT(invMngDlgDeleteOnePressed()));
+	connect(invMngDlg.deleteAllButton, SIGNAL(clicked()), SLOT(invMngDlgDeleteAllPressed()));
+	invMngDlg.listView->setSelectionMode(QListView::Extended);
+	invMngDlg.listView->setMinimumSize(QSize(400, 100)); // QTs size is much to small
+
 	connect(invDlg.closeButton, SIGNAL(clicked()), SLOT(invDlgClosed()));
 	connect(&invDlg, SIGNAL(closed()), SLOT(invDlgClosed()));
-	connect(invDlg.newButton, SIGNAL(clicked()), SIGNAL(createInvitation()));
-	connect(invDlg.deleteOneButton, SIGNAL(clicked()), SLOT(invDlgDeleteOnePressed()));
-	connect(invDlg.deleteAllButton, SIGNAL(clicked()), SLOT(invDlgDeleteAllPressed()));
-	invDlg.listView->setSelectionMode(QListView::Extended);
-	invDlg.listView->setMinimumSize(QSize(400, 100)); // QTs size is much to small
+	connect(invDlg.createInvitationButton, SIGNAL(clicked()),
+		SLOT(showPersonalInvitationDialog()));
+	connect(invDlg.createInvitationEMailButton, SIGNAL(clicked()),
+		SLOT(inviteEmail()));
+	if (m_mode != KRFB_STAND_ALONE)
+		invDlg.dontShowOnStartupButton->hide();
+
+	connect(persInvDlg.closeButton, SIGNAL(clicked()), SLOT(persInvDlgClosed()));
+	connect(&persInvDlg, SIGNAL(closed()), SLOT(persInvDlgClosed()));
+
+	if ((m_mode == KRFB_STAND_ALONE) ||
+	    (m_mode == KRFB_KINETD_MODE)) {
+		connect(&expirationTimer, SIGNAL(timeout()), SLOT(invalidateOldInvitations()));
+		expirationTimer.start(1000*60);
+	}
 }
 
 Configuration::Configuration(bool oneConnection, bool askOnConnect,
@@ -154,10 +95,6 @@ Configuration::Configuration(bool oneConnection, bool askOnConnect,
 Configuration::~Configuration() {
 }
 
-void Configuration::configChanged() {
-	confDlg.applyButton->setEnabled(true);
-}
-
 void Configuration::loadFromKConfig() {
 	if (KRFB_STAND_ALONE_CMDARG == mode())
 		return;
@@ -165,6 +102,7 @@ void Configuration::loadFromKConfig() {
 	allowUninvitedFlag = c.readBoolEntry("allowUninvited", true);
 	askOnConnectFlag = c.readBoolEntry("confirmUninvitedConnection", true);
 	allowDesktopControlFlag = c.readBoolEntry("allowDesktopControl", false);
+	showInvDlgOnStartupFlag = c.readBoolEntry("shovInvDlgOnStartup", false);
 	passwordString = c.readEntry("uninvitedPassword", "");
 
 	invitationList.clear();
@@ -174,12 +112,16 @@ void Configuration::loadFromKConfig() {
 		invitationList.push_back(Invitation(&c, i));
 
 	confDlg.applyButton->setEnabled(false);
+	invalidateOldInvitations();
 }
 
 void Configuration::loadFromDialogs() {
 	allowUninvitedFlag = confDlg.allowUninvitedCB->isChecked();
 	askOnConnectFlag = confDlg.askOnConnectCB->isChecked();
 	allowDesktopControlFlag = confDlg.allowDesktopControlCB->isChecked();
+
+	showInvDlgOnStartupFlag = invDlg.dontShowOnStartupButton->isChecked();
+
 	QString newPassword = confDlg.passwordInput->text();
 	if (passwordString != newPassword) {
 		passwordString = newPassword;
@@ -195,6 +137,7 @@ void Configuration::saveToKConfig() {
 	c.writeEntry("confirmUninvitedConnection", askOnConnectFlag);
 	c.writeEntry("allowDesktopControl", allowDesktopControlFlag);
 	c.writeEntry("allowUninvited", allowUninvitedFlag);
+	c.writeEntry("shovInvDlgOnStartup", showInvDlgOnStartupFlag);
 	c.writeEntry("uninvitedPassword", passwordString);
 
 	c.setGroup("invitations");
@@ -213,20 +156,49 @@ void Configuration::saveToDialogs() {
 	confDlg.allowDesktopControlCB->setChecked(allowDesktopControlFlag);
 	confDlg.passwordInput->setText(passwordString);
 
+	invDlg.dontShowOnStartupButton->setChecked(showInvDlgOnStartupFlag);
+
+	invalidateOldInvitations();
 	QValueList<Invitation>::iterator it = invitationList.begin();
 	while (it != invitationList.end()) {
 		Invitation &inv = *(it++);
 		if (!inv.getViewItem())
-			inv.setViewItem(new KListViewItem(invDlg.listView,
+			inv.setViewItem(new KListViewItem(invMngDlg.listView,
 				inv.creationTime().toString(Qt::LocalDate),
 				inv.expirationTime().toString(Qt::LocalDate)));
 	}
+
+	invMngDlg.adjustSize();
 }
 
 void Configuration::reload() {
 	loadFromKConfig();
 	saveToDialogs();
 }
+
+Invitation Configuration::createInvitation() {
+	Invitation inv;
+	invitationList.push_back(inv);
+	emit passwordChanged();
+	return inv;
+}
+
+void Configuration::invalidateOldInvitations() {
+	bool changed = false;
+	QValueList<Invitation>::iterator it = invitationList.begin();
+	while (it != invitationList.end()) {
+		if (!(*it).isValid()) {
+			it = invitationList.remove(it);
+			changed = true;
+		}
+		else
+			it++;
+	}
+	if (changed)
+		emit passwordChanged();
+}
+
+///////// properties ///////////////////////////
 
 krfb_mode Configuration::mode() const {
 	return m_mode;
@@ -242,6 +214,10 @@ bool Configuration::askOnConnect() const {
 
 bool Configuration::allowDesktopControl() const {
 	return allowDesktopControlFlag;
+}
+
+bool Configuration::showInvitationDialogOnStartup() const {
+	return showInvDlgOnStartupFlag;
 }
 
 QString Configuration::password() const {
@@ -281,18 +257,10 @@ void Configuration::setPassword(QString password)
 	saveToDialogs();
 }
 
+////////////// config dialog //////////////////////////
+
 void Configuration::showConfigDialog() {
 	confDlg.show();
-}
-
-void Configuration::showManageInvitationsDialog() {
-	updateDialogs();
-	invDlg.show();
-}
-
-void Configuration::updateDialogs() {
-	saveToDialogs();
-	invDlg.adjustSize();
 }
 
 void Configuration::configOkPressed() {
@@ -311,15 +279,81 @@ void Configuration::configApplyPressed() {
 	saveToKConfig();
 }
 
+void Configuration::configChanged() {
+	confDlg.applyButton->setEnabled(true);
+}
+
+////////////// invitation manage dialog //////////////////////////
+
+void Configuration::showManageInvitationsDialog() {
+	saveToDialogs();
+	invMngDlg.show();
+}
+
+void Configuration::invMngDlgClosed() {
+	invMngDlg.hide();
+}
+
+void Configuration::invMngDlgDeleteOnePressed() {
+	QValueList<Invitation>::iterator it = invitationList.begin();
+		while (it != invitationList.end()) {
+			Invitation &ix = (*it);
+			KListViewItem *iv = ix.getViewItem();
+			if (iv && iv->isSelected())
+				it = invitationList.remove(it);
+			else
+				it++;
+		}
+	emit passwordChanged();
+}
+
+void Configuration::invMngDlgDeleteAllPressed() {
+	invitationList.clear();
+	saveToKConfig();
+	emit passwordChanged();
+}
+
+////////////// invitation dialog //////////////////////////
+
+void Configuration::showInvitationDialog() {
+	invMngDlg.newButton->setEnabled(false);
+	invDlg.show();
+}
+
 void Configuration::invDlgClosed() {
+	loadFromDialogs();
+	saveToKConfig();
 	invDlg.hide();
+	invMngDlg.newButton->setEnabled(true);
 }
 
-void Configuration::invDlgDeleteOnePressed() {
+
+////////////// personal invitation dialog //////////////////////////
+
+void Configuration::showPersonalInvitationDialog() {
+	invDlgClosed();
+
+	Invitation inv = createInvitation();
+	saveToDialogs();
+	invDlg.createInvitationButton->setEnabled(false);
+	persInvDlg.passwordLabel->setText(inv.password());
+	persInvDlg.expirationLabel->setText(
+		inv.expirationTime().toString(Qt::LocalDate));
+	persInvDlg.show();
 }
 
-void Configuration::invDlgDeleteAllPressed() {
+void Configuration::persInvDlgClosed() {
+	persInvDlg.hide();
+	invDlg.createInvitationButton->setEnabled(true);
 }
 
+////////////// invite email //////////////////////////
+
+void Configuration::inviteEmail() {
+	invDlgClosed();
+	Invitation inv = createInvitation();
+	saveToDialogs();
+	// TODO: start mail client
+}
 
 #include "configuration.moc"

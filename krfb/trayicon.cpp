@@ -51,7 +51,7 @@ TrayIcon::TrayIcon(KDialog *d, Configuration *c) :
 	aboutAction->plug(contextMenu());
 
 	connect(configureAction, SIGNAL(activated()), SIGNAL(showConfigure()));
-	connect(manageInvitationsAction, SIGNAL(activated()), 
+	connect(manageInvitationsAction, SIGNAL(activated()),
 		SIGNAL(showManageInvitations()));
 	connect(aboutAction, SIGNAL(activated()), SLOT(showAbout()));
 	connect(closeConnectionAction, SIGNAL(activated()),

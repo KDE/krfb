@@ -18,15 +18,18 @@
 #ifndef CONFIGURATION_H
 #define CONFIGURATION_H
 
+#include "invitation.h"
+
 #include "configurationdialog.h"
 #include "manageinvitations.h"
+#include "personalinvitation.h"
+#include "invite.h"
 
-#include <klistview.h>
 #include <kconfig.h>
+#include <qtimer.h>
 #include <qobject.h>
 #include <qvalidator.h>
 #include <qstring.h>
-#include <qdatetime.h>
 
 enum krfb_mode {
 	KRFB_UNKNOWN_MODE = 0,
@@ -43,7 +46,6 @@ public:
 signals:
 	void closed();
 };
-
 class ManageInvitationsDialog2 : public ManageInvitationsDialog {
 	Q_OBJECT
 public:
@@ -51,35 +53,24 @@ public:
 signals:
 	void closed();
 };
-
-class Invitation {
+class InvitationDialog2 : public InvitationDialog {
+	Q_OBJECT
 public:
-	Invitation();
-	~Invitation();
-	Invitation(KConfig* config, int num);
-	Invitation(const QString &tmpPassword, const QDateTime &expirationTime,
-		const QDateTime &creationTime);
-	Invitation(const Invitation &x);
-	Invitation &operator= (const Invitation&x);
-
-	QString password() const;
-	QDateTime expirationTime() const;
-	QDateTime creationTime() const;
-
-	void setViewItem(KListViewItem*);
-	KListViewItem* getViewItem() const;
-	void save(KConfig *config, int num) const;
-private:
-	QString m_password;
-	QDateTime m_creationTime;
-	QDateTime m_expirationTime;
-
-	KListViewItem *m_viewItem;
+	virtual void closeEvent(QCloseEvent *);
+signals:
+	void closed();
 };
-KListViewItem
+class PersonalInvitationDialog2 : public PersonalInvitationDialog {
+	Q_OBJECT
+public:
+	virtual void closeEvent(QCloseEvent *);
+signals:
+	void closed();
+};
+
 /**
  * This class stores the app's configuration, manages the
- * standalone-config-dialog and the manage-invitations-dialog
+ * standalone-config-dialog and all the invitation dialogs
  * @author Tim Jansen
  */
 class Configuration : public QObject {
@@ -94,6 +85,7 @@ public:
 	bool oneConnection() const;
 	bool askOnConnect() const;
 	bool allowDesktopControl() const;
+	bool showInvitationDialogOnStartup() const;
 	QString password() const;
 
         void setOnceConnection(bool oneConnection);
@@ -105,28 +97,37 @@ public:
 	QValueList<Invitation> &invitations();
 signals:
   	void passwordChanged();
-	void createInvitation();
 
 public slots:
 	void showConfigDialog();
 	void showManageInvitationsDialog();
-	void updateDialogs();
+	void showInvitationDialog();
+	void showPersonalInvitationDialog();
+	void inviteEmail();
+
+	void invalidateOldInvitations();
 
 private:
         void loadFromKConfig();
         void loadFromDialogs();
         void saveToKConfig();
         void saveToDialogs();
+	Invitation createInvitation();
 
 	krfb_mode m_mode;
 
         ConfigurationDialog2 confDlg;
-	ManageInvitationsDialog2 invDlg;
+	ManageInvitationsDialog2 invMngDlg;
+	InvitationDialog2 invDlg;
+	PersonalInvitationDialog2 persInvDlg;
+	QTimer expirationTimer;
 
 	bool askOnConnectFlag;
 	bool allowDesktopControlFlag;
 	bool allowUninvitedFlag;
 	bool oneConnectionFlag;
+	
+	bool showInvDlgOnStartupFlag;
 
 	QString passwordString;
 	QValueList<Invitation> invitationList;
@@ -136,9 +137,13 @@ private slots:
 	void configApplyPressed();
 	void configChanged();
 
+	void invMngDlgClosed();
+	void invMngDlgDeleteOnePressed();
+	void invMngDlgDeleteAllPressed();
+	
 	void invDlgClosed();
-	void invDlgDeleteOnePressed();
-	void invDlgDeleteAllPressed();
+
+	void persInvDlgClosed();
 };
 
 #endif

@@ -475,13 +475,13 @@ void RFBController::idleSlot()
 	checkAsyncEvents();
 }
 
-void RFBController::dialogAccepted() 
+void RFBController::dialogAccepted()
 {
 	dialog.hide();
 	acceptConnection(dialog.allowRemoteControlCB->isChecked());
 }
 
-void RFBController::dialogRefused() 
+void RFBController::dialogRefused()
 {
 	refuseConnection();
 	dialog.hide();
@@ -489,15 +489,18 @@ void RFBController::dialogRefused()
 }
 
 bool checkPassword(const QString &p,
-	unsigned char *challenge,
+	unsigned char *ochallenge,
 	const char *response,
 	int len) {
 
-	char passwd[8];
-
-	bzero(passwd, 8);
+	char passwd[MAXPWLEN];
+	char challenge[CHALLENGESIZE];
+	
+	memcpy(challenge, ochallenge, CHALLENGESIZE);
+	bzero(passwd, MAXPWLEN);
 	if (!p.isNull())
-		strncpy(passwd, p.latin1(), (8 <= p.length()) ? 8 : p.length());
+		strncpy(passwd, p.latin1(),
+			(MAXPWLEN <= p.length()) ? MAXPWLEN : p.length());
 
 	vncEncryptBytes(challenge, passwd);
 	return memcmp(challenge, response, len) == 0;
@@ -515,7 +518,8 @@ bool RFBController::handleCheckPassword(rfbClientPtr cl,
 			configuration->invitations().begin();
 		while (it != configuration->invitations().end()) {
 			if (checkPassword((*it).password(),
-				cl->authChallenge, response, len)) {
+				cl->authChallenge, response, len) &&
+				(*it).isValid()) {
 				authd = true;
 				configuration->invitations().remove(it);
 				break;
@@ -601,8 +605,13 @@ void RFBController::handlePointerEvent(int button_mask, int x, int y) {
 }
 
 void RFBController::passwordChanged() {
-	server->rfbAuthPasswdData = (void*) 
-		((configuration->password().length() == 0) ? 0 :  1);
+	bool b = false;
+
+	if(configuration->password().length() == 0)
+		b = true;
+	if(configuration->invitations().count() > 0)
+		b = true;
+	server->rfbAuthPasswdData = (void*) (b ? 1 : 0);
 }
 
 int RFBController::getPort()
@@ -611,7 +620,7 @@ int RFBController::getPort()
 }
 
 void RFBController::sendDelayedKNotifyEvent(QString name,
-					    QString desc) 
+					    QString desc)
 {
 	if (asyncKNotifyEvent)
 		return;
