@@ -5,7 +5,7 @@ kde_module_LTLIBRARIES = kcm_krfb.la
 
 kcm_krfb_la_SOURCES = configurationwidget.ui kcm_krfb.cpp
 kcm_krfb_la_LDFLAGS  = $(all_libraries) $(KDE_PLUGIN) -module
-kcm_krfb_la_LIBADD   = ../krfb/libkrfbconfig.la $(LIB_KDEUI)
+kcm_krfb_la_LIBADD   = ../krfb/libkrfbconfig.la $(LIB_KDEUI) -lkio
 
 # Services
 xdg_apps_DATA = kcmkrfb.desktop

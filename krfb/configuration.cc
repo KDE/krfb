@@ -35,6 +35,8 @@
 #include <qlineedit.h>
 #include <qcheckbox.h>
 
+#include <krun.h>
+
 /**
  * Note that this class is used and provides GUI in every mode:
  * - for the invitation dialogs
@@ -465,9 +467,7 @@ void Configuration::inviteEmail() {
 ////////////// invoke kcontrol module //////////////////////////
 
 void Configuration::showConfigurationModule() {
-	KProcess p;
-	p << "kcmshell" << "Network/kcmkrfb";
-	p.start(KProcess::DontCare);
+		KRun::run( "kcmshell kcmkrfb", KURL::List() );
 }
 
 

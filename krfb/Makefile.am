@@ -12,7 +12,7 @@ bin_PROGRAMS = krfb
 krfb_SOURCES = rfbcontroller.cc xupdatescanner.cc main.cpp \
                connectionwidget.ui krfbifaceimpl.cc krfbiface.skel \
                trayicon.cpp connectiondialog.cc
-krfb_LDADD   = libkrfbconfig.la ../libvncserver/libvncserver.la ../srvloc/libsrvloc.la -lXtst $(LIB_KDEUI) $(LIBJPEG) 
+krfb_LDADD   = libkrfbconfig.la ../libvncserver/libvncserver.la ../srvloc/libsrvloc.la -lXtst $(LIB_KDEUI) $(LIBJPEG) -lkio 
 krfb_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 
 appdatadir = $(kde_datadir)/krfb/pics
