@@ -17,8 +17,6 @@ EXTRA_DIST = $(kded_kinetd_la_SOURCES)\
              $(kde_servicetypes_DATA) \
 	     eventsrc README.debugging
 
-KDE_ICON = kinetd
-
 install-data-local:
 	$(mkinstalldirs) $(DESTDIR)$(kde_datadir)/kinetd
 	$(INSTALL_DATA) $(srcdir)/eventsrc $(DESTDIR)$(kde_datadir)/kinetd/eventsrc
