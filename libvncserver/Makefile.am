@@ -9,7 +9,6 @@ libvncserver_la_SOURCES = main.c rfbserver.c sraRegion.c auth.c sockets.c \
 
 EXTRA_DIST = CHANGES COPYING README TODO
 
-CFLAGS = @CFLAGS@ -DHAVE_PTHREADS -DALLOW24BPP -Wno-unused
-
-
+AM_CPPFLAGS = -DHAVE_PTHREADS -DALLOW24BPP
+AM_CFLAGS = -Wno-unused
 
