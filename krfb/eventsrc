@@ -3,34 +3,41 @@ IconName=krfb
 Comment=Desktop Sharing
 Comment[af]=werkskerm deeling
 Comment[da]=Skrivebords-deling
+Comment[el]=Μοίρασμα επιφάνειας εργασίας
 Comment[ro]=Partajare ecran
 
 [UserAcceptsConnection]
 Name=UserAcceptsConnection
 Name[da]=BrugerAcceptererForbindelse
+Name[el]=Ο χρήστης δέχεται σύνδεση
 Name[ro]=Conexiune acceptată de utilizator
 Comment=User accepts connection
 Comment[af]=gebruiker aanvaar verbinding
 Comment[da]=Bruger accepterer forbindelse
+Comment[el]=Ο χρήστης δέχεται σύνδεση
 Comment[ro]=Utilizatorul acceptă conexiunea
 default_presentation=4
 
 [UserRefusesConnection]
 Name=UserRefusesConnection
 Name[da]=BrugerAfslårForbindelse
+Name[el]=Ο χρήστης δε δέχεται σύνδεση
 Name[ro]=Conexiune respinsă de utilizator
 Comment=User refuses connection
 Comment[da]=Bruger afslår forbindelse
+Comment[el]=Ο χρήστης δε δέχεται σύνδεση
 Comment[ro]=Utilizatorul refuză conexiunea
 default_presentation=4
 
 [ConnectionClosed]
 Name=ConnectionClosed
 Name[da]=ForbindelseLukket
+Name[el]=Η σύνδεση έκλεισε
 Name[ro]=Conexiune închisă
 Comment=Connection closed
 Comment[af]=verbinding gesluit
 Comment[da]=Forbindelse lukket
+Comment[el]=Η σύνδεση έκλεισε
 Comment[ro]=Conexiune închisă
 default_presentation=4
 
@@ -38,11 +45,13 @@ default_presentation=4
 Name=InvalidPassword
 Name[be]=Некарэктны пароль
 Name[da]=UgyldigtKodeord
+Name[el]=Λάθος κωδικός πρόσβασης
 Name[ro]=Parolă eronată
 Comment=Invalid password
 Comment[af]=ongeldige wagwoord
 Comment[be]=Некарэктны пароль
 Comment[da]=Ugyldigt kodeord
+Comment[el]=Λάθος κωδικός πρόσβασης
 Comment[ro]=Parolă eronată
 default_presentation=4
 
@@ -52,35 +61,42 @@ Name[da]=UgyldigtKodeordInvitationer
 Comment=The invited party sent an invalid password. Connection refused.
 Comment[af]=die uitgenooi party gestuur 'n ongeldige wagwoord. verbinding geweier.
 Comment[da]=Den inviterede part sendte et ugyldigt kodeord. Forbindelse afslået.
+Comment[el]=Η προσκαλεσμένη ομάδα έστειλε άκυρο κωδικό πρόσβασης. Η σύνδεση απορρίφθηκε.
 default_presentation=2
 
 [NewConnectionOnHold]
 Name=NewConnectionOnHold
 Name[da]=NyForbindelseOnHold
+Name[el]=Νέα σύνδεση σε αναμονή
 Name[ro]=Conexiune nouă în aşteptare
 Comment=Connection requested, user must accept
 Comment[af]=verbinding versoekte, gebruiker moet aanvaar
 Comment[da]=Forbindelse forespurgt, bruger skal acceptere
+Comment[el]=Ζητήθηκε σύνδεση, ο χρήστης πρέπει να αποδεχθεί
 Comment[ro]=Cerere de conectare; utilizatorul trebuie să accepte
 default_presentation=4
 
 [NewConnectionAutoAccepted]
 Name=NewConnectionAutoAccepted
 Name[da]=NyForbindelseAutoAccepteret
+Name[el]=Αυτόματη αποδοχή νέας σύνδεσης
 Name[ro]=Conexiune nouă acceptată automat
 Comment=New connection automatically established
 Comment[af]=nuwe verbinding automaties vasgestel
 Comment[da]=Ny forbindelse automatisk etableret
+Comment[el]=Νέα σύνδεση αυτόματα αποκαταστάθηκε
 Comment[ro]=Conexiune nouă stabilită automat
 default_presentation=4
 
 [TooManyConnections]
 Name=TooManyConnections
 Name[da]=ForMangeForbindelser
+Name[el]=Πάρα πολλές συνδέσεις
 Name[ro]=Prea multe conexiuni
 Comment=Busy, connection refused
 Comment[af]=besig, verbinding geweier
 Comment[da]=Optaget, forbindelse afslået
+Comment[el]=Απασχολημένο, η σύνδεση απορρίφθηκε
 Comment[ro]=Ocupat; conexiune refuzată
 default_presentation=4
 default_logfile=
@@ -88,10 +104,12 @@ default_logfile=
 [UnexpectedConnection]
 Name=UnexpectedConnection
 Name[da]=UventetForbindelse
+Name[el]=Μη αναμενόμενη σύνδεση
 Name[ro]=Conexiune neaşteptată
 Comment=Received unexpected connection, abort
 Comment[af]=ontvang onverwagte verbinding, staak
 Comment[da]=Modtog uventet forbindelse, afbrød
+Comment[el]=Λήψη μη αναμενόμενης σύνδεσης, διακοπή
 Comment[ro]=A fost recepţionată o conexiune neaşteptată şi a fost anulată
 default_presentation=4
 
