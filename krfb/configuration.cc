@@ -171,14 +171,30 @@ void Configuration::doKinetdConf() {
 	}
 }
 
+/*
+ * Function for (en/de)crypting strings for config file, taken from KMail
+ * Author: Stefan Taferner <taferner@alpin.or.at>
+ */
+QString cryptStr(const QString &aStr) {
+	QString result;
+	for (unsigned int i = 0; i < aStr.length(); i++)
+		result += (aStr[i].unicode() < 0x20) ? aStr[i] :
+			QChar(0x1001F - aStr[i].unicode());
+	return result;
+}
+
 void Configuration::loadFromKConfig() {
 
 	KConfig c("krfbrc");
 	allowUninvitedFlag = c.readBoolEntry("allowUninvited", false);
 	askOnConnectFlag = c.readBoolEntry("confirmUninvitedConnection", true);
 	allowDesktopControlFlag = c.readBoolEntry("allowDesktopControl", false);
-	passwordString = c.readEntry("uninvitedPassword", "");
 	preferredPortNum = c.readNumEntry("preferredPort", -1);
+	if (c.hasKey("uninvitedPasswordCrypted"))
+		passwordString = cryptStr(c.readEntry("uninvitedPasswordCrypted", ""));
+	else
+		passwordString = c.readEntry("uninvitedPassword", "");
+
 
 	unsigned int invNum = invitationList.size();
 	invitationList.clear();
@@ -198,8 +214,9 @@ void Configuration::saveToKConfig() {
 	c.writeEntry("confirmUninvitedConnection", askOnConnectFlag);
 	c.writeEntry("allowDesktopControl", allowDesktopControlFlag);
 	c.writeEntry("allowUninvited", allowUninvitedFlag);
-	c.writeEntry("uninvitedPassword", passwordString);
 	c.writeEntry("preferredPort", preferredPortNum);
+	c.writeEntry("uninvitedPasswordCrypted", cryptStr(passwordString));
+	c.deleteEntry("uninvitedPassword");
 
 	c.setGroup("invitations");
 	int num = invitationList.count();
