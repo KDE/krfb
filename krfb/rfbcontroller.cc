@@ -360,6 +360,7 @@ void RFBController::startServer(int inetdFd, bool xtestGrab)
 	server->rfbServerFormat.depth = framebufferImage->depth;
 	//rfbEndianTest = framebufferImage->bitmap_bit_order != MSBFirst;
 	server->rfbServerFormat.trueColour = (CARD8) TRUE;
+	server->rfbServerFormat.bigEndian =  (CARD8) ((framebufferImage->bitmap_bit_order == MSBFirst) ? TRUE : FALSE);
 
 	if ( server->rfbServerFormat.bitsPerPixel == 8 ) {
 		server->rfbServerFormat.redShift = 0;
