@@ -5,13 +5,13 @@ METASOURCES = AUTO
 noinst_LTLIBRARIES = libkrfbconfig.la
 libkrfbconfig_la_SOURCES = configuration.cc manageinvitations.ui \
                            personalinvitation.ui invite.ui invitation.cc
-libkrfbconfig_la_LIBADD = ../srvloc/libsrvloc.la -lslp $(LIB_KDEUI)
+libkrfbconfig_la_LIBADD = ../srvloc/libsrvloc.la $(LIB_KDEUI)
 
 bin_PROGRAMS = krfb
 krfb_SOURCES = rfbcontroller.cc xupdatescanner.cc main.cpp \
                newconnectiondialog.ui krfbifaceimpl.cc krfbiface.skel \
                trayicon.cpp
-krfb_LDADD   = libkrfbconfig.la ../libvncserver/libvncserver.la ../srvloc/libsrvloc.la -lXtst $(LIB_KDEUI) $(LIBJPEG) -lslp
+krfb_LDADD   = libkrfbconfig.la ../libvncserver/libvncserver.la ../srvloc/libsrvloc.la -lXtst $(LIB_KDEUI) $(LIBJPEG) 
 krfb_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 
 noinst_HEADER = configuration.h invitation.h invite.h krfbiface.h \

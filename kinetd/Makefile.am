@@ -6,7 +6,7 @@ lib_LTLIBRARIES = libkded_kinetd.la
 libkded_kinetd_la_SOURCES = kinetd.cpp kinetd.skel
 libkded_kinetd_la_LDFLAGS  = $(all_libraries) -module -avoid-version
 libkded_kinetd_la_LIBADD   = ../srvloc/libsrvloc.la $(LIB_QT) $(LIB_KDECORE) \
-	$(LIB_KDEUI) -lslp
+	$(LIB_KDEUI) 
 
 # Services
 kde_servicetypes_DATA = kinetdmodule.desktop
