@@ -7,6 +7,7 @@ Comment[el]=Μοίρασμα επιφάνειας εργασίας
 Comment[hr]=Dijeljenje radne površine
 Comment[ro]=Partajare ecran
 Comment[sv]=Skrivbordsdelning
+Comment[tr]=Masaüstü Paylaşımı
 
 [UserAcceptsConnection]
 Name=UserAcceptsConnection
@@ -22,6 +23,7 @@ Comment[el]=Ο χρήστης δέχεται σύνδεση
 Comment[hr]=Korisnik prihvaća vezu
 Comment[ro]=Utilizatorul acceptă conexiunea
 Comment[sv]=Användaren accepterar anslutning
+Comment[tr]=Kullanıcı bağlantıyı kabul etti
 default_presentation=4
 
 [UserRefusesConnection]
@@ -37,6 +39,7 @@ Comment[el]=Ο χρήστης δε δέχεται σύνδεση
 Comment[hr]=Korisnik odbija vezu
 Comment[ro]=Utilizatorul refuză conexiunea
 Comment[sv]=Användaren vägrar anslutning
+Comment[tr]=Kullanıcı bağlantıyı iptal etti
 default_presentation=4
 
 [ConnectionClosed]
@@ -46,6 +49,7 @@ Name[el]=Η σύνδεση έκλεισε
 Name[hr]=VezaPrekinuta
 Name[ro]=Conexiune închisă
 Name[sv]=Anslutning stängd
+Name[tr]=Bağlantı Kapatıldı
 Comment=Connection closed
 Comment[af]=verbinding gesluit
 Comment[da]=Forbindelse lukket
@@ -53,6 +57,7 @@ Comment[el]=Η σύνδεση έκλεισε
 Comment[hr]=Veza prekinuta
 Comment[ro]=Conexiune închisă
 Comment[sv]=Anslutning stängd
+Comment[tr]=Bağlantı kesildi
 default_presentation=4
 
 [InvalidPassword]
@@ -63,6 +68,7 @@ Name[el]=Λάθος κωδικός πρόσβασης
 Name[hr]=NevažećaLozinka
 Name[ro]=Parolă eronată
 Name[sv]=Ogiltigt lösenord
+Name[tr]=Geçersiz Parola
 Comment=Invalid password
 Comment[af]=ongeldige wagwoord
 Comment[be]=Некарэктны пароль
@@ -71,6 +77,7 @@ Comment[el]=Λάθος κωδικός πρόσβασης
 Comment[hr]=Nevažeća lozinka
 Comment[ro]=Parolă eronată
 Comment[sv]=Ogiltigt lösenord
+Comment[tr]=Geçersiz parola
 default_presentation=4
 
 [InvalidPasswordInvitations]
@@ -124,6 +131,7 @@ Name[el]=Πάρα πολλές συνδέσεις
 Name[hr]=PrevišeVeza
 Name[ro]=Prea multe conexiuni
 Name[sv]=För många anslutningar
+Name[tr]=ÇokFazlaBağlantı
 Comment=Busy, connection refused
 Comment[af]=besig, verbinding geweier
 Comment[da]=Optaget, forbindelse afslået
@@ -141,6 +149,7 @@ Name[el]=Μη αναμενόμενη σύνδεση
 Name[hr]=NeočekivanaVeza
 Name[ro]=Conexiune neaşteptată
 Name[sv]=Oväntad anslutning
+Name[tr]=Beklenmedik Bağlantı
 Comment=Received unexpected connection, abort
 Comment[af]=ontvang onverwagte verbinding, staak
 Comment[da]=Modtog uventet forbindelse, afbrød
