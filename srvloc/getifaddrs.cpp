@@ -38,6 +38,10 @@
 #include <netinet/in.h>
 #include <stdio.h>
 
+#ifndef IF_NAMESIZE
+#define IF_NAMESIZE IFNAMSIZ
+#endif
+
 #ifdef SIOCGIFCONF
 
 #define old_siocgifconf 0
