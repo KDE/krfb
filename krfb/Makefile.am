@@ -12,7 +12,7 @@ krfb_SOURCES = rfbcontroller.cc xupdatescanner.cc main.cpp \
                newconnectiondialog.ui krfbifaceimpl.cc krfbiface.skel \
                trayicon.cpp kpassivepopup.cpp
 
-krfb_LDADD   = libkrfbconfig.la ../libvncserver/libvncserver.la -lXtst $(LIB_KDEUI) -ljpeg
+krfb_LDADD   = libkrfbconfig.la ../libvncserver/libvncserver.la -lXtst $(LIB_KDEUI) $(LIBJPEG)
 krfb_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 
 noinst_HEADER = configuration.h invitation.h invite.h krfbiface.h \
