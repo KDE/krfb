@@ -68,6 +68,7 @@ Name[pt_BR]=Rejeita Conexões do Usuário
 Name[ro]=Conexiune respinsă de utilizator
 Name[sv]=Användaren vägrar anslutning
 Comment=User refuses connection
+Comment[af]=gebruiker weier verbinding
 Comment[bs]=Korisnik odbija konekciju
 Comment[ca]=L'usuari refusa la connexió
 Comment[da]=Bruger afslår forbindelse
