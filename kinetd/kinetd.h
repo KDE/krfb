@@ -35,7 +35,7 @@ class PortListener : public QObject {
 private:
 	bool m_valid;
 	QString m_serviceName;
-	QString m_serviceURL, m_serviceAttributes;
+	QString m_serviceURL, m_serviceAttributes, m_registeredServiceURL;
 	int m_port;
 	int m_portBase, m_autoPortRange;
 	int m_defaultPortBase, m_defaultAutoPortRange;
@@ -71,7 +71,7 @@ public:
 	QDateTime expiration();
 	bool isEnabled();
 	int port();
-	QString serviceURL();
+	QString processServiceTemplate(const QString &a);
 	bool setPort(int port = -1, int autoProbeRange = 1);
 
 private slots:

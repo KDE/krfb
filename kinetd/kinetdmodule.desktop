@@ -47,6 +47,8 @@ Type=bool
 # the port is open. The following strings will be substituted:
 # %h with the local IP address
 # %p with the port number
+# %u with the user's login name
+# %f with the user's full name
 [PropertyDef::X-KDE-KINETD-serviceURL]
 Type=QString
 
@@ -54,6 +56,8 @@ Type=QString
 # The following strings will be substituted:
 # %h with the local IP address
 # %p with the port number
+# %u with the user's login name
+# %f with the user's full name
 [PropertyDef::X-KDE-KINETD-serviceAttributes]
 Type=QString
 

@@ -12,6 +12,7 @@ X-KDE-KINETD-enabled=false
 X-KDE-KINETD-argument=--kinetd
 X-KDE-KINETD-multiInstance=false
 X-KDE-KINETD-serviceURL=service:remotedesktop.kde:vnc://%h:%p
+X-KDE-KINETD-serviceAttributes=(username=%u),(fullname=%f)
 
 Name=KRfb Desktop Sharing
 Name[bs]=KRfb dijeljenje desktopa

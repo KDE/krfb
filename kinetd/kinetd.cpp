@@ -19,6 +19,7 @@
 #include "kinetd.h"
 #include "kinetd.moc"
 #include "kinetaddr.h"
+#include "kuser.h"
 #include <qregexp.h>
 #include <kservicetype.h>
 #include <kdebug.h>
@@ -198,12 +199,16 @@ int PortListener::port() {
 	return m_port;
 }
 
-QString PortListener::serviceURL() {
-	KInetAddress *a = KInetAddress::getLocalAddress();
-	QString hostName = a->nodeName();
-	delete a;
-	return m_serviceURL.replace(QRegExp("%h"), hostName)
-		.replace(QRegExp("%p"), QString::number(m_port));
+QString PortListener::processServiceTemplate(const QString &a) {
+	KInetAddress *kia = KInetAddress::getLocalAddress();
+	QString hostName = kia->nodeName();
+	delete kia;
+	KUser u;
+	QString x = a; // replace does not work in const QString. Why??
+	return x.replace(QRegExp("%h"), hostName)
+		.replace(QRegExp("%p"), QString::number(m_port))
+		.replace(QRegExp("%u"), u.loginName())
+		.replace(QRegExp("%f"), u.fullName());
 }
 
 bool PortListener::setPort(int port, int autoPortRange) {
@@ -280,12 +285,14 @@ void PortListener::setServiceRegistrationEnabledInternal(bool e) {
 		return;
 
         if (m_enabled && e) {
-		m_serviceRegistered = m_srvreg->registerService(serviceURL(), 
-								m_serviceAttributes);
+		m_registeredServiceURL = processServiceTemplate(m_serviceURL);
+		m_serviceRegistered = m_srvreg->registerService(
+			m_registeredServiceURL, 
+			processServiceTemplate(m_serviceAttributes));
 		if (!m_serviceRegistered) 
                       kdDebug(7021) << "Failure registering SLP service (no slpd running?)"<< endl;
 	} else {
-		m_srvreg->unregisterService(serviceURL());
+		m_srvreg->unregisterService(m_registeredServiceURL);
 		m_serviceRegistered = false;
 	}
 }
