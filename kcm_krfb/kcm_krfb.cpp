@@ -45,7 +45,7 @@ typedef KGenericFactory<KcmKRfb, QWidget> KcmKRfbFactory;
 
 // Can't use K_EXPORT_COMPONENT_FACTORY, since insertCatalogue necessary
 extern "C" {
-  void *init_kcm_krfb() {
+  KDE_EXPORT void *init_kcm_krfb() {
     KGlobal::locale()->insertCatalogue("krfb"); // For invitation translations
     return new KcmKRfbFactory("kcm_krfb"); 
   }
