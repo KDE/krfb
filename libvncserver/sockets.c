@@ -362,6 +362,7 @@ ReadExact(cl, buf, len)
     int n;
     fd_set fds;
     struct timeval tv;
+    int totalTimeWaited = 0;
 
     while (len > 0) {
         n = read(sock, buf, len);
@@ -383,18 +384,29 @@ ReadExact(cl, buf, len)
                 return n;
             }
 
+            /* Retry every 5 seconds until we exceed rfbMaxClientWait.  We
+               need to do this because select doesn't necessarily return
+               immediately when the other end has gone away */
+
             FD_ZERO(&fds);
             FD_SET(sock, &fds);
-            tv.tv_sec = rfbMaxClientWait / 1000;
-            tv.tv_usec = (rfbMaxClientWait % 1000) * 1000;
+
+            tv.tv_sec = 5;
+            tv.tv_usec = 0;
+
             n = select(sock+1, &fds, NULL, &fds, &tv);
             if (n < 0) {
                 rfbLogPerror("ReadExact: select");
                 return n;
             }
             if (n == 0) {
-                errno = ETIMEDOUT;
-                return -1;
+	        totalTimeWaited += 5000;
+                if (totalTimeWaited >= rfbMaxClientWait) {
+		    errno = ETIMEDOUT;
+		    return -1;
+		}
+            } else {
+                totalTimeWaited = 0;
             }
         }
     }
