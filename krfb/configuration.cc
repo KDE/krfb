@@ -35,20 +35,26 @@
 #include <qlineedit.h>
 #include <qcheckbox.h>
 
+/**
+ * Note that this class is used and provides GUI in every mode:
+ * - for the invitation dialogs
+ * - for the kcontrol module
+ * - for the running krfb instance
+ */
 Configuration::Configuration(krfb_mode mode) :
 	m_mode(mode),
 	invMngDlg(0, 0, true),
 	invDlg(0, 0, true),
 	persInvDlg(0, 0, true),
 	portNum(-1),
-	kinetdRef("kded", "kinetd")	
+	kinetdRef("kded", "kinetd")
 {
 	kinetdRef.setDCOPClient(KApplication::dcopClient());
 	loadFromKConfig();
 	saveToDialogs();
 	doKinetdConf();
 
-	connect(invMngDlg.newPersonalInvitationButton, SIGNAL(clicked()), 
+	connect(invMngDlg.newPersonalInvitationButton, SIGNAL(clicked()),
 		SLOT(showPersonalInvitationDialog()));
 	connect(invMngDlg.newEmailInvitationButton, SIGNAL(clicked()), SLOT(inviteEmail()));
 	connect(invMngDlg.deleteOneButton, SIGNAL(clicked()), SLOT(invMngDlgDeleteOnePressed()));
@@ -60,10 +66,12 @@ Configuration::Configuration(krfb_mode mode) :
 		SLOT(showPersonalInvitationDialog()));
 	connect(invDlg.createInvitationEMailButton, SIGNAL(clicked()),
 		SLOT(inviteEmail()));
-	connect(invDlg.manageInvitationButton, SIGNAL(clicked()),
+	connect(invDlg.manageInvitationsButton, SIGNAL(clicked()),
 		SLOT(showManageInvitationsDialog()));
+	connect(invDlg.configurationButton, SIGNAL(clicked()),
+		SLOT(showConfigurationModule()));
 	connect(this, SIGNAL(invitationNumChanged(int)), this, SLOT(changeInvDlgNum(int)));
-	connect(this, SIGNAL(invitationNumChanged(int)), 
+	connect(this, SIGNAL(invitationNumChanged(int)),
 		&invMngDlg, SLOT(listSizeChanged(int)));
         emit invitationNumChanged(invitationList.size());
 
@@ -86,9 +94,9 @@ void Configuration::setKInetdEnabled(const QDateTime &date) {
 }
 
 void Configuration::setKInetdServiceRegistrationEnabled(bool enabled) {
-	kinetdRef.send("setServiceRegistrationEnabled", 
+	kinetdRef.send("setServiceRegistrationEnabled",
 		       QString("krfb"), enabled);
-	kinetdRef.send("setServiceRegistrationEnabled", 
+	kinetdRef.send("setServiceRegistrationEnabled",
 		       QString("krfb_httpd"), enabled);
 }
 
@@ -100,7 +108,7 @@ void Configuration::getPortFromKInetd() {
 }
 
 void Configuration::setKInetdPort(int p) {
-	DCOPReply r = kinetdRef.call("setPort", 
+	DCOPReply r = kinetdRef.call("setPort",
 				     QString("krfb"), p, 1);
 	// nice error msg here?
 }
@@ -320,7 +328,7 @@ int Configuration::port() const
 // use p=-1 for defaults
 void Configuration::setPreferredPort(int p)
 {
-	preferredPortNum = p;		
+	preferredPortNum = p;
 }
 
 int Configuration::preferredPort() const
@@ -371,7 +379,7 @@ void Configuration::showInvitationDialog() {
 }
 
 void Configuration::changeInvDlgNum(int newNum) {
-	invDlg.manageInvitationButton->setText( i18n("&Manage Invitations (%1)...").arg(newNum) );
+	invDlg.manageInvitationsButton->setText( i18n("&Manage Invitations (%1)...").arg(newNum) );
 }
 
 ////////////// personal invitation dialog //////////////////////////
@@ -381,7 +389,7 @@ void Configuration::showPersonalInvitationDialog() {
 	Invitation inv = createInvitation();
 	save();
 	emit invitationNumChanged(invitationList.size());
-	
+
 	invDlg.createInvitationButton->setEnabled(false);
 	invMngDlg.newPersonalInvitationButton->setEnabled(false);
 
@@ -398,14 +406,14 @@ void Configuration::showPersonalInvitationDialog() {
 ////////////// invite email //////////////////////////
 
 void Configuration::inviteEmail() {
-	int r = KMessageBox::warningContinueCancel(0, 
+	int r = KMessageBox::warningContinueCancel(0,
 	   i18n("When sending an invitation by email, note that everybody who reads this email "
 		"will be able to connect to your computer for one hour, or until the first "
 		"successful connection took place, whatever comes first. \n"
 		"You should either encrypt the email or at least send it only in a "
 		"secure network, but not over the Internet."),
 						   i18n("Send Invitation via Email"),
-						   KStdGuiItem::cont(), 
+						   KStdGuiItem::cont(),
 						   "showEmailInvitationWarning");
 	if (r == KMessageBox::Cancel)
 		return;
@@ -440,5 +448,14 @@ void Configuration::inviteEmail() {
 			.arg(5800) // determine with dcop ... later ...
 			.arg(KGlobal::locale()->formatDateTime(inv.expirationTime())));
 }
+
+////////////// invoke kcontrol module //////////////////////////
+
+void Configuration::showConfigurationModule() {
+	KProcess p;
+	p << "kcmshell" << "Network/kcmkrfb";
+	p.start(KProcess::DontCare);
+}
+
 
 #include "configuration.moc"

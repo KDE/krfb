@@ -1,4 +1,4 @@
-<!DOCTYPE UI><UI version="3.1" stdsetdef="1">
+<!DOCTYPE UI><UI version="3.2" stdsetdef="1">
 <class>InvitationDialog</class>
 <widget class="QDialog">
     <property name="name">
@@ -8,8 +8,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>635</width>
-            <height>376</height>
+            <width>562</width>
+            <height>378</height>
         </rect>
     </property>
     <property name="caption">
@@ -28,45 +28,6 @@
         <property name="spacing">
             <number>6</number>
         </property>
-        <spacer row="1" column="0" rowspan="1" colspan="2">
-            <property name="name">
-                <cstring>Spacer4</cstring>
-            </property>
-            <property name="orientation">
-                <enum>Horizontal</enum>
-            </property>
-            <property name="sizeType">
-                <enum>Expanding</enum>
-            </property>
-            <property name="sizeHint">
-                <size>
-                    <width>20</width>
-                    <height>20</height>
-                </size>
-            </property>
-        </spacer>
-        <widget class="QPushButton" row="1" column="2">
-            <property name="name">
-                <cstring>closeButton</cstring>
-            </property>
-            <property name="sizePolicy">
-                <sizepolicy>
-                    <hsizetype>0</hsizetype>
-                    <vsizetype>0</vsizetype>
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                </sizepolicy>
-            </property>
-            <property name="text">
-                <string>&amp;Close</string>
-            </property>
-            <property name="toolTip" stdset="0">
-                <string>Closes this window.</string>
-            </property>
-            <property name="whatsThis" stdset="0">
-                <string>Closes this window.</string>
-            </property>
-        </widget>
         <widget class="QLabel" row="0" column="0">
             <property name="name">
                 <cstring>PixmapLabel1</cstring>
@@ -104,9 +65,94 @@
                 <bool>true</bool>
             </property>
         </widget>
-        <widget class="QFrame" row="0" column="1" rowspan="1" colspan="2">
+        <widget class="QLayoutWidget" row="1" column="0" rowspan="1" colspan="2">
+            <property name="name">
+                <cstring>layout3</cstring>
+            </property>
+            <hbox>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <spacer>
+                    <property name="name">
+                        <cstring>Spacer4</cstring>
+                    </property>
+                    <property name="orientation">
+                        <enum>Horizontal</enum>
+                    </property>
+                    <property name="sizeType">
+                        <enum>Expanding</enum>
+                    </property>
+                    <property name="sizeHint">
+                        <size>
+                            <width>220</width>
+                            <height>20</height>
+                        </size>
+                    </property>
+                </spacer>
+                <widget class="QPushButton">
+                    <property name="name">
+                        <cstring>configurationButton</cstring>
+                    </property>
+                    <property name="sizePolicy">
+                        <sizepolicy>
+                            <hsizetype>0</hsizetype>
+                            <vsizetype>0</vsizetype>
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                        </sizepolicy>
+                    </property>
+                    <property name="text">
+                        <string>C&amp;onfiguration...</string>
+                    </property>
+                    <property name="accel">
+                        <string>Alt+O</string>
+                    </property>
+                    <property name="whatsThis" stdset="0">
+                        <string>Use this button to see your invitations or to cancel them.</string>
+                    </property>
+                </widget>
+                <widget class="QPushButton">
+                    <property name="name">
+                        <cstring>closeButton</cstring>
+                    </property>
+                    <property name="sizePolicy">
+                        <sizepolicy>
+                            <hsizetype>0</hsizetype>
+                            <vsizetype>0</vsizetype>
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                        </sizepolicy>
+                    </property>
+                    <property name="text">
+                        <string>&amp;Close</string>
+                    </property>
+                    <property name="accel">
+                        <string>Alt+C</string>
+                    </property>
+                    <property name="default">
+                        <bool>true</bool>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>Closes this window.</string>
+                    </property>
+                    <property name="whatsThis" stdset="0">
+                        <string>Closes this window.</string>
+                    </property>
+                </widget>
+            </hbox>
+        </widget>
+        <widget class="QFrame" row="0" column="1">
             <property name="name">
                 <cstring>Frame19</cstring>
+            </property>
+            <property name="sizePolicy">
+                <sizepolicy>
+                    <hsizetype>3</hsizetype>
+                    <vsizetype>5</vsizetype>
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                </sizepolicy>
             </property>
             <property name="frameShape">
                 <enum>NoFrame</enum>
@@ -145,20 +191,34 @@
                         <string>Welcome to KDE Desktop Sharing</string>
                     </property>
                 </widget>
-                <widget class="QLabel">
+                <widget class="KActiveLabel">
                     <property name="name">
-                        <cstring>TextLabel1</cstring>
+                        <cstring>kActiveLabel1</cstring>
+                    </property>
+                    <property name="sizePolicy">
+                        <sizepolicy>
+                            <hsizetype>3</hsizetype>
+                            <vsizetype>3</vsizetype>
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                        </sizepolicy>
                     </property>
                     <property name="text">
-                        <string>KDE Desktop Sharing allows you to invite somebody at a remote location to watch and possibly control your desktop. To invite somebody using email, press the 'Invite via Email' button. If you would like to tell somebody how to login personally, or via telephone, use the 'Create Personal Invitation' button. To see existing invitations or cancel them use the 'Manage Invitations' button.</string>
-                    </property>
-                    <property name="alignment">
-                        <set>WordBreak|AlignTop</set>
+                        <string>KDE Desktop Sharing allows you to invite somebody at a remote location to watch and possibly control your desktop.
+&lt;a href="whatsthis:&lt;p&gt;An invitation creates a one-time password that allows the receiver to connect to your desktop. It is valid for only one successful connection and will expire after an hour if it has not been used. When somebody connects to your computer a dialog will appear and ask you for permission. The connection will not be established before you accept it. In this dialog you can also restrict the other person to view your desktop only, without the ability to move your mouse pointer or press keys.&lt;/p&gt;&lt;p&gt;If you want to create a permanent password for Desktop Sharing, allow 'Uninvited Connections' in the configuration."&gt;More about invitations...&lt;/a&gt;</string>
                     </property>
                 </widget>
                 <widget class="QFrame">
                     <property name="name">
-                        <cstring>Frame10</cstring>
+                        <cstring>Frame9_2</cstring>
+                    </property>
+                    <property name="sizePolicy">
+                        <sizepolicy>
+                            <hsizetype>3</hsizetype>
+                            <vsizetype>5</vsizetype>
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                        </sizepolicy>
                     </property>
                     <property name="frameShape">
                         <enum>NoFrame</enum>
@@ -208,22 +268,44 @@
                                     <property name="name">
                                         <cstring>createInvitationButton</cstring>
                                     </property>
+                                    <property name="sizePolicy">
+                                        <sizepolicy>
+                                            <hsizetype>3</hsizetype>
+                                            <vsizetype>0</vsizetype>
+                                            <horstretch>0</horstretch>
+                                            <verstretch>0</verstretch>
+                                        </sizepolicy>
+                                    </property>
                                     <property name="text">
                                         <string>Create &amp;Personal Invitation...</string>
+                                    </property>
+                                    <property name="accel">
+                                        <string>Alt+P</string>
                                     </property>
                                     <property name="toolTip" stdset="0">
                                         <string></string>
                                     </property>
                                     <property name="whatsThis" stdset="0">
-                                        <string>Will create a new invitation and display it to you. Use this option if you want to invite somebody personally.</string>
+                                        <string>Create a new invitation and display the connection data. Use this option if you want to invite somebody personally, for example to tell the connection data on the phone.</string>
                                     </property>
                                 </widget>
                                 <widget class="QPushButton">
                                     <property name="name">
                                         <cstring>createInvitationEMailButton</cstring>
                                     </property>
+                                    <property name="sizePolicy">
+                                        <sizepolicy>
+                                            <hsizetype>3</hsizetype>
+                                            <vsizetype>0</vsizetype>
+                                            <horstretch>0</horstretch>
+                                            <verstretch>0</verstretch>
+                                        </sizepolicy>
+                                    </property>
                                     <property name="text">
                                         <string>Invite via &amp;Email...</string>
+                                    </property>
+                                    <property name="accel">
+                                        <string>Alt+E</string>
                                     </property>
                                     <property name="whatsThis" stdset="0">
                                         <string>This button will start your email application with a pre-configured text that explains to the recipient how to connect to your computer. </string>
@@ -231,13 +313,21 @@
                                 </widget>
                                 <widget class="QPushButton">
                                     <property name="name">
-                                        <cstring>manageInvitationButton</cstring>
+                                        <cstring>manageInvitationsButton</cstring>
+                                    </property>
+                                    <property name="sizePolicy">
+                                        <sizepolicy>
+                                            <hsizetype>3</hsizetype>
+                                            <vsizetype>0</vsizetype>
+                                            <horstretch>0</horstretch>
+                                            <verstretch>0</verstretch>
+                                        </sizepolicy>
                                     </property>
                                     <property name="text">
-                                        <string>&amp;Manage Invitations...</string>
+                                        <string>&amp;Manage Invitations (%1)...</string>
                                     </property>
-                                    <property name="whatsThis" stdset="0">
-                                        <string>Use this button to see your invitations or to cancel them.</string>
+                                    <property name="accel">
+                                        <string>Alt+M</string>
                                     </property>
                                 </widget>
                             </vbox>
@@ -264,5 +354,13 @@
         <slot>accept()</slot>
     </connection>
 </connections>
+<tabstops>
+    <tabstop>createInvitationButton</tabstop>
+    <tabstop>createInvitationEMailButton</tabstop>
+    <tabstop>manageInvitationsButton</tabstop>
+    <tabstop>configurationButton</tabstop>
+    <tabstop>closeButton</tabstop>
+    <tabstop>kActiveLabel1</tabstop>
+</tabstops>
 <layoutdefaults spacing="6" margin="11"/>
 </UI>

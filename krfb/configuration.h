@@ -81,8 +81,9 @@ public slots:
 	void showManageInvitationsDialog();
 	void showInvitationDialog();
 	void showPersonalInvitationDialog();
+	void showConfigurationModule();
 	void inviteEmail();
-	
+
 private:
         void loadFromKConfig();
         void loadFromDialogs();
@@ -110,7 +111,7 @@ private:
 	bool allowUninvitedFlag;
 	bool enableSLPFlag;
 
-	int portNum, preferredPortNum; 
+	int portNum, preferredPortNum;
 
 	DCOPRef kinetdRef;
 
