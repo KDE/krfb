@@ -42,7 +42,7 @@
 
 
 typedef KGenericFactory<KcmKRfb, QWidget> KcmKRfbFactory;
-K_EXPORT_COMPONENT_FACTORY( libkcm_krfb, KcmKRfbFactory("kcm_krfb") );
+K_EXPORT_COMPONENT_FACTORY( kcm_krfb, KcmKRfbFactory("kcm_krfb") );
 
 KcmKRfb::KcmKRfb(QWidget *p, const char *name, const QStringList &) :
 	KCModule(KcmKRfbFactory::instance(), p, name),

@@ -1,11 +1,11 @@
 METASOURCES = AUTO
 
 # Code 
-lib_LTLIBRARIES = libkded_kinetd.la
+kde_module_LTLIBRARIES = kded_kinetd.la
 
-libkded_kinetd_la_SOURCES = kinetd.cpp kinetd.skel
-libkded_kinetd_la_LDFLAGS  = $(all_libraries) -module -avoid-version
-libkded_kinetd_la_LIBADD   = ../srvloc/libsrvloc.la $(LIB_QT) $(LIB_KDECORE) \
+kded_kinetd_la_SOURCES = kinetd.cpp kinetd.skel
+kded_kinetd_la_LDFLAGS  = $(all_libraries) $(KDE_PLUGIN) -module
+kded_kinetd_la_LIBADD   = ../srvloc/libsrvloc.la $(LIB_QT) $(LIB_KDECORE) \
 	$(LIB_KDEUI) 
 
 # Services
@@ -13,7 +13,7 @@ kde_servicetypes_DATA = kinetdmodule.desktop
 kdeddir = $(kde_servicesdir)/kded
 kded_DATA = kinetd.desktop
 
-EXTRA_DIST = $(libkded_kinetd_la_SOURCES)\
+EXTRA_DIST = $(kded_kinetd_la_SOURCES)\
              $(kded_DATA) \
              $(kde_servicetypes_DATA) \
 	     eventsrc README.debugging
@@ -26,5 +26,3 @@ install-data-local:
 
 # set the include path for X, qt and KDE
 INCLUDES= $(all_includes) -I$(top_srcdir)/krfb/srvloc
-
-
