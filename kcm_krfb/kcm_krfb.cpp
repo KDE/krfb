@@ -61,7 +61,6 @@ KcmKRfb::KcmKRfb(QWidget *p, const char *name, const QStringList &) :
 	load();
 
 	connect(m_confWidget.passwordInput, SIGNAL(textChanged(const QString&)), SLOT(configChanged()) );
-	connect(m_confWidget.runOnDemandRB, SIGNAL(toggled(bool)), SLOT(configChanged()) );
 	connect(m_confWidget.allowUninvitedCB, SIGNAL(clicked()), SLOT(configChanged()) );
 	connect(m_confWidget.confirmConnectionsCB, SIGNAL(clicked()), SLOT(configChanged()) );
 	connect(m_confWidget.allowDesktopControlCB, SIGNAL(clicked()), SLOT(configChanged()) );
@@ -104,15 +103,6 @@ void KcmKRfb::load() {
 	bool kinetdAvailable, krfbAvailable;
 	checkKInetd(kinetdAvailable, krfbAvailable);
 
-	if (!krfbAvailable) {
-		m_confWidget.runInBackgroundRB->setEnabled(false);
-		m_confWidget.runOnDemandRB->setChecked(true);
-	}
-	else {
-		bool daemonMode = m_configuration.daemonMode();
-		m_confWidget.runInBackgroundRB->setChecked(daemonMode);
-		m_confWidget.runOnDemandRB->setChecked(!daemonMode);
-	}
 	m_confWidget.allowUninvitedCB->setChecked(m_configuration.allowUninvitedConnections());
 	m_confWidget.confirmConnectionsCB->setChecked(m_configuration.askOnConnect());
 	m_confWidget.allowDesktopControlCB->setChecked(m_configuration.allowDesktopControl());
@@ -121,9 +111,8 @@ void KcmKRfb::load() {
 
 void KcmKRfb::save() {
 
+        m_configuration.update();
 	bool allowUninvited = m_confWidget.allowUninvitedCB->isChecked();
-	bool daemonMode = !m_confWidget.runOnDemandRB->isChecked();
-	m_configuration.setDaemonMode(daemonMode);
 	m_configuration.setAllowUninvited(allowUninvited);
 	m_configuration.setAskOnConnect(m_confWidget.confirmConnectionsCB->isChecked());
 	m_configuration.setAllowDesktopControl(m_confWidget.allowDesktopControlCB->isChecked());
@@ -135,15 +124,6 @@ void KcmKRfb::defaults() {
 	bool kinetdAvailable, krfbAvailable;
 	checkKInetd(kinetdAvailable, krfbAvailable);
 
-	if (!krfbAvailable) {
-		m_confWidget.runInBackgroundRB->setEnabled(false);
-		m_confWidget.runOnDemandRB->setChecked(true);
-	}
-	else {
-		m_confWidget.runInBackgroundRB->setEnabled(true);
-		m_confWidget.runInBackgroundRB->setChecked(true);
-		m_confWidget.runOnDemandRB->setChecked(false);
-	}
 	m_confWidget.allowUninvitedCB->setChecked(false);
 	m_confWidget.confirmConnectionsCB->setChecked(false);
 	m_confWidget.allowDesktopControlCB->setChecked(false);
@@ -157,7 +137,7 @@ const KAboutData *KcmKRfb::aboutData() const
 
 QString KcmKRfb::quickHelp() const
 {
-	return i18n("<h1>desktop sharing</h1> This module allows you to configure"
+	return i18n("<h1>Desktop Sharing Configuration</h1> This module allows you to configure"
 	            " the KDE desktop sharing.");
 }
 

@@ -31,19 +31,10 @@ TrayIcon::TrayIcon(KDialog *d, Configuration *c) :
 {
 	KIconLoader *loader = KGlobal::iconLoader();
 	trayIconOpen = loader->loadIcon("eyes-open24", KIcon::User);
-	trayIconClosed = loader->loadIcon("eyes-closed24", KIcon::User);
-	setPixmap(trayIconClosed);
+	setPixmap(trayIconOpen);
 
-	configureAction = KStdAction::preferences(this, SIGNAL(showConfigure()), &actionCollection);
 	manageInvitationsAction = new KAction(i18n("Manage &invitations"), QString::null, 0, this, SIGNAL(showManageInvitations()), &actionCollection);
-	if (c->mode() != KRFB_STAND_ALONE_CMDARG) {
-		configureAction->plug(contextMenu());
-		manageInvitationsAction->plug(contextMenu());
-	}
-
-	closeConnectionAction = new KAction(i18n("Cl&ose connection"), QString::null, 0, this, SLOT(connectionClose), &actionCollection);
-	closeConnectionAction->plug(contextMenu());
-	closeConnectionAction->setEnabled(false);
+	manageInvitationsAction->plug(contextMenu());
 
 	contextMenu()->insertSeparator();
 	aboutAction = KStdAction::aboutApp(this, SLOT(showAbout()), &actionCollection);
@@ -53,16 +44,6 @@ TrayIcon::TrayIcon(KDialog *d, Configuration *c) :
 }
 
 TrayIcon::~TrayIcon(){
-}
-
-void TrayIcon::openConnection(){
-	setPixmap(trayIconOpen);
-	closeConnectionAction->setEnabled(true);
-}
-
-void TrayIcon::closeConnection(){
-	setPixmap(trayIconClosed);
-	closeConnectionAction->setEnabled(false);
 }
 
 void TrayIcon::showAbout() {

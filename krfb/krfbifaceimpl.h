@@ -10,29 +10,13 @@ class KRfbIfaceImpl : public QObject, public virtual krfbIface
 	Q_OBJECT
 private:
 	Configuration *configuration;
-	int portNum;
 public:
 	KRfbIfaceImpl(Configuration *c);
 signals:
-	void connectionClosed();
 	void exitApp();
 
-public slots:
-	void setPort(int p);
-
 public:
-	void disconnect();
-//	void setWindowID(int);
 	void exit();
-	void reloadConfig();
-
-	bool oneConnection();
-	void setOneConnection(bool);
-	bool askOnConnect();
-	void setAskOnConnect(bool);
-	bool allowDesktopControl();
 	void setAllowDesktopControl(bool);
-	void setPassword(QString);
-	int port();
 };
 #endif

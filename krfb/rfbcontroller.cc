@@ -324,9 +324,7 @@ void RFBController::startServer(int inetdFd, bool xtestGrab)
 
 	server->frameBuffer = fb;
 	server->autoPort = TRUE;
-
-	if (inetdFd >= 0)
-		server->inetdSock = inetdFd;
+	server->inetdSock = inetdFd;
 
 	server->kbdAddEvent = keyboardHook;
 	server->ptrAddEvent = pointerHook;
@@ -343,9 +341,6 @@ void RFBController::startServer(int inetdFd, bool xtestGrab)
 
 	rfbInitServer(server);
 	state = RFB_WAITING;
-
-	if (inetdFd < 0)
-		emit portProbed(server->rfbPort);
 
 	if (xtestGrab) {
 		disabler.disable = false;
@@ -367,12 +362,6 @@ void RFBController::stopServer(bool xtestUngrab)
 		disabler.disable = true;
 		QTimer::singleShot(0, &disabler, SLOT(exec()));
 	}
-}
-
-void RFBController::rebind()
-{
-	stopServer(false);
-	startServer(-1, false);
 }
 
 void RFBController::connectionAccepted(bool aRC)
@@ -447,10 +436,7 @@ void RFBController::connectionClosed()
 void RFBController::closeConnection()
 {
 	if (state == RFB_CONNECTED) {
-		if (server->inetdSock >= 0) {
-			close(server->inetdSock);
-			emit sessionFinished();
-		}
+	        emit sessionFinished();
 		if (!checkAsyncEvents()) {
 			asyncMutex.lock();
 			if (!closePending)
@@ -640,11 +626,6 @@ void RFBController::passwordChanged() {
 		(configuration->invitations().count() > 0);
 
 	server->rfbAuthPasswdData = (void*) (authRequired ? 1 : 0);
-}
-
-int RFBController::getPort()
-{
-	return server->rfbPort;
 }
 
 void RFBController::sendKNotifyEvent(const QString &n, const QString &d)

@@ -37,22 +37,13 @@ public:
 	TrayIcon(KDialog*, Configuration*);
 	~TrayIcon();
 
-public slots:
-  	void closeConnection();
-	void openConnection();
-
 signals:
-  	void connectionClosed();
-	void showConfigure();
 	void showManageInvitations();
 
 private:
   	KPixmap trayIconOpen;
-  	KPixmap trayIconClosed;
 	KDialog* aboutDialog;
 	KActionCollection actionCollection;
-  	KAction* closeConnectionAction;
-  	KAction* configureAction;
   	KAction* manageInvitationsAction;
   	KAction* aboutAction;
 

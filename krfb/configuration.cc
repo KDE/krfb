@@ -30,8 +30,6 @@
 #include <qlineedit.h>
 #include <qcheckbox.h>
 
-void ConfigurationDialog2::closeEvent(QCloseEvent *)
-{ emit closed(); }
 void ManageInvitationsDialog2::closeEvent(QCloseEvent *)
 { emit closed(); }
 void InvitationDialog2::closeEvent(QCloseEvent *)
@@ -41,22 +39,11 @@ void PersonalInvitationDialog2::closeEvent(QCloseEvent *)
 
 Configuration::Configuration(krfb_mode mode) :
 	m_mode(mode),
-	oneConnectionFlag(false),
 	portNum(-1)
 {
 	loadFromKConfig();
 	saveToDialogs();
 	doKinetdConf();
-
-	connect(confDlg.okButton, SIGNAL(clicked()), SLOT(configOkPressed()));
-	connect(confDlg.cancelButton, SIGNAL(clicked()), SLOT(configCancelPressed()));
-	connect(confDlg.applyButton, SIGNAL(clicked()), SLOT(configApplyPressed()));
-	connect(&confDlg, SIGNAL(closed()), SLOT(configCancelPressed()));
-
-	connect(confDlg.passwordInput, SIGNAL(textChanged(const QString&)), SLOT(configChanged()) );
-	connect(confDlg.allowUninvitedCB, SIGNAL(clicked()), SLOT(configChanged()) );
-	connect(confDlg.askOnConnectCB, SIGNAL(clicked()), SLOT(configChanged()) );
-	connect(confDlg.allowDesktopControlCB, SIGNAL(clicked()), SLOT(configChanged()) );
 
 	connect(invMngDlg.closeButton, SIGNAL(clicked()), SLOT(invMngDlgClosed()));
 	connect(&invMngDlg, SIGNAL(closed()), SLOT(invMngDlgClosed()));
@@ -72,39 +59,16 @@ Configuration::Configuration(krfb_mode mode) :
 		SLOT(showPersonalInvitationDialog()));
 	connect(invDlg.createInvitationEMailButton, SIGNAL(clicked()),
 		SLOT(inviteEmail()));
-	if (m_mode != KRFB_STAND_ALONE)
-		invDlg.dontShowOnStartupButton->hide();
 
 	connect(persInvDlg.closeButton, SIGNAL(clicked()), SLOT(persInvDlgClosed()));
 	connect(&persInvDlg, SIGNAL(closed()), SLOT(persInvDlgClosed()));
 
-	if ((m_mode == KRFB_STAND_ALONE) ||
-	    (m_mode == KRFB_KINETD_MODE) ||
-	    (m_mode == KRFB_CONFIGURATION_MODE)) {
-		connect(&expirationTimer, SIGNAL(timeout()), SLOT(invalidateOldInvitations()));
-		expirationTimer.start(1000*60);
-	}
-
-}
-
-Configuration::Configuration(bool oneConnection, bool askOnConnect,
-			     bool allowDesktopControl, QString password) :
-	m_mode(KRFB_STAND_ALONE_CMDARG),
-	askOnConnectFlag(askOnConnect),
-	allowDesktopControlFlag(allowDesktopControl),
-	oneConnectionFlag(oneConnection),
-	portNum(-1),
-	passwordString(password)
-{
+	connect(&expirationTimer, SIGNAL(timeout()), SLOT(invalidateOldInvitations()));
+	expirationTimer.start(1000*60);
 }
 
 Configuration::~Configuration() {
-}
-
-// special static method to determine daemon mode before constructor was invoked
-bool Configuration::earlyDaemonMode() {
-	KConfig c("krfbrc");
-	return c.readBoolEntry("daemonMode", true);
+        save();
 }
 
 void Configuration::setKInetd(bool enabled) {
@@ -146,14 +110,10 @@ void Configuration::setPortKInetd() {
 
 void Configuration::removeInvitation(QValueList<Invitation>::iterator it) {
 	invitationList.remove(it);
-	doKinetdConf();
+	save();
 }
 
 void Configuration::doKinetdConf() {
-        if (!daemonFlag) {
-		setKInetd(false);
-		return;
-	}
 
 	if (allowUninvitedFlag) {
 		setKInetd(true);
@@ -181,14 +141,11 @@ void Configuration::doKinetdConf() {
 }
 
 void Configuration::loadFromKConfig() {
-	if (KRFB_STAND_ALONE_CMDARG == mode())
-		return;
+
 	KConfig c("krfbrc");
-	daemonFlag = c.readBoolEntry("daemonMode", true);
 	allowUninvitedFlag = c.readBoolEntry("allowUninvited", false);
 	askOnConnectFlag = c.readBoolEntry("confirmUninvitedConnection", true);
 	allowDesktopControlFlag = c.readBoolEntry("allowDesktopControl", false);
-	showInvDlgOnStartupFlag = c.readBoolEntry("shovInvDlgOnStartup", false);
 	passwordString = c.readEntry("uninvitedPassword", "");
 
 	invitationList.clear();
@@ -197,39 +154,15 @@ void Configuration::loadFromKConfig() {
 	for (int i = 0; i < num; i++)
 		invitationList.push_back(Invitation(&c, i));
 
-	confDlg.applyButton->setEnabled(false);
 	invalidateOldInvitations();
-
-}
-
-void Configuration::loadFromDialogs() {
-	bool oldAllowUninvitedFlag = allowUninvitedFlag;
-	allowUninvitedFlag = confDlg.allowUninvitedCB->isChecked();
-	askOnConnectFlag = confDlg.askOnConnectCB->isChecked();
-	allowDesktopControlFlag = confDlg.allowDesktopControlCB->isChecked();
-
-	showInvDlgOnStartupFlag = !invDlg.dontShowOnStartupButton->isChecked();
-
-	QString newPassword = confDlg.passwordInput->text();
-	if (passwordString != newPassword) {
-		passwordString = newPassword;
-		emit passwordChanged();
-	}
-
-	if (oldAllowUninvitedFlag != allowUninvitedFlag)
-		doKinetdConf();
 }
 
 void Configuration::saveToKConfig() {
-	if (KRFB_STAND_ALONE_CMDARG == mode())
-		return;
 
 	KConfig c("krfbrc");
-	c.writeEntry("daemonMode", daemonFlag);
 	c.writeEntry("confirmUninvitedConnection", askOnConnectFlag);
 	c.writeEntry("allowDesktopControl", allowDesktopControlFlag);
 	c.writeEntry("allowUninvited", allowUninvitedFlag);
-	c.writeEntry("shovInvDlgOnStartup", showInvDlgOnStartupFlag);
 	c.writeEntry("uninvitedPassword", passwordString);
 
 	c.setGroup("invitations");
@@ -239,17 +172,9 @@ void Configuration::saveToKConfig() {
 	while (i < num)
 		invitationList[i++].save(&c, i);
 
-	confDlg.applyButton->setEnabled(false);
 }
 
 void Configuration::saveToDialogs() {
-	confDlg.allowUninvitedCB->setChecked(allowUninvitedFlag);
-	confDlg.askOnConnectCB->setChecked(askOnConnectFlag);
-	confDlg.allowDesktopControlCB->setChecked(allowDesktopControlFlag);
-	confDlg.passwordInput->setText(passwordString);
-
-	invDlg.dontShowOnStartupButton->setChecked(!showInvDlgOnStartupFlag);
-
 	invalidateOldInvitations();
 	QValueList<Invitation>::iterator it = invitationList.begin();
 	while (it != invitationList.end()) {
@@ -263,48 +188,38 @@ void Configuration::saveToDialogs() {
 	invMngDlg.adjustSize();
 }
 
-void Configuration::reload() {
-	loadFromKConfig();
-	saveToDialogs();
-}
-
 void Configuration::save() {
 	saveToKConfig();
 	saveToDialogs();
 	doKinetdConf();
 }
 
+void Configuration::update() {
+	loadFromKConfig();
+	saveToDialogs();
+}
+
 Invitation Configuration::createInvitation() {
 	Invitation inv;
 	invitationList.push_back(inv);
-	emit passwordChanged();
 	doKinetdConf();
 	return inv;
 }
 
 void Configuration::invalidateOldInvitations() {
-	bool changed = false;
 	QValueList<Invitation>::iterator it = invitationList.begin();
 	while (it != invitationList.end()) {
-		if (!(*it).isValid()) {
+		if (!(*it).isValid())
 			it = invitationList.remove(it);
-			changed = true;
-		}
 		else
 			it++;
 	}
-	if (changed)
-		emit passwordChanged();
 }
 
 ///////// properties ///////////////////////////
 
 krfb_mode Configuration::mode() const {
 	return m_mode;
-}
-
-bool Configuration::oneConnection() const {
-	return oneConnectionFlag;
 }
 
 bool Configuration::askOnConnect() const {
@@ -319,14 +234,6 @@ bool Configuration::allowUninvitedConnections() const {
 	return allowUninvitedFlag;
 }
 
-bool Configuration::showInvitationDialogOnStartup() const {
-	return showInvDlgOnStartupFlag;
-}
-
-bool Configuration::daemonMode() const {
-	return daemonFlag;
-}
-
 QString Configuration::password() const {
 	return passwordString;
 }
@@ -335,17 +242,8 @@ QValueList<Invitation> &Configuration::invitations() {
 	return invitationList;
 }
 
-void Configuration::setDaemonMode(bool daemonMode) {
-	daemonFlag = daemonMode;
-}
-
 void Configuration::setAllowUninvited(bool allowUninvited) {
 	allowUninvitedFlag = allowUninvited;
-}
-
-void Configuration::setOnceConnection(bool oneConnection)
-{
-	oneConnectionFlag = oneConnection;
 }
 
 void Configuration::setAskOnConnect(bool askOnConnect)
@@ -361,7 +259,6 @@ void Configuration::setAllowDesktopControl(bool allowDesktopControl)
 void Configuration::setPassword(QString password)
 {
 	passwordString = password;
-	emit passwordChanged();
 }
 
 int Configuration::port() const
@@ -372,58 +269,20 @@ int Configuration::port() const
 		return portNum - 5900;
 }
 
-void Configuration::setPort(int p) {
-	portNum = p;
-}
 
 // hostname is implemented in configuration_hostname.cpp
 // QString Configuration::hostname()
 
-////////////// config dialog //////////////////////////
-
-void Configuration::showConfigDialog() {
-	if (m_mode == KRFB_KINETD_MODE) {
-		KProcess p;
-		p << "kcmshell" << "kcmkrfb";
-		p.start(KProcess::DontCare);
-	}
-	else {
-		loadFromKConfig();
-		saveToDialogs();
-		confDlg.show();
-	}
-}
-
-void Configuration::configOkPressed() {
-	loadFromDialogs();
-	saveToKConfig();
-	confDlg.hide();
-}
-
-void Configuration::configCancelPressed() {
-	saveToDialogs();
-	confDlg.hide();
-}
-
-void Configuration::configApplyPressed() {
-	loadFromDialogs();
-	saveToKConfig();
-}
-
-void Configuration::configChanged() {
-	confDlg.applyButton->setEnabled(true);
-}
-
 ////////////// invitation manage dialog //////////////////////////
 
 void Configuration::showManageInvitationsDialog() {
+        loadFromKConfig();
 	saveToDialogs();
 	invMngDlg.show();
 }
 
 void Configuration::invMngDlgClosed() {
 	invMngDlg.hide();
-	saveToKConfig();
 }
 
 void Configuration::invMngDlgDeleteOnePressed() {
@@ -436,14 +295,13 @@ void Configuration::invMngDlgDeleteOnePressed() {
 		else
 			it++;
 	}
-	emit passwordChanged();
+	saveToKConfig();
 	doKinetdConf();
 }
 
 void Configuration::invMngDlgDeleteAllPressed() {
 	invitationList.clear();
 	saveToKConfig();
-	emit passwordChanged();
 	doKinetdConf();
 }
 
@@ -460,7 +318,6 @@ void Configuration::invDlgClosed() {
 }
 
 void Configuration::closeInvDlg() {
-	loadFromDialogs();
 	saveToKConfig();
 	invDlg.hide();
 	invMngDlg.newButton->setEnabled(true);

@@ -20,7 +20,6 @@
 
 #include "invitation.h"
 
-#include "configurationdialog.h"
 #include "manageinvitations.h"
 #include "personalinvitation.h"
 #include "invite.h"
@@ -33,20 +32,11 @@
 
 enum krfb_mode {
 	KRFB_UNKNOWN_MODE = 0,
-	KRFB_STAND_ALONE,
-	KRFB_STAND_ALONE_CMDARG,
 	KRFB_KINETD_MODE,
 	KRFB_INVITATION_MODE,
 	KRFB_CONFIGURATION_MODE
 };
 
-class ConfigurationDialog2 : public ConfigurationDialog {
-	Q_OBJECT
-public:
-	virtual void closeEvent(QCloseEvent *);
-signals:
-	void closed();
-};
 class ManageInvitationsDialog2 : public ManageInvitationsDialog {
 	Q_OBJECT
 public:
@@ -78,47 +68,35 @@ class Configuration : public QObject {
    	Q_OBJECT
 public:
 	Configuration(krfb_mode mode);
-	Configuration(bool oneConnection, bool askOnConnect,
-		      bool allowDesktopControl, QString password);
 	~Configuration();
 
-	static bool earlyDaemonMode();
-
 	krfb_mode mode() const;
-	bool oneConnection() const;
 	bool askOnConnect() const;
 	bool allowDesktopControl() const;
 	bool allowUninvitedConnections() const;
-	bool showInvitationDialogOnStartup() const;
-	bool daemonMode() const;
 	QString password() const;
 	QString hostname() const;
 	int port() const;
 
-        void setDaemonMode(bool daemonMode);
         void setAllowUninvited(bool allowUninvited);
-        void setOnceConnection(bool oneConnection);
         void setAskOnConnect(bool askOnConnect);
         void setAllowDesktopControl(bool allowDesktopControl);
 	void setPassword(QString password);
-	void reload();
 	void save();
+	void update();
 
 	QValueList<Invitation> &invitations();
 	void removeInvitation(QValueList<Invitation>::iterator it);
 signals:
-  	void passwordChanged();
 	void invitationFinished();
 
 public slots:
-	void showConfigDialog();
 	void showManageInvitationsDialog();
 	void showInvitationDialog();
 	void showPersonalInvitationDialog();
 	void inviteEmail();
 
 	void invalidateOldInvitations();
-	void setPort(int);
 private:
         void loadFromKConfig();
         void loadFromDialogs();
@@ -133,7 +111,6 @@ private:
 
 	krfb_mode m_mode;
 
-        ConfigurationDialog2 confDlg;
 	ManageInvitationsDialog2 invMngDlg;
 	InvitationDialog2 invDlg;
 	PersonalInvitationDialog2 persInvDlg;
@@ -142,20 +119,12 @@ private:
 	bool askOnConnectFlag;
 	bool allowDesktopControlFlag;
 	bool allowUninvitedFlag;
-	bool oneConnectionFlag;
-	bool daemonFlag;
 
-	bool showInvDlgOnStartupFlag;
 	int portNum;
 
 	QString passwordString;
 	QValueList<Invitation> invitationList;
 private slots:
-	void configOkPressed();
-	void configCancelPressed();
-	void configApplyPressed();
-	void configChanged();
-
 	void invMngDlgClosed();
 	void invMngDlgDeleteOnePressed();
 	void invMngDlgDeleteAllPressed();

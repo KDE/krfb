@@ -5,7 +5,6 @@ Known bugs:
 
 Todo (soon):
 - fix shutdown connection in kinetd nide
-- remove the standalone & command line modes (="run on demand" in kcontrol)
 
 Todo (unscheduled features):
 - SLP support (or UPnP, or whatever KDE will use)

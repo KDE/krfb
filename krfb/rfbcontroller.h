@@ -134,7 +134,6 @@ public:
 	static bool checkX11Capabilities();
 
 public slots:
-	void rebind();
 	void passwordChanged();
 	void closeConnection();
 
@@ -142,7 +141,6 @@ signals:
         void sessionEstablished();
 	void sessionFinished();
 	void sessionRefused();
-	void portProbed(int);
 
 private:
 	void stopServer(bool xtestUngrab = true);

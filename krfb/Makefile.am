@@ -2,7 +2,7 @@ METASOURCES = AUTO
 
 
 noinst_LIBRARIES = libkrfbconfig.a
-libkrfbconfig_a_SOURCES = configuration.cc configurationdialog.ui manageinvitations.ui personalinvitation.ui \
+libkrfbconfig_a_SOURCES = configuration.cc manageinvitations.ui personalinvitation.ui \
   invite.ui invitation.cc configuration_hostname.cpp
 
 
@@ -17,7 +17,7 @@ kde_services_DATA = kinetd_krfb.desktop
 
 EXTRA_DIST = $(krfb_SOURCES) $(kde_services_DATA) krfb.desktop \
   lo32-app-krfb.png lo16-app-krfb.png rfbcontroller.h \
-  eyes-closed24.png eyes-open24.png xupdatescanner.h trayicon.h \
+  eyes-open24.png xupdatescanner.h trayicon.h \
   configuration.h invitation.h krfbiface.h krfbiface.kidl eventsrc 
 
 install-data-local:
@@ -26,7 +26,6 @@ install-data-local:
 	$(mkinstalldirs) $(kde_datadir)/krfb
 	$(INSTALL_DATA) $(srcdir)/eventsrc $(kde_datadir)/krfb/eventsrc
 	$(mkinstalldirs) $(kde_datadir)/krfb/pics
-	$(INSTALL_DATA) $(srcdir)/eyes-closed24.png $(kde_datadir)/krfb/pics/eyes-closed24.png
 	$(INSTALL_DATA) $(srcdir)/eyes-open24.png $(kde_datadir)/krfb/pics/eyes-open24.png
 	$(INSTALL_DATA) $(srcdir)/connection-side-image.png $(kde_datadir)/krfb/pics/connection-side-image.png
 
@@ -34,7 +33,6 @@ uninstall-local:
 	-rm -f $(kde_appsdir)/Applications/krfb.desktop
 	-rm -f $(kde_datadir)/krfb/eventsrc
 	-rm -f $(kde_datadir)/krfb/pics/eyes-open24.png
-	-rm -f $(kde_datadir)/krfb/pics/eyes-closed24.png
 
 KDE_ICON = krfb
 

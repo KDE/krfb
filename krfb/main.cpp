@@ -43,51 +43,16 @@
 
 static const char *description = I18N_NOOP("VNC-compatible server to share "
 					   "KDE desktops");
-#define ARG_ONE_SESSION "one-session"
-#define ARG_PASSWORD "password"
-#define ARG_DONT_CONFIRM_CONNECT "dont-confirm-connect"
-#define ARG_REMOTE_CONTROL "remote-control"
-#define ARG_STAND_ALONE "stand-alone"
 #define ARG_KINETD "kinetd"
 
 
 static KCmdLineOptions options[] =
 {
-	{ "o", 0, 0},
-	{ ARG_ONE_SESSION, I18N_NOOP("Terminate when the first session is finished."), 0},
-	{ "w", 0, 0},
-	{ ARG_PASSWORD " ", I18N_NOOP("Set the password."), ""},
-	{ "d", 0, 0},
-	{ ARG_DONT_CONFIRM_CONNECT, I18N_NOOP("Allow connections without asking the user."), 0},
-	{ "c", 0, 0},
-	{ ARG_REMOTE_CONTROL, I18N_NOOP("Allow remote side to control this computer."), 0},
-	{ "s", 0, 0},
-	{ ARG_STAND_ALONE, I18N_NOOP("Standalone mode: do not use daemon."), 0},
 	{ ARG_KINETD " ", I18N_NOOP("Used for calling from kinetd."), 0},
 	{ 0, 0, 0 }
 };
 
 /*
- * KRfb can run in 4 different modes:
- * - stand-alone
- *   + To get there call KRfb with kinetd disabled in KConfig (use KControl module)
- *   + traditional mode like <0.7 versions
- *   + uses non-kcm configuration dialog
- *   + invitation on start-up can be disabled
- * - stand-alone with command line args
- *   + to get there call krfb any cmd line args (except --kinetd)
- *   + behaves like stand-alone, but without configuration & invitations
- * - kinetd mode
- *   + started using the --kinetd argument
- *   + used for starting from kinetd
- *   + takes socket fd from cmd args
- *   + exits after connection is finished
- *   + config option calls kcontrol module
- * - invitation mode
- *   + started when krfb is called while kinetd is enabled and no cmd line arg is given
- *   + displays only invitation dialog and finishs then
- *   + does not accept connections, no tray icon
- *
  * TODO:
  * - fix bug on 'close connection' in kinetd mode
  */
@@ -115,8 +80,6 @@ void checkKInetd(bool &kinetdAvailable, bool &krfbAvailable) {
 
 int main(int argc, char *argv[])
 {
-	enum krfb_mode mode = KRFB_UNKNOWN_MODE;
-
 	KAboutData aboutData( "krfb", I18N_NOOP("Desktop Sharing"),
 		VERSION, description, KAboutData::License_GPL,
 		"(c) 2001-2002, Tim Jansen\n"
@@ -151,68 +114,38 @@ int main(int argc, char *argv[])
 	Configuration *config;
 	KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
 	QString fdString;
-	if (args->isSet(ARG_ONE_SESSION) ||
-	    args->isSet(ARG_PASSWORD) ||
-	    args->isSet(ARG_REMOTE_CONTROL) ||
-	    args->isSet(ARG_DONT_CONFIRM_CONNECT)) {
-
-		bool oneConnection = args->isSet(ARG_ONE_SESSION);
-		bool askOnConnect = !args->isSet(ARG_DONT_CONFIRM_CONNECT);
-		bool allowDesktopControl = args->isSet(ARG_REMOTE_CONTROL);
-		QString password = args->getOption(ARG_PASSWORD);
-		mode = KRFB_STAND_ALONE_CMDARG;
-		config = new Configuration(oneConnection, askOnConnect,
-					   allowDesktopControl, password);
-	}
-	else {
-		if (args->isSet(ARG_STAND_ALONE)) {
-			mode = KRFB_STAND_ALONE;
-		}
-		else if (args->isSet(ARG_KINETD)) {
-			fdString = args->getOption(ARG_KINETD);
-			mode = KRFB_KINETD_MODE;
-		}
-		if (mode == KRFB_UNKNOWN_MODE) {
-			if (Configuration::earlyDaemonMode()) {
-				bool kinetdA, krfbA;
-				mode = KRFB_INVITATION_MODE;
-				checkKInetd(kinetdA, krfbA);
-				if (!kinetdA) {
-					KMessageBox::error(0,
-						i18n("Cannot find KInetD. "
-							"Have you restarted KDE after installation?"),
-						i18n("Desktop Sharing Error"));
-					return 1;
-				}
-				if (!krfbA) {
-					KMessageBox::error(0,
-						i18n("Cannot find KInetD service for Desktop Sharing (KRfb). "
-							"Have you restarted KDE after installation?"),
-						i18n("Desktop Sharing Error"));
-					return 1;
-				}
-			}
-			else
-				mode = KRFB_STAND_ALONE;
-		}
-		config = new Configuration(mode);
-
-		if ((mode == KRFB_KINETD_MODE) &&
-		    (!config->allowUninvitedConnections()) &&
-		    (config->invitations().size() == 0)) {
-			KNotifyClient::event("UnexpectedConnection");
+	if (!args->isSet(ARG_KINETD)) {
+		bool kinetdA, krfbA;
+		checkKInetd(kinetdA, krfbA);
+		if (!kinetdA) {
+		        KMessageBox::error(0,
+					   i18n("Cannot find KInetD. "
+						"Have you restarted KDE after installation?"),
+					   i18n("Desktop Sharing Error"));
 			return 1;
 		}
-	}
-	args->clear();
+		if (!krfbA) {
+		        KMessageBox::error(0,
+					   i18n("Cannot find KInetD service for Desktop Sharing (KRfb). "
+						"Have you restarted KDE after installation?"),
+					   i18n("Desktop Sharing Error"));
+			return 1;
+		}
 
-
-	if (mode == KRFB_INVITATION_MODE) {
+		config = new Configuration(KRFB_INVITATION_MODE);	
 		config->showInvitationDialog();
 		QObject::connect(config, SIGNAL(invitationFinished()),
 				 &app, SLOT(quit()));
 		return app.exec();
 	}
+	fdString = args->getOption(ARG_KINETD);
+	config = new Configuration(KRFB_KINETD_MODE);	
+	args->clear();
+
+	if ((!config->allowUninvitedConnections()) && (config->invitations().size() == 0)) {
+		KNotifyClient::event("UnexpectedConnection");
+		return 1;
+        }
 
 	if (!RFBController::checkX11Capabilities())
 		return 1;
@@ -228,59 +161,29 @@ int main(int argc, char *argv[])
 	QObject::connect(&app, SIGNAL(lastWindowClosed()),
 			 &app, SLOT(quit()));
 
-	QObject::connect(&trayicon, SIGNAL(connectionClosed()),
-			 &controller, SLOT(closeConnection()));
-	QObject::connect(&trayicon, SIGNAL(showConfigure()),
-			 config, SLOT(showConfigDialog()));
 	QObject::connect(&trayicon, SIGNAL(showManageInvitations()),
 			 config, SLOT(showManageInvitationsDialog()));
-	QObject::connect(&controller, SIGNAL(portProbed(int)),
-			 config, SLOT(setPort(int)));
-
-	QObject::connect(&dcopiface, SIGNAL(connectionClosed()),
-			 &controller, SLOT(closeConnection()));
 
 	QObject::connect(&dcopiface, SIGNAL(exitApp()),
 			 &app, SLOT(quit()));
 
-	QObject::connect(config, SIGNAL(passwordChanged()),
-			 &controller, SLOT(passwordChanged()));
-
-	QObject::connect(&controller, SIGNAL(portProbed(int)),
-			 &dcopiface, SLOT(setPort(int)));
-
-	QObject::connect(&controller, SIGNAL(sessionEstablished()),
-			 &trayicon, SLOT(openConnection()));
-
-	if (config->oneConnection() || (mode == KRFB_KINETD_MODE)) {
-		QObject::connect(&controller, SIGNAL(sessionRefused()),
-				 &app, SLOT(quit()));
-		QObject::connect(&controller, SIGNAL(sessionFinished()),
-				 &app, SLOT(quit()));
-	} else {
-		QObject::connect(&controller, SIGNAL(sessionFinished()),
-				 &trayicon, SLOT(closeConnection()));
-	}
+	QObject::connect(&controller, SIGNAL(sessionRefused()),
+			 &app, SLOT(quit()));
+	QObject::connect(&controller, SIGNAL(sessionFinished()),
+			 &app, SLOT(quit()));
 
 	sigset_t sigs;
 	sigemptyset(&sigs);
 	sigaddset(&sigs, SIGPIPE);
 	sigprocmask(SIG_BLOCK, &sigs, 0);
 
-	if (mode == KRFB_KINETD_MODE) {
-		bool ok;
-		int fdNum = fdString.toInt(&ok);
-		if (!ok) {
-			kdError() << "kinetd fd was not numeric." << endl;
-			return 2;
-		}
-		controller.startServer(fdNum);
+	bool ok;
+	int fdNum = fdString.toInt(&ok);
+	if (!ok) {
+	  kdError() << "kinetd fd was not numeric." << endl;
+	  return 2;
 	}
-	else
-		controller.startServer();
-
-	if (config->showInvitationDialogOnStartup())
-		config->showInvitationDialog();
+	controller.startServer(fdNum);
 
 	return app.exec();
 }
