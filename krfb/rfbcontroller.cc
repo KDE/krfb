@@ -363,12 +363,12 @@ void RFBController::startServer(int inetdFd, bool xtestGrab)
 	server->rfbServerFormat.bigEndian =  (CARD8) ((framebufferImage->bitmap_bit_order == MSBFirst) ? TRUE : FALSE);
 
 	if ( server->rfbServerFormat.bitsPerPixel == 8 ) {
-		server->rfbServerFormat.redShift = 0;
-		server->rfbServerFormat.greenShift = 2;
-		server->rfbServerFormat.blueShift = 5;
-		server->rfbServerFormat.redMax   = 3;
-		server->rfbServerFormat.greenMax = 7;
-		server->rfbServerFormat.blueMax  = 3;
+                server->rfbServerFormat.redShift = 0;
+                server->rfbServerFormat.greenShift = 3;
+                server->rfbServerFormat.blueShift = 6;
+                server->rfbServerFormat.redMax   = 7;
+                server->rfbServerFormat.greenMax = 7;
+                server->rfbServerFormat.blueMax  = 3;
 	} else {
 		server->rfbServerFormat.redShift = 0;
 		if ( framebufferImage->red_mask )
