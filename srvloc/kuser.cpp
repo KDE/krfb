@@ -72,6 +72,7 @@ KUser& KUser::operator =(const KUser& user) {
 	d = new KUserPrivate(user.uid(),
 			     user.loginName(),
 			     user.fullName());
+	return *this;
 }
 
 bool KUser::operator ==(const KUser& user) {
