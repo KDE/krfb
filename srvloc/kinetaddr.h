@@ -114,14 +114,16 @@ public:
    * This will be NULL if this is not a v6 address.
    * @see addressV4
    */
+#ifdef AF_INET6
   const struct in6_addr* addressV6() const;
+#endif
 
   operator const struct in_addr*() const
   { return addressV4(); }
-
+#ifdef AF_INET6
   operator const struct in6_addr*() const
   { return addressV6(); }
-
+#endif
   /**
    * Returns an address that can be used for communication with
    * other computers on the internet.

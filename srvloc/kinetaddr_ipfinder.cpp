@@ -61,8 +61,8 @@
 #endif
 
 
-static char *local_address = NULL;
-static char *inet_address = NULL;
+static const char *local_address = NULL;
+static const char *inet_address = NULL;
 
 /* max number of network interfaces*/
 #define MAX_IF 8
@@ -85,7 +85,8 @@ char *getdefaultdev()
 	FILE *fp = fopen( PROCROUTE, "r");
 	char buff[4096], gate_addr[128], net_addr[128];
 	char mask_addr[128];
-	int irtt, window, mss, num, metric, iflags, refcnt, use;
+	int irtt, window, mss, num, metric, refcnt, use;
+        unsigned int iflags;
 	char i;
 	if( !fp ) {
 		return NULL;
@@ -93,9 +94,9 @@ char *getdefaultdev()
 	i=0;
 // cruise through the list, and find the gateway interface
 	while( fgets(buff, 1023, fp) ) {
-		num = sscanf(buff, "%s %s %s %X %d %d %d %s %d %d %d\n",
+		num = sscanf(buff, "%15s %127s %127s %X %d %d %d %127s %d %d %d\n",
 			iface, net_addr, gate_addr, &iflags, &refcnt, &use, &metric,
-			&mask_addr, &mss, &window, &irtt);
+			mask_addr, &mss, &window, &irtt);
 		i++;
 		if( i == 1) continue;
 
