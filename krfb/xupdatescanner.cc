@@ -44,6 +44,13 @@
 
 #include "xupdatescanner.h"
 
+/* ../../krfb/libvncserver/rfb.h */
+#ifdef Bool
+#undef Bool
+#endif
+#define Bool int
+
+
 #define SCANLINES 35
 unsigned int scanlines[SCANLINES] = {  0, 16,  8, 24,
                                 33, 4, 20, 12, 28,
