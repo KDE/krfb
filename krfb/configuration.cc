@@ -76,15 +76,19 @@ Configuration::~Configuration() {
 
 void Configuration::setKInetdEnabled(bool enabled) {
 	kinetdRef.send("setEnabled", QString("krfb"), enabled);
+	kinetdRef.send("setEnabled", QString("krfb_httpd"), enabled);
 }
 
 void Configuration::setKInetdEnabled(const QDateTime &date) {
 	kinetdRef.send("setEnabled", QString("krfb"), date);
+	kinetdRef.send("setEnabled", QString("krfb_httpd"), date);
 }
 
 void Configuration::setKInetdServiceRegistrationEnabled(bool enabled) {
 	kinetdRef.send("setServiceRegistrationEnabled", 
 		       QString("krfb"), enabled);
+	kinetdRef.send("setServiceRegistrationEnabled", 
+		       QString("krfb_httpd"), enabled);
 }
 
 void Configuration::getPortFromKInetd() {
