@@ -8,7 +8,7 @@ Comment[xx]=xxKInetDxx
 [IncomingConnection]
 Name=IncomingConnection
 Name[ar]=اتصال وارد
-Name[bg]=Входяща връзка
+Name[bg]=Получена е входяща връзка
 Name[ca]=Connexió entrant
 Name[cs]=Příchozí spojení
 Name[cy]=CysylltiadCyrraedd
@@ -109,7 +109,7 @@ default_presentation=4
 [ProcessFailed]
 Name=ProcessFailed
 Name[ar]=فشلت العملية
-Name[bg]=Процесът се провали
+Name[bg]=Процесът за обработка връзки не може да бъде стартиран
 Name[ca]=Procés fallit
 Name[cs]=Proces selhal
 Name[cy]=MethoddProses
@@ -157,7 +157,7 @@ Name[zu]=UkwenzekaKuhlulekile
 Comment=Could not call process to handle connection
 Comment[af]=Kon nie roep proses na handvatsel verbinding
 Comment[ar]=لم أستطع استحضار العملية لحمل المكالمة
-Comment[bg]=Процесът за обработка на входящи връзки не може да бъде стартиран
+Comment[bg]=Процесът за обработка връзки не може да бъде стартиран
 Comment[bs]=Ne mogu pokrenuti proces koji upravlja konekcijom
 Comment[ca]=No es pot cridar al procés per a manejar la connexió
 Comment[cs]=Nelze spustit proces k obsluze spojení
