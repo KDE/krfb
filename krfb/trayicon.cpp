@@ -67,9 +67,8 @@ TrayIcon::TrayIcon(KDialog *d, Configuration *c) :
 
 	enableControlAction = new KToggleAction(i18n("Enable Remote Control"));
 	enableControlAction->plug(contextMenu());
-	connect(enableControlAction, SIGNAL(toggled(bool)), 
-		SIGNAL(enableDesktopControl(bool)));
-	enableControlAction->setChecked(configuration->allowDesktopControl());
+	enableControlAction->setEnabled(false);
+	connect(enableControlAction, SIGNAL(toggled(bool)), SIGNAL(enableDesktopControl(bool)));
 
 	contextMenu()->insertSeparator();
 
@@ -113,8 +112,9 @@ void TrayIcon::showDisconnectedMessage() {
 	connect(p, SIGNAL(hidden()), this, SIGNAL(diconnectedMessageDisplayed()));
 }
 
-void TrayIcon::contextMenuAboutToShow(KPopupMenu*) {
-	enableControlAction->setChecked(configuration->allowDesktopControl());
+void TrayIcon::setDesktopControlSetting(bool b) {
+	enableControlAction->setEnabled(true);
+	enableControlAction->setChecked(b);
 }
 
 void TrayIcon::mousePressEvent(QMouseEvent *e)

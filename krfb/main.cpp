@@ -85,7 +85,7 @@ int main(int argc, char *argv[])
 		"(c) 2001-2002, Tim Jansen\n"
 		"(c) 2001, Johannes E. Schindelin\n"
 		"(c) 2000, heXoNet Support GmbH, D-66424 Homburg\n"
-		"(c) 2000, Const Kaplinsky\n"
+		"(c) 2000-2001, Const Kaplinsky\n"
 		"(c) 2000, Tridia Corporation\n"
 		"(c) 1999, AT&T Laboratories Cambridge\n",
                 0, "http://www.tjansen.de/krfb", "ml@tjansen.de");
@@ -163,7 +163,7 @@ int main(int argc, char *argv[])
 	QObject::connect(&trayicon, SIGNAL(showManageInvitations()),
 			 config, SLOT(showManageInvitationsDialog()));
 	QObject::connect(&trayicon, SIGNAL(enableDesktopControl(bool)),
-			 config, SLOT(setAllowDesktopControl(bool)));
+			 &controller, SLOT(enableDesktopControl(bool)));
 	QObject::connect(&trayicon, SIGNAL(diconnectedMessageDisplayed()),
 			 &app, SLOT(quit()));
 
@@ -176,6 +176,8 @@ int main(int argc, char *argv[])
 			 &trayicon, SLOT(showConnectedMessage()));
 	QObject::connect(&controller, SIGNAL(sessionFinished()),
 			 &trayicon, SLOT(showDisconnectedMessage()));
+	QObject::connect(&controller, SIGNAL(desktopControlSettingChanged(bool)),
+			 &trayicon, SLOT(setDesktopControlSetting(bool)));
 	QObject::connect(&controller, SIGNAL(quitApp()),
 			 &app, SLOT(quit()));
 

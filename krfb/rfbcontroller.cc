@@ -384,6 +384,7 @@ void RFBController::connectionAccepted(bool aRC)
 		return;
 
 	allowDesktopControl = aRC;
+	emit desktopControlSettingChanged(aRC);
 	idleTimer.start(IDLE_PAUSE);
 
 	server->rfbClientHead->clientGoneHook = clientGoneHook;
@@ -462,6 +463,10 @@ void RFBController::closeConnection()
 	}
 	else if (state == RFB_CONNECTING)
 		refuseConnection();
+}
+
+void RFBController::enableDesktopControl(bool b) {
+	allowDesktopControl = b;
 }
 
 void RFBController::idleSlot()

@@ -66,9 +66,9 @@ public slots:
         void prepareQuit();
         void showConnectedMessage();
         void showDisconnectedMessage();
+	void setDesktopControlSetting(bool);
 
 protected:
-	void contextMenuAboutToShow(KPopupMenu*);
 	void mousePressEvent(QMouseEvent *e);
 
 private:

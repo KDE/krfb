@@ -146,12 +146,14 @@ public:
 public slots:
 	void passwordChanged();
 	void closeConnection();
+	void enableDesktopControl(bool c);
 
 signals:
         void sessionEstablished();
 	void sessionFinished();
 	void sessionRefused();
 	void quitApp();
+	void desktopControlSettingChanged(bool);
 
 private:
 	void stopServer(bool xtestUngrab = true);
