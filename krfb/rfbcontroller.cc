@@ -730,10 +730,6 @@ void RFBController::sendSessionEstablished()
         emit sessionEstablished();
 }
 
-#ifdef __osf__
-extern "C" Bool XShmQueryExtension(Display*);
-#endif
-
 bool RFBController::checkX11Capabilities() {
 	int bp1, bp2, majorv, minorv;
 	Bool r = XTestQueryExtension(qt_xdisplay(), &bp1, &bp2,
@@ -745,13 +741,6 @@ bool RFBController::checkX11Capabilities() {
 		return false;
 	}
 
-	r = XShmQueryExtension(qt_xdisplay());
-	if (!r) {
-		KMessageBox::error(0,
-		   i18n("Your X11 Server does not support the required XShm extension. You can only share a local desktop."),
-				   i18n("Desktop Sharing Error"));
-		return false;
-	}
 	return true;
 }
 
