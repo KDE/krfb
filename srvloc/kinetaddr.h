@@ -66,12 +66,14 @@ public:
    */
   KInetAddress(const struct in_addr& in);
 
-  /**
+#ifdef AF_INET6
+   /**
    * Creates an IPv6 socket from in6_addr
    * @param in6       	a in_addr6 structure to copy from
    * @param len		the socket address length
    */
   KInetAddress(const struct in6_addr& in6);
+#endif
 
   /**
    * Creates a socket from text representation. Be careful with names

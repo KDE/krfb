@@ -63,7 +63,7 @@ public:
 	int sockfamily;
 	struct in_addr in;
 #ifdef AF_INET6
-	struct in6_addr in6;
+ 	struct in6_addr in6;
 #endif
 
 	KInetAddressPrivate() : sockfamily(AF_UNSPEC)
@@ -93,16 +93,14 @@ KInetAddress::KInetAddress(const struct in_addr& in) :
 	memcpy(&d->in, &in, sizeof(in));
 }
 
+#ifdef AF_INET6
 KInetAddress::KInetAddress(const struct in6_addr& in6) :
 	d(new KInetAddressPrivate)
 {
-#ifdef AF_INET6
 	d->sockfamily = AF_INET6;
 	memcpy(&d->in6, &in6, sizeof(in6));
-#else
-	d->sockfamily = AF_UNSPEC;
-#endif
 }
+#endif
 
 KInetAddress::KInetAddress(const QString &host) :
 	d(new KInetAddressPrivate)
