@@ -219,7 +219,7 @@ Comment[pt_BR]=senha inválida
 Comment[ro]=Parolă eronată
 Comment[sv]=Ogiltigt lösenord
 Comment[tr]=Geçersiz parola
-Comment[xh]=Igama lokugqitha Alisebenzi
+Comment[xh]=Igama lokugqitha Elingasebenziyo
 Comment[zu]=Igama elifihlikeli
 default_presentation=4
 
@@ -262,6 +262,7 @@ Comment[nso]=Momemiwa o rometse lefokophetiso le le sa dumelelwago. Kopantsho e 
 Comment[pt]=O convidado enviou uma senha inválida. A ligação foi recusada.
 Comment[pt_BR]=A parte "convidada" enviou uma senha inválida. Conexão recusada.
 Comment[sv]=Den inbjudna personen skickade ett ogiltigt lösenord. Anslutning vägrades.
+Comment[xh]=Umhlangano omenyiweyo uthumele igama lokugqitha elisebenzayo. Uxhulumano lwa lile. 
 Comment[zu]=Ingxenye emenyiwe ithumele igama lokungena alivunyelwanga. Ukuxhumana kwaliwe.
 default_presentation=2
 
@@ -353,6 +354,7 @@ Comment[pt]=A nova ligação foi estabelecida automaticamente
 Comment[pt_BR]=Nova conexão estabelecida automaticamente
 Comment[ro]=Conexiune nouă stabilită automat
 Comment[sv]=Ny anslutning automatiskt upprättad
+Comment[xh]=Uxhulumaniso olutsha lufunyenwe ngokuzenzekelayo
 Comment[zu]=Ukuxhumana okusha kuyazisungulela
 default_presentation=4
 
