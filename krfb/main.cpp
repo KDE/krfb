@@ -88,26 +88,27 @@ int main(int argc, char *argv[])
 	KAboutData aboutData( "krfb", I18N_NOOP("Desktop Sharing"),
 		VERSION, description, KAboutData::License_GPL,
 		"(c) 2001-2002, Tim Jansen\n"
+                "(c) 2001 Johannes E. Schindelin\n"
 		"(c) 2000, heXoNet Support GmbH, D-66424 Homburg\n"
 		"(c) 2000, Const Kaplinsky\n"
 	        "(c) 2000, Tridia Corporation\n"
 	        "(c) 1999, AT&T Laboratories Cambridge\n",
                 0, "http://www.tjansen.de/krfb", "ml@tjansen.de");
-	aboutData.addAuthor("Tim Jansen", "KDE Port", "tim@tjansen.de");
-	aboutData.addAuthor("Jens Wagner (heXoNet Support GmbH)", 
-			    "original RFB library, x0rfbserver", 
-			    "");
-	aboutData.addAuthor("Const Kaplinsky", 
-			    "TightVNC encoder", 
-			    "");
-	aboutData.addAuthor("Tridia Corporation", 
-			    "ZLib encoder", 
-			    "");
-	aboutData.addAuthor("AT&T Laboratories Cambridge", 
-			    "VNC encoders", 
-			    "");
-	aboutData.addAuthor("Jason Spisak", 
-			    "New Connection side image", 
+	aboutData.addAuthor("Tim Jansen", "", "tim@tjansen.de");
+	aboutData.addCredit("Johannes E. Schindelin", 
+			    I18N_NOOP("libvncserver"));
+	aboutData.addCredit("Const Kaplinsky", 
+			    I18N_NOOP("TightVNC encoder"));
+	aboutData.addCredit("Tridia Corporation", 
+			    I18N_NOOP("ZLib encoder"));
+	aboutData.addCredit("AT&T Laboratories Cambridge", 
+			    I18N_NOOP("original VNC encoders and "
+				      "protocol design"));
+	aboutData.addCredit("Jens Wagner (heXoNet Support GmbH)", 
+			    I18N_NOOP("x11 update scanner, "
+				      "original code base"));
+	aboutData.addCredit("Jason Spisak", 
+			    I18N_NOOP("Connection side image"), 
 			    "kovalid@yahoo.com");
 	KCmdLineArgs::init(argc, argv, &aboutData);
 	KCmdLineArgs::addCmdLineOptions(options);
@@ -140,13 +141,13 @@ int main(int argc, char *argv[])
 	RFBController controller(config);
 
 	QObject::connect(&app, SIGNAL(lastWindowClosed()),
-			 &controller, SLOT(closeSession()));
+			 &controller, SLOT(closeConnection()));
 
 	QObject::connect(&app, SIGNAL(lastWindowClosed()),
 			 &app, SLOT(quit()));
 
 	QObject::connect(&trayicon, SIGNAL(connectionClosed()),
-			 &controller, SLOT(closeSession()));
+			 &controller, SLOT(closeConnection()));
 
 	QObject::connect(&trayicon, SIGNAL(showConfigure()),
 			 config, SLOT(showDialog()));

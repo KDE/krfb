@@ -165,7 +165,8 @@ void RFBController::startServer(bool xtestGrab)
 	rfbRunEventLoop(server, -1, TRUE);
 }
 
-void RFBController::stopServer(bool xtestUngrab) {
+void RFBController::stopServer(bool xtestUngrab) 
+{
 	rfbScreenCleanup(server);
 	state = RFB_STOPPED;
 	delete scanner;
@@ -178,12 +179,14 @@ void RFBController::stopServer(bool xtestUngrab) {
 	}
 }
 
-void RFBController::rebind() {
+void RFBController::rebind() 
+{
 	stopServer(false);
 	startServer(false);
 }
 
-void RFBController::acceptConnection(bool aRC) {
+void RFBController::connectionAccepted(bool aRC)
+{
 	if (state != RFB_CONNECTING)
 		return;
 
@@ -192,13 +195,21 @@ void RFBController::acceptConnection(bool aRC) {
 	idleTimer.start(IDLE_PAUSE);
 
 	client->clientGoneHook = clientGoneHook;
-	rfbStartOnHoldClient(client);
-
 	state = RFB_CONNECTED;
 	emit sessionEstablished();
 }
 
-void RFBController::refuseConnection() {
+void RFBController::acceptConnection(bool aRC) 
+{
+	if (state != RFB_CONNECTING)
+		return;
+
+	connectionAccepted(aRC);
+	rfbStartOnHoldClient(client);
+}
+
+void RFBController::refuseConnection() 
+{
 	if (state != RFB_CONNECTING)
 		return;
 	rfbRefuseOnHoldClient(client);
@@ -216,7 +227,12 @@ void RFBController::connectionClosed()
 
 void RFBController::closeConnection() 
 {
-	rfbCloseClient(client);
+	if (state == RFB_CONNECTED) {
+		rfbCloseClient(client);
+		connectionClosed();
+	}
+	else if (state == RFB_CONNECTING)
+		refuseConnection();
 }
 
 void RFBController::idleSlot() 
@@ -226,7 +242,7 @@ void RFBController::idleSlot()
 	QList<Hint> v;
 	v.setAutoDelete(true);
 	scanner->searchUpdates(v);
-	
+
 	Hint *h;
 
 	for (h = v.first(); h != 0; h = v.next()) 
@@ -259,7 +275,7 @@ bool RFBController::handleCheckPassword(const char *p, int len)
 }
 
 enum rfbNewClientAction RFBController::handleNewClient(rfbClientPtr cl) 
-{	
+{
 	int socket = cl->sock;
 
 	if ((connectionNum > 0) ||
@@ -271,10 +287,10 @@ enum rfbNewClientAction RFBController::handleNewClient(rfbClientPtr cl)
 	state = RFB_CONNECTING;
 
 	if (!configuration->askOnConnect()) {
-		acceptConnection(configuration->allowDesktopControl());
+		connectionAccepted(configuration->allowDesktopControl());
 		return RFB_CLIENT_ACCEPT;
 	}
-	
+
 	dialog.allowRemoteControlCB->setChecked(configuration->allowDesktopControl());
 	// TODO: get & set client host name
 
@@ -283,7 +299,7 @@ enum rfbNewClientAction RFBController::handleNewClient(rfbClientPtr cl)
 	return RFB_CLIENT_ON_HOLD;
 }
 
-void RFBController::handleClientGone() 
+void RFBController::handleClientGone()
 {
 	connectionClosed();
 }

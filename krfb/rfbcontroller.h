@@ -29,7 +29,8 @@
 #include <ksock.h>
 #include <qobject.h>
 #include <qtimer.h>
-// rfbconnection must be last because of X11 headers
+
+#define HAVE_PTHREADS
 #include "rfb.h"
 
 #include <X11/Xlib.h>
@@ -72,6 +73,7 @@ public:
 	RFBState state;
 
 	void acceptConnection(bool allowRemoteConnection);
+	void connectionAccepted(bool allowRemoteConnection);
 	void refuseConnection();
 	void connectionClosed();
 	bool handleCheckPassword(const char *p, int len);

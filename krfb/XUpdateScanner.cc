@@ -20,6 +20,8 @@
 /*
  * December 15th 2001: removed coments, mouse pointer options and some
  * other stuff
+ * January 10th 2002: improved hint creation (join adjacent hints)
+ * 
  *                   Tim Jansen <tim@tjansen.de>
  */   
 
