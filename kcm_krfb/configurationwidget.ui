@@ -8,8 +8,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>353</width>
-            <height>318</height>
+            <width>394</width>
+            <height>345</height>
         </rect>
     </property>
     <property name="caption">
@@ -79,6 +79,50 @@
                     </property>
                 </widget>
             </vbox>
+        </widget>
+        <widget class="QGroupBox">
+            <property name="name">
+                <cstring>GroupBox1</cstring>
+            </property>
+            <property name="title">
+                <string>Invitations</string>
+            </property>
+            <grid>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <property name="margin">
+                    <number>11</number>
+                </property>
+                <property name="spacing">
+                    <number>6</number>
+                </property>
+                <widget class="QPushButton" row="1" column="0">
+                    <property name="name">
+                        <cstring>createInvitation</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Create invitation...</string>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string></string>
+                    </property>
+                    <property name="whatsThis" stdset="0">
+                        <string>Click to create a new invitation.</string>
+                    </property>
+                </widget>
+                <widget class="QPushButton" row="1" column="1">
+                    <property name="name">
+                        <cstring>manageInvitations</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Manage invitations...</string>
+                    </property>
+                    <property name="whatsThis" stdset="0">
+                        <string>Click to view or delete the open invitations.</string>
+                    </property>
+                </widget>
+            </grid>
         </widget>
         <widget class="QButtonGroup">
             <property name="name">

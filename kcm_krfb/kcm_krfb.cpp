@@ -65,6 +65,10 @@ KcmKRfb::KcmKRfb(QWidget *p, const char *name, const QStringList &) :
 	connect(m_confWidget.allowUninvitedCB, SIGNAL(clicked()), SLOT(configChanged()) );
 	connect(m_confWidget.confirmConnectionsCB, SIGNAL(clicked()), SLOT(configChanged()) );
 	connect(m_confWidget.allowDesktopControlCB, SIGNAL(clicked()), SLOT(configChanged()) );
+	connect((QObject*)m_confWidget.createInvitation, SIGNAL(clicked()), 
+		&m_configuration, SLOT(showInvitationDialog()) );
+	connect((QObject*)m_confWidget.manageInvitations, SIGNAL(clicked()), 
+		&m_configuration, SLOT(showManageInvitationsDialog()) );
 }
 
 KcmKRfb::~KcmKRfb() {
