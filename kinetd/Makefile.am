@@ -24,7 +24,7 @@ install-data-local:
 	$(INSTALL_DATA) $(srcdir)/eventsrc $(DESTDIR)$(kde_datadir)/kinetd/eventsrc
 
 # set the include path for X, qt and KDE
-INCLUDES= $(all_includes) -I$(top_srcdir)/krfb/srvloc
+INCLUDES= -I$(top_srcdir)/krfb/srvloc $(all_includes)
 
 messages: rc.cpp
 	$(XGETTEXT) *.cpp -o $(podir)/kinetd.pot
