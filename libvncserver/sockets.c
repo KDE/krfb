@@ -173,7 +173,7 @@ rfbCheckFds(rfbScreenInfoPtr rfbScreen,long usec)
     fd_set fds;
     struct timeval tv;
     struct sockaddr_in addr;
-    int addrlen = sizeof(addr);
+    unsigned int addrlen = sizeof(addr);
     char buf[6];
     const int one = 1;
     int sock;
@@ -294,6 +294,7 @@ rfbCloseClient(cl)
     LOCK(cl->updateMutex);
     if (cl->sock != -1) {
       FD_CLR(cl->sock,&(cl->screen->allFds));
+      shutdown(cl->sock, SHUT_RDWR);
       close(cl->sock);
       cl->sock = -1;
     }
