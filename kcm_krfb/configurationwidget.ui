@@ -80,7 +80,7 @@
                                     <cstring>invitationNumLabel</cstring>
                                 </property>
                                 <property name="text">
-                                    <string>You have no open invitation.</string>
+                                    <string>You have no open invitations.</string>
                                 </property>
                             </widget>
                             <widget class="QPushButton">
