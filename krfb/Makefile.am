@@ -14,7 +14,7 @@ krfb_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 
 kde_services_DATA = kinetd_krfb.desktop
 
-lnkdir = $(kde_appsdir)/Applications
+lnkdir = $(kde_appsdir)/System
 lnk_DATA = krfb.desktop
 
 appdir = $(kde_datadir)/krfb
