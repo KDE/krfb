@@ -909,6 +909,22 @@ rfbProcessClientNormalMessage(cl)
 }
 
 
+/*
+ * rfbSendPing - send an empty framebuffer request
+ */
+
+Bool
+rfbSendPing(cl)
+     rfbClientPtr cl;
+{
+    rfbFramebufferUpdateMsg *fu = (rfbFramebufferUpdateMsg *)cl->updateBuf;
+    cl->rfbFramebufferUpdateMessagesSent++;
+    fu->type = rfbFramebufferUpdate;
+    fu->nRects = Swap16IfLE((CARD16)0);
+    cl->ublen = sz_rfbFramebufferUpdateMsg;
+    return TRUE;
+}
+
 
 /*
  * rfbSendFramebufferUpdate - send the currently pending framebuffer update to

@@ -151,6 +151,10 @@ typedef unsigned long KeySym;
 #define TINI_MUTEX(mutex) pthread_mutex_destroy(&(mutex))
 #define TSIGNAL(cond) pthread_cond_signal(&(cond))
 #define WAIT(cond,mutex) pthread_cond_wait(&(cond),&(mutex))
+#define TIMEDWAIT(cond,mutex,t) {struct timeval tv;\
+  tv.tv_sec = (t) / 1000;\
+  tv.tv_usec = ((t) % 1000) * 1000;\
+  pthread_cond_timedwait(&(cond),&(mutex),&tv);}
 #define COND(cond) pthread_cond_t (cond)
 #define INIT_COND(cond) pthread_cond_init(&(cond),NULL)
 #define TINI_COND(cond) pthread_cond_destroy(&(cond))
@@ -620,6 +624,7 @@ extern void rfbProcessClientMessage(rfbClientPtr cl);
 extern void rfbClientConnFailed(rfbClientPtr cl, char *reason);
 extern void rfbNewUDPConnection(rfbScreenInfoPtr rfbScreen,int sock);
 extern void rfbProcessUDPInput(rfbScreenInfoPtr rfbScreen);
+extern Bool rfbSendPing(rfbClientPtr cl);
 extern Bool rfbSendFramebufferUpdate(rfbClientPtr cl, sraRegionPtr updateRegion);
 extern Bool rfbSendRectEncodingRaw(rfbClientPtr cl, int x,int y,int w,int h);
 extern Bool rfbSendUpdateBuf(rfbClientPtr cl);
