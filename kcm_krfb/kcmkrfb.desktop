@@ -8,3 +8,22 @@ X-KDE-ModuleType=Library
 X-KDE-Library=krfb
 
 Name=Desktop Sharing
+Name[af]=werkskerm deeling
+Name[bs]=Dijeljenje desktopa
+Name[cs]=Sdílení pracovní plochy
+Name[da]=Skrivebordsdeling
+Name[de]=Arbeitsfläche freigeben
+Name[el]=Μοίρασμα της επιφάνειας εργασίας
+Name[es]=Compartición de escritorio
+Name[fi]=Työpöytien jako
+Name[he]=שיתוף שולחנות עבודה
+Name[hr]=Dijeljenje radne površine
+Name[ja]=デスクトップ共有
+Name[mt]=Qsim tad-desktop
+Name[pt_BR]=Compartilhamento do Ambiente de Trabalho
+Name[ro]=Partajare ecran
+Name[sv]=Dela ut skrivbordet
+Name[tr]=Masaüstü Paylaşımı
+
+Comment=Configure Desktop Sharing
+Keywords=desktop sharing,krfb,vnc,sharing,rdp,krdc,remote desktop connection,rdp
