@@ -504,6 +504,8 @@ typedef struct _rfbClientRec {
     int tightQualityLevel;
 
     /* soft cursor images */
+    unsigned char *softSource;
+    int softSourceLen;
     rfbSoftCursorSetImage *softCursorImages[rfbSoftCursorMaxImages];
     int nextUnusedSoftCursorImage;
   
@@ -703,20 +705,18 @@ typedef struct rfbCursor {
     unsigned short width, height, xhot, yhot;	/* metrics */
     unsigned short foreRed, foreGreen, foreBlue; /* device-independent colour */
     unsigned short backRed, backGreen, backBlue; /* device-independent colour */
-    unsigned short softCursorLength;
     unsigned char *richSource; /* source bytes for a rich cursor */
-    unsigned char *softSource; /* image for a soft cursor */
 } rfbCursor, *rfbCursorPtr;
 
 extern Bool rfbSendCursorShape(rfbClientPtr cl/*, rfbScreenInfoPtr pScreen*/);
-extern Bool rfbSendSoftCursor(rfbClientPtr cl);
+extern Bool rfbSendSoftCursor(rfbClientPtr cl, Bool cursorWasChanged);
 extern unsigned char rfbReverseByte[0x100];
 extern void rfbConvertLSBCursorBitmapOrMask(int width,int height,unsigned char* bitmap);
 extern rfbCursorPtr rfbMakeXCursor(int width,int height,char* cursorString,char* maskString);
 extern char* rfbMakeMaskForXCursor(int width,int height,char* cursorString);
 extern void MakeXCursorFromRichCursor(rfbScreenInfoPtr rfbScreen,rfbCursorPtr cursor);
 extern void MakeRichCursorFromXCursor(rfbScreenInfoPtr rfbScreen,rfbCursorPtr cursor);
-extern void MakeSoftCursor(rfbScreenInfoPtr rfbScreen,rfbCursorPtr cursor);
+extern void MakeSoftCursor(rfbClientPtr cl,rfbCursorPtr cursor);
 extern void rfbFreeCursor(rfbCursorPtr cursor);
 extern void rfbDrawCursor(rfbScreenInfoPtr rfbScreen);
 extern void rfbUndrawCursor(rfbScreenInfoPtr rfbScreen);

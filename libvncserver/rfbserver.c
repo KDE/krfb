@@ -1093,12 +1093,12 @@ rfbSendFramebufferUpdate(cl, givenUpdateRegion)
     }
 
    if (sendSoftCursorRects) {
-	cl->cursorWasChanged = FALSE;
-	cl->cursorWasMoved = FALSE;
-	if (!rfbSendSoftCursor(cl)) {
+	if (!rfbSendSoftCursor(cl, cl->cursorWasChanged)) {
 	    sraRgnDestroy(updateRegion);
 	    return FALSE;
 	}
+	cl->cursorWasChanged = FALSE;
+	cl->cursorWasMoved = FALSE;
     }
 
     if (!sraRgnEmpty(updateCopyRegion)) {

@@ -177,8 +177,7 @@ rfbSendCursorShape(cl)
  */
 
 Bool
-rfbSendSoftCursor(cl)
-    rfbClientPtr cl;
+rfbSendSoftCursor(rfbClientPtr cl, Bool cursorWasChanged)
 {
     rfbCursorPtr pCursor;
     rfbSoftCursorSetImage setImage;
@@ -187,7 +186,14 @@ rfbSendSoftCursor(cl)
     int saved_ublen, i, scOindex, scNindex, nlen, imgLen;
 
     pCursor = cl->screen->getCursorPtr(cl);
-    MakeSoftCursor(cl->screen,pCursor);
+    if (cursorWasChanged && cl->softSource) {
+	free(cl->softSource);
+	cl->softSource = 0;
+    }
+    if (!cl->softSource)
+	MakeSoftCursor(cl, pCursor);
+
+    imgLen = cl->softSourceLen;
 
     /* If there is no cursor, send update with empty cursor data. */
 
@@ -197,11 +203,6 @@ rfbSendSoftCursor(cl)
 	pCursor = NULL;
     }
 
-    
-    if (pCursor == NULL)
-	imgLen = 0;
-    else
-	imgLen = pCursor->softCursorLength;
     setImage.imageLength = Swap16IfLE(imgLen);
 
     scOindex = -1;
@@ -216,7 +217,7 @@ rfbSendSoftCursor(cl)
 	setImage.imageIndex = scsi->imageIndex;
 	if (!memcmp((char*)scsi, (char*)&setImage, sizeof(setImage))) {
 	    if (imgLen && !memcmp(((char*)scsi)+sizeof(rfbSoftCursorSetImage),
-				  (char*)pCursor->softSource,
+				  cl->softSource,
 				  imgLen)) {
 		scOindex = i;
 		break;
@@ -241,7 +242,7 @@ rfbSendSoftCursor(cl)
 	       sizeof(setImage));
 	if (imgLen)
 	    memcpy(((char*)cl->softCursorImages[scNindex])+sizeof(setImage), 
-		   (char*)pCursor->softSource, imgLen);
+		   (char*)cl->softSource, imgLen);
     }
 
     /* Send buffer contents if needed. */
@@ -460,70 +461,82 @@ void MakeRichCursorFromXCursor(rfbScreenInfoPtr rfbScreen,rfbCursorPtr cursor)
        else memcpy(cp,back,bpp);
 }
 
-void MakeSoftCursor(rfbScreenInfoPtr rfbScreen,rfbCursorPtr cursor)
+void MakeSoftCursor(rfbClientPtr cl, rfbCursorPtr cursor)
 {
-  int w = (cursor->width+7)/8;
-  int bpp = rfbScreen->rfbServerFormat.bitsPerPixel/8;
-  unsigned char *cp, *sp;
-  int state; /* 0 = transparent, 1 otherwise */
-  CARD8 *counter;
-  unsigned char bit;
-  int i,j;
+    int w = (cursor->width+7)/8;
+    int bpp = cl->format.bitsPerPixel/8;
+    int sbpp= cl->screen->rfbServerFormat.bitsPerPixel/8;
+    unsigned char *cp, *sp, *translatedCursor;
+    int state; /* 0 = transparent, 1 otherwise */
+    CARD8 *counter;
+    unsigned char bit;
+    int i,j;
+    
+    if ((!cursor) || (cl->softSource)) {
+	cl->softSourceLen = 0;
+	return;
+    }
+    
+    if (!cursor->richSource)
+	MakeRichCursorFromXCursor(cl->screen, cursor);
 
-  if ((!cursor) || cursor->softSource)
-    return;
+    sp = malloc(cursor->width*bpp*cursor->height);
 
-  if (!cursor->richSource)
-    MakeRichCursorFromXCursor(rfbScreen, cursor);
+    (*cl->translateFn)(cl->translateLookupTable,
+		       &(cl->screen->rfbServerFormat),
+                       &cl->format, cursor->richSource,
+		       sp, cursor->width*sbpp, 
+		       cursor->width, cursor->height);
 
-   cp=cursor->softSource=(unsigned char*)calloc(cursor->width*(bpp+2),cursor->height);
-   sp=cursor->richSource;
+    translatedCursor = sp;
+    cp=cl->softSource=(unsigned char*)calloc(cursor->width*(bpp+2),cursor->height);
+    
+    state = 0;
+    counter = cp++;
+    *counter = 0;
+    
+    for(j=0;j<cursor->height;j++)
+	for(i=0,bit=0x80;i<cursor->width;i++,bit=(bit&1)?0x80:bit>>1)
+	    if(cursor->mask[j*w+i/8]&bit) {
+		if (state) {
+		    memcpy(cp,sp,bpp);
+		    cp += bpp;
+		    sp += bpp;
+		    (*counter)++;
+		    if (*counter == 255) {
+			state = 0;
+			counter = cp++;
+			*counter = 0;
+		    }
+		}
+		else {
+		    state = 1;
+		    counter = cp++;
+		    *counter = 1;
+		    memcpy(cp,sp,bpp);
+		    cp += bpp;
+		    sp += bpp;
+		}
+	    }
+	    else {
+		if (!state) {
+		    (*counter)++;
+		    if (*counter == 255) {
+			state = 1;
+			counter = cp++;
+			*counter = 0;
+		    }
+		}
+		else {
+		    state = 0;
+		    counter = cp++;
+		    *counter = 1;
+		}
+		sp += bpp;
+	    }
 
-   state = 0;
-   counter = cp++;
-   *counter = 0;
-
-   for(j=0;j<cursor->height;j++)
-     for(i=0,bit=0x80;i<cursor->width;i++,bit=(bit&1)?0x80:bit>>1)
-       if(cursor->mask[j*w+i/8]&bit) {
-	 if (state) {
-	   memcpy(cp,sp,bpp);
-	   cp += bpp;
-	   sp += bpp;
-	   (*counter)++;
-	   if (*counter == 255) {
-	     state = 0;
-	     counter = cp++;
-	     *counter = 0;
-	   }
-	 }
-	 else {
-	   state = 1;
-	   counter = cp++;
-	   *counter = 1;
-	   memcpy(cp,sp,bpp);
-	   cp += bpp;
-	   sp += bpp;
-	 }
-       }
-       else {
-	 if (!state) {
-	   (*counter)++;
-	   if (*counter == 255) {
-	     state = 1;
-	     counter = cp++;
-	     *counter = 0;
-	   }
-	 }
-	 else {
-	   state = 0;
-	   counter = cp++;
-	   *counter = 1;
-	 }
-	 sp += bpp;
-       }
-
-   cursor->softCursorLength = cp - cursor->softSource;
+    free(translatedCursor);
+    cl->softSourceLen = cp - cl->softSource;
 }
 
 
