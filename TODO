@@ -6,8 +6,6 @@ For 3.2:
 - set desktop name (username@hostname)
 - apply multi-desktop patch
 - trayicon mouse-over text
-- configurable slp lifetime in kinetd
-- slp registration refresh in kinetd when lifetime expired
 - when krfb is started with URL arguments and without connection
   quality, add some kind of smart algorithm to determine whether the
   other host is local (maybe using SLP to announce the connectivity 

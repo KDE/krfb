@@ -36,6 +36,7 @@ private:
 	bool m_valid;
 	QString m_serviceName;
 	QString m_serviceURL, m_serviceAttributes, m_registeredServiceURL;
+	int m_serviceLifetime;
 	int m_port;
 	int m_portBase, m_autoPortRange;
 	int m_defaultPortBase, m_defaultAutoPortRange;
@@ -45,6 +46,7 @@ private:
 	bool m_enabled;
 	bool m_serviceRegistered, m_registerService;
 	QDateTime m_expirationTime;
+	QDateTime m_slpLifetimeEnd;
 
 	KServerSocket *m_socket;
 	KProcess m_process;
@@ -69,10 +71,12 @@ public:
 	void setServiceRegistrationEnabled(bool enabled);
 	bool isServiceRegistrationEnabled();
 	QDateTime expiration();
+	QDateTime serviceLifetimeEnd();
 	bool isEnabled();
 	int port();
 	QString processServiceTemplate(const QString &a);
 	bool setPort(int port = -1, int autoProbeRange = 1);
+	void refreshRegistration();
 
 private slots:
 	void accepted(KSocket*);
@@ -162,16 +166,20 @@ k_dcop:
  private:
 	QDateTime getNextExpirationTime();
 	void setPortRetryTimer(bool retry);
+	void setReregistrationTimer();
+	void setExpirationTimer();
 
 	KConfig *m_config;
 	KServiceRegistry *m_srvreg;
 	QPtrList<PortListener> m_portListeners;
 	QTimer m_expirationTimer;
 	QTimer m_portRetryTimer;
+	QTimer m_reregistrationTimer;
 
  private slots:
-	void setExpirationTimer();
+	void expirationTimer();
 	void portRetryTimer();
+	void reregistrationTimer();
 
  public:
 	KInetD(QCString &n);

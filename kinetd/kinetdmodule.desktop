@@ -88,3 +88,9 @@ Type=QString
 [PropertyDef::X-KDE-KINETD-serviceAttributes]
 Type=QString
 
+# the lifetime of a service in seconds. kinets will renew the service 
+# automatically. Max 65535, never use anything under 2 min. Something like
+# 5-20 minutes is a sane value for most desktop applications.
+[PropertyDef::X-KDE-KINETD-serviceLifetime]
+Type=int
+

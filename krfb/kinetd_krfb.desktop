@@ -13,6 +13,7 @@ X-KDE-KINETD-argument=--kinetd
 X-KDE-KINETD-multiInstance=false
 X-KDE-KINETD-serviceURL=service:remotedesktop.kde:vnc://%h:%p;(type=shared),(username=%u),(fullname=%f)
 X-KDE-KINETD-serviceAttributes=(type=shared),(username=%u),(fullname=%f)
+X-KDE-KINETD-serviceLifetime=1200
 
 Name=KRfb Desktop Sharing
 Name[bg]=Споделяне на Работно място KRfb
