@@ -35,10 +35,13 @@ TrayIcon::TrayIcon(KDialog *d, Configuration *c) :
 	setPixmap(trayIconClosed);
 
 	configureAction = KStdAction::preferences(0, 0, &actionCollection);
-	if (!c->preconfigured()) 
+	manageInvitationsAction = new KAction(i18n("Manage &invitations"));
+	if (c->mode() != KRFB_STAND_ALONE_CMDARG) {
 		configureAction->plug(contextMenu());
+		manageInvitationsAction->plug(contextMenu());
+	}
 
-	closeConnectionAction = new KAction(i18n("Close connection"));
+	closeConnectionAction = new KAction(i18n("Cl&ose connection"));
 	closeConnectionAction->plug(contextMenu());
 	closeConnectionAction->setEnabled(false);
 	actionCollection.insert(closeConnectionAction);
@@ -48,8 +51,10 @@ TrayIcon::TrayIcon(KDialog *d, Configuration *c) :
 	aboutAction->plug(contextMenu());
 
 	connect(configureAction, SIGNAL(activated()), SIGNAL(showConfigure()));
+	connect(manageInvitationsAction, SIGNAL(activated()), 
+		SIGNAL(showManageInvitations()));
 	connect(aboutAction, SIGNAL(activated()), SLOT(showAbout()));
-	connect(closeConnectionAction, SIGNAL(activated()), 
+	connect(closeConnectionAction, SIGNAL(activated()),
 		SIGNAL(connectionClosed()));
 	actionCollection.insert(closeConnectionAction);
 	show();

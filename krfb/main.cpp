@@ -88,17 +88,10 @@ static KCmdLineOptions options[] =
  *   + does not accept connections, no tray icons
  *
  * TODO:
- * - invitations
- * - kcontrol config for kinetd mode
+ * - invitations (see configuration.cc for overview)
+ * - implement invitation mode
+ * - display kcm in kinetd mode
  */
-
-enum krfb_mode {
-	KRFB_UNKNOWN_MODE = 0,
-	KRFB_STAND_ALONE,
-	KRFB_STAND_ALONE_CMDARG,
-	KRFB_KINETD_MODE,
-	KRFB_INVITATION_MODE
-};
 
 bool checkKInetd() {
 	bool enabled;
@@ -166,9 +159,9 @@ int main(int argc, char *argv[])
 		bool askOnConnect = !args->isSet(ARG_DONT_CONFIRM_CONNECT);
 		bool allowDesktopControl = args->isSet(ARG_REMOTE_CONTROL);
 		QString password = args->getOption(ARG_PASSWORD);
+		mode = KRFB_STAND_ALONE_CMDARG;
 		config = new Configuration(oneConnection, askOnConnect,
 					   allowDesktopControl, password);
-		mode = KRFB_STAND_ALONE_CMDARG;
 	}
 	else {
 		if (args->isSet(ARG_STAND_ALONE)) {
@@ -178,12 +171,13 @@ int main(int argc, char *argv[])
 			fdString = args->getOption(ARG_KINETD);
 			mode = KRFB_KINETD_MODE;
 		}
-		config = new Configuration();
+		if (mode == KRFB_UNKNOWN_MODE)
+			mode = checkKInetd() ? KRFB_INVITATION_MODE : KRFB_STAND_ALONE;
+
+		config = new Configuration(mode);
 	}
 	args->clear();
 
-	if (mode == KRFB_UNKNOWN_MODE)
-		mode = checkKInetd() ? KRFB_INVITATION_MODE : KRFB_STAND_ALONE;
 
 	if (mode == KRFB_INVITATION_MODE) {
 		// TODO: display invitation
@@ -208,7 +202,9 @@ int main(int argc, char *argv[])
 	QObject::connect(&trayicon, SIGNAL(connectionClosed()),
 			 &controller, SLOT(closeConnection()));
 	QObject::connect(&trayicon, SIGNAL(showConfigure()),
-			 config, SLOT(showDialog()));
+			 config, SLOT(showConfigDialog()));
+	QObject::connect(&trayicon, SIGNAL(showManageInvitations()),
+			 config, SLOT(showManageInvitationsDialog()));
 
 	QObject::connect(&dcopiface, SIGNAL(connectionClosed()),
 			 &controller, SLOT(closeConnection()));

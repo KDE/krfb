@@ -488,21 +488,43 @@ void RFBController::dialogRefused()
 	emit sessionRefused();
 }
 
-bool RFBController::handleCheckPassword(rfbClientPtr cl, 
-					const char *response, 
-					int len) 
-{
+bool checkPassword(const QString &p,
+	unsigned char *challenge,
+	const char *response,
+	int len) {
+
 	char passwd[8];
 
-	QString cpassword = configuration->password();
 	bzero(passwd, 8);
-	if (!cpassword.isNull())
-		strncpy(passwd, cpassword.latin1(), 
-			(8 <= cpassword.length()) ? 8 : cpassword.length());
-	
-	vncEncryptBytes(cl->authChallenge, passwd);
-	
-	if (memcmp(cl->authChallenge, response, len) != 0) {
+	if (!p.isNull())
+		strncpy(passwd, p.latin1(), (8 <= p.length()) ? 8 : p.length());
+
+	vncEncryptBytes(challenge, passwd);
+	return memcmp(challenge, response, len) == 0;
+}
+
+bool RFBController::handleCheckPassword(rfbClientPtr cl,
+					const char *response,
+					int len)
+{
+	bool authd = checkPassword(configuration->password(),
+		cl->authChallenge, response, len);
+
+	if (!authd) {
+		QValueList<Invitation>::iterator it =
+			configuration->invitations().begin();
+		while (it != configuration->invitations().end()) {
+			if (checkPassword((*it).password(),
+				cl->authChallenge, response, len)) {
+				authd = true;
+				configuration->invitations().remove(it);
+				break;
+			}
+			it++;
+		}
+	}
+
+	if (!authd) {
 		QString host, port;
 		KExtendedSocket::resolve(KExtendedSocket::peerAddress(cl->sock),
 					 host, port);

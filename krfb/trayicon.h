@@ -44,6 +44,7 @@ public slots:
 signals:
   	void connectionClosed();
 	void showConfigure();
+	void showManageInvitations();
 
 private:
   	KPixmap trayIconOpen;
@@ -52,6 +53,7 @@ private:
 	KActionCollection actionCollection;
   	KAction* closeConnectionAction;
   	KAction* configureAction;
+  	KAction* manageInvitationsAction;
   	KAction* aboutAction;
 
 private slots:

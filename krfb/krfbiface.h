@@ -12,7 +12,6 @@ k_dcop:
 	 * If a client is connected it will be disconnected.
 	 */
 	virtual void disconnect() = 0;
-//	virtual void setWindowID(int) = 0;
 
 	/**
 	 * Quites krfb, connected clients will be disconnected.

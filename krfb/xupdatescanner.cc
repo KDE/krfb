@@ -21,9 +21,10 @@
  * December 15th 2001: removed coments, mouse pointer options and some
  * other stuff
  * January 10th 2002: improved hint creation (join adjacent hints)
- * 
+ * February 20th: use only partial tiles
+ *
  *                   Tim Jansen <tim@tjansen.de>
- */   
+ */
 
 #include <kdebug.h>
 
@@ -226,7 +227,6 @@ void XUpdateScanner::createHintFromTile(int x, int y, int th, Hint &hint)
 
 void XUpdateScanner::addTileToHint(int x, int y, int th, Hint &hint)
 {
-// todo: refuse to add hint if this one is much smaller or bigger (use x0)
 	unsigned int w = width - x;
 	unsigned int h = height - y;
 	if (w > tileWidth) 

@@ -1,6 +1,12 @@
+2002-03-29  Tim Jansen  <tjansen@tjansen.de>
+
+	* Added invitations.
+
 2002-03-18  Tim Jansen  <tjansen@tjansen.de>
 
 	* removed vertical splitting of tiles, simplifies code.
+
+	* finished kinetd support
 
 2002-03-11  Tim Jansen  <tjansen@tjansen.de>
 
@@ -24,18 +30,20 @@
 	
 2002-02-20  Tim Jansen  <tjansen@tjansen.de>
 
-	* krfb/xupdatescanner.cc: split tiles into left&right half if neccessary.
+	* krfb/xupdatescanner.cc: split tiles into left&right half if 
+	  neccessary.
 
 	* krfb/Makefile.am: fixed a bug for people who "make install" for the
 	  first time (did not create share/krfb dir for eventrc)
 
-	* krfb/xupdatescanner.cc: improved scanning algorithm and renamed the file. 
+	* krfb/xupdatescanner.cc: improved scanning algorithm and renamed 
+	  the file.
 	  It now calculates the correct height of tiles and only joins them
 	  if it wouldn't include too many unused pixels.
-	  Result seems to be a reduction between 25% (web browsing) and 40% (text 
-	  editing) of transmitted raw data. Note that the effectiveness of some 
-	  encoders decreases with less adjacent regions, so the real reduction is 
-	  probably less.
+	  Result seems to be a reduction between 25% (web browsing) and 40% 
+	  (text editing) of transmitted raw data. Note that the effectiveness 
+	  of some encoders decreases with less adjacent regions, so the real 
+	  reduction is probably less.
 
 2002-02-18  Tim Jansen  <tjansen@tjansen.de>
 

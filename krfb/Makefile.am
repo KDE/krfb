@@ -3,7 +3,8 @@ METASOURCES = AUTO
 bin_PROGRAMS = krfb
 krfb_SOURCES = rfbcontroller.cc configuration.cc trayicon.cpp \
   xupdatescanner.cc main.cpp configurationdialog.ui newconnectiondialog.ui \
-  krfbifaceimpl.cc krfbiface.skel
+  krfbifaceimpl.cc krfbiface.skel manageinvitations.ui personalinvitation.ui \
+  invite.ui
 krfb_LDADD   = ../libvncserver/libvncserver.a -lz -lpthread -ljpeg -lXtst \
   $(LIB_QT) $(LIB_KDECORE) $(LIB_KDEUI)  $(LIBSOCKET)
 
