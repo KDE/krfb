@@ -91,7 +91,7 @@ KcmKRfb::~KcmKRfb() {
 }
 
 void KcmKRfb::configChanged() {
-	setChanged(true);
+	emit changed(true);
 }
 
 void KcmKRfb::setInvitationNum(int num) {
@@ -135,7 +135,7 @@ void KcmKRfb::load() {
 	m_confWidget->portInput->setValue(m_configuration.preferredPort()> 0 ?
 		m_configuration.preferredPort() : 5900);
 	m_confWidget->disableBackgroundCB->setChecked(m_configuration.disableBackground());
-	setChanged(false);
+	emit changed(false);
 }
 
 void KcmKRfb::save() {
@@ -153,7 +153,7 @@ void KcmKRfb::save() {
 		m_configuration.setPreferredPort(m_confWidget->portInput->value());
 	m_configuration.setDisableBackground(m_confWidget->disableBackgroundCB->isChecked());
 	m_configuration.save();
-	setChanged(false);
+	emit changed(false);
 }
 
 void KcmKRfb::defaults() {
@@ -168,7 +168,7 @@ void KcmKRfb::defaults() {
 	m_confWidget->autoPortCB->setChecked(true);
 	m_confWidget->portInput->setValue(5900);
 	m_confWidget->disableBackgroundCB->setChecked(false);
-	setChanged(true);
+	emit changed(true);
 }
 
 const KAboutData *KcmKRfb::aboutData() const
