@@ -19,6 +19,7 @@
 /*
  * TODOs:
  * - get notified of changes in services
+ * - replace debug messages with knotify
  */
 
 #include "kinetd.h"
@@ -109,7 +110,7 @@ void PortListener::accepted(KSocket *sock) {
 
 	process.clearArguments();
 	process << argument << sock->socket();
-	if (!process.start(KProcess::DontCare) {
+	if (!process.start(KProcess::DontCare)) {
 		kdDebug() << "kinetd: Calling process failed" << endl;
 	}
 	delete sock;

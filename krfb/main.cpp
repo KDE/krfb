@@ -32,6 +32,9 @@
 #include <kmessagebox.h>
 #include <qobject.h>
 #include <qwindowdefs.h>
+#include <qcstring.h>
+#include <qdatastream.h>
+#include <dcopclient.h>
 
 #include <signal.h>
 
@@ -43,7 +46,10 @@ static const char *description = I18N_NOOP("VNC-compatible server to share "
 #define ARG_PASSWORD "password"
 #define ARG_DONT_CONFIRM_CONNECT "dont-confirm-connect"
 #define ARG_REMOTE_CONTROL "remote-control"
-	
+#define ARG_STAND_ALONE "stand-alone"
+#define ARG_KINETD "kinetd "
+
+
 static KCmdLineOptions options[] =
 {
 	{ "o", 0, 0},
@@ -54,33 +60,90 @@ static KCmdLineOptions options[] =
 	{ ARG_DONT_CONFIRM_CONNECT, I18N_NOOP("Allow connections without asking the user."), 0},
 	{ "c", 0, 0},
 	{ ARG_REMOTE_CONTROL, I18N_NOOP("Allow remote side to control this computer."), 0},
+	{ "s", 0, 0},
+	{ ARG_STAND_ALONE, I18N_NOOP("Stand-alone mode, do not use daemon."), 0},
+	{ ARG_KINETD, I18N_NOOP("Used for calling from kinetd."), 0},
 	{ 0, 0, 0 }
 };
 
+/*
+ * KRfb can run in 4 different modes:
+ * - stand-alone
+ *   + To get there call KRfb with kinetd disabled or not running
+ *   + traditional mode like <0.7 versions
+ *   + uses non-kcm configuration dialog
+ *   + invitation on start-up can be disabled
+ * - stand-alone with command line args
+ *   + to get there call krfb any cmd line args (except --kinetd)
+ *   + behaves like stand-alone, but without configuration
+ * - kinetd mode
+ *   + started using the --kinetd argument
+ *   + used for starting from kinetd
+ *   + takes socket fd from cmd args
+ *   + exits after connection is finished
+ *   + config option calls kcontrol module
+ * - invitation mode
+ *   + started when krfb is called while kinetd is enabled and no cmd line arg is given
+ *   + displays only invitation dialog and finished then
+ *   + does not accept connections, no tray icons
+ *
+ * TODO:
+ * - invitations
+ * - kcontrol config for kinetd mode
+ */
+
+enum krfb_mode {
+	KRFB_UNKNOWN_MODE = 0,
+	KRFB_STAND_ALONE,
+	KRFB_STAND_ALONE_CMDARG,
+	KRFB_KINETD_MODE,
+	KRFB_INVITATION_MODE
+};
+
+bool checkKInetd() {
+	bool enabled;
+	DCOPClient *d = KApplication::dcopClient();
+
+	QByteArray sdata, rdata;
+	QCString replyType;
+	QDataStream arg(sdata, IO_WriteOnly);
+	arg << QString("krfb");
+	if (!d->call ("kded", "kinetd", "isEnabled(QString)", sdata, replyType, rdata))
+		return false;
+
+	if (replyType != "bool")
+		return false;
+
+	QDataStream answer(rdata, IO_ReadOnly);
+	answer >> enabled;
+	return enabled;
+}
 
 int main(int argc, char *argv[])
 {
+	enum krfb_mode mode = KRFB_UNKNOWN_MODE;
+
 	KAboutData aboutData( "krfb", I18N_NOOP("Desktop Sharing"),
 		VERSION, description, KAboutData::License_GPL,
 		"(c) 2001-2002, Tim Jansen\n"
-                "(c) 2001 Johannes E. Schindelin\n"
+		"(c) 2001 Johannes E. Schindelin\n"
 		"(c) 2000, heXoNet Support GmbH, D-66424 Homburg\n"
 		"(c) 2000, Const Kaplinsky\n"
-	        "(c) 2000, Tridia Corporation\n"
-	        "(c) 1999, AT&T Laboratories Cambridge\n",
+		"(c) 2000, Tridia Corporation\n"
+		"(c) 1999, AT&T Laboratories Cambridge\n",
                 0, "http://www.tjansen.de/krfb", "ml@tjansen.de");
 	aboutData.addAuthor("Tim Jansen", "", "tim@tjansen.de");
         aboutData.addAuthor("Ian Reinhart Geiser", "DCOP interface", "geiseri@kde.org");
 	aboutData.addCredit("Johannes E. Schindelin",
 			    I18N_NOOP("libvncserver"));
-	aboutData.addCredit("Const Kaplinsky", 
+	aboutData.addCredit("Const Kaplinsky",
 			    I18N_NOOP("TightVNC encoder"));
-	aboutData.addCredit("Tridia Corporation", 
+	aboutData.addCredit("Tridia Corporation",
 			    I18N_NOOP("ZLib encoder"));
 	aboutData.addCredit("AT&T Laboratories Cambridge",
 			    I18N_NOOP("original VNC encoders and "
 				      "protocol design"));
-	aboutData.addCredit("Jens Wagner (heXoNet Support GmbH)", 
+	aboutData.addCredit("Jens Wagner (heXoNet Support GmbH)",
 			    I18N_NOOP("x11 update scanner, "
 				      "original code base"));
 	aboutData.addCredit("Jason Spisak",
@@ -90,11 +153,10 @@ int main(int argc, char *argv[])
 	KCmdLineArgs::addCmdLineOptions(options);
 
  	KApplication app;
-	if (!RFBController::checkX11Capabilities())
-		return 1;
 
 	Configuration *config;
 	KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
+	QString fdString;
 	if (args->isSet(ARG_ONE_SESSION) ||
 	    args->isSet(ARG_PASSWORD) ||
 	    args->isSet(ARG_REMOTE_CONTROL) ||
@@ -104,14 +166,33 @@ int main(int argc, char *argv[])
 		bool askOnConnect = !args->isSet(ARG_DONT_CONFIRM_CONNECT);
 		bool allowDesktopControl = args->isSet(ARG_REMOTE_CONTROL);
 		QString password = args->getOption(ARG_PASSWORD);
-		config = new Configuration(oneConnection, askOnConnect, 
+		config = new Configuration(oneConnection, askOnConnect,
 					   allowDesktopControl, password);
+		mode = KRFB_STAND_ALONE_CMDARG;
+	}
+	else if (args->isSet(ARG_STAND_ALONE)) {
+		mode = KRFB_STAND_ALONE;
+	}
+	else if (args->isSet(ARG_KINETD)) {
+		fdString = args->getOption(ARG_KINETD);
+		mode = KRFB_KINETD_MODE;
 	}
 	else
 		config = new Configuration();
 	args->clear();
 
- 	TrayIcon trayicon(new KAboutApplication(&aboutData), 
+	if (mode == KRFB_UNKNOWN_MODE)
+		mode = checkKInetd() ? KRFB_INVITATION_MODE : KRFB_STAND_ALONE;
+
+	if (mode == KRFB_INVITATION_MODE) {
+		// TODO: display invitation
+		return app.exec();
+	}
+
+	if (!RFBController::checkX11Capabilities())
+		return 1;
+
+	TrayIcon trayicon(new KAboutApplication(&aboutData),
 			  config);
 	KRfbIfaceImpl dcopiface(config);
 	RFBController controller(config);
@@ -124,7 +205,6 @@ int main(int argc, char *argv[])
 
 	QObject::connect(&trayicon, SIGNAL(connectionClosed()),
 			 &controller, SLOT(closeConnection()));
-
 	QObject::connect(&trayicon, SIGNAL(showConfigure()),
 			 config, SLOT(showDialog()));
 
@@ -143,7 +223,7 @@ int main(int argc, char *argv[])
 	QObject::connect(&controller, SIGNAL(sessionEstablished()),
 			 &trayicon, SLOT(openConnection()));
 
-	if (config->oneConnection()) {
+	if (config->oneConnection() || (mode == KRFB_KINETD_MODE)) {
 		QObject::connect(&controller, SIGNAL(sessionRefused()),
 				 &app, SLOT(quit()));
 		QObject::connect(&controller, SIGNAL(sessionFinished()),
@@ -158,7 +238,17 @@ int main(int argc, char *argv[])
 	sigaddset(&sigs, SIGPIPE);
 	sigprocmask(SIG_BLOCK, &sigs, 0);
 
-	controller.startServer();
+	if (mode == KRFB_KINETD_MODE) {
+		bool ok;
+		int fdNum = fdString.toInt(&ok);
+		if (!ok) {
+			kdError() << "kinetd fd was not numeric." << endl;
+			return 2;
+		}
+		controller.startServer(fdNum);
+	}
+	else
+		controller.startServer();
 
 	return app.exec();
 }

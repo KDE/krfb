@@ -121,7 +121,7 @@ public:
 	enum rfbNewClientAction handleNewClient(rfbClientPtr cl);
 	void handleClientGone();
 	int getPort();
-	void startServer(bool xtestGrab = true);
+	void startServer(int inetdFd = -1, bool xtestGrab = true);
 
 	static bool checkX11Capabilities();
 

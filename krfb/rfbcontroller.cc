@@ -258,7 +258,7 @@ RFBController::~RFBController()
 
 
 
-void RFBController::startServer(bool xtestGrab) 
+void RFBController::startServer(int inetdFd, bool xtestGrab)
 {
 	framebufferImage = XGetImage(qt_xdisplay(),
 				     QApplication::desktop()->winId(),
@@ -277,14 +277,14 @@ void RFBController::startServer(bool xtestGrab)
 			      framebufferImage->bits_per_pixel,
 			      8,
 			      framebufferImage->bits_per_pixel/8);
-   
+
 	server->paddedWidthInBytes = framebufferImage->bytes_per_line;
-	
+
 	server->rfbServerFormat.bitsPerPixel = framebufferImage->bits_per_pixel;
 	server->rfbServerFormat.depth = framebufferImage->depth;
 	//rfbEndianTest = framebufferImage->bitmap_bit_order != MSBFirst;
 	server->rfbServerFormat.trueColour = (CARD8) TRUE;
-	
+
 	if ( server->rfbServerFormat.bitsPerPixel == 8 ) {
 		server->rfbServerFormat.redShift = 0;
 		server->rfbServerFormat.greenShift = 2;
@@ -313,6 +313,9 @@ void RFBController::startServer(bool xtestGrab)
 	server->frameBuffer = fb;
 	server->autoPort = TRUE;
 
+	if (inetdFd >= 0)
+		server->inetdSock = inetdFd;
+
 	server->kbdAddEvent = keyboardHook;
 	server->ptrAddEvent = pointerHook;
 	server->newClientHook = newClientHook;
@@ -333,7 +336,7 @@ void RFBController::startServer(bool xtestGrab)
 
 	if (xtestGrab) {
 		disabler.disable = false;
-		XTestGrabControl(qt_xdisplay(), true); 
+		XTestGrabControl(qt_xdisplay(), true);
 	}
 
 	rfbRunEventLoop(server, -1, TRUE);
@@ -356,7 +359,7 @@ void RFBController::stopServer(bool xtestUngrab)
 void RFBController::rebind() 
 {
 	stopServer(false);
-	startServer(false);
+	startServer(-1, false);
 }
 
 void RFBController::connectionAccepted(bool aRC)

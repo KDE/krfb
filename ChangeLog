@@ -6,6 +6,8 @@
 
 	* added multithreaded inetd capabilities to libvncserver
 
+	* main.c: implemented the 4 modes of krfb
+
 2002-03-02  Tim Jansen  <tjansen@tjansen.de>
 
 	* added kinetd
