@@ -11,8 +11,8 @@ X-KDE-KINETD-autoPortRange=100
 X-KDE-KINETD-enabled=false
 X-KDE-KINETD-argument=--kinetd
 X-KDE-KINETD-multiInstance=false
-X-KDE-KINETD-serviceURL=service:remotedesktop.kde:vnc://%h:%p
-X-KDE-KINETD-serviceAttributes=(username=%u),(fullname=%f)
+X-KDE-KINETD-serviceURL=service:remotedesktop.kde:vnc://%h:%p;(type=shared),(username=%u),(fullname=%f)
+X-KDE-KINETD-serviceAttributes=(type=shared),(username=%u),(fullname=%f)
 
 Name=KRfb Desktop Sharing
 Name[bs]=KRfb dijeljenje desktopa
@@ -22,9 +22,11 @@ Name[es]=Compartición de escritorio KRfb
 Name[fi]=KRfb työpöytien jako
 Name[he]=שיתוף שולחנות עבודה של KRfb
 Name[hr]=KRfb dijeljenje radne površine
+Name[ja]=KRfb デスクトップ共有
 Name[pt_BR]=Compartilhamento do Ambiente de Trabalho KRfb
 Name[ro]=Partajare ecran KRfb
 Name[sv]=Krfb dela ut skrivbord
+Name[tr]=KRfb Masaüstü Paylaşımı
 Comment=A daemon that allows you to share your desktop
 Comment[af]='n bediener wat laat toe jy aan deel jou werkskerm
 Comment[bs]=Daemon koji vam omogućuje da dijelite vaš desktop
