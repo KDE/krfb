@@ -24,7 +24,7 @@
 #include <kpixmap.h>
 #include <kaction.h>
 #include <ksystemtray.h>
-#include <kpassivepopup.h>
+#include "kpassivepopup.h"
 
 class KDialog;
 
