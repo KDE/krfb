@@ -425,7 +425,7 @@ void Configuration::inviteEmail() {
 		     "Host: %4:%5\n"
 		     "Password: %6\n\n"
 		     "Alternatively you can click on the link below to start the VNC session\n"
-		     "within your webbrowser.\n"
+		     "within your web browser.\n"
 		     "\n"
 		     "	http://%7:%8/\n"
 		     "\n"
