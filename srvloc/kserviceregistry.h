@@ -21,6 +21,10 @@
 #ifndef __KSERVICEREGISTRY_H
 #define __KSERVICEREGISTRY_H
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #ifdef HAVE_SLP
 #include <slp.h>
 #endif
