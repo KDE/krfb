@@ -174,7 +174,7 @@ VNCEvent::~VNCEvent() {
 }
 
 Display *KeyboardEvent::dpy;
-char KeyboardEvent::modifiers[0x100];
+signed char KeyboardEvent::modifiers[0x100];
 KeyCode KeyboardEvent::keycodes[0x100];
 KeyCode KeyboardEvent::leftShiftCode;
 KeyCode KeyboardEvent::rightShiftCode;
@@ -222,7 +222,7 @@ void KeyboardEvent::initKeycodes() {
 }
 
 /* this function adjusts the modifiers according to mod (as from modifiers) and ModifierState */
-void KeyboardEvent::tweakModifiers(char mod, bool down) {
+void KeyboardEvent::tweakModifiers(signed char mod, bool down) {
 
 	bool isShift = ModifierState & (LEFTSHIFT|RIGHTSHIFT);
 	if(mod < 0)

@@ -61,14 +61,14 @@ class KeyboardEvent : public VNCEvent {
 	KeySym keySym;
 
 	static Display *dpy;
-	static char modifiers[0x100];
+	static signed char modifiers[0x100];
 	static KeyCode keycodes[0x100], leftShiftCode, rightShiftCode, altGrCode;
 	static const int LEFTSHIFT;
 	static const int RIGHTSHIFT;
 	static const int ALTGR;
 	static char ModifierState;
 
-	static void tweakModifiers(char mod, bool down);
+	static void tweakModifiers(signed char mod, bool down);
 public:
 	static void initKeycodes();
 
