@@ -21,7 +21,7 @@
 #ifndef _hexonet_rfb_XUpdateScanner_h_
 #define _hexonet_rfb_XUpdateScanner_h_
 
-#include <qlist.h>
+#include <qptrlist.h>
 #include <X11/Xlib.h>
 #include <X11/extensions/XShm.h>
 

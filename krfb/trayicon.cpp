@@ -34,29 +34,21 @@ TrayIcon::TrayIcon(KDialog *d, Configuration *c) :
 	trayIconClosed = loader->loadIcon("eyes-closed24", KIcon::User);
 	setPixmap(trayIconClosed);
 
-	configureAction = KStdAction::preferences(0, 0, &actionCollection);
-	manageInvitationsAction = new KAction(i18n("Manage &invitations"));
+	configureAction = KStdAction::preferences(this, SIGNAL(showConfigure()), &actionCollection);
+	manageInvitationsAction = new KAction(i18n("Manage &invitations"), QString::null, 0, this, SIGNAL(showManageInvitations()), &actionCollection);
 	if (c->mode() != KRFB_STAND_ALONE_CMDARG) {
 		configureAction->plug(contextMenu());
 		manageInvitationsAction->plug(contextMenu());
 	}
 
-	closeConnectionAction = new KAction(i18n("Cl&ose connection"));
+	closeConnectionAction = new KAction(i18n("Cl&ose connection"), QString::null, 0, this, SLOT(connectionClose), &actionCollection);
 	closeConnectionAction->plug(contextMenu());
 	closeConnectionAction->setEnabled(false);
-	actionCollection.insert(closeConnectionAction);
 
 	contextMenu()->insertSeparator();
-	aboutAction = KStdAction::aboutApp(0, 0, &actionCollection);
+	aboutAction = KStdAction::aboutApp(this, SLOT(showAbout()), &actionCollection);
 	aboutAction->plug(contextMenu());
 
-	connect(configureAction, SIGNAL(activated()), SIGNAL(showConfigure()));
-	connect(manageInvitationsAction, SIGNAL(activated()),
-		SIGNAL(showManageInvitations()));
-	connect(aboutAction, SIGNAL(activated()), SLOT(showAbout()));
-	connect(closeConnectionAction, SIGNAL(activated()),
-		SIGNAL(connectionClosed()));
-	actionCollection.insert(closeConnectionAction);
 	show();
 }
 
