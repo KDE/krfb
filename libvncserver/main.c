@@ -323,7 +323,7 @@ listenerRun(void *data)
     int client_fd;
     struct sockaddr_in peer;
     rfbClientPtr cl;
-    socklen_t len;
+    size_t len;
 
     if (rfbScreen->inetdSock != -1) {
        cl = rfbNewClient(rfbScreen, rfbScreen->inetdSock);
