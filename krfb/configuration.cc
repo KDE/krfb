@@ -182,7 +182,7 @@ void Configuration::loadFromKConfig() {
 		return;
 	KConfig c("krfbrc");
 	daemonFlag = c.readBoolEntry("daemonMode", true);
-	allowUninvitedFlag = c.readBoolEntry("allowUninvited", true);
+	allowUninvitedFlag = c.readBoolEntry("allowUninvited", false);
 	askOnConnectFlag = c.readBoolEntry("confirmUninvitedConnection", true);
 	allowDesktopControlFlag = c.readBoolEntry("allowDesktopControl", false);
 	showInvDlgOnStartupFlag = c.readBoolEntry("shovInvDlgOnStartup", false);
