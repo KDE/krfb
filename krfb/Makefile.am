@@ -2,7 +2,7 @@ METASOURCES = AUTO
 
 bin_PROGRAMS = krfb
 krfb_SOURCES = rfbcontroller.cc configuration.cc trayicon.cpp XUpdateScanner.cc rfbconnection.cc main.cpp configurationdialog.ui newconnectiondialog.ui
-krfb_LDADD   = ../lib/librfbserver.a  $(LIB_QT) $(LIB_KDECORE) $(LIB_KDEUI)  $(LIBSOCKET)
+krfb_LDADD   = ../lib/librfbserver.a -lz $(LIB_QT) $(LIB_KDECORE) $(LIB_KDEUI)  $(LIBSOCKET)
 
 EXTRA_DIST = $(krfb_SOURCES) krfb.desktop lo32-app-krfb.png lo16-app-krfb.png rfbcontroller.h rfbconnection.h eyes-closed24.png eyes-open24.png XUpdateScanner.h trayicon.h configuration.h
 

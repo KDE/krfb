@@ -1,4 +1,13 @@
+2002-01-15  Tim Jansen  <tim@tjansen.de>
+
+	* started introducing auto_ptrs
+
+	* removed all client stuff from the library
+
 2002-01-14  Tim Jansen  <tim@tjansen.de>
+
+	* lib/encodeRectangleZlib.cc: ported ZLib encoder from TightVNC's
+	  winvnc server
 
 	* lib/Makefile.am: removed CoRRE encoder from project (see NOTES)
 
