@@ -1,0 +1,13 @@
+[!Global!]
+IconName=kinetd
+Comment=KInetD
+
+[IncomingConnection]
+Name=IncomingConnection
+Comment=Got incoming connection
+default_presentation=4
+
+[ProcessFailed]
+Name=ProcessFailed
+Comment=Could not call process to handle connection
+default_presentation=4

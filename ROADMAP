@@ -7,18 +7,13 @@ Version 0.6 (2002/02/18): Improved RFB backend
 - dcop support
 - knotify
 
-Version 0.7 (2002/3/31): Better integration with KDE, improved GUI
+Version 0.7 (2002/4/1): Better integration with KDE, improved GUI, invitations
 - kded module 'kinetd' that listens on the Rfb port and starts KRfb
- -> remove debug msgs, replace with knotify
- -> better error handling
--> invitation support
+- invitation support
 - kcontrol module
--> on startup a dialog appears that allows the user to invite somebody
-   using email (and later other mechanisms). Dialog can be turned off forever,
-   of course
-- remove STDOUT/STDERR logging from libvncserver
 
-Version 0.8: 
+Future versions
+- getting rid of stand-alone mode?
 - i18n
 - docs
 

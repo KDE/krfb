@@ -25,17 +25,20 @@
 #include <kprocess.h>
 #include <qstringlist.h>
 #include <qstring.h>
+#include <qdatetime.h>
+#include <qtimer.h>
 
 class PortListener : public QObject {
 	Q_OBJECT
 private:
 	bool valid;
 	QString serviceName;
-	int port, portBase, autoPortRange;
+	int portNum, portBase, autoPortRange;
 	bool multiInstance;
 	QCString execPath;
 	QString argument;
 	bool enabled;
+	QDateTime expirationTime;
 
 	KServerSocket *socket;
 	KProcess process;
@@ -43,6 +46,8 @@ private:
 	KConfig *config;
 
 	void loadConfig(KService::Ptr s);
+	void acquirePort();
+	void setEnabledInternal(bool e, const QDateTime &ex);
 public:
 	PortListener(KService::Ptr s);
 	~PortListener();
@@ -50,7 +55,10 @@ public:
 	bool isValid();
 	QString name();
 	void setEnabled(bool enabled);
+	void setEnabled(const QDateTime &expiration);
+	QDateTime expiration();
 	bool isEnabled();
+	int port();
 
 private slots:
 	void accepted(KSocket*);
@@ -85,8 +93,37 @@ k_dcop:
 	 */
 	void setEnabled(QString service, bool enable);
 
+	/**
+	 * Enables the given service until the given time. Ignored if the given
+	 * service does not exist.
+	 * @param service name of a service as specified in its .desktop file
+	 * @param expiration the time the service will be disabled at
+	 */
+	void setEnabled(QString service, QDateTime expiration);
+
+
+	/**
+	 * Returns the port of the service, or -1 if not listening.
+	 * @param service name of a service as specified in its .desktop file
+	 * @return the port or -1 if no port used or service does not exist
+	 */
+	int port(QString service);
+
+	/**
+	 * Tests whether the given service is installed..
+	 * @param service name of a service as specified in its .desktop file
+	 * @return true if installed, false otherwise
+	 */
+	bool isInstalled(QString service);
+
  private:
+	QDateTime getNextExpirationTime();
+
 	QPtrList<PortListener> portListeners;
+	QTimer expirationTimer;
+
+ private slots:
+	void setTimer();
 
  public:
 	KInetD(QCString &n);

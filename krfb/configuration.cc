@@ -18,7 +18,12 @@
 #include "configuration.h"
 
 #include <kglobal.h>
+#include <klocale.h>
 #include <kapplication.h>
+#include <kprocess.h>
+
+#include <qdatastream.h>
+#include <dcopclient.h>
 
 #include <qlabel.h>
 #include <qpushbutton.h>
@@ -34,16 +39,14 @@ void InvitationDialog2::closeEvent(QCloseEvent *)
 void PersonalInvitationDialog2::closeEvent(QCloseEvent *)
 { emit closed(); }
 
-// TODO:
-// get host address
-// email inv
-
 Configuration::Configuration(krfb_mode mode) :
 	m_mode(mode),
-	oneConnectionFlag(false)
+	oneConnectionFlag(false),
+	portNum(-1)
 {
 	loadFromKConfig();
 	saveToDialogs();
+	doKinetdConf();
 
 	connect(confDlg.okButton, SIGNAL(clicked()), SLOT(configOkPressed()));
 	connect(confDlg.cancelButton, SIGNAL(clicked()), SLOT(configCancelPressed()));
@@ -80,6 +83,7 @@ Configuration::Configuration(krfb_mode mode) :
 		connect(&expirationTimer, SIGNAL(timeout()), SLOT(invalidateOldInvitations()));
 		expirationTimer.start(1000*60);
 	}
+
 }
 
 Configuration::Configuration(bool oneConnection, bool askOnConnect,
@@ -88,6 +92,7 @@ Configuration::Configuration(bool oneConnection, bool askOnConnect,
 	askOnConnectFlag(askOnConnect),
 	allowDesktopControlFlag(allowDesktopControl),
 	oneConnectionFlag(oneConnection),
+	portNum(-1),
 	passwordString(password)
 {
 }
@@ -95,10 +100,88 @@ Configuration::Configuration(bool oneConnection, bool askOnConnect,
 Configuration::~Configuration() {
 }
 
+// special static method to determine daemon mode before constructor was invoked
+bool Configuration::earlyDaemonMode() {
+	KConfig c("krfbrc");
+	return c.readBoolEntry("daemonMode", true);
+}
+
+void Configuration::setKInetd(bool enabled) {
+	DCOPClient *d = KApplication::dcopClient();
+
+	QByteArray sdata;
+	QDataStream arg(sdata, IO_WriteOnly);
+	arg << QString("krfb");
+	arg << enabled;
+	d->send ("kded", "kinetd", "setEnabled(QString,bool)", sdata);
+}
+
+void Configuration::setKInetd(const QDateTime &date) {
+	DCOPClient *d = KApplication::dcopClient();
+
+	QByteArray sdata;
+	QDataStream arg(sdata, IO_WriteOnly);
+	arg << QString("krfb");
+	arg << date;
+	d->send ("kded", "kinetd", "setEnabled(QString,QDateTime)", sdata);
+}
+
+void Configuration::setPortKInetd() {
+	DCOPClient *d = KApplication::dcopClient();
+
+	QByteArray sdata, rdata;
+	QCString replyType;
+	QDataStream arg(sdata, IO_WriteOnly);
+	arg << QString("krfb");
+	if (!d->call ("kded", "kinetd", "port(QString)", sdata, replyType, rdata))
+		return; // nicer error here
+
+	if (replyType != "int")
+		return; // nicer error here
+
+	QDataStream answer(rdata, IO_ReadOnly);
+	answer >> portNum;
+}
+
+void Configuration::removeInvitation(QValueList<Invitation>::iterator it) {
+	invitationList.remove(it);
+	doKinetdConf();
+}
+
+void Configuration::doKinetdConf() {
+	if (!daemonFlag)
+		return;
+
+	if (allowUninvitedFlag) {
+		setKInetd(true);
+		setPortKInetd();
+		return;
+	}
+
+	QDateTime lastExpiration;
+	QValueList<Invitation>::iterator it = invitationList.begin();
+	while (it != invitationList.end()) {
+		Invitation &ix = (*it);
+		QDateTime t = ix.expirationTime();
+		if (t > lastExpiration)
+			lastExpiration = t;
+		it++;
+	}
+	if (lastExpiration.isNull() || (lastExpiration < QDateTime::currentDateTime())) {
+		setKInetd(false);
+		portNum = -1;
+	}
+	else {
+		setKInetd(lastExpiration);
+		setPortKInetd();
+	}
+}
+
 void Configuration::loadFromKConfig() {
 	if (KRFB_STAND_ALONE_CMDARG == mode())
 		return;
 	KConfig c("krfbrc");
+	daemonFlag = c.readBoolEntry("daemonMode", true);
 	allowUninvitedFlag = c.readBoolEntry("allowUninvited", true);
 	askOnConnectFlag = c.readBoolEntry("confirmUninvitedConnection", true);
 	allowDesktopControlFlag = c.readBoolEntry("allowDesktopControl", false);
@@ -113,20 +196,25 @@ void Configuration::loadFromKConfig() {
 
 	confDlg.applyButton->setEnabled(false);
 	invalidateOldInvitations();
+
 }
 
 void Configuration::loadFromDialogs() {
+	bool oldAllowUninvitedFlag = allowUninvitedFlag;
 	allowUninvitedFlag = confDlg.allowUninvitedCB->isChecked();
 	askOnConnectFlag = confDlg.askOnConnectCB->isChecked();
 	allowDesktopControlFlag = confDlg.allowDesktopControlCB->isChecked();
 
-	showInvDlgOnStartupFlag = invDlg.dontShowOnStartupButton->isChecked();
+	showInvDlgOnStartupFlag = !invDlg.dontShowOnStartupButton->isChecked();
 
 	QString newPassword = confDlg.passwordInput->text();
 	if (passwordString != newPassword) {
 		passwordString = newPassword;
 		emit passwordChanged();
 	}
+
+	if (oldAllowUninvitedFlag != allowUninvitedFlag)
+		doKinetdConf();
 }
 
 void Configuration::saveToKConfig() {
@@ -134,6 +222,7 @@ void Configuration::saveToKConfig() {
 		return;
 
 	KConfig c("krfbrc");
+	c.writeEntry("daemonMode", daemonFlag);
 	c.writeEntry("confirmUninvitedConnection", askOnConnectFlag);
 	c.writeEntry("allowDesktopControl", allowDesktopControlFlag);
 	c.writeEntry("allowUninvited", allowUninvitedFlag);
@@ -156,7 +245,7 @@ void Configuration::saveToDialogs() {
 	confDlg.allowDesktopControlCB->setChecked(allowDesktopControlFlag);
 	confDlg.passwordInput->setText(passwordString);
 
-	invDlg.dontShowOnStartupButton->setChecked(showInvDlgOnStartupFlag);
+	invDlg.dontShowOnStartupButton->setChecked(!showInvDlgOnStartupFlag);
 
 	invalidateOldInvitations();
 	QValueList<Invitation>::iterator it = invitationList.begin();
@@ -216,8 +305,16 @@ bool Configuration::allowDesktopControl() const {
 	return allowDesktopControlFlag;
 }
 
+bool Configuration::allowUninvitedConnects() const {
+	return allowUninvitedFlag;
+}
+
 bool Configuration::showInvitationDialogOnStartup() const {
 	return showInvDlgOnStartupFlag;
+}
+
+bool Configuration::daemonMode() const {
+	return daemonFlag;
 }
 
 QString Configuration::password() const {
@@ -257,10 +354,34 @@ void Configuration::setPassword(QString password)
 	saveToDialogs();
 }
 
+int Configuration::port() const
+{
+	if ((portNum < 5900) || (portNum >= 6000))
+		return portNum;
+	else
+		return portNum - 5900;
+}
+
+void Configuration::setPort(int p) {
+	portNum = p;
+}
+
+// hostname is implemented in configuration_hostname.cpp
+// QString Configuration::hostname()
+
 ////////////// config dialog //////////////////////////
 
 void Configuration::showConfigDialog() {
-	confDlg.show();
+	if (m_mode == KRFB_KINETD_MODE) {
+		KProcess p;
+		p << "kcmshell" << "kcmkrfb";
+		p.start(KProcess::DontCare);
+	}
+	else {
+		loadFromKConfig();
+		saveToDialogs();
+		confDlg.show();
+	}
 }
 
 void Configuration::configOkPressed() {
@@ -292,25 +413,28 @@ void Configuration::showManageInvitationsDialog() {
 
 void Configuration::invMngDlgClosed() {
 	invMngDlg.hide();
+	saveToKConfig();
 }
 
 void Configuration::invMngDlgDeleteOnePressed() {
 	QValueList<Invitation>::iterator it = invitationList.begin();
-		while (it != invitationList.end()) {
-			Invitation &ix = (*it);
-			KListViewItem *iv = ix.getViewItem();
-			if (iv && iv->isSelected())
-				it = invitationList.remove(it);
-			else
-				it++;
-		}
+	while (it != invitationList.end()) {
+		Invitation &ix = (*it);
+		KListViewItem *iv = ix.getViewItem();
+		if (iv && iv->isSelected())
+			it = invitationList.remove(it);
+		else
+			it++;
+	}
 	emit passwordChanged();
+	doKinetdConf();
 }
 
 void Configuration::invMngDlgDeleteAllPressed() {
 	invitationList.clear();
 	saveToKConfig();
 	emit passwordChanged();
+	doKinetdConf();
 }
 
 ////////////// invitation dialog //////////////////////////
@@ -338,9 +462,14 @@ void Configuration::closeInvDlg() {
 void Configuration::showPersonalInvitationDialog() {
 	closeInvDlg();
 
+	loadFromKConfig();
 	Invitation inv = createInvitation();
 	saveToDialogs();
+	saveToKConfig();
+	doKinetdConf();
+	
 	invDlg.createInvitationButton->setEnabled(false);
+	persInvDlg.hostLabel->setText(QString("%1:%2").arg(hostname()).arg(port()));
 	persInvDlg.passwordLabel->setText(inv.password());
 	persInvDlg.expirationLabel->setText(
 		inv.expirationTime().toString(Qt::LocalDate));
@@ -357,9 +486,25 @@ void Configuration::persInvDlgClosed() {
 
 void Configuration::inviteEmail() {
 	closeInvDlg();
+	loadFromKConfig();
 	Invitation inv = createInvitation();
 	saveToDialogs();
-	// TODO: start mail client
+	saveToKConfig();
+	doKinetdConf();
+
+	KApplication *app = KApplication::kApplication();
+	app->invokeMailer(QString::null, QString::null, QString::null,
+		i18n("Desktop Sharing (VNC) invitation"),
+		i18n("You have been invited to a VNC session. To connect start "
+		     "a VNC client with the following parameters:\n\n"
+		     "Host: %1:%2\n"
+		     "Password: %3\n\n"
+		     "For security reasons this invitation will expire on %4.")
+			.arg(hostname())
+			.arg(port())
+			.arg(inv.password())
+			.arg(inv.expirationTime().toString(Qt::LocalDate)));
+
 	emit invitationFinished();
 }
 

@@ -19,8 +19,13 @@ default_presentation=4
 
 [InvalidPassword]
 Name=InvalidPassword
-Comment=Invalid Password
+Comment=The invalid password.
 default_presentation=4
+
+[InvalidPasswordInvitations]
+Name=InvalidPasswordInvitations
+Comment=The invited party sent an invalid password. Connection refused.
+default_presentation=2
 
 [NewConnectionOnHold]
 Name=NewConnectionOnHold
@@ -37,4 +42,9 @@ Name=TooManyConnections
 Comment=Busy, connection refused
 default_presentation=4
 default_logfile=
+
+[UnexpectedConnection]
+Name=UnexpectedConnection
+Comment=Got unexpected connection, abort
+default_presentation=4
 

@@ -1,28 +1,30 @@
 Comments on various aspects of KRfb:
 
 - KRfb has been designed for three use cases:
+  * a user who needs help from an administrator or friend. The adminstrator can 
+    connect to the user and change settings and so on while both are talking
+    on the telephone or using VoIP.
   * a user who wants to show something to a friend, so he lets his friend
     connect to his computer
-  * a user who needs help from an administrator. The adminstrator can connect
-    to the user and change settings and so on while both are talking
-    on the telephone or using VoIP.
-  * (advanced use case) somebody with several computers that are running 
-    GUIs want to control them without going to them. 
+  * (advanced use case) somebody with several computers that are running
+    GUIs want to control them.
 - cases 1&2 are probably more mainstream and more important for novice users,
-  so KRfb is pre-configured for them. Case 3 is for advanced users and 
+  so KRfb is pre-configured for them. Case 3 is for advanced users and
   therefore a little bit more difficult to configure.
-- by offering the connection-confirmation dialog KRfb avoids configuration 
-  issues like setting a password
 - design goal of KRfb is to make it as easy to use as possible. I tried to
-  limit functionality whereever possible. 
-- the command line args are intended for starting KRfb from a system like
-  Jabber, thats the reason why there is no preferences dialog when 
-  command line args have been used and it's also the reason 
-  for --one-connection
-- the newconnection-dialog is extra large and has the pixmap on the left 
-  side to capture the attention of the user before allowing a connection. 
+  limit functionality whereever possible.
+- the newconnection-dialog is extra large and has the pixmap on the left
+  side to capture the attention of the user before allowing a connection.
+- the RFBController class is a mess. The interactions between the threaded, 
+  callback-using libvncserver and the event-driven, single thread qt GUI is 
+  quite complicated and I can only hope that it works.
+- most limitations and problems of KRfb are caused either by limitations of
+  Rfb (for example no proper authentication of users, no encryption) or
+  by lack of a framework in KDE or Linux in general (no discovery of running
+  KRfb servers, no way to connect through a NAT device). In the months I am going
+  to concentrate on improving the latter.
 
-Do the following files when releasing a new version:
+Change the following files when releasing a new version:
 - configure.in.in: change the AM_INIT_AUTOMAKE macro
 - krfb/main.cpp: change the VERSION macro
 - kcm_krfb/kcm_krfb.cpp: change the VERSION macro

@@ -81,12 +81,18 @@ public:
 		      bool allowDesktopControl, QString password);
 	~Configuration();
 
+	static bool earlyDaemonMode();
+
 	krfb_mode mode() const;
 	bool oneConnection() const;
 	bool askOnConnect() const;
 	bool allowDesktopControl() const;
+	bool allowUninvitedConnects() const;
 	bool showInvitationDialogOnStartup() const;
+	bool daemonMode() const;
 	QString password() const;
+	QString hostname() const;
+	int port() const;
 
         void setOnceConnection(bool oneConnection);
         void setAskOnConnect(bool askOnConnect);
@@ -95,6 +101,7 @@ public:
 	void reload();
 
 	QValueList<Invitation> &invitations();
+	void removeInvitation(QValueList<Invitation>::iterator it);
 signals:
   	void passwordChanged();
 	void invitationFinished();
@@ -107,7 +114,7 @@ public slots:
 	void inviteEmail();
 
 	void invalidateOldInvitations();
-
+	void setPort(int);
 private:
         void loadFromKConfig();
         void loadFromDialogs();
@@ -115,6 +122,10 @@ private:
         void saveToDialogs();
 	Invitation createInvitation();
 	void closeInvDlg();
+	void setKInetd(const QDateTime &date);
+	void setKInetd(bool enabled);
+	void setPortKInetd();
+	void doKinetdConf();
 
 	krfb_mode m_mode;
 
@@ -128,8 +139,10 @@ private:
 	bool allowDesktopControlFlag;
 	bool allowUninvitedFlag;
 	bool oneConnectionFlag;
+	bool daemonFlag;
 
 	bool showInvDlgOnStartupFlag;
+	int portNum;
 
 	QString passwordString;
 	QValueList<Invitation> invitationList;
@@ -142,7 +155,7 @@ private slots:
 	void invMngDlgClosed();
 	void invMngDlgDeleteOnePressed();
 	void invMngDlgDeleteAllPressed();
-	
+
 	void invDlgClosed();
 
 	void persInvDlgClosed();

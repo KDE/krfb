@@ -24,6 +24,7 @@
 #include <kaction.h>
 #include <kdebug.h>
 #include <kapplication.h>
+#include <knotifyclient.h>
 #include <ksystemtray.h>
 #include <kcmdlineargs.h>
 #include <kaboutdata.h>
@@ -69,13 +70,13 @@ static KCmdLineOptions options[] =
 /*
  * KRfb can run in 4 different modes:
  * - stand-alone
- *   + To get there call KRfb with kinetd disabled or not running
+ *   + To get there call KRfb with kinetd disabled in KConfig (use KControl module)
  *   + traditional mode like <0.7 versions
  *   + uses non-kcm configuration dialog
  *   + invitation on start-up can be disabled
  * - stand-alone with command line args
  *   + to get there call krfb any cmd line args (except --kinetd)
- *   + behaves like stand-alone, but without configuration
+ *   + behaves like stand-alone, but without configuration & invitations
  * - kinetd mode
  *   + started using the --kinetd argument
  *   + used for starting from kinetd
@@ -84,32 +85,35 @@ static KCmdLineOptions options[] =
  *   + config option calls kcontrol module
  * - invitation mode
  *   + started when krfb is called while kinetd is enabled and no cmd line arg is given
- *   + displays only invitation dialog and finished then
- *   + does not accept connections, no tray icons
+ *   + displays only invitation dialog and finishs then
+ *   + does not accept connections, no tray icon
  *
  * TODO:
- * - invitations (see configuration.cc for overview)
- * - display kcm in kinetd mode
+ * - error on 'close connection' in kinetd mode
+ * - disable kinetd when no invitation valid
  */
 
-bool checkKInetd() {
-	bool enabled;
+void checkKInetd(bool &kinetdAvailable, bool &krfbAvailable) {
+	kinetdAvailable = false;
+	krfbAvailable = false;
+
 	DCOPClient *d = KApplication::dcopClient();
 
 	QByteArray sdata, rdata;
 	QCString replyType;
 	QDataStream arg(sdata, IO_WriteOnly);
 	arg << QString("krfb");
-	if (!d->call ("kded", "kinetd", "isEnabled(QString)", sdata, replyType, rdata))
-		return false;
+	if (!d->call ("kded", "kinetd", "isInstalled(QString)", sdata, replyType, rdata))
+		return;
 
 	if (replyType != "bool")
-		return false;
+		return;
 
 	QDataStream answer(rdata, IO_ReadOnly);
-	answer >> enabled;
-	return enabled;
+	answer >> krfbAvailable;
+	kinetdAvailable = true;
 }
+
 
 int main(int argc, char *argv[])
 {
@@ -170,10 +174,37 @@ int main(int argc, char *argv[])
 			fdString = args->getOption(ARG_KINETD);
 			mode = KRFB_KINETD_MODE;
 		}
-		if (mode == KRFB_UNKNOWN_MODE)
-			mode = checkKInetd() ? KRFB_INVITATION_MODE : KRFB_STAND_ALONE;
-
+		if (mode == KRFB_UNKNOWN_MODE) {
+			if (Configuration::earlyDaemonMode()) {
+				bool kinetdA, krfbA;
+				mode = KRFB_INVITATION_MODE;
+				checkKInetd(kinetdA, krfbA);
+				if (!kinetdA) {
+					KMessageBox::error(0,
+						i18n("Cannot find KInetD. "
+							"Have you re-started KDE after installation?"),
+						i18n("Desktop Sharing Error"));
+					return 1;
+				}
+				if (!krfbA) {
+					KMessageBox::error(0,
+						i18n("Cannot find KInetD service for Desktop Sharing (KRfb). "
+							"Have you re-started KDE after installation?"),
+						i18n("Desktop Sharing Error"));
+					return 1;
+				}
+			}
+			else
+				mode = KRFB_STAND_ALONE;
+		}
 		config = new Configuration(mode);
+
+		if ((mode == KRFB_KINETD_MODE) &&
+		    (!config->allowUninvitedConnects()) &&
+		    (config->invitations().size() == 0)) {
+			KNotifyClient::event("UnexpectedConnection");
+			return 1;
+		}
 	}
 	args->clear();
 
@@ -205,6 +236,8 @@ int main(int argc, char *argv[])
 			 config, SLOT(showConfigDialog()));
 	QObject::connect(&trayicon, SIGNAL(showManageInvitations()),
 			 config, SLOT(showManageInvitationsDialog()));
+	QObject::connect(&controller, SIGNAL(portProbed(int)),
+			 config, SLOT(setPort(int)));
 
 	QObject::connect(&dcopiface, SIGNAL(connectionClosed()),
 			 &controller, SLOT(closeConnection()));
@@ -247,6 +280,9 @@ int main(int argc, char *argv[])
 	}
 	else
 		controller.startServer();
+
+	if (config->showInvitationDialogOnStartup())
+		config->showInvitationDialog();
 
 	return app.exec();
 }

@@ -20,6 +20,7 @@
 #define _KCM_KRFB_H_
 
 #include <qobject.h>
+#include <qdatetime.h>
 #include <kcmodule.h>
 #include "configurationwidget.h"
 
@@ -28,8 +29,9 @@ class KcmKRfb : public KCModule {
 private:
 	ConfigurationWidget confWidget;
 	KAboutData *about;
-	void checkKInetd(bool &available, bool &enabled);
+	void checkKInetd(bool&, bool&);
 	void setKInetd(bool enabled);
+	void setKInetd(const QDateTime &d);
 public:
 	KcmKRfb(QWidget *p, const char *name, const QStringList &);
 	~KcmKRfb();

@@ -93,12 +93,20 @@ public:
 	virtual void exec();
 };
 
+class KNotifyEvent : public VNCEvent {
+	QString name;
+	QString desc;
+public:
+	KNotifyEvent(const QString &n, const QString &d);
+	virtual ~KNotifyEvent();
+	virtual void exec();
+};
 
 /**
  * Manages sockets, drives the RGBConnection and triggers the connection
  * dialog.
  * The controller has three states: 'waiting for connection',
- * 'waiting for confirmation' and 'connected'. In the first state socket and 
+ * 'waiting for confirmation' and 'connected'. In the first state socket and
  * connection are null, in the second socket is set and in the last both are
  * set.
  * @author Tim Jansen
@@ -138,9 +146,9 @@ signals:
 
 private:
 	void stopServer(bool xtestUngrab = true);
+	void sendKNotifyEvent(const QString &name, const QString &desc);
 	bool checkAsyncEvents();
-	void sendDelayedKNotifyEvent(QString name, QString desc);
-
+	
 	bool allowRemoteControl;
 	int connectionNum;
 	QString remoteIp;
@@ -157,15 +165,10 @@ private:
 	QMutex asyncMutex;
 	QPtrList<VNCEvent> asyncQueue;
 	bool closePending;
-
-	bool asyncKNotifyEvent;
-	QString asyncKNotifyEventName;
-	QString asyncKNotifyEventDesc;
 private slots:
 	void idleSlot();
 	void dialogAccepted();
 	void dialogRefused();
-	void sendKNotifyEvent();
 };
 
 /*

@@ -74,9 +74,9 @@ void KcmKRfb::configChanged() {
 	emit changed(true);
 }
 
-void KcmKRfb::checkKInetd(bool &available, bool &enabled) {
-	available = false;
-	enabled = false;
+void KcmKRfb::checkKInetd(bool &kinetdAvailable, bool &krfbAvailable) {
+	kinetdAvailable = false;
+	krfbAvailable = false;
 
 	DCOPClient *d = KApplication::dcopClient();
 
@@ -84,15 +84,15 @@ void KcmKRfb::checkKInetd(bool &available, bool &enabled) {
 	QCString replyType;
 	QDataStream arg(sdata, IO_WriteOnly);
 	arg << QString("krfb");
-	if (!d->call ("kded", "kinetd", "isEnabled(QString)", sdata, replyType, rdata))
+	if (!d->call ("kded", "kinetd", "isInstalled(QString)", sdata, replyType, rdata))
 		return;
 
 	if (replyType != "bool")
 		return;
 
 	QDataStream answer(rdata, IO_ReadOnly);
-	answer >> enabled;
-	available = true;
+	answer >> krfbAvailable;
+	kinetdAvailable = true;
 }
 
 void KcmKRfb::setKInetd(bool enabled) {
@@ -108,22 +108,34 @@ void KcmKRfb::setKInetd(bool enabled) {
 	}
 }
 
+void KcmKRfb::setKInetd(const QDateTime &date) {
+	DCOPClient *d = KApplication::dcopClient();
+
+	QByteArray sdata;
+	QDataStream arg(sdata, IO_WriteOnly);
+	arg << QString("krfb");
+	arg << date;
+	if (!d->send ("kded", "kinetd", "setEnabled(QString,QDateTime)", sdata)) {
+		confWidget.runInBackgroundRB->setEnabled(false);
+		confWidget.runOnDemandRB->setChecked(true);
+	}
+}
+
 
 void KcmKRfb::load() {
-	bool kinetdAvailable, kinetdEnabled;
-	checkKInetd(kinetdAvailable, kinetdEnabled);
+	bool kinetdAvailable, krfbAvailable;
+	checkKInetd(kinetdAvailable, krfbAvailable);
 
-	if (!kinetdAvailable) {
+	KConfig c("krfbrc");
+	if (!krfbAvailable) {
 		confWidget.runInBackgroundRB->setEnabled(false);
 		confWidget.runOnDemandRB->setChecked(true);
 	}
 	else {
-		confWidget.runInBackgroundRB->setEnabled(true);
-		confWidget.runInBackgroundRB->setChecked(kinetdEnabled);
-		confWidget.runOnDemandRB->setChecked(!kinetdEnabled);
+		bool daemonMode = c.readBoolEntry("daemonMode", true);
+		confWidget.runInBackgroundRB->setChecked(daemonMode);
+		confWidget.runOnDemandRB->setChecked(!daemonMode);
 	}
-
-	KConfig c("krfbrc");
 	confWidget.allowUninvitedCB->setChecked(c.readBoolEntry("allowUninvited", false));
 	confWidget.confirmConnectionsCB->setChecked(c.readBoolEntry("confirmUninvitedConnection", false));
 	confWidget.allowDesktopControlCB->setChecked(c.readBoolEntry("allowDesktopControl", false));
@@ -133,19 +145,43 @@ void KcmKRfb::load() {
 void KcmKRfb::save() {
 	KConfig c("krfbrc");
 
-	setKInetd(!confWidget.runOnDemandRB->isChecked());
-
-	c.writeEntry("allowUninvited", confWidget.allowUninvitedCB->isChecked());
+	bool allowUninvited = confWidget.allowUninvitedCB->isChecked();
+	bool daemonMode = !confWidget.runOnDemandRB->isChecked();
+	c.writeEntry("daemonMode", daemonMode);
+	c.writeEntry("allowUninvited", allowUninvited);
 	c.writeEntry("confirmUninvitedConnection", confWidget.confirmConnectionsCB->isChecked());
 	c.writeEntry("allowDesktopControl", confWidget.allowDesktopControlCB->isChecked());
 	c.writeEntry("uninvitedPassword", confWidget.passwordInput->text());
+
+	if (!daemonMode)
+		return;
+
+	if (allowUninvited) {
+		setKInetd(true);
+		return;
+	}
+
+	c.setGroup("invitations");
+	int num = c.readNumEntry("invitation_num", 0);
+	QDateTime lastExpiration;
+	for (int i = 0; i < num; i++) {
+		QDateTime e = c.readDateTimeEntry(QString("expiration%1").arg(i));
+		if ((e.isNull()) || (e < QDateTime::currentDateTime()))
+			continue;
+		if (e > lastExpiration)
+			lastExpiration = e;
+	}
+	if (lastExpiration.isNull())
+		setKInetd(false);
+	else
+		setKInetd(lastExpiration);
 }
 
 void KcmKRfb::defaults() {
-	bool kinetdAvailable, kinetdEnabled;
-	checkKInetd(kinetdAvailable, kinetdEnabled);
+	bool kinetdAvailable, krfbAvailable;
+	checkKInetd(kinetdAvailable, krfbAvailable);
 
-	if (!kinetdAvailable) {
+	if (!krfbAvailable) {
 		confWidget.runInBackgroundRB->setEnabled(false);
 		confWidget.runOnDemandRB->setChecked(true);
 	}

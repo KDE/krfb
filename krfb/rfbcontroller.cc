@@ -16,7 +16,7 @@
  ***************************************************************************/
 
 /*
- * Contains keyboard & pointer handling from libvncserver's x11vnc.c 
+ * Contains keyboard & pointer handling from libvncserver's x11vnc.c
  */
 
 #include "rfbcontroller.h"
@@ -61,7 +61,7 @@ public:
 	AppLocker() {
 		KApplication::kApplication()->lock();
 	}
-	
+
 	~AppLocker() {
 		KApplication::kApplication()->unlock();
 	}
@@ -73,7 +73,7 @@ static enum rfbNewClientAction newClientHook(struct _rfbClientRec *cl)
 	return self->handleNewClient(cl);
 }
 
-static Bool passwordCheck(rfbClientPtr cl, 
+static Bool passwordCheck(rfbClientPtr cl,
 			  char* encryptedPassword,
 			  int len)
 {
@@ -98,7 +98,7 @@ static void clientGoneHook(rfbClientPtr)
 
 
 
-void ConnectionDialog::closeEvent(QCloseEvent *) 
+void ConnectionDialog::closeEvent(QCloseEvent *)
 {
 	emit closed();
 }
@@ -221,22 +221,33 @@ PointerEvent::PointerEvent(int b, int _x, int _y) :
 
 void PointerEvent::exec() {
 	XTestFakeMotionEvent(dpy, 0, x, y, CurrentTime);
-	for(int i = 0; i < 5; i++) 
+	for(int i = 0; i < 5; i++)
 		if ((buttonMask&(1<<i))!=(button_mask&(1<<i)))
 			XTestFakeButtonEvent(dpy,
 					     i+1,
 					     (button_mask&(1<<i))?True:False,
 					     CurrentTime);
-	
+
 	buttonMask = button_mask;
+}
+
+KNotifyEvent::KNotifyEvent(const QString &n, const QString &d) :
+	name(n),
+	desc(d) {
+}
+
+KNotifyEvent::~KNotifyEvent() {
+}
+
+void KNotifyEvent::exec() {
+	KNotifyClient::event(name, desc);
 }
 
 RFBController::RFBController(Configuration *c) :
 	allowRemoteControl(false),
 	connectionNum(0),
 	configuration(c),
-	closePending(false),
-	asyncKNotifyEvent(false)
+	closePending(false)
 {
 	self = this;
 	connect(dialog.acceptConnectionButton, SIGNAL(clicked()),
@@ -333,7 +344,8 @@ void RFBController::startServer(int inetdFd, bool xtestGrab)
 	rfbInitServer(server);
 	state = RFB_WAITING;
 
-	emit portProbed(server->rfbPort);
+	if (inetdFd < 0)
+		emit portProbed(server->rfbPort);
 
 	if (xtestGrab) {
 		disabler.disable = false;
@@ -357,7 +369,7 @@ void RFBController::stopServer(bool xtestUngrab)
 	}
 }
 
-void RFBController::rebind() 
+void RFBController::rebind()
 {
 	stopServer(false);
 	startServer(-1, false);
@@ -377,10 +389,10 @@ void RFBController::connectionAccepted(bool aRC)
 	emit sessionEstablished();
 }
 
-void RFBController::acceptConnection(bool aRC) 
+void RFBController::acceptConnection(bool aRC)
 {
 	KNotifyClient::event("UserAcceptsConnection",
-			     i18n("Connecting system: %1")
+			     i18n("User accepts connection from %1")
 			     .arg(remoteIp));
 
 	if (state != RFB_CONNECTING)
@@ -390,10 +402,10 @@ void RFBController::acceptConnection(bool aRC)
 	rfbStartOnHoldClient(server->rfbClientHead);
 }
 
-void RFBController::refuseConnection() 
+void RFBController::refuseConnection()
 {
 	KNotifyClient::event("UserRefusesConnection",
-			     i18n("Connecting system: %1")
+			     i18n("User refuses connection from %1")
 			     .arg(remoteIp));
 
 	if (state != RFB_CONNECTING)
@@ -403,7 +415,7 @@ void RFBController::refuseConnection()
 }
 
 // checks async events, returns true if client disconnected
-bool RFBController::checkAsyncEvents() 
+bool RFBController::checkAsyncEvents()
 {
 	bool closed = false;
 	asyncMutex.lock();
@@ -420,7 +432,7 @@ bool RFBController::checkAsyncEvents()
 	return closed;
 }
 
-void RFBController::connectionClosed() 
+void RFBController::connectionClosed()
 {
 	KNotifyClient::event("ConnectionClosed",
 			     i18n("Closed connection: %1.")
@@ -432,9 +444,13 @@ void RFBController::connectionClosed()
 	emit sessionFinished();
 }
 
-void RFBController::closeConnection() 
+void RFBController::closeConnection()
 {
 	if (state == RFB_CONNECTED) {
+		if (server->inetdSock >= 0) {
+			close(server->inetdSock);
+			emit sessionFinished();
+		}
 		if (!checkAsyncEvents()) {
 			asyncMutex.lock();
 			if (!closePending)
@@ -494,9 +510,12 @@ bool checkPassword(const QString &p,
 	const char *response,
 	int len) {
 
+	if ((len == 0) && (p.length() == 0))
+		return true;
+
 	char passwd[MAXPWLEN];
-	char challenge[CHALLENGESIZE];
-	
+	unsigned char challenge[CHALLENGESIZE];
+
 	memcpy(challenge, ochallenge, CHALLENGESIZE);
 	bzero(passwd, MAXPWLEN);
 	if (!p.isNull())
@@ -511,8 +530,12 @@ bool RFBController::handleCheckPassword(rfbClientPtr cl,
 					const char *response,
 					int len)
 {
-	bool authd = checkPassword(configuration->password(),
-		cl->authChallenge, response, len);
+
+	bool authd = false;
+
+	if (configuration->allowUninvitedConnects())
+		authd = checkPassword(configuration->password(),
+			cl->authChallenge, response, len);
 
 	if (!authd) {
 		QValueList<Invitation>::iterator it =
@@ -522,7 +545,7 @@ bool RFBController::handleCheckPassword(rfbClientPtr cl,
 				cl->authChallenge, response, len) &&
 				(*it).isValid()) {
 				authd = true;
-				configuration->invitations().remove(it);
+				configuration->removeInvitation(it);
 				break;
 			}
 			it++;
@@ -530,47 +553,53 @@ bool RFBController::handleCheckPassword(rfbClientPtr cl,
 	}
 
 	if (!authd) {
-		QString host, port;
-		KExtendedSocket::resolve(KExtendedSocket::peerAddress(cl->sock),
-					 host, port);
-
-		sendDelayedKNotifyEvent("InvalidPassword",
-					i18n("Connecting system: %1")
+		if (configuration->invitations().size() > 0) {
+			sendKNotifyEvent("InvalidPasswordInvitations",
+					i18n("Failed login attempt from %1: wrong password")
+					.arg(remoteIp));
+}
+		else
+			sendKNotifyEvent("InvalidPassword",
+					i18n("Failed login attempt from %1: wrong password")
 					.arg(remoteIp));
 		return FALSE;
 	}
 	return TRUE;
 }
 
-enum rfbNewClientAction RFBController::handleNewClient(rfbClientPtr cl) 
+enum rfbNewClientAction RFBController::handleNewClient(rfbClientPtr cl)
 {
 	int socket = cl->sock;
 
 	QString host, port;
-	KExtendedSocket::resolve(KExtendedSocket::peerAddress(socket),
-				 host, port);
+	KSocketAddress *ksa = KExtendedSocket::peerAddress(socket);
+	if (ksa) {
+		KExtendedSocket::resolve(ksa, host, port);
+		delete ksa;
+	}
 
 	if ((connectionNum > 0) ||
 	    (state != RFB_WAITING)) {
-		sendDelayedKNotifyEvent("TooManyConnections",
-					i18n("Connecting system: %1")
+		sendKNotifyEvent("TooManyConnections",
+					i18n("Connection refused from %1, already connected.")
 					.arg(host));
 		return RFB_CLIENT_REFUSE;
 	}
 	remoteIp = host;
 	state = RFB_CONNECTING;
 
-	if (!configuration->askOnConnect()) {
-		sendDelayedKNotifyEvent("NewConnectionAutoAccepted",
-					i18n("Connecting system: %1")
+	if ((!configuration->askOnConnect()) &&
+	    (configuration->invitations().size() == 0)) {
+		sendKNotifyEvent("NewConnectionAutoAccepted",
+					i18n("Accepted uninvited connection from %1")
 					.arg(remoteIp));
-		
+
 		connectionAccepted(configuration->allowDesktopControl());
 		return RFB_CLIENT_ACCEPT;
 	}
 
-	sendDelayedKNotifyEvent("NewConnectionOnHold",
-				i18n("Connecting system: %1")
+	sendKNotifyEvent("NewConnectionOnHold",
+				i18n("Got connection from %1, on hold (waiting for confirmation)")
 				.arg(remoteIp));
 
 	dialog.ipLabel->setText(remoteIp);
@@ -606,13 +635,11 @@ void RFBController::handlePointerEvent(int button_mask, int x, int y) {
 }
 
 void RFBController::passwordChanged() {
-	bool b = false;
+	bool authRequired = (!configuration->allowUninvitedConnects()) ||
+		(configuration->password().length() != 0) ||
+		(configuration->invitations().count() > 0);
 
-	if(configuration->password().length() == 0)
-		b = true;
-	if(configuration->invitations().count() > 0)
-		b = true;
-	server->rfbAuthPasswdData = (void*) (b ? 1 : 0);
+	server->rfbAuthPasswdData = (void*) (authRequired ? 1 : 0);
 }
 
 int RFBController::getPort()
@@ -620,34 +647,19 @@ int RFBController::getPort()
 	return server->rfbPort;
 }
 
-void RFBController::sendDelayedKNotifyEvent(QString name,
-					    QString desc)
+void RFBController::sendKNotifyEvent(const QString &n, const QString &d)
 {
-	if (asyncKNotifyEvent)
-		return;
-
-	asyncKNotifyEventName = name;
-	asyncKNotifyEventDesc= desc;
-	asyncKNotifyEvent = true;
-	QTimer::singleShot(0, this, SLOT(sendKNotifyEvent()));
-}
-
-void RFBController::sendKNotifyEvent() 
-{
-	if (!asyncKNotifyEvent)
-		return;
-
-	KNotifyClient::event(asyncKNotifyEventName,
-			     asyncKNotifyEventDesc);
-	asyncKNotifyEvent = false;
+	asyncMutex.lock();
+	asyncQueue.append(new KNotifyEvent(n, d));
+	asyncMutex.unlock();
 }
 
 bool RFBController::checkX11Capabilities() {
 	int bp1, bp2, majorv, minorv;
-	Bool r = XTestQueryExtension(qt_xdisplay(), &bp1, &bp2, 
+	Bool r = XTestQueryExtension(qt_xdisplay(), &bp1, &bp2,
 				     &majorv, &minorv);
 	if ((!r) || (((majorv*1000)+minorv) < 2002)) {
-		KMessageBox::error(0, 
+		KMessageBox::error(0,
 		   i18n("Your X11 Server does not support the required XTest extension version 2.2. Sharing your desktop is not possible."),
 				   i18n("Desktop Sharing Error"));
 		return false;
@@ -655,7 +667,7 @@ bool RFBController::checkX11Capabilities() {
 
 	r = XShmQueryExtension(qt_xdisplay());
 	if (!r) {
-		KMessageBox::error(0, 
+		KMessageBox::error(0,
 		   i18n("Your X11 Server does not support the required XShm extension. You can only share a local desktop."),
 				   i18n("Desktop Sharing Error"));
 		return false;
