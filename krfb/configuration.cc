@@ -371,7 +371,7 @@ void Configuration::showInvitationDialog() {
 }
 
 void Configuration::changeInvDlgNum(int newNum) {
-	invDlg.manageInvitationButton->setText( i18n("Manage Invitations (%1)...").arg(newNum) );
+	invDlg.manageInvitationButton->setText( i18n("&Manage Invitations (%1)...").arg(newNum) );
 }
 
 ////////////// personal invitation dialog //////////////////////////
