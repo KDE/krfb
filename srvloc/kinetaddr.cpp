@@ -34,6 +34,10 @@
 #include "kinetaddr.h"
 #include <netdb.h>
 
+#ifdef sun
+#include <sys/socket.h>
+#endif
+
 #if defined(__osf__) && defined(AF_INET6)
 #undef AF_INET6
 #endif
@@ -125,19 +129,21 @@ const struct in_addr *KInetAddress::addressV4() const {
 	return &d->in;
 }
 
-#ifdef AF_INET6
 const struct in6_addr *KInetAddress::addressV6() const {
+#ifdef AF_INET6
 	if (d->sockfamily != AF_INET6)
 		return 0;
 	return &d->in6;
-}
+#else
+	return 0;
 #endif
+}
 
 QString KInetAddress::nodeName() const
 {
 	char buf[INET6_ADDRSTRLEN+1];	// INET6_ADDRSTRLEN > INET_ADDRSTRLEN
 
-#ifdef __osf__
+#ifdef __osf__ || defined(sun)
 	if (d->sockfamily == AF_INET) {
 	    char *p = inet_ntoa(d->in);
 	    strncpy(buf, p, sizeof(buf));
