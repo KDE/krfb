@@ -84,6 +84,7 @@ KcmKRfb::KcmKRfb(QWidget *p, const char *name, const QStringList &) :
 	connect(&m_configuration, SIGNAL(invitationNumChanged(int)), 
 		this, SLOT(setInvitationNum(int)));
 	setInvitationNum(m_configuration.invitations().size());
+	connect(m_confWidget->disableBackgroundCB, SIGNAL(clicked()), SLOT(configChanged()) );
 }
 KcmKRfb::~KcmKRfb() {
 	delete m_about;
@@ -133,6 +134,7 @@ void KcmKRfb::load() {
 	m_confWidget->autoPortCB->setChecked(m_configuration.preferredPort()<0);
 	m_confWidget->portInput->setValue(m_configuration.preferredPort()> 0 ?
 		m_configuration.preferredPort() : 5900);
+	m_confWidget->disableBackgroundCB->setChecked(m_configuration.disableBackground());
 }
 
 void KcmKRfb::save() {
@@ -148,6 +150,7 @@ void KcmKRfb::save() {
 		m_configuration.setPreferredPort(-1);
 	else
 		m_configuration.setPreferredPort(m_confWidget->portInput->value());
+	m_configuration.setDisableBackground(m_confWidget->disableBackgroundCB->isChecked());
 	m_configuration.save();
 }
 
@@ -162,6 +165,7 @@ void KcmKRfb::defaults() {
 	m_confWidget->passwordInput->setText("");
 	m_confWidget->autoPortCB->setChecked(true);
 	m_confWidget->portInput->setValue(5900);
+	m_confWidget->disableBackgroundCB->setChecked(false);
 }
 
 const KAboutData *KcmKRfb::aboutData() const

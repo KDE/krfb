@@ -144,6 +144,7 @@ void Configuration::loadFromKConfig() {
 	askOnConnectFlag = c.readBoolEntry("confirmUninvitedConnection", true);
 	allowDesktopControlFlag = c.readBoolEntry("allowDesktopControl", false);
 	preferredPortNum = c.readNumEntry("preferredPort", -1);
+	disableBackgroundFlag = c.readBoolEntry("disableBackground", false);
 	if (c.hasKey("uninvitedPasswordCrypted"))
 		passwordString = cryptStr(c.readEntry("uninvitedPasswordCrypted", ""));
 	else
@@ -159,6 +160,7 @@ void Configuration::loadFromKConfig() {
 	invalidateOldInvitations();
 	if (invNum != invitationList.size())
 		emit invitationNumChanged(invitationList.size());
+
 }
 
 void Configuration::saveToKConfig() {
@@ -169,6 +171,7 @@ void Configuration::saveToKConfig() {
 	c.writeEntry("allowUninvited", allowUninvitedFlag);
 	c.writeEntry("enableSLP", enableSLPFlag);
 	c.writeEntry("preferredPort", preferredPortNum);
+	c.writeEntry("disableBackground", disableBackgroundFlag);
 	c.writeEntry("uninvitedPasswordCrypted", cryptStr(passwordString));
 	c.deleteEntry("uninvitedPassword");
 
@@ -274,6 +277,10 @@ QValueList<Invitation> &Configuration::invitations() {
 	return invitationList;
 }
 
+bool Configuration::disableBackground() const {
+	return disableBackgroundFlag;
+}
+
 void Configuration::setAllowUninvited(bool allowUninvited) {
 	allowUninvitedFlag = allowUninvited;
 }
@@ -316,6 +323,9 @@ int Configuration::preferredPort() const
 	return preferredPortNum;
 }
 
+void Configuration::setDisableBackground(bool disable) {
+	disableBackgroundFlag = disable;
+}
 
 ////////////// invitation manage dialog //////////////////////////
 

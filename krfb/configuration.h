@@ -59,12 +59,14 @@ public:
 	QString hostname() const;
 	int port() const;
 	int preferredPort() const;
+	bool disableBackground() const;
 
         void setAllowUninvited(bool allowUninvited);
 	void setEnableSLP(bool e);
         void setAskOnConnect(bool askOnConnect);
 	void setPassword(QString password);
 	void setPreferredPort(int p);
+	void setDisableBackground(bool disable);
 	void save();
 	void update();
 
@@ -114,6 +116,8 @@ private:
 
 	QString passwordString;
 	QValueList<Invitation> invitationList;
+
+	bool disableBackgroundFlag;
 private slots:
         void refreshTimeout();
 

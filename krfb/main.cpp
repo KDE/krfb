@@ -77,7 +77,7 @@ int main(int argc, char *argv[])
 		"(c) 2000-2001, Const Kaplinsky\n"
 		"(c) 2000, Tridia Corporation\n"
 		"(c) 1999, AT&T Laboratories Cambridge\n",
-                0, "", "ml@tjansen.de");
+                0, "", "tim@tjansen.de");
 	aboutData.addAuthor("Tim Jansen", "", "tim@tjansen.de");
         aboutData.addAuthor("Ian Reinhart Geiser", "DCOP interface", "geiseri@kde.org");
 	aboutData.addCredit("Johannes E. Schindelin",
@@ -95,6 +95,8 @@ int main(int argc, char *argv[])
 	aboutData.addCredit("Jason Spisak",
 			    I18N_NOOP("Connection side image"),
 			    "kovalid@yahoo.com");
+	aboutData.addCredit("Karl Vogel",
+			    I18N_NOOP("KDesktop background deactivation"));
 	KCmdLineArgs::init(argc, argv, &aboutData);
 	KCmdLineArgs::addCmdLineOptions(options);
 

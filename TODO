@@ -2,18 +2,18 @@
 For 3.2:
 - write SLP service template for remote desktop protocols
   (documentation)
-- when krfb is started with URL arguments and without connection
-  quality, add some kind of smart algorithm to determine whether the
-  other host is local (maybe using SLP to announce the connectivity 
-  of a LAN)
+- extend VNC to enable/disable desktop wallpaper
 - enhance RFB with SASL authentication (Kerberos)
 - encrypted connections (using SASL and/or SSL/TLS)
 - with kerberos/ssl: display name of remote user in connection dialog,
                      kpassivepopup and systray (if name is available)
-- try to solve the non-atomic KConfig changes problem
 - mention that invitations are one-time on personal invitation dialog
 
 Todo (unscheduled features):
+- when krfb is started with URL arguments and without connection
+  quality, add some kind of smart algorithm to determine whether the
+  other host is local (maybe using SLP to announce the connectivity 
+  of a LAN)
 - NAT traversal support if I can find an acceptable implementation
   (probably using TURN, as soon as there is a server and newer spec for that)
 - when OpenSLP supports this, allow scope configuration

@@ -1,4 +1,4 @@
-<!DOCTYPE UI><UI version="3.0" stdsetdef="1">
+<!DOCTYPE UI><UI version="3.1" stdsetdef="1">
 <class>ConfigurationWidget</class>
 <widget class="QWidget">
     <property name="name">
@@ -23,7 +23,7 @@
             <cstring>unnamed</cstring>
         </property>
         <property name="margin">
-            <number>11</number>
+            <number>0</number>
         </property>
         <property name="spacing">
             <number>6</number>
@@ -148,7 +148,7 @@
                                     <cstring>enableSLPCB</cstring>
                                 </property>
                                 <property name="text">
-                                    <string>Announce &amp;service on the network</string>
+                                    <string>Announce service &amp;on the network</string>
                                 </property>
                                 <property name="checked">
                                     <bool>true</bool>
@@ -162,7 +162,7 @@
                                     <cstring>confirmConnectionsCB</cstring>
                                 </property>
                                 <property name="text">
-                                    <string>&amp;Confirm uninvited connections before accepting</string>
+                                    <string>Confirm uninvited connections &amp;before accepting</string>
                                 </property>
                                 <property name="whatsThis" stdset="0">
                                     <string>If enabled, a dialog will appear when somebody attempts to connect, asking you whether you want to accept the connection.</string>
@@ -222,7 +222,7 @@
                                             </sizepolicy>
                                         </property>
                                         <property name="text">
-                                            <string>&amp;Password:</string>
+                                            <string>Pass&amp;word:</string>
                                         </property>
                                         <property name="buddy" stdset="0">
                                             <cstring>passwordInput</cstring>
@@ -270,6 +270,75 @@
                     <cstring>tab</cstring>
                 </property>
                 <attribute name="title">
+                    <string>&amp;Session</string>
+                </attribute>
+                <vbox>
+                    <property name="name">
+                        <cstring>unnamed</cstring>
+                    </property>
+                    <property name="margin">
+                        <number>11</number>
+                    </property>
+                    <property name="spacing">
+                        <number>6</number>
+                    </property>
+                    <widget class="QGroupBox">
+                        <property name="name">
+                            <cstring>GroupBox4</cstring>
+                        </property>
+                        <property name="title">
+                            <string>Session preferences</string>
+                        </property>
+                        <vbox>
+                            <property name="name">
+                                <cstring>unnamed</cstring>
+                            </property>
+                            <property name="margin">
+                                <number>11</number>
+                            </property>
+                            <property name="spacing">
+                                <number>6</number>
+                            </property>
+                            <widget class="QCheckBox">
+                                <property name="name">
+                                    <cstring>disableBackgroundCB</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>Disable &amp;background image</string>
+                                </property>
+                                <property name="checked">
+                                    <bool>false</bool>
+                                </property>
+                                <property name="whatsThis" stdset="0">
+                                    <string>Check this option to disable the background image during a remote session.</string>
+                                </property>
+                            </widget>
+                        </vbox>
+                    </widget>
+                    <spacer>
+                        <property name="name">
+                            <cstring>Spacer4</cstring>
+                        </property>
+                        <property name="orientation">
+                            <enum>Vertical</enum>
+                        </property>
+                        <property name="sizeType">
+                            <enum>Expanding</enum>
+                        </property>
+                        <property name="sizeHint">
+                            <size>
+                                <width>0</width>
+                                <height>20</height>
+                            </size>
+                        </property>
+                    </spacer>
+                </vbox>
+            </widget>
+            <widget class="QWidget">
+                <property name="name">
+                    <cstring>tab</cstring>
+                </property>
+                <attribute name="title">
                     <string>&amp;Network</string>
                 </attribute>
                 <vbox>
@@ -304,7 +373,7 @@
                                     <cstring>autoPortCB</cstring>
                                 </property>
                                 <property name="text">
-                                    <string>A&amp;ssign port automatically</string>
+                                    <string>Assi&amp;gn port automatically</string>
                                 </property>
                                 <property name="checked">
                                     <bool>true</bool>
@@ -341,7 +410,7 @@
                                             <cstring>TextLabel1_2</cstring>
                                         </property>
                                         <property name="text">
-                                            <string>&amp;Port:</string>
+                                            <string>P&amp;ort:</string>
                                         </property>
                                         <property name="buddy" stdset="0">
                                             <cstring>portInput</cstring>
@@ -436,4 +505,8 @@ Most VNC clients use a display number instead of the actual port. This display n
     <tabstop>portInput</tabstop>
 </tabstops>
 <layoutdefaults spacing="6" margin="11"/>
+<includehints>
+    <includehint>knuminput.h</includehint>
+    <includehint>knuminput.h</includehint>
+</includehints>
 </UI>

@@ -160,6 +160,7 @@ private:
 	void sendKNotifyEvent(const QString &name, const QString &desc);
 	bool checkAsyncEvents();
 	void sendSessionEstablished();
+	void restoreBackground();
 	
 	QString remoteIp;
 	bool allowDesktopControl;

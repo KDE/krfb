@@ -499,6 +499,15 @@ bool RFBController::checkAsyncEvents()
 	return closed;
 }
 
+void RFBController::restoreBackground() {
+	if (configuration->disableBackground()) {
+		DCOPRef ref("kdesktop", "KBackgroundIface");
+		ref.setDCOPClient(KApplication::dcopClient());
+
+		ref.send("setBackgroundEnabled(bool)", bool(true));
+	}
+}
+
 void RFBController::connectionClosed()
 {
 	KNotifyClient::event("ConnectionClosed",
@@ -506,6 +515,7 @@ void RFBController::connectionClosed()
 			     .arg(remoteIp));
 
 	idleTimer.stop();
+	restoreBackground();
 	state = RFB_WAITING;
 	if (forcedClose)
 	        emit quitApp();
@@ -517,6 +527,8 @@ void RFBController::closeConnection()
 {
         forcedClose = true;
 	if (state == RFB_CONNECTED) {
+		restoreBackground();
+
 		if (!checkAsyncEvents()) {
 			asyncMutex.lock();
 			if (!closePending)
@@ -735,6 +747,12 @@ void RFBController::sendKNotifyEvent(const QString &n, const QString &d)
 
 void RFBController::sendSessionEstablished()
 {
+	if (configuration->disableBackground()) {
+		DCOPRef ref("kdesktop", "KBackgroundIface");
+		ref.setDCOPClient(KApplication::dcopClient());
+
+		ref.send("setBackgroundEnabled(bool)", bool(false));
+	}
         emit sessionEstablished(remoteIp);
 }
 
