@@ -88,6 +88,12 @@ XUpdateScanner::XUpdateScanner(Display *_dpy,
 	tile(NULL)
 {
 	useShm = useXShm && XShmQueryExtension(dpy);
+	if (useShm) {
+		int major, minor;
+		Bool pixmaps;
+		if ((!XShmQueryVersion(dpy, &major, &minor, &pixmaps)) || !pixmaps)
+			useShm = false;
+	}
 
 	if (useShm) {
 		tile = XShmCreateImage(dpy,
