@@ -1,12 +1,17 @@
 METASOURCES = AUTO
 
-bin_PROGRAMS = krfb
-krfb_SOURCES = rfbcontroller.cc configuration.cc trayicon.cpp \
-  xupdatescanner.cc main.cpp configurationdialog.ui newconnectiondialog.ui \
-  krfbifaceimpl.cc krfbiface.skel manageinvitations.ui personalinvitation.ui \
+
+noinst_LIBRARIES = libkrfbconfig.a
+libkrfbconfig_a_SOURCES = configuration.cc configurationdialog.ui manageinvitations.ui personalinvitation.ui \
   invite.ui invitation.cc configuration_hostname.cpp
-krfb_LDADD   = ../libvncserver/libvncserver.a -lz -lpthread -ljpeg -lXtst \
+
+
+bin_PROGRAMS = krfb
+krfb_SOURCES = rfbcontroller.cc trayicon.cpp xupdatescanner.cc main.cpp newconnectiondialog.ui \
+  krfbifaceimpl.cc krfbiface.skel
+krfb_LDADD   = libkrfbconfig.a ../libvncserver/libvncserver.a -lz -lpthread -ljpeg -lXtst \
   $(LIB_QT) $(LIB_KDECORE) $(LIB_KDEUI)  $(LIBSOCKET)
+krfb_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 
 kde_services_DATA = kinetd_krfb.desktop
 
@@ -49,8 +54,6 @@ KDE_ICON = krfb
 # set the include path for X, qt and KDE
 INCLUDES= -I$(top_srcdir)/krfb/libvncserver $(all_includes)
 
-# the library search path. 
-krfb_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 
 CXXFLAGS = @CXXFLAGS@ -DQT_THREAD_SUPPORT
 

@@ -198,7 +198,7 @@ int main(int argc, char *argv[])
 		config = new Configuration(mode);
 
 		if ((mode == KRFB_KINETD_MODE) &&
-		    (!config->allowUninvitedConnects()) &&
+		    (!config->allowUninvitedConnections()) &&
 		    (config->invitations().size() == 0)) {
 			KNotifyClient::event("UnexpectedConnection");
 			return 1;

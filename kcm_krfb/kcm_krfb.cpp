@@ -43,31 +43,32 @@ K_EXPORT_COMPONENT_FACTORY( libkcm_krfb, KcmKRfbFactory("kcm_krfb") );
 
 KcmKRfb::KcmKRfb(QWidget *p, const char *name, const QStringList &) :
 	KCModule(p, name),
-	confWidget(this) {
+	m_configuration(KRFB_CONFIGURATION_MODE),
+	m_confWidget(this) {
 
 	QVBoxLayout *l = new QVBoxLayout(this, 0, KDialog::spacingHint());
-	l->add(&confWidget);
+	l->add(&m_confWidget);
 
 	setButtons(Default|Apply|Reset);
 
-	about = new KAboutData( "kcm_krfb", I18N_NOOP("Desktop Sharing Control Module"),
+	m_about = new KAboutData( "kcm_krfb", I18N_NOOP("Desktop Sharing Control Module"),
 		VERSION,
 		I18N_NOOP("Configure desktop sharing"), KAboutData::License_GPL,
 		"(c) 2002, Tim Jansen\n",
 		0, "http://www.tjansen.de/krfb", "tim@tjansen.de");
-	about->addAuthor("Tim Jansen", 0, "tim@tjansen.de");
+	m_about->addAuthor("Tim Jansen", 0, "tim@tjansen.de");
 
 	load();
 
-	connect(confWidget.passwordInput, SIGNAL(textChanged(const QString&)), SLOT(configChanged()) );
-	connect(confWidget.runOnDemandRB, SIGNAL(toggled(bool)), SLOT(configChanged()) );
-	connect(confWidget.allowUninvitedCB, SIGNAL(clicked()), SLOT(configChanged()) );
-	connect(confWidget.confirmConnectionsCB, SIGNAL(clicked()), SLOT(configChanged()) );
-	connect(confWidget.allowDesktopControlCB, SIGNAL(clicked()), SLOT(configChanged()) );
+	connect(m_confWidget.passwordInput, SIGNAL(textChanged(const QString&)), SLOT(configChanged()) );
+	connect(m_confWidget.runOnDemandRB, SIGNAL(toggled(bool)), SLOT(configChanged()) );
+	connect(m_confWidget.allowUninvitedCB, SIGNAL(clicked()), SLOT(configChanged()) );
+	connect(m_confWidget.confirmConnectionsCB, SIGNAL(clicked()), SLOT(configChanged()) );
+	connect(m_confWidget.allowDesktopControlCB, SIGNAL(clicked()), SLOT(configChanged()) );
 }
 
 KcmKRfb::~KcmKRfb() {
-	delete about;
+	delete m_about;
 }
 
 void KcmKRfb::configChanged() {
@@ -95,86 +96,35 @@ void KcmKRfb::checkKInetd(bool &kinetdAvailable, bool &krfbAvailable) {
 	kinetdAvailable = true;
 }
 
-void KcmKRfb::setKInetd(bool enabled) {
-	DCOPClient *d = KApplication::dcopClient();
-
-	QByteArray sdata;
-	QDataStream arg(sdata, IO_WriteOnly);
-	arg << QString("krfb");
-	arg << enabled;
-	if (!d->send ("kded", "kinetd", "setEnabled(QString,bool)", sdata)) {
-		confWidget.runInBackgroundRB->setEnabled(false);
-		confWidget.runOnDemandRB->setChecked(true);
-	}
-}
-
-void KcmKRfb::setKInetd(const QDateTime &date) {
-	DCOPClient *d = KApplication::dcopClient();
-
-	QByteArray sdata;
-	QDataStream arg(sdata, IO_WriteOnly);
-	arg << QString("krfb");
-	arg << date;
-	if (!d->send ("kded", "kinetd", "setEnabled(QString,QDateTime)", sdata)) {
-		confWidget.runInBackgroundRB->setEnabled(false);
-		confWidget.runOnDemandRB->setChecked(true);
-	}
-}
-
-
 void KcmKRfb::load() {
 	bool kinetdAvailable, krfbAvailable;
 	checkKInetd(kinetdAvailable, krfbAvailable);
 
-	KConfig c("krfbrc");
 	if (!krfbAvailable) {
-		confWidget.runInBackgroundRB->setEnabled(false);
-		confWidget.runOnDemandRB->setChecked(true);
+		m_confWidget.runInBackgroundRB->setEnabled(false);
+		m_confWidget.runOnDemandRB->setChecked(true);
 	}
 	else {
-		bool daemonMode = c.readBoolEntry("daemonMode", true);
-		confWidget.runInBackgroundRB->setChecked(daemonMode);
-		confWidget.runOnDemandRB->setChecked(!daemonMode);
+		bool daemonMode = m_configuration.daemonMode();
+		m_confWidget.runInBackgroundRB->setChecked(daemonMode);
+		m_confWidget.runOnDemandRB->setChecked(!daemonMode);
 	}
-	confWidget.allowUninvitedCB->setChecked(c.readBoolEntry("allowUninvited", false));
-	confWidget.confirmConnectionsCB->setChecked(c.readBoolEntry("confirmUninvitedConnection", false));
-	confWidget.allowDesktopControlCB->setChecked(c.readBoolEntry("allowDesktopControl", false));
-	confWidget.passwordInput->setText(c.readEntry("uninvitedPassword", ""));
+	m_confWidget.allowUninvitedCB->setChecked(m_configuration.allowUninvitedConnections());
+	m_confWidget.confirmConnectionsCB->setChecked(m_configuration.askOnConnect());
+	m_confWidget.allowDesktopControlCB->setChecked(m_configuration.allowDesktopControl());
+	m_confWidget.passwordInput->setText(m_configuration.password());
 }
 
 void KcmKRfb::save() {
-	KConfig c("krfbrc");
 
-	bool allowUninvited = confWidget.allowUninvitedCB->isChecked();
-	bool daemonMode = !confWidget.runOnDemandRB->isChecked();
-	c.writeEntry("daemonMode", daemonMode);
-	c.writeEntry("allowUninvited", allowUninvited);
-	c.writeEntry("confirmUninvitedConnection", confWidget.confirmConnectionsCB->isChecked());
-	c.writeEntry("allowDesktopControl", confWidget.allowDesktopControlCB->isChecked());
-	c.writeEntry("uninvitedPassword", confWidget.passwordInput->text());
-
-	if (!daemonMode)
-		return;
-
-	if (allowUninvited) {
-		setKInetd(true);
-		return;
-	}
-
-	c.setGroup("invitations");
-	int num = c.readNumEntry("invitation_num", 0);
-	QDateTime lastExpiration;
-	for (int i = 0; i < num; i++) {
-		QDateTime e = c.readDateTimeEntry(QString("expiration%1").arg(i));
-		if ((e.isNull()) || (e < QDateTime::currentDateTime()))
-			continue;
-		if (e > lastExpiration)
-			lastExpiration = e;
-	}
-	if (lastExpiration.isNull())
-		setKInetd(false);
-	else
-		setKInetd(lastExpiration);
+	bool allowUninvited = m_confWidget.allowUninvitedCB->isChecked();
+	bool daemonMode = !m_confWidget.runOnDemandRB->isChecked();
+	m_configuration.setDaemonMode(daemonMode);
+	m_configuration.setAllowUninvited(allowUninvited);
+	m_configuration.setAskOnConnect(m_confWidget.confirmConnectionsCB->isChecked());
+	m_configuration.setAllowDesktopControl(m_confWidget.allowDesktopControlCB->isChecked());
+	m_configuration.setPassword(m_confWidget.passwordInput->text());
+	m_configuration.save();
 }
 
 void KcmKRfb::defaults() {
@@ -182,23 +132,23 @@ void KcmKRfb::defaults() {
 	checkKInetd(kinetdAvailable, krfbAvailable);
 
 	if (!krfbAvailable) {
-		confWidget.runInBackgroundRB->setEnabled(false);
-		confWidget.runOnDemandRB->setChecked(true);
+		m_confWidget.runInBackgroundRB->setEnabled(false);
+		m_confWidget.runOnDemandRB->setChecked(true);
 	}
 	else {
-		confWidget.runInBackgroundRB->setEnabled(true);
-		confWidget.runInBackgroundRB->setChecked(true);
-		confWidget.runOnDemandRB->setChecked(false);
+		m_confWidget.runInBackgroundRB->setEnabled(true);
+		m_confWidget.runInBackgroundRB->setChecked(true);
+		m_confWidget.runOnDemandRB->setChecked(false);
 	}
-	confWidget.allowUninvitedCB->setChecked(false);
-	confWidget.confirmConnectionsCB->setChecked(false);
-	confWidget.allowDesktopControlCB->setChecked(false);
-	confWidget.passwordInput->setText("");
+	m_confWidget.allowUninvitedCB->setChecked(false);
+	m_confWidget.confirmConnectionsCB->setChecked(false);
+	m_confWidget.allowDesktopControlCB->setChecked(false);
+	m_confWidget.passwordInput->setText("");
 }
 
 const KAboutData *KcmKRfb::aboutData() const
 {
-	return about;
+	return m_about;
 }
 
 QString KcmKRfb::quickHelp() const

@@ -533,7 +533,7 @@ bool RFBController::handleCheckPassword(rfbClientPtr cl,
 
 	bool authd = false;
 
-	if (configuration->allowUninvitedConnects())
+	if (configuration->allowUninvitedConnections())
 		authd = checkPassword(configuration->password(),
 			cl->authChallenge, response, len);
 
@@ -635,7 +635,7 @@ void RFBController::handlePointerEvent(int button_mask, int x, int y) {
 }
 
 void RFBController::passwordChanged() {
-	bool authRequired = (!configuration->allowUninvitedConnects()) ||
+	bool authRequired = (!configuration->allowUninvitedConnections()) ||
 		(configuration->password().length() != 0) ||
 		(configuration->invitations().count() > 0);
 

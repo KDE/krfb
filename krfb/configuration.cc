@@ -79,7 +79,8 @@ Configuration::Configuration(krfb_mode mode) :
 	connect(&persInvDlg, SIGNAL(closed()), SLOT(persInvDlgClosed()));
 
 	if ((m_mode == KRFB_STAND_ALONE) ||
-	    (m_mode == KRFB_KINETD_MODE)) {
+	    (m_mode == KRFB_KINETD_MODE) ||
+	    (m_mode == KRFB_CONFIGURATION_MODE)) {
 		connect(&expirationTimer, SIGNAL(timeout()), SLOT(invalidateOldInvitations()));
 		expirationTimer.start(1000*60);
 	}
@@ -149,8 +150,10 @@ void Configuration::removeInvitation(QValueList<Invitation>::iterator it) {
 }
 
 void Configuration::doKinetdConf() {
-	if (!daemonFlag)
+        if (!daemonFlag) {
+		setKInetd(false);
 		return;
+	}
 
 	if (allowUninvitedFlag) {
 		setKInetd(true);
@@ -265,10 +268,17 @@ void Configuration::reload() {
 	saveToDialogs();
 }
 
+void Configuration::save() {
+	saveToKConfig();
+	saveToDialogs();
+	doKinetdConf();
+}
+
 Invitation Configuration::createInvitation() {
 	Invitation inv;
 	invitationList.push_back(inv);
 	emit passwordChanged();
+	doKinetdConf();
 	return inv;
 }
 
@@ -305,7 +315,7 @@ bool Configuration::allowDesktopControl() const {
 	return allowDesktopControlFlag;
 }
 
-bool Configuration::allowUninvitedConnects() const {
+bool Configuration::allowUninvitedConnections() const {
 	return allowUninvitedFlag;
 }
 
@@ -325,33 +335,33 @@ QValueList<Invitation> &Configuration::invitations() {
 	return invitationList;
 }
 
+void Configuration::setDaemonMode(bool daemonMode) {
+	daemonFlag = daemonMode;
+}
+
+void Configuration::setAllowUninvited(bool allowUninvited) {
+	allowUninvitedFlag = allowUninvited;
+}
+
 void Configuration::setOnceConnection(bool oneConnection)
 {
 	oneConnectionFlag = oneConnection;
-	saveToKConfig();
-	saveToDialogs();
 }
 
 void Configuration::setAskOnConnect(bool askOnConnect)
 {
 	askOnConnectFlag = askOnConnect;
-	saveToKConfig();
-	saveToDialogs();
 }
 
 void Configuration::setAllowDesktopControl(bool allowDesktopControl)
 {
 	allowDesktopControlFlag = allowDesktopControl;
-	saveToKConfig();
-	saveToDialogs();
 }
 
 void Configuration::setPassword(QString password)
 {
 	passwordString = password;
 	emit passwordChanged();
-	saveToKConfig();
-	saveToDialogs();
 }
 
 int Configuration::port() const
@@ -466,7 +476,6 @@ void Configuration::showPersonalInvitationDialog() {
 	Invitation inv = createInvitation();
 	saveToDialogs();
 	saveToKConfig();
-	doKinetdConf();
 	
 	invDlg.createInvitationButton->setEnabled(false);
 	persInvDlg.hostLabel->setText(QString("%1:%2").arg(hostname()).arg(port()));
@@ -490,7 +499,6 @@ void Configuration::inviteEmail() {
 	Invitation inv = createInvitation();
 	saveToDialogs();
 	saveToKConfig();
-	doKinetdConf();
 
 	KApplication *app = KApplication::kApplication();
 	app->invokeMailer(QString::null, QString::null, QString::null,

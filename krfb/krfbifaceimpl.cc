@@ -42,6 +42,7 @@ bool KRfbIfaceImpl::oneConnection()
 void KRfbIfaceImpl::setOneConnection(bool b)
 {
 	configuration->setOnceConnection(b);
+	configuration->save();
 }
 bool KRfbIfaceImpl::askOnConnect()
 {
@@ -50,6 +51,7 @@ bool KRfbIfaceImpl::askOnConnect()
 void KRfbIfaceImpl::setAskOnConnect(bool b)
 {
 	configuration->setAskOnConnect(b);
+	configuration->save();
 }
 bool KRfbIfaceImpl::allowDesktopControl()
 {
@@ -58,10 +60,12 @@ bool KRfbIfaceImpl::allowDesktopControl()
 void KRfbIfaceImpl::setAllowDesktopControl(bool b)
 {
 	configuration->setAllowDesktopControl(b);
+	configuration->save();
 }
 void KRfbIfaceImpl::setPassword(QString password)
 {
 	configuration->setPassword(password);
+	configuration->save();
 }
 int KRfbIfaceImpl::port()
 {

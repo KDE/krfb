@@ -36,7 +36,8 @@ enum krfb_mode {
 	KRFB_STAND_ALONE,
 	KRFB_STAND_ALONE_CMDARG,
 	KRFB_KINETD_MODE,
-	KRFB_INVITATION_MODE
+	KRFB_INVITATION_MODE,
+	KRFB_CONFIGURATION_MODE
 };
 
 class ConfigurationDialog2 : public ConfigurationDialog {
@@ -87,18 +88,21 @@ public:
 	bool oneConnection() const;
 	bool askOnConnect() const;
 	bool allowDesktopControl() const;
-	bool allowUninvitedConnects() const;
+	bool allowUninvitedConnections() const;
 	bool showInvitationDialogOnStartup() const;
 	bool daemonMode() const;
 	QString password() const;
 	QString hostname() const;
 	int port() const;
 
+        void setDaemonMode(bool daemonMode);
+        void setAllowUninvited(bool allowUninvited);
         void setOnceConnection(bool oneConnection);
         void setAskOnConnect(bool askOnConnect);
         void setAllowDesktopControl(bool allowDesktopControl);
 	void setPassword(QString password);
 	void reload();
+	void save();
 
 	QValueList<Invitation> &invitations();
 	void removeInvitation(QValueList<Invitation>::iterator it);

@@ -23,15 +23,15 @@
 #include <qdatetime.h>
 #include <kcmodule.h>
 #include "configurationwidget.h"
+#include "../krfb/configuration.h"
 
 class KcmKRfb : public KCModule {
 	Q_OBJECT
 private:
-	ConfigurationWidget confWidget;
-	KAboutData *about;
+	Configuration m_configuration;
+	ConfigurationWidget m_confWidget;
+	KAboutData *m_about;
 	void checkKInetd(bool&, bool&);
-	void setKInetd(bool enabled);
-	void setKInetd(const QDateTime &d);
 public:
 	KcmKRfb(QWidget *p, const char *name, const QStringList &);
 	~KcmKRfb();

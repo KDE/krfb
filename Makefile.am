@@ -1,4 +1,4 @@
-SUBDIRS = kinetd kcm_krfb libvncserver krfb
+SUBDIRS = kinetd libvncserver krfb kcm_krfb 
 
 EXTRA_DIST = AUTHORS COPYING ChangeLog INSTALL README TODO NOTES \
              ROADMAP DCOP-INTERFACE krfb.lsm 

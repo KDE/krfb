@@ -14,7 +14,7 @@ k_dcop:
 	virtual void disconnect() = 0;
 
 	/**
-	 * Quites krfb, connected clients will be disconnected.
+	 * Quits krfb, connected clients will be disconnected.
 	 */
 	virtual void exit() = 0;
 
