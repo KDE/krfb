@@ -165,7 +165,7 @@ public:
   /**
    * Destructor
    */
-  virtual ~KUser();
+  ~KUser();
 
 private:
   KUserPrivate* d;
