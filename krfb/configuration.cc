@@ -321,6 +321,11 @@ void Configuration::showInvitationDialog() {
 }
 
 void Configuration::invDlgClosed() {
+	closeInvDlg();
+	emit invitationFinished();
+}
+
+void Configuration::closeInvDlg() {
 	loadFromDialogs();
 	saveToKConfig();
 	invDlg.hide();
@@ -331,7 +336,7 @@ void Configuration::invDlgClosed() {
 ////////////// personal invitation dialog //////////////////////////
 
 void Configuration::showPersonalInvitationDialog() {
-	invDlgClosed();
+	closeInvDlg();
 
 	Invitation inv = createInvitation();
 	saveToDialogs();
@@ -345,15 +350,17 @@ void Configuration::showPersonalInvitationDialog() {
 void Configuration::persInvDlgClosed() {
 	persInvDlg.hide();
 	invDlg.createInvitationButton->setEnabled(true);
+	emit invitationFinished();
 }
 
 ////////////// invite email //////////////////////////
 
 void Configuration::inviteEmail() {
-	invDlgClosed();
+	closeInvDlg();
 	Invitation inv = createInvitation();
 	saveToDialogs();
 	// TODO: start mail client
+	emit invitationFinished();
 }
 
 #include "configuration.moc"

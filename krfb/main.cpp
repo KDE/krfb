@@ -89,7 +89,6 @@ static KCmdLineOptions options[] =
  *
  * TODO:
  * - invitations (see configuration.cc for overview)
- * - implement invitation mode
  * - display kcm in kinetd mode
  */
 
@@ -180,8 +179,9 @@ int main(int argc, char *argv[])
 
 
 	if (mode == KRFB_INVITATION_MODE) {
-		// TODO: display invitation
-		kdDebug() << "invitation mode" <<endl;
+		config->showInvitationDialog();
+		QObject::connect(config, SIGNAL(invitationFinished()),
+				 &app, SLOT(quit()));
 		return app.exec();
 	}
 

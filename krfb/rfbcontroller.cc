@@ -273,6 +273,7 @@ void RFBController::startServer(int inetdFd, bool xtestGrab)
 	int h = framebufferImage->height;
 	char *fb = framebufferImage->data;
 
+	rfbLogEnable(0);
 	server = rfbGetScreen(0, 0, w, h,
 			      framebufferImage->bits_per_pixel,
 			      8,

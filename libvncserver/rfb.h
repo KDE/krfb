@@ -758,6 +758,7 @@ extern void rfbProcessSizeArguments(int* width,int* height,int* bpp,int* argc, c
 
 /* main.c */
 
+extern void rfbLogEnable(int enabled);
 extern void rfbLog(const char *format, ...);
 extern void rfbLogPerror(const char *str);
 

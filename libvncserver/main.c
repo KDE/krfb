@@ -34,6 +34,8 @@
 
 MUTEX(logMutex);
 
+int rfbEnableLogging = 1;
+
 char rfbEndianTest = (_BYTE_ORDER == _LITTLE_ENDIAN);
 
 /*
@@ -47,6 +49,9 @@ rfbLog(const char *format, ...)
     char buf[256];
     time_t log_clock;
 
+    if (!rfbEnableLogging)
+        return;
+    
     LOCK(logMutex);
     va_start(args, format);
 
@@ -66,13 +71,17 @@ void rfbLogPerror(const char *str)
     rfbLog("%s: %s\n", str, strerror(errno));
 }
 
+void rfbLogEnable(int enabled) {
+	rfbEnableLogging = enabled;
+}
+
 void rfbScheduleCopyRegion(rfbScreenInfoPtr rfbScreen,sraRegionPtr copyRegion,int dx,int dy)
-{  
+{
    rfbClientIteratorPtr iterator;
    rfbClientPtr cl;
 
    rfbUndrawCursor(rfbScreen);
-  
+
    iterator=rfbGetClientIterator(rfbScreen);
    while((cl=rfbClientIteratorNext(iterator))) {
      LOCK(cl->updateMutex);

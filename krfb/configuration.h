@@ -97,6 +97,7 @@ public:
 	QValueList<Invitation> &invitations();
 signals:
   	void passwordChanged();
+	void invitationFinished();
 
 public slots:
 	void showConfigDialog();
@@ -113,6 +114,7 @@ private:
         void saveToKConfig();
         void saveToDialogs();
 	Invitation createInvitation();
+	void closeInvDlg();
 
 	krfb_mode m_mode;
 
@@ -126,7 +128,7 @@ private:
 	bool allowDesktopControlFlag;
 	bool allowUninvitedFlag;
 	bool oneConnectionFlag;
-	
+
 	bool showInvDlgOnStartupFlag;
 
 	QString passwordString;
