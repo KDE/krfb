@@ -1,12 +1,12 @@
 METASOURCES = AUTO
 
 bin_PROGRAMS = krfb
-krfb_SOURCES = configuration.cc trayicon.cpp XUpdateScanner.cc rfbconnection.cpp main.cpp configurationdialog.ui newconnectiondialog.ui
+krfb_SOURCES = rfbcontroller.cc configuration.cc trayicon.cpp XUpdateScanner.cc rfbconnection.cc main.cpp configurationdialog.ui newconnectiondialog.ui
 krfb_LDADD   = ./lib/liblib.a  $(LIB_QT) $(LIB_KDECORE) $(LIB_KDEUI)  $(LIBSOCKET)
 
 SUBDIRS = lib 
 
-EXTRA_DIST = main.cpp krfb.desktop lo32-app-krfb.png lo16-app-krfb.png rfbserver.cpp rfbserver.h eyes-closed24.png eyes-open24.png XUpdateScanner.cc XUpdateScanner.h trayicon.cpp trayicon.h configuration.h configuration.cpp
+EXTRA_DIST = krfb.desktop lo32-app-krfb.png lo16-app-krfb.png rfbcontroller.h rfbconnection.h eyes-closed24.png eyes-open24.png XUpdateScanner.h trayicon.h configuration.h
 
 install-data-local:
 	$(mkinstalldirs) $(kde_appsdir)/Applications/
