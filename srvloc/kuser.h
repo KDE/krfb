@@ -30,13 +30,12 @@ struct passwd;
 /**
  * An user or account name.
  *
- * This class represents a user on your system. You can
- * between KInetAddress and KInetSocketAddress is that the socket address
- * consists of the address and the port, KInetAddress peresents only the 
- * address itself.
+ * This class represents a user on your system. You can either get
+ * information about the current user, of fetch information about
+ * a user on the system.
  *
  * @author Tim Jansen <tim@tjansen.de>
- * @short an Internet Address
+ * @short Represents a user on your system
  */
 class KUser {
 
