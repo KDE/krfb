@@ -21,6 +21,7 @@
 
 #include <qlayout.h>
 #include <qcheckbox.h>
+#include <qlabel.h>
 #include <qradiobutton.h>
 #include <qlineedit.h>
 #include <qbuttongroup.h>
@@ -69,10 +70,11 @@ KcmKRfb::KcmKRfb(QWidget *p, const char *name, const QStringList &) :
 	connect(m_confWidget->allowDesktopControlCB, SIGNAL(clicked()), SLOT(configChanged()) );
 	connect(m_confWidget->autoPortCB, SIGNAL(clicked()), SLOT(configChanged()) );
 	connect(m_confWidget->portInput, SIGNAL(valueChanged(int)), SLOT(configChanged()) );
-	connect((QObject*)m_confWidget->createInvitation, SIGNAL(clicked()), 
-		&m_configuration, SLOT(showInvitationDialog()) );
 	connect((QObject*)m_confWidget->manageInvitations, SIGNAL(clicked()), 
 		&m_configuration, SLOT(showManageInvitationsDialog()) );
+	connect(&m_configuration, SIGNAL(invitationNumChanged(int)), 
+		this, SLOT(setInvitationNum(int)));
+	setInvitationNum(m_configuration.invitations().size());
 }
 KcmKRfb::~KcmKRfb() {
 	delete m_about;
@@ -80,6 +82,13 @@ KcmKRfb::~KcmKRfb() {
 
 void KcmKRfb::configChanged() {
 	emit changed(true);
+}
+
+void KcmKRfb::setInvitationNum(int num) {
+	if (num == 0)
+		m_confWidget->invitationNumLabel->setText(i18n("You have no open invitation."));
+	else
+		m_confWidget->invitationNumLabel->setText(i18n("Open invitations: %1").arg(num));
 }
 
 void KcmKRfb::checkKInetd(bool &kinetdAvailable, bool &krfbAvailable) {

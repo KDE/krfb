@@ -8,8 +8,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>409</width>
-            <height>291</height>
+            <width>680</width>
+            <height>364</height>
         </rect>
     </property>
     <property name="caption">
@@ -28,7 +28,41 @@
         <property name="spacing">
             <number>6</number>
         </property>
-        <widget class="KListView" row="0" column="0" rowspan="4" colspan="1">
+        <spacer row="7" column="0">
+            <property name="name" stdset="0">
+                <cstring>Spacer10</cstring>
+            </property>
+            <property name="orientation">
+                <enum>Horizontal</enum>
+            </property>
+            <property name="sizeType">
+                <enum>Expanding</enum>
+            </property>
+            <property name="sizeHint">
+                <size>
+                    <width>20</width>
+                    <height>20</height>
+                </size>
+            </property>
+        </spacer>
+        <spacer row="0" column="1">
+            <property name="name" stdset="0">
+                <cstring>Spacer7</cstring>
+            </property>
+            <property name="orientation">
+                <enum>Vertical</enum>
+            </property>
+            <property name="sizeType">
+                <enum>Expanding</enum>
+            </property>
+            <property name="sizeHint">
+                <size>
+                    <width>20</width>
+                    <height>20</height>
+                </size>
+            </property>
+        </spacer>
+        <widget class="KListView" row="0" column="0" rowspan="5" colspan="1">
             <column>
                 <property name="text">
                     <string>Created</string>
@@ -67,69 +101,49 @@
                 <string>Displays the open invitations. Use the buttons on the right to delete them or create a new invitation.</string>
             </property>
         </widget>
-        <widget class="QPushButton" row="5" column="1">
+        <widget class="QPushButton" row="1" column="1">
             <property name="name">
-                <cstring>closeButton</cstring>
+                <cstring>newPersonalInvitationButton</cstring>
             </property>
             <property name="text">
-                <string>&amp;Close</string>
+                <string>New &amp;Personal Invitation...</string>
             </property>
             <property name="toolTip" stdset="0">
-                <string>Closes this window.</string>
+                <string>Create a new personal invitation...</string>
             </property>
             <property name="whatsThis" stdset="0">
-                <string>Closes this window.</string>
+                <string>Click this button to create a new personal invitation.</string>
             </property>
         </widget>
-        <widget class="Line" row="4" column="0" rowspan="1" colspan="2">
+        <widget class="QPushButton" row="2" column="1">
             <property name="name">
-                <cstring>Line1</cstring>
+                <cstring>newEmailInvitationButton</cstring>
             </property>
-            <property name="frameShape" stdset="0">
-                <enum>HLine</enum>
+            <property name="text">
+                <string>&amp;New EMail Invitation...</string>
             </property>
-            <property name="frameShadow">
-                <enum>Sunken</enum>
+            <property name="toolTip" stdset="0">
+                <string>Send a new invitation via email...</string>
             </property>
-            <property name="orientation">
-                <enum>Horizontal</enum>
+            <property name="whatsThis" stdset="0">
+                <string>Click this button to send a new invitation via EMail.</string>
             </property>
         </widget>
-        <spacer row="5" column="0">
-            <property name="name" stdset="0">
-                <cstring>Spacer10</cstring>
-            </property>
-            <property name="orientation">
-                <enum>Horizontal</enum>
-            </property>
-            <property name="sizeType">
-                <enum>Expanding</enum>
-            </property>
-            <property name="sizeHint">
-                <size>
-                    <width>20</width>
-                    <height>20</height>
-                </size>
-            </property>
-        </spacer>
-        <spacer row="0" column="1">
-            <property name="name" stdset="0">
-                <cstring>Spacer7</cstring>
-            </property>
-            <property name="orientation">
-                <enum>Vertical</enum>
-            </property>
-            <property name="sizeType">
-                <enum>Expanding</enum>
-            </property>
-            <property name="sizeHint">
-                <size>
-                    <width>20</width>
-                    <height>20</height>
-                </size>
-            </property>
-        </spacer>
         <widget class="QPushButton" row="3" column="1">
+            <property name="name">
+                <cstring>deleteAllButton</cstring>
+            </property>
+            <property name="text">
+                <string>Delete All</string>
+            </property>
+            <property name="toolTip" stdset="0">
+                <string>Delete all invitations</string>
+            </property>
+            <property name="whatsThis" stdset="0">
+                <string>Deletes all open invitations.</string>
+            </property>
+        </widget>
+        <widget class="QPushButton" row="4" column="1">
             <property name="name">
                 <cstring>deleteOneButton</cstring>
             </property>
@@ -143,32 +157,32 @@
                 <string>Delete the selected invitation. The invited person will not be able to connect using this invitation anymore.</string>
             </property>
         </widget>
-        <widget class="QPushButton" row="1" column="1">
+        <widget class="Line" row="5" column="0" rowspan="2" colspan="2">
             <property name="name">
-                <cstring>newButton</cstring>
+                <cstring>Line1</cstring>
             </property>
-            <property name="text">
-                <string>&amp;New...</string>
+            <property name="frameShape" stdset="0">
+                <enum>HLine</enum>
             </property>
-            <property name="toolTip" stdset="0">
-                <string>Create a new invitation...</string>
+            <property name="frameShadow">
+                <enum>Sunken</enum>
             </property>
-            <property name="whatsThis" stdset="0">
-                <string>Click this button to create a new invitation.</string>
+            <property name="orientation">
+                <enum>Horizontal</enum>
             </property>
         </widget>
-        <widget class="QPushButton" row="2" column="1">
+        <widget class="QPushButton" row="6" column="1" rowspan="2" colspan="1">
             <property name="name">
-                <cstring>deleteAllButton</cstring>
+                <cstring>closeButton</cstring>
             </property>
             <property name="text">
-                <string>Delete All</string>
+                <string>&amp;Close</string>
             </property>
             <property name="toolTip" stdset="0">
-                <string>Delete all invitations</string>
+                <string>Closes this window.</string>
             </property>
             <property name="whatsThis" stdset="0">
-                <string>Deletes all open invitations.</string>
+                <string>Closes this window.</string>
             </property>
         </widget>
     </grid>

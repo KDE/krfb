@@ -59,7 +59,9 @@ Configuration::Configuration(krfb_mode mode) :
 
 	connect(invMngDlg.closeButton, SIGNAL(clicked()), SLOT(invMngDlgClosed()));
 	connect(&invMngDlg, SIGNAL(closed()), SLOT(invMngDlgClosed()));
-	connect(invMngDlg.newButton, SIGNAL(clicked()), SLOT(showInvitationDialog()));
+	connect(invMngDlg.newPersonalInvitationButton, SIGNAL(clicked()), 
+		SLOT(showPersonalInvitationDialog()));
+	connect(invMngDlg.newEmailInvitationButton, SIGNAL(clicked()), SLOT(inviteEmail()));
 	connect(invMngDlg.deleteOneButton, SIGNAL(clicked()), SLOT(invMngDlgDeleteOnePressed()));
 	connect(invMngDlg.deleteAllButton, SIGNAL(clicked()), SLOT(invMngDlgDeleteAllPressed()));
 	invMngDlg.listView->setSelectionMode(QListView::Extended);
@@ -71,12 +73,16 @@ Configuration::Configuration(krfb_mode mode) :
 		SLOT(showPersonalInvitationDialog()));
 	connect(invDlg.createInvitationEMailButton, SIGNAL(clicked()),
 		SLOT(inviteEmail()));
+	connect(invDlg.manageInvitationButton, SIGNAL(clicked()),
+		SLOT(showManageInvitationsDialog()));
+	connect(this, SIGNAL(invitationNumChanged(int)), this, SLOT(changeInvDlgNum(int)));
+	changeInvDlgNum(invitationList.size());
 
 	connect(persInvDlg.closeButton, SIGNAL(clicked()), SLOT(persInvDlgClosed()));
 	connect(&persInvDlg, SIGNAL(closed()), SLOT(persInvDlgClosed()));
 
-	connect(&expirationTimer, SIGNAL(timeout()), SLOT(invalidateOldInvitations()));
-	expirationTimer.start(1000*60);
+	connect(&refreshTimer, SIGNAL(timeout()), SLOT(refreshTimeout()));
+	refreshTimer.start(1000*60);
 }
 
 Configuration::~Configuration() {
@@ -173,6 +179,7 @@ void Configuration::loadFromKConfig() {
 	passwordString = c.readEntry("uninvitedPassword", "");
 	preferredPortNum = c.readNumEntry("preferredPort", -1);
 
+	unsigned int invNum = invitationList.size();
 	invitationList.clear();
 	c.setGroup("invitations");
 	int num = c.readNumEntry("invitation_num", 0);
@@ -180,6 +187,8 @@ void Configuration::loadFromKConfig() {
 		invitationList.push_back(Invitation(&c, i));
 
 	invalidateOldInvitations();
+	if (invNum != invitationList.size())
+		emit invitationNumChanged(invitationList.size());
 }
 
 void Configuration::saveToKConfig() {
@@ -228,7 +237,6 @@ void Configuration::update() {
 Invitation Configuration::createInvitation() {
 	Invitation inv;
 	invitationList.push_back(inv);
-	doKinetdConf();
 	return inv;
 }
 
@@ -239,6 +247,15 @@ void Configuration::invalidateOldInvitations() {
 			it = invitationList.remove(it);
 		else
 			it++;
+	}
+}
+
+void Configuration::refreshTimeout() {
+	unsigned int invNum = invitationList.size();
+	loadFromKConfig();
+	if (invNum != invitationList.size()) {
+		saveToDialogs();
+		emit invitationNumChanged(invitationList.size());
 	}
 }
 
@@ -334,18 +351,19 @@ void Configuration::invMngDlgDeleteOnePressed() {
 	}
 	saveToKConfig();
 	doKinetdConf();
+	emit invitationNumChanged(invitationList.size());
 }
 
 void Configuration::invMngDlgDeleteAllPressed() {
 	invitationList.clear();
 	saveToKConfig();
 	doKinetdConf();
+	emit invitationNumChanged(invitationList.size());
 }
 
 ////////////// invitation dialog //////////////////////////
 
 void Configuration::showInvitationDialog() {
-	invMngDlg.newButton->setEnabled(false);
 	invDlg.show();
 }
 
@@ -357,21 +375,24 @@ void Configuration::invDlgClosed() {
 void Configuration::closeInvDlg() {
 	saveToKConfig();
 	invDlg.hide();
-	invMngDlg.newButton->setEnabled(true);
 }
 
+void Configuration::changeInvDlgNum(int newNum) {
+	invDlg.manageInvitationButton->setText(i18n("Manage Invitations%1...").
+			       arg(QString(i18n("(%1) ")).arg(newNum) ) );
+}
 
 ////////////// personal invitation dialog //////////////////////////
 
 void Configuration::showPersonalInvitationDialog() {
-	closeInvDlg();
-
 	loadFromKConfig();
 	Invitation inv = createInvitation();
-	saveToDialogs();
-	saveToKConfig();
+	save();
+	emit invitationNumChanged(invitationList.size());
 	
 	invDlg.createInvitationButton->setEnabled(false);
+	invMngDlg.newPersonalInvitationButton->setEnabled(false);
+
 	persInvDlg.hostLabel->setText(QString("%1:%2").arg(hostname()).arg(port()));
 	persInvDlg.passwordLabel->setText(inv.password());
 	persInvDlg.expirationLabel->setText(
@@ -382,17 +403,16 @@ void Configuration::showPersonalInvitationDialog() {
 void Configuration::persInvDlgClosed() {
 	persInvDlg.hide();
 	invDlg.createInvitationButton->setEnabled(true);
-	emit invitationFinished();
+	invMngDlg.newPersonalInvitationButton->setEnabled(true);
 }
 
 ////////////// invite email //////////////////////////
 
 void Configuration::inviteEmail() {
-	closeInvDlg();
 	loadFromKConfig();
 	Invitation inv = createInvitation();
-	saveToDialogs();
-	saveToKConfig();
+	save();
+	emit invitationNumChanged(invitationList.size());
 
 	KApplication *app = KApplication::kApplication();
 	app->invokeMailer(QString::null, QString::null, QString::null,
@@ -407,7 +427,6 @@ void Configuration::inviteEmail() {
 			.arg(inv.password())
 			.arg(inv.expirationTime().toString(Qt::LocalDate)));
 
-	emit invitationFinished();
 }
 
 #include "configuration.moc"

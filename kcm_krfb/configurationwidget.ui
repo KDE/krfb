@@ -8,8 +8,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>532</width>
-            <height>468</height>
+            <width>420</width>
+            <height>354</height>
         </rect>
     </property>
     <property name="caption">
@@ -56,7 +56,10 @@
                         <property name="title">
                             <string>Invitations</string>
                         </property>
-                        <grid>
+                        <property name="alignment">
+                            <set>AlignAuto</set>
+                        </property>
+                        <vbox>
                             <property name="name">
                                 <cstring>unnamed</cstring>
                             </property>
@@ -66,32 +69,34 @@
                             <property name="spacing">
                                 <number>6</number>
                             </property>
-                            <widget class="QPushButton" row="1" column="0">
+                            <widget class="QLabel">
                                 <property name="name">
-                                    <cstring>createInvitation</cstring>
+                                    <cstring>invitationNumLabel</cstring>
                                 </property>
                                 <property name="text">
-                                    <string>Create &amp;Invitation...</string>
-                                </property>
-                                <property name="toolTip" stdset="0">
-                                    <string></string>
-                                </property>
-                                <property name="whatsThis" stdset="0">
-                                    <string>Click to create a new invitation.</string>
+                                    <string>You have no open invitation.</string>
                                 </property>
                             </widget>
-                            <widget class="QPushButton" row="1" column="1">
+                            <widget class="QPushButton">
                                 <property name="name">
                                     <cstring>manageInvitations</cstring>
                                 </property>
+                                <property name="sizePolicy">
+                                    <sizepolicy>
+                                        <hsizetype>0</hsizetype>
+                                        <vsizetype>0</vsizetype>
+                                        <horstretch>0</horstretch>
+                                        <verstretch>0</verstretch>
+                                    </sizepolicy>
+                                </property>
                                 <property name="text">
-                                    <string>&amp;Manage Invitations...</string>
+                                    <string>Create and &amp;Manage Invitations...</string>
                                 </property>
                                 <property name="whatsThis" stdset="0">
                                     <string>Click to view or delete the open invitations.</string>
                                 </property>
                             </widget>
-                        </grid>
+                        </vbox>
                     </widget>
                     <widget class="QButtonGroup">
                         <property name="name">
@@ -379,7 +384,6 @@ Most VNC clients use a display number instead of the actual port. This display n
 <tabstops>
     <tabstop>autoPortCB</tabstop>
     <tabstop>TabWidget2</tabstop>
-    <tabstop>createInvitation</tabstop>
     <tabstop>manageInvitations</tabstop>
     <tabstop>allowUninvitedCB</tabstop>
     <tabstop>confirmConnectionsCB</tabstop>

@@ -93,6 +93,7 @@ public:
 	void removeInvitation(QValueList<Invitation>::iterator it);
 signals:
 	void invitationFinished();
+	void invitationNumChanged(int num);
 
 public slots:
         void setAllowDesktopControl(bool allowDesktopControl);
@@ -100,8 +101,7 @@ public slots:
 	void showInvitationDialog();
 	void showPersonalInvitationDialog();
 	void inviteEmail();
-
-	void invalidateOldInvitations();
+	
 private:
         void loadFromKConfig();
         void loadFromDialogs();
@@ -109,6 +109,7 @@ private:
         void saveToDialogs();
 	Invitation createInvitation();
 	void closeInvDlg();
+	void invalidateOldInvitations();
 	void setKInetdEnabled(const QDateTime &date);
 	void setKInetdEnabled(bool enabled);
 	void getPortFromKInetd();
@@ -120,7 +121,7 @@ private:
 	ManageInvitationsDialog2 invMngDlg;
 	InvitationDialog2 invDlg;
 	PersonalInvitationDialog2 persInvDlg;
-	QTimer expirationTimer;
+	QTimer refreshTimer;
 
 	bool askOnConnectFlag;
 	bool allowDesktopControlFlag;
@@ -131,11 +132,14 @@ private:
 	QString passwordString;
 	QValueList<Invitation> invitationList;
 private slots:
+        void refreshTimeout();
+
 	void invMngDlgClosed();
 	void invMngDlgDeleteOnePressed();
 	void invMngDlgDeleteAllPressed();
 
 	void invDlgClosed();
+	void changeInvDlgNum(int newNum);
 
 	void persInvDlgClosed();
 };

@@ -132,7 +132,7 @@ int main(int argc, char *argv[])
 			return 1;
 		}
 
-		config = new Configuration(KRFB_INVITATION_MODE);	
+		config = new Configuration(KRFB_INVITATION_MODE);
 		config->showInvitationDialog();
 		QObject::connect(config, SIGNAL(invitationFinished()),
 				 &app, SLOT(quit()));

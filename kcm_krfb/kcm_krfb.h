@@ -42,6 +42,7 @@ public:
 	QString quickHelp() const;
 	const KAboutData *aboutData() const;
 private slots:
+	void setInvitationNum(int num);
 	void configChanged();
 };
 
