@@ -22,6 +22,7 @@
 
 #include "rfbconnection.h"
 
+#include <kdebug.h>
 #include <qapplication.h>
 #include <X11/Xutil.h>
 #include <unistd.h>
@@ -29,24 +30,28 @@
 #include <string.h>
 
 
-RFBConnection::RFBConnection(Display *dpy, int fd, const QString &cpassword) :
+RFBConnection::RFBConnection(Display *_dpy, 
+			     int _fd, 
+			     const QString &cpassword,
+			     bool _allowInput) :
 	Server(),
-	dpy(dpy),
-	fd(fd),
+	dpy(_dpy),
+	fd(_fd),
+	allowInput(_allowInput),
 	buttonMask(0)
 {
 	memcpy(password, "\0\0\0\0\0\0\0\0", 8);
 	if (!cpassword.isNull())
 		strncpy(password, cpassword.latin1(), 
-			8 <= cpassword.length() ? 8 : cpassword.length());
+			(8 <= cpassword.length()) ? 8 : cpassword.length());
 
   	bufferedConnection = new BufferedConnection(32768, 32768);
   	connection = bufferedConnection;
 
-	InitBlocks(32, 32);
-
 	XTestGrabControl(dpy, true);
 	createFramebuffer();
+
+	InitBlocks(32, 32);
 
 	connection->send((unsigned char*) RFB_PROTOCOL_VERSION, 12);
 }
@@ -62,6 +67,8 @@ RFBConnection::~RFBConnection() {
 }
 
 void RFBConnection::handleKeyEvent(KeyEvent &keyEvent) {
+	if (!allowInput)
+		return;
 	KeyCode kc = XKeysymToKeycode(dpy, keyEvent.key);
  	if (kc != NoSymbol)
   		XTestFakeKeyEvent(dpy,
@@ -71,6 +78,8 @@ void RFBConnection::handleKeyEvent(KeyEvent &keyEvent) {
 }
 
 void RFBConnection::handlePointerEvent(PointerEvent &pointerEvent) {
+	if (!allowInput)
+		return;
   	XTestFakeMotionEvent(dpy,
    			0,
    			pointerEvent.x_position,
@@ -97,48 +106,50 @@ void RFBConnection::createFramebuffer()
 				     QApplication::desktop()->height(),
 				     AllPlanes,
 				     ZPixmap);
-	framebuffer.width = framebufferImage->width;
-	framebuffer.height = framebufferImage->height;
-	framebuffer.bytesPerLine = framebufferImage->bytes_per_line;
-	framebuffer.data = (unsigned char*) framebufferImage->data;
+	framebuffer = new Framebuffer();
+	framebuffer->width = framebufferImage->width;
+	framebuffer->height = framebufferImage->height;
+	framebuffer->bytesPerLine = framebufferImage->bytes_per_line;
+	framebuffer->data = (unsigned char*) framebufferImage->data;
 
-	framebuffer.pixelFormat.bits_per_pixel = 
+	framebuffer->pixelFormat.bits_per_pixel = 
 		framebufferImage->bits_per_pixel;
-	framebuffer.pixelFormat.depth = framebufferImage->depth;
-	framebuffer.pixelFormat.big_endian_flag = 
+	framebuffer->pixelFormat.depth = framebufferImage->depth;
+	framebuffer->pixelFormat.big_endian_flag = 
 		(framebufferImage->bitmap_bit_order == MSBFirst);
-	framebuffer.pixelFormat.true_colour_flag = true;
+	framebuffer->pixelFormat.true_colour_flag = true;
 
-	if (framebuffer.pixelFormat.bits_per_pixel == 8) {
-		framebuffer.pixelFormat.red_shift = 0;
-		framebuffer.pixelFormat.green_shift = 2;
-		framebuffer.pixelFormat.blue_shift = 5;
-		framebuffer.pixelFormat.red_max   = 3;
-		framebuffer.pixelFormat.green_max = 7;
-		framebuffer.pixelFormat.blue_max  = 3;
+	if (framebuffer->pixelFormat.bits_per_pixel == 8) {
+		framebuffer->pixelFormat.red_shift = 0;
+		framebuffer->pixelFormat.green_shift = 2;
+		framebuffer->pixelFormat.blue_shift = 5;
+		framebuffer->pixelFormat.red_max   = 3;
+		framebuffer->pixelFormat.green_max = 7;
+		framebuffer->pixelFormat.blue_max  = 3;
 	} else {
-		framebuffer.pixelFormat.red_shift = 0;
+		framebuffer->pixelFormat.red_shift = 0;
 		if ( framebufferImage->red_mask )
-			while (!(framebufferImage->red_mask & (1 << framebuffer.pixelFormat.red_shift)))
-				framebuffer.pixelFormat.red_shift++;
-		framebuffer.pixelFormat.green_shift = 0;
+			while (!(framebufferImage->red_mask & (1 << framebuffer->pixelFormat.red_shift)))
+				framebuffer->pixelFormat.red_shift++;
+		framebuffer->pixelFormat.green_shift = 0;
 		if (framebufferImage->green_mask)
-			while (!(framebufferImage->green_mask & (1 << framebuffer.pixelFormat.green_shift)))
-				framebuffer.pixelFormat.green_shift++;
-		framebuffer.pixelFormat.blue_shift = 0;
+			while (!(framebufferImage->green_mask & (1 << framebuffer->pixelFormat.green_shift)))
+				framebuffer->pixelFormat.green_shift++;
+		framebuffer->pixelFormat.blue_shift = 0;
 		if (framebufferImage->blue_mask)
-			while (!(framebufferImage->blue_mask & (1 << framebuffer.pixelFormat.blue_shift)))
-				framebuffer.pixelFormat.blue_shift++;
-		framebuffer.pixelFormat.red_max = framebufferImage->red_mask   >> framebuffer.pixelFormat.red_shift;
-		framebuffer.pixelFormat.green_max = framebufferImage->green_mask >> framebuffer.pixelFormat.green_shift;
-		framebuffer.pixelFormat.blue_max = framebufferImage->blue_mask  >> framebuffer.pixelFormat.blue_shift;
+			while (!(framebufferImage->blue_mask & (1 << framebuffer->pixelFormat.blue_shift)))
+				framebuffer->pixelFormat.blue_shift++;
+		framebuffer->pixelFormat.red_max = framebufferImage->red_mask   >> framebuffer->pixelFormat.red_shift;
+		framebuffer->pixelFormat.green_max = framebufferImage->green_mask >> framebuffer->pixelFormat.green_shift;
+		framebuffer->pixelFormat.blue_max = framebufferImage->blue_mask  >> framebuffer->pixelFormat.blue_shift;
 	}
-	scanner = new XUpdateScanner( dpy, QApplication::desktop()->winId(), &framebuffer );
+	scanner = new XUpdateScanner( dpy, QApplication::desktop()->winId(), framebuffer );
 }
 
 void RFBConnection::destroyFramebuffer()
 {
 	delete scanner;
+	delete framebuffer;
 	XDestroyImage(framebufferImage);
 }
 

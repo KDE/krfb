@@ -34,9 +34,10 @@ using namespace rfb;
 /**
  * Manages sockets, drives the RGBConnection and triggers the connection
  * dialog.
- * The controller has two states: 'waiting for connection' and 'connected'.
- * In the former serversocket is set and socket and connection are null, in
- * the latter serversocket is null and socket and connection are set.
+ * The controller has three states: 'waiting for connection',
+ * 'waiting for confirmation' and 'connected'. In the first state socket and 
+ * connection are null, in the second socket is set and in the last both are 
+ * set.
  * @author Tim Jansen
  */
 class RFBController : public QObject  {
@@ -54,8 +55,8 @@ signals:
 	void sessionFinished(); 
  
 private:	
-	void start();
-	void checkWritable();
+	void startServer();
+	void checkWriteBuffer();
 	void prepareIdleUpdate();
 
 	Configuration *configuration;
@@ -66,7 +67,7 @@ private:
 
 private slots:
 	void idleSlot();
-	void accepted();
+	void accepted(KSocket*);
         void socketReadable(); 
         void socketWritable(); 
 };

@@ -17,6 +17,7 @@
 
 #include "trayicon.h"
 #include "configuration.h"
+#include "rfbcontroller.h"
 
 #include <kpixmap.h>
 #include <kaction.h>
@@ -50,6 +51,7 @@ int main(int argc, char *argv[])
  	KApplication app;
  	TrayIcon trayicon;
 	Configuration config;
+	RFBController controller(&config);
 
 	QObject::connect(&trayicon, SIGNAL(showConfigure()),
 			 &config, SLOT(showDialog()));
@@ -57,5 +59,15 @@ int main(int argc, char *argv[])
 	QObject::connect(&app, SIGNAL(lastWindowClosed()),
 			 &app, SLOT(quit()));
 
+	QObject::connect(&controller, SIGNAL(sessionEstablished()),
+			 &trayicon, SLOT(openConnection()));
+	QObject::connect(&controller, SIGNAL(sessionFinished()),
+			 &trayicon, SLOT(closeConnection()));
+	QObject::connect(&trayicon, SIGNAL(connectionClosed()),
+			 &controller, SLOT(closeSession()));
+
+	QObject::connect(&config, SIGNAL(portChanged()),
+			 &controller, SLOT(rebind()));
+	
 	return app.exec();
 }

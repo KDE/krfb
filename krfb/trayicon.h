@@ -33,13 +33,16 @@ public:
 	TrayIcon();
 	~TrayIcon();
 
+public slots:
   	void closeConnection();
 	void openConnection();
+
 private:
   	KPixmap trayIconOpen;
   	KPixmap trayIconClosed;
   	KAction* closeConnectionAction;
   	KAction* configureAction;
+
 signals:
   	void connectionClosed();
 	void showConfigure();

@@ -50,7 +50,8 @@ using namespace rfb;
 class RFBConnection : public QObject, public Server  {
 	Q_OBJECT
 public: 
-	RFBConnection(Display *dpy, int fd, const QString &cpassword);
+	RFBConnection(Display *dpy, int fd, 
+		      const QString &cpassword, bool allowInput);
 	~RFBConnection();
 	virtual void handleKeyEvent(KeyEvent &keyEvent);
 	virtual void handlePointerEvent(PointerEvent &pointerEvent);
@@ -65,8 +66,8 @@ private:
 
 	int fd;
 	int buttonMask;
+	bool allowInput;
 
-	Framebuffer framebuffer;
 	XUpdateScanner *scanner;
 
 	Display *dpy;

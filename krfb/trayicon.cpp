@@ -1,5 +1,5 @@
 /***************************************************************************
-                          trayicon.cpp  -  description
+                                trayicon.cpp
                              -------------------
     begin                : Tue Dec 11 2001
     copyright            : (C) 2001 by Tim Jansen
@@ -30,7 +30,11 @@ TrayIcon::TrayIcon() : KSystemTray() {
 	configureAction = new KAction(i18n("&Configure KRfb")); 	
 	configureAction->plug(contextMenu());
 	closeConnectionAction = new KAction(i18n("Close connection"));
+	closeConnectionAction->plug(contextMenu());
+	closeConnectionAction->setEnabled(false);
 	connect(configureAction, SIGNAL(activated()), SIGNAL(showConfigure()));
+	connect(closeConnectionAction, SIGNAL(activated()), 
+		SIGNAL(connectionClosed()));
 	show();
 }
 
@@ -39,10 +43,10 @@ TrayIcon::~TrayIcon(){
 
 void TrayIcon::openConnection(){
 	setPixmap(trayIconOpen);
-	closeConnectionAction->plug(contextMenu());	
+	closeConnectionAction->setEnabled(true);
 }
 
 void TrayIcon::closeConnection(){
 	setPixmap(trayIconClosed);
-	closeConnectionAction->unplug(contextMenu());
+	closeConnectionAction->setEnabled(false);
 }

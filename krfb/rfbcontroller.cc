@@ -33,84 +33,99 @@
 
 RFBController::RFBController(Configuration *c) :
 	configuration(c),
+	socket(0),
+	connection(0),
 	idleUpdateScheduled(false)
 {
-	start();
+	startServer();
 }
 
 RFBController::~RFBController() {
 	delete serversocket;
-	delete connection;
-	delete socket;
+	if (socket)
+		delete socket;
+	if (connection) 
+		delete connection;
 }
 
-void RFBController::start() {
+void RFBController::startServer() {
 	serversocket = new KServerSocket(configuration->port(), false);
-	connect(serversocket, SIGNAL(accepted()), SLOT(accepted()));
+	connect(serversocket, SIGNAL(accepted(KSocket*)), SLOT(accepted(KSocket*)));
 	serversocket->bindAndListen();
 	// TODO: error message if bindAndListen fails (port in use)
 }
 
 void RFBController::rebind() {
-	if (serversocket) {
-		delete serversocket;
-		start();
-	}
+	delete serversocket;
+	startServer();
 }
 
-void RFBController::idleSlot() {
-	idleUpdateScheduled = false;
-	if (connection) {
-		connection->sendIncrementalFramebufferUpdate();
-		checkWritable();
-	}
-}
-
-// called when KServerSocket accepted a connection. Closes KServerSocket.
-void RFBController::accepted() {
-	int sockFd = serversocket->socket();
-	KSocket *s;
+/* called when KServerSocket accepted a connection.
+   Refuses the connection if there is already a connection.
+ */
+void RFBController::accepted(KSocket *s) {
+	int sockFd = s->socket();
 	if (sockFd < 0)
-		kdDebug("Negative server socket?");
+		kdError() << "Got negative socket (error)" << endl;
+
+	if (socket) {
+		kdWarning() << "refuse 2nd connection" << endl;
+		delete s;
+		return;
+	}
 
 	int one = 1;
 	setsockopt(sockFd, IPPROTO_TCP, TCP_NODELAY, 
 		   (char *)&one, sizeof(one));
 	fcntl(sockFd, F_SETFL, O_NONBLOCK);
-	s = new KSocket(sockFd);
+	socket = s;
 
 	// TODO: ASK USER FOR PERMISSION HERE BEFORE GOING ON
+	// TODO: also handle case if remote closes while dialog is shown
 
-	delete serversocket;
-	serversocket = 0;
-
-	socket = s;
-	connect(s, SIGNAL(readEvent(KSocket*)), SLOT(sockedReadable()));
-	connect(s, SIGNAL(writeEvent(KSocket*)), SLOT(sockedWritable()));
-	connect(s, SIGNAL(closeEvent(KSocket*)), SLOT(sockedClosed()));
+	connect(s, SIGNAL(readEvent(KSocket*)), SLOT(socketReadable()));
+	connect(s, SIGNAL(writeEvent(KSocket*)), SLOT(socketWritable()));
+	connect(s, SIGNAL(closeEvent(KSocket*)), SLOT(closeSession()));
 	s->enableRead(true);
+	s->enableWrite(true);
 	connection = new RFBConnection(qt_xdisplay(), sockFd, 
-				       configuration->password());
-	checkWritable();
+				       configuration->password(),
+				       configuration->allowDesktopControl());
+
 	emit sessionEstablished();
 }
 
-void RFBController::checkWritable() {
+void RFBController::checkWriteBuffer() {
 	BufferedConnection *bc = connection->bufferedConnection;	
 	socket->enableWrite((bc->senderBuffer.end - bc->senderBuffer.pos) > 0);
 }
 
+void RFBController::idleSlot() {
+kdDebug() << "Idle 1" << endl;
+	idleUpdateScheduled = false;
+	if (connection) {
+kdDebug() << "Idle 2" << endl;
+                connection->scanUpdates();
+		connection->sendIncrementalFramebufferUpdate();
+		checkWriteBuffer();
+	}
+}
+
 void RFBController::prepareIdleUpdate() {
-	if (!idleUpdateScheduled)
+	kdDebug() << "test schedule, isScheduled? " << idleUpdateScheduled<< endl;
+	BufferedConnection *bc = connection->bufferedConnection;	
+	if (((bc->senderBuffer.end - bc->senderBuffer.pos) == 0) && 
+	    !idleUpdateScheduled) {
 		QTimer::singleShot(0, this, SLOT(idleSlot()));
-	idleUpdateScheduled = true;
+		idleUpdateScheduled = true;
+kdDebug() << "Scheduled!" << endl;
+	}
 }
 
 void RFBController::socketReadable() {
 	ASSERT(socket);
 	int fd = socket->socket();
 	BufferedConnection *bc = connection->bufferedConnection;
-	prepareIdleUpdate();
 	int count = read(fd,
 			 bc->receiverBuffer.data,
                          bc->receiverBuffer.size);
@@ -121,7 +136,7 @@ void RFBController::socketReadable() {
 	}
 	while (connection->currentState && bc->hasReceiverBufferData()) {
 		connection->update();
-		checkWritable();
+		checkWriteBuffer();
 	}
 	bc->receiverBuffer.pos = 0;
 	bc->receiverBuffer.end = 0;
@@ -132,31 +147,34 @@ void RFBController::socketReadable() {
 
 void RFBController::socketWritable() {
 	ASSERT(socket);
+kdDebug() << "write slot" << endl;
 	int fd = socket->socket();
 	BufferedConnection *bc = connection->bufferedConnection;
 	ASSERT((bc->senderBuffer.end - bc->senderBuffer.pos) > 0);
 	// TODO: what to do if fd < 0?
-	prepareIdleUpdate();
 	int count = write(fd,
 			  bc->senderBuffer.data + bc->senderBuffer.pos,
 			  bc->senderBuffer.end - bc->senderBuffer.pos);
-	if (count >= 0)
+	if (count >= 0) {
 		bc->senderBuffer.pos += count;
-	else {
+	} else {
 		// TODO: what to do if write failed
 	}
-	checkWritable();
+kdDebug() << "written " << count << " left " << (bc->senderBuffer.end - bc->senderBuffer.pos) << endl;
+	prepareIdleUpdate();
+	checkWriteBuffer();
 }
 
 void RFBController::closeSession() {
-	if (!connection)
+	if (!socket)
 		return;
-	delete connection;
+	if (connection) {
+		delete connection;
+		connection = 0;
+		emit sessionFinished();
+	}
 	delete socket;
-	connection = 0;
 	socket = 0;
-	emit sessionFinished();
-	start();
 }
 
 #include "rfbcontroller.moc"
