@@ -377,7 +377,7 @@ typedef struct _rfbClientRec {
     char *host;
 
 #ifdef HAVE_PTHREADS
-    pthread_t *client_thread;
+    pthread_t client_thread;
 #endif
                                 /* Possible client states: */
     enum {
@@ -778,10 +778,6 @@ Bool rfbCheckPasswordByList(rfbClientPtr cl,char* response,int len);
 extern rfbScreenInfoPtr rfbGetScreen(int* argc,char** argv,
  int width,int height,int bitsPerSample,int samplesPerPixel,
  int bytesPerPixel);
-extern rfbScreenInfoPtr rfbGetScreen2(int* argc,char** argv,
- int width,int height,int bytesPerPixel,
- int redMax, int greenMax, int blueMax,
- int redShift, int greenShift, int blueShift);
 extern void rfbInitServer(rfbScreenInfoPtr rfbScreen);
 extern void rfbScreenCleanup(rfbScreenInfoPtr screenInfo);
 

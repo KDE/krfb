@@ -25,30 +25,33 @@
 #include <kpopupmenu.h>
 
 TrayIcon::TrayIcon(KDialog *d, Configuration *c) : 
-	KSystemTray(),
-	aboutDialog(d)
+	KSystemTray(0, "krfb trayicon"),
+	aboutDialog(d),
+	actionCollection(this)
 {
 	KIconLoader *loader = KGlobal::iconLoader();
 	trayIconOpen = loader->loadIcon("eyes-open24", KIcon::User);
 	trayIconClosed = loader->loadIcon("eyes-closed24", KIcon::User);
 	setPixmap(trayIconClosed);
 
-	configureAction = KStdAction::preferences();
+	configureAction = KStdAction::preferences(0, 0, &actionCollection);
 	if (!c->preconfigured()) 
 		configureAction->plug(contextMenu());
 
 	closeConnectionAction = new KAction(i18n("Close connection"));
 	closeConnectionAction->plug(contextMenu());
 	closeConnectionAction->setEnabled(false);
+	actionCollection.insert(closeConnectionAction);
 
 	contextMenu()->insertSeparator();
-	aboutAction = KStdAction::aboutApp();
+	aboutAction = KStdAction::aboutApp(0, 0, &actionCollection);
 	aboutAction->plug(contextMenu());
 
 	connect(configureAction, SIGNAL(activated()), SIGNAL(showConfigure()));
 	connect(aboutAction, SIGNAL(activated()), SLOT(showAbout()));
 	connect(closeConnectionAction, SIGNAL(activated()), 
 		SIGNAL(connectionClosed()));
+	actionCollection.insert(closeConnectionAction);
 	show();
 }
 

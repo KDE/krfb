@@ -82,6 +82,8 @@ public:
 	enum rfbNewClientAction handleNewClient(rfbClientPtr cl);
 	void handleClientGone();
 
+	static bool checkX11Capabilities();
+
 public slots:	
 	void rebind();
 	void closeConnection();

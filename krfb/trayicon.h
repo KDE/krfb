@@ -49,6 +49,7 @@ private:
   	KPixmap trayIconOpen;
   	KPixmap trayIconClosed;
 	KDialog* aboutDialog;
+	KActionCollection actionCollection;
   	KAction* closeConnectionAction;
   	KAction* configureAction;
   	KAction* aboutAction;

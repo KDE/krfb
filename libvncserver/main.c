@@ -296,7 +296,6 @@ listenerRun(void *data)
     rfbScreenInfoPtr rfbScreen=(rfbScreenInfoPtr)data;
     int client_fd;
     struct sockaddr_in peer;
-    pthread_t client_thread;
     rfbClientPtr cl;
     int len;
 
@@ -305,7 +304,6 @@ listenerRun(void *data)
                                (struct sockaddr*)&peer, &len)) >= 0) {
         cl = rfbNewClient(rfbScreen,client_fd);
         len = sizeof(peer);
-	cl->client_thread = &client_thread;
 
 	if (cl && !cl->onHold )
 		rfbStartOnHoldClient(cl);
@@ -318,7 +316,7 @@ listenerRun(void *data)
 void 
 rfbStartOnHoldClient(rfbClientPtr cl)
 {
-    pthread_create(cl->client_thread, NULL, clientInput, (void *)cl);
+    pthread_create(&cl->client_thread, NULL, clientInput, (void *)cl);
 }
 
 #else
@@ -456,30 +454,6 @@ rfbScreenInfoPtr rfbGetScreen(int* argc,char** argv,
  int width,int height,int bitsPerSample,int samplesPerPixel,
  int bytesPerPixel)
 {
-   if(bytesPerPixel == 1) {
-     return rfbGetScreen2(argc, argv, width, height, bytesPerPixel, 
-			  7, 7, 3, 0, 3, 6);
-   } else {
-     int redMax = (1 << bitsPerSample) - 1;
-     int greenMax = (1 << bitsPerSample) - 1;
-     int blueMax = (1 << bitsPerSample) - 1;
-     if(rfbEndianTest) {
-       return rfbGetScreen2(argc, argv, width, height, bytesPerPixel, 
-			    redMax, greenMax, blueMax,
-			    0, bitsPerSample, bitsPerSample * 2);
-     } else {
-       return rfbGetScreen2(argc, argv, width, height, bytesPerPixel, 
-			    redMax, greenMax, blueMax,
-			    bitsPerSample*3, bitsPerSample*2, bitsPerSample);
-     }
-   }
-}
-
-rfbScreenInfoPtr rfbGetScreen2(int* argc,char** argv,
- int width,int height,int bytesPerPixel,
- int redMax, int greenMax, int blueMax,
- int redShift, int greenShift, int blueShift)
-{
    rfbScreenInfoPtr rfbScreen=malloc(sizeof(rfbScreenInfo));
    rfbPixelFormat* format=&rfbScreen->rfbServerFormat;
 
@@ -545,12 +519,27 @@ rfbScreenInfoPtr rfbGetScreen2(int* argc,char** argv,
    rfbScreen->colourMap.is16 = 0;
    rfbScreen->colourMap.data.bytes = NULL;
 
-   format->redMax = redMax;
-   format->greenMax = greenMax;
-   format->blueMax = blueMax;
-   format->redShift = redShift;
-   format->greenShift = greenShift;
-   format->blueShift = blueShift;
+   if(bytesPerPixel == 1) {
+     format->redMax = 7;
+     format->greenMax = 7;
+     format->blueMax = 3;
+     format->redShift = 0;
+     format->greenShift = 3;
+     format->blueShift = 6;
+   } else {
+     format->redMax = (1 << bitsPerSample) - 1;
+     format->greenMax = (1 << bitsPerSample) - 1;
+     format->blueMax = (1 << bitsPerSample) - 1;
+     if(rfbEndianTest) {
+       format->redShift = 0;
+       format->greenShift = bitsPerSample;
+       format->blueShift = bitsPerSample * 2;
+     } else {
+       format->redShift = bitsPerSample*3;
+       format->greenShift = bitsPerSample*2;
+       format->blueShift = bitsPerSample;
+     }
+   }
 
    /* cursor */
 

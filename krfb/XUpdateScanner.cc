@@ -53,17 +53,17 @@ XUpdateScanner::XUpdateScanner(Display *_dpy,
 			       int _bytesPerLine,
 			       unsigned int _tileWidth,
 			       unsigned int _tileHeight) : 
-	dpy(_dpy), 
+	dpy(_dpy),
 	window(_window),
-	fb(_fb), 
+	fb(_fb),
 	width(_width),
 	height(_height),
 	bitsPerPixel(_bitsPerPixel),
 	bytesPerLine(_bytesPerLine),
-	tileWidth(_tileWidth), 
-	tileHeight(_tileHeight), 
-	count (0), 
-	scanline(NULL), 
+	tileWidth(_tileWidth),
+	tileHeight(_tileHeight),
+	count (0),
+	scanline(NULL),
 	tile(NULL)
 {
 	tile = XShmCreateImage(dpy,
@@ -74,20 +74,20 @@ XUpdateScanner::XUpdateScanner(Display *_dpy,
 			       &shminfo_tile,
 			       tileWidth,
 			       tileHeight);
-                                  
+
 	shminfo_tile.shmid = shmget(IPC_PRIVATE,
 				    tile->bytes_per_line * tile->height,
 				    IPC_CREAT | 0777);
 	shminfo_tile.shmaddr = tile->data = (char *) 
 		shmat(shminfo_tile.shmid, 0, 0);
 	shminfo_tile.readOnly = False;
-  
+
 	XShmAttach(dpy, &shminfo_tile);
 
 	tilesX = (width + tileWidth - 1) / tileWidth;
 	tilesY = (height + tileHeight - 1) / tileHeight;
 	tileMap = new bool[tilesX * tilesY];
-	
+
 	unsigned int i;
 	for (i = 0; i < tilesX * tilesY; i++) 
 		tileMap[i] = false;
@@ -100,14 +100,14 @@ XUpdateScanner::XUpdateScanner(Display *_dpy,
 				   &shminfo_scanline,
 				   width,
 				   1);
-                                  
+
 	shminfo_scanline.shmid = shmget(IPC_PRIVATE,
 					scanline->bytes_per_line,
 					IPC_CREAT | 0777);
 	shminfo_scanline.shmaddr = scanline->data = (char *) 
 		shmat( shminfo_scanline.shmid, 0, 0 );
 	shminfo_scanline.readOnly = False;
-  
+
 	XShmAttach(dpy, &shminfo_scanline);
 };
 

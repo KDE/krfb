@@ -34,8 +34,6 @@
 
 #include <signal.h>
 
-#include <X11/extensions/XTest.h>
-
 #define VERSION "0.6"
 
 static const char *description = I18N_NOOP("VNC-compatible server to share "
@@ -61,26 +59,6 @@ static KCmdLineOptions options[] =
 	{ 0, 0, 0 }
 };
 
-static int checkX11Capabilities() {
-	int bp1, bp2, majorv, minorv;
-	Bool r = XTestQueryExtension(qt_xdisplay(), &bp1, &bp2, 
-				     &majorv, &minorv);
-	if ((!r) || (((majorv*1000)+minorv) < 2002)) {
-		KMessageBox::error(0, 
-		   i18n("Your X11 Server does not support the required XTest extension version 2.2. Sharing your desktop is not possible."),
-				   i18n("Desktop Sharing Error"));
-		return 1;
-	}
-
-	r = XShmQueryExtension(qt_xdisplay());
-	if (!r) {
-		KMessageBox::error(0, 
-		   i18n("Your X11 Server does not support the required XShm extension. You can only share a local desktop."),
-				   i18n("Desktop Sharing Error"));
-		return 1;
-	}
-	return 0;
-}
 
 int main(int argc, char *argv[])
 {
@@ -114,8 +92,8 @@ int main(int argc, char *argv[])
 	KCmdLineArgs::addCmdLineOptions(options);
 
  	KApplication app;
-	if ((r = checkX11Capabilities()) != 0)
-		return r;
+	if (!RFBController::checkX11Capabilities())
+		return 1;
 
 	Configuration *config;
 	KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
@@ -137,7 +115,8 @@ int main(int argc, char *argv[])
 		config = new Configuration();
 	args->clear();
 
- 	TrayIcon trayicon(new KAboutApplication(&aboutData), config);
+ 	TrayIcon trayicon(new KAboutApplication(&aboutData), 
+			  config);
 	RFBController controller(config);
 
 	QObject::connect(&app, SIGNAL(lastWindowClosed()),

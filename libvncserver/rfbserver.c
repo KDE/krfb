@@ -282,11 +282,11 @@ rfbNewTCPOrUDPClient(rfbScreen,sock,isUDP)
     cl->clientData = NULL;
     cl->clientGoneHook = doNothingWithClient;
     switch (cl->screen->newClientHook(cl)) {
-    case RFB_CLIENT_ACCEPT:
-	    cl->onHold = FALSE;
-	    break;
     case RFB_CLIENT_ON_HOLD:
 	    cl->onHold = TRUE;
+	    break;
+    case RFB_CLIENT_ACCEPT:
+	    cl->onHold = FALSE;
 	    break;
     case RFB_CLIENT_REFUSE:
 	    rfbCloseClient(cl);

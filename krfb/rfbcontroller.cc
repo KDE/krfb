@@ -33,6 +33,7 @@
 #include <qpushbutton.h>
 #include <qglobal.h>
 #include <qlabel.h>
+#include <qmutex.h>
 
 #include <X11/Xutil.h>
 #include <X11/extensions/XTest.h>
@@ -60,21 +61,8 @@ public:
 	}
 };
 
-static void keyboardHook(Bool down, KeySym keySym, rfbClientPtr)
-{
-	AppLocker a;
-	self->handleKeyEvent(down?true:false, keySym);
-}
-
-static void pointerHook(int bm, int x, int y, rfbClientPtr)
-{
-	AppLocker a;
-	self->handlePointerEvent(bm, x, y);
-}
-
 static enum rfbNewClientAction newClientHook(struct _rfbClientRec *cl) 
 {
-	AppLocker a;
 	return self->handleNewClient(cl);
 }
 
@@ -86,8 +74,23 @@ static Bool passwordCheck(rfbClientPtr cl,
 	self->handleCheckPassword(encryptedPassword, len);
 }
 
+static void keyboardHook(Bool down, KeySym keySym, rfbClientPtr)
+{
+	// todo!
+	AppLocker a;
+	self->handleKeyEvent(down?true:false, keySym);
+}
+
+static void pointerHook(int bm, int x, int y, rfbClientPtr)
+{
+	// todo!
+	AppLocker a;
+	self->handlePointerEvent(bm, x, y);
+}
+
 static void clientGoneHook(rfbClientPtr cl) 
 {
+	// todo!
 	AppLocker a;
 	self->handleClientGone();
 }
@@ -136,40 +139,45 @@ void RFBController::startServer(bool xtestGrab)
 
 	int w = framebufferImage->width;
 	int h = framebufferImage->height;
-	int bpp = framebufferImage->depth;
 	char *fb = framebufferImage->data;
-	
-	int red_max, green_max, blue_max;
-	int red_shift, green_shift, blue_shift;
 
-	if (bpp == 8) {
-		red_max   = 3;
-		green_max = 7;
-		blue_max  = 3;
-		red_shift = 0;
-		green_shift = 2;
-		blue_shift = 5;
+	server = rfbGetScreen(0, 0, w, h,
+			      framebufferImage->bits_per_pixel,
+			      8,
+			      framebufferImage->bits_per_pixel/8);
+   
+	server->paddedWidthInBytes = framebufferImage->bytes_per_line;
+	
+	server->rfbServerFormat.bitsPerPixel = framebufferImage->bits_per_pixel;
+	server->rfbServerFormat.depth = framebufferImage->depth;
+	//rfbEndianTest = framebufferImage->bitmap_bit_order != MSBFirst;
+	server->rfbServerFormat.trueColour = TRUE;
+	
+	if ( server->rfbServerFormat.bitsPerPixel == 8 ) {
+		server->rfbServerFormat.redShift = 0;
+		server->rfbServerFormat.greenShift = 2;
+		server->rfbServerFormat.blueShift = 5;
+		server->rfbServerFormat.redMax   = 3;
+		server->rfbServerFormat.greenMax = 7;
+		server->rfbServerFormat.blueMax  = 3;
 	} else {
-		red_shift = 0;
+		server->rfbServerFormat.redShift = 0;
 		if ( framebufferImage->red_mask )
-			while (!(framebufferImage->red_mask & (1 << red_shift)))
-				red_shift++;
-		green_shift = 0;
-		if (framebufferImage->green_mask)
-			while (!(framebufferImage->green_mask & (1 << green_shift)))
-				green_shift++;
-		blue_shift = 0;
-		if (framebufferImage->blue_mask)
-			while (!(framebufferImage->blue_mask & (1 << blue_shift)))
-				blue_shift++;
-		red_max = framebufferImage->red_mask   >> red_shift;
-		green_max = framebufferImage->green_mask >> green_shift;
-		blue_max = framebufferImage->blue_mask  >> blue_shift;
+			while ( ! ( framebufferImage->red_mask & (1 << server->rfbServerFormat.redShift) ) )
+				server->rfbServerFormat.redShift++;
+		server->rfbServerFormat.greenShift = 0;
+		if ( framebufferImage->green_mask )
+			while ( ! ( framebufferImage->green_mask & (1 << server->rfbServerFormat.greenShift) ) )
+				server->rfbServerFormat.greenShift++;
+		server->rfbServerFormat.blueShift = 0;
+		if ( framebufferImage->blue_mask )
+			while ( ! ( framebufferImage->blue_mask & (1 << server->rfbServerFormat.blueShift) ) )
+				server->rfbServerFormat.blueShift++;
+		server->rfbServerFormat.redMax   = framebufferImage->red_mask   >> server->rfbServerFormat.redShift;
+		server->rfbServerFormat.greenMax = framebufferImage->green_mask >> server->rfbServerFormat.greenShift;
+		server->rfbServerFormat.blueMax  = framebufferImage->blue_mask  >> server->rfbServerFormat.blueShift;
 	}
 
-	server = rfbGetScreen2(0, 0, w, h, bpp/8,
-			       red_max, green_max, blue_max,
-			       red_shift, green_shift, blue_shift);
 	server->frameBuffer = fb;
 	server->rfbPort = configuration->port();
 	//server->udpPort = configuration->port();
@@ -181,8 +189,9 @@ void RFBController::startServer(bool xtestGrab)
 
 	scanner = new XUpdateScanner(qt_xdisplay(), 
 				     QApplication::desktop()->winId(), 
-				     (unsigned char*)fb, 
-				     w, h, bpp, (bpp/8)*w);
+				     (unsigned char*)fb, w, h, 
+				     server->rfbServerFormat.bitsPerPixel,
+				     server->paddedWidthInBytes);
 
 	rfbInitServer(server);
 	state = RFB_WAITING;
@@ -267,6 +276,9 @@ void RFBController::closeConnection()
 
 void RFBController::idleSlot() 
 {
+	if (state != RFB_CONNECTED)
+		return;
+
 	rfbUndrawCursor(server);
 
 	QList<Hint> v;
@@ -313,7 +325,6 @@ enum rfbNewClientAction RFBController::handleNewClient(rfbClientPtr cl)
 		return RFB_CLIENT_REFUSE;
 
 	client = cl;
-
 	state = RFB_CONNECTING;
 
 	if (!configuration->askOnConnect()) {
@@ -321,11 +332,13 @@ enum rfbNewClientAction RFBController::handleNewClient(rfbClientPtr cl)
 		return RFB_CLIENT_ACCEPT;
 	}
 
+	QString host, port;
+	KExtendedSocket::resolve(KExtendedSocket::peerAddress(socket),
+				 host, port);
+	dialog.ipLabel->setText(host);
 	dialog.allowRemoteControlCB->setChecked(configuration->allowDesktopControl());
-	// TODO: get & set client host name
-
+	dialog.setFixedSize(dialog.sizeHint());
 	dialog.show();
-
 	return RFB_CLIENT_ON_HOLD;
 }
 
@@ -446,6 +459,27 @@ void RFBController::handlePointerEvent(int button_mask, int x, int y) {
 					     CurrentTime);
 
 	buttonMask = button_mask;
+}
+
+bool RFBController::checkX11Capabilities() {
+	int bp1, bp2, majorv, minorv;
+	Bool r = XTestQueryExtension(qt_xdisplay(), &bp1, &bp2, 
+				     &majorv, &minorv);
+	if ((!r) || (((majorv*1000)+minorv) < 2002)) {
+		KMessageBox::error(0, 
+		   i18n("Your X11 Server does not support the required XTest extension version 2.2. Sharing your desktop is not possible."),
+				   i18n("Desktop Sharing Error"));
+		return false;
+	}
+
+	r = XShmQueryExtension(qt_xdisplay());
+	if (!r) {
+		KMessageBox::error(0, 
+		   i18n("Your X11 Server does not support the required XShm extension. You can only share a local desktop."),
+				   i18n("Desktop Sharing Error"));
+		return false;
+	}
+	return true;
 }
 
 

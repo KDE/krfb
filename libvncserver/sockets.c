@@ -365,7 +365,7 @@ ReadExact(cl, buf, len)
             FD_SET(sock, &fds);
             tv.tv_sec = rfbMaxClientWait / 1000;
             tv.tv_usec = (rfbMaxClientWait % 1000) * 1000;
-            n = select(sock+1, &fds, NULL, NULL, &tv);
+            n = select(sock+1, &fds, NULL, &fds, &tv);
             if (n < 0) {
                 rfbLogPerror("ReadExact: select");
                 return n;
