@@ -136,15 +136,13 @@ const struct in_addr *KInetAddress::addressV4() const {
 	return &d->in;
 }
 
-const struct in6_addr *KInetAddress::addressV6() const {
 #ifdef AF_INET6
+const struct in6_addr *KInetAddress::addressV6() const {
 	if (d->sockfamily != AF_INET6)
 		return 0;
 	return &d->in6;
-#else
-	return 0;
-#endif
 }
+#endif
 
 QString KInetAddress::nodeName() const
 {
