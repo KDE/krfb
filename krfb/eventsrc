@@ -2,6 +2,7 @@
 IconName=krfb
 Comment=Desktop Sharing
 Comment[af]=Werkskerm Deeling
+Comment[ar]=مشاركة سطح المكتب
 Comment[bg]=Споделяне на Работно място
 Comment[bs]=Dijeljenje desktopa
 Comment[ca]=Compartició de l'escriptori
@@ -43,6 +44,7 @@ Comment[zu]=Ukuhlukaniselana kwe-Desktop
 
 [UserAcceptsConnection]
 Name=UserAcceptsConnection
+Name[ar]=المستخدم قبل الاتصال
 Name[bg]=Потребител Приема Връзка
 Name[ca]=L'usuari accepta la connexió
 Name[cs]=Uživatel přijímá spojení
@@ -79,6 +81,7 @@ Name[zh_TW]=使用者接受連線
 Name[zu]=UmsebenziUvumelaUkuxhumana
 Comment=User accepts connection
 Comment[af]=Gebruiker aanvaar verbinding
+Comment[ar]=المستخدم قبل الإتصال
 Comment[bg]=Потребител приема връзка
 Comment[bs]=Korisnik prihvata konekciju
 Comment[ca]=L'usuari accepta la connexió
@@ -121,6 +124,7 @@ default_presentation=4
 
 [UserRefusesConnection]
 Name=UserRefusesConnection
+Name[ar]=المستخدم رفض الاتصال
 Name[bg]=Потребител Отказва Връзка
 Name[ca]=L'usuari refusa la connexió
 Name[cs]=Uživatel odmítá spojení
@@ -157,6 +161,7 @@ Name[zh_TW]=使用者拒絕連線
 Name[zu]=UmsebenzisiWalaUxhumaniso
 Comment=User refuses connection
 Comment[af]=Gebruiker weier verbinding
+Comment[ar]=المستخدم رفض الاتصال
 Comment[bg]=Потребител отказва връзка
 Comment[bs]=Korisnik odbija konekciju
 Comment[ca]=L'usuari refusa la connexió
@@ -199,6 +204,7 @@ default_presentation=4
 
 [ConnectionClosed]
 Name=ConnectionClosed
+Name[ar]=اتصال مغلق
 Name[bg]=Връзката е Затворена
 Name[ca]=Connexió tancada
 Name[cs]=Spojení ukončeno
@@ -236,6 +242,7 @@ Name[zh_TW]=連線已關閉
 Name[zu]=UkuxhumanisaKuvaliwe
 Comment=Connection closed
 Comment[af]=Verbinding gesluit
+Comment[ar]=الاتصال قُطع
 Comment[bg]=Връзката е затворена
 Comment[bs]=Konekcija prekinuta
 Comment[ca]=Connexió tancada
@@ -278,6 +285,7 @@ default_presentation=4
 
 [InvalidPassword]
 Name=InvalidPassword
+Name[ar]=كلمة مرور غير صالحة
 Name[be]=Некарэктны пароль
 Name[bg]=Грешна Парола
 Name[ca]=Contrasenya no vàlida
@@ -316,6 +324,7 @@ Name[zh_TW]=無效的密碼
 Name[zu]=IgamaEliyimfihloLokudlulaOkungasiyilona
 Comment=Invalid password
 Comment[af]=Ongeldige wagwoord
+Comment[ar]=كلمة مرور غير صالحة
 Comment[be]=Некарэктны пароль
 Comment[bg]=Грешна парола
 Comment[bs]=Neispravna šifra
@@ -359,6 +368,7 @@ default_presentation=4
 
 [InvalidPasswordInvitations]
 Name=InvalidPasswordInvitations
+Name[ar]=دعوات كلمات مرور غير صالحة
 Name[bg]=Грешна Парола за Покана
 Name[ca]=Contrasenya convidats no vàlides
 Name[cs]=Neplatné hesla výzev
@@ -393,6 +403,7 @@ Name[zh_TW]=無效的密碼邀請函
 Name[zu]=IsimemoSegamaEliyimfihloLokudlulaOkungasiyilona
 Comment=The invited party sent an invalid password. Connection refused.
 Comment[af]=Die uitgenooi party gestuur 'n ongeldige wagwoord. Verbinding geweier.
+Comment[ar]=الجهة المدعوة أرسلت كلمة مرور غير صالحة. الاتصال رُفض
 Comment[bs]=Pozvana strana je poslala neispravnu šifru. Konekcija je odbijena.
 Comment[ca]=La part invitada ha enviat una contrasenya no vàlida. Connexió refusada.
 Comment[cs]=Pozvaná strana poslala neplatné heslo. Spojení odmítnuto.
@@ -432,6 +443,7 @@ default_presentation=2
 
 [NewConnectionOnHold]
 Name=NewConnectionOnHold
+Name[ar]=اتصال جديد على الانتظار
 Name[bg]=Поддържа Нова Връзка
 Name[ca]=Nova connexió en espera
 Name[cs]=Nové spojení pozdrženo
@@ -468,6 +480,7 @@ Name[zh_TW]=保持的新連線
 Name[zu]=UkuxhumanisaOkushaKubanjiwe
 Comment=Connection requested, user must accept
 Comment[af]=Verbinding versoekte, gebruiker moet aanvaar
+Comment[ar]=طلب اتصال, يجب أن يقبل المستخدم
 Comment[bg]=Заявка за връзка, потребителя трябва да приеме
 Comment[bs]=Zatražena konekcija, korisnik mora prihvatiti
 Comment[ca]=Connexió solicitada, l'usuari ha d'acceptar-la
@@ -509,6 +522,7 @@ default_presentation=4
 
 [NewConnectionAutoAccepted]
 Name=NewConnectionAutoAccepted
+Name[ar]=اتصال جديد مقبول تلقائياً
 Name[bg]=Автоматично Приема Нова Връзка
 Name[ca]=Nova connexió auto-acceptada
 Name[cs]=Nové spojení automaticky přijato
@@ -545,6 +559,7 @@ Name[zh_TW]=自動接受的新連線
 Name[zu]=UkuxhumanisaOkushaKokuzenzakalelaKuvunyelwe
 Comment=New connection automatically established
 Comment[af]=Nuwe verbinding automaties vasgestel
+Comment[ar]=اتصالات جديدة أُنشئت تلقائياً
 Comment[bg]=Автоматично установяване на нова връзка
 Comment[bs]=Automatski uspostavljena nova konekcija
 Comment[ca]=Nova connexió establerta automàticament
@@ -586,6 +601,7 @@ default_presentation=4
 
 [TooManyConnections]
 Name=TooManyConnections
+Name[ar]=اتصالات عديدة جداً
 Name[bg]=Твърде Много Връзки
 Name[ca]=Masses connexions
 Name[cs]=Příliš mnoho spojení
@@ -623,6 +639,7 @@ Name[zh_TW]=太多連線
 Name[zu]=UkuxhumanaOkuningi
 Comment=Busy, connection refused
 Comment[af]=Besig, verbinding geweier
+Comment[ar]=مشغول , الاتصال رُفض
 Comment[bg]=Заето, връзката е отказана
 Comment[bs]=Zauzet, konekcija odbijena
 Comment[ca]=Ocupat, connexió refusada
@@ -665,6 +682,7 @@ default_logfile=
 
 [UnexpectedConnection]
 Name=UnexpectedConnection
+Name[ar]=اتصال غير متوقع
 Name[bg]=Неочаквана Връзка
 Name[ca]=Connexió inesperada
 Name[cs]=Neočekávané spojení
@@ -702,6 +720,7 @@ Name[zh_TW]=非預期的連線
 Name[zu]=UkuxhumanaOkungalindelwe
 Comment=Received unexpected connection, abort
 Comment[af]=Ontvang onverwagte verbinding, staak
+Comment[ar]=تم استلام اتصال غير متوقع , اقطع
 Comment[bg]=Получи се неочаквана връзка, прекъсва
 Comment[bs]=Primio neočekivanu konekciju, prekidam
 Comment[ca]=Rebuda una connexió inesperada, abortant

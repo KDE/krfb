@@ -5,6 +5,7 @@ Comment[sv]=Kinetd
 
 [IncomingConnection]
 Name=IncomingConnection
+Name[ar]=اتصال وارد
 Name[ca]=Connexió entrant
 Name[cs]=Příchozí spojení
 Name[da]=IndkommendeForbindelse
@@ -42,6 +43,7 @@ Name[zh_TW]=進來的連接
 Name[zu]=UkuxhumanaOkuzayo
 Comment=Received incoming connection
 Comment[af]=Ontvang inkomende verbinding
+Comment[ar]=تم استلام اتصال وارد
 Comment[bg]=Получена Входяща Връзка
 Comment[bs]=Primio dolaznu konekciju
 Comment[ca]=Rebuda connexió entrant
@@ -84,6 +86,7 @@ default_presentation=4
 
 [ProcessFailed]
 Name=ProcessFailed
+Name[ar]=فشلت العملية
 Name[bg]=Пропаднал Процес
 Name[ca]=Procés fallit
 Name[cs]=Proces selhal
@@ -121,6 +124,7 @@ Name[zh_TW]=程序失敗
 Name[zu]=UkwenzekaKuhlulekile
 Comment=Could not call process to handle connection
 Comment[af]=Kon nie roep proses na handvatsel verbinding
+Comment[ar]=لم أستطع استحضار العملية لحمل المكالمة
 Comment[bg]=Не мога да извикам процес за подръжка на страницата
 Comment[bs]=Ne mogu pokrenuti proces koji upravlja konekcijom
 Comment[ca]=No es pot cridar al procés per a manejar la connexió
