@@ -68,3 +68,4 @@ void TrayIcon::closeConnection(){
 void TrayIcon::showAbout() {
 	aboutDialog->show();
 }
+#include "trayicon.moc"

@@ -78,3 +78,4 @@ void KRfbIfaceImpl::setPort(int p)
 }
 
 
+#include "krfbifaceimpl.moc"
