@@ -2,7 +2,7 @@
                               configuration.cpp
                              -------------------
     begin                : Tue Dec 11 2001
-    copyright            : (C) 2001-2002 by Tim Jansen
+    copyright            : (C) 2001-2003 by Tim Jansen
     email                : tim@tjansen.de
  ***************************************************************************/
 
@@ -158,6 +158,7 @@ void Configuration::loadFromKConfig() {
 	allowDesktopControlFlag = c.readBoolEntry("allowDesktopControl", false);
 	preferredPortNum = c.readNumEntry("preferredPort", -1);
 	disableBackgroundFlag = c.readBoolEntry("disableBackground", false);
+	disableXShmFlag = c.readBoolEntry("disableXShm", false);
 	if (c.hasKey("uninvitedPasswordCrypted"))
 		passwordString = cryptStr(c.readEntry("uninvitedPasswordCrypted", ""));
 	else
@@ -185,6 +186,7 @@ void Configuration::saveToKConfig() {
 	c.writeEntry("enableSLP", enableSLPFlag);
 	c.writeEntry("preferredPort", preferredPortNum);
 	c.writeEntry("disableBackground", disableBackgroundFlag);
+	c.writeEntry("disableXShm", disableXShmFlag);
 	c.writeEntry("uninvitedPasswordCrypted", cryptStr(passwordString));
 	c.deleteEntry("uninvitedPassword");
 
@@ -294,6 +296,10 @@ bool Configuration::disableBackground() const {
 	return disableBackgroundFlag;
 }
 
+bool Configuration::disableXShm() const {
+	return disableXShmFlag;
+}
+
 void Configuration::setAllowUninvited(bool allowUninvited) {
 	allowUninvitedFlag = allowUninvited;
 }
@@ -338,6 +344,10 @@ int Configuration::preferredPort() const
 
 void Configuration::setDisableBackground(bool disable) {
 	disableBackgroundFlag = disable;
+}
+
+void Configuration::setDisableXShm(bool disable) {
+	disableXShmFlag = disable;
 }
 
 ////////////// invitation manage dialog //////////////////////////

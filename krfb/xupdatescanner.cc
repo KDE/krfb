@@ -25,7 +25,7 @@
  * January 21st 2003: remember last modified scanlines, and scan them and
  *                    in every cycle, reduce scanlines to every 35th
  * January 21st 2003: scan lines around the cursor in every cycle
- * 
+ *
  *                   Tim Jansen <tim@tjansen.de>
  */
 
@@ -48,8 +48,8 @@
 unsigned int scanlines[SCANLINES] = {  0, 16,  8, 24,
                                 33, 4, 20, 12, 28,
 			       10, 26, 18,  34, 2,
-			       22,  6, 30, 14, 	
-			        1, 17,  32, 9, 25, 
+			       22,  6, 30, 14,
+			        1, 17,  32, 9, 25,
 			        7, 23, 15, 31,
 			       19,  3, 27, 11,
 			       29, 13,  5, 21 };
@@ -72,7 +72,8 @@ XUpdateScanner::XUpdateScanner(Display *_dpy,
 			       int _width,
 			       int _height,
 			       int _bitsPerPixel,
-			       int _bytesPerLine) : 
+			       int _bytesPerLine,
+			       bool useXShm) :
 	dpy(_dpy),
 	window(_window),
 	fb(_fb),
@@ -86,7 +87,7 @@ XUpdateScanner::XUpdateScanner(Display *_dpy,
 	scanline(NULL),
 	tile(NULL)
 {
-	useShm = XShmQueryExtension(dpy);
+	useShm = useXShm && XShmQueryExtension(dpy);
 
 	if (useShm) {
 		tile = XShmCreateImage(dpy,
@@ -97,11 +98,11 @@ XUpdateScanner::XUpdateScanner(Display *_dpy,
 				       &shminfo_tile,
 				       tileWidth,
 				       tileHeight);
-		
+
 		shminfo_tile.shmid = shmget(IPC_PRIVATE,
 					    tile->bytes_per_line * tile->height,
 					    IPC_CREAT | 0777);
-		shminfo_tile.shmaddr = tile->data = (char *) 
+		shminfo_tile.shmaddr = tile->data = (char *)
 			shmat(shminfo_tile.shmid, 0, 0);
 		shminfo_tile.readOnly = False;
 
@@ -110,7 +111,7 @@ XUpdateScanner::XUpdateScanner(Display *_dpy,
 	else {
 		int tlen = tileWidth*(bitsPerPixel/8);
 		void *data = malloc(tlen*tileHeight);
-		
+
 		tile = XCreateImage(dpy,
 				    DefaultVisual(dpy, 0),
 				    bitsPerPixel,
@@ -129,7 +130,7 @@ XUpdateScanner::XUpdateScanner(Display *_dpy,
         tileRegionMap = new struct TileChangeRegion[tilesX * tilesY];
 
 	unsigned int i;
-	for (i = 0; i < tilesX * tilesY; i++) 
+	for (i = 0; i < tilesX * tilesY; i++)
 		tileMap[i] = false;
 
 	if (useShm) {
@@ -141,11 +142,11 @@ XUpdateScanner::XUpdateScanner(Display *_dpy,
 					   &shminfo_scanline,
 					   width,
 					   1);
-		
+
 		shminfo_scanline.shmid = shmget(IPC_PRIVATE,
 						scanline->bytes_per_line,
 						IPC_CREAT | 0777);
-		shminfo_scanline.shmaddr = scanline->data = (char *) 
+		shminfo_scanline.shmaddr = scanline->data = (char *)
 			shmat( shminfo_scanline.shmid, 0, 0 );
 		shminfo_scanline.readOnly = False;
 
@@ -200,21 +201,21 @@ bool XUpdateScanner::copyTile(int x, int y, int tx, int ty)
 {
 	unsigned int maxWidth = width - x;
 	unsigned int maxHeight = height - y;
-	if (maxWidth > tileWidth) 
+	if (maxWidth > tileWidth)
 		maxWidth = tileWidth;
-	if (maxHeight > tileHeight) 
+	if (maxHeight > tileHeight)
 		maxHeight = tileHeight;
 
 	if (useShm) {
 		if ((maxWidth == tileWidth) && (maxHeight == tileHeight)) {
 			XShmGetImage(dpy, window, tile, x, y, AllPlanes);
 		} else {
-			XGetSubImage(dpy, window, x, y, maxWidth, maxHeight, 
+			XGetSubImage(dpy, window, x, y, maxWidth, maxHeight,
 				     AllPlanes, ZPixmap, tile, 0, 0);
 		}
 	}
 	else
-		XGetSubImage(dpy, window, x, y, maxWidth, maxHeight, 
+		XGetSubImage(dpy, window, x, y, maxWidth, maxHeight,
 			     AllPlanes, ZPixmap, tile, 0, 0);
 
 	unsigned int line;
@@ -225,7 +226,7 @@ bool XUpdateScanner::copyTile(int x, int y, int tx, int ty)
         unsigned char *ssrc = src;
         unsigned char *sdest = dest;
         int firstLine = maxHeight;
-	
+
 	for (line = 0; line < maxHeight; line++) {
 		if (memcmp(sdest, ssrc, maxWidth * pixelsize)) {
 			firstLine = line;
@@ -234,16 +235,16 @@ bool XUpdateScanner::copyTile(int x, int y, int tx, int ty)
 		ssrc += tile->bytes_per_line;
 		sdest += bytesPerLine;
         }
-	
+
         if (firstLine == maxHeight) {
 		tileMap[tx + ty * tilesX] = false;
 		return false;
         }
-	
+
         unsigned char *msrc = src + (tile->bytes_per_line * maxHeight);
         unsigned char *mdest = dest + (bytesPerLine * maxHeight);
         int lastLine = firstLine;
-	
+
         for (line = maxHeight-1; line > firstLine; line--) {
 		msrc -= tile->bytes_per_line;
 		mdest -= bytesPerLine;
@@ -262,7 +263,7 @@ bool XUpdateScanner::copyTile(int x, int y, int tx, int ty)
         struct TileChangeRegion *r = &tileRegionMap[tx + (ty * tilesX)];
         r->firstLine = firstLine;
         r->lastLine = lastLine;
-	
+
         return lastLine == (maxHeight-1);
 }
 
@@ -276,7 +277,7 @@ void XUpdateScanner::copyAllTiles()
 					tileMap[x + (y+1) * tilesX] = true;
 		}
 	}
-	
+
 }
 
 void XUpdateScanner::createHintFromTile(int x, int y, int th, Hint &hint)
@@ -285,9 +286,9 @@ void XUpdateScanner::createHintFromTile(int x, int y, int th, Hint &hint)
 	unsigned int h = height - y;
 	if (w > tileWidth)
 		w = tileWidth;
-	if (h > th) 
+	if (h > th)
 		h = th;
-	
+
 	hint.x = x;
 	hint.y = y;
 	hint.w = w;
@@ -298,9 +299,9 @@ void XUpdateScanner::addTileToHint(int x, int y, int th, Hint &hint)
 {
 	unsigned int w = width - x;
 	unsigned int h = height - y;
-	if (w > tileWidth) 
+	if (w > tileWidth)
 		w = tileWidth;
-	if (h > th) 
+	if (h > th)
 		h = th;
 
 	if (hint.x > x) {
@@ -341,7 +342,7 @@ static void printStatistics(Hint &hint) {
 	kdDebug() << "avg size: "<< avg <<"%"<<endl;
 }
 
-void XUpdateScanner::flushHint(int x, int y, int &x0, 
+void XUpdateScanner::flushHint(int x, int y, int &x0,
 			       Hint &hint, QPtrList<Hint> &hintList)
 {
 	if (x0 < 0)
@@ -370,15 +371,15 @@ void XUpdateScanner::createHints(QPtrList<Hint> &hintList)
 				int ty = tileRegionMap[idx].firstLine;
 				int th = tileRegionMap[idx].lastLine - ty +1;
 				if (x0 < 0) {
-					createHintFromTile(x * tileWidth, 
-							   (y * tileHeight) + ty, 
+					createHintFromTile(x * tileWidth,
+							   (y * tileHeight) + ty,
 							   th,
 							   hint);
 					x0 = x;
 
 				} else {
-					addTileToHint(x * tileWidth, 
-						      (y * tileHeight) + ty, 
+					addTileToHint(x * tileWidth,
+						      (y * tileHeight) + ty,
 						      th,
 						      hint);
 				}
@@ -401,19 +402,19 @@ void XUpdateScanner::testScanline(int y, bool rememberHits) {
 	if (useShm)
 		XShmGetImage(dpy, window, scanline, 0, y, AllPlanes);
 	else
-		XGetSubImage(dpy, window, 0, y, width, 1, 
+		XGetSubImage(dpy, window, 0, y, width, 1,
 			     AllPlanes, ZPixmap, scanline, 0, 0);
 
 	while (x < width) {
 		int pixelsize = bitsPerPixel >> 3;
-		unsigned char *src = (unsigned char*) scanline->data + 
+		unsigned char *src = (unsigned char*) scanline->data +
 			x * pixelsize;
-		unsigned char *dest = fb + 
+		unsigned char *dest = fb +
 			y * bytesPerLine + x * pixelsize;
 		int w = (x + 32) > width ? (width-x) : 32;
 		if (memcmp(dest, src, w * pixelsize)) {
 			hit = true;
-			tileMap[(x / tileWidth) + 
+			tileMap[(x / tileWidth) +
 				(y / tileHeight) * tilesX] = true;
 		}
 		x += 32;
@@ -441,7 +442,7 @@ void XUpdateScanner::searchUpdates(QPtrList<Hint> &hintList, int ptrY)
 
 	// test last scanlines with hits
 	for (i = 0; i < MAX_RECENT_HITS; i++)
-		testScanline(recentHitScanlines[i], true);		
+		testScanline(recentHitScanlines[i], true);
 
 	// test scanlines around the cursor
 	for (i = 0; i < CURSOR_SCANLINES; i++)

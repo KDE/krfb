@@ -469,7 +469,8 @@ void RFBController::startServer(int inetdFd, bool xtestGrab)
 				     QApplication::desktop()->winId(),
 				     (unsigned char*)fb, w, h,
 				     server->rfbServerFormat.bitsPerPixel,
-				     server->paddedWidthInBytes);
+				     server->paddedWidthInBytes,
+				     !configuration->disableXShm());
 
 	rfbInitServer(server);
 	state = RFB_WAITING;

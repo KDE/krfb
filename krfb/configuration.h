@@ -2,7 +2,7 @@
                                configuration.h
                              -------------------
     begin                : Tue Dec 11 2001
-    copyright            : (C) 2001-2002 by Tim Jansen
+    copyright            : (C) 2001-2003 by Tim Jansen
     email                : tim@tjansen.de
  ***************************************************************************/
 
@@ -60,6 +60,7 @@ public:
 	int port() const;
 	int preferredPort() const;
 	bool disableBackground() const;
+	bool disableXShm() const;
 
         void setAllowUninvited(bool allowUninvited);
 	void setEnableSLP(bool e);
@@ -67,6 +68,7 @@ public:
 	void setPassword(QString password);
 	void setPreferredPort(int p);
 	void setDisableBackground(bool disable);
+	void setDisableXShm(bool disable);
 	void save();
 	void update();
 
@@ -119,6 +121,7 @@ private:
 	QValueList<Invitation> invitationList;
 
 	bool disableBackgroundFlag;
+	bool disableXShmFlag;
 private slots:
         void refreshTimeout();
 

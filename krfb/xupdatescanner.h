@@ -30,7 +30,7 @@ class Hint {
  public:
 	int x, y, w, h;
 
-	Hint() : 
+	Hint() :
 		x(0),
 		y(0),
 		w(0),
@@ -69,24 +69,25 @@ class XUpdateScanner
 			Window _window,
 			unsigned char *_fb,
 			int _width, int _height,
-			int _bitsPerPixel, int _bytesPerLine);
-	
+			int _bitsPerPixel, int _bytesPerLine,
+			bool useXShm);
+
 	~XUpdateScanner();
 
 	// hitList: returns list of changes
 	// ptrY: ptrY: position of the cursor
 	void searchUpdates( QPtrList<Hint> &hintList, int ptrY);
-	
+
  private:
 	void testScanline(int y, bool rememberHits);
 	bool copyTile(int x, int y, int tx, int ty);
 	void copyAllTiles();
-	void flushHint(int x, int y, int &x0, Hint &hint, 
+	void flushHint(int x, int y, int &x0, Hint &hint,
 		       QPtrList<Hint> &hintList);
 	void createHints(QPtrList<Hint> &hintList);
 	void addTileToHint(int x, int y, int th, Hint &hint);
 	void createHintFromTile(int x, int y, int th, Hint &hint);
-	
+
 	Display *dpy;
 	Window window;
 	unsigned char *fb;
@@ -95,13 +96,13 @@ class XUpdateScanner
 	unsigned int tileWidth, tileHeight;
 	unsigned int count;
 	bool useShm;
-	
+
 	XImage *scanline;
 	XShmSegmentInfo shminfo_scanline;
-	
+
 	XImage *tile;
 	XShmSegmentInfo shminfo_tile;
-	
+
 	unsigned int tilesX, tilesY;
 	bool *tileMap;
 	struct TileChangeRegion *tileRegionMap;
