@@ -18,13 +18,12 @@ noinst_HEADER = configuration.h invitation.h invite.h krfbiface.h \
                 krfbifaceimpl.h rfbcontroller.h trayicon.h xupdatescanner.h
 
 
-datadir = $(kde_datadir)/krfb/pics
-data_DATA = eyes-open24.png eyes-closed24.png connection-side-image.png
+appdatadir = $(kde_datadir)/krfb/pics
+appdata_DATA = eyes-open24.png eyes-closed24.png connection-side-image.png
 
 kde_services_DATA = kinetd_krfb.desktop
 
-lnkdir = $(kde_appsdir)/System
-lnk_DATA = krfb.desktop
+xdg_apps_DATA = krfb.desktop
 
 appdir = $(kde_datadir)/krfb
 app_DATA = eventsrc
