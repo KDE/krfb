@@ -154,9 +154,6 @@
             <property name="text">
                 <string>Allow remote user to &amp;control keyboard and mouse</string>
             </property>
-            <property name="accel">
-                <string>Alt+C</string>
-            </property>
             <property name="whatsThis" stdset="0">
                 <string>If you turn this option on, the remote user can enter keystrokes and use your mouse pointer. This gives them full control over your computer, so be careful. When the option is disabled the remote user can only watch your screen.</string>
             </property>

@@ -105,9 +105,6 @@
             <property name="text">
                 <string>Create &amp;Personal Invitation...</string>
             </property>
-            <property name="accel">
-                <string>Alt+P</string>
-            </property>
             <property name="toolTip" stdset="0">
                 <string></string>
             </property>
@@ -156,9 +153,6 @@
             <property name="text">
                 <string>&amp;Manage Invitations (%1)...</string>
             </property>
-            <property name="accel">
-                <string>Alt+M</string>
-            </property>
         </widget>
         <widget class="QPushButton" row="4" column="2">
             <property name="name">
@@ -166,9 +160,6 @@
             </property>
             <property name="text">
                 <string>Invite via &amp;Email...</string>
-            </property>
-            <property name="accel">
-                <string>Alt+E</string>
             </property>
             <property name="whatsThis" stdset="0">
                 <string>This button will start your email application with a pre-configured text that explains to the recipient how to connect to your computer. </string>
