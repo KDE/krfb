@@ -3,7 +3,7 @@ IconName=krfb
 Comment=Desktop Sharing
 Comment[af]=werkskerm deeling
 Comment[bs]=Dijeljenje desktopa
-Comment[da]=Skrivebords-deling
+Comment[da]=Skrivebordsdeling
 Comment[el]=Μοίρασμα επιφάνειας εργασίας
 Comment[es]=Compartición de escritorio
 Comment[he]=שיתוף שולחנות עבודה
@@ -134,7 +134,7 @@ default_presentation=2
 
 [NewConnectionOnHold]
 Name=NewConnectionOnHold
-Name[da]=NyForbindelseOnHold
+Name[da]=NyForbindelseSatPåHold
 Name[el]=Νέα σύνδεση σε αναμονή
 Name[es]=Nueva conexión en espera
 Name[he]=חיבור חדש בהמתנה
@@ -157,7 +157,7 @@ default_presentation=4
 
 [NewConnectionAutoAccepted]
 Name=NewConnectionAutoAccepted
-Name[da]=NyForbindelseAutoAccepteret
+Name[da]=NyForbindelseAutomatiskAccepteret
 Name[el]=Αυτόματη αποδοχή νέας σύνδεσης
 Name[es]=Nueva conexión auto aceptada
 Name[he]=חיבור חדש נתקבל אוטומטית
