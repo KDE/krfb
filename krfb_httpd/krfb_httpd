@@ -1,0 +1,72 @@
+#!/bin/bash
+
+if [ "$1" = "--kinetd" ]; then
+	# redirect stdin and stdout to the inetd socket.
+	exec <&$2 >&$2
+fi
+
+read request url httptype || exit 0
+url="${url//}"
+httptype="${httptype//}"
+
+if [ "x$httptype" != "x" ]; then
+	line="x"
+	while [ -n "$line" ]; do
+		read line || exit 0
+		line="${line//}"
+	done
+fi
+# echo "url = $url, request = $request" >> /tmp/httpd.log
+case "$url" in
+/)
+	# We need the size of the display for the current applet.
+	size=`xdpyinfo -display :0| grep dimensions:|head -1|sed -e "s/.*dimensions: *//" -e "s/ pixels.*//"`
+	width=`echo $size|sed -e "s/x.*//"`
+	height=`echo $size|sed -e "s/.*x//"`
+	# The VNC menubar is 20 pixels high ...
+	height=$((height+20))
+
+	port=`dcop kded kinetd port krfb`
+	if [ "$port" == "-1" ]; then
+		port=5900
+	fi
+
+	ctype="text/html"
+	content="
+<HTML><HEAD><TITLE>$LOGNAME's desktop</TITLE></HEAD>
+<BODY>
+<APPLET CODE=vncviewer.class ARCHIVE=vncviewer.jar WIDTH=$width HEIGHT=$height>
+	<param name=PORT value=$port>
+</APPLET>
+</BODY></HTML>"
+	;;
+*.jar|*.class)
+	# Use basename to make sure we have just a filename, not ../../...
+	url="`basename "$url"`"
+	ctype="application/octet-stream"
+	cfile="/usr/share/vnc/classes/$url"
+	content="FILE"
+	;;
+esac
+
+if [ "x$httptype" != "x" ]; then
+	echo "HTTP/1.0 200 OK"
+	echo "Content-Type: $ctype"
+	if [ "$content" == "FILE" ]; then
+		clen=`wc -c "$cfile"`
+	else
+		clen=`echo "$content"|wc -c`
+	fi
+	echo "Content-Length: $clen"
+	echo "Connection: close"
+	echo
+fi
+
+if [ "$request" == "GET" ]; then
+	if [ "$content" == "FILE" ]; then
+		cat "$cfile"
+	else
+		echo "$content"
+	fi
+fi
+exit 0

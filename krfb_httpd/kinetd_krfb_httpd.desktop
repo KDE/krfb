@@ -1,0 +1,17 @@
+[Desktop Entry]
+Encoding=UTF-8
+Type=Service
+
+ServiceTypes=KInetDModule
+Exec=krfb_httpd
+X-KDE-FactoryName=kinetd
+X-KDE-KINETD-id=krfb_httpd
+X-KDE-KINETD-port=5800
+X-KDE-KINETD-autoPortRange=10
+X-KDE-KINETD-enabled=false
+X-KDE-KINETD-argument=--kinetd
+X-KDE-KINETD-multiInstance=false
+X-KDE-KINETD-serviceLifetime=1200
+
+Name=KRfb Micro Httpd
+Comment=A micro http daemon for krfb that serves the VNC viewer applet.
