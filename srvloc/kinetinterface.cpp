@@ -182,7 +182,8 @@ KInetSocketAddress *KInetInterface::getPublicInetAddress() {
 	while (it != v.end()) {
 		if (((*it).flags() & (PointToPoint | Up | Running)) &&
 		    (!((*it).flags() & Loopback)) &&
-		    (*it).address())
+		    (*it).address() &&
+            ((*it).address()->family() == AF_INET))
 			return new KInetSocketAddress(*(*it).address());
 		it++;
 	}
@@ -192,7 +193,8 @@ KInetSocketAddress *KInetInterface::getPublicInetAddress() {
 	while (it != v.end()) {
 		if (((*it).flags() & (Up | Running)) &&
 		    (!((*it).flags() & Loopback)) &&
-		    (*it).address())
+		    (*it).address() &&
+            ((*it).address()->family() == AF_INET))
 			return new KInetSocketAddress(*(*it).address());
 		it++;
 	}
