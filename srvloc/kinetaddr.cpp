@@ -54,9 +54,9 @@ public:
 
 	KInetAddressPrivate() : sockfamily(AF_UNSPEC)
 	{
-		bzero((void*)&in, sizeof(in));
+		memset((void*)&in, 0, sizeof(in));
 #ifdef AF_INET6
-		bzero((void*)&in6, sizeof(in6));
+		memset((void*)&in6, 0, sizeof(in6));
 #endif
 	}
 
