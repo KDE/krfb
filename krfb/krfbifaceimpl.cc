@@ -9,9 +9,9 @@
 
 #include "krfbifaceimpl.h"
 
-KRfbIfaceImpl::KRfbIfaceImpl(Configuration *c) :
+KRfbIfaceImpl::KRfbIfaceImpl(RFBController *c) :
 	DCOPObject("krfbIface"),
-	configuration(c)
+	controller(c)
 {
 }
 
@@ -21,8 +21,7 @@ void KRfbIfaceImpl::exit()
 }
 void KRfbIfaceImpl::setAllowDesktopControl(bool b)
 {
-	configuration->setAllowDesktopControl(b);
-	configuration->save();
+	controller->enableDesktopControl(b);
 }
 
 #include "krfbifaceimpl.moc"

@@ -2,7 +2,7 @@
                                    main.cpp
                              -------------------
     begin                : Sat Dec  8 03:23:02 CET 2001
-    copyright            : (C) 2001-2002 by Tim Jansen
+    copyright            : (C) 2001-2003 by Tim Jansen
     email                : tim@tjansen.de
  ***************************************************************************/
 
@@ -141,8 +141,8 @@ int main(int argc, char *argv[])
 
 	TrayIcon trayicon(new KAboutApplication(&aboutData),
 			  config);
-	KRfbIfaceImpl dcopiface(config);
 	RFBController controller(config);
+	KRfbIfaceImpl dcopiface(&controller);
 
 	QObject::connect(&app, SIGNAL(lastWindowClosed()), // dont show passivepopup
 			 &trayicon, SLOT(prepareQuit()));

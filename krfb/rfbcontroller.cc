@@ -2,7 +2,7 @@
                               rfbcontroller.cpp
                              -------------------
     begin                : Sun Dec 9 2001
-    copyright            : (C) 2001-2002 by Tim Jansen
+    copyright            : (C) 2001-2003 by Tim Jansen
     email                : tim@tjansen.de
  ***************************************************************************/
 
@@ -608,6 +608,8 @@ void RFBController::closeConnection()
 }
 
 void RFBController::enableDesktopControl(bool b) {
+	if (b != allowDesktopControl)
+		emit desktopControlSettingChanged(b);
 	allowDesktopControl = b;
 }
 

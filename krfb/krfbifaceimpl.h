@@ -2,16 +2,16 @@
 #define __KRFB_IFACE_IMPL_H
 
 #include <qobject.h>
-#include "configuration.h"
+#include "rfbcontroller.h"
 #include "krfbiface.h"
 
 class KRfbIfaceImpl : public QObject, public virtual krfbIface
 {
 	Q_OBJECT
 private:
-	Configuration *configuration;
+	RFBController *controller;
 public:
-	KRfbIfaceImpl(Configuration *c);
+	KRfbIfaceImpl(RFBController *c);
 signals:
 	void exitApp();
 
