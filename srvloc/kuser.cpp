@@ -72,7 +72,7 @@ KUser::KUser(long uid) {
 }
 
 KUser::KUser(const QString& name) {
-	fillPasswd(getpwnam((const char*)name.utf8()));
+	fillPasswd(getpwnam((const char*)name.local8Bit()));
 }
 
 KUser::KUser(const KUser &user) {
