@@ -467,7 +467,7 @@ void RFBController::idleSlot()
 {
 	if (state != RFB_CONNECTED)
 		return;
-	if (checkAsyncEvents())
+	if (checkAsyncEvents() || forcedClose)
 		return;
 
 	rfbUndrawCursor(server);
