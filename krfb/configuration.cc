@@ -378,8 +378,7 @@ void Configuration::closeInvDlg() {
 }
 
 void Configuration::changeInvDlgNum(int newNum) {
-	invDlg.manageInvitationButton->setText(i18n("Manage Invitations%1...").
-			       arg(QString(i18n("(%1) ")).arg(newNum) ) );
+	invDlg.manageInvitationButton->setText( i18n("Manage Invitations %1...").arg(newNum) );
 }
 
 ////////////// personal invitation dialog //////////////////////////
@@ -425,7 +424,7 @@ void Configuration::inviteEmail() {
 			.arg(hostname())
 			.arg(port())
 			.arg(inv.password())
-			.arg(inv.expirationTime().toString(Qt::LocalDate)));
+			.arg(KGlobal::locale()->formatDateTime(inv.expirationTime())));
 
 }
 
