@@ -25,9 +25,8 @@
 #include <X11/extensions/XShm.h>
 
 #include "XUpdateScanner.h"
-#include "OXProperties.h"
 
-extern Properties properties;
+#define SHOW_MOUSE_POINTER 1
 
 namespace rfb {
 
@@ -245,7 +244,7 @@ void XUpdateScanner::searchUpdates( list< Hint > &hintList )
   }
 
 
-  if ( properties.showMousePointer ) {
+  if ( SHOW_MOUSE_POINTER ) {
 
   Window root_return, child_return;
   int root_x, root_y;

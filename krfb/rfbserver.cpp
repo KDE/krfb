@@ -20,40 +20,51 @@
  *                                                                         *
  ***************************************************************************/
 
-RFBServer::RFBServer(int fd) :
+#include "rfbserver.h"
+
+#include <unistd.h>
+
+
+RFBServer::RFBServer(Display *dpy, int fd) :
 	Server(),
+	dpy(dpy),
 	fd(fd),
-	buttonMask(0)	
+	buttonMask(0)
 {
+  	connection = bufferedConnection = new BufferedConnection(32768,
+                                                            	  32768);	
 	InitBlocks(32, 32);
+	connection->send((unsigned char*) RFB_PROTOCOL_VERSION, 12);
 }
 
 RFBServer::~RFBServer() {
  	DeleteBlocks();
-  shutdown(fd, 2);
-  close(fd);
+ 	delete bufferedConnection;
+	close(fd);
 }
 
 void RFBServer::handleKeyEvent(KeyEvent &keyEvent) {
 	KeyCode kc = XKeysymToKeycode(dpy, keyEvent.key);
  	if (kc != NoSymbol)
-  	XTestFakeKeyEvent(dpy,
+  		XTestFakeKeyEvent(dpy,
                       XKeysymToKeycode( dpy, keyEvent.key ),
                       keyEvent.down_flag,
                       CurrentTime);
 }
 
 void RFBServer::handlePointerEvent(PointerEvent &pointerEvent) {
-  XTestFakeMotionEvent(dpy,
-                       0,
-                       pointerEvent.x_position,
-                       pointerEvent.y_position,
-                       CurrentTime);
-  int i = 1;
-  while (i <= 5) {
-    if ( (buttonMask & (1 << (i-1))) != (pointerEvent.button_mask & (1 << (i-1))) )
-      XTestFakeButtonEvent( dpy, i, (pointerEvent.button_mask & (1 << (i-1)))? True : False, CurrentTime );
-    i++;
-  }
-  buttonMask = pointerEvent.button_mask;
+  	XTestFakeMotionEvent(dpy,
+   			0,
+   			pointerEvent.x_position,
+                       	pointerEvent.y_position,
+                       	CurrentTime);
+	int i = 1;
+	while (i <= 5) {
+		if ( (buttonMask & (1 << (i-1))) != (pointerEvent.button_mask & (1 << (i-1))) )
+			XTestFakeButtonEvent( dpy, i,
+			(pointerEvent.button_mask & (1 << (i-1)))? True : False,
+			CurrentTime );
+		i++;
+	}
+	buttonMask = pointerEvent.button_mask;
 }

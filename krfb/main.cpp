@@ -29,7 +29,7 @@ static const char *description = I18N_NOOP("Krfb");
 	
 static KCmdLineOptions options[] =
 {
-  { 0, 0, 0 }
+	{ 0, 0, 0 }
   // INSERT YOUR COMMANDLINE OPTIONS HERE
 };
 
@@ -47,12 +47,12 @@ void setClosedIcon() {
 
 int main(int argc, char *argv[])
 {
-  KAboutData aboutData( "krfb", I18N_NOOP("Krfb"),
-    VERSION, description, KAboutData::License_GPL,
-    "(c) 2001, Tim Jansen", 0, 0, "tim@tjansen.de");
-  aboutData.addAuthor("Tim Jansen",0, "tim@tjansen.de");
-  KCmdLineArgs::init( argc, argv, &aboutData );
-  KCmdLineArgs::addCmdLineOptions( options );
+	KAboutData aboutData( "krfb", I18N_NOOP("Krfb"),
+		VERSION, description, KAboutData::License_GPL,
+		"(c) 2001, Tim Jansen", 0, 0, "tim@tjansen.de");
+	aboutData.addAuthor("Tim Jansen",0, "tim@tjansen.de");
+	KCmdLineArgs::init( argc, argv, &aboutData );
+	KCmdLineArgs::addCmdLineOptions( options );
 
  	KApplication app;
 
@@ -64,5 +64,5 @@ int main(int argc, char *argv[])
 	setClosedIcon();
 	tray->show();
 	
-  return app.exec();
+	return app.exec();
 }

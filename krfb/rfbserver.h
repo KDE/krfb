@@ -23,20 +23,28 @@
 #ifndef RFBSERVER_H
 #define RFBSERVER_H
 
-#include <rfbserver.h>
+#include "../include/rfbServer.h"
+#include <X11/extensions/XTest.h>
+
 
 using namespace rfb;
 
-/**KDE-specific implementation of the Server base class
-  *@author Tim Jansen
+/**
+  * KDE-specific implementation of the Server base class
+  * @author Tim Jansen
   */
-
 class RFBServer : public Server  {
 public: 
-	RFBServer(int fd);
+	RFBServer(Display *dpy, int fd);
 	~RFBServer();
-  virtual void handleKeyEvent();
-  virtual void handlePointerEvent(PointerEvent &pointerEvent);
+	virtual void handleKeyEvent(KeyEvent &keyEvent);
+	virtual void handlePointerEvent(PointerEvent &pointerEvent);
+	
+private:	
+	int fd;
+	int buttonMask;
+	BufferedConnection *bufferedConnection;
+	Display *dpy;
 };
 
 #endif
