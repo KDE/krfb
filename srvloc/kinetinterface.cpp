@@ -212,7 +212,9 @@ KInetSocketAddress *KInetInterface::getPublicInetAddress() {
 
 namespace {
 	KInetSocketAddress *createAddress(struct sockaddr *a) {
-		if (a->sa_family == AF_INET)
+		if (!a)
+			return 0;
+		else if (a->sa_family == AF_INET)
 			return new KInetSocketAddress((struct sockaddr_in*) a,
 						      sizeof(struct sockaddr_in));
 		else if (a->sa_family == AF_INET6)
