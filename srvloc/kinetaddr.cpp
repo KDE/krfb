@@ -34,6 +34,9 @@
 #include "kinetaddr.h"
 #include <netdb.h>
 
+#if defined(__osf__) && defined(AF_INET6)
+#undef AF_INET6
+#endif
 
 #define V6_CAN_CONVERT_TO_V4(addr)	(KDE_IN6_IS_ADDR_V4MAPPED(addr) || KDE_IN6_IS_ADDR_V4COMPAT(addr))
 
@@ -122,18 +125,27 @@ const struct in_addr *KInetAddress::addressV4() const {
 	return &d->in;
 }
 
+#ifdef AF_INET6
 const struct in6_addr *KInetAddress::addressV6() const {
 	if (d->sockfamily != AF_INET6)
 		return 0;
 	return &d->in6;
 }
+#endif
 
 QString KInetAddress::nodeName() const
 {
 	char buf[INET6_ADDRSTRLEN+1];	// INET6_ADDRSTRLEN > INET_ADDRSTRLEN
 
+#ifdef __osf__
+	if (d->sockfamily == AF_INET) {
+	    char *p = inet_ntoa(d->in);
+	    strncpy(buf, p, sizeof(buf));
+	}
+#else
 	if (d->sockfamily == AF_INET)
 		inet_ntop(d->sockfamily, (void*)&d->in, buf, sizeof(buf));
+#endif
 #ifdef AF_INET6
 	else if (d->sockfamily == AF_INET6)
 		inet_ntop(d->sockfamily, (void*)&d->in6, buf, sizeof(buf));
