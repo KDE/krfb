@@ -369,14 +369,10 @@ Give the information below to the person that you want to invite (&lt;a href="wh
     <slot>howToConnectHelpClicked( const QString &amp; )</slot>
 </slots>
 <layoutdefaults spacing="6" margin="11"/>
+<includes>
+    <include location="local" impldecl="in implementation">kactivelabel.h</include>
+</includes>
 <includehints>
-    <includehint>kactivelabel.h</includehint>
-    <includehint>kactivelabel.h</includehint>
-    <includehint>kactivelabel.h</includehint>
-    <includehint>kactivelabel.h</includehint>
-    <includehint>kactivelabel.h</includehint>
-    <includehint>kactivelabel.h</includehint>
-    <includehint>kactivelabel.h</includehint>
     <includehint>kactivelabel.h</includehint>
 </includehints>
 </UI>
