@@ -65,8 +65,12 @@ typedef unsigned long KeySym;
 #elif defined(__APPLE__) || defined(__FreeBSD__)
 #include <sys/types.h>
 #include <machine/endian.h>
+#ifndef _BYTE_ORDER
 #define _BYTE_ORDER BYTE_ORDER
+#endif
+#ifndef _LITTLE_ENDIAN
 #define _LITTLE_ENDIAN LITTLE_ENDIAN
+#endif
 #elif defined (__SVR4) && defined (__sun) /* Solaris */
 #include <sys/types.h>
 #if defined(__sparc)
