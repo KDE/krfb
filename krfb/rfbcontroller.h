@@ -159,7 +159,6 @@ private:
 	bool checkAsyncEvents();
 	void sendSessionEstablished();
 	
-	bool allowRemoteControl;
 	int connectionNum;
 	QString remoteIp;
 

@@ -162,6 +162,8 @@ int main(int argc, char *argv[])
 
 	QObject::connect(&trayicon, SIGNAL(showManageInvitations()),
 			 config, SLOT(showManageInvitationsDialog()));
+	QObject::connect(&trayicon, SIGNAL(enableDesktopControl(bool)),
+			 config, SLOT(setAllowDesktopControl(bool)));
 	QObject::connect(&trayicon, SIGNAL(diconnectedMessageDisplayed()),
 			 &app, SLOT(quit()));
 

@@ -60,6 +60,7 @@ public:
 signals:
 	void showManageInvitations();
 	void diconnectedMessageDisplayed();
+	void enableDesktopControl(bool);
 
 public slots:
         void prepareQuit();
@@ -69,10 +70,12 @@ public slots:
 private:
   	KPixmap trayIconOpen;
   	KPixmap trayIconClosed;
+	Configuration *configuration;
 	KDialog* aboutDialog;
 	KActionCollection actionCollection;
   	KAction* manageInvitationsAction;
   	KAction* aboutAction;
+	KToggleAction* enableControlAction;
 	bool quitting;
 
 private slots:

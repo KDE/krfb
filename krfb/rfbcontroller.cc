@@ -254,7 +254,6 @@ void SessionEstablishedEvent::exec() {
 
 
 RFBController::RFBController(Configuration *c) :
-	allowRemoteControl(false),
 	connectionNum(0),
 	configuration(c),
 	closePending(false),
@@ -380,7 +379,7 @@ void RFBController::connectionAccepted(bool aRC)
 	if (state != RFB_CONNECTING)
 		return;
 
-	allowRemoteControl = aRC;
+	configuration->setAllowDesktopControl(aRC);
 	connectionNum++;
 	idleTimer.start(IDLE_PAUSE);
 
@@ -609,7 +608,7 @@ enum rfbNewClientAction RFBController::handleNewClient(rfbClientPtr cl)
 				.arg(remoteIp));
 
 	dialog.ipLabel->setText(remoteIp);
-	dialog.allowRemoteControlCB->setChecked(configuration->allowDesktopControl());
+	dialog.allowRemoteControlCB->setChecked(false);
 	dialog.setFixedSize(dialog.sizeHint());
 	dialog.show();
 	return RFB_CLIENT_ON_HOLD;
@@ -623,7 +622,7 @@ void RFBController::handleClientGone()
 }
 
 void RFBController::handleKeyEvent(bool down, KeySym keySym) {
-	if (!allowRemoteControl)
+	if (!configuration->allowDesktopControl())
 		return;
 
 	asyncMutex.lock();
@@ -632,7 +631,7 @@ void RFBController::handleKeyEvent(bool down, KeySym keySym) {
 }
 
 void RFBController::handlePointerEvent(int button_mask, int x, int y) {
-	if (!allowRemoteControl)
+	if (!configuration->allowDesktopControl())
 		return;
 
 	asyncMutex.lock();

@@ -48,6 +48,7 @@ KPassivePopup2 *KPassivePopup2::message( const QString &caption, const QString &
 
 TrayIcon::TrayIcon(KDialog *d, Configuration *c) : 
 	KSystemTray(0, "krfb trayicon"),
+	configuration(c),
 	aboutDialog(d),
 	actionCollection(this),
 	quitting(false)
@@ -63,6 +64,15 @@ TrayIcon::TrayIcon(KDialog *d, Configuration *c) :
 	manageInvitationsAction->plug(contextMenu());
 
 	contextMenu()->insertSeparator();
+
+	enableControlAction = new KToggleAction(i18n("Enable remote control"));
+	enableControlAction->plug(contextMenu());
+	connect(enableControlAction, SIGNAL(toggled(bool)), 
+		SIGNAL(enableDesktopControl(bool)));
+	enableControlAction->setChecked(configuration->allowDesktopControl());
+
+	contextMenu()->insertSeparator();
+
 	aboutAction = KStdAction::aboutApp(this, SLOT(showAbout()), &actionCollection);
 	aboutAction->plug(contextMenu());
 
@@ -81,6 +91,8 @@ void TrayIcon::prepareQuit() {
 }
 
 void TrayIcon::showConnectedMessage() {
+	enableControlAction->setChecked(configuration->allowDesktopControl());
+
         setPixmap(trayIconOpen);
         KPassivePopup2 *p = KPassivePopup2::message(i18n("Desktop Sharing"), 
 						    i18n("The remote user has been authenticated and is now connected."), 

@@ -80,7 +80,6 @@ public:
 
         void setAllowUninvited(bool allowUninvited);
         void setAskOnConnect(bool askOnConnect);
-        void setAllowDesktopControl(bool allowDesktopControl);
 	void setPassword(QString password);
 	void save();
 	void update();
@@ -91,6 +90,7 @@ signals:
 	void invitationFinished();
 
 public slots:
+        void setAllowDesktopControl(bool allowDesktopControl);
 	void showManageInvitationsDialog();
 	void showInvitationDialog();
 	void showPersonalInvitationDialog();
