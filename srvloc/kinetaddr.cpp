@@ -22,7 +22,7 @@
  *  Boston, MA 02111-1307, USA.
  **/
 
-#include "kinetaddress.h"
+#include "kinetaddr.h"
 #include <config.h>
 
 #include <limits.h>

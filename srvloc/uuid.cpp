@@ -11,7 +11,7 @@
  *
  * 2002-12-15, tim@tjansen.de: 
  *   merged all *.c files, 
- *   replaced all function that are not needed to generating a time uuid,
+ *   replaced all function that are not needed to generate a time uuid,
  *   added createUUID()
  */
 
