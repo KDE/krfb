@@ -22,7 +22,10 @@
 #define _hexonet_rfb_XUpdateScanner_h_
 
 
-#include "rfbServer.h"
+#include "../include/rfbServer.h"
+
+#include <X11/Xlib.h>
+#include <X11/extensions/XShm.h>
 
 
 namespace rfb {

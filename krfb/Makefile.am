@@ -1,10 +1,12 @@
+METASOURCES = AUTO
+
 bin_PROGRAMS = krfb
-krfb_SOURCES = trayicon.cpp XUpdateScanner.cc rfbserver.cpp main.cpp configurationdialog.ui newconnectiondialog.ui configuration.cpp
+krfb_SOURCES = configuration.cc trayicon.cpp XUpdateScanner.cc rfbconnection.cpp main.cpp configurationdialog.ui newconnectiondialog.ui
 krfb_LDADD   = ./lib/liblib.a  $(LIB_QT) $(LIB_KDECORE) $(LIB_KDEUI)  $(LIBSOCKET)
 
 SUBDIRS = lib 
 
-EXTRA_DIST = main.cpp krfb.desktop lo32-app-krfb.png lo16-app-krfb.png rfbserver.cpp rfbserver.h eyes-closed24.png eyes-open24.png XUpdateScanner.cc XUpdateScanner.h trayicon.cpp trayicon.h 
+EXTRA_DIST = main.cpp krfb.desktop lo32-app-krfb.png lo16-app-krfb.png rfbserver.cpp rfbserver.h eyes-closed24.png eyes-open24.png XUpdateScanner.cc XUpdateScanner.h trayicon.cpp trayicon.h configuration.h configuration.cpp
 
 install-data-local:
 	$(mkinstalldirs) $(kde_appsdir)/Applications/
@@ -41,8 +43,6 @@ uninstall-local:
 # set the include path for X, qt and KDE
 INCLUDES= $(all_includes) -I../include
 
-METASOURCES = AUTO
-
 # the library search path. 
 krfb_LDFLAGS = $(all_libraries) $(KDE_RPATH) -lXtst
 
@@ -51,15 +51,7 @@ krfb_LDFLAGS = $(all_libraries) $(KDE_RPATH) -lXtst
 #rcdir = $(kde_datadir)/krfb
 #rc_DATA = krfbui.rc
 
-#WARNING: if you use a ui.rc file above, use:
-
-# messages: rc.cpp
-
-# instead of 
-
-# messages:
-
-messages: 
+messages: rc.cpp
 	LIST=`find . -name \*.h -o -name \*.hh -o -name \*.H -o -name \*.hxx -o -name \*.hpp -o -name \*.cpp -o -name \*.cc -o -name \*.cxx -o -name \*.ecpp -o -name \*.C`; \
 	if test -n "$$LIST"; then \
 	 $(XGETTEXT) $$LIST -o $(podir)/krfb.pot; \

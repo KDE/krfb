@@ -1,0 +1,72 @@
+/***************************************************************************
+                               configuration.h
+                             -------------------
+    begin                : Tue Dec 11 2001
+    copyright            : (C) 2001 by Tim Jansen
+    email                : tim@tjansen.de
+ ***************************************************************************/
+
+/***************************************************************************
+ *                                                                         *
+ *   This program is free software; you can redistribute it and/or modify  *
+ *   it under the terms of the GNU General Public License as published by  *
+ *   the Free Software Foundation; either version 2 of the License, or     *
+ *   (at your option) any later version.                                   *
+ *                                                                         *
+ ***************************************************************************/
+
+#ifndef CONFIGURATION_H
+#define CONFIGURATION_H
+
+#include "configurationdialog.h"
+
+#include <qobject.h>
+#include <qvalidator.h>
+#include <qstring.h>
+
+/**
+ * This class stores the app's configuration and also 'drives'
+ * the configuration dialog.
+ * @author Tim Jansen
+ */
+class Configuration : public QObject {
+   	Q_OBJECT
+public:
+	Configuration();
+	~Configuration();
+
+	bool askOnConnect() const; 
+	bool allowDesktopControl() const;
+	bool showMousePointer() const;
+
+	QString password() const;
+	int port() const;
+
+signals:
+  	void portChanged();
+
+public slots:
+	void showDialog();
+
+private:
+        void loadFromKConfig(); 
+        void loadFromDialog(); 
+        void saveToKConfig(); 
+        void saveToDialog(); 
+
+        ConfigurationDialog confDlg;
+	QIntValidator *portValidator;
+
+	bool askOnConnectFlag;
+	bool allowDesktopControlFlag;
+	bool showMousePointerFlag;
+	QString passwordString;
+	int portNumber;
+
+private slots:
+	void okPressed();
+	void cancelPressed();
+	void applyPressed();
+};
+
+#endif

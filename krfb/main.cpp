@@ -16,6 +16,7 @@
  ***************************************************************************/
 
 #include "trayicon.h"
+#include "configuration.h"
 
 #include <kpixmap.h>
 #include <kaction.h>
@@ -24,6 +25,7 @@
 #include <kcmdlineargs.h>
 #include <kaboutdata.h>
 #include <klocale.h>
+#include <qobject.h>
 
 #define VERSION "0.1"
 
@@ -46,7 +48,14 @@ int main(int argc, char *argv[])
 	KCmdLineArgs::addCmdLineOptions( options );
 
  	KApplication app;
- 	TrayIcon tray;
- 		
+ 	TrayIcon trayicon;
+	Configuration config;
+
+	QObject::connect(&trayicon, SIGNAL(showConfigure()),
+			 &config, SLOT(showDialog()));
+
+	QObject::connect(&app, SIGNAL(lastWindowClosed()),
+			 &app, SLOT(quit()));
+
 	return app.exec();
 }

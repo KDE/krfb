@@ -30,6 +30,7 @@ TrayIcon::TrayIcon() : KSystemTray() {
 	configureAction = new KAction(i18n("&Configure KRfb")); 	
 	configureAction->plug(contextMenu());
 	closeConnectionAction = new KAction(i18n("Close connection"));
+	connect(configureAction, SIGNAL(activated()), SIGNAL(showConfigure()));
 	show();
 }
 

@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>390</width>
+            <width>386</width>
             <height>278</height>
         </rect>
     </property>
@@ -351,6 +351,10 @@
                     <property stdset="1">
                         <name>text</name>
                         <string>&amp;Ok</string>
+                    </property>
+                    <property stdset="1">
+                        <name>default</name>
+                        <bool>true</bool>
                     </property>
                     <property>
                         <name>whatsThis</name>
