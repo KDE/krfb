@@ -152,7 +152,7 @@ XUpdateScanner::XUpdateScanner(Display *_dpy,
 					8,
 					slen);
 	}
-};
+}
 
 
 XUpdateScanner::~XUpdateScanner()
