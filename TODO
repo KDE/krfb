@@ -1,8 +1,11 @@
+- cut&paste support
+
 Todo (unscheduled features):
 - attach .vnc file to invitations? 
 - SLP support (or UPnP, or whatever KDE will use)
 - NAT traversal support (MIDCOM stun/turn, UPnP)
+- better cursor encodings
+- SSL/TLS support?
+- better authentication mechanisms?
 - look into adding an extension to xfree to improve speed (get noticed of
   screen updates)
-
-

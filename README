@@ -1,21 +1,19 @@
-KRfb
-====
+KDE Desktop Sharing (krfb)
+==========================
 
-KRfb is a small server for the RFB protocol, better known as VNC. Unlike most 
-other Unix/Linux RFB servers, KRfb allows you to share your X11 session 
-instead of creating a new X11 session. 
+KDE Desktop Sharing (krfb)  is a small server for the RFB protocol, better 
+known as VNC. Unlike most other Unix/Linux RFB servers, KRfb allows you to
+share your X11 session instead of creating a new X11 session. 
 It was originally based on x0rfbserver 
 (ttp://www.hexonet.de/software/x0rfbserver/), but there is not much code of
 x0rfbserver left. Since version 0.6 it uses libvncserver 
 (http://libvncserver.sf.net) as backend.
 
-For the latest information about KRfb visit http://www.tjansen.de/krfb
-
 
 Guide to documentation:
-INSTALL - Very short installation instructions
 ROADMAP - KRfb roadmap, progress and future features
 TODO - unscheduled things to be done
+INSTALL - Very short installation instructions
 NOTES - reasons for various decisions
 DCOP-INTERFACE - short documentation of the DCOP interface
 
