@@ -68,6 +68,10 @@ Please at least include KDE, the KDE package it is in, the name
 <keyword>VNC</keyword>
 <keyword>RFB</keyword>
 <keyword>krdc</keyword>
+<keyword>Desktop Sharing</keyword>
+<keyword>Remote Control</keyword>
+<keyword>Remote Assistance</keyword>
+<keyword>Remote Desktop</keyword>
 </keywordset>
 
 </bookinfo>
@@ -339,7 +343,7 @@ uninvited connections before accepting</guilabel>.
 <note>
 <para>
 &krfb; uses the normal RFB password system, which does not transfer
-your password in the clear across the network. Intead, it uses a
+your password in the clear across the network. Instead, it uses a
 challenge-response system. This is reasonably secure, as long as the
 password is securely guarded.
 </para>
