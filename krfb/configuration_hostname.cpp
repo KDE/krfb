@@ -13,12 +13,12 @@
 /* WirLab 29.1.2002 */
 #include <sys/errno.h>
 /* WirLab 31.1.2002 */
+#include <net/if.h>
 #include <net/if_arp.h>
 #include <net/route.h>
 #include <sys/ioctl.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
-#include <net/if.h>
 #include <qmessagebox.h>
 #include <qstring.h>
 /*--*/
