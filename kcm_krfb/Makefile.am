@@ -17,4 +17,5 @@ EXTRA_DIST = $(libkcm_krfb_la_SOURCES)\
 # set the include path for X, qt and KDE
 INCLUDES= -I../krfb $(all_includes)
 
-
+messages: rc.cpp
+	$(XGETTEXT) *.cpp *.h -o $(podir)/kcm_krfb.pot
