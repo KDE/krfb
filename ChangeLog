@@ -1,5 +1,7 @@
 2002-02-20  Tim Jansen  <tjansen@tjansen.de>
 
+	* krfb/xupdatescanner.cc: split tiles into left&right half if neccessary.
+
 	* krfb/Makefile.am: fixed a bug for people who "make install" for the
 	  first time (did not create share/krfb dir for eventrc)
 
