@@ -44,12 +44,12 @@ static const char *description = I18N_NOOP("RFB (VNC) Server to share "
 	
 static KCmdLineOptions options[] =
 {
-	{ "p ", 0, 0},
-	{ ARG_PORT " ", I18N_NOOP("Set the display number the server is listening on."), "0"},
+	{ "p", 0, 0},
+	{ ARG_PORT " ", I18N_NOOP("Set the port number the server is listening on."), "0"},
 	{ "o", 0, 0},
 	{ ARG_ONE_SESSION, I18N_NOOP("Terminate when the first session is finished."), 0},
-	{ "w ", 0, 0},
-	{ ARG_PASSWORD " ", I18N_NOOP("Set the password."), 0},
+	{ "w", 0, 0},
+	{ ARG_PASSWORD " ", I18N_NOOP("Set the password."), ""},
 	{ "d", 0, 0},
 	{ ARG_DONT_CONFIRM_CONNECT, I18N_NOOP("Allow connections without asking the user."), 0},
 	{ "c", 0, 0},
@@ -86,10 +86,10 @@ int main(int argc, char *argv[])
 		"(c) 2000, heXoNet Support GmbH, D-66424 Homburg\n"
                 "(c) 2001, Tim Jansen", 0, "http://www.tjansen.de/krfb", 
 	        "ml@tjansen.de");
+	aboutData.addAuthor("Tim Jansen", "KDE Port", "tim@tjansen.de");
 	aboutData.addAuthor("Jens Wagner (heXoNet Support GmbH)", 
 			    "RFB library, original x0rfbserver", 
 			    "");
-	aboutData.addAuthor("Tim Jansen", "KDE Port", "tim@tjansen.de");
 	KCmdLineArgs::init(argc, argv, &aboutData);
 	KCmdLineArgs::addCmdLineOptions(options);
 
@@ -139,9 +139,9 @@ int main(int argc, char *argv[])
 			 &trayicon, SLOT(openConnection()));
 	if (config->oneConnection()) {
 		QObject::connect(&controller, SIGNAL(sessionRefused()),
-				 &controller, SLOT(quit()));
+				 &app, SLOT(quit()));
 		QObject::connect(&controller, SIGNAL(sessionFinished()),
-				 &trayicon, SLOT(quit()));
+				 &app, SLOT(quit()));
 	} else {
 		QObject::connect(&controller, SIGNAL(sessionFinished()),
 				 &trayicon, SLOT(closeConnection()));

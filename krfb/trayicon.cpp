@@ -16,7 +16,7 @@
  ***************************************************************************/
 
 #include "trayicon.h"
-#include <kdebug.h>
+#include <kapplication.h>
 #include <klocale.h>
 #include <kdialog.h>
 #include <kglobal.h>
@@ -25,14 +25,14 @@
 
 TrayIcon::TrayIcon(KDialog *d, Configuration *c) : 
 	KSystemTray(),
-	aboutDialog(d) 
+	aboutDialog(d)
 {
 	KIconLoader *loader = KGlobal::iconLoader();
 	trayIconOpen = loader->loadIcon("eyes-open24", KIcon::User);
 	trayIconClosed = loader->loadIcon("eyes-closed24", KIcon::User);
 	setPixmap(trayIconClosed);
 
-	configureAction = new KAction(i18n("&Configure KRfb")); 	
+	configureAction = new KAction(i18n("&Configure KRfb...")); 	
 	if (!c->preconfigured()) 
 		configureAction->plug(contextMenu());
 
@@ -41,7 +41,8 @@ TrayIcon::TrayIcon(KDialog *d, Configuration *c) :
 	closeConnectionAction->setEnabled(false);
 
 	contextMenu()->insertSeparator();
-	aboutAction = new KAction(i18n("&About KRfb")); 	
+	aboutAction = new KAction(i18n("&About KRfb"), 
+				  KApplication::kApplication()->instanceName()); 	
 	aboutAction->plug(contextMenu());
 	connect(configureAction, SIGNAL(activated()), SIGNAL(showConfigure()));
 	connect(aboutAction, SIGNAL(activated()), SLOT(showAbout()));

@@ -76,4 +76,18 @@ private:
 	XImage *framebufferImage;
 };
 
+/*
+ * Class to calls XTestDiscard at idle time (because otherwise
+ * it will not work with QT)
+ */
+class XTestDisabler : public QObject {
+	Q_OBJECT
+public:
+	XTestDisabler();
+	bool disable;
+	Display *dpy;
+public slots:
+	void exec();
+};
+
 #endif

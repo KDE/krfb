@@ -1,4 +1,6 @@
 METASOURCES = AUTO
+KDE_ICON = AUTO
+POFILES=AUTO
 
 bin_PROGRAMS = krfb
 krfb_SOURCES = rfbcontroller.cc configuration.cc trayicon.cpp XUpdateScanner.cc rfbconnection.cc main.cpp configurationdialog.ui newconnectiondialog.ui
@@ -17,15 +19,15 @@ install-data-local:
 	$(INSTALL_DATA) $(srcdir)/lo16-app-krfb.png $(kde_icondir)/locolor/16x16/apps/krfb.png
 	$(mkinstalldirs) $(kde_datadir)/krfb/pics
 	$(INSTALL_DATA) $(srcdir)/eyes-closed24.png $(kde_datadir)/krfb/pics/eyes-closed24.png
-	$(mkinstalldirs) $(kde_datadir)/krfb/pics
 	$(INSTALL_DATA) $(srcdir)/eyes-open24.png $(kde_datadir)/krfb/pics/eyes-open24.png
+	$(INSTALL_DATA) $(srcdir)/connection-side-image.png $(kde_datadir)/krfb/pics/connection-side-image.png
 
 uninstall-local:
 	-rm -f $(kde_appsdir)/Applications/krfb.desktop
 	-rm -f $(kde_icondir)/locolor/32x32/apps/krfb.png
 	-rm -f $(kde_icondir)/locolor/16x16/apps/krfb.png
-	-rm -f $(kde_datadir)/krfb/pics
-	-rm -f $(kde_datadir)/krfb/pics
+	-rm -f $(kde_datadir)/krfb/pics/eyes-open24.png
+	-rm -f $(kde_datadir)/krfb/pics/eyes-closed24.png
 
 # this 10 paths are KDE specific. Use them:
 # kde_htmldir       Where your docs should go to. (contains lang subdirs)
@@ -50,6 +52,8 @@ krfb_LDFLAGS = $(all_libraries) $(KDE_RPATH) -lXtst
 # KDE´s XML GUI builing
 #rcdir = $(kde_datadir)/krfb
 #rc_DATA = krfbui.rc
+
+podir = ../po
 
 messages: 
 	LIST=`find . -name \*.h -o -name \*.hh -o -name \*.H -o -name \*.hxx -o -name \*.hpp -o -name \*.cpp -o -name \*.cc -o -name \*.cxx -o -name \*.ecpp -o -name \*.C`; \

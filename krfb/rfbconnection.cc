@@ -24,11 +24,13 @@
 
 #include <kdebug.h>
 #include <qapplication.h>
+#include <qtimer.h>
 #include <X11/Xutil.h>
 #include <unistd.h>
 #include <stdlib.h>
 #include <string.h>
 
+static XTestDisabler disabler;
 
 RFBConnection::RFBConnection(Display *_dpy, 
 			     int _fd, 
@@ -51,6 +53,8 @@ RFBConnection::RFBConnection(Display *_dpy,
   	connection = bufferedConnection;
 
 	XTestGrabControl(dpy, true); 
+	disabler.disable = false;
+
 	createFramebuffer();
 
 	InitBlocks(32, 32);
@@ -62,9 +66,11 @@ RFBConnection::~RFBConnection() {
  	DeleteBlocks();
 
 	destroyFramebuffer();
-//	XTestDiscard(dpy); // (makes problems with Qt??)
-
  	delete bufferedConnection;
+
+	disabler.disable = true;
+	disabler.dpy = dpy;
+	QTimer::singleShot(0, &disabler, SLOT(exec()));
 }
 
 void RFBConnection::handleKeyEvent(KeyEvent &keyEvent) {
@@ -170,6 +176,15 @@ void RFBConnection::getServerInitialisation( ServerInitialisation &_serverInit )
   _serverInit.name_length = strlen( getenv("HOSTNAME") );
   _serverInit.name_string = (CARD8 *) malloc( _serverInit.name_length + 1 );
   strcpy( (char*) _serverInit.name_string, getenv( "HOSTNAME" ) );
+}
+
+XTestDisabler::XTestDisabler() :
+	disable(false) {
+}
+
+void XTestDisabler::exec() {
+	if (disable)
+		XTestDiscard(dpy);
 }
 
 #include "rfbconnection.moc"
