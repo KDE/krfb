@@ -99,13 +99,13 @@ public:
  * dialog.
  * The controller has three states: 'waiting for connection',
  * 'waiting for confirmation' and 'connected'. In the first state socket and 
- * connection are null, in the second socket is set and in the last both are 
+ * connection are null, in the second socket is set and in the last both are
  * set.
  * @author Tim Jansen
  */
 class RFBController : public QObject  {
 	Q_OBJECT
-public: 
+public:
 	RFBController(Configuration *c);
 	virtual ~RFBController();
 
@@ -121,22 +121,22 @@ public:
 	enum rfbNewClientAction handleNewClient(rfbClientPtr cl);
 	void handleClientGone();
 	int getPort();
+	void startServer(bool xtestGrab = true);
 
 	static bool checkX11Capabilities();
 
-public slots:	
+public slots:
 	void rebind();
 	void passwordChanged();
 	void closeConnection();
 
 signals:
         void sessionEstablished();
-	void sessionFinished(); 
+	void sessionFinished();
 	void sessionRefused();
 	void portProbed(int);
- 
-private:	
-	void startServer(bool xtestGrab = true);
+
+private:
 	void stopServer(bool xtestUngrab = true);
 	bool checkAsyncEvents();
 	void sendDelayedKNotifyEvent(QString name, QString desc);

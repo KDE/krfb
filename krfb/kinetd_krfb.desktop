@@ -2,14 +2,15 @@
 Encoding=UTF-8
 Type=Service
 
-ServiceTypes=KDEDModule
+ServiceTypes=KInetDModule
 Exec=krfb
 X-KDE-FactoryName=kinetd
-X-KDE-Kinetd-port=5900
-X-KDE-Kinetd-autoPortRange=100
-X-KDE-Kinetd-enabled=true
-X-KDE-Kinetd-argument=--kinetd
-X-KDE-Kinetd-multiInstance=false
+X-KDE-KINETD-id=krfb
+X-KDE-KINETD-port=5900
+X-KDE-KINETD-autoPortRange=100
+X-KDE-KINETD-enabled=true
+X-KDE-KINETD-argument=--kinetd
+X-KDE-KINETD-multiInstance=false
 
 Name=KRfb Desktop Sharing
 Comment=A daemon that allows you to share your desktop

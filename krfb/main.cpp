@@ -157,6 +157,8 @@ int main(int argc, char *argv[])
 	sigemptyset(&sigs);
 	sigaddset(&sigs, SIGPIPE);
 	sigprocmask(SIG_BLOCK, &sigs, 0);
-	
+
+	controller.startServer();
+
 	return app.exec();
 }

@@ -249,8 +249,6 @@ RFBController::RFBController(Configuration *c) :
 	asyncQueue.setAutoDelete(true);
 
 	KeyboardEvent::initKeycodes();
-
-	startServer();
 }
 
 RFBController::~RFBController() 
@@ -314,7 +312,7 @@ void RFBController::startServer(bool xtestGrab)
 
 	server->frameBuffer = fb;
 	server->autoPort = TRUE;
-	
+
 	server->kbdAddEvent = keyboardHook;
 	server->ptrAddEvent = pointerHook;
 	server->newClientHook = newClientHook;
@@ -322,9 +320,9 @@ void RFBController::startServer(bool xtestGrab)
 
 	passwordChanged();
 
-	scanner = new XUpdateScanner(qt_xdisplay(), 
-				     QApplication::desktop()->winId(), 
-				     (unsigned char*)fb, w, h, 
+	scanner = new XUpdateScanner(qt_xdisplay(),
+				     QApplication::desktop()->winId(),
+				     (unsigned char*)fb, w, h,
 				     server->rfbServerFormat.bitsPerPixel,
 				     server->paddedWidthInBytes);
 

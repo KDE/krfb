@@ -1,6 +1,6 @@
 Begin3
 Title:          KDE Desktop Sharing (KRfb)
-Version:        0.6
+Version:        0.7
 Entered-date:   
 Description:    KRfb is a RFB (VNC) server that allows sharing a local
 		X11 session. 

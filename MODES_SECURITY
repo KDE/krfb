@@ -1,0 +1,26 @@
+Modes & Security
+================
+
+KRfb has 3 different security modes
+- stand-alone: 
+	+ traditional mode like in versions < 0.7
+	+ kinetd always disabled
+	+ KRfb only accepts connections from the time the user 
+	  started it until he quits krfb
+	+ no security restrictions (password can be empty)
+- daemon/invitation only:
+	+ new default since 0.7
+	+ kinetd is only enabled after the user invited someone
+	+ krfb only accepts invited users, all other requests will be
+	  denied	
+- daemon/open
+	+ kinetd is always enabled
+	+ a password must be set (enforced by kcontrol module, so this
+          can be overidden by editing the configuration)
+	+ kinetd accepts both invited and other users
+
+- an invitation is a password that expires after a default of 60 min
+- because of limitations in the Rfb protocol a connecting client must always 
+  enter a password while invitations are valid, even if it is empty
+
+

@@ -3,7 +3,7 @@ METASOURCES = AUTO
 # Code 
 lib_LTLIBRARIES = libkded_kinetd.la
 
-libkded_kinetd_la_SOURCES = kinetd.cpp kinetd.h
+libkded_kinetd_la_SOURCES = kinetd.cpp kinetd.h kinetd.skel
 libkded_kinetd_la_LIBADD   = $(LIB_QT) $(LIB_KDECORE) $(LIB_KDEUI)
 
 # Services

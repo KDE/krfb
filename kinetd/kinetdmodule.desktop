@@ -1,22 +1,34 @@
+# describes the servicetype that you need to implement in order to use
+# kinetd.
 [Desktop Entry]
 Type=ServiceType
 X-KDE-ServiceType=KInetDModule
 Name=KInetD Module Type
 
-[PropertyDef::X-KDE-Kinetd-port]
-Type=int
-
-[PropertyDef::X-KDE-Kinetd-autoPortRange]
-Type=int
-
-[PropertyDef::X-KDE-Kinetd-enabled]
-Type=bool
-
-[PropertyDef::X-KDE-Kinetd-argument]
+# id to manipulate the service
+[PropertyDef::X-KDE-KINETD-id]
 Type=QString
 
-[PropertyDef::X-KDE-Kinetd-multiInstance]
+# describes the TCP port kinetd should listen to
+[PropertyDef::X-KDE-KINETD-port]
+Type=int
+
+# if set and >0 the number of ports kinetd should probe if the port is in use
+[PropertyDef::X-KDE-KINETD-autoPortRange]
+Type=int
+
+# if enabled kinetd will listen on the port. Can be overridden using the
+# dcop interface.
+[PropertyDef::X-KDE-KINETD-enabled]
 Type=bool
 
+# if set this argument if given to the app to start, followed by the number
+# of the socket's fd
+[PropertyDef::X-KDE-KINETD-argument]
+Type=QString
 
+# if true kinetd can accepts several connections at the same time. Otherwise
+# it will block the port when a connection has been established.
+[PropertyDef::X-KDE-KINETD-multiInstance]
+Type=bool
 
