@@ -552,7 +552,7 @@ int main(int argc,char *argv[])
   for(i=argc-1;i>0;i--)
 #ifdef LOCAL_CONTROL
     if(i<argc-1 && !strcmp(argv[i],"-toggleviewonly")) {
-      sprintf(message,"t%s",argv[i+1]);
+      snprintf(message, sizeof(message), "t%s",argv[i+1]);
       send_message(&single_instance,message);
       exit(0);
     } else if(!strcmp(argv[i],"-listclients")) {
@@ -562,7 +562,7 @@ int main(int argc,char *argv[])
     } else
 #ifdef BACKCHANNEL
     if(i<argc-1 && !strcmp(argv[i],"-backchannel")) {
-      sprintf(message,"b%s",argv[i+1]);
+      snprintf(message, sizeof(message), "b%s",argv[i+1]);
       send_message(&single_instance,message);
       exit(0);
     } else

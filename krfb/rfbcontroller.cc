@@ -360,14 +360,15 @@ void RFBController::startServer(int inetdFd, bool xtestGrab)
 	server->rfbServerFormat.depth = framebufferImage->depth;
 	//rfbEndianTest = framebufferImage->bitmap_bit_order != MSBFirst;
 	server->rfbServerFormat.trueColour = (CARD8) TRUE;
+	server->rfbServerFormat.bigEndian =  (CARD8) ((framebufferImage->bitmap_bit_order == MSBFirst) ? TRUE : FALSE);
 
 	if ( server->rfbServerFormat.bitsPerPixel == 8 ) {
-		server->rfbServerFormat.redShift = 0;
-		server->rfbServerFormat.greenShift = 2;
-		server->rfbServerFormat.blueShift = 5;
-		server->rfbServerFormat.redMax   = 3;
-		server->rfbServerFormat.greenMax = 7;
-		server->rfbServerFormat.blueMax  = 3;
+                server->rfbServerFormat.redShift = 0;
+                server->rfbServerFormat.greenShift = 3;
+                server->rfbServerFormat.blueShift = 6;
+                server->rfbServerFormat.redMax   = 7;
+                server->rfbServerFormat.greenMax = 7;
+                server->rfbServerFormat.blueMax  = 3;
 	} else {
 		server->rfbServerFormat.redShift = 0;
 		if ( framebufferImage->red_mask )
@@ -729,10 +730,6 @@ void RFBController::sendSessionEstablished()
         emit sessionEstablished();
 }
 
-#ifdef __osf__
-extern "C" Bool XShmQueryExtension(Display*);
-#endif
-
 bool RFBController::checkX11Capabilities() {
 	int bp1, bp2, majorv, minorv;
 	Bool r = XTestQueryExtension(qt_xdisplay(), &bp1, &bp2,
@@ -744,13 +741,6 @@ bool RFBController::checkX11Capabilities() {
 		return false;
 	}
 
-	r = XShmQueryExtension(qt_xdisplay());
-	if (!r) {
-		KMessageBox::error(0,
-		   i18n("Your X11 Server does not support the required XShm extension. You can only share a local desktop."),
-				   i18n("Desktop Sharing Error"));
-		return false;
-	}
 	return true;
 }
 

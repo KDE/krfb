@@ -200,7 +200,7 @@ rfbNewTCPOrUDPClient(rfbScreen,sock,isUDP)
     rfbClientIteratorPtr iterator;
     rfbClientPtr cl,cl_;
     struct sockaddr_in addr;
-    socklen_t addrlen = sizeof(struct sockaddr_in);
+    size_t addrlen = sizeof(struct sockaddr_in);
     int i;
 
     cl = (rfbClientPtr)calloc(sizeof(rfbClientRec),1);
@@ -721,6 +721,8 @@ rfbProcessClientNormalMessage(cl)
 		}
 		break;
 	    case rfbEncodingXCursor:
+		if (cl->enableSoftCursorUpdates)
+		  break;
 		if(!cl->screen->dontConvertRichCursorToXCursor) {
 		    rfbLog("Enabling X-style cursor updates for client %s\n",
 			   cl->host);
@@ -731,9 +733,11 @@ rfbProcessClientNormalMessage(cl)
 	    case rfbEncodingRichCursor:
 	        rfbLog("Enabling full-color cursor updates for client "
 		      "%s\n", cl->host);
-	        cl->enableCursorShapeUpdates = TRUE;
-	        cl->useRichCursorEncoding = TRUE;
-	        cl->cursorWasChanged = TRUE;
+		if (cl->enableSoftCursorUpdates)
+		  break;
+		cl->enableCursorShapeUpdates = TRUE;
+		cl->useRichCursorEncoding = TRUE;
+		cl->cursorWasChanged = TRUE;
 	        break;
 	    case rfbEncodingSoftCursor:
 	        rfbLog("Enabling soft cursor updates for client "
@@ -741,6 +745,8 @@ rfbProcessClientNormalMessage(cl)
 	        cl->enableSoftCursorUpdates = TRUE;
 	        cl->cursorWasChanged = TRUE;
 	        cl->cursorWasMoved = TRUE;
+		cl->enableCursorShapeUpdates = FALSE;
+		cl->useRichCursorEncoding = FALSE;
 	        break;
 	    case rfbEncodingLastRect:
 		if (!cl->enableLastRectEncoding) {
@@ -908,6 +914,22 @@ rfbProcessClientNormalMessage(cl)
     }
 }
 
+
+/*
+ * rfbSendPing - send an empty framebuffer request
+ */
+
+Bool
+rfbSendPing(cl)
+     rfbClientPtr cl;
+{
+    rfbFramebufferUpdateMsg *fu = (rfbFramebufferUpdateMsg *)cl->updateBuf;
+    cl->rfbFramebufferUpdateMessagesSent++;
+    fu->type = rfbFramebufferUpdate;
+    fu->nRects = Swap16IfLE((CARD16)0);
+    cl->ublen = sz_rfbFramebufferUpdateMsg;
+    return TRUE;
+}
 
 
 /*

@@ -34,6 +34,17 @@
 #include "kinetaddr.h"
 #include <netdb.h>
 
+#include <sys/types.h> 
+#include <sys/socket.h> 
+#include <netinet/in.h> 
+#include <arpa/inet.h> 
+#include <arpa/nameser.h> 
+#include <resolv.h>
+
+#ifdef sun
+#include <sys/socket.h>
+#endif
+
 #if defined(__osf__) && defined(AF_INET6)
 #undef AF_INET6
 #endif
@@ -52,7 +63,7 @@ public:
 	int sockfamily;
 	struct in_addr in;
 #ifdef AF_INET6
-	struct in6_addr in6;
+ 	struct in6_addr in6;
 #endif
 
 	KInetAddressPrivate() : sockfamily(AF_UNSPEC)
@@ -82,16 +93,14 @@ KInetAddress::KInetAddress(const struct in_addr& in) :
 	memcpy(&d->in, &in, sizeof(in));
 }
 
+#ifdef AF_INET6
 KInetAddress::KInetAddress(const struct in6_addr& in6) :
 	d(new KInetAddressPrivate)
 {
-#ifdef AF_INET6
 	d->sockfamily = AF_INET6;
 	memcpy(&d->in6, &in6, sizeof(in6));
-#else
-	d->sockfamily = AF_UNSPEC;
-#endif
 }
+#endif
 
 KInetAddress::KInetAddress(const QString &host) :
 	d(new KInetAddressPrivate)
@@ -137,7 +146,7 @@ QString KInetAddress::nodeName() const
 {
 	char buf[INET6_ADDRSTRLEN+1];	// INET6_ADDRSTRLEN > INET_ADDRSTRLEN
 
-#ifdef __osf__
+#ifdef __osf__ || defined(sun)
 	if (d->sockfamily == AF_INET) {
 	    char *p = inet_ntoa(d->in);
 	    strncpy(buf, p, sizeof(buf));

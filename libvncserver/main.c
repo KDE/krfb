@@ -35,6 +35,9 @@ typedef int socklen_t;
 #include "rfb.h"
 #include "sraRegion.h"
 
+/* minimum interval between attempts to send something */
+#define PING_MS 10000
+
 MUTEX(logMutex);
 
 int rfbEnableLogging=1;
@@ -257,11 +260,13 @@ clientOutput(void *data)
 	    UNLOCK(cl->updateMutex);
 
             if (!haveUpdate) {
-                WAIT(cl->updateCond, cl->updateMutex);
+                TIMEDWAIT(cl->updateCond, cl->updateMutex, PING_MS);
 		UNLOCK(cl->updateMutex); /* we really needn't lock now. */
+		if (!haveUpdate)
+		    rfbSendPing(cl);
             }
         }
-        
+
         /* OK, now, to save bandwidth, wait a little while for more
            updates to come along. */
         usleep(cl->screen->rfbDeferUpdateTime * 1000);
@@ -318,7 +323,7 @@ listenerRun(void *data)
     int client_fd;
     struct sockaddr_in peer;
     rfbClientPtr cl;
-    socklen_t len;
+    size_t len;
 
     if (rfbScreen->inetdSock != -1) {
        cl = rfbNewClient(rfbScreen, rfbScreen->inetdSock);
