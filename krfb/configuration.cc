@@ -499,7 +499,7 @@ void Configuration::inviteEmail() {
 		     "a VNC client with the following parameters:\n\n"
 		     "Host: %1:%2\n"
 		     "Password: %3\n\n"
-		     "For security reasons this invitation will expire on %4.")
+		     "For security reasons this invitation will expire at %4.")
 			.arg(hostname())
 			.arg(port())
 			.arg(inv.password())
