@@ -258,7 +258,6 @@ void SessionEstablishedEvent::exec() {
 
 
 RFBController::RFBController(Configuration *c) :
-	connectionNum(0),
 	configuration(c),
 	closePending(false),
 	forcedClose(false)
@@ -384,7 +383,6 @@ void RFBController::connectionAccepted(bool aRC)
 		return;
 
 	configuration->setAllowDesktopControl(aRC);
-	connectionNum++;
 	idleTimer.start(IDLE_PAUSE);
 
 	server->rfbClientHead->clientGoneHook = clientGoneHook;
@@ -443,7 +441,6 @@ void RFBController::connectionClosed()
 			     .arg(remoteIp));
 
 	idleTimer.stop();
-	connectionNum--;
 	state = RFB_WAITING;
 	if (forcedClose)
 	        emit quitApp();
@@ -587,8 +584,7 @@ enum rfbNewClientAction RFBController::handleNewClient(rfbClientPtr cl)
 		delete ksa;
 	}
 
-	if ((connectionNum > 0) ||
-	    (state != RFB_WAITING)) {
+	if (state != RFB_WAITING) {
 		sendKNotifyEvent("TooManyConnections",
 					i18n("Connection refused from %1, already connected.")
 					.arg(host));

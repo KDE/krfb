@@ -159,7 +159,6 @@ private:
 	bool checkAsyncEvents();
 	void sendSessionEstablished();
 	
-	int connectionNum;
 	QString remoteIp;
 
 	QTimer idleTimer;
