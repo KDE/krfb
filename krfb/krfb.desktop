@@ -1,5 +1,6 @@
 # KDE Config File  
 [Desktop Entry]
+OnlyShowIn=KDE;
 Type=Application
 Exec=krfb -caption "%c" %i %m
 Icon=krfb
@@ -15,7 +16,7 @@ Name[cs]=Sdílení pracovní plochy
 Name[cy]=Rhannu Penbwrdd
 Name[da]=Skrivebordsdeling
 Name[de]=Arbeitsfläche freigeben
-Name[el]=Μοίρασμα επιφάνειας εργασίας
+Name[el]=Κοινή χρήση επιφάνειας εργασίας
 Name[eo]=Tabuloj komunaj
 Name[es]=Compartición de escritorio
 Name[et]=Töölaua jagamine
@@ -26,6 +27,7 @@ Name[he]=שיתוף שולחנות עבודה
 Name[hi]=डेस्कटॉप साझा
 Name[hr]=Dijeljenje radne površine
 Name[hu]=Munkaasztal-megosztás
+Name[is]=Skjáborðamiðlun
 Name[it]=Condivisione Desktop
 Name[ja]=デスクトップ共有
 Name[lt]=Dalinimasis darbastaliu
@@ -44,6 +46,7 @@ Name[ru]=Общий рабочий стол
 Name[sk]=Zdieľanie pracovnej plochy
 Name[sl]=Deljenje namizja
 Name[sr]=Дељење радне површине
+Name[sr@Latn]=Deljenje radne površine
 Name[sv]=Dela ut skrivbordet
 Name[ta]=மேசைமேல் பகிர்வு
 Name[th]=ใช้งานพื้นที่ทำงานร่วมกัน
