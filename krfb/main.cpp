@@ -48,7 +48,7 @@ static const char description[] = I18N_NOOP("VNC-compatible server to share "
 
 static KCmdLineOptions options[] =
 {
-	{ ARG_KINETD " ", I18N_NOOP("Used for calling from kinetd."), 0},
+	{ ARG_KINETD " ", I18N_NOOP("Used for calling from kinetd"), 0},
 	KCmdLineLastOption
 };
 
