@@ -455,7 +455,7 @@ void RFBController::connectionAccepted(bool aRC)
 	        emit sessionEstablished();
 }
 
-void RFBController::acceptConnection(bool aRC)
+void RFBController::acceptConnection(bool aRemoteControl)
 {
 	KNotifyClient::event("UserAcceptsConnection",
 			     i18n("User accepts connection from %1")
@@ -464,7 +464,7 @@ void RFBController::acceptConnection(bool aRC)
 	if (state != RFB_CONNECTING)
 		return;
 
-	connectionAccepted(aRC);
+	connectionAccepted(aRemoteControl);
 	rfbStartOnHoldClient(server->rfbClientHead);
 }
 
