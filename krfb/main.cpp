@@ -39,7 +39,6 @@
 
 static const char *description = I18N_NOOP("VNC-compatible server to share "
 					   "KDE desktops");
-#define ARG_PORT "port"
 #define ARG_ONE_SESSION "one-session"
 #define ARG_PASSWORD "password"
 #define ARG_DONT_CONFIRM_CONNECT "dont-confirm-connect"
@@ -47,8 +46,6 @@ static const char *description = I18N_NOOP("VNC-compatible server to share "
 	
 static KCmdLineOptions options[] =
 {
-	{ "p", 0, 0},
-	{ ARG_PORT " ", I18N_NOOP("Set the port number the server is listening on."), "0"},
 	{ "o", 0, 0},
 	{ ARG_ONE_SESSION, I18N_NOOP("Terminate when the first session is finished."), 0},
 	{ "w", 0, 0},
@@ -63,7 +60,6 @@ static KCmdLineOptions options[] =
 
 int main(int argc, char *argv[])
 {
-	int r;
 	KAboutData aboutData( "krfb", I18N_NOOP("Desktop Sharing"),
 		VERSION, description, KAboutData::License_GPL,
 		"(c) 2001-2002, Tim Jansen\n"
@@ -99,8 +95,7 @@ int main(int argc, char *argv[])
 
 	Configuration *config;
 	KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
-	if (args->isSet(ARG_PORT) ||
-	    args->isSet(ARG_ONE_SESSION) ||
+	if (args->isSet(ARG_ONE_SESSION) ||
 	    args->isSet(ARG_PASSWORD) ||
 	    args->isSet(ARG_REMOTE_CONTROL) ||
 	    args->isSet(ARG_DONT_CONFIRM_CONNECT)) {
@@ -109,9 +104,8 @@ int main(int argc, char *argv[])
 		bool askOnConnect = !args->isSet(ARG_DONT_CONFIRM_CONNECT);
 		bool allowDesktopControl = args->isSet(ARG_REMOTE_CONTROL);
 		QString password = args->getOption(ARG_PASSWORD);
-		int port = args->getOption(ARG_PORT).toInt();
 		config = new Configuration(oneConnection, askOnConnect, 
-					   allowDesktopControl, password, port);
+					   allowDesktopControl, password);
 	}
 	else
 		config = new Configuration();
@@ -140,13 +134,15 @@ int main(int argc, char *argv[])
 	QObject::connect(&dcopiface, SIGNAL(exitApp()),
 			 &app, SLOT(quit()));
 
-	QObject::connect(config, SIGNAL(portChanged()),
-			 &controller, SLOT(rebind()));
 	QObject::connect(config, SIGNAL(passwordChanged()),
 			 &controller, SLOT(passwordChanged()));
 
+	QObject::connect(&controller, SIGNAL(portProbed(int)),
+			 &dcopiface, SLOT(setPort(int)));
+
 	QObject::connect(&controller, SIGNAL(sessionEstablished()),
 			 &trayicon, SLOT(openConnection()));
+
 	if (config->oneConnection()) {
 		QObject::connect(&controller, SIGNAL(sessionRefused()),
 				 &app, SLOT(quit()));

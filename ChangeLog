@@ -1,3 +1,7 @@
+2002-02-17  Tim Jansen  <tjansen@tjansen.de>
+
+	* rfbcontroller.cc: added KNotify support
+
 2002-02-14  Tim Jansen  <tjansen@tjansen.de>
 
 	* integrated DCOP interface patch by Ian Reinhart 

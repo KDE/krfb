@@ -15,14 +15,14 @@ Some comments on various aspects of KRfb:
   issues like setting a password
 - design goal of KRfb is to make it as easy to use as possible. I tried to
   limit functionality whereever possible. 
-- the original x0rfbserver has a features for selecting the port number
-  automatically. I skipped that because it is too complicated on the client
-  side, but I this will change when there are mechanisms for inviting people.
 - the command line args are intended for starting KRfb from a system like
   Jabber, thats the reason why there is no preferences dialog when 
   command line args have been used and it's also the reason 
   for --one-connection
 - the newconnection-dialog is extra large and has the pixmap on the left 
   side to capture the attention of the user before allowing a connection. 
+- the auto-port-selection feature is somewhat inconvenient when you have
+  more than one VNC server running (you cannot know the port). Problems
+  willbe solved in a future version when there is an invitation feature.
 
 tim@tjansen.de

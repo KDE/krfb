@@ -1,6 +1,4 @@
 Todo:
-- big endian support (testers needed)
-- write screen recording app using the lib
 - SLP support (or UPnP, or whatever KDE will use)
 - look into adding extension to xfree to improve speed (get noticed of
   screen updates)

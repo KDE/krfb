@@ -120,6 +120,7 @@ public:
 	void handlePointerEvent(int button_mask, int x, int y);
 	enum rfbNewClientAction handleNewClient(rfbClientPtr cl);
 	void handleClientGone();
+	int getPort();
 
 	static bool checkX11Capabilities();
 
@@ -132,6 +133,7 @@ signals:
         void sessionEstablished();
 	void sessionFinished(); 
 	void sessionRefused();
+	void portProbed(int);
  
 private:	
 	void startServer(bool xtestGrab = true);
@@ -140,6 +142,7 @@ private:
 
 	bool allowRemoteControl;
 	int connectionNum;
+	QString remoteIp;
 
 	QTimer idleTimer;
 	Configuration *configuration;

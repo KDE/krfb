@@ -1,0 +1,24 @@
+DCOP Interfaces:
+// Disconnects the current session
+void disconnect()
+// Exits the application
+void exit()
+// Will the application quit after one connection
+bool oneConnection()
+// Set the application to quite after one connection
+void setOneConnection(bool)
+// Will the application ask the user for permission
+// when a new connection arrives
+bool askOnConnect()
+// Set the application to ask for permission on new connections
+void setAskOnConnect(bool)
+// Is the desktop controlable from remote clients
+bool allowDesktopControl()
+// Set the desktop to be controlable from remote clients
+void setAllowDesktopControl(bool)
+// Set the password to connect to your system
+void setPassword(QString)
+// What port will clients connect on
+int port()
+
+

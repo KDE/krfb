@@ -1,0 +1,13 @@
+[Desktop Entry]
+Encoding=UTF-8
+Type=Service
+
+ServiceTypes=KDEDModule
+X-KDE-ModuleType=Library
+X-KDE-Library=kinetd
+X-KDE-FactoryName=kinetd
+X-KDE-Kded-autoload=true
+X-KDE-Kded-load-on-demand=false
+
+Name=KDE Print Deamon
+Comment=A Print Daemon for KDE

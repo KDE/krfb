@@ -26,6 +26,7 @@
 #include <fcntl.h>
 
 #include <kapplication.h>
+#include <knotifyclient.h>
 #include <kdebug.h>
 #include <kmessagebox.h>
 #include <klocale.h>
@@ -311,8 +312,7 @@ void RFBController::startServer(bool xtestGrab)
 	}
 
 	server->frameBuffer = fb;
-	server->rfbPort = configuration->port();
-	//server->udpPort = configuration->port();
+	server->autoPort = TRUE;
 	
 	server->kbdAddEvent = keyboardHook;
 	server->ptrAddEvent = pointerHook;
@@ -329,6 +329,8 @@ void RFBController::startServer(bool xtestGrab)
 
 	rfbInitServer(server);
 	state = RFB_WAITING;
+
+	emit portProbed(server->rfbPort);
 
 	if (xtestGrab) {
 		disabler.disable = false;
@@ -374,7 +376,10 @@ void RFBController::connectionAccepted(bool aRC)
 
 void RFBController::acceptConnection(bool aRC) 
 {
-// todo: knotify
+	KNotifyClient::event("UserAcceptsConnection",
+			     i18n("Connecting system: %1")
+			     .arg(remoteIp));
+
 	if (state != RFB_CONNECTING)
 		return;
 
@@ -384,7 +389,10 @@ void RFBController::acceptConnection(bool aRC)
 
 void RFBController::refuseConnection() 
 {
-// todo: knotify
+	KNotifyClient::event("UserRefusesConnection",
+			     i18n("Connecting system: %1")
+			     .arg(remoteIp));
+
 	if (state != RFB_CONNECTING)
 		return;
 	rfbRefuseOnHoldClient(server->rfbClientHead);
@@ -411,7 +419,10 @@ bool RFBController::checkAsyncEvents()
 
 void RFBController::connectionClosed() 
 {
-// todo: knotify
+	KNotifyClient::event("ConnectionClosed",
+			     i18n("Closed connection: %1.")
+			     .arg(remoteIp));
+
 	idleTimer.stop();
 	connectionNum--;
 	state = RFB_WAITING;
@@ -490,7 +501,14 @@ bool RFBController::handleCheckPassword(rfbClientPtr cl,
 	vncEncryptBytes(cl->authChallenge, passwd);
 	
 	if (memcmp(cl->authChallenge, response, len) != 0) {
-		// TODO: knotify
+		QString host, port;
+		KExtendedSocket::resolve(KExtendedSocket::peerAddress(cl->sock),
+					 host, port);
+
+		KNotifyClient::event("InvalidPassword",
+				     i18n("Connecting system: %1")
+				     .arg(remoteIp));
+		
 		return FALSE;
 	}
 	return TRUE;
@@ -500,22 +518,35 @@ enum rfbNewClientAction RFBController::handleNewClient(rfbClientPtr cl)
 {
 	int socket = cl->sock;
 
-	if ((connectionNum > 0) ||
-	    (state != RFB_WAITING)) 
-		return RFB_CLIENT_REFUSE;
+	QString host, port;
+	KExtendedSocket::resolve(KExtendedSocket::peerAddress(socket),
+				 host, port);
 
+	if ((connectionNum > 0) ||
+	    (state != RFB_WAITING)) {
+		KNotifyClient::event("TooManyConnections",
+				     i18n("Connecting system: %1")
+				     .arg(host));
+		return RFB_CLIENT_REFUSE;
+	}
+
+	remoteIp = host;
 	state = RFB_CONNECTING;
 
 	if (!configuration->askOnConnect()) {
+		KNotifyClient::event("NewConnectionAutoAccepted",
+				     i18n("Connecting system: %1")
+				     .arg(remoteIp));
+		
 		connectionAccepted(configuration->allowDesktopControl());
 		return RFB_CLIENT_ACCEPT;
 	}
 
-// TODO: knotify
-	QString host, port;
-	KExtendedSocket::resolve(KExtendedSocket::peerAddress(socket),
-				 host, port);
-	dialog.ipLabel->setText(host);
+	KNotifyClient::event("NewConnectionOnHold",
+				     i18n("Connecting system: %1")
+				     .arg(remoteIp));
+
+	dialog.ipLabel->setText(remoteIp);
 	dialog.allowRemoteControlCB->setChecked(configuration->allowDesktopControl());
 	dialog.setFixedSize(dialog.sizeHint());
 	dialog.show();
@@ -550,6 +581,11 @@ void RFBController::handlePointerEvent(int button_mask, int x, int y) {
 void RFBController::passwordChanged() {
 	server->rfbAuthPasswdData = (const char*) 
 		((configuration->password().length() == 0) ? 0 :  1);
+}
+
+int RFBController::getPort()
+{
+	return server->rfbPort;
 }
 
 bool RFBController::checkX11Capabilities() {

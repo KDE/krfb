@@ -19,6 +19,5 @@ k_dcop:
 	virtual void setAllowDesktopControl(bool) = 0;
 	virtual void setPassword(QString) = 0;
 	virtual int port() = 0;
-	virtual void setPort(int) = 0;
 };
 #endif

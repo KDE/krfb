@@ -11,7 +11,8 @@
 
 KRfbIfaceImpl::KRfbIfaceImpl(Configuration *c) :
 	DCOPObject("krfbIface"),
-	configuration(c)
+	configuration(c),
+	portNum(0)
 {	
 }
 
@@ -60,10 +61,16 @@ void KRfbIfaceImpl::setPassword(QString password)
 }
 int KRfbIfaceImpl::port()
 {
-	return configuration->port();
+	return portNum;
 }
-void KRfbIfaceImpl::setPort(int port)
+
+/*
+ * Note that setPort() is not a DCOP function, but a slot that's
+ * connected to RFBController to get the autoprobed port. 
+ */
+void KRfbIfaceImpl::setPort(int p)
 {
-	configuration->setPort(port);
+	portNum = p;
 }
+
 

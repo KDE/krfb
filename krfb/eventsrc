@@ -1,0 +1,40 @@
+[!Global!]
+IconName=krfb
+Comment=Desktop Sharing
+
+[UserAcceptsConnection]
+Name=UserAcceptsConnection
+Comment=User accepts connection
+default_presentation=4
+
+[UserRefusesConnection]
+Name=UserRefusesConnection
+Comment=User refuses connection
+default_presentation=4
+
+[ConnectionClosed]
+Name=ConnectionClosed
+Comment=Connection closed
+default_presentation=4
+
+[InvalidPassword]
+Name=InvalidPassword
+Comment=Invalid Password
+default_presentation=4
+
+[NewConnectionOnHold]
+Name=NewConnectionOnHold
+Comment=Connection requested, user must accept
+default_presentation=4
+
+[NewConnectionAutoAccepted]
+Name=NewConnectionAutoAccepted
+Comment=New connection automatically established
+default_presentation=4
+
+[TooManyConnections]
+Name=TooManyConnections
+Comment=Busy, connection refused
+default_presentation=4
+default_logfile=
+

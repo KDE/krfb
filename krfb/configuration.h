@@ -42,7 +42,7 @@ class Configuration : public QObject {
 public:
 	Configuration();
 	Configuration(bool oneConnection, bool askOnConnect, 
-		      bool allowDesktopControl, QString password, int port);
+		      bool allowDesktopControl, QString password);
 	~Configuration();
 
 	bool preconfigured() const;
@@ -50,16 +50,13 @@ public:
 	bool askOnConnect() const; 
 	bool allowDesktopControl() const;
 	QString password() const;
-	int port() const;
 
         void setOnceConnection(bool oneConnection);
         void setAskOnConnect(bool askOnConnect);
         void setAllowDesktopControl(bool allowDesktopControl);
 	void setPassword(QString password);
-	void setPort(int port);
 
 signals:
-  	void portChanged();
   	void passwordChanged();
 
 public slots:
@@ -79,7 +76,6 @@ private:
 	bool allowDesktopControlFlag;
 	bool oneConnectionFlag;
 	QString passwordString;
-	int portNumber;
 
 private slots:
 	void okPressed();

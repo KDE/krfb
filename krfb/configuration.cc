@@ -36,10 +36,6 @@ Configuration::Configuration() :
 	loadFromKConfig();
 	saveToDialog();
 
-	portValidator = new QIntValidator(0, 65535, 
-					  confDlg.displayNumberInput);
-	confDlg.displayNumberInput->setValidator(portValidator);
-
 	connect(confDlg.okButton, SIGNAL(clicked()), 
 		SLOT(okPressed()));
 	connect(confDlg.cancelButton, SIGNAL(clicked()), 
@@ -50,18 +46,13 @@ Configuration::Configuration() :
 }
 
 Configuration::Configuration(bool oneConnection, bool askOnConnect, 
-			     bool allowDesktopControl, QString password, 
-			     int port) :
+			     bool allowDesktopControl, QString password) :
 	preconfiguredFlag(true),
 	askOnConnectFlag(askOnConnect),
 	allowDesktopControlFlag(allowDesktopControl),
 	oneConnectionFlag(oneConnection),
 	passwordString(password)
 {
-	if ((port >= 5900) && (port < 6000))
-		portNumber = port-5900;
-	else
-		portNumber = port;
 }
 
 
@@ -76,7 +67,6 @@ void Configuration::loadFromKConfig() {
 	allowDesktopControlFlag = config->readBoolEntry("allowDesktopControl", 
 							false);
 	passwordString = config->readEntry("password", "");
-	portNumber = config->readNumEntry("port", 0);
 }
 
 void Configuration::loadFromDialog() {
@@ -87,11 +77,6 @@ void Configuration::loadFromDialog() {
 		passwordString = newPassword;
 		emit passwordChanged();
 	}
-	int p = confDlg.displayNumberInput->text().toInt();
-	if (p != portNumber) {
-		portNumber = p;
-		emit portChanged();
-	}
 }
 
 void Configuration::saveToKConfig() {
@@ -101,14 +86,12 @@ void Configuration::saveToKConfig() {
 	config->writeEntry("askOnConnect", askOnConnectFlag);
 	config->writeEntry("allowDesktopControl", allowDesktopControlFlag);
 	config->writeEntry("password", passwordString);
-	config->writeEntry("port", portNumber);
 }
 
 void Configuration::saveToDialog() {
 	confDlg.askOnConnectCB->setChecked(askOnConnectFlag);
 	confDlg.allowDesktopControlCB->setChecked(allowDesktopControlFlag);
 	confDlg.passwordInput->setText(passwordString);
-	confDlg.displayNumberInput->setText(QString().setNum(portNumber));
 }
 
 bool Configuration::preconfigured() const {
@@ -129,10 +112,6 @@ bool Configuration::allowDesktopControl() const {
 
 QString Configuration::password() const {
 	return passwordString;
-}
-
-int Configuration::port() const {
-	return (portNumber < 100) ? (portNumber + 5900) : portNumber;
 }
 
 void Configuration::setOnceConnection(bool oneConnection)
@@ -160,19 +139,6 @@ void Configuration::setPassword(QString password)
 {
         passwordString = password;
   	emit passwordChanged();
-        saveToKConfig();
-        saveToDialog();
-}
-
-void Configuration::setPort(int port)
-{
-	int oldPort = portNumber;
-        if ((port >= 5900) && (port < 6000))
-                portNumber = port-5900;
-        else
-                portNumber = port;
-	if (oldPort != portNumber)
-		emit portChanged();
         saveToKConfig();
         saveToDialog();
 }
