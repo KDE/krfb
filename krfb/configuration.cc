@@ -226,8 +226,10 @@ void Configuration::saveToKConfig() {
 	int num = invitationList.count();
 	c.writeEntry("invitation_num", num);
 	int i = 0;
-	while (i < num)
-		invitationList[i++].save(&c, i);
+	while (i < num) {
+		invitationList[i].save(&c, i);
+		i++;
+	}
 
 }
 
