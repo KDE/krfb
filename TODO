@@ -1,6 +1,6 @@
 For 3.1:
-- make sure that KMail supports vnc urls or use files
 - write SLP service template for remote desktop protocols
+  (documentation)
 
 For 3.2:
 - enhance RFB with SASL authentication (Kerberos)

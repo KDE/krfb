@@ -1,7 +1,6 @@
 SUBDIRS = srvloc kinetd libvncserver krfb kcm_krfb 
 
-EXTRA_DIST = AUTHORS COPYING ChangeLog INSTALL README TODO NOTES \
-             ROADMAP DCOP-INTERFACE krfb.lsm 
+EXTRA_DIST = AUTHORS README TODO NOTES DCOP-INTERFACE
 
 # not a GNU package. You can remove this line, if 
 # have all needed files, that a GNU package needs

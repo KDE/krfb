@@ -360,9 +360,6 @@ int Configuration::preferredPort() const
 }
 
 
-// hostname is implemented in configuration_hostname.cpp
-// QString Configuration::hostname()
-
 ////////////// invitation manage dialog //////////////////////////
 
 void Configuration::showManageInvitationsDialog() {
