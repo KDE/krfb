@@ -217,7 +217,7 @@
                                                 <string></string>
                                             </property>
                                             <property name="whatsThis" stdset="0">
-                                                <string>Create a new invitation and display the connection data. Use this option if you want to invite somebody personally, for example to tell the connection data on the phone.</string>
+                                                <string>Create a new invitation and display the connection data. Use this option if you want to invite somebody personally, for example, to give the connection data over the phone.</string>
                                             </property>
                                         </widget>
                                         <widget class="QPushButton">

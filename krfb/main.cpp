@@ -111,7 +111,7 @@ int main(int argc, char *argv[])
 		if (!kinetdA) {
 		        KMessageBox::error(0,
 					   i18n("Cannot find KInetD. "
-						"The KDE daemon (kded) may have crashed  or has not been started at all, or the installation failed."),
+						"The KDE daemon (kded) may have crashed or has not been started at all, or the installation failed."),
 					   i18n("Desktop Sharing Error"));
 			return 1;
 		}
