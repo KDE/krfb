@@ -307,10 +307,7 @@ QString PortListener::name() {
 
 PortListener::~PortListener() {
 	setServiceRegistrationEnabledInternal(false);
-	if (m_socket)
-		delete m_socket;
-	if (m_config)
-		delete m_config;
+	delete m_socket;
 }
 
 
