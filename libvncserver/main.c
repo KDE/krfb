@@ -329,7 +329,7 @@ listenerRun(void *data)
        cl = rfbNewClient(rfbScreen, rfbScreen->inetdSock);
        if (cl && !cl->onHold)
            rfbStartOnHoldClient(cl);
-       else if (rfbScreen->inetdDisconnectHook)
+       else if (rfbScreen->inetdDisconnectHook && !cl)
            rfbScreen->inetdDisconnectHook();
        return 0;
     }
