@@ -147,9 +147,6 @@ int PortListener::port() {
 }
 
 void PortListener::setEnabled(bool e) {
-	if (e == enabled)
-		return;
-
 	setEnabledInternal(e, QDateTime());
 }
 
@@ -158,12 +155,15 @@ void PortListener::setEnabledInternal(bool e, const QDateTime &ex) {
 	if (e) {
 		if (portNum < 0)
 			acquirePort();
-		if (portNum < 0)
+		if (portNum < 0) {
+			enabled = false;
 			return;
+		}
 	}
 	else {
 		portNum = -1;
-		delete socket;
+		if (socket)
+			delete socket;
 		socket = 0;
 	}
 

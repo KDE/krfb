@@ -7,7 +7,7 @@ Version 0.6 (2002/02/18): Improved RFB backend
 - dcop support
 - knotify
 
-Version 0.7 (2002/4/1): Better integration with KDE, improved GUI, invitations
+Version 0.7 (2002/4/X): Better integration with KDE, improved GUI, invitations
 - kded module 'kinetd' that listens on the Rfb port and starts KRfb
 - invitation support
 - kcontrol module

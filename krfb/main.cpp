@@ -89,8 +89,7 @@ static KCmdLineOptions options[] =
  *   + does not accept connections, no tray icon
  *
  * TODO:
- * - error on 'close connection' in kinetd mode
- * - disable kinetd when no invitation valid
+ * - fix bug on 'close connection' in kinetd mode
  */
 
 void checkKInetd(bool &kinetdAvailable, bool &krfbAvailable) {
@@ -114,7 +113,6 @@ void checkKInetd(bool &kinetdAvailable, bool &krfbAvailable) {
 	kinetdAvailable = true;
 }
 
-
 int main(int argc, char *argv[])
 {
 	enum krfb_mode mode = KRFB_UNKNOWN_MODE;
@@ -122,7 +120,7 @@ int main(int argc, char *argv[])
 	KAboutData aboutData( "krfb", I18N_NOOP("Desktop Sharing"),
 		VERSION, description, KAboutData::License_GPL,
 		"(c) 2001-2002, Tim Jansen\n"
-		"(c) 2001 Johannes E. Schindelin\n"
+		"(c) 2001, Johannes E. Schindelin\n"
 		"(c) 2000, heXoNet Support GmbH, D-66424 Homburg\n"
 		"(c) 2000, Const Kaplinsky\n"
 		"(c) 2000, Tridia Corporation\n"
@@ -148,7 +146,7 @@ int main(int argc, char *argv[])
 	KCmdLineArgs::init(argc, argv, &aboutData);
 	KCmdLineArgs::addCmdLineOptions(options);
 
- 	KApplication app;
+	KApplication app;
 
 	Configuration *config;
 	KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
