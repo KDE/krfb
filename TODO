@@ -1,5 +1,4 @@
 For 3.1:
-- remove krfb from all user-visible places
 - write SLP service template for remote desktop protocols
   (documentation)
 
