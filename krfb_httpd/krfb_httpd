@@ -35,7 +35,7 @@ case "$url" in
 	content="
 <HTML><HEAD><TITLE>$LOGNAME's desktop</TITLE></HEAD>
 <BODY>
-<APPLET CODE=vncviewer.class ARCHIVE=vncviewer.jar WIDTH=$width HEIGHT=$height>
+<APPLET CODE=VncViewer.class ARCHIVE=VncViewer.jar WIDTH=$width HEIGHT=$height>
 	<param name=PORT value=$port>
 </APPLET>
 </BODY></HTML>"
