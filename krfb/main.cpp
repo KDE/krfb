@@ -15,16 +15,17 @@
  *                                                                         *
  ***************************************************************************/
 
+#include <kpixmap.h>
+#include <kapplication.h>
+#include <ksystemtray.h>
 #include <kcmdlineargs.h>
 #include <kaboutdata.h>
 #include <klocale.h>
 
-#include "krfb.h"
+#define VERSION "0.1"
 
-static const char *description =
-	I18N_NOOP("Krfb");
-// INSERT A DESCRIPTION FOR YOUR APPLICATION HERE
-	
+static const char *description = I18N_NOOP("Krfb");
+
 	
 static KCmdLineOptions options[] =
 {
@@ -32,20 +33,36 @@ static KCmdLineOptions options[] =
   // INSERT YOUR COMMANDLINE OPTIONS HERE
 };
 
+static KPixmap *trayIconOpen;
+static KPixmap *trayIconClosed;
+static KSystemTray *tray;
+
+void setOpenIcon() {
+	tray->setPixmap(*trayIconOpen);
+}
+
+void setClosedIcon() {
+	tray->setPixmap(*trayIconClosed);
+}
+
 int main(int argc, char *argv[])
 {
-
   KAboutData aboutData( "krfb", I18N_NOOP("Krfb"),
     VERSION, description, KAboutData::License_GPL,
     "(c) 2001, Tim Jansen", 0, 0, "tim@tjansen.de");
   aboutData.addAuthor("Tim Jansen",0, "tim@tjansen.de");
   KCmdLineArgs::init( argc, argv, &aboutData );
-  KCmdLineArgs::addCmdLineOptions( options ); // Add our own options.
+  KCmdLineArgs::addCmdLineOptions( options );
 
-  KApplication a;
-  Krfb *krfb = new Krfb();
-  a.setMainWidget(krfb);
-  krfb->show();  
+ 	KApplication app;
 
-  return a.exec();
+ 	tray = new KSystemTray();
+ 	trayIconOpen = new KPixmap();
+ 	trayIconClosed = new KPixmap();
+	trayIconOpen->load("eyes-open24.png");
+	trayIconClosed->load("eyes-closed24.png");
+	setClosedIcon();
+	tray->show();
+	
+  return app.exec();
 }

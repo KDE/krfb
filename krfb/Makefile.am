@@ -1,10 +1,10 @@
 ####### kdevelop will overwrite this part!!! (begin)##########
 bin_PROGRAMS = krfb
-krfb_SOURCES = krfb.cpp main.cpp 
-krfb_LDADD   =  $(LIB_QT) $(LIB_KDECORE) $(LIB_KDEUI)  $(LIBSOCKET)
+krfb_SOURCES = XUpdateScanner.cc rfbserver.cpp main.cpp 
+krfb_LDADD   = lib/liblib.a  $(LIB_QT) $(LIB_KDECORE) $(LIB_KDEUI)  $(LIBSOCKET)
 
 
-EXTRA_DIST = main.cpp krfb.cpp krfb.h krfb.desktop lo32-app-krfb.png lo16-app-krfb.png 
+EXTRA_DIST = main.cpp krfb.desktop lo32-app-krfb.png lo16-app-krfb.png rfbserver.cpp rfbserver.h eyes-closed24.png eyes-open24.png XUpdateScanner.cc XUpdateScanner.h 
 
 install-data-local:
 	$(mkinstalldirs) $(kde_appsdir)/Applications/
@@ -34,7 +34,7 @@ uninstall-local:
 # kde_wallpaperdir  Where general wallpapers should go to.
 
 # set the include path for X, qt and KDE
-INCLUDES= $(all_includes)
+INCLUDES= $(all_includes) ../include
 
 METASOURCES = AUTO
 

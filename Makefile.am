@@ -1,6 +1,6 @@
 ####### kdevelop will overwrite this part!!! (begin)##########
 
-SUBDIRS = krfb po doc 
+SUBDIRS = krfb po doc lib include 
 
 EXTRA_DIST = krfb.kdevprj admin AUTHORS COPYING ChangeLog INSTALL README TODO krfb.lsm 
 
