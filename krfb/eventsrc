@@ -2,35 +2,44 @@
 IconName=krfb
 Comment=Desktop Sharing
 Comment[da]=Skrivebords-deling
+Comment[ro]=Partajare ecran
 
 [UserAcceptsConnection]
 Name=UserAcceptsConnection
 Name[da]=BrugerAcceptererForbindelse
+Name[ro]=Conexiune acceptată de utilizator
 Comment=User accepts connection
 Comment[da]=Bruger accepterer forbindelse
+Comment[ro]=Utilizatorul acceptă conexiunea
 default_presentation=4
 
 [UserRefusesConnection]
 Name=UserRefusesConnection
 Name[da]=BrugerAfslårForbindelse
+Name[ro]=Conexiune respinsă de utilizator
 Comment=User refuses connection
 Comment[da]=Bruger afslår forbindelse
+Comment[ro]=Utilizatorul refuză conexiunea
 default_presentation=4
 
 [ConnectionClosed]
 Name=ConnectionClosed
 Name[da]=ForbindelseLukket
+Name[ro]=Conexiune închisă
 Comment=Connection closed
 Comment[da]=Forbindelse lukket
+Comment[ro]=Conexiune închisă
 default_presentation=4
 
 [InvalidPassword]
 Name=InvalidPassword
 Name[be]=Некарэктны пароль
 Name[da]=UgyldigtKodeord
+Name[ro]=Parolă eronată
 Comment=Invalid password
 Comment[be]=Некарэктны пароль
 Comment[da]=Ugyldigt kodeord
+Comment[ro]=Parolă eronată
 default_presentation=4
 
 [InvalidPasswordInvitations]
@@ -43,29 +52,37 @@ default_presentation=2
 [NewConnectionOnHold]
 Name=NewConnectionOnHold
 Name[da]=NyForbindelseOnHold
+Name[ro]=Conexiune nouă în aşteptare
 Comment=Connection requested, user must accept
 Comment[da]=Forbindelse forespurgt, bruger skal acceptere
+Comment[ro]=Cerere de conectare; utilizatorul trebuie să accepte
 default_presentation=4
 
 [NewConnectionAutoAccepted]
 Name=NewConnectionAutoAccepted
 Name[da]=NyForbindelseAutoAccepteret
+Name[ro]=Conexiune nouă acceptată automat
 Comment=New connection automatically established
 Comment[da]=Ny forbindelse automatisk etableret
+Comment[ro]=Conexiune nouă stabilită automat
 default_presentation=4
 
 [TooManyConnections]
 Name=TooManyConnections
 Name[da]=ForMangeForbindelser
+Name[ro]=Prea multe conexiuni
 Comment=Busy, connection refused
 Comment[da]=Optaget, forbindelse afslået
+Comment[ro]=Ocupat; conexiune refuzată
 default_presentation=4
 default_logfile=
 
 [UnexpectedConnection]
 Name=UnexpectedConnection
 Name[da]=UventetForbindelse
+Name[ro]=Conexiune neaşteptată
 Comment=Received unexpected connection, abort
 Comment[da]=Modtog uventet forbindelse, afbrød
+Comment[ro]=A fost recepţionată o conexiune neaşteptată şi a fost anulată
 default_presentation=4
 

@@ -5,13 +5,16 @@ Comment=KInetD
 [IncomingConnection]
 Name=IncomingConnection
 Name[da]=IndkommendeForbindelse
+Name[ro]=Conexiune de intrare
 Comment=Received incoming connection
 Comment[da]=Modtog indkommende forbindelse
+Comment[ro]=Conexiune de intrare recepţionată
 default_presentation=4
 
 [ProcessFailed]
 Name=ProcessFailed
 Name[da]=ProcesMislykkedes
+Name[ro]=Proces eşuat
 Comment=Could not call process to handle connection
 Comment[da]=Kunne ikke kalde proces til at håndtere forbindelse
 default_presentation=4
