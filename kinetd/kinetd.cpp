@@ -18,7 +18,7 @@
 
 #include "kinetd.h"
 #include "kinetd.moc"
-#include "kinetaddr.h"
+#include "kinetinterface.h"
 #include "kuser.h"
 #include "uuid.h"
 #include <qregexp.h>
@@ -210,10 +210,10 @@ int PortListener::port() {
 
 QStringList PortListener::processServiceTemplate(const QString &a) {
 	QStringList l;
-	QValueVector<KInetAddress> v = KInetAddress::getAllAddresses();
-	QValueVector<KInetAddress>::Iterator it = v.begin();
+	QValueVector<KInetInterface> v = KInetInterface::getAllInterfaces(false);
+	QValueVector<KInetInterface>::Iterator it = v.begin();
 	while (it != v.end()) {
-		QString hostName = (*(it++)).nodeName();
+		QString hostName = (*(it++)).address()->nodeName();
 		KUser u;
 		QString x = a; // replace does not work in const QString. Why??
 		l.append(x.replace(QRegExp("%h"), KServiceRegistry::encodeAttributeValue(hostName))

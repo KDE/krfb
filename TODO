@@ -8,6 +8,8 @@ For 3.2:
   of a LAN)
 - enhance RFB with SASL authentication (Kerberos)
 - encrypted connections (using SASL and/or SSL/TLS)
+- with kerberos/ssl: display name of remote user in connection dialog,
+                     kpassivepopup and systray (if name is available)
 - try to solve the non-atomic KConfig changes problem
 - mention that invitations are one-time on personal invitation dialog
 

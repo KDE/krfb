@@ -16,13 +16,14 @@
  ***************************************************************************/
 
 #include "configuration.h"
-#include "kinetaddr.h"
+#include "kinetinterface.h"
 
 #include <kglobal.h>
 #include <klocale.h>
 #include <kapplication.h>
 #include <kmessagebox.h>
 #include <kprocess.h>
+#include <ksockaddr.h>
 
 #include <qdatastream.h>
 #include <dcopclient.h>
@@ -232,8 +233,14 @@ void Configuration::refreshTimeout() {
 
 QString Configuration::hostname() const
 {
-  	KInetAddress a = KInetAddress::getPublicInetAddress();
-	QString hostName = a.nodeName();
+  	KInetSocketAddress *a = KInetInterface::getPublicInetAddress();
+	QString hostName;
+	if (a) {
+		hostName = a->nodeName();
+		delete a;
+	}
+	else
+		hostName = "localhost";
 	return hostName;
 }
 
