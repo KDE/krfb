@@ -1,5 +1,14 @@
 2002-01-05  Tim Jansen  <tim@tjansen.de>
 
+	* lib/rfbServer.cc (update): removed blocks, added more sophistacated
+	  Hint handling in preparation for ZLib and Tight encodings
+
+	* lib/encodeRectangleHextile.cc:  replaced cut&paste code with macros,
+	  fixed one bug (in 8 bit encoding) while doing this
+
+	* lib/rfbServer.cc (update): fixed security bug that potentially
+	  allows the client to read any the whole KRfb server memory
+
 	* krfb/rfbcontroller.cc: fixed crash after client disconnect while
 	  krfb was writing
 

@@ -55,14 +55,10 @@ RFBConnection::RFBConnection(Display *_dpy,
 
 	createFramebuffer();
 
-	InitBlocks(32, 32);
-
 	sendFirstHandshake(connection);
 }
 
 RFBConnection::~RFBConnection() {
- 	DeleteBlocks();
-
 	destroyFramebuffer();
  	delete bufferedConnection;
 
