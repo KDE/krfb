@@ -52,6 +52,7 @@ Comment[es]=Imposible lanzar proceso para manejar conexión
 Comment[fi]=Ei voitu kutsua prosessia yhteyden hoitamiseksi
 Comment[he]=אין אפשרות לקרוא לתהליך על מנת לטפל בחיבור
 Comment[hr]=Nisam mogao pozvati proces za kontrolu veze
+Comment[ja]=接続をハンドルするのにプロセスを呼べませんでした
 Comment[pt_BR]=Não foi possível chamar o processo de controle da conexão
 Comment[sv]=Kunde inte anropa process för att hantera anslutning
 default_presentation=4
