@@ -415,7 +415,7 @@ void Configuration::inviteEmail() {
 	int r = KMessageBox::warningContinueCancel(0,
 	   i18n("When sending an invitation by email, note that everybody who reads this email "
 		"will be able to connect to your computer for one hour, or until the first "
-		"successful connection took place, whatever comes first. \n"
+		"successful connection took place, whichever comes first. \n"
 		"You should either encrypt the email or at least send it only in a "
 		"secure network, but not over the Internet."),
 						   i18n("Send Invitation via Email"),
