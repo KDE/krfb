@@ -45,7 +45,7 @@ Please respect the format of the date (YYYY-MM-DD) and of the version
 Do NOT change these in the translation. -->
 
 <date>2003-09-17</date>
-<releaseinfo>1.0</releaseinfo>
+<releaseinfo>1.0.1</releaseinfo>
 
 <!-- Abstract about this handbook -->
 
@@ -115,6 +115,52 @@ Please report any problems or feature requests to the &kde; mailing
 lists or file a bug at <ulink
 url="http://bugs.kde.org">http://www.bugs.kde.org</ulink>. 
 </para>
+</chapter>
+
+<chapter id="what-is-RFB">
+<title>The Remote Frame Buffer protocol</title>
+
+<para>
+This chapter provides a brief description of the Remote Frame Buffer
+protocol used by &krfb; and by other compatible systems. If you are
+already familiar with Remote Frame Buffer, you can safely skip this
+chapter.
+</para>
+
+<para>
+The high level implementation of a system using the Remote Frame
+Buffer protocol is known as Virtual Network Computer, or more often
+just as <acronym>VNC</acronym>. 
+</para>
+
+<para>
+Remote Frame Buffer (or <acronym>RFB</acronym> for short) is a simple
+protocol for remote access to graphical user interfaces. It works at
+the frame-buffer level, which roughly corresponds to the rendered
+screen image, which means that it can be applied to all windowing
+systems (including X11, &MacOS; and &Microsoft; &Windows;). Remote
+Frame Buffer applications exist for many platforms, and can often be
+free re-distributed.
+</para>
+
+<para>
+In the Remote Frame Buffer protocol, the application that runs on the
+machine where the user sits (containing the display, keyboard and
+pointer) is called the client. The application that runs on the
+machine where the framebuffer is located (which is running the
+windowing system and applications that the user is remotely
+controlling) is called the server. &krfb; is the &kde; server for the
+Remote Frame Buffer protocol. &krdc; is the &kde; client for the
+Remote Frame Buffer protocol.
+</para>
+
+<para>
+It takes a reasonable amount of network traffic to send an image of
+the framebuffer, so Remote Frame Buffer works best over high
+bandwidth links, such as a local area network. It is still possible to
+use &krfb; over other links, but performance is unlikely to be as good.
+</para>
+
 </chapter>
 
 <chapter id="using-krfb">
