@@ -2,23 +2,3 @@ KDE_CHECK_HEADER(X11/extensions/XTest.h,
 	[],
 	AC_MSG_ERROR([XTest  extension header not found / no xlib headers]))
 
-
-#check for SLP
-AC_MSG_CHECKING(for SLP support)
-save_krfb_LIBS="$LIBS"
-LIBS="-lslp"
-AC_TRY_LINK(	[
-			#include <slp.h>
-		],[
-			SLPOpen(0, SLP_FALSE, (SLPHandle*) 0);
-		],[
-			AC_DEFINE(HAVE_SLP,1,[Define if SLP is available])
-                        LIB_SLP="-lslp"
-			AC_MSG_RESULT(yes)
-		],[
-			AC_MSG_RESULT(no)
-                        LIB_SLP=""
-			AC_MSG_WARN([Browsing in krfb not possible. Install OpenSLP (www.openslp.org).])
-])	
-LIBS=$save_krfb_LIBS
-AC_SUBST(LIB_SLP)
