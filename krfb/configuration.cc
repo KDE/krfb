@@ -30,12 +30,24 @@
 #include <qlineedit.h>
 #include <qcheckbox.h>
 
+ManageInvitationsDialog2::ManageInvitationsDialog2() :
+  ManageInvitationsDialog(0, 0, false, WShowModal)
+{ }
 void ManageInvitationsDialog2::closeEvent(QCloseEvent *)
 { emit closed(); }
+
+InvitationDialog2::InvitationDialog2() :
+  InvitationDialog(0, 0, false, WShowModal)
+{ }
 void InvitationDialog2::closeEvent(QCloseEvent *)
 { emit closed(); }
+
+PersonalInvitationDialog2::PersonalInvitationDialog2() :
+  PersonalInvitationDialog(0, 0, false, WShowModal)
+{ }
 void PersonalInvitationDialog2::closeEvent(QCloseEvent *)
 { emit closed(); }
+
 
 Configuration::Configuration(krfb_mode mode) :
 	m_mode(mode),

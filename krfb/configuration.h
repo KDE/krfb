@@ -40,6 +40,7 @@ enum krfb_mode {
 class ManageInvitationsDialog2 : public ManageInvitationsDialog {
 	Q_OBJECT
 public:
+	ManageInvitationsDialog2();
 	virtual void closeEvent(QCloseEvent *);
 signals:
 	void closed();
@@ -47,6 +48,7 @@ signals:
 class InvitationDialog2 : public InvitationDialog {
 	Q_OBJECT
 public:
+	InvitationDialog2();
 	virtual void closeEvent(QCloseEvent *);
 signals:
 	void closed();
@@ -54,6 +56,7 @@ signals:
 class PersonalInvitationDialog2 : public PersonalInvitationDialog {
 	Q_OBJECT
 public:
+	PersonalInvitationDialog2();
 	virtual void closeEvent(QCloseEvent *);
 signals:
 	void closed();
