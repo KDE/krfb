@@ -39,7 +39,7 @@
 
 #include <signal.h>
 
-#define VERSION "0.7"
+#define VERSION "1.0"
 
 static const char *description = I18N_NOOP("VNC-compatible server to share "
 					   "KDE desktops");
@@ -88,7 +88,7 @@ int main(int argc, char *argv[])
 		"(c) 2000-2001, Const Kaplinsky\n"
 		"(c) 2000, Tridia Corporation\n"
 		"(c) 1999, AT&T Laboratories Cambridge\n",
-                0, "http://www.tjansen.de/krfb", "ml@tjansen.de");
+                0, "", "ml@tjansen.de");
 	aboutData.addAuthor("Tim Jansen", "", "tim@tjansen.de");
         aboutData.addAuthor("Ian Reinhart Geiser", "DCOP interface", "geiseri@kde.org");
 	aboutData.addCredit("Johannes E. Schindelin",
