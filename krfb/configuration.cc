@@ -20,6 +20,7 @@
 #include <kglobal.h>
 #include <klocale.h>
 #include <kapplication.h>
+#include <kmessagebox.h>
 #include <kprocess.h>
 
 #include <qdatastream.h>
@@ -408,6 +409,18 @@ void Configuration::persInvDlgClosed() {
 ////////////// invite email //////////////////////////
 
 void Configuration::inviteEmail() {
+	int r = KMessageBox::warningContinueCancel(0, 
+	   i18n("When sending an invitation per Email note that everybody who reads this Email "
+		"will be able to connect to your computer for one hour or until the first "
+		"successful connection took place, whatever comes first. \n"
+		"You should either encrypt that mail or at least send it only in a "
+		"secure network, but not over the Internet."),
+						   i18n("Send Invitation via Email"),
+						   KStdGuiItem::cont(), 
+						   "showEmailInvitationWarning");
+	if (r == KMessageBox::Cancel)
+		return;
+
 	loadFromKConfig();
 	Invitation inv = createInvitation();
 	save();
