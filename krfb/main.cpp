@@ -85,12 +85,24 @@ int main(int argc, char *argv[])
 	int r;
 	KAboutData aboutData( "krfb", I18N_NOOP("Desktop Sharing"),
 		VERSION, description, KAboutData::License_GPL,
+		"(c) 2001-2002, Tim Jansen\n"
 		"(c) 2000, heXoNet Support GmbH, D-66424 Homburg\n"
-                "(c) 2001-2002, Tim Jansen", 0, "http://www.tjansen.de/krfb", 
-	        "ml@tjansen.de");
+		"(c) 2000, Const Kaplinsky\n"
+	        "(c) 2000, Tridia Corporation\n"
+	        "(c) 1999, AT&T Laboratories Cambridge\n",
+                0, "http://www.tjansen.de/krfb", "ml@tjansen.de");
 	aboutData.addAuthor("Tim Jansen", "KDE Port", "tim@tjansen.de");
 	aboutData.addAuthor("Jens Wagner (heXoNet Support GmbH)", 
-			    "RFB library, original x0rfbserver", 
+			    "original RFB library, x0rfbserver", 
+			    "");
+	aboutData.addAuthor("Const Kaplinsky", 
+			    "TightVNC encoder", 
+			    "");
+	aboutData.addAuthor("Tridia Corporation", 
+			    "ZLib encoder", 
+			    "");
+	aboutData.addAuthor("AT&T Laboratories Cambridge", 
+			    "VNC encoders", 
 			    "");
 	aboutData.addAuthor("Jason Spisak", 
 			    "New Connection side image", 

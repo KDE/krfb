@@ -1,10 +1,15 @@
 Todo:
-- clip framebuffer updates to requested region!
-- i18n
-- docs
-- knotify
-- kcontrol module?
-- encrypted connections: http://web.mit.edu/thouis/vnc/
+- add codec-test option (0.6)
+- let Connection write/read directly, add Tight::flush (0.6)
+- rewrite Connection to use linked buffers (0.6)
+- clip framebuffer updates to requested region (0.6)
+- knotify (0.6)
+- i18n    (0.7)
+- encrypted connections: http://web.mit.edu/thouis/vnc/ (0.7)
+- kcontrol module? (0.8)
+- kded module? (0.8)
+- docs (0.8)
+- big endian support (need tester)
 - do something against potential denial-of-service attacks by repeatedly
   trying to connect to users until they agree. Maybe a message box
   after the third attempt offering the user to stop KRfb, block the IP or 

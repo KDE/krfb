@@ -22,11 +22,10 @@ Some comments on various aspects of KRfb:
   with additional ZLib and sometimes HexZLib support and the TightVNC one
   with additional TightVNC encoding. So I will have four primary codecs to
   support: Raw as a fall-back and for local traffic, Hextiles for original
-  VNC clients, ZLib for the Tridia ones and TightVNC. I'll keep RRE 
-  because I already ported it, but should it make any trouble I'll kick it
-  out. CoRRE won't be supported, and probably neither HexZLib. 4 codecs
-  ought to be enough for everybody. TightVNC is the preferred codec and the
-  one that clients should use.
+  VNC clients, ZLib for the Tridia ones and TightVNC. RRE and CoRRE won't be 
+  supported, and probably neither HexZLib. 4 codecs ought to be enough for 
+  everybody. TightVNC is the preferred codec and the one that clients should 
+  use.
 - the original x0rfbserver has a features for selecting the port number
   automatically. I skipped that because it is too complicated on the client
   side, but I may change my opinion when KDE supports SLP or a similar
