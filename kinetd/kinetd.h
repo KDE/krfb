@@ -169,7 +169,6 @@ k_dcop:
 	QDateTime getNextExpirationTime();
 	void setPortRetryTimer(bool retry);
 	void setReregistrationTimer();
-	void setExpirationTimer();
 
 	KConfig *m_config;
 	KServiceRegistry *m_srvreg;
@@ -179,6 +178,7 @@ k_dcop:
 	QTimer m_reregistrationTimer;
 
  private slots:
+	void setExpirationTimer();
 	void expirationTimer();
 	void portRetryTimer();
 	void reregistrationTimer();
