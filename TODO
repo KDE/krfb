@@ -1,8 +1,15 @@
+For 3.1:
+- SLP support
+- NAT traversal support if I can find an acceptable implementation (using DTCP, probably)
+
 Todo (unscheduled features):
-- SLP support (or UPnP, or whatever KDE will use)
-- NAT traversal support (MIDCOM stun/turn, UPnP)
+- split krfb into 2 seperate programs (server and invitation)
+- user/password authentication mechanism (kerberos)?
 - SSL/TLS support?
-- better authentication mechanisms?
 - look into adding an extension to xfree to improve speed (get noticed of
-  screen updates)
+  screen updates) or maybe use the translucency extensino if finished
 - cut&paste support
+
+Known bugs/problems:
+- the IP address sent in invitation may be wrong on multi-homed machines, and it
+  is always incorrect behind a NAT
