@@ -258,6 +258,7 @@ void SessionEstablishedEvent::exec() {
 
 
 RFBController::RFBController(Configuration *c) :
+	allowDesktopControl(false),
 	configuration(c),
 	closePending(false),
 	forcedClose(false)
@@ -382,7 +383,7 @@ void RFBController::connectionAccepted(bool aRC)
 	if (state != RFB_CONNECTING)
 		return;
 
-	configuration->setAllowDesktopControl(aRC);
+	allowDesktopControl = aRC;
 	idleTimer.start(IDLE_PAUSE);
 
 	server->rfbClientHead->clientGoneHook = clientGoneHook;
@@ -622,7 +623,7 @@ void RFBController::handleClientGone()
 }
 
 void RFBController::handleKeyEvent(bool down, KeySym keySym) {
-	if (!configuration->allowDesktopControl())
+	if (!allowDesktopControl)
 		return;
 
 	asyncMutex.lock();
@@ -631,7 +632,7 @@ void RFBController::handleKeyEvent(bool down, KeySym keySym) {
 }
 
 void RFBController::handlePointerEvent(int button_mask, int x, int y) {
-	if (!configuration->allowDesktopControl())
+	if (!allowDesktopControl)
 		return;
 
 	asyncMutex.lock();

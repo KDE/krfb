@@ -160,6 +160,7 @@ private:
 	void sendSessionEstablished();
 	
 	QString remoteIp;
+	bool allowDesktopControl;
 
 	QTimer idleTimer;
 	Configuration *configuration;
