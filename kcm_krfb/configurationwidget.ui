@@ -208,7 +208,10 @@
                                             </sizepolicy>
                                         </property>
                                         <property name="text">
-                                            <string>Password:</string>
+                                            <string>&amp;Password:</string>
+                                        </property>
+                                        <property name="buddy" stdset="0">
+                                            <cstring>passwordInput</cstring>
                                         </property>
                                     </widget>
                                     <widget class="QLineEdit">
@@ -238,6 +241,12 @@
                         </property>
                         <property name="sizeType">
                             <enum>Expanding</enum>
+                        </property>
+                        <property name="sizeHint">
+                            <size>
+                                <width>0</width>
+                                <height>20</height>
+                            </size>
                         </property>
                     </spacer>
                 </vbox>
@@ -281,7 +290,7 @@
                                     <cstring>autoPortCB</cstring>
                                 </property>
                                 <property name="text">
-                                    <string>Assign &amp;port automatically</string>
+                                    <string>A&amp;ssign port automatically</string>
                                 </property>
                                 <property name="checked">
                                     <bool>true</bool>
@@ -318,7 +327,10 @@
                                             <cstring>TextLabel1_2</cstring>
                                         </property>
                                         <property name="text">
-                                            <string>Port:</string>
+                                            <string>&amp;Port:</string>
+                                        </property>
+                                        <property name="buddy" stdset="0">
+                                            <cstring>portInput</cstring>
                                         </property>
                                     </widget>
                                     <widget class="KIntNumInput">
@@ -355,6 +367,12 @@ Most VNC clients use a display number instead of the actual port. This display n
                         </property>
                         <property name="sizeType">
                             <enum>Expanding</enum>
+                        </property>
+                        <property name="sizeHint">
+                            <size>
+                                <width>0</width>
+                                <height>20</height>
+                            </size>
                         </property>
                     </spacer>
                 </vbox>
