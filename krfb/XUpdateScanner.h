@@ -72,9 +72,10 @@ class XUpdateScanner
 
     void copyTile( int x, int y);
     void copyAllTiles();
-    void searchUpdates( QList<Hint> &hintList);
-    void flushHint(int x, int y, int &x0, Hint &hint, QList<Hint> &hintList);
-    void createHints(QList<Hint> &hintList);
+    void searchUpdates( QPtrList<Hint> &hintList);
+    void flushHint(int x, int y, int &x0, Hint &hint, 
+		   QPtrList<Hint> &hintList);
+    void createHints(QPtrList<Hint> &hintList);
     void addTileToHint(int x, int y, Hint &hint);
     void createHintFromTile(int x, int y, Hint &hint);
 

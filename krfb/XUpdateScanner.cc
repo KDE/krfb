@@ -209,7 +209,7 @@ void XUpdateScanner::addTileToHint(int x, int y, Hint &hint)
 }
 
 void XUpdateScanner::flushHint(int x, int y, int &x0, 
-			       Hint &hint, QList<Hint> &hintList)
+			       Hint &hint, QPtrList<Hint> &hintList)
 {
 	if (x0 < 0)
 		return;
@@ -240,7 +240,7 @@ void XUpdateScanner::flushHint(int x, int y, int &x0,
 	hintList.append(new Hint(hint));
 }
 
-void XUpdateScanner::createHints(QList<Hint> &hintList)
+void XUpdateScanner::createHints(QPtrList<Hint> &hintList)
 {
 	Hint hint;
 	int x0 = -1;
@@ -267,7 +267,7 @@ void XUpdateScanner::createHints(QList<Hint> &hintList)
 	}
 }
 
-void XUpdateScanner::searchUpdates(QList<Hint> &hintList)
+void XUpdateScanner::searchUpdates(QPtrList<Hint> &hintList)
 {
 	count++;
 	count %= 32;

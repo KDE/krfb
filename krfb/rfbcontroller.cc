@@ -61,8 +61,9 @@ public:
 	}
 };
 
-static enum rfbNewClientAction newClientHook(struct _rfbClientRec *cl) 
+static enum rfbNewClientAction newClientHook(struct _rfbClientRec *cl)
 {
+	AppLocker a;
 	return self->handleNewClient(cl);
 }
 
@@ -71,29 +72,24 @@ static Bool passwordCheck(rfbClientPtr cl,
 			  int len)
 {
 	AppLocker a;
-	self->handleCheckPassword(encryptedPassword, len);
+	return self->handleCheckPassword(encryptedPassword, len);
 }
 
 static void keyboardHook(Bool down, KeySym keySym, rfbClientPtr)
 {
-	// todo!
-	AppLocker a;
-	self->handleKeyEvent(down?true:false, keySym);
+	self->handleKeyEvent(down ? true : false, keySym);
 }
 
 static void pointerHook(int bm, int x, int y, rfbClientPtr)
 {
-	// todo!
-	AppLocker a;
 	self->handlePointerEvent(bm, x, y);
 }
 
 static void clientGoneHook(rfbClientPtr cl) 
 {
-	// todo!
-	AppLocker a;
 	self->handleClientGone();
 }
+
 
 
 void ConnectionDialog::closeEvent(QCloseEvent *) 
@@ -101,12 +97,141 @@ void ConnectionDialog::closeEvent(QCloseEvent *)
 	emit closed();
 }
 
+bool KeyboardEvent::initialized = false;
+Display *KeyboardEvent::dpy;
+char KeyboardEvent::modifiers[0x100];
+KeyCode KeyboardEvent::keycodes[0x100];
+KeyCode KeyboardEvent::leftShiftCode;
+KeyCode KeyboardEvent::rightShiftCode;
+KeyCode KeyboardEvent::altGrCode;
+const int KeyboardEvent::LEFTSHIFT = 1;
+const int KeyboardEvent::RIGHTSHIFT = 2;
+const int KeyboardEvent::ALTGR = 4;
+char KeyboardEvent::ModifierState;
 
+KeyboardEvent::KeyboardEvent(bool d, KeySym k) :
+	down(d),
+	keySym(k) {
+	if (!initialized) {
+		initialized = true;
+		initKeycodes();
+		dpy = qt_xdisplay();
+	}
+}
+
+/* this function adjusts the modifiers according to mod (as from modifiers) and ModifierState */
+void KeyboardEvent::tweakModifiers(char mod, bool down) {
+	
+	bool isShift = ModifierState & (LEFTSHIFT|RIGHTSHIFT);
+	if(mod < 0) 
+		return;
+	
+	if(isShift && mod != 1) {
+		if(ModifierState & LEFTSHIFT)
+			XTestFakeKeyEvent(dpy, leftShiftCode,
+					  !down, CurrentTime);
+		if(ModifierState & RIGHTSHIFT)
+				XTestFakeKeyEvent(dpy, rightShiftCode,
+						  !down, CurrentTime);
+	}
+	
+	if(!isShift && mod==1)
+		XTestFakeKeyEvent(dpy, leftShiftCode,
+				  down, CurrentTime);
+	
+	if(ModifierState&ALTGR && mod != 2)
+		XTestFakeKeyEvent(dpy, altGrCode,
+				  !down, CurrentTime);
+	if(!(ModifierState&ALTGR) && mod==2)
+		XTestFakeKeyEvent(dpy, altGrCode,
+					  down, CurrentTime);
+}
+
+void KeyboardEvent::initKeycodes() {
+	KeySym key,*keymap;
+	int i,j,minkey,maxkey,syms_per_keycode;
+	
+	memset(modifiers,-1,sizeof(modifiers));
+	
+	XDisplayKeycodes(dpy,&minkey,&maxkey);
+	keymap=XGetKeyboardMapping(dpy,minkey,(maxkey - minkey + 1),&syms_per_keycode);
+	
+	for (i = minkey; i <= maxkey; i++)
+		for(j=0;j<syms_per_keycode;j++) {
+			key=keymap[(i-minkey)*syms_per_keycode+j];
+			if(key>=' ' && key<0x100 && i==XKeysymToKeycode(dpy,key)) {
+				keycodes[key]=i;
+				modifiers[key]=j;
+			}
+		}
+	
+	leftShiftCode = XKeysymToKeycode(dpy,XK_Shift_L);
+	rightShiftCode = XKeysymToKeycode(dpy,XK_Shift_R);
+	altGrCode = XKeysymToKeycode(dpy,XK_Mode_switch);
+	
+	XFree ((char *)keymap);
+}
+
+void KeyboardEvent::exec() {
+#define ADJUSTMOD(sym,state) \
+  if(keySym==sym) { if(down) ModifierState|=state; else ModifierState&=~state; }
+	
+	ADJUSTMOD(XK_Shift_L,LEFTSHIFT);
+	ADJUSTMOD(XK_Shift_R,RIGHTSHIFT);
+	ADJUSTMOD(XK_Mode_switch,ALTGR);
+	
+	if(keySym>=' ' && keySym<0x100) {
+		KeyCode k;
+		if (down)
+			tweakModifiers(modifiers[keySym],True);
+		//tweakModifiers(modifiers[keySym],down);
+		//k = XKeysymToKeycode( dpy,keySym );
+		k = keycodes[keySym];
+		if(k!=NoSymbol) 
+			XTestFakeKeyEvent(dpy,k,down,CurrentTime);
+		
+		/*XTestFakeKeyEvent(dpy,keycodes[keySym],down,CurrentTime);*/
+		if (down)
+			tweakModifiers(modifiers[keySym],False);
+	} else {
+		KeyCode k = XKeysymToKeycode( dpy,keySym );
+		if(k!=NoSymbol)
+			XTestFakeKeyEvent(dpy,k,down,CurrentTime);
+	}
+}
+
+bool PointerEvent::initialized = false;
+Display *PointerEvent::dpy;
+int PointerEvent::buttonMask = 0;
+
+PointerEvent::PointerEvent(int b, int _x, int _y) :
+	button_mask(b),
+	x(_x),
+	y(_y) {
+	if (!initialized) {
+		initialized = true;
+		Display *dpy = qt_xdisplay();
+		buttonMask = 0;
+	}
+}
+
+void PointerEvent::exec() {
+	XTestFakeMotionEvent(dpy, 0, x, y, CurrentTime);
+	for(int i = 0; i < 5; i++) 
+		if ((buttonMask&(1<<i))!=(button_mask&(1<<i)))
+			XTestFakeButtonEvent(dpy,
+					     i+1,
+					     (button_mask&(1<<i))?True:False,
+					     CurrentTime);
+	
+	buttonMask = button_mask;
+}
 
 RFBController::RFBController(Configuration *c) :
 	allowRemoteControl(false),
 	connectionNum(0),
-	configuration(c)
+	configuration(c),
+	closePending(false)
 {
 	self = this;
 	connect(dialog.acceptConnectionButton, SIGNAL(clicked()),
@@ -116,6 +241,7 @@ RFBController::RFBController(Configuration *c) :
 	connect(&dialog, SIGNAL(closed()), SLOT(dialogRefused()));
 	connect(&idleTimer, SIGNAL(timeout()), SLOT(idleSlot()));
 
+	asyncQueue.setAutoDelete(true);
 	startServer();
 }
 
@@ -233,68 +359,100 @@ void RFBController::connectionAccepted(bool aRC)
 	connectionNum++;
 	idleTimer.start(IDLE_PAUSE);
 
-	client->clientGoneHook = clientGoneHook;
+	server->rfbClientHead->clientGoneHook = clientGoneHook;
 	state = RFB_CONNECTED;
 	emit sessionEstablished();
 }
 
 void RFBController::acceptConnection(bool aRC) 
 {
+// todo: knotify
 	if (state != RFB_CONNECTING)
 		return;
 
 	connectionAccepted(aRC);
-	rfbStartOnHoldClient(client);
+	rfbStartOnHoldClient(server->rfbClientHead);
 }
 
 void RFBController::refuseConnection() 
 {
+// todo: knotify
 	if (state != RFB_CONNECTING)
 		return;
-	rfbRefuseOnHoldClient(client);
+	rfbRefuseOnHoldClient(server->rfbClientHead);
 	state = RFB_WAITING;
+}
+
+// checks async events, returns true if client disconnected
+bool RFBController::checkAsyncEvents() 
+{
+	bool closed = false;
+	asyncMutex.lock();
+	VNCEvent *e;
+	for (e = asyncQueue.first(); e; e = asyncQueue.next())
+		e->exec();
+	asyncQueue.clear();
+	if (closePending) {
+		connectionClosed();
+		closed = true;
+		closePending = false;
+	}
+	asyncMutex.unlock();
+	return closed;
 }
 
 void RFBController::connectionClosed() 
 {
+// todo: knotify
 	idleTimer.stop();
 	connectionNum--;
 	state = RFB_WAITING;
-	client = 0;
 	emit sessionFinished();
 }
 
 void RFBController::closeConnection() 
 {
 	if (state == RFB_CONNECTED) {
-		rfbCloseClient(client);
-		connectionClosed();
+		if (!checkAsyncEvents()) {
+			asyncMutex.lock();
+			if (!closePending)	
+				rfbCloseClient(server->rfbClientHead);
+			asyncMutex.unlock();
+		}
 	}
 	else if (state == RFB_CONNECTING)
 		refuseConnection();
 }
 
-void RFBController::idleSlot() 
+void RFBController::idleSlot()
 {
 	if (state != RFB_CONNECTED)
+		return;
+	if (checkAsyncEvents())
 		return;
 
 	rfbUndrawCursor(server);
 
-	QList<Hint> v;
+	QPtrList<Hint> v;
 	v.setAutoDelete(true);
 	scanner->searchUpdates(v);
 
 	Hint *h;
 
-	for (h = v.first(); h != 0; h = v.next()) {
+	for (h = v.first(); h != 0; h = v.next())
 		rfbMarkRectAsModified(server, h->left(),
 				      h->top(),
 				      h->right(),
 				      h->bottom());
-	}
+
 	QPoint p = QCursor::pos();
-	defaultPtrAddEvent(0, p.x(),p.y(), client);
+	asyncMutex.lock();
+	if (!closePending)	
+		defaultPtrAddEvent(0, p.x(),p.y(), server->rfbClientHead);
+	asyncMutex.unlock();
+
+
+	checkAsyncEvents();
 }
 
 void RFBController::dialogAccepted() 
@@ -324,7 +482,6 @@ enum rfbNewClientAction RFBController::handleNewClient(rfbClientPtr cl)
 	    (state != RFB_WAITING)) 
 		return RFB_CLIENT_REFUSE;
 
-	client = cl;
 	state = RFB_CONNECTING;
 
 	if (!configuration->askOnConnect()) {
@@ -332,6 +489,7 @@ enum rfbNewClientAction RFBController::handleNewClient(rfbClientPtr cl)
 		return RFB_CLIENT_ACCEPT;
 	}
 
+// TODO: knotify
 	QString host, port;
 	KExtendedSocket::resolve(KExtendedSocket::peerAddress(socket),
 				 host, port);
@@ -344,121 +502,27 @@ enum rfbNewClientAction RFBController::handleNewClient(rfbClientPtr cl)
 
 void RFBController::handleClientGone()
 {
-	connectionClosed();
-}
-
-
-
-#define LEFTSHIFT 1
-#define RIGHTSHIFT 2
-#define ALTGR 4
-char ModifierState = 0;
-
-/* this function adjusts the modifiers according to mod (as from modifiers) and ModifierState */
-
-void RFBController::tweakModifiers(char mod, bool down)
-{
-	Display *dpy = qt_xdisplay();
-
-	bool isShift = ModifierState & (LEFTSHIFT|RIGHTSHIFT);
-	if(mod < 0) 
-		return;
-	
-	if(isShift && mod != 1) {
-		if(ModifierState & LEFTSHIFT)
-			XTestFakeKeyEvent(dpy, leftShiftCode,
-					  !down, CurrentTime);
-		if(ModifierState & RIGHTSHIFT)
-			XTestFakeKeyEvent(dpy, rightShiftCode,
-					  !down, CurrentTime);
-	}
-	
-	if(!isShift && mod==1)
-		XTestFakeKeyEvent(dpy, leftShiftCode,
-				  down, CurrentTime);
-
-	if(ModifierState&ALTGR && mod != 2)
-		XTestFakeKeyEvent(dpy, altGrCode,
-				  !down, CurrentTime);
-	if(!(ModifierState&ALTGR) && mod==2)
-		XTestFakeKeyEvent(dpy, altGrCode,
-				  down, CurrentTime);
-}
-
-void RFBController::initKeycodes()
-{
-	Display *dpy = qt_xdisplay();
-	KeySym key,*keymap;
-	int i,j,minkey,maxkey,syms_per_keycode;
-	
-	memset(modifiers,-1,sizeof(modifiers));
-	
-	XDisplayKeycodes(dpy,&minkey,&maxkey);
-	keymap=XGetKeyboardMapping(dpy,minkey,(maxkey - minkey + 1),&syms_per_keycode);
-
-	for (i = minkey; i <= maxkey; i++)
-		for(j=0;j<syms_per_keycode;j++) {
-			key=keymap[(i-minkey)*syms_per_keycode+j];
-			if(key>=' ' && key<0x100 && i==XKeysymToKeycode(dpy,key)) {
-				keycodes[key]=i;
-				modifiers[key]=j;
-			}
-		}
-	
-	leftShiftCode = XKeysymToKeycode(dpy,XK_Shift_L);
-	rightShiftCode = XKeysymToKeycode(dpy,XK_Shift_R);
-	altGrCode = XKeysymToKeycode(dpy,XK_Mode_switch);
-
-	XFree ((char *)keymap);
+	asyncMutex.lock();
+	closePending = true;
+	asyncMutex.unlock();
 }
 
 void RFBController::handleKeyEvent(bool down, KeySym keySym) {
 	if (!allowRemoteControl)
 		return;
 
-	Display *dpy = qt_xdisplay();
-
-#define ADJUSTMOD(sym,state) \
-  if(keySym==sym) { if(down) ModifierState|=state; else ModifierState&=~state; }
-	
-	ADJUSTMOD(XK_Shift_L,LEFTSHIFT);
-	ADJUSTMOD(XK_Shift_R,RIGHTSHIFT);
-	ADJUSTMOD(XK_Mode_switch,ALTGR);
-
-	if(keySym>=' ' && keySym<0x100) {
-		KeyCode k;
-		if (down)
-			tweakModifiers(modifiers[keySym],True);
-		//tweakModifiers(modifiers[keySym],down);
-		//k = XKeysymToKeycode( dpy,keySym );
-		k = keycodes[keySym];
-		if(k!=NoSymbol) 
-			XTestFakeKeyEvent(dpy,k,down,CurrentTime);
-
-		/*XTestFakeKeyEvent(dpy,keycodes[keySym],down,CurrentTime);*/
-		if (down)
-			tweakModifiers(modifiers[keySym],False);
-	} else {
-		KeyCode k = XKeysymToKeycode( dpy,keySym );
-		if(k!=NoSymbol)
-			XTestFakeKeyEvent(dpy,k,down,CurrentTime);
-	}
+	asyncMutex.lock();
+	asyncQueue.append(new KeyboardEvent(down, keySym));
+	asyncMutex.unlock();
 }
 
 void RFBController::handlePointerEvent(int button_mask, int x, int y) {
 	if (!allowRemoteControl)
 		return;
 
-	Display *dpy = qt_xdisplay();
-  	XTestFakeMotionEvent(dpy, 0, x, y, CurrentTime);
-	for(int i = 0; i < 5; i++) 
-		if ((buttonMask&(1<<i))!=(button_mask&(1<<i)))
-			XTestFakeButtonEvent(dpy,
-					     i+1,
-					     (button_mask&(1<<i))?True:False,
-					     CurrentTime);
-
-	buttonMask = button_mask;
+	asyncMutex.lock();
+	asyncQueue.append(new PointerEvent(button_mask, x, y));
+	asyncMutex.unlock();
 }
 
 bool RFBController::checkX11Capabilities() {
