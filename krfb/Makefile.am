@@ -2,19 +2,20 @@ METASOURCES = AUTO
 
 bin_PROGRAMS = krfb
 krfb_SOURCES = rfbcontroller.cc configuration.cc trayicon.cpp \
-  XUpdateScanner.cc main.cpp configurationdialog.ui newconnectiondialog.ui \
+  xupdatescanner.cc main.cpp configurationdialog.ui newconnectiondialog.ui \
   krfbifaceimpl.cc krfbiface.skel
 krfb_LDADD   = ../libvncserver/libvncserver.a -lz -lpthread -ljpeg -lXtst \
   $(LIB_QT) $(LIB_KDECORE) $(LIB_KDEUI)  $(LIBSOCKET)
 
 EXTRA_DIST = $(krfb_SOURCES) krfb.desktop lo32-app-krfb.png \
   lo16-app-krfb.png rfbcontroller.h eyes-closed24.png eyes-open24.png \
-  XUpdateScanner.h trayicon.h configuration.h krfbiface.h krfbiface.kidl \
+  xupdatescanner.h trayicon.h configuration.h krfbiface.h krfbiface.kidl \
   eventsrc
 
 install-data-local:
 	$(mkinstalldirs) $(kde_appsdir)/Applications/
 	$(INSTALL_DATA) $(srcdir)/krfb.desktop $(kde_appsdir)/Applications/krfb.desktop
+	$(mkinstalldirs) $(kde_datadir)/krfb
 	$(INSTALL_DATA) $(srcdir)/eventsrc $(kde_datadir)/krfb/eventsrc
 	$(mkinstalldirs) $(kde_datadir)/krfb/pics
 	$(INSTALL_DATA) $(srcdir)/eyes-closed24.png $(kde_datadir)/krfb/pics/eyes-closed24.png

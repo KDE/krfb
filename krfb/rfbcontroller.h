@@ -25,7 +25,7 @@
 
 #include "configuration.h"
 #include "newconnectiondialog.h"
-#include "XUpdateScanner.h"
+#include "xupdatescanner.h"
 #include <ksock.h>
 #include <qobject.h>
 #include <qtimer.h>

@@ -33,7 +33,7 @@
 
 #include <string.h>
 
-#include "XUpdateScanner.h"
+#include "xupdatescanner.h"
 
 unsigned int scanlines[32] = {  0, 16,  8, 24,
                                 4, 20, 12, 28,
