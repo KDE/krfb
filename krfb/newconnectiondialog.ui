@@ -1,4 +1,4 @@
-<!DOCTYPE UI><UI version="3.0" stdsetdef="1">
+<!DOCTYPE UI><UI version="3.1" stdsetdef="1">
 <class>KRFBConnectionDialog</class>
 <widget class="QDialog">
     <property name="name">
@@ -61,7 +61,7 @@
                     <number>6</number>
                 </property>
                 <spacer>
-                    <property name="name" stdset="0">
+                    <property name="name">
                         <cstring>Spacer2</cstring>
                     </property>
                     <property name="orientation">
@@ -96,7 +96,7 @@
                         <string>&amp;Refuse Connection</string>
                     </property>
                     <property name="accel">
-                        <number>276824146</number>
+                        <string>Alt+R</string>
                     </property>
                     <property name="default">
                         <bool>true</bool>
@@ -192,7 +192,7 @@
                             </property>
                             <property name="sizePolicy">
                                 <sizepolicy>
-                                    <hsizetype>0</hsizetype>
+                                    <hsizetype>5</hsizetype>
                                     <vsizetype>0</vsizetype>
                                     <horstretch>0</horstretch>
                                     <verstretch>0</verstretch>
@@ -208,8 +208,7 @@
                                 <number>5</number>
                             </property>
                             <property name="text">
-                                <string>Somebody is requesting a RFB (VNC) connection to your computer. 
-Granting this will allow them to see everything on your screen and, if the option below is enabled, be able to control it. Refuse the connection unless you trust the person.</string>
+                                <string>Somebody is requesting a connection to your computer. Granting this will allow the remote user to watch your desktop. </string>
                             </property>
                             <property name="textFormat">
                                 <enum>AutoText</enum>
