@@ -59,6 +59,7 @@ class Hint {
 
 struct TileChangeRegion {
   short firstLine, lastLine;
+  bool leftSide, rightSide;
 };
 
 
@@ -83,17 +84,28 @@ class XUpdateScanner
 	void flushHint(int x, int y, int &x0, Hint &hint, 
 		       QPtrList<Hint> &hintList);
 	void createHints(QPtrList<Hint> &hintList);
-	void addTileToHint(int x, int y, int th, Hint &hint);
+	bool addTileToHint(int x, int y, int x0, int th, Hint &hint);
 	void createHintFromTile(int x, int y, int th, Hint &hint);
 	void extendHintY(int x, int y, int x0, Hint &h);
+	int findFirstLine(int maxH, unsigned char *&ssrc, 
+			  unsigned char *&sdest, int halfWidthBytes,
+			  bool &left);
+	int findLastLine(int maxH, int firstL, unsigned char *msrc,
+			 unsigned char *mdest, int halfWidthBytes,
+			 bool &left);
+	bool checkRight(unsigned char *src,
+			unsigned char *dest,
+			int halfWidthBytes);
+	bool checkSide(unsigned char *src, unsigned char *dest,
+		       int halfWidthBytes, int n);
 	
 	Display *dpy;
 	Window window;
 	unsigned char *fb;
 	int width, height;
 	int bitsPerPixel, bytesPerLine;
-	unsigned int tileWidth, tileHeight;
-	unsigned int count;
+	int tileWidth, tileHeight;
+	int count;
 	
 	XImage *scanline;
 	XShmSegmentInfo shminfo_scanline;
@@ -101,7 +113,7 @@ class XUpdateScanner
 	XImage *tile;
 	XShmSegmentInfo shminfo_tile;
 	
-	unsigned int tilesX, tilesY;
+	int tilesX, tilesY;
 	bool *tileMap;
 	struct TileChangeRegion *tileRegionMap;
 };
