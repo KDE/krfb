@@ -35,7 +35,7 @@ private:
 	QString serviceName;
 	int portNum, portBase, autoPortRange;
 	bool multiInstance;
-	QCString execPath;
+	QString execPath;
 	QString argument;
 	bool enabled;
 	QDateTime expirationTime;
