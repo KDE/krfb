@@ -71,11 +71,14 @@ Type=QString
 Type=bool
 
 # if set, kinetd will register the given URL at the local SLP SA while 
-# the port is open. The following strings will be substituted:
+# the port is open. It will register one URL for each IP address of the
+# host.
+# The following strings will be substituted:
 # %h with the local IP address
 # %p with the port number
 # %u with the user's login name
 # %f with the user's full name
+# %i with a UUID thats identical in all URLs of this service
 [PropertyDef::X-KDE-KINETD-serviceURL]
 Type=QString
 
@@ -85,6 +88,7 @@ Type=QString
 # %p with the port number
 # %u with the user's login name
 # %f with the user's full name
+# %i with a UUID thats identical in all URLs of this service
 [PropertyDef::X-KDE-KINETD-serviceAttributes]
 Type=QString
 

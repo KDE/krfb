@@ -20,6 +20,7 @@
 #include "kinetd.moc"
 #include "kinetaddr.h"
 #include "kuser.h"
+#include "uuid.h"
 #include <qregexp.h>
 #include <kservicetype.h>
 #include <kdebug.h>
@@ -40,6 +41,7 @@ PortListener::PortListener(KService::Ptr s,
 	m_config(config),
 	m_srvreg(srvreg)
 {
+	m_uuid = createUUID();
 	loadConfig(s);
 
 	if (m_valid && m_enabled)
@@ -206,16 +208,21 @@ int PortListener::port() {
 	return m_port;
 }
 
-QString PortListener::processServiceTemplate(const QString &a) {
-	KInetAddress *kia = KInetAddress::getLocalAddress();
-	QString hostName = kia->nodeName();
-	delete kia;
-	KUser u;
-	QString x = a; // replace does not work in const QString. Why??
-	return x.replace(QRegExp("%h"), KServiceRegistry::encodeAttributeValue(hostName))
-		.replace(QRegExp("%p"), QString::number(m_port))
-		.replace(QRegExp("%u"), KServiceRegistry::encodeAttributeValue(u.loginName()))
-		.replace(QRegExp("%f"), KServiceRegistry::encodeAttributeValue(u.fullName()));
+QStringList PortListener::processServiceTemplate(const QString &a) {
+	QStringList l;
+	QValueVector<KInetAddress> v = KInetAddress::getAllAddresses();
+	QValueVector<KInetAddress>::Iterator it = v.begin();
+	while (it != v.end()) {
+		QString hostName = (*(it++)).nodeName();
+		KUser u;
+		QString x = a; // replace does not work in const QString. Why??
+		l.append(x.replace(QRegExp("%h"), KServiceRegistry::encodeAttributeValue(hostName))
+			 .replace(QRegExp("%p"), QString::number(m_port))
+			 .replace(QRegExp("%u"), KServiceRegistry::encodeAttributeValue(u.loginName()))
+			 .replace(QRegExp("%i"), KServiceRegistry::encodeAttributeValue(m_uuid))
+			 .replace(QRegExp("%f"), KServiceRegistry::encodeAttributeValue(u.fullName())));
+	}
+	return l;
 }
 
 bool PortListener::setPort(int port, int autoPortRange) {
@@ -292,17 +299,25 @@ void PortListener::setServiceRegistrationEnabledInternal(bool e) {
 		return;
 
         if (m_enabled && e) {
-		m_registeredServiceURL = processServiceTemplate(m_serviceURL);
-		m_serviceRegistered = m_srvreg->registerService(
-			m_registeredServiceURL,
-			processServiceTemplate(m_serviceAttributes),
-			m_serviceLifetime);
-		if (!m_serviceRegistered)
-                      kdDebug(7021) << "Failure registering SLP service (no slpd running?)"<< endl;
+		m_registeredServiceURLs = processServiceTemplate(m_serviceURL);
+		QStringList attributes = processServiceTemplate(m_serviceAttributes);
+		QStringList::Iterator it = m_registeredServiceURLs.begin();
+		QStringList::Iterator it2 = attributes.begin();
+		while ((it != m_registeredServiceURLs.end()) &&
+		       (it2 != attributes.end())) {
+			 if (!m_srvreg->registerService(
+				     *(it++),
+				     *(it2++),
+				     m_serviceLifetime))
+				 kdDebug(7021) << "Failure registering SLP service (no slpd running?)"<< endl;
+		}
+		m_serviceRegistered = true;
 		// make lifetime 30s shorter, because the timeout is not precise
 		m_slpLifetimeEnd = QDateTime::currentDateTime().addSecs(m_serviceLifetime-30);
 	} else {
-		m_srvreg->unregisterService(m_registeredServiceURL);
+		QStringList::Iterator it = m_registeredServiceURLs.begin();
+		while (it != m_registeredServiceURLs.end())
+			m_srvreg->unregisterService(*(it++));
 		m_serviceRegistered = false;
 	}
 }

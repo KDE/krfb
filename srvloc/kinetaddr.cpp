@@ -22,16 +22,14 @@
  *  Boston, MA 02111-1307, USA.
  **/
 
+#include "kinetaddress.h"
 #include <config.h>
-
-
 
 #include <limits.h>
 #include <string.h>
 
 #include <kdebug.h>
 #include <klocale.h>
-#include "kinetaddr.h"
 #include <netdb.h>
 
 #if defined(__osf__) && defined(AF_INET6)
@@ -64,6 +62,19 @@ public:
 	}
 
 };
+
+/**
+ * Functions defined in kinetaddr_ipfinder.cpp:
+ */
+QMap<QString,QString> kinetaddr_getAllInterfaces(bool includeLoopback);
+
+
+
+
+KInetAddress::KInetAddress() :
+	d(new KInetAddressPrivate)
+{
+}
 
 KInetAddress::KInetAddress(const KInetAddress &other) :
 	d(new KInetAddressPrivate)
@@ -114,6 +125,15 @@ KInetAddress::KInetAddress(const QString &host) :
 	
 }
 
+KInetAddress& KInetAddress::operator =(const KInetAddress& a) {
+	d->sockfamily = a.d->sockfamily;
+	memcpy(&d->in, &a.d->in, sizeof(d->in));
+#ifdef AF_INET6
+	memcpy(&d->in6, &a.d->in6, sizeof(d->in6));
+#endif
+	return *this;
+}
+
 KInetAddress::~KInetAddress()
 {
 	delete d;
@@ -152,7 +172,7 @@ QString KInetAddress::nodeName() const
 #endif
 	else {
 		kdWarning() << "KInetAddress::nodeName() called on uninitialized class\n";
-		return i18n("<empty>");
+		return QString::null;
 	}
 
 	return QString::fromLatin1(buf); // FIXME! What's the encoding?
@@ -176,4 +196,41 @@ bool KInetAddress::areEqual(const KInetAddress &a1, const KInetAddress &a2)
 	return true;
 }
 
+KInetAddress KInetAddress::getPublicInetAddress() {
+	KInetAddress kia("localhost");
+	QMap<QString,KInetAddress> list = getAllInterfaces(false);
+	QMap<QString,KInetAddress>::iterator it = list.begin();
+	while (it != list.end()) {
+		QString ifc = it.key();
+		kia = it.data();
+		if (ifc.startsWith("ppp"))
+			return kia;
+		if (ifc.startsWith("ippp"))
+			return kia;
+		it++;
+	}
+	return kia;
+}
+
+QValueVector<KInetAddress> KInetAddress::getAllAddresses(bool includeLoopback) {
+	QValueVector<KInetAddress> list;
+	QMap<QString,KInetAddress> map = getAllInterfaces(includeLoopback);
+	QMap<QString,KInetAddress>::iterator it = map.begin();
+	while (it != map.end()) {
+		 list.push_back(it.data());
+		 it++;
+	}
+	return list;
+}
+
+QMap<QString,KInetAddress> KInetAddress::getAllInterfaces(bool includeLoopback) {
+	QMap<QString,KInetAddress> map;
+	QMap<QString,QString> l = kinetaddr_getAllInterfaces(includeLoopback);
+	QMap<QString,QString>::iterator it = l.begin();
+	while (it != l.end()) {
+		map[it.key()] = KInetAddress(it.data());
+		it++;
+	}
+	return map;
+}
 

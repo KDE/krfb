@@ -260,9 +260,8 @@ void Configuration::refreshTimeout() {
 
 QString Configuration::hostname() const
 {
-  	KInetAddress *a = KInetAddress::getPrivateInetAddress();
-	QString hostName = a->nodeName();
-	delete a;
+  	KInetAddress a = KInetAddress::getPublicInetAddress();
+	QString hostName = a.nodeName();
 	return hostName;
 }
 

@@ -34,6 +34,8 @@
 #endif
 
 #include <qobject.h>
+#include <qmap.h>
+#include <qvaluevector.h>
 #include <qcstring.h>
 #include <qstring.h>
 
@@ -45,19 +47,26 @@ class KInetAddressPrivate;
  * An Inet (IPv4 or IPv6) address.
  *
  * This class represents an internet (IPv4 or IPv6) address. The difference
- * between KInetAddress and KInetSocketAddress is that the socket address
- * consists of the address and the port, KInetAddress peresents only the 
- * address itself.
+ * between @ref KInetAddress and @ref KInetSocketAddress is that the socket 
+ * address consists of the address and the port, KInetAddress represents 
+ * only the address itself.
  *
  * @author Tim Jansen <tim@tjansen.de>
- * @short an Internet Address
+ * @short Represents an Internet Address
+ * @since 3.2
  */
 class KInetAddress {
 public:
   /**
-   * Copy constructor
+   * Default constructor. Creates an uninitialized KInetAddress.
    */
-  KInetAddress(const KInetAddress&);
+  KInetAddress();
+
+  /**
+   * Copy constructor
+   * @param a the KInetAddress to copy
+   */
+  KInetAddress(const KInetAddress &a);
 
   /**
    * Creates an IPv4 socket from in_addr
@@ -88,30 +97,59 @@ public:
   virtual ~KInetAddress();
 
   /**
-   * Returns a text representation of the host address
+   * Assignment, makes a deep copy of @p a.
+   * @param a the KInetAddress to copy
+   * @return this KInetAddress
+   */
+  KInetAddress& operator =(const KInetAddress& a);
+
+  /**
+   * Returns a text representation of the host address.
+   * @return a text representation of the host address, or 
+   *         QString::null if created using the default
+   *         constructor
    */
   virtual QString nodeName() const;
 
+  /**
+   * Checks whether this KInetAddress equals the @p other.
+   * @param other the other KInetAddress to compare
+   * @return true if both addresses equal
+   * @see areEqual()
+   */
   bool isEqual(const KInetAddress* other) const
   { return areEqual(*this, *other); }
 
+  /**
+   * Checks whether this KInetAddress equals the @p other.
+   * @param other the other KInetAddress to compare
+   * @return true if both addresses equal
+   * @see areEqual()
+   */
   bool operator==(const KInetAddress& other) const
   { return areEqual(*this, other); }
     
+  /**
+   * Checks whether the given KInetAddresses are equal.
+   * @param a1 the first KInetAddress to compare
+   * @param a2 the second KInetAddress to compare
+   * @return true if both addresses equal
+   * @see isEqual()
+   */
   static bool areEqual(const KInetAddress &a1, const KInetAddress &a2);
 
   /**
-   * Returns the in_addr structure. The pointer is valid as long as
-   * the KInetAddress object lives.
-   * This will be NULL if this is not a v4 address.
+   * Returns the in_addr structure.
+   * @return the in_addr structure, or 0 if this is not a v4 address.
+   *         The pointer is valid as long as the KInetAddress object lives.
    * @see addressV6
    */
   const struct in_addr* addressV4() const;
 
   /**
-   * Returns the in6_addr structure. The pointer is valid as long as
-   * the KInetAddress object lives.
-   * This will be NULL if this is not a v6 address.
+   * Returns the in6_addr structure. 
+   * @return the in_addr structure, or 0 if this is not a v6 address.
+   *         The pointer is valid as long as the KInetAddress object lives.
    * @see addressV4
    */
   const struct in6_addr* addressV6() const;
@@ -123,29 +161,31 @@ public:
   { return addressV6(); }
 
   /**
-   * Returns an address that can be used for communication with
-   * other computers on the internet.
-   * Note that the returned address is not always a real 
-   * internet address, because the computer couble be unable to connect 
-   * to the internet or is behind a NAT gateway.
-   * In the worst case you will get the address of the local loopback 
-   * interface.
-   * The user is responsible for freeing the object.
-   * @return a new KInetAddress object that contains the address
+   * Tries to guess the public internet address of this computer.
+   * This is not always successful, especially when the computer
+   * is behind a firewall or NAT gateway. In the worst case, it
+   * returns localhost.
+   * @return a KInetAddress object that contains the best match
    */
-  static KInetAddress* getPrivateInetAddress();
+  static KInetAddress getPublicInetAddress();
 
   /**
-   * Returns the address of the interface that should be used
-   * to announce local services.
-   * Note that the returned address is not always a real internet address, 
-   * because the computer may be behind a NAT gateway, or 
-   * it is no connected to the internet. In the worst case you 
-   * will get the address of the local loopback interface.
-   * The user is responsible for freeing the object.
-   * @return a new KInetAddress object that contains the address
+   * Returns all active IP addresses that can be used to reach this
+   * system.
+   * @param includeLoopback if true, include the loopback interface's 
+   *                        name
+   * @return the list of IP addresses
    */
-  static KInetAddress* getLocalAddress();
+  static QValueVector<KInetAddress> getAllAddresses(bool includeLoopback = false);
+
+  /**
+   * Returns all active interfaces as name/IP address pairs.
+   * @param includeLoopback if true, include the loopback interface's 
+   *                        name
+   * @return the map of interfaces. The QString contains the name (like 'eth0'
+   *         or 'ppp1'), KInetAddress the address
+   */
+  static QMap<QString,KInetAddress> getAllInterfaces(bool includeLoopback = false);
 
 
 private:

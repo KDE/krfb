@@ -35,7 +35,8 @@ class PortListener : public QObject {
 private:
 	bool m_valid;
 	QString m_serviceName;
-	QString m_serviceURL, m_serviceAttributes, m_registeredServiceURL;
+	QString m_serviceURL, m_serviceAttributes;
+	QStringList m_registeredServiceURLs;
 	int m_serviceLifetime;
 	int m_port;
 	int m_portBase, m_autoPortRange;
@@ -47,6 +48,7 @@ private:
 	bool m_serviceRegistered, m_registerService;
 	QDateTime m_expirationTime;
 	QDateTime m_slpLifetimeEnd;
+	QString m_uuid;
 
 	KServerSocket *m_socket;
 	KProcess m_process;
@@ -74,7 +76,7 @@ public:
 	QDateTime serviceLifetimeEnd();
 	bool isEnabled();
 	int port();
-	QString processServiceTemplate(const QString &a);
+	QStringList processServiceTemplate(const QString &a);
 	bool setPort(int port = -1, int autoProbeRange = 1);
 	void refreshRegistration();
 
