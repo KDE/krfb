@@ -7,7 +7,7 @@ make
 # get superuser permissions, for example using su
 make install
 
-This assumes that you already have KDE 3.0 running of course.
+This assumes that you already have KDE 3.0 running, of course.
 
 IMPORTANT
 ---------
