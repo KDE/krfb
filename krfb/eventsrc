@@ -26,8 +26,10 @@ default_presentation=4
 
 [InvalidPassword]
 Name=InvalidPassword
+Name[be]=Некарэктны пароль
 Name[da]=UgyldigtKodeord
 Comment=Invalid password
+Comment[be]=Некарэктны пароль
 Comment[da]=Ugyldigt kodeord
 default_presentation=4
 
