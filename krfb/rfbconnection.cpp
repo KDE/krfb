@@ -25,14 +25,21 @@
 #include <qapplication.h>
 #include <X11/Xutil.h>
 #include <unistd.h>
+#include <stdlib.h>
+#include <string.h>
 
 
-RFBConnection::RFBConnection(Display *dpy, int fd) :
+RFBConnection::RFBConnection(Display *dpy, int fd, const QString &cpassword) :
 	Server(),
 	dpy(dpy),
 	fd(fd),
 	buttonMask(0)
 {
+	memcpy(password, "\0\0\0\0\0\0\0\0", 8);
+	if (!cpassword.isNull())
+		strncpy(password, cpassword.latin1(), 
+			8 <= cpassword.length() ? 8 : cpassword.length());
+
   	bufferedConnection = new BufferedConnection(32768, 32768);
   	connection = bufferedConnection;
 
@@ -134,3 +141,23 @@ void RFBConnection::destroyFramebuffer()
 	delete scanner;
 	XDestroyImage(framebufferImage);
 }
+
+void RFBConnection::scanUpdates()
+{
+  list<Hint> hintList;
+  
+  scanner->searchUpdates(hintList);
+  list<Hint>::iterator i;
+  for (i = hintList.begin(); i != hintList.end(); i++)
+	  handleHint(*i);
+};
+
+void RFBConnection::getServerInitialisation( ServerInitialisation &_serverInit )
+{
+  Server::getServerInitialisation( _serverInit );
+  _serverInit.name_length = strlen( getenv("HOSTNAME") );
+  _serverInit.name_string = (CARD8 *) malloc( _serverInit.name_length + 1 );
+  strcpy( (char*) _serverInit.name_string, getenv( "HOSTNAME" ) );
+}
+
+#include "rfbconnection.moc"

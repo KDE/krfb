@@ -25,6 +25,7 @@
 
 // QT must be first because of conflicts with X11
 #include <qobject.h>
+#include <qstring.h>
 
 #include "XUpdateScanner.h"
 
@@ -49,10 +50,12 @@ using namespace rfb;
 class RFBConnection : public QObject, public Server  {
 	Q_OBJECT
 public: 
-	RFBConnection(Display *dpy, int fd);
+	RFBConnection(Display *dpy, int fd, const QString &cpassword);
 	~RFBConnection();
 	virtual void handleKeyEvent(KeyEvent &keyEvent);
 	virtual void handlePointerEvent(PointerEvent &pointerEvent);
+	virtual void getServerInitialisation( ServerInitialisation &_serverInitialisation );
+	void scanUpdates();
 	
 private:	
 	void createFramebuffer();
