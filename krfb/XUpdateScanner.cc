@@ -87,6 +87,7 @@ XUpdateScanner::XUpdateScanner(Display *_dpy,
 	tilesX = (width + tileWidth - 1) / tileWidth;
 	tilesY = (height + tileHeight - 1) / tileHeight;
 	tileMap = new bool[tilesX * tilesY];
+        tileRegionMap = new struct TileChangeRegion[tilesX * tilesY];
 
 	unsigned int i;
 	for (i = 0; i < tilesX * tilesY; i++) 
@@ -119,6 +120,7 @@ XUpdateScanner::~XUpdateScanner()
 	shmdt(shminfo_scanline.shmaddr);
 	shmctl(shminfo_scanline.shmid, IPC_RMID, 0);
 	delete tileMap;
+        delete tileRegionMap;
 	XShmDetach(dpy, &shminfo_tile);
 	XDestroyImage(tile);
 	shmdt(shminfo_tile.shmaddr);
@@ -126,7 +128,7 @@ XUpdateScanner::~XUpdateScanner()
 }
 
 
-void XUpdateScanner::copyTile(int x, int y)
+bool XUpdateScanner::copyTile(int x, int y, int tx, int ty)
 {
 	unsigned int maxWidth = width - x;
 	unsigned int maxHeight = height - y;
@@ -145,21 +147,59 @@ void XUpdateScanner::copyTile(int x, int y)
 	int pixelsize = bitsPerPixel >> 3;
 	unsigned char *src = (unsigned char*) tile->data;
 	unsigned char *dest = fb + y * bytesPerLine + x * pixelsize;
+
+        unsigned char *ssrc = src;
+        unsigned char *sdest = dest;
+        int firstLine = maxHeight;
+	
 	for (line = 0; line < maxHeight; line++) {
-		memcpy(dest, src, maxWidth * pixelsize );
-		src += tile->bytes_per_line;
-		dest += bytesPerLine;
+		if (memcmp(sdest, ssrc, maxWidth * pixelsize)) {
+			firstLine = line;
+			break;
+		}
+		ssrc += tile->bytes_per_line;
+		sdest += bytesPerLine;
+        }
+	
+        if (firstLine == maxHeight) {
+		tileMap[tx + ty * tilesX] = false;
+		return false;
+        }
+	
+        unsigned char *msrc = src + (tile->bytes_per_line * maxHeight);
+        unsigned char *mdest = dest + (bytesPerLine * maxHeight);
+        int lastLine = firstLine;
+	
+        for (line = maxHeight-1; line > firstLine; line--) {
+		msrc -= tile->bytes_per_line;
+		mdest -= bytesPerLine;
+		if (memcmp(mdest, msrc, maxWidth * pixelsize)) {
+			lastLine = line;
+			break;
+		}
+        }
+	
+        for (line = firstLine; line <= lastLine; line++) {
+                memcpy(sdest, ssrc, maxWidth * pixelsize );
+                ssrc += tile->bytes_per_line;
+		sdest += bytesPerLine;
 	}
+
+        struct TileChangeRegion *r = &tileRegionMap[tx + (ty * tilesX)];
+        r->firstLine = firstLine;
+        r->lastLine = lastLine;
+	
+        return lastLine >= (maxHeight-1);
 }
 
 void XUpdateScanner::copyAllTiles()
 {
-	unsigned int x, y;
-	// TODO: is it useful to compare again instead of only copying?
-	for (y = 0; y < tilesY; y++) {
-		for (x = 0; x < tilesX; x++) {
-			if (tileMap[x + y * tilesX])
-				copyTile(x*tileWidth, y*tileHeight);
+	for (unsigned int y = 0; y < tilesY; y++) {
+		for (unsigned int x = 0; x < tilesX; x++) {
+                        if (tileMap[x + y * tilesX])
+                                if (copyTile(x*tileWidth, y*tileHeight, x, y) &&
+                                    ((y+1) < tilesY))
+					tileMap[x + (y+1) * tilesX] = true;
 		}
 	}
 	

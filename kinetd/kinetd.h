@@ -20,12 +20,26 @@
 #define _KINETD_H_
 
 #include <kdedmodule.h>
-#include "portlistener.h"
+#include <kservice.h>
 
+class PortListener {
+private:
+	QString serviceName;
+	int port;
+	QCString execPath;
+	bool enabled;
+
+	KServerSocket *socket;
+public:
+	PortListener(KService::Ptr s);
+	~PortListener();
+
+private slots:
+	void accepted(KSocket*);
+}
 
 class KInetD : public KDEDModule {
 	Q_OBJECT
-	K_DCOP
  private:
 	QPtrList<PortListener> portListeners;
 
@@ -35,9 +49,8 @@ class KInetD : public KDEDModule {
 	
 	
 
- k_dcop:
+	// DCOP functions
 	void reloadPortListenerList();
-	PortListener *findPortListener(QString name);	
 }
 
 

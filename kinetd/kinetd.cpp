@@ -16,12 +16,46 @@
  *                                                                         *
  ***************************************************************************/
 
+/*
+ * TODOs: 
+ * - override configuration in KDEHOME
+ * - set listening ip address
+ */
+
 #include "kinetd.h"
 #include <kservicetype.h>
 #include <kservice.h>
+#include <kdebug.h>
 
 PortListener::PortListener(KService::Ptr s) {
 
+	serviceName = s->name();
+
+	// TODO: load KConfig to override these settings
+
+	port = s->property("port");
+	enabled = s->property("enabled");
+	execPath = s->exec();
+
+	socket = new KSocket(defaultPort, false);
+	connect(socket, SIGNAL(accepted(KSocket*)), 
+		SLOT(accepted(KSocket*)));
+
+	if (!socket->bindAndListen()) {
+		// TODO: do something
+		kdDebug() << "bind failed" <<endl;
+	}
+}
+
+PortListener::accepted(KSocket *sock) {
+	// TODO: do the inetd thing
+	kdDebug() << "got connection" << endl;
+	delete sock;
+}
+
+PortListener::~PortListener() {
+	if (socket)
+		delete socket;
 }
 
 
@@ -32,7 +66,7 @@ class KInetD : public KDEDModule {
 		portListeners.setAutoDelete(true);
 		loadServiceList();
 	}
-	
+
 	void KInetD::loadServiceList() 
 	{
 		portListeners.clear();
@@ -48,8 +82,6 @@ class KInetD : public KDEDModule {
 		
 	}
 }
-
-
 
 
 extern "C" {

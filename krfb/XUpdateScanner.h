@@ -57,6 +57,11 @@ class Hint {
 	}
 };
 
+struct TileChangeRegion {
+  short firstLine, lastLine;
+};
+
+
 class XUpdateScanner
 {
   public:
@@ -70,7 +75,7 @@ class XUpdateScanner
 
     ~XUpdateScanner();
 
-    void copyTile( int x, int y);
+    bool copyTile(int x, int y, int tx, int ty);
     void copyAllTiles();
     void searchUpdates( QPtrList<Hint> &hintList);
     void flushHint(int x, int y, int &x0, Hint &hint, 
@@ -95,6 +100,7 @@ class XUpdateScanner
 
     unsigned int tilesX, tilesY;
     bool *tileMap;
+    struct TileChangeRegion *tileRegionMap;
 };
 
 

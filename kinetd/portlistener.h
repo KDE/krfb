@@ -21,8 +21,8 @@
 
 #include <kservice.h>
 
-class PortListener : public DCOPObject {
-	K_DCOP
+class PortListener {
+
 private:
 	QString serviceName;
 	int port;
@@ -35,8 +35,6 @@ private:
 	
 	
 
- k_dcop:
-	
 	
 }
 
