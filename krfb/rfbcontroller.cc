@@ -731,7 +731,7 @@ enum rfbNewClientAction RFBController::handleNewClient(rfbClientPtr cl)
 				.arg(remoteIp));
 
 	dialog.ipLabel->setText(remoteIp);
-	dialog.allowRemoteControlCB->setChecked(false);
+	dialog.allowRemoteControlCB->setChecked(true);
 	dialog.setFixedSize(dialog.sizeHint());
 	dialog.show();
 	return RFB_CLIENT_ON_HOLD;
