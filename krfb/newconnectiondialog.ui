@@ -17,7 +17,7 @@
     </property>
     <property stdset="1">
         <name>caption</name>
-        <string>New RFB Connection</string>
+        <string>KRfb: New Connection</string>
     </property>
     <grid>
         <property stdset="1">
@@ -145,7 +145,7 @@
                             <class>QLabel</class>
                             <property stdset="1">
                                 <name>name</name>
-                                <cstring>TextLabel3</cstring>
+                                <cstring>mainTextLabel</cstring>
                             </property>
                             <property stdset="1">
                                 <name>sizePolicy</name>
@@ -168,12 +168,12 @@
                             </property>
                             <property stdset="1">
                                 <name>text</name>
-                                <string>A user on the computer x.x.x.x requests a RFB connection to your computer. 
-This means that he can see everything on your screen and, if the box below is enabled, he can also control it. Refuse the connection unless you trust the person.</string>
+                                <string>Somebody requests a RFB connection to your computer. 
+This means that she can see everything on your screen and, if the option below is enabled, she can also control it. Refuse the connection unless you trust the person.</string>
                             </property>
                             <property stdset="1">
                                 <name>textFormat</name>
-                                <enum>PlainText</enum>
+                                <enum>AutoText</enum>
                             </property>
                             <property stdset="1">
                                 <name>alignment</name>
@@ -190,6 +190,78 @@ This means that he can see everything on your screen and, if the box below is en
                     </vbox>
                 </widget>
                 <widget>
+                    <class>QFrame</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>Frame6</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>sizePolicy</name>
+                        <sizepolicy>
+                            <hsizetype>7</hsizetype>
+                            <vsizetype>0</vsizetype>
+                        </sizepolicy>
+                    </property>
+                    <property stdset="1">
+                        <name>frameShape</name>
+                        <enum>NoFrame</enum>
+                    </property>
+                    <property stdset="1">
+                        <name>frameShadow</name>
+                        <enum>Plain</enum>
+                    </property>
+                    <property>
+                        <name>layoutMargin</name>
+                    </property>
+                    <property>
+                        <name>layoutSpacing</name>
+                    </property>
+                    <hbox>
+                        <property stdset="1">
+                            <name>margin</name>
+                            <number>0</number>
+                        </property>
+                        <property stdset="1">
+                            <name>spacing</name>
+                            <number>1</number>
+                        </property>
+                        <widget>
+                            <class>QLabel</class>
+                            <property stdset="1">
+                                <name>name</name>
+                                <cstring>TextLabel1</cstring>
+                            </property>
+                            <property stdset="1">
+                                <name>font</name>
+                                <font>
+                                    <bold>1</bold>
+                                </font>
+                            </property>
+                            <property stdset="1">
+                                <name>text</name>
+                                <string>Remote system:</string>
+                            </property>
+                        </widget>
+                        <widget>
+                            <class>QLabel</class>
+                            <property stdset="1">
+                                <name>name</name>
+                                <cstring>ipLabel</cstring>
+                            </property>
+                            <property stdset="1">
+                                <name>font</name>
+                                <font>
+                                    <bold>1</bold>
+                                </font>
+                            </property>
+                            <property stdset="1">
+                                <name>text</name>
+                                <string>123.234.123.234</string>
+                            </property>
+                        </widget>
+                    </hbox>
+                </widget>
+                <widget>
                     <class>QCheckBox</class>
                     <property stdset="1">
                         <name>name</name>
@@ -204,7 +276,7 @@ This means that he can see everything on your screen and, if the box below is en
                     </property>
                     <property stdset="1">
                         <name>text</name>
-                        <string>Allow remote user to control keyboard and mouse</string>
+                        <string>Allow remote user to control &amp;keyboard and mouse</string>
                     </property>
                     <property>
                         <name>whatsThis</name>
@@ -278,7 +350,7 @@ This means that he can see everything on your screen and, if the box below is en
                     </property>
                     <property stdset="1">
                         <name>text</name>
-                        <string>Accept connection</string>
+                        <string>&amp;Accept Connection</string>
                     </property>
                     <property>
                         <name>whatsThis</name>
@@ -293,7 +365,11 @@ This means that he can see everything on your screen and, if the box below is en
                     </property>
                     <property stdset="1">
                         <name>text</name>
-                        <string>Refuse connection</string>
+                        <string>&amp;Refuse Connection</string>
+                    </property>
+                    <property stdset="1">
+                        <name>accel</name>
+                        <number>276824146</number>
                     </property>
                     <property stdset="1">
                         <name>default</name>

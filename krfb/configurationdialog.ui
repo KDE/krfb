@@ -11,20 +11,20 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>318</width>
+            <width>321</width>
             <height>257</height>
         </rect>
     </property>
     <property stdset="1">
         <name>sizePolicy</name>
         <sizepolicy>
-            <hsizetype>5</hsizetype>
-            <vsizetype>5</vsizetype>
+            <hsizetype>0</hsizetype>
+            <vsizetype>0</vsizetype>
         </sizepolicy>
     </property>
     <property stdset="1">
         <name>caption</name>
-        <string>KRfb configuration</string>
+        <string>KRfb: Configuration</string>
     </property>
     <vbox>
         <property stdset="1">
@@ -76,7 +76,7 @@
                     </property>
                     <property stdset="1">
                         <name>text</name>
-                        <string>ask &amp;before remote client connects</string>
+                        <string>Ask &amp;before remote client connects</string>
                     </property>
                     <property>
                         <name>whatsThis</name>
@@ -91,7 +91,7 @@
                     </property>
                     <property stdset="1">
                         <name>text</name>
-                        <string>allow &amp;remote client to control the desktop</string>
+                        <string>Allow &amp;remote client to control the desktop</string>
                     </property>
                     <property>
                         <name>whatsThis</name>

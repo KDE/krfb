@@ -29,11 +29,13 @@
 #include <kdebug.h>
 #include <kmessagebox.h>
 #include <klocale.h>
+#include <kextsock.h>
 #include <qwindowdefs.h>
 #include <qtimer.h>
 #include <qcheckbox.h>
 #include <qpushbutton.h>
 #include <qglobal.h>
+#include <qlabel.h>
 
 RFBController::RFBController(Configuration *c) :
 	configuration(c),
@@ -107,8 +109,13 @@ void RFBController::accepted(KSocket *s) {
 	socket = s;
 
 	if (configuration->askOnConnect()) {
+		QString host, port;
+		KExtendedSocket::resolve(KExtendedSocket::peerAddress(sockFd),
+					 host, port);
+		dialog.ipLabel->setText(host);
 		dialog.allowRemoteControlCB->setChecked(
 			configuration->allowDesktopControl());
+		dialog.setFixedSize(dialog.sizeHint());
 		dialog.show();
 	}
 	else {

@@ -1,22 +1,16 @@
 METASOURCES = AUTO
-KDE_ICON = AUTO
-POFILES=AUTO
 
 bin_PROGRAMS = krfb
 krfb_SOURCES = rfbcontroller.cc configuration.cc trayicon.cpp XUpdateScanner.cc rfbconnection.cc main.cpp configurationdialog.ui newconnectiondialog.ui
-krfb_LDADD   = ./lib/liblib.a  $(LIB_QT) $(LIB_KDECORE) $(LIB_KDEUI)  $(LIBSOCKET)
+krfb_LDADD   = ./lib/librfbserver.a  $(LIB_QT) $(LIB_KDECORE) $(LIB_KDEUI)  $(LIBSOCKET)
 
 SUBDIRS = lib 
 
-EXTRA_DIST = krfb.desktop lo32-app-krfb.png lo16-app-krfb.png rfbcontroller.h rfbconnection.h eyes-closed24.png eyes-open24.png XUpdateScanner.h trayicon.h configuration.h
+EXTRA_DIST = $(krfb_SOURCES) krfb.desktop lo32-app-krfb.png lo16-app-krfb.png rfbcontroller.h rfbconnection.h eyes-closed24.png eyes-open24.png XUpdateScanner.h trayicon.h configuration.h
 
 install-data-local:
 	$(mkinstalldirs) $(kde_appsdir)/Applications/
 	$(INSTALL_DATA) $(srcdir)/krfb.desktop $(kde_appsdir)/Applications/krfb.desktop
-	$(mkinstalldirs) $(kde_icondir)/locolor/32x32/apps/
-	$(INSTALL_DATA) $(srcdir)/lo32-app-krfb.png $(kde_icondir)/locolor/32x32/apps/krfb.png
-	$(mkinstalldirs) $(kde_icondir)/locolor/16x16/apps/
-	$(INSTALL_DATA) $(srcdir)/lo16-app-krfb.png $(kde_icondir)/locolor/16x16/apps/krfb.png
 	$(mkinstalldirs) $(kde_datadir)/krfb/pics
 	$(INSTALL_DATA) $(srcdir)/eyes-closed24.png $(kde_datadir)/krfb/pics/eyes-closed24.png
 	$(INSTALL_DATA) $(srcdir)/eyes-open24.png $(kde_datadir)/krfb/pics/eyes-open24.png
@@ -24,10 +18,10 @@ install-data-local:
 
 uninstall-local:
 	-rm -f $(kde_appsdir)/Applications/krfb.desktop
-	-rm -f $(kde_icondir)/locolor/32x32/apps/krfb.png
-	-rm -f $(kde_icondir)/locolor/16x16/apps/krfb.png
 	-rm -f $(kde_datadir)/krfb/pics/eyes-open24.png
 	-rm -f $(kde_datadir)/krfb/pics/eyes-closed24.png
+
+KDE_ICON = krfb
 
 # this 10 paths are KDE specific. Use them:
 # kde_htmldir       Where your docs should go to. (contains lang subdirs)
@@ -46,7 +40,9 @@ uninstall-local:
 INCLUDES= $(all_includes) -I../include
 
 # the library search path. 
-krfb_LDFLAGS = $(all_libraries) $(KDE_RPATH) -lXtst
+krfb_LDFLAGS = $(all_libraries) $(KDE_RPATH) -lXtst -lz
+
+CXXFLAGS = -DUSE_ZLIB_WARREN
 
 # Uncomment the following two lines if you add a ui.rc file for your application to make use of
 # KDE´s XML GUI builing

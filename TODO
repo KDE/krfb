@@ -1,4 +1,8 @@
 Todo:
-- i18n (0.2)
+- i18n
+- do something against potential denial-of-service attacks by repeatedly
+  trying to connect to users until they agree. Maybe a message box
+  after the third attempt offering the user to stop KRfb, block the IP or 
+  something like this
 
 
