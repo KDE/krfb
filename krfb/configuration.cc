@@ -416,11 +416,16 @@ void Configuration::inviteEmail() {
 	KApplication *app = KApplication::kApplication();
 	app->invokeMailer(QString::null, QString::null, QString::null,
 		i18n("Desktop Sharing (VNC) invitation"),
-		i18n("You have been invited to a VNC session. To connect, start "
-		     "a VNC client with the following parameters:\n\n"
-		     "Host: %1:%2\n"
-		     "Password: %3\n\n"
-		     "For security reasons this invitation will expire at %4.")
+		i18n("You have been invited to a VNC session. If you have the KDE Remote "
+                     "Desktop Connection installed, just click on the link below.\n\n"
+		     "vnc://invitation:%1@%2:%3\n\n"
+                     "Otherwise you can use any VNC client with the following parameters:\n\n"
+		     "Host: %4:%5\n"
+		     "Password: %6\n\n"
+		     "For security reasons this invitation will expire at %7.")
+			.arg(inv.password())
+			.arg(hostname())
+			.arg(port())
 			.arg(hostname())
 			.arg(port())
 			.arg(inv.password())

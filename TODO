@@ -1,5 +1,3 @@
-- cut&paste support
-
 Todo (unscheduled features):
 - attach .vnc file to invitations? 
 - SLP support (or UPnP, or whatever KDE will use)
@@ -9,3 +7,4 @@ Todo (unscheduled features):
 - better authentication mechanisms?
 - look into adding an extension to xfree to improve speed (get noticed of
   screen updates)
+- cut&paste support
