@@ -102,7 +102,7 @@ QString Configuration::password() const {
 }
 
 int Configuration::port() const {
-	return portNumber;
+	return (portNumber < 1023) ? (portNumber + 5900) : portNumber;
 }
 
 void Configuration::showDialog() {

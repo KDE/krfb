@@ -56,14 +56,15 @@ public:
 	virtual void handlePointerEvent(PointerEvent &pointerEvent);
 	virtual void getServerInitialisation( ServerInitialisation &_serverInitialisation );
 	void scanUpdates();
-	
+
+	BufferedConnection *bufferedConnection;	
+
 private:	
 	void createFramebuffer();
 	void destroyFramebuffer();
 
 	int fd;
 	int buttonMask;
-	BufferedConnection *bufferedConnection;
 
 	Framebuffer framebuffer;
 	XUpdateScanner *scanner;

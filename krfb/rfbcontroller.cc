@@ -22,11 +22,14 @@
 
 #include "rfbcontroller.h"
 
+#include <netinet/tcp.h>
+#include <unistd.h>
+#include <fcntl.h>
+
 #include <kdebug.h>
-#include <qwindowdef.h>
+#include <qwindowdefs.h>
 #include <qtimer.h>
 #include <qglobal.h>
-#include <unistd.h>
 
 RFBController::RFBController(Configuration *c) :
 	configuration(c),
@@ -42,7 +45,7 @@ RFBController::~RFBController() {
 }
 
 void RFBController::start() {
-	serversocket = new KServerSocket(configuration->port, false);
+	serversocket = new KServerSocket(configuration->port(), false);
 	connect(serversocket, SIGNAL(accepted()), SLOT(accepted()));
 	serversocket->bindAndListen();
 	// TODO: error message if bindAndListen fails (port in use)
@@ -65,10 +68,10 @@ void RFBController::idleSlot() {
 
 // called when KServerSocket accepted a connection. Closes KServerSocket.
 void RFBController::accepted() {
-	int sockFd = serversocket->socket;
-	KSocket s;
+	int sockFd = serversocket->socket();
+	KSocket *s;
 	if (sockFd < 0)
-		kdebug("Negative server socket?");
+		kdDebug("Negative server socket?");
 
 	int one = 1;
 	setsockopt(sockFd, IPPROTO_TCP, TCP_NODELAY, 
@@ -85,16 +88,16 @@ void RFBController::accepted() {
 	connect(s, SIGNAL(readEvent(KSocket*)), SLOT(sockedReadable()));
 	connect(s, SIGNAL(writeEvent(KSocket*)), SLOT(sockedWritable()));
 	connect(s, SIGNAL(closeEvent(KSocket*)), SLOT(sockedClosed()));
-	s.enableRead(true);
+	s->enableRead(true);
 	connection = new RFBConnection(qt_xdisplay(), sockFd, 
-				       configuration->password);
-	setWritable();
+				       configuration->password());
+	checkWritable();
 	emit sessionEstablished();
 }
 
 void RFBController::checkWritable() {
 	BufferedConnection *bc = connection->bufferedConnection;	
-	socket->writeEnable((bc->senderBuffer.end - bc->senderBuffer.pos) > 0);
+	socket->enableWrite((bc->senderBuffer.end - bc->senderBuffer.pos) > 0);
 }
 
 void RFBController::prepareIdleUpdate() {
@@ -118,7 +121,7 @@ void RFBController::socketReadable() {
 	}
 	while (connection->currentState && bc->hasReceiverBufferData()) {
 		connection->update();
-		setWritable();
+		checkWritable();
 	}
 	bc->receiverBuffer.pos = 0;
 	bc->receiverBuffer.end = 0;
@@ -142,7 +145,7 @@ void RFBController::socketWritable() {
 	else {
 		// TODO: what to do if write failed
 	}
-	setWritable();
+	checkWritable();
 }
 
 void RFBController::closeSession() {
@@ -154,10 +157,6 @@ void RFBController::closeSession() {
 	socket = 0;
 	emit sessionFinished();
 	start();
-}
-
-void RFBController::socketClosed() {
-	closeSession();
 }
 
 #include "rfbcontroller.moc"

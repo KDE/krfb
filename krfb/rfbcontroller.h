@@ -23,11 +23,11 @@
 #ifndef RFBCONTROLLER_H
 #define RFBCONTROLLER_H
 
-#include "rfbconnection.h"
 #include "configuration.h"
-#include <ksocket.h>
-#include <kserversocket.h>
+#include <ksock.h>
 #include <qobject.h>
+// rfbconnection must be last because of X11 headers
+#include "rfbconnection.h"
 
 using namespace rfb;
 
@@ -45,10 +45,9 @@ public:
 	RFBController(Configuration *c);
 	~RFBController();
 
-	void closeSession();
-
 public slots:	
 	void rebind();
+	void closeSession();
 
 signals:
         void sessionEstablished();
@@ -59,7 +58,7 @@ private:
 	void checkWritable();
 	void prepareIdleUpdate();
 
-	Configuration *c;
+	Configuration *configuration;
 	KServerSocket *serversocket;
 	KSocket *socket;
 	RFBConnection *connection;
@@ -70,7 +69,6 @@ private slots:
 	void accepted();
         void socketReadable(); 
         void socketWritable(); 
-        void socketClosed(); 
 };
 
 #endif
