@@ -300,6 +300,8 @@ listenerRun(void *data)
     int len;
 
     len = sizeof(peer);
+
+    /* TODO: this thread wont die by restarting the server */
     while ((client_fd = accept(rfbScreen->rfbListenSock, 
                                (struct sockaddr*)&peer, &len)) >= 0) {
         cl = rfbNewClient(rfbScreen,client_fd);
@@ -308,9 +310,6 @@ listenerRun(void *data)
 	if (cl && !cl->onHold )
 		rfbStartOnHoldClient(cl);
     }
-
-    rfbLog("accept failed\n");
-    exit(1);
 }
 
 void 
@@ -462,6 +461,7 @@ rfbScreenInfoPtr rfbGetScreen(int* argc,char** argv,
    if(width&3)
      fprintf(stderr,"WARNING: Width (%d) is not a multiple of 4. VncViewer has problems with that.\n",width);
 
+   rfbScreen->autoPort=FALSE;
    rfbScreen->rfbClientHead=0;
    rfbScreen->rfbPort=5900;
    rfbScreen->socketInitDone=FALSE;

@@ -257,6 +257,7 @@ typedef struct _rfbScreenInfo
     char* desktopName;
     char rfbThisHost[255];
 
+    Bool autoPort;
     int rfbPort;
     SOCKET rfbListenSock;
     int maxSock;

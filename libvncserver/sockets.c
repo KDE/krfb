@@ -112,7 +112,28 @@ rfbInitSockets(rfbScreenInfoPtr rfbScreen)
 	return;
     }
 
-    if(rfbScreen->rfbPort>0) {
+    if(rfbScreen->autoPort) {
+        int i;
+        rfbLog("Autoprobing TCP port \n");
+
+        for (i = 5900; i < 6000; i++) {
+            if ((rfbScreen->rfbListenSock = ListenOnTCPPort(i)) >= 0) {
+		rfbScreen->rfbPort = i;
+		break;
+	    }
+        }
+
+        if (i >= 6000) {
+	    rfbLogPerror("Failure autoprobing");
+	    exit(1);
+        }
+
+        rfbLog("Autoprobing selected port %d\n", rfbScreen->rfbPort);
+        FD_ZERO(&(rfbScreen->allFds));
+        FD_SET(rfbScreen->rfbListenSock, &(rfbScreen->allFds));
+        rfbScreen->maxFd = rfbScreen->rfbListenSock;
+    }
+    else if(rfbScreen->rfbPort>0) {
       rfbLog("Listening for VNC connections on TCP port %d\n", rfbScreen->rfbPort);
 
       if ((rfbScreen->rfbListenSock = ListenOnTCPPort(rfbScreen->rfbPort)) < 0) {

@@ -15,6 +15,10 @@
  *                                                                         *
  ***************************************************************************/
 
+/*
+ * Contains keyboard & pointer handling from libvncserver's x11vnc.c 
+ */
+
 #include "rfbcontroller.h"
 
 #include <netinet/tcp.h>
@@ -26,6 +30,7 @@
 #include <kmessagebox.h>
 #include <klocale.h>
 #include <kextsock.h>
+#include <qstring.h>
 #include <qcursor.h>
 #include <qwindowdefs.h>
 #include <qtimer.h>
@@ -72,7 +77,7 @@ static Bool passwordCheck(rfbClientPtr cl,
 			  int len)
 {
 	AppLocker a;
-	return self->handleCheckPassword(encryptedPassword, len);
+	return self->handleCheckPassword(cl, encryptedPassword, len);
 }
 
 static void keyboardHook(Bool down, KeySym keySym, rfbClientPtr)
@@ -85,7 +90,7 @@ static void pointerHook(int bm, int x, int y, rfbClientPtr)
 	self->handlePointerEvent(bm, x, y);
 }
 
-static void clientGoneHook(rfbClientPtr cl) 
+static void clientGoneHook(rfbClientPtr)
 {
 	self->handleClientGone();
 }
@@ -97,7 +102,6 @@ void ConnectionDialog::closeEvent(QCloseEvent *)
 	emit closed();
 }
 
-bool KeyboardEvent::initialized = false;
 Display *KeyboardEvent::dpy;
 char KeyboardEvent::modifiers[0x100];
 KeyCode KeyboardEvent::keycodes[0x100];
@@ -112,34 +116,36 @@ char KeyboardEvent::ModifierState;
 KeyboardEvent::KeyboardEvent(bool d, KeySym k) :
 	down(d),
 	keySym(k) {
-	if (!initialized) {
-		initialized = true;
-		initKeycodes();
-		dpy = qt_xdisplay();
-	}
 }
 
 void KeyboardEvent::initKeycodes() {
 	KeySym key,*keymap;
 	int i,j,minkey,maxkey,syms_per_keycode;
+
+	dpy = qt_xdisplay();
 	
 	memset(modifiers,-1,sizeof(modifiers));
 	
 	XDisplayKeycodes(dpy,&minkey,&maxkey);
-	keymap=XGetKeyboardMapping(dpy,minkey,(maxkey - minkey + 1),&syms_per_keycode);
-	
+	ASSERT(minkey >= 8);
+	ASSERT(maxkey < 256);
+	keymap = XGetKeyboardMapping(dpy, minkey,
+				     (maxkey - minkey + 1),
+				     &syms_per_keycode);
+	ASSERT(keymap);
+
 	for (i = minkey; i <= maxkey; i++)
-		for(j=0;j<syms_per_keycode;j++) {
-			key=keymap[(i-minkey)*syms_per_keycode+j];
-			if(key>=' ' && key<0x100 && i==XKeysymToKeycode(dpy,key)) {
+		for (j=0; j<syms_per_keycode; j++) {
+			key = keymap[(i-minkey)*syms_per_keycode+j];
+			if (key>=' ' && key<0x100 && i==XKeysymToKeycode(dpy,key)) {
 				keycodes[key]=i;
 				modifiers[key]=j;
 			}
 		}
 	
-	leftShiftCode = XKeysymToKeycode(dpy,XK_Shift_L);
-	rightShiftCode = XKeysymToKeycode(dpy,XK_Shift_R);
-	altGrCode = XKeysymToKeycode(dpy,XK_Mode_switch);
+	leftShiftCode = XKeysymToKeycode(dpy, XK_Shift_L);
+	rightShiftCode = XKeysymToKeycode(dpy, XK_Shift_R);
+	altGrCode = XKeysymToKeycode(dpy, XK_Mode_switch);
 	
 	XFree ((char *)keymap);
 }
@@ -164,12 +170,12 @@ void KeyboardEvent::tweakModifiers(char mod, bool down) {
 		XTestFakeKeyEvent(dpy, leftShiftCode,
 				  down, CurrentTime);
 	
-	if(ModifierState&ALTGR && mod != 2)
+	if((ModifierState&ALTGR) && mod != 2)
 		XTestFakeKeyEvent(dpy, altGrCode,
 				  !down, CurrentTime);
 	if(!(ModifierState&ALTGR) && mod==2)
 		XTestFakeKeyEvent(dpy, altGrCode,
-					  down, CurrentTime);
+				  down, CurrentTime);
 }
 
 void KeyboardEvent::exec() {
@@ -184,19 +190,16 @@ void KeyboardEvent::exec() {
 		KeyCode k;
 		if (down)
 			tweakModifiers(modifiers[keySym],True);
-		//tweakModifiers(modifiers[keySym],down);
-		//k = XKeysymToKeycode( dpy,keySym );
 		k = keycodes[keySym];
-		if(k!=NoSymbol) 
-			XTestFakeKeyEvent(dpy,k,down,CurrentTime);
+		if (k != NoSymbol) 
+			XTestFakeKeyEvent(dpy, k, down, CurrentTime);
 		
-		/*XTestFakeKeyEvent(dpy,keycodes[keySym],down,CurrentTime);*/
 		if (down)
 			tweakModifiers(modifiers[keySym],False);
 	} else {
-		KeyCode k = XKeysymToKeycode( dpy,keySym );
-		if(k!=NoSymbol)
-			XTestFakeKeyEvent(dpy,k,down,CurrentTime);
+		KeyCode k = XKeysymToKeycode(dpy, keySym );
+		if (k != NoSymbol)
+			XTestFakeKeyEvent(dpy, k, down, CurrentTime);
 	}
 }
 
@@ -242,6 +245,9 @@ RFBController::RFBController(Configuration *c) :
 	connect(&idleTimer, SIGNAL(timeout()), SLOT(idleSlot()));
 
 	asyncQueue.setAutoDelete(true);
+
+	KeyboardEvent::initKeycodes();
+
 	startServer();
 }
 
@@ -277,7 +283,7 @@ void RFBController::startServer(bool xtestGrab)
 	server->rfbServerFormat.bitsPerPixel = framebufferImage->bits_per_pixel;
 	server->rfbServerFormat.depth = framebufferImage->depth;
 	//rfbEndianTest = framebufferImage->bitmap_bit_order != MSBFirst;
-	server->rfbServerFormat.trueColour = TRUE;
+	server->rfbServerFormat.trueColour = (CARD8) TRUE;
 	
 	if ( server->rfbServerFormat.bitsPerPixel == 8 ) {
 		server->rfbServerFormat.redShift = 0;
@@ -312,6 +318,8 @@ void RFBController::startServer(bool xtestGrab)
 	server->ptrAddEvent = pointerHook;
 	server->newClientHook = newClientHook;
 	server->passwordCheck = passwordCheck;
+
+	passwordChanged();
 
 	scanner = new XUpdateScanner(qt_xdisplay(), 
 				     QApplication::desktop()->winId(), 
@@ -467,10 +475,25 @@ void RFBController::dialogRefused()
 	emit sessionRefused();
 }
 
-bool RFBController::handleCheckPassword(const char *, int) 
+bool RFBController::handleCheckPassword(rfbClientPtr cl, 
+					const char *response, 
+					int len) 
 {
+	char passwd[8];
+
+	QString cpassword = configuration->password();
+	bzero(passwd, 8);
+	if (!cpassword.isNull())
+		strncpy(passwd, cpassword.latin1(), 
+			(8 <= cpassword.length()) ? 8 : cpassword.length());
+	
+	vncEncryptBytes(cl->authChallenge, passwd);
+	
+	if (memcmp(cl->authChallenge, response, len) != 0) {
+		// TODO: knotify
+		return FALSE;
+	}
 	return TRUE;
-	// TODO
 }
 
 enum rfbNewClientAction RFBController::handleNewClient(rfbClientPtr cl) 
@@ -522,6 +545,11 @@ void RFBController::handlePointerEvent(int button_mask, int x, int y) {
 	asyncMutex.lock();
 	asyncQueue.append(new PointerEvent(button_mask, x, y));
 	asyncMutex.unlock();
+}
+
+void RFBController::passwordChanged() {
+	server->rfbAuthPasswdData = (const char*) 
+		((configuration->password().length() == 0) ? 0 :  1);
 }
 
 bool RFBController::checkX11Capabilities() {

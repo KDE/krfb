@@ -60,6 +60,7 @@ public:
 
 signals:
   	void portChanged();
+  	void passwordChanged();
 
 public slots:
 	void showDialog();

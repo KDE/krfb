@@ -66,7 +66,6 @@ class KeyboardEvent : public VNCEvent {
 	bool down;
 	KeySym keySym;
 
-	static bool initialized;
 	static Display *dpy;
 	static char modifiers[0x100];
 	static KeyCode keycodes[0x100], leftShiftCode, rightShiftCode, altGrCode;
@@ -76,11 +75,11 @@ class KeyboardEvent : public VNCEvent {
 	static char ModifierState;
 
 	static void tweakModifiers(char mod, bool down);
-	static void initKeycodes();
 public:
+	static void initKeycodes();
+
 	KeyboardEvent(bool d, KeySym k);
 	virtual void exec();
-
 };
 
 class PointerEvent : public VNCEvent {
@@ -116,7 +115,7 @@ public:
 	void connectionAccepted(bool allowRemoteConnection);
 	void refuseConnection();
 	void connectionClosed();
-	bool handleCheckPassword(const char *p, int len);
+	bool handleCheckPassword(rfbClientPtr, const char *, int);
 	void handleKeyEvent(bool down, KeySym keySym);
 	void handlePointerEvent(int button_mask, int x, int y);
 	enum rfbNewClientAction handleNewClient(rfbClientPtr cl);
@@ -126,6 +125,7 @@ public:
 
 public slots:	
 	void rebind();
+	void passwordChanged();
 	void closeConnection();
 
 signals:

@@ -142,6 +142,8 @@ int main(int argc, char *argv[])
 
 	QObject::connect(config, SIGNAL(portChanged()),
 			 &controller, SLOT(rebind()));
+	QObject::connect(config, SIGNAL(passwordChanged()),
+			 &controller, SLOT(passwordChanged()));
 
 	QObject::connect(&controller, SIGNAL(sessionEstablished()),
 			 &trayicon, SLOT(openConnection()));

@@ -82,7 +82,11 @@ void Configuration::loadFromKConfig() {
 void Configuration::loadFromDialog() {
 	askOnConnectFlag = confDlg.askOnConnectCB->isChecked();
 	allowDesktopControlFlag = confDlg.allowDesktopControlCB->isChecked();
-	passwordString = confDlg.passwordInput->text();
+	QString newPassword = confDlg.passwordInput->text();
+	if (passwordString != newPassword) {
+		passwordString = newPassword;
+		emit passwordChanged();
+	}
 	int p = confDlg.displayNumberInput->text().toInt();
 	if (p != portNumber) {
 		portNumber = p;
@@ -155,17 +159,20 @@ void Configuration::setAllowDesktopControl(bool allowDesktopControl)
 void Configuration::setPassword(QString password)
 {
         passwordString = password;
+  	emit passwordChanged();
         saveToKConfig();
         saveToDialog();
 }
 
 void Configuration::setPort(int port)
 {
+	int oldPort = portNumber;
         if ((port >= 5900) && (port < 6000))
                 portNumber = port-5900;
         else
                 portNumber = port;
-        emit portChanged();
+	if (oldPort != portNumber)
+		emit portChanged();
         saveToKConfig();
         saveToDialog();
 }
