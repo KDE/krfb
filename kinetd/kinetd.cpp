@@ -217,7 +217,10 @@ QStringList PortListener::processServiceTemplate(const QString &a) {
 	QValueVector<KInetInterface> v = KInetInterface::getAllInterfaces(false);
 	QValueVector<KInetInterface>::Iterator it = v.begin();
 	while (it != v.end()) {
-		QString hostName = (*(it++)).address()->nodeName();
+		KInetSocketAddress *address = (*(it++)).address();
+		if (!address)
+			continue;
+		QString hostName = address->nodeName();
 		KUser u;
 		QString x = a; // replace does not work in const QString. Why??
 		l.append(x.replace(QRegExp("%h"), KServiceRegistry::encodeAttributeValue(hostName))
