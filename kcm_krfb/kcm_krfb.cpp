@@ -175,7 +175,7 @@ const KAboutData *KcmKRfb::aboutData() const
 
 QString KcmKRfb::quickHelp() const
 {
-	return i18n("<h1>Desktop Sharing Configuration</h1> This module allows you to configure"
+	return i18n("<h1>Desktop Sharing</h1> This module allows you to configure"
 	            " the KDE desktop sharing.");
 }
 
