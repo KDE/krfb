@@ -85,7 +85,6 @@ class XUpdateScanner
 	void createHints(QPtrList<Hint> &hintList);
 	void addTileToHint(int x, int y, int th, Hint &hint);
 	void createHintFromTile(int x, int y, int th, Hint &hint);
-	void extendHintY(int x, int y, int x0, Hint &h);
 	
 	Display *dpy;
 	Window window;

@@ -134,6 +134,8 @@ XUpdateScanner::~XUpdateScanner()
 }
 
 
+// returns true if last line changed. this is used to re-scan the tile under
+// this one because it is likely to be modified but missed by the probe
 bool XUpdateScanner::copyTile(int x, int y, int tx, int ty)
 {
 	unsigned int maxWidth = width - x;
@@ -254,45 +256,6 @@ void XUpdateScanner::addTileToHint(int x, int y, int th, Hint &hint)
 	}
 }
 
-void XUpdateScanner::extendHintY(int x, int y, int x0, Hint &hint) 
-{
-	int eh = 0;
-	int lastLine = -1;
-	int w = x - x0 + 1;
-	for (int i = y+1; i < tilesY; i++) {
-		bool lk = true;
-		int ll = 0;
-		for (int j = x0; j < x; j++) {
-			int idx = j + i * tilesX;
-			if ((!tileMap[idx]) ||
-			    (tileRegionMap[idx].firstLine*w > MAX_ADJ_TOLERANCE)) {
-				lk = false;
-				break;
-			}
-			if (tileRegionMap[idx].lastLine > ll)
-				ll = tileRegionMap[idx].lastLine;
-		}
-		if (!lk)
-			break;
-		
-		for (int j = x0; j < x; j++) 
-			tileMap[j + i * tilesX] = false;
-
-		lastLine = ll;
-		eh++;
-		if ((ll*w) > MAX_ADJ_TOLERANCE)
-			break;
-	}
-
-	if (eh == 0)
-		return;
-
-	hint.h += (eh-1) * tileHeight;
-	hint.h += lastLine + 1;
-	if ((hint.y + hint.h) > height)
-		hint.h = height - hint.y;
-}
-
 static void printStatistics(Hint &hint) {
 	static int snum = 0;
 	static float ssum = 0.0;
@@ -318,17 +281,12 @@ void XUpdateScanner::flushHint(int x, int y, int &x0,
 	if (x0 < 0)
 		return;
 
-	int w = x - x0 + 1;
-	int th = (hint.y + hint.h) % tileHeight;
-	if ((th == 0) ||
-	    ((31-th)*w < MAX_ADJ_TOLERANCE))
-		extendHintY(x, y, x0, hint);
 	x0 = -1;
 
 	assert (hint.w > 0);
 	assert (hint.h > 0);
 
-//printStatistics(hint);
+	//printStatistics(hint);
 
 	hintList.append(new Hint(hint));
 }
@@ -351,8 +309,8 @@ void XUpdateScanner::createHints(QPtrList<Hint> &hintList)
 							   th,
 							   hint);
 					x0 = x;
-				}
-				else {
+
+				} else {
 					addTileToHint(x * tileWidth, 
 						      (y * tileHeight) + ty, 
 						      th,
