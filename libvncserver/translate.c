@@ -29,7 +29,7 @@
 #include "sraRegion.h"
 
 static void PrintPixelFormat(rfbPixelFormat *pf);
-static Bool rfbSetClientColourMapBGR233();
+static Bool rfbSetClientColourMapBGR233(rfbClientPtr cl);
 
 Bool rfbEconomicTranslate = FALSE;
 
@@ -38,7 +38,7 @@ Bool rfbEconomicTranslate = FALSE;
  */
 
 static const rfbPixelFormat BGR233Format = {
-    8, 8, 0, 1, 7, 7, 3, 0, 3, 6
+  8, 8, 0, 1, 7, 7, 3, 0, 3, 6, 0, 0
 };
 
 
@@ -359,8 +359,7 @@ rfbSetTranslateFunction(cl)
  */
 
 static Bool
-rfbSetClientColourMapBGR233(cl)
-    rfbClientPtr cl;
+rfbSetClientColourMapBGR233(rfbClientPtr cl)
 {
     char buf[sz_rfbSetColourMapEntriesMsg + 256 * 3 * 2];
     rfbSetColourMapEntriesMsg *scme = (rfbSetColourMapEntriesMsg *)buf;

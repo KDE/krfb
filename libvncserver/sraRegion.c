@@ -33,7 +33,7 @@ typedef struct sraRegion {
 sraSpanList *sraSpanListDup(const sraSpanList *src);
 void sraSpanListDestroy(sraSpanList *list);
 
-sraSpan *
+static sraSpan *
 sraSpanCreate(int start, int end, const sraSpanList *subspan) {
   sraSpan *item = (sraSpan*)malloc(sizeof(sraSpan));
   item->_next = item->_prev = NULL;
@@ -43,7 +43,7 @@ sraSpanCreate(int start, int end, const sraSpanList *subspan) {
   return item;
 }
 
-sraSpan *
+static sraSpan *
 sraSpanDup(const sraSpan *src) {
   sraSpan *span;
   if (!src) return NULL;
@@ -51,7 +51,7 @@ sraSpanDup(const sraSpan *src) {
   return span;
 }
 
-void
+static void
 sraSpanInsertAfter(sraSpan *newspan, sraSpan *after) {
   newspan->_next = after->_next;
   newspan->_prev = after;
@@ -59,7 +59,7 @@ sraSpanInsertAfter(sraSpan *newspan, sraSpan *after) {
   after->_next = newspan;
 }
 
-void
+static void
 sraSpanInsertBefore(sraSpan *newspan, sraSpan *before) {
   newspan->_next = before;
   newspan->_prev = before->_prev;
@@ -67,33 +67,35 @@ sraSpanInsertBefore(sraSpan *newspan, sraSpan *before) {
   before->_prev = newspan;
 }
 
-void
+static void
 sraSpanRemove(sraSpan *span) {
   span->_prev->_next = span->_next;
   span->_next->_prev = span->_prev;
 }
 
-void
+static void
 sraSpanDestroy(sraSpan *span) {
   if (span->subspan) sraSpanListDestroy(span->subspan);
   free(span);
 }
 
-void
+/*
+static void
 sraSpanCheck(const sraSpan *span, const char *text) {
-  /* Check the span is valid! */
+  // Check the span is valid! 
   if (span->start == span->end) {
     printf(text); 
     printf(":%d-%d\n", span->start, span->end);
     exit(0);
   }
 }
+*/
 
 /* -=- SpanList routines */
 
 void sraSpanPrint(const sraSpan *s);
 
-void
+static void
 sraSpanListPrint(const sraSpanList *l) {
   sraSpan *curr;
   if (!l) {
@@ -116,7 +118,7 @@ sraSpanPrint(const sraSpan *s) {
     sraSpanListPrint(s->subspan);
 }
 
-sraSpanList *
+static sraSpanList *
 sraSpanListCreate() {
   sraSpanList *item = (sraSpanList*)malloc(sizeof(sraSpanList));
   item->front._next = &(item->back);
@@ -156,7 +158,7 @@ sraSpanListDestroy(sraSpanList *list) {
   free(list);
 }
 
-void
+static void
 sraSpanListMakeEmpty(sraSpanList *list) {
   sraSpan *curr, *next;
   while (list->front._next != &(list->back)) {
@@ -172,10 +174,12 @@ sraSpanListMakeEmpty(sraSpanList *list) {
   list->back._next = NULL;
 }
 
-int sraMax(int a, int b) {return (a>b)?a:b;}
-int sraMin(int a, int b) {return (a<b)?a:b;}
+/*
+static int sraMax(int a, int b) {return (a>b)?a:b;}
+static int sraMin(int a, int b) {return (a<b)?a:b;}
+*/
 
-Bool
+static Bool
 sraSpanListEqual(const sraSpanList *s1, const sraSpanList *s2) {
   sraSpan *sp1, *sp2;
 
@@ -208,12 +212,12 @@ sraSpanListEqual(const sraSpanList *s1, const sraSpanList *s2) {
   }    
 }
 
-Bool
+static Bool
 sraSpanListEmpty(const sraSpanList *list) {
   return (list->front._next == &(list->back));
 }
 
-unsigned long
+static unsigned long
 sraSpanListCount(const sraSpanList *list) {
   sraSpan *curr = list->front._next;
   unsigned long count = 0;
@@ -228,7 +232,7 @@ sraSpanListCount(const sraSpanList *list) {
   return count;
 }
 
-void
+static void
 sraSpanMergePrevious(sraSpan *dest) {
   sraSpan *prev = dest->_prev;
   while ((prev->end == dest->start) &&
@@ -248,7 +252,7 @@ sraSpanMergePrevious(sraSpan *dest) {
   }
 }    
 
-void
+static void
 sraSpanMergeNext(sraSpan *dest) {
   sraSpan *next = dest->_next;
   while ((next->start == dest->end) &&
@@ -268,7 +272,7 @@ sraSpanMergeNext(sraSpan *dest) {
   }
 }
 
-void
+static void
 sraSpanListOr(sraSpanList *dest, const sraSpanList *src) {
   sraSpan *d_curr, *s_curr;
   int s_start, s_end;
@@ -358,7 +362,7 @@ sraSpanListOr(sraSpanList *dest, const sraSpanList *src) {
   }
 }
 
-Bool
+static Bool
 sraSpanListAnd(sraSpanList *dest, const sraSpanList *src) {
   sraSpan *d_curr, *s_curr, *d_next;
 
@@ -438,7 +442,7 @@ sraSpanListAnd(sraSpanList *dest, const sraSpanList *src) {
   return !sraSpanListEmpty(dest);
 }
 
-Bool
+static Bool
 sraSpanListSubtract(sraSpanList *dest, const sraSpanList *src) {
   sraSpan *d_curr, *s_curr;
 
@@ -511,7 +515,7 @@ sraSpanListSubtract(sraSpanList *dest, const sraSpanList *src) {
 
 /* -=- Region routines */
 
-sraRegion *
+sraRegion*
 sraRgnCreate() {
   return (sraRegion*)sraSpanListCreate();
 }
@@ -692,13 +696,13 @@ sraRectangleIterator *sraRgnGetReverseIterator(sraRegion *s,Bool reverseX,Bool r
   return(i);
 }
 
-Bool sraReverse(sraRectangleIterator *i)
+static Bool sraReverse(sraRectangleIterator *i)
 {
   return( ((i->ptrPos&2) && i->reverseX) ||
      (!(i->ptrPos&2) && i->reverseY));
 }
 
-sraSpan* sraNextSpan(sraRectangleIterator *i)
+static sraSpan* sraNextSpan(sraRectangleIterator *i)
 {
   if(sraReverse(i))
     return(i->sPtrs[i->ptrPos]->_prev);

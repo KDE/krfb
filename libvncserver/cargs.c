@@ -14,8 +14,7 @@
 
 #include "rfb.h"
 
-void
-rfbUsage(void)
+void rfbUsage(void)
 {
     fprintf(stderr, "-rfbport port          TCP port for RFB protocol\n");
     fprintf(stderr, "-rfbwait time          max time in ms to wait for RFB client\n");
@@ -91,12 +90,14 @@ rfbProcessArguments(rfbScreenInfoPtr rfbScreen,int* argc, char *argv[])
     *argc -= i-i1;
 }
 
-void rfbSizeUsage()
+/*
+static void rfbSizeUsage()
 {
     fprintf(stderr, "-width                 sets the width of the framebuffer\n");
     fprintf(stderr, "-height                sets the height of the framebuffer\n");
     exit(1);
 }
+*/
 
 void 
 rfbProcessSizeArguments(int* width,int* height,int* bpp,int* argc, char *argv[])

@@ -47,7 +47,7 @@
 
 #define OK_STR "HTTP/1.0 200 OK\nContent-Type: text/html\n\n"
 
-static void httpProcessInput();
+static void httpProcessInput(rfbScreenInfoPtr rfbScreen);
 static Bool compareAndSkip(char **ptr, const char *str);
 
 /*
@@ -108,7 +108,7 @@ httpCheckFds(rfbScreenInfoPtr rfbScreen)
     fd_set fds;
     struct timeval tv;
     struct sockaddr_in addr;
-    int addrlen = sizeof(addr);
+    socklen_t addrlen = sizeof(addr);
 
     if (!rfbScreen->httpDir)
 	return;
@@ -175,7 +175,7 @@ static void
 httpProcessInput(rfbScreenInfoPtr rfbScreen)
 {
     struct sockaddr_in addr;
-    int addrlen = sizeof(addr);
+    socklen_t addrlen = sizeof(addr);
     char fullFname[256];
     char *fname;
     unsigned int maxFnameLen;
@@ -273,7 +273,7 @@ httpProcessInput(rfbScreenInfoPtr rfbScreen)
 
     /* Open the file */
 
-    if ((fd = fopen(fullFname, "r")) <= 0) {
+    if (!(fd = fopen(fullFname, "r"))) {
 	rfbLogPerror("httpProcessInput: open");
 	WriteExact(&cl, NOT_FOUND_STR, strlen(NOT_FOUND_STR));
 	httpCloseSock(rfbScreen);

@@ -56,14 +56,14 @@ static void rfbProcessClientNormalMessage(rfbClientPtr cl);
 static void rfbProcessClientInitMessage(rfbClientPtr cl);
 
 #ifdef HAVE_PTHREADS
-void rfbIncrClientRef(rfbClientPtr cl)
+static void rfbIncrClientRef(rfbClientPtr cl)
 {
   LOCK(cl->refCountMutex);
   cl->refCount++;
   UNLOCK(cl->refCountMutex);
 }
 
-void rfbDecrClientRef(rfbClientPtr cl)
+static void rfbDecrClientRef(rfbClientPtr cl)
 {
   LOCK(cl->refCountMutex);
   cl->refCount--;
@@ -179,7 +179,7 @@ rfbReverseConnection(rfbScreen,host, port)
  * means.
  */
 
-rfbClientPtr
+static rfbClientPtr
 rfbNewTCPOrUDPClient(rfbScreen,sock,isUDP)
     rfbScreenInfoPtr rfbScreen;
     int sock;
@@ -189,7 +189,7 @@ rfbNewTCPOrUDPClient(rfbScreen,sock,isUDP)
     rfbClientIteratorPtr iterator;
     rfbClientPtr cl,cl_;
     struct sockaddr_in addr;
-    int addrlen = sizeof(struct sockaddr_in);
+    socklen_t addrlen = sizeof(struct sockaddr_in);
     int i;
 
     cl = (rfbClientPtr)calloc(sizeof(rfbClientRec),1);
@@ -526,7 +526,7 @@ rfbProcessClientInitMessage(cl)
     si->format.blueMax = Swap16IfLE(si->format.blueMax);
 
     if (strlen(cl->screen->desktopName) > 128)      /* sanity check on desktop name len */
-        cl->screen->desktopName[128] = 0;
+        ((char*)cl->screen->desktopName)[128] = 0;
 
     strcpy(buf + sz_rfbServerInitMsg, cl->screen->desktopName);
     len = strlen(buf + sz_rfbServerInitMsg);
@@ -1430,9 +1430,7 @@ rfbSendServerCutText(rfbScreenInfoPtr rfbScreen,char *str, int len)
 unsigned char ptrAcceleration = 50;
 
 void
-rfbNewUDPConnection(rfbScreen,sock)
-    rfbScreenInfoPtr rfbScreen;
-    int sock;
+rfbNewUDPConnection(rfbScreenInfoPtr rfbScreen, int sock)
 {
     if (write(sock, &ptrAcceleration, 1) < 0) {
 	rfbLogPerror("rfbNewUDPConnection: write");

@@ -412,7 +412,7 @@ ReadExact(cl, buf, len)
 int
 WriteExact(cl, buf, len)
      rfbClientPtr cl;
-     char *buf;
+     const char *buf;
      int len;
 {
     int sock = cl->sock;
@@ -519,7 +519,7 @@ ConnectToTcpAddr(host, port)
     addr.sin_family = AF_INET;
     addr.sin_port = htons(port);
 
-    if ((addr.sin_addr.s_addr = inet_addr(host)) == -1)
+    if ((addr.sin_addr.s_addr = inet_addr(host)) == INADDR_NONE)
     {
 	if (!(hp = gethostbyname(host))) {
 	    errno = EINVAL;

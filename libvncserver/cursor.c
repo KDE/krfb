@@ -143,7 +143,7 @@ rfbSendCursorShape(cl)
 	 bpp2=cl->format.bitsPerPixel/8;
        (*cl->translateFn)(cl->translateLookupTable,
 		       &(cl->screen->rfbServerFormat),
-                       &cl->format, pCursor->richSource,
+                       &cl->format, (char*)pCursor->richSource,
 		       &cl->updateBuf[cl->ublen],
                        pCursor->width*bpp1, pCursor->width, pCursor->height);
 
@@ -230,18 +230,18 @@ rfbCursorPtr rfbMakeXCursor(int width,int height,char* cursorString,char* maskSt
    /*cursor->backRed=cursor->backGreen=cursor->backBlue=0xffff;*/
    cursor->foreRed=cursor->foreGreen=cursor->foreBlue=0xffff;
    
-   cursor->source = (char*)calloc(w,height);
+   cursor->source = (unsigned char*)calloc(w,height);
    for(j=0,cp=cursorString;j<height;j++)
       for(i=0,bit=0x80;i<width;i++,bit=(bit&1)?0x80:bit>>1,cp++)
 	if(*cp!=' ') cursor->source[j*w+i/8]|=bit;
 
    if(maskString) {
-      cursor->mask = (char*)calloc(w,height);
+      cursor->mask = (unsigned char*)calloc(w,height);
       for(j=0,cp=maskString;j<height;j++)
 	for(i=0,bit=0x80;i<width;i++,bit=(bit&1)?0x80:bit>>1,cp++)
 	  if(*cp!=' ') cursor->mask[j*w+i/8]|=bit;
    } else
-     cursor->mask = rfbMakeMaskForXCursor(width,height,cursor->source);
+     cursor->mask = (unsigned char*)rfbMakeMaskForXCursor(width,height,(char*)cursor->source);
 
    return(cursor);
 }
@@ -289,7 +289,7 @@ void MakeXCursorFromRichCursor(rfbScreenInfoPtr rfbScreen,rfbCursorPtr cursor)
    char *back=(char*)&background;
    unsigned char bit;
    
-   cursor->source=(char*)calloc(w,cursor->height);
+   cursor->source=(unsigned char*)calloc(w,cursor->height);
    
    if(format->bigEndian)
       back+=4-bpp;
@@ -311,8 +311,9 @@ void MakeRichCursorFromXCursor(rfbScreenInfoPtr rfbScreen,rfbCursorPtr cursor)
    char *cp,*back=(char*)&background,*fore=(char*)&foreground;
    unsigned char bit;
 
-   cp=cursor->richSource=(char*)calloc(cursor->width*bpp,cursor->height);
-   
+   cp=(char*)calloc(cursor->width*bpp,cursor->height);
+   cursor->richSource = (unsigned char*) cp;
+
    if(format->bigEndian) {
       back+=4-bpp;
       fore+=4-bpp;
@@ -434,8 +435,8 @@ void rfbDrawCursor(rfbScreenInfoPtr s)
 }
 
 /* for debugging */
-
-void rfbPrintXCursor(rfbCursorPtr cursor)
+/*
+static void rfbPrintXCursor(rfbCursorPtr cursor)
 {
    int i,i1,j,w=(cursor->width+7)/8;
    unsigned char bit;
@@ -448,6 +449,7 @@ void rfbPrintXCursor(rfbCursorPtr cursor)
       putchar('\n');
    }
 }
+*/
 
 extern void rfbSetCursor(rfbScreenInfoPtr rfbScreen,rfbCursorPtr c,Bool freeOld)
 {

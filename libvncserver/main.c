@@ -306,13 +306,13 @@ listenerRun(void *data)
     int client_fd;
     struct sockaddr_in peer;
     rfbClientPtr cl;
-    int len;
+    socklen_t len;
 
     if (rfbScreen->inetdSock != -1) {
 	cl = rfbNewClient(rfbScreen, rfbScreen->inetdSock);
 	if (cl && !cl->onHold )
 		rfbStartOnHoldClient(cl);
-	return;
+	return 0;
     }
     
     len = sizeof(peer);
@@ -325,6 +325,7 @@ listenerRun(void *data)
 	if (cl && !cl->onHold )
 		rfbStartOnHoldClient(cl);
     }
+    return 0;
 }
 
 void 
@@ -370,7 +371,7 @@ defaultPtrAddEvent(int buttonMask, int x, int y, rfbClientPtr cl)
    }
 }
 
-void defaultSetXCutText(char* text, int len, rfbClientPtr cl)
+static void defaultSetXCutText(char *text, int len, rfbClientPtr cl)
 {
 }
 
@@ -403,13 +404,13 @@ static rfbCursor myCursor =
 };
 #endif
 
-rfbCursorPtr defaultGetCursorPtr(rfbClientPtr cl)
+static rfbCursorPtr defaultGetCursorPtr(rfbClientPtr cl)
 {
    return(cl->screen->cursor);
 }
 
 /* response is cl->authChallenge vncEncrypted with passwd */
-Bool defaultPasswordCheck(rfbClientPtr cl,char* response,int len)
+static Bool defaultPasswordCheck(rfbClientPtr cl,char* response,int len)
 {
   int i;
   char *passwd=vncDecryptPasswdFromFile(cl->screen->rfbAuthPasswdData);
@@ -439,7 +440,7 @@ Bool defaultPasswordCheck(rfbClientPtr cl,char* response,int len)
 
 /* for this method, rfbAuthPasswdData is really a pointer to an array
    of char*'s, where the last pointer is 0. */
-Bool rfbCheckPasswordByList(rfbClientPtr cl,char* response,int len)
+Bool rfbCheckPasswordByList(rfbClientPtr cl,const char* response,int len)
 {
   char **passwds;
 

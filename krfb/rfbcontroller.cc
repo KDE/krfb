@@ -74,7 +74,7 @@ static enum rfbNewClientAction newClientHook(struct _rfbClientRec *cl)
 }
 
 static Bool passwordCheck(rfbClientPtr cl,
-			  char* encryptedPassword,
+			  const char* encryptedPassword,
 			  int len)
 {
 	AppLocker a;
