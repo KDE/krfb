@@ -26,6 +26,8 @@
 #include "rfbcontroller.h"
 
 #include <netinet/tcp.h>
+#include <netinet/in.h>
+#include <netdb.h>
 #include <unistd.h>
 #include <fcntl.h>
 
@@ -638,7 +640,17 @@ enum rfbNewClientAction RFBController::handleNewClient(rfbClientPtr cl)
 	QString host, port;
 	KSocketAddress *ksa = KExtendedSocket::peerAddress(socket);
 	if (ksa) {
-		KExtendedSocket::resolve(ksa, host, port);
+		hostent *he = 0;
+		KInetSocketAddress *kisa = (KInetSocketAddress*) ksa;
+		in_addr ia4 = kisa->hostV4();
+		he = gethostbyaddr((const char*)&ia4,
+				   sizeof(ia4),
+				   AF_INET);
+		
+		if (he && he->h_name)
+			host = QString(he->h_name);
+		else
+			host = ksa->nodeName();
 		delete ksa;
 	}
 
