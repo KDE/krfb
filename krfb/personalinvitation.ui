@@ -97,6 +97,12 @@
             <property name="sizeType">
                 <enum>Expanding</enum>
             </property>
+            <property name="sizeHint">
+                <size>
+                    <width>20</width>
+                    <height>0</height>
+                </size>
+            </property>
         </spacer>
         <widget class="QFrame" row="0" column="1" rowspan="1" colspan="2">
             <property name="name">
@@ -189,7 +195,7 @@ For security reasons this invitation is only valid for one hour.</string>
                                 </font>
                             </property>
                             <property name="text">
-                                <string>Host (address and display):</string>
+                                <string>Host (address and display)</string>
                             </property>
                         </widget>
                         <widget class="QLabel" row="2" column="0">
@@ -202,7 +208,7 @@ For security reasons this invitation is only valid for one hour.</string>
                                 </font>
                             </property>
                             <property name="text">
-                                <string>Expiration time:</string>
+                                <string>Expiration time</string>
                             </property>
                         </widget>
                         <widget class="QLineEdit" row="2" column="1">
@@ -248,7 +254,7 @@ For security reasons this invitation is only valid for one hour.</string>
                                 </font>
                             </property>
                             <property name="text">
-                                <string>Password:</string>
+                                <string>Password</string>
                             </property>
                         </widget>
                     </grid>
