@@ -12,6 +12,7 @@ For 3.2:
 - enhance RFB with SASL authentication (Kerberos)
 - encrypted connections (using SASL and/or SSL/TLS)
 - try to solve the non-atomic KConfig changes problem
+- mention that invitations are one-time on personal invitation dialog
 
 Todo (unscheduled features):
 - NAT traversal support if I can find an acceptable implementation

@@ -274,10 +274,9 @@ void Configuration::invalidateOldInvitations() {
 void Configuration::refreshTimeout() {
 	unsigned int invNum = invitationList.size();
 	loadFromKConfig();
-	if (invNum != invitationList.size()) {
-		saveToDialogs();
+	saveToDialogs();
+	if (invNum != invitationList.size())
 		emit invitationNumChanged(invitationList.size());
-	}
 }
 
 QString Configuration::hostname() const
