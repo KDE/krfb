@@ -88,8 +88,17 @@ public:
   bool isValid() const;
 
   /**
+   * Returns a user-readable name of the interface, if available.
+   * Otherwise it returns the same value as @ref name().
+   * @return the display name of the interface
+   * @see name()
+   */
+  QString displayName() const;
+
+  /**
    * Returns the name of the interface, e.g. 'eth0'. 
    * @return the name of the interface
+   * @see displayName()
    */
   QString name() const;
 

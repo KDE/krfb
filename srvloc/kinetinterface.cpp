@@ -131,6 +131,10 @@ bool KInetInterface::isValid() const {
 	return d == 0;
 }
 
+QString KInetInterface::displayName() const {
+	return d->name;
+}
+
 QString KInetInterface::name() const {
 	return d->name;
 }
