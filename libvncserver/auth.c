@@ -30,6 +30,8 @@
 #include <stdlib.h>
 #include "rfb.h"
 
+static int rfbMaxPasswordWait = 120000;   /* password timeout (ms)  */
+
 /*
  * rfbAuthNewClient is called when we reach the point of authenticating
  * a new client.  If authentication isn't being used then we simply send
@@ -77,7 +79,8 @@ rfbAuthProcessClientMessage(cl)
     CARD8 response[CHALLENGESIZE];
     CARD32 authResult;
 
-    if ((n = ReadExact(cl, (char *)response, CHALLENGESIZE)) <= 0) {
+    if ((n = ReadExactTimeout(cl, (char *)response, CHALLENGESIZE, 
+	                      rfbMaxPasswordWait)) <= 0) {
         if (n != 0)
             rfbLogPerror("rfbAuthProcessClientMessage: read");
         rfbCloseClient(cl);

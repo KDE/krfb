@@ -358,6 +358,18 @@ ReadExact(cl, buf, len)
      char *buf;
      int len;
 {
+    return ReadExactTimeout(cl, buf, len, rfbMaxClientWait);
+}
+
+/*
+ * ReadExact with customizable timeout (in ms).
+ */
+int
+ReadExactTimeout(cl, buf, len, timeout)
+     rfbClientPtr cl;
+     char *buf;
+     int len;
+{
     int sock = cl->sock;
     int n;
     fd_set fds;
@@ -384,7 +396,7 @@ ReadExact(cl, buf, len)
                 return n;
             }
 
-            /* Retry every 5 seconds until we exceed rfbMaxClientWait.  We
+            /* Retry every 5 seconds until we exceed the timeout.  We
                need to do this because select doesn't necessarily return
                immediately when the other end has gone away */
 
@@ -401,7 +413,7 @@ ReadExact(cl, buf, len)
             }
             if (n == 0) {
 	        totalTimeWaited += 5000;
-                if (totalTimeWaited >= rfbMaxClientWait) {
+                if (totalTimeWaited >= timeout) {
 		    errno = ETIMEDOUT;
 		    return -1;
 		}
