@@ -1,4 +1,4 @@
-SUBDIRS = srvloc kinetd libvncserver krfb kcm_krfb 
+SUBDIRS = srvloc kinetd libvncserver krfb kcm_krfb krfb_httpd
 
 EXTRA_DIST = AUTHORS README TODO NOTES DCOP-INTERFACE
 
