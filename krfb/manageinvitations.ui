@@ -120,13 +120,13 @@
                 <cstring>newEmailInvitationButton</cstring>
             </property>
             <property name="text">
-                <string>&amp;New EMail Invitation...</string>
+                <string>&amp;New Email Invitation...</string>
             </property>
             <property name="toolTip" stdset="0">
                 <string>Send a new invitation via email...</string>
             </property>
             <property name="whatsThis" stdset="0">
-                <string>Click this button to send a new invitation via EMail.</string>
+                <string>Click this button to send a new invitation via email.</string>
             </property>
         </widget>
         <widget class="QPushButton" row="3" column="1">
