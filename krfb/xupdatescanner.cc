@@ -407,7 +407,7 @@ void XUpdateScanner::createHints(QPtrList<Hint> &hintList)
 void XUpdateScanner::testScanline(int y, bool rememberHits) {
 	if (y < 0)
 		return;
-	if (y > (int)height)
+	if (y >= (int)height)
 		return;
 
 	int x = 0;
