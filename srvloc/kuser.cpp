@@ -25,26 +25,40 @@
 #include <sys/types.h>
 #include <pwd.h>
 #include <unistd.h>
-
+#include <qstringlist.h>
 
 class KUserPrivate
 {
 public:
 	bool valid;
-	long uid;
+	long uid, gid;
 	QString loginName, fullName;
+	QString roomNumber, workPhone, homePhone;
+	QString homeDir, shell;
 
 	KUserPrivate() {
 		valid = false;
 	}
 
 	KUserPrivate(long _uid,
+		     long _gid,
 		     const QString &_loginname, 
-		     const QString &_fullname) {
-		valid = true;
-		uid = _uid;
-		loginName = _loginname;
-		fullName = _fullname;
+		     const QString &_fullname,
+		     const QString &_room,
+		     const QString &_workPhone,
+		     const QString &_homePhone,
+		     const QString &_homedir,
+		     const QString &_shell) :
+		valid(true),
+		uid(_uid),
+		gid(_gid),
+		loginName(_loginname),
+		fullName(_fullname),
+		roomNumber(_room),
+		workPhone(_workPhone),
+		homePhone(_homePhone),
+		homeDir(_homedir),
+		shell(_shell) {
 	}
 };
 
@@ -58,20 +72,32 @@ KUser::KUser(long uid) {
 }
 
 KUser::KUser(const QString& name) {
-	fillPasswd(getpwnam(name.latin1()));
+	fillPasswd(getpwnam((const char*)name.utf8()));
 }
 
 KUser::KUser(const KUser &user) {
 	d = new KUserPrivate(user.uid(),
+			     user.gid(),
 			     user.loginName(),
-			     user.fullName());
+			     user.fullName(), 
+			     user.roomNumber(),
+			     user.workPhone(),
+			     user.homePhone(),
+			     user.homeDir(),
+			     user.shell());
 }
 
 KUser& KUser::operator =(const KUser& user) {
 	delete d;
 	d = new KUserPrivate(user.uid(),
+			     user.gid(),
 			     user.loginName(),
-			     user.fullName());
+			     user.fullName(), 
+			     user.roomNumber(),
+			     user.workPhone(),
+			     user.homePhone(),
+			     user.homeDir(),
+			     user.shell());
 	return *this;
 }
 
@@ -86,14 +112,18 @@ bool KUser::operator ==(const KUser& user) {
 
 void KUser::fillPasswd(struct passwd *p) {
 	if (p) {
-		QString fn(p->pw_gecos);
-		int pos = fn.find(',');
-		if (pos >= 0)
-			fn = fn.left(pos);
+		QString gecos = QString::fromUtf8(p->pw_gecos);
+		QStringList gecosList = QStringList::split(',', gecos, true);
 
-		d = new KUserPrivate(p->pw_uid, 
-				     QString(p->pw_name),
-				     fn.stripWhiteSpace());
+		d = new KUserPrivate(p->pw_uid,
+				     p->pw_gid,
+				     QString::fromUtf8(p->pw_name),
+				     (gecosList.size() > 0) ? gecosList[0] : QString::null,
+				     (gecosList.size() > 1) ? gecosList[1] : QString::null,
+				     (gecosList.size() > 2) ? gecosList[2] : QString::null,
+				     (gecosList.size() > 3) ? gecosList[3] : QString::null,
+				     QString::fromUtf8(p->pw_dir),
+				     QString::fromUtf8(p->pw_shell));
 	}
 	else
 		d = new KUserPrivate();
@@ -106,6 +136,13 @@ bool KUser::isValid() const {
 long KUser::uid() const {
 	if (d->valid)
 		return d->uid;
+	else
+		return -1;
+}
+
+long KUser::gid() const {
+	if (d->valid)
+		return d->gid;
 	else
 		return -1;
 }
@@ -124,6 +161,41 @@ QString KUser::loginName() const {
 QString KUser::fullName() const {
 	if (d->valid)
 		return d->fullName;
+	else
+		return QString::null;
+}
+
+QString KUser::roomNumber() const {
+	if (d->valid)
+		return d->roomNumber;
+	else
+		return QString::null;
+}
+
+QString KUser::workPhone() const {
+	if (d->valid)
+		return d->workPhone;
+	else
+		return QString::null;
+}
+
+QString KUser::homePhone() const {
+	if (d->valid)
+		return d->homePhone;
+	else
+		return QString::null;
+}
+
+QString KUser::homeDir() const {
+	if (d->valid)
+		return d->homeDir;
+	else
+		return QString::null;
+}
+
+QString KUser::shell() const {
+	if (d->valid)
+		return d->shell;
 	else
 		return QString::null;
 }
