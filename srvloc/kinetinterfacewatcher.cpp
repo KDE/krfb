@@ -21,7 +21,7 @@
  */
 
 #include "kinetinterfacewatcher.h"
-
+#include "kinetinterfacewatcher.moc"
 
 class KInetInterfaceWatcherPrivate {
 public:
@@ -40,7 +40,7 @@ public:
    * or all network interfaces.
    * @param interface the name of the interface to watch (e.g.'eth0')
    *                  or QString::null to watch all interfaces
-   * @param minInterval the minimum interval between two checks in 
+   * @param minInterval the minimum interval between two checks in
    *                    seconds. Be careful not to check too often, to
    *                    avoid unneccessary wasting of CPU time
    */
