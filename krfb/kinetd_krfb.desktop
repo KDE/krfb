@@ -14,7 +14,7 @@ X-KDE-KINETD-multiInstance=false
 X-KDE-KINETD-serviceURL=service:remotedesktop.kde:vnc://%h:%p;(type=shared),(username=%u),(fullname=%f),(serviceid=%i)
 X-KDE-KINETD-serviceAttributes=(type=shared),(username=%u),(fullname=%f),(serviceid=%i)
 X-KDE-KINETD-serviceLifetime=1200
-X-KDE-KINETD-DNSSD-Name=Remote desktop of %u
+X-KDE-KINETD-DNSSD-Name=Remote Desktop of %u
 X-KDE-KINETD-DNSSD-Type=_rfb._tcp
 X-KDE-KINETD-DNSSD-Properties=type=shared,u=%u,fullname=%f
 
@@ -31,6 +31,7 @@ Name[el]=Κοινή χρήση επιφάνειας εργασίας KRfb
 Name[eo]=KRfb Tabula fordonado
 Name[es]=Compartición de escritorio KRfb
 Name[et]=KRfb Töölaua jagamine
+Name[eu]=KRfb mahaigain partekatzea
 Name[fi]=Työpöydän jakaminen
 Name[fr]=Partage de bureau KRfb
 Name[ga]=Roinnt Deisce KRfb
@@ -56,6 +57,7 @@ Name[pt]=Partilha do Ecrã KRfb
 Name[pt_BR]=Compartilhamento do Ambiente de Trabalho KRfb
 Name[ro]=Partajare ecran KRfb
 Name[ru]=Общий рабочий стол KRfb
+Name[se]=KRfb-čállinbeavdejuohkin
 Name[sk]=KRfb zdieľanie pracovnej plochy
 Name[sl]=Deljenje namizja z KRfb
 Name[sr]=KRfb дељење радне површине
@@ -86,6 +88,7 @@ Comment[el]=Ένας δαίμονας που σας επιτρέπει να μο
 Comment[eo]=demono por permesi retan fordonadon de via tabulo
 Comment[es]=Un demonio que le permite compartir su escritorio
 Comment[et]=Deemon, mis lubab sul töölauda jagada
+Comment[eu]=Zure mahaigaina partekatzeko aukera ematen duen deabrua da
 Comment[fi]=Palvelin joka mahdollistaa työpöydän jakamisen
 Comment[fr]=Un démon qui vous permet de partager votre bureau
 Comment[ga]=Deamhan a chuireann ar do chumas do dheasca a roinnt
