@@ -26,6 +26,10 @@
         <name>caption</name>
         <string>KRfb: Configuration</string>
     </property>
+    <property stdset="1">
+        <name>icon</name>
+        <pixmap>image0</pixmap>
+    </property>
     <vbox>
         <property stdset="1">
             <name>margin</name>
@@ -76,7 +80,7 @@
                     </property>
                     <property stdset="1">
                         <name>text</name>
-                        <string>Ask &amp;before remote client connects</string>
+                        <string>Confirm connection &amp;before accepting</string>
                     </property>
                     <property>
                         <name>whatsThis</name>
@@ -355,4 +359,10 @@ Regular RFB/VNC port numbers are between 0 and 99. If you enter a higher number 
         </widget>
     </vbox>
 </widget>
+<images>
+    <image>
+        <name>image0</name>
+        <data format="XPM.GZ" length="1377">789cad93cf4ac4301087ef7d8ad0dc8aec468bb0203e82e251100f339336dbc22ae87a10f1ddcd2f6960dbedbf05671a9a8f7c2413926c0bf5fcf4a08a6df679a463234af6f4a10afb75387cbfbcdeff647979a3fc77edbffc2acb374ad4e3fb5b85fedef7b5313b630cb08e281d5611eb3aa206960609b4c0db1d1228c09d4102094806096c8098374ec5014b24b005629938ea222242c10bb1d6d10b111c9a8d4b9ce9854e9ca97ac71cee72d26121cb96656337c23ce6308b77c88a6f2450cf1c160e424c6898aaef108652843ec9c061c258da71f42cf71d0a46154fba8e9e50df116fb8a4d495730e56dff18683b3f7d1494ecbc0498ad69082e3f4b8834afec3395d4b0f1c48d856ac3929c3f33adbfbe8b9fb523a05554dde9f741873776ccd3d9c7356dc7922597c3b4d2bd43650fd7d2534f4c2ff8237b8e2bd4fed2945fe7b97fd01050651f8</data>
+    </image>
+</images>
 </UI>

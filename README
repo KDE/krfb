@@ -1,10 +1,12 @@
 KRfb
 ====
 
-KRfb is a small server for the RFB protocol, better known as VNC. It is based 
-on x0rfbserver, available from http://www.hexonet.de/software/x0rfbserver/.
-Unlike most other Unix/Linux RFB servers, KRfb (and x0rfbserver) allows you 
+KRfb is a small server for the RFB protocol, better known as VNC. Unlike most 
+other Unix/Linux RFB servers, KRfb (and x0rfbserver) allows you 
 to share your X11 session instead of creating a new X11 session. 
+It is based on x0rfbserver, available from 
+http://www.hexonet.de/software/x0rfbserver/.
+
 
 For more information about KRfb visit http://www.tjansen.de/krfb
 

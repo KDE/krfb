@@ -1,6 +1,6 @@
 #MIN_CONFIG
 
-AM_INIT_AUTOMAKE(krfb,0.1)
+AM_INIT_AUTOMAKE(krfb,0.5.1)
 
 AC_CHECK_HEADER(X11/extensions/XTest.h, 
 	[],

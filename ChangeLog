@@ -1,0 +1,10 @@
+2002-01-03  Tim Jansen  <tim@tjansen.de>
+
+	* Released 0.5.1
+
+	* replaced kapplication.h with kapp.h for KDE versions < 2.2.2
+
+2002-01-02  Tim Jansen  <tim@tjansen.de>
+
+	* First release
+

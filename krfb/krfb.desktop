@@ -1,12 +1,12 @@
 # KDE Config File  
 [Desktop Entry]
 Type=Application
-Exec=krfb -caption "%c" %i %m  
+Exec=krfb -caption "%c" %i %m
 Icon=krfb.png
 MiniIcon=krfb.png
 DocPath=krfb/index.html
 Comment=
 Comment[de]=
 Terminal=0
-Name=Krfb
-Name[de]=Krfb
+Name=KRfb Server
+Name[de]=KRfb Server

@@ -37,6 +37,10 @@
 #include <qglobal.h>
 #include <qlabel.h>
 
+#ifndef ASSERT
+#define ASSERT(x) Q_ASSERT(x)
+#endif
+
 RFBController::RFBController(Configuration *c) :
 	configuration(c),
 	socket(0),

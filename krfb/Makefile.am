@@ -40,9 +40,7 @@ KDE_ICON = krfb
 INCLUDES= $(all_includes) -I../include
 
 # the library search path. 
-krfb_LDFLAGS = $(all_libraries) $(KDE_RPATH) -lXtst -lz
-
-CXXFLAGS = -DUSE_ZLIB_WARREN
+krfb_LDFLAGS = $(all_libraries) $(KDE_RPATH) -lXtst
 
 # Uncomment the following two lines if you add a ui.rc file for your application to make use of
 # KDE´s XML GUI builing

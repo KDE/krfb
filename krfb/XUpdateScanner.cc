@@ -17,7 +17,11 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307,
  *  USA.
  */
-   
+/*
+ * December 15th 2001: removed coments, mouse pointer options and some
+ * other stuff
+ *                   Tim Jansen <tim@tjansen.de>
+ */   
 
 #include <sys/ipc.h>
 #include <sys/shm.h>

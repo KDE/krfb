@@ -2,7 +2,7 @@
                                    main.cpp
                              -------------------
     begin                : Sat Dec  8 03:23:02 CET 2001
-    copyright            : (C) 2001 by Tim Jansen
+    copyright            : (C) 2001-2002 by Tim Jansen
     email                : tim@tjansen.de
  ***************************************************************************/
 
@@ -22,7 +22,7 @@
 #include <kpixmap.h>
 #include <kaction.h>
 #include <kdebug.h>
-#include <kapplication.h>
+#include <kapp.h>
 #include <ksystemtray.h>
 #include <kcmdlineargs.h>
 #include <kaboutdata.h>
@@ -32,7 +32,7 @@
 #include <qobject.h>
 #include <qwindowdefs.h>
 
-#define VERSION "0.1"
+#define VERSION "0.5.1"
 
 static const char *description = I18N_NOOP("RFB (VNC) Server to share "
 					   "KDE sessions");
@@ -84,7 +84,7 @@ int main(int argc, char *argv[])
 	KAboutData aboutData( "krfb", I18N_NOOP("KRfb"),
 		VERSION, description, KAboutData::License_GPL,
 		"(c) 2000, heXoNet Support GmbH, D-66424 Homburg\n"
-                "(c) 2001, Tim Jansen", 0, "http://www.tjansen.de/krfb", 
+                "(c) 2001-2002, Tim Jansen", 0, "http://www.tjansen.de/krfb", 
 	        "ml@tjansen.de");
 	aboutData.addAuthor("Tim Jansen", "KDE Port", "tim@tjansen.de");
 	aboutData.addAuthor("Jens Wagner (heXoNet Support GmbH)", 

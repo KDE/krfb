@@ -17,7 +17,7 @@
 
 #include "trayicon.h"
 #include <kstdaction.h>
-#include <kapplication.h>
+#include <kapp.h>
 #include <klocale.h>
 #include <kdialog.h>
 #include <kglobal.h>
