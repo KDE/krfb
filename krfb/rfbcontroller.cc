@@ -102,6 +102,7 @@ void RFBController::accepted(KSocket *s) {
 
 	if (socket) {
 		kdWarning() << "refuse 2nd connection" << endl;
+		// TODO: send connection failed with reason 
 		delete s;
 		return;
 	}
@@ -136,8 +137,7 @@ void RFBController::acceptConnection(bool allowDesktopControl) {
 	s->enableWrite(true);
 	connection = new RFBConnection(qt_xdisplay(), s->socket(), 
 				       configuration->password(),
-				       allowDesktopControl,
-				       false);
+				       allowDesktopControl);
 
 	emit sessionEstablished();
 }
@@ -162,7 +162,8 @@ void RFBController::checkWriteBuffer() {
 }
 
 void RFBController::socketReadable() {
-	ASSERT(socket);
+	if ((!socket) || (!connection))
+		return;
 	int fd = socket->socket();
 	BufferedConnection *bc = connection->bufferedConnection;
 	int count = read(fd,
@@ -175,6 +176,7 @@ void RFBController::socketReadable() {
 		KMessageBox::error(0, 
 				   i18n("An error occurred while reading from the remote client. The connection will be terminated."),
 				   i18n("KRfb Error"));
+		return;
 	}
 	while (connection->currentState && bc->hasReceiverBufferData()) {
 		connection->update();
@@ -188,8 +190,10 @@ void RFBController::socketReadable() {
 }
 
 void RFBController::socketWritable() {
-	ASSERT(socket);
+	if ((!socket) || (!connection))
+		return;
 	int fd = socket->socket();
+
 	BufferedConnection *bc = connection->bufferedConnection;
 	ASSERT((bc->senderBuffer.end - bc->senderBuffer.pos) > 0);
 	int count = write(fd,
@@ -197,13 +201,13 @@ void RFBController::socketWritable() {
 			  bc->senderBuffer.end - bc->senderBuffer.pos);
 	if (count >= 0) {
 		bc->senderBuffer.pos += count;
+		checkWriteBuffer();
 	} else {
+		closeSession();
 		KMessageBox::error(0, 
 				   i18n("An error occurred while writing to the remote client. The connection will be terminated."),
 				   i18n("KRfb Error"));
 	}
-
-	checkWriteBuffer();
 }
 
 void RFBController::closeSession() {

@@ -47,9 +47,9 @@ Configuration::Configuration(bool oneConnection, bool askOnConnect,
 			     bool allowDesktopControl, QString password, 
 			     int port) :
 	preconfiguredFlag(true),
-	oneConnectionFlag(oneConnection),
 	askOnConnectFlag(askOnConnect),
 	allowDesktopControlFlag(allowDesktopControl),
+	oneConnectionFlag(oneConnection),
 	passwordString(password)
 {
 	if ((port >= 5900) && (port < 6000))

@@ -52,8 +52,8 @@ XUpdateScanner::XUpdateScanner(Display *_dpy,
 	dpy(_dpy), 
 	window(_window),
 	fb(_fb), 
-	tileWidth(32), 
-	tileHeight(32), 
+	tileWidth(_tileWidth), 
+	tileHeight(_tileHeight), 
 	blockWidth(_blockWidth), 
 	blockHeight(_blockHeight), 
 	count (0), 
@@ -160,8 +160,7 @@ void XUpdateScanner::checkTile(int x, int y, list<Hint> &hintList)
 	}
 }
 
-void XUpdateScanner::searchUpdates(list<Hint> &hintList, 
-				   bool showMousePointer)
+void XUpdateScanner::searchUpdates(list<Hint> &hintList)
 {
 	count %= 32;
 	unsigned int i;

@@ -52,7 +52,7 @@ class RFBConnection : public QObject, public Server  {
 public: 
 	RFBConnection(Display *dpy, int fd, 
 		      const QString &cpassword, 
-		      bool allowInput, bool showMouse);
+		      bool allowInput);
 	~RFBConnection();
 	virtual void handleKeyEvent(KeyEvent &keyEvent);
 	virtual void handlePointerEvent(PointerEvent &pointerEvent);
@@ -68,7 +68,6 @@ private:
 	int fd;
 	int buttonMask;
 	bool allowInput;
-	bool showMousePointer;
 
 	XUpdateScanner *scanner;
 

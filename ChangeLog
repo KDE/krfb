@@ -1,6 +1,17 @@
+2002-01-05  Tim Jansen  <tim@tjansen.de>
+
+	* krfb/rfbcontroller.cc: fixed crash after client disconnect while
+	  krfb was writing
+
+	* lib/rfbServer.cc: fixed some bugs, avoid endlessly collecting
+	  data if client doesn't take them, check input from client
+
 2002-01-04  Tim Jansen  <tim@tjansen.de>
 
-	* lib/: moved lib directory from krfb/lib to lib 
+	* lib/rfbServer.cc: use /dev/urandom for authentication challenge 
+	  if available
+
+	* moved rfb lib directory from krfb/lib to lib 
 
 2002-01-03  Tim Jansen  <tim@tjansen.de>
 

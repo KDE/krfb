@@ -44,7 +44,7 @@ class XUpdateScanner
     ~XUpdateScanner();
 
     void checkTile( int x, int y, list< Hint > &hintList );
-    void searchUpdates( list< Hint > &hintList, bool showMouse );
+    void searchUpdates( list< Hint > &hintList);
     
 
     Display *dpy;
@@ -66,4 +66,4 @@ class XUpdateScanner
 
 } // namespace rfb
 
-#endif _hexonet_rfb_XUpdateScanner_h_
+#endif // _hexonet_rfb_XUpdateScanner_h_

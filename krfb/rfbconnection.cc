@@ -35,14 +35,12 @@ static XTestDisabler disabler;
 RFBConnection::RFBConnection(Display *_dpy, 
 			     int _fd, 
 			     const QString &cpassword,
-			     bool _allowInput,
-			     bool _showMousePointer) :
+			     bool _allowInput) :
 	Server(),
-	dpy(_dpy),
 	fd(_fd),
+	buttonMask(0),
 	allowInput(_allowInput),
-	showMousePointer(_showMousePointer),
-	buttonMask(0)
+	dpy(_dpy)
 {
 	memcpy(password, "\0\0\0\0\0\0\0\0", 8);
 	if (!cpassword.isNull())
@@ -59,7 +57,7 @@ RFBConnection::RFBConnection(Display *_dpy,
 
 	InitBlocks(32, 32);
 
-	connection->send((unsigned char*) RFB_PROTOCOL_VERSION, 12);
+	sendFirstHandshake(connection);
 }
 
 RFBConnection::~RFBConnection() {
@@ -164,7 +162,7 @@ void RFBConnection::scanUpdates()
 {
   list<Hint> hintList;
   
-  scanner->searchUpdates(hintList, showMousePointer);
+  scanner->searchUpdates(hintList);
   list<Hint>::iterator i;
   for (i = hintList.begin(); i != hintList.end(); i++)
 	  handleHint(*i);
