@@ -151,6 +151,7 @@ signals:
         void sessionEstablished();
 	void sessionFinished();
 	void sessionRefused();
+	void quitApp();
 
 private:
 	void stopServer(bool xtestUngrab = true);
@@ -173,7 +174,9 @@ private:
 
 	QMutex asyncMutex;
 	QPtrList<VNCEvent> asyncQueue;
-	bool closePending;
+
+	bool closePending; // set when libvncserver detected close
+	bool forcedClose;  // set when user closed connection
 private slots:
 	void idleSlot();
 	void dialogAccepted();

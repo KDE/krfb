@@ -2,7 +2,7 @@
                                 trayicon.cpp
                              -------------------
     begin                : Tue Dec 11 2001
-    copyright            : (C) 2001 by Tim Jansen
+    copyright            : (C) 2001-2002 by Tim Jansen
     email                : tim@tjansen.de
  ***************************************************************************/
 

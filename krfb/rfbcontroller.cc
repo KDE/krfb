@@ -257,7 +257,8 @@ RFBController::RFBController(Configuration *c) :
 	allowRemoteControl(false),
 	connectionNum(0),
 	configuration(c),
-	closePending(false)
+	closePending(false),
+	forcedClose(false)
 {
 	self = this;
 	connect(dialog.acceptConnectionButton, SIGNAL(clicked()),
@@ -441,13 +442,16 @@ void RFBController::connectionClosed()
 	idleTimer.stop();
 	connectionNum--;
 	state = RFB_WAITING;
-	emit sessionFinished();
+	if (forcedClose)
+	        emit quitApp();
+	else
+	        emit sessionFinished();
 }
 
 void RFBController::closeConnection()
 {
+        forcedClose = true;
 	if (state == RFB_CONNECTED) {
-	        emit sessionFinished();
 		if (!checkAsyncEvents()) {
 			asyncMutex.lock();
 			if (!closePending)

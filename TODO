@@ -1,12 +1,5 @@
-Known bugs:
-- when the server closes the connection in kinetd mode krfb crashes for
-  unknown reasons. (After this kinetd will not accept new connections 
-  because some threads will not be killed properly, use "killall krfb")
-
-Todo (soon):
-- fix shutdown connection in kinetd nide
-
 Todo (unscheduled features):
+- attach .vnc file to invitations? 
 - SLP support (or UPnP, or whatever KDE will use)
 - NAT traversal support (MIDCOM stun/turn, UPnP)
 - look into adding an extension to xfree to improve speed (get noticed of

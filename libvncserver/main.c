@@ -38,6 +38,10 @@ int rfbEnableLogging = 1;
 
 char rfbEndianTest = (_BYTE_ORDER == _LITTLE_ENDIAN);
 
+/* from rfbserver.c */
+void rfbIncrClientRef(rfbClientPtr cl);
+void rfbDecrClientRef(rfbClientPtr cl);
+
 /*
  * rfbLog prints a time-stamped message to the log file (stderr).
  */
@@ -265,7 +269,9 @@ clientOutput(void *data)
         UNLOCK(cl->updateMutex);
 
         /* Now actually send the update. */
+	rfbIncrClientRef(cl);
         rfbSendFramebufferUpdate(cl, updateRegion);
+	rfbDecrClientRef(cl);
 
 	sraRgnDestroy(updateRegion);
     }

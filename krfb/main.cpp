@@ -159,8 +159,6 @@ int main(int argc, char *argv[])
 			 &trayicon, SLOT(prepareQuit()));
 	QObject::connect(&app, SIGNAL(lastWindowClosed()),
 			 &controller, SLOT(closeConnection()));
-	QObject::connect(&app, SIGNAL(lastWindowClosed()),
-			 &app, SLOT(quit()));
 
 	QObject::connect(&trayicon, SIGNAL(showManageInvitations()),
 			 config, SLOT(showManageInvitationsDialog()));
@@ -168,7 +166,7 @@ int main(int argc, char *argv[])
 			 &app, SLOT(quit()));
 
 	QObject::connect(&dcopiface, SIGNAL(exitApp()),
-			 &app, SLOT(quit()));
+			 &controller, SLOT(closeConnection()));
 
 	QObject::connect(&controller, SIGNAL(sessionRefused()),
 			 &app, SLOT(quit()));
@@ -176,6 +174,8 @@ int main(int argc, char *argv[])
 			 &trayicon, SLOT(showConnectedMessage()));
 	QObject::connect(&controller, SIGNAL(sessionFinished()),
 			 &trayicon, SLOT(showDisconnectedMessage()));
+	QObject::connect(&controller, SIGNAL(quitApp()),
+			 &app, SLOT(quit()));
 
 	sigset_t sigs;
 	sigemptyset(&sigs);

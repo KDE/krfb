@@ -56,20 +56,28 @@ static void rfbProcessClientNormalMessage(rfbClientPtr cl);
 static void rfbProcessClientInitMessage(rfbClientPtr cl);
 
 #ifdef HAVE_PTHREADS
-static void rfbIncrClientRef(rfbClientPtr cl)
+void rfbIncrClientRef(rfbClientPtr cl)
 {
   LOCK(cl->refCountMutex);
   cl->refCount++;
   UNLOCK(cl->refCountMutex);
 }
 
-static void rfbDecrClientRef(rfbClientPtr cl)
+void rfbDecrClientRef(rfbClientPtr cl)
 {
   LOCK(cl->refCountMutex);
   cl->refCount--;
   if(cl->refCount<=0) /* just to be sure also < 0 */
     TSIGNAL(cl->deleteCond);
   UNLOCK(cl->refCountMutex);
+}
+#else
+void rfbIncrClientRef(rfbClientPtr cl)
+{
+}
+
+void rfbDecrClientRef(rfbClientPtr cl)
+{
 }
 #endif
 
