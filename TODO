@@ -1,9 +1,9 @@
 Todo:
-- a pixmap for the connection dialog
-- a better name for KRfb...
 - i18n
 - docs
+- kcontrol module?
 - encrypted connections (ssh, OpenSSL?)
+- TightVNC extensions
 - do something against potential denial-of-service attacks by repeatedly
   trying to connect to users until they agree. Maybe a message box
   after the third attempt offering the user to stop KRfb, block the IP or 

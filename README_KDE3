@@ -1,15 +1,8 @@
 For KDE 3.0, you need to do the following:
 
-* the .ui files must be recompiled, you can enforce this by deleting
-  the following files before you build:
+* the .ui files must be recompiled, you can enforce this by touching them:
+	touch krfb/*.ui
 
-	krfb/configurationdialog.moc
-	krfb/configurationdialog.h
-	krfb/configurationdialog.cc
-	krfb/newconnectiondialog.moc
-	krfb/newconnectiondialog.h
-	krfb/newconnectiondialog.cc
-
-* main.cpp and trayicon.cpp include the file kapp.h. It has been renamed in
-  KDE 3.0 to kapplication.h, so you must change the sources accordingly.
+* main.cpp and trayicon.cpp include the file kapp.h. It has been renamed to 
+  kapplication.h, so you must change the sources accordingly.
 

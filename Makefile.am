@@ -1,5 +1,5 @@
 
-SUBDIRS = krfb po doc include 
+SUBDIRS = lib krfb po doc include 
 
 EXTRA_DIST = admin AUTHORS COPYING ChangeLog INSTALL README TODO NOTES \
              README_KDE3 krfb.lsm 

@@ -44,6 +44,7 @@ TrayIcon::TrayIcon(KDialog *d, Configuration *c) :
 	contextMenu()->insertSeparator();
 	aboutAction = KStdAction::aboutApp();
 	aboutAction->plug(contextMenu());
+
 	connect(configureAction, SIGNAL(activated()), SIGNAL(showConfigure()));
 	connect(aboutAction, SIGNAL(activated()), SLOT(showAbout()));
 	connect(closeConnectionAction, SIGNAL(activated()), 

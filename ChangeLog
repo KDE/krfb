@@ -1,3 +1,17 @@
+2002-01-04  Tim Jansen  <tim@tjansen.de>
+
+	* lib/: moved lib directory from krfb/lib to lib 
+
+2002-01-03  Tim Jansen  <tim@tjansen.de>
+
+	* Changed official name to KDE Desktop Sharing
+
+	* changed the color the icons's eyes to blue. 
+
+	* krfb/connection-side-image.png: New side pixmap, thanks to
+	  Jason Spisak (who made it) and Christopher M. Young (who sent 
+	  another pixmap).
+
 2002-01-03  Tim Jansen  <tim@tjansen.de>
 
 	* Released 0.5.1

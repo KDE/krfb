@@ -1,5 +1,5 @@
 Begin3
-Title:          KRfb 
+Title:          KDE Desktop Sharing (KRfb)
 Version:        0.5.1
 Entered-date:   
 Description:    KRfb is a RFB (VNC) server that allows sharing a local
@@ -12,5 +12,5 @@ Home-page:      http://www.tjansen.de/krfb
 Original-site:  http://www.tjansen.de/krfb
 Platforms:       Linux and other Unices
                  KDE 2.2 or higher
-Copying-policy: GOK
+Copying-policy: GPL
 End

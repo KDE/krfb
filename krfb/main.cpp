@@ -32,10 +32,10 @@
 #include <qobject.h>
 #include <qwindowdefs.h>
 
-#define VERSION "0.5.1"
+#define VERSION "0.6"
 
-static const char *description = I18N_NOOP("RFB (VNC) Server to share "
-					   "KDE sessions");
+static const char *description = I18N_NOOP("VNC-compatible server to share "
+					   "KDE desktops");
 #define ARG_PORT "port"
 #define ARG_ONE_SESSION "one-session"
 #define ARG_PASSWORD "password"
@@ -63,16 +63,16 @@ static int checkX11Capabilities() {
 				     &majorv, &minorv);
 	if ((!r) || (((majorv*1000)+minorv) < 2002)) {
 		KMessageBox::error(0, 
-		   i18n("Your X11 Server does not support the required XTest extension version 2.2. KRfb can not run on your system."),
-				   i18n("KRfb Error"));
+		   i18n("Your X11 Server does not support the required XTest extension version 2.2. Sharing your desktop is not possible."),
+				   i18n("Desktop Sharing Error"));
 		return 1;
 	}
 
 	r = XShmQueryExtension(qt_xdisplay());
 	if (!r) {
 		KMessageBox::error(0, 
-		   i18n("Your X11 Server does not support the required XShm extension. You are probably not running KRfb on a local server which is required."),
-				   i18n("KRfb Error"));
+		   i18n("Your X11 Server does not support the required XShm extension. You can only share a local desktop."),
+				   i18n("Desktop Sharing Error"));
 		return 1;
 	}
 	return 0;
@@ -81,7 +81,7 @@ static int checkX11Capabilities() {
 int main(int argc, char *argv[])
 {
 	int r;
-	KAboutData aboutData( "krfb", I18N_NOOP("KRfb"),
+	KAboutData aboutData( "krfb", I18N_NOOP("Desktop Sharing"),
 		VERSION, description, KAboutData::License_GPL,
 		"(c) 2000, heXoNet Support GmbH, D-66424 Homburg\n"
                 "(c) 2001-2002, Tim Jansen", 0, "http://www.tjansen.de/krfb", 
@@ -90,6 +90,9 @@ int main(int argc, char *argv[])
 	aboutData.addAuthor("Jens Wagner (heXoNet Support GmbH)", 
 			    "RFB library, original x0rfbserver", 
 			    "");
+	aboutData.addAuthor("Jason Spisak", 
+			    "New Connection side image", 
+			    "kovalid@yahoo.com");
 	KCmdLineArgs::init(argc, argv, &aboutData);
 	KCmdLineArgs::addCmdLineOptions(options);
 

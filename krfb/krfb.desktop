@@ -8,5 +8,5 @@ DocPath=krfb/index.html
 Comment=
 Comment[de]=
 Terminal=0
-Name=KRfb Server
-Name[de]=KRfb Server
+Name=Desktop Sharing
+Name[de]=Desktop Sharing
