@@ -279,9 +279,9 @@ PointerEvent::PointerEvent(int b, int _x, int _y) :
 }
 
 void PointerEvent::exec() {
-	static QDesktopWidget desktopWidget;
+	QDesktopWidget *desktopWidget = QApplication::desktop();
 
-	int screen = desktopWidget.screenNumber();
+	int screen = desktopWidget->screenNumber();
 	if (screen < 0)
 		screen = 0;
 	XTestFakeMotionEvent(dpy, screen, x, y, CurrentTime);
