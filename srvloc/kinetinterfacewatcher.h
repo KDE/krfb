@@ -47,8 +47,9 @@ class KInetInterfaceWatcher : public QObject {
   Q_OBJECT
 public:
   /**
-   * Creates a new KInetInterfaceWatcher. It watches either one
-   * or all network interfaces.
+   * Creates a new KInetInterfaceWatcher. Before you can use it,
+   * you must @ref start() it.
+   * 
    * @param interface the name of the interface to watch (e.g.'eth0')
    *                  or QString::null to watch all interfaces
    * @param minInterval the minimum interval between two checks in 
@@ -66,6 +67,27 @@ public:
   QString interface() const;
 
   /**
+   * Starts the KInetInterfaceWatcher. It watches either one
+   * or all network interfaces. When one of them changed.
+   * it emits a @ref changed() signal.
+   * @param interface the name of the interface to watch (e.g.'eth0')
+   *                  or QString::null to watch all interfaces
+   * @param minInterval the minimum interval between two checks in 
+   *                    seconds. Be careful not to check too often, to
+   *                    avoid unneccessary wasting of CPU time
+   * @see changed()
+   * @see stop()
+   */
+  void start(const QString &interface = QString::null,
+	     int minInterval = 60);
+
+  /**
+   * Stops watching the interfaces.
+   * @see start()
+   */
+  void stop();
+
+  /**
    * Destructor
    */
   virtual ~KInetInterfaceWatcher();
@@ -76,9 +98,20 @@ signals:
    * @p interfaceName is the name of the interface being watched, not
    * the interface that has changed (because more than one interface
    * may have changed). 
+   * A change occurred, when 
+   * @li a new interface has been added (when watching a single interface, 
+   *     only when an interface of that name has been added)
+   * @li an interface has been removed (when watching a single interface,
+   *     only when this interface has been removed)
+   * @li the address or netmask of the interface changed
+   *
+   * No change will be emitted when the broadcast address or destination
+   * address has changed.
+   *
    * @param interfaceName the name of the interface that is watched,
    *                      by the emitter, or QString::null if all 
    *                      interfaces are being watched
+   * @see start()
    */
   void changed(QString interfaceName);
 
