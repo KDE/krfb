@@ -48,6 +48,7 @@ Comment[de]=Ein Mikro-HTTP-Dämon für krfb, der als VNC-Anzeige-Applet dient.
 Comment[el]=Ένας μικρός δαίμονας http για το krfb που εξυπηρετεί το εφαρμογίδιο προβολής VNC.
 Comment[es]=Un micro demonio http para krfb que sirve de applet de visor VNC.
 Comment[et]=Mikro-HTTP deemon KRfb jaoks, mis teenindab VNC apletti.
+Comment[eu]=VNC ikustaile applet-a zerbitzatzen duen krfb-rako micro http deabrua.
 Comment[fi]=Pieni http-palvelin krfb ohjelmalle, joka jakaa VNC-näyttäjäsovelmaa
 Comment[fr]=Un mini serveur http pour KRfb dédié à l'applet d'affichage de bureaux VNC.
 Comment[gl]=Un micro demo de HTTP para krfb que serve unha applet de visualización de VNC
