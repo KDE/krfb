@@ -35,7 +35,7 @@
 #include <qwindowdefs.h>
 #include <qcstring.h>
 #include <qdatastream.h>
-#include <dcopclient.h>
+#include <dcopref.h>
 
 #include <signal.h>
 
@@ -52,29 +52,18 @@ static KCmdLineOptions options[] =
 	{ 0, 0, 0 }
 };
 
-/*
- * TODO:
- * - fix bug on 'close connection' in kinetd mode
- */
-
 void checkKInetd(bool &kinetdAvailable, bool &krfbAvailable) {
-	kinetdAvailable = false;
-	krfbAvailable = false;
+	DCOPRef ref("kded", "kinetd");
+	ref.setDCOPClient(KApplication::dcopClient());
 
-	DCOPClient *d = KApplication::dcopClient();
-
-	QByteArray sdata, rdata;
-	QCString replyType;
-	QDataStream arg(sdata, IO_WriteOnly);
-	arg << QString("krfb");
-	if (!d->call ("kded", "kinetd", "isInstalled(QString)", sdata, replyType, rdata))
+	DCOPReply r = ref.call("isInstalled", QString("krfb"));
+	if (!r.isValid()) {
+		kinetdAvailable = false;
+		krfbAvailable = false;
 		return;
+	}
 
-	if (replyType != "bool")
-		return;
-
-	QDataStream answer(rdata, IO_ReadOnly);
-	answer >> krfbAvailable;
+	r.get(krfbAvailable);
 	kinetdAvailable = true;
 }
 

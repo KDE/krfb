@@ -24,6 +24,7 @@
 #include "personalinvitation.h"
 #include "invite.h"
 
+#include <dcopref.h>
 #include <kconfig.h>
 #include <qtimer.h>
 #include <qobject.h>
@@ -108,6 +109,8 @@ private:
 	bool enableSLPFlag;
 
 	int portNum, preferredPortNum; 
+
+	DCOPRef kinetdRef;
 
 	QString passwordString;
 	QValueList<Invitation> invitationList;

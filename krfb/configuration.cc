@@ -26,6 +26,7 @@
 
 #include <qdatastream.h>
 #include <dcopclient.h>
+#include <dcopref.h>
 
 #include <qlabel.h>
 #include <qpushbutton.h>
@@ -37,8 +38,10 @@ Configuration::Configuration(krfb_mode mode) :
 	invMngDlg(0, 0, true),
 	invDlg(0, 0, true),
 	persInvDlg(0, 0, true),
-	portNum(-1)
+	portNum(-1),
+	kinetdRef("kded", "kinetd")	
 {
+	kinetdRef.setDCOPClient(KApplication::dcopClient());
 	loadFromKConfig();
 	saveToDialogs();
 	doKinetdConf();
@@ -71,62 +74,31 @@ Configuration::~Configuration() {
 }
 
 void Configuration::setKInetdEnabled(bool enabled) {
-	DCOPClient *d = KApplication::dcopClient();
-
-	QByteArray sdata;
-	QDataStream arg(sdata, IO_WriteOnly);
-	arg << QString("krfb");
-	arg << enabled;
-	d->send ("kded", "kinetd", "setEnabled(QString,bool)", sdata);
+	kinetdRef.send("setEnabled", QString("krfb"), enabled);
 }
 
 void Configuration::setKInetdEnabled(const QDateTime &date) {
-	DCOPClient *d = KApplication::dcopClient();
-
-	QByteArray sdata;
-	QDataStream arg(sdata, IO_WriteOnly);
-	arg << QString("krfb");
-	arg << date;
-	d->send ("kded", "kinetd", "setEnabled(QString,QDateTime)", sdata);
+	kinetdRef.send("setEnabled", QString("krfb"), date);
 }
 
 void Configuration::setKInetdServiceRegistrationEnabled(bool enabled) {
-	DCOPClient *d = KApplication::dcopClient();
-
-	QByteArray sdata;
-	QDataStream arg(sdata, IO_WriteOnly);
-	arg << QString("krfb");
-	arg << enabled;
-	d->send ("kded", "kinetd", "setServiceRegistrationEnabled(QString,bool)", sdata);
+	kinetdRef.send("setServiceRegistrationEnabled", 
+		       QString("krfb"), enabled);
 }
 
 void Configuration::getPortFromKInetd() {
-	DCOPClient *d = KApplication::dcopClient();
-
-	QByteArray sdata, rdata;
-	QCString replyType;
-	QDataStream arg(sdata, IO_WriteOnly);
-	arg << QString("krfb");
-	if (!d->call ("kded", "kinetd", "port(QString)", sdata, replyType, rdata))
-		return; // nicer error here
-
-	if (replyType != "int")
-		return; // nicer error here
-
-	QDataStream answer(rdata, IO_ReadOnly);
-	answer >> portNum;
+	DCOPReply r = kinetdRef.call("port", QString("krfb"));
+	if (!r.isValid())
+		return; // nice error msg here?
+	r.get(portNum);
 }
 
 void Configuration::setKInetdPort(int p) {
-	DCOPClient *d = KApplication::dcopClient();
-
-	QByteArray sdata, rdata;
-	QCString replyType;
-	QDataStream arg(sdata, IO_WriteOnly);
-	arg << QString("krfb") << p << 1;
-	if (!d->call ("kded", "kinetd", "setPort(QString,int,int)", sdata, replyType, rdata))
-		return; // nicer error here
+	DCOPReply r = kinetdRef.call("setPort", 
+				     QString("krfb"), p, 1);
+	// nice error msg here?
 }
+
 
 void Configuration::removeInvitation(QValueList<Invitation>::iterator it) {
 	invitationList.remove(it);
