@@ -3,6 +3,7 @@ IconName=krfb
 Comment=Desktop Sharing
 Comment[af]=werkskerm deeling
 Comment[bs]=Dijeljenje desktopa
+Comment[ca]=Compartició de l'escriptori
 Comment[da]=Skrivebordsdeling
 Comment[de]=Arbeitsfläche freigeben
 Comment[el]=Μοίρασμα επιφάνειας εργασίας
@@ -19,6 +20,7 @@ Comment[tr]=Masaüstü Paylaşımı
 
 [UserAcceptsConnection]
 Name=UserAcceptsConnection
+Name[ca]=L'usuari accepta la connexió
 Name[da]=BrugerAcceptererForbindelse
 Name[de]=BenutzerBestätigtVerbindung
 Name[el]=Ο χρήστης δέχεται σύνδεση
@@ -32,6 +34,7 @@ Name[sv]=Användare accepterar anslutning
 Comment=User accepts connection
 Comment[af]=gebruiker aanvaar verbinding
 Comment[bs]=Korisnik prihvata konekciju
+Comment[ca]=L'usuari accepta la connexió
 Comment[da]=Bruger accepterer forbindelse
 Comment[de]=Der Benutzer bestätigt die Verbindung
 Comment[el]=Ο χρήστης δέχεται σύνδεση
@@ -49,6 +52,7 @@ default_presentation=4
 
 [UserRefusesConnection]
 Name=UserRefusesConnection
+Name[ca]=L'usuari refusa la connexió
 Name[da]=BrugerAfslårForbindelse
 Name[de]=BenutzerLehntVerbindungAb
 Name[el]=Ο χρήστης δε δέχεται σύνδεση
@@ -61,6 +65,7 @@ Name[ro]=Conexiune respinsă de utilizator
 Name[sv]=Användaren vägrar anslutning
 Comment=User refuses connection
 Comment[bs]=Korisnik odbija konekciju
+Comment[ca]=L'usuari refusa la connexió
 Comment[da]=Bruger afslår forbindelse
 Comment[de]=Der Benutzer lehnt die Verbindung ab
 Comment[el]=Ο χρήστης δε δέχεται σύνδεση
@@ -78,6 +83,7 @@ default_presentation=4
 
 [ConnectionClosed]
 Name=ConnectionClosed
+Name[ca]=Connexió tancada
 Name[da]=ForbindelseLukket
 Name[de]=VerbindungGeschlossen
 Name[el]=Η σύνδεση έκλεισε
@@ -92,6 +98,7 @@ Name[tr]=Bağlantı Kapatıldı
 Comment=Connection closed
 Comment[af]=verbinding gesluit
 Comment[bs]=Konekcija prekinuta
+Comment[ca]=Connexió tancada
 Comment[da]=Forbindelse lukket
 Comment[de]=Verbindung geschlossen
 Comment[el]=Η σύνδεση έκλεισε
@@ -110,6 +117,7 @@ default_presentation=4
 [InvalidPassword]
 Name=InvalidPassword
 Name[be]=Некарэктны пароль
+Name[ca]=Contrasenya no vàlida
 Name[da]=UgyldigtKodeord
 Name[de]=UngültigesPasswort
 Name[el]=Λάθος κωδικός πρόσβασης
@@ -125,6 +133,7 @@ Comment=Invalid password
 Comment[af]=ongeldige wagwoord
 Comment[be]=Некарэктны пароль
 Comment[bs]=Neispravna šifra
+Comment[ca]=Contrasenya no vàlida
 Comment[da]=Ugyldigt kodeord
 Comment[de]=Ungültiges Passwort
 Comment[el]=Λάθος κωδικός πρόσβασης
@@ -142,6 +151,7 @@ default_presentation=4
 
 [InvalidPasswordInvitations]
 Name=InvalidPasswordInvitations
+Name[ca]=Contrasenya convidats no vàlides
 Name[da]=UgyldigtKodeordInvitationer
 Name[de]=UngültigePasswortAnfragen
 Name[es]=Invitación de contraseñas erróneas
@@ -153,6 +163,7 @@ Name[sv]=Ogiltigt lösenord vid inbjudan
 Comment=The invited party sent an invalid password. Connection refused.
 Comment[af]=die uitgenooi party gestuur 'n ongeldige wagwoord. verbinding geweier.
 Comment[bs]=Pozvana strana je poslala neispravnu šifru. Konekcija je odbijena.
+Comment[ca]=La part invitada ha enviat una contrasenya no vàlida. Connexió refusada.
 Comment[da]=Den inviterede part sendte et ugyldigt kodeord. Forbindelse afslået.
 Comment[de]=Die eingeladene Partei hat ein ungültiges Passwort gesendet: Verbindung abgelehnt.
 Comment[el]=Η προσκαλεσμένη ομάδα έστειλε άκυρο κωδικό πρόσβασης. Η σύνδεση απορρίφθηκε.
@@ -168,6 +179,7 @@ default_presentation=2
 
 [NewConnectionOnHold]
 Name=NewConnectionOnHold
+Name[ca]=Nova connexió en espera
 Name[da]=NyForbindelseSatPåHold
 Name[de]=NeueVerbindungWartet
 Name[el]=Νέα σύνδεση σε αναμονή
@@ -181,6 +193,7 @@ Name[sv]=Ny anslutning väntar
 Comment=Connection requested, user must accept
 Comment[af]=verbinding versoekte, gebruiker moet aanvaar
 Comment[bs]=Zatražena konekcija, korisnik mora prihvatiti
+Comment[ca]=Connexió solicitada, l'usuari ha d'acceptar-la
 Comment[da]=Forbindelse forespurgt, bruger skal acceptere
 Comment[de]=Verbindungsanfrage, Benutzer muss bestätigen
 Comment[el]=Ζητήθηκε σύνδεση, ο χρήστης πρέπει να αποδεχθεί
@@ -197,6 +210,7 @@ default_presentation=4
 
 [NewConnectionAutoAccepted]
 Name=NewConnectionAutoAccepted
+Name[ca]=Nova connexió auto-acceptada
 Name[da]=NyForbindelseAutomatiskAccepteret
 Name[de]=NeueVerbindungAutomatischAkzeptiert
 Name[el]=Αυτόματη αποδοχή νέας σύνδεσης
@@ -210,6 +224,7 @@ Name[sv]=Ny anslutning accepterades automatiskt
 Comment=New connection automatically established
 Comment[af]=nuwe verbinding automaties vasgestel
 Comment[bs]=Automatski uspostavljena nova konekcija
+Comment[ca]=Nova connexió establerta automàticament
 Comment[da]=Ny forbindelse automatisk etableret
 Comment[de]=Neue Verbindung automatisch hergestellt
 Comment[el]=Νέα σύνδεση αυτόματα αποκαταστάθηκε
@@ -226,6 +241,7 @@ default_presentation=4
 
 [TooManyConnections]
 Name=TooManyConnections
+Name[ca]=Masses connexions
 Name[da]=ForMangeForbindelser
 Name[de]=ZuVieleVerbindungen
 Name[el]=Πάρα πολλές συνδέσεις
@@ -240,6 +256,7 @@ Name[tr]=ÇokFazlaBağlantı
 Comment=Busy, connection refused
 Comment[af]=besig, verbinding geweier
 Comment[bs]=Zauzet, konekcija odbijena
+Comment[ca]=Ocupat, connexió refusada
 Comment[da]=Optaget, forbindelse afslået
 Comment[de]=Beschäftigt, Verbindung abgelehnt
 Comment[el]=Απασχολημένο, η σύνδεση απορρίφθηκε
@@ -257,6 +274,7 @@ default_logfile=
 
 [UnexpectedConnection]
 Name=UnexpectedConnection
+Name[ca]=Connexió inesperada
 Name[da]=UventetForbindelse
 Name[de]=UnerwarteteVerbindung
 Name[el]=Μη αναμενόμενη σύνδεση
@@ -271,6 +289,7 @@ Name[tr]=Beklenmedik Bağlantı
 Comment=Received unexpected connection, abort
 Comment[af]=ontvang onverwagte verbinding, staak
 Comment[bs]=Primio neočekivanu konekciju, prekidam
+Comment[ca]=Rebuda una connexió inesperada, abortant
 Comment[da]=Modtog uventet forbindelse, afbrød
 Comment[de]=Unerwartete Verbindung hergestallt, Abbruch
 Comment[el]=Λήψη μη αναμενόμενης σύνδεσης, διακοπή
