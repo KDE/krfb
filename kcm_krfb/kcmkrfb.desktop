@@ -7,4 +7,4 @@ Exec=kcmshell kcmkrfb
 X-KDE-ModuleType=Library
 X-KDE-Library=krfb
 
-Name=Desktop Sharing Configuration
+Name=Desktop Sharing
