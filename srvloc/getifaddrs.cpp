@@ -23,6 +23,8 @@
  *                           removed glibc dependencies
  */
 
+#include "config.h"
+
 #ifndef HAVE_GETIFADDRS
 
 #include "getifaddrs.h"

@@ -5,16 +5,17 @@ KDE_CHECK_HEADER(X11/extensions/XTest.h,
 #check for getifaddrs(3) (as in glibc >= 2.3 and newer bsds)
 AC_MSG_CHECKING(for getifaddrs support)
 AC_TRY_LINK(    [
+			#include <sys/types.h>
 			#include <sys/socket.h>
 			#include <ifaddrs.h>
                 ],[
 			getifaddrs(0);
                 ],[
                         AC_DEFINE(HAVE_GETIFADDRS,1,[Define if getifaddrs is available])
-                        COMPILE_GETIFADDRS="getifaddrs.cpp"
                         AC_MSG_RESULT(yes)
+                        COMPILE_GETIFADDRS=""
                 ],[
                         AC_MSG_RESULT(no)
-                        COMPILE_GETIFADDRS=""
+                        COMPILE_GETIFADDRS="getifaddrs.cpp"
 ])
 AC_SUBST(COMPILE_GETIFADDRS)

@@ -22,10 +22,16 @@
  *                           removed glibs dependencies
  */
 
- #include <net/if.h>
+#include "config.h"
+
+#ifdef HAVE_SYS_TYPES_H
+#include <sys/types.h>
+#endif
+
+#include <sys/socket.h>
+#include <net/if.h>
 
 #ifdef HAVE_GETIFADDRS
- #include <sys/socket.h>
  #include <ifaddrs.h>
 
 #define kde_getifaddrs(a) getifaddrs(a)
