@@ -208,7 +208,7 @@ This means that he can see everything on your screen and, if the box below is en
                     </property>
                     <property>
                         <name>whatsThis</name>
-                        <string>If you allow this option the remote user can enter keystrokes and use your mouse pointer. This gives him full control over your computer, so be careful.  When the option is disabled the remote user can only see what you are doing.</string>
+                        <string>If you turn this option on the remote user can enter keystrokes and use your mouse pointer. This gives him full control over your computer, so be careful.  When the option is disabled the remote user can only watch your screen.</string>
                     </property>
                 </widget>
             </vbox>
@@ -249,17 +249,6 @@ This means that he can see everything on your screen and, if the box below is en
                     <name>spacing</name>
                     <number>6</number>
                 </property>
-                <widget>
-                    <class>QPushButton</class>
-                    <property stdset="1">
-                        <name>name</name>
-                        <cstring>PushButton8</cstring>
-                    </property>
-                    <property stdset="1">
-                        <name>text</name>
-                        <string>Help</string>
-                    </property>
-                </widget>
                 <spacer>
                     <property>
                         <name>name</name>
@@ -293,7 +282,7 @@ This means that he can see everything on your screen and, if the box below is en
                     </property>
                     <property>
                         <name>whatsThis</name>
-                        <string>This button grant the request. The remote user can now see everything on your desktop and, if you enabled it, control your computer.</string>
+                        <string>This button grants the request. The remote user can now watch your desktop and, if you selected it above, control your computer.</string>
                     </property>
                 </widget>
                 <widget>
@@ -305,6 +294,10 @@ This means that he can see everything on your screen and, if the box below is en
                     <property stdset="1">
                         <name>text</name>
                         <string>Refuse connection</string>
+                    </property>
+                    <property stdset="1">
+                        <name>default</name>
+                        <bool>true</bool>
                     </property>
                     <property>
                         <name>whatsThis</name>

@@ -1,6 +1,7 @@
 Todo:
 - fix what's-this help in dialogs
-- remove help button?
+- remove help buttons?
+- add command-line args (one-connection, set-password, ask-on-connect)
 
 Possible features:
 

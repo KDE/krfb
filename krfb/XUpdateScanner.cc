@@ -26,8 +26,6 @@
 
 #include "XUpdateScanner.h"
 
-#define SHOW_MOUSE_POINTER 1
-
 namespace rfb {
 
 unsigned int scanlines[32] = {  0, 16,  8, 24,
@@ -194,7 +192,8 @@ char pointerMap[] =
 "       ..   "
 "            ";
 
-void XUpdateScanner::searchUpdates( list< Hint > &hintList )
+void XUpdateScanner::searchUpdates( list< Hint > &hintList, 
+				    bool showMousePointer)
 {
 /*
   count %= (blockWidth * blockHeight);
@@ -244,7 +243,7 @@ void XUpdateScanner::searchUpdates( list< Hint > &hintList )
   }
 
 
-  if ( SHOW_MOUSE_POINTER ) {
+  if ( showMousePointer ) {
 
   Window root_return, child_return;
   int root_x, root_y;

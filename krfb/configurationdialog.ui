@@ -11,8 +11,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>386</width>
-            <height>278</height>
+            <width>318</width>
+            <height>284</height>
         </rect>
     </property>
     <property stdset="1">
@@ -80,7 +80,7 @@
                     </property>
                     <property>
                         <name>whatsThis</name>
-                        <string>If this option is enabled you will be asked whenever a remote user wants to connect to your display. This allows to close windows that the remote user should not see or to deny the request completely. It is highly recommended when you work on this computer. If you do not enable this option your only hint that somebody is connected is the small icon in your panel showing an open eye.</string>
+                        <string>If this option is enabled you will be asked whenever a remote user tries to connect to your display. This allows you to deny the request or to remove things that the remote user should not see before he connects. It is highly recommended to turn this on while you are working on this computer. If you do not enable this option your only hint that somebody is connected is the small icon in your panel showing an open eye.</string>
                     </property>
                 </widget>
                 <widget>
@@ -95,7 +95,7 @@
                     </property>
                     <property>
                         <name>whatsThis</name>
-                        <string>If you allow this option the remote user can enter keystrokes and use your mouse pointer. This gives him full control over your computer, so be careful.  When the option is disabled the remote user can only see what you are doing.</string>
+                        <string>If you turn this option on the remote user can enter keystrokes and use your mouse pointer. This gives him full control over your computer, so be careful.  When the option is disabled the remote user can only watch your screen.</string>
                     </property>
                 </widget>
                 <widget>
@@ -182,7 +182,7 @@
                     </property>
                     <property>
                         <name>whatsThis</name>
-                        <string>Enter the display number/port here. Unless you have more than one server running on the machine just enter 0 here. Regular RFB/VNC port number are between 0 and 99. If you enter a higher number it will be used as TCP port. Note that ports below 1024 require root privileges.</string>
+                        <string>Enter the display number/port here. Unless you have more than one server running on the machine just enter 0. Regular RFB/VNC port numbers are between 0 and 99. If you enter a higher number it will be used as TCP port. Note that ports below 1024 require root privileges.</string>
                     </property>
                 </widget>
             </vbox>
@@ -289,21 +289,25 @@
             <hbox>
                 <property stdset="1">
                     <name>margin</name>
-                    <number>0</number>
+                    <number>4</number>
                 </property>
                 <property stdset="1">
                     <name>spacing</name>
-                    <number>5</number>
+                    <number>6</number>
                 </property>
                 <widget>
                     <class>QPushButton</class>
                     <property stdset="1">
                         <name>name</name>
-                        <cstring>helpButton</cstring>
+                        <cstring>applyButton</cstring>
                     </property>
                     <property stdset="1">
                         <name>text</name>
-                        <string>&amp;Help</string>
+                        <string>&amp;Apply</string>
+                    </property>
+                    <property>
+                        <name>whatsThis</name>
+                        <string>Click this to apply the changes immediately.</string>
                     </property>
                 </widget>
                 <spacer>
@@ -327,21 +331,6 @@
                         </size>
                     </property>
                 </spacer>
-                <widget>
-                    <class>QPushButton</class>
-                    <property stdset="1">
-                        <name>name</name>
-                        <cstring>applyButton</cstring>
-                    </property>
-                    <property stdset="1">
-                        <name>text</name>
-                        <string>&amp;Apply</string>
-                    </property>
-                    <property>
-                        <name>whatsThis</name>
-                        <string>Click this to apply the changes immediately.</string>
-                    </property>
-                </widget>
                 <widget>
                     <class>QPushButton</class>
                     <property stdset="1">

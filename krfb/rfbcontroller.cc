@@ -29,6 +29,8 @@
 #include <kdebug.h>
 #include <qwindowdefs.h>
 #include <qtimer.h>
+#include <qcheckbox.h>
+#include <qpushbutton.h>
 #include <qglobal.h>
 
 RFBController::RFBController(Configuration *c) :
@@ -37,6 +39,11 @@ RFBController::RFBController(Configuration *c) :
 	connection(0),
 	idleUpdateScheduled(false)
 {
+	connect(dialog.acceptConnectionButton, SIGNAL(clicked()),
+		SLOT(dialogAccepted()));
+	connect(dialog.refuseConnectionButton, SIGNAL(clicked()),
+		SLOT(dialogRefused()));
+
 	startServer();
 }
 
@@ -80,17 +87,27 @@ void RFBController::accepted(KSocket *s) {
 	fcntl(sockFd, F_SETFL, O_NONBLOCK);
 	socket = s;
 
-	// TODO: ASK USER FOR PERMISSION HERE BEFORE GOING ON
-	// TODO: also handle case if remote closes while dialog is shown
+	if (configuration->askOnConnect()) {
+		dialog.allowRemoteControlCB->setChecked(
+			configuration->allowDesktopControl());
+		dialog.show();
+	}
+	else {
+		acceptConnection(configuration->allowDesktopControl());
+	}
+}
 
+void RFBController::acceptConnection(bool allowDesktopControl) {
+	KSocket *s = socket;
 	connect(s, SIGNAL(readEvent(KSocket*)), SLOT(socketReadable()));
 	connect(s, SIGNAL(writeEvent(KSocket*)), SLOT(socketWritable()));
 	connect(s, SIGNAL(closeEvent(KSocket*)), SLOT(closeSession()));
 	s->enableRead(true);
 	s->enableWrite(true);
-	connection = new RFBConnection(qt_xdisplay(), sockFd, 
+	connection = new RFBConnection(qt_xdisplay(), s->socket(), 
 				       configuration->password(),
-				       configuration->allowDesktopControl());
+				       allowDesktopControl,
+				       configuration->showMousePointer());
 
 	emit sessionEstablished();
 }
@@ -173,6 +190,26 @@ void RFBController::closeSession() {
 		connection = 0;
 		emit sessionFinished();
 	}
+	closeSocket();
+}
+
+void RFBController::dialogAccepted() {
+	ASSERT(socket);
+	ASSERT(!connection);
+
+	dialog.hide();
+	acceptConnection(dialog.allowRemoteControlCB->isChecked());
+}
+
+void RFBController::dialogRefused() {
+	ASSERT(socket);
+	ASSERT(!connection);
+	
+	closeSocket();
+	dialog.hide();
+}
+
+void RFBController::closeSocket() {
 	delete socket;
 	socket = 0;
 }

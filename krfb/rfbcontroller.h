@@ -24,6 +24,7 @@
 #define RFBCONTROLLER_H
 
 #include "configuration.h"
+#include "newconnectiondialog.h"
 #include <ksock.h>
 #include <qobject.h>
 // rfbconnection must be last because of X11 headers
@@ -58,11 +59,14 @@ private:
 	void startServer();
 	void checkWriteBuffer();
 	void prepareIdleUpdate();
+	void acceptConnection(bool ask);
+	void closeSocket();
 
 	Configuration *configuration;
 	KServerSocket *serversocket;
 	KSocket *socket;
 	RFBConnection *connection;
+	KRFBConnectionDialog dialog;
 	bool idleUpdateScheduled;
 
 private slots:
@@ -70,6 +74,8 @@ private slots:
 	void accepted(KSocket*);
         void socketReadable(); 
         void socketWritable(); 
+	void dialogAccepted();
+	void dialogRefused();
 };
 
 #endif

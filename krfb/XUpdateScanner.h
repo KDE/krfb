@@ -44,7 +44,7 @@ class XUpdateScanner
     ~XUpdateScanner();
 
     void checkTile( int x, int y, list< Hint > &hintList );
-    void searchUpdates( list< Hint > &hintList );
+    void searchUpdates( list< Hint > &hintList, bool showMouse );
     
 
     Display *dpy;

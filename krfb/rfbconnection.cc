@@ -33,11 +33,13 @@
 RFBConnection::RFBConnection(Display *_dpy, 
 			     int _fd, 
 			     const QString &cpassword,
-			     bool _allowInput) :
+			     bool _allowInput,
+			     bool _showMousePointer) :
 	Server(),
 	dpy(_dpy),
 	fd(_fd),
 	allowInput(_allowInput),
+	showMousePointer(_showMousePointer),
 	buttonMask(0)
 {
 	memcpy(password, "\0\0\0\0\0\0\0\0", 8);
@@ -157,7 +159,7 @@ void RFBConnection::scanUpdates()
 {
   list<Hint> hintList;
   
-  scanner->searchUpdates(hintList);
+  scanner->searchUpdates(hintList, showMousePointer);
   list<Hint>::iterator i;
   for (i = hintList.begin(); i != hintList.end(); i++)
 	  handleHint(*i);
