@@ -1,0 +1,13 @@
+Recommended practice to debug a kinetd program
+==============================================
+
+Instead of executing your program directly, start a wrapper script that 
+looks like this:
+
+#!/bin/sh
+exec xterm -e gdb --args /opt/kde/bin/krfb $1 $2
+
+Note that you cannot use konsole because it closes the file descriptor. You need 
+a very recent gdb version for the "--args" option (>= 5.2, only available as
+CVS snapshot at this time).
+

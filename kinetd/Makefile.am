@@ -15,7 +15,7 @@ kded_DATA = kinetd.desktop
 EXTRA_DIST = $(libkded_kinetd_la_SOURCES)\
              $(kded_DATA) \
              $(kde_servicetypes_DATA) \
-	     eventsrc
+	     eventsrc README.debugging
 
 KDE_ICON = kinetd
 
