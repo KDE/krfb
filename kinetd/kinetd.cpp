@@ -29,8 +29,9 @@
 #include <ksockaddr.h>
 #include <kextsock.h>
 #include <klocale.h>
+#include <kglobal.h>
 
-PortListener::PortListener(KService::Ptr s, 
+PortListener::PortListener(KService::Ptr s,
 			   KConfig *config,
 			   KServiceRegistry *srvreg) :
 	m_port(-1),
@@ -73,7 +74,7 @@ bool PortListener::acquirePort() {
 
 	bool s = m_registerService;
 	setServiceRegistrationEnabledInternal(false);
-	setServiceRegistrationEnabledInternal(s); 
+	setServiceRegistrationEnabledInternal(s);
 	return true;
 }
 
@@ -82,7 +83,7 @@ void PortListener::freePort() {
 	if (m_socket)
 		delete m_socket;
 	m_socket = 0;
-	setServiceRegistrationEnabledInternal(m_registerService); 
+	setServiceRegistrationEnabledInternal(m_registerService);
 }
 
 void PortListener::loadConfig(KService::Ptr s) {
@@ -146,11 +147,11 @@ void PortListener::loadConfig(KService::Ptr s) {
 	m_defaultAutoPortRange = m_autoPortRange;
 
 	m_config->setGroup("ListenerConfig");
-	m_enabled = m_config->readBoolEntry("enabled_" + m_serviceName, 
+	m_enabled = m_config->readBoolEntry("enabled_" + m_serviceName,
 					    m_enabled);
-	m_portBase = m_config->readNumEntry("port_base_" + m_serviceName, 
+	m_portBase = m_config->readNumEntry("port_base_" + m_serviceName,
 					    m_portBase);
-	m_autoPortRange = m_config->readNumEntry("auto_port_range_" + m_serviceName, 
+	m_autoPortRange = m_config->readNumEntry("auto_port_range_" + m_serviceName,
 						 m_autoPortRange);
 	QDateTime nullTime;
 	m_expirationTime = m_config->readDateTimeEntry("enabled_expiration_"+m_serviceName,
@@ -166,7 +167,7 @@ void PortListener::accepted(KSocket *sock) {
 	KSocketAddress *ksa = KExtendedSocket::peerAddress(sock->socket());
 	KExtendedSocket::resolve(ksa, host, port);
 	KNotifyClient::event("IncomingConnection",
-		i18n("connection from %1").arg(host));
+		i18n("Connection from %1").arg(host));
 	delete ksa;
 
 	if ((!m_enabled) ||
@@ -225,7 +226,7 @@ bool PortListener::setPort(int port, int autoPortRange) {
 	}
 	else {
 		m_portBase = m_defaultPortBase;
-		m_autoPortRange = m_defaultAutoPortRange;		
+		m_autoPortRange = m_defaultAutoPortRange;
 
 		m_config->deleteEntry("port_base_" + m_serviceName);
 		m_config->deleteEntry("auto_port_range_"+m_serviceName);
@@ -281,15 +282,15 @@ void PortListener::setServiceRegistrationEnabledInternal(bool e) {
 
 	if ((!m_srvreg) || m_serviceURL.isNull())
 		return;
-	if (m_serviceRegistered == (m_enabled && e)) 
+	if (m_serviceRegistered == (m_enabled && e))
 		return;
 
         if (m_enabled && e) {
 		m_registeredServiceURL = processServiceTemplate(m_serviceURL);
 		m_serviceRegistered = m_srvreg->registerService(
-			m_registeredServiceURL, 
+			m_registeredServiceURL,
 			processServiceTemplate(m_serviceAttributes));
-		if (!m_serviceRegistered) 
+		if (!m_serviceRegistered)
                       kdDebug(7021) << "Failure registering SLP service (no slpd running?)"<< endl;
 	} else {
 		m_srvreg->unregisterService(m_registeredServiceURL);
@@ -357,7 +358,7 @@ void KInetD::setExpirationTimer() {
 }
 
 void KInetD::portRetryTimer() {
-	setPortRetryTimer(true); 
+	setPortRetryTimer(true);
 }
 
 void KInetD::setPortRetryTimer(bool retry) {
@@ -365,7 +366,7 @@ void KInetD::setPortRetryTimer(bool retry) {
 
 	PortListener *pl = m_portListeners.first();
 	while (pl) {
-		if (pl->isEnabled() && (pl->port() == -1)) 
+		if (pl->isEnabled() && (pl->port() == -1))
 			if (retry) {
 				if (!pl->acquirePort())
 					unmappedPorts++;
@@ -504,10 +505,7 @@ KInetD::~KInetD() {
 extern "C" {
 	KDEDModule *create_kinetd(QCString &name)
 	{
+        KGlobal::locale()->insertCatalogue("kinetd");
 		return new KInetD(name);
 	}
 }
-
-
-
-
