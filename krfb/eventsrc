@@ -19,6 +19,8 @@ Comment[pt_BR]=Compartilhamento do Ambiente de Trabalho
 Comment[ro]=Partajare ecran
 Comment[sv]=Dela ut skrivbord
 Comment[tr]=Masaüstü Paylaşımı
+Comment[xh]=Ukusebenzisa ngokuhlangeneyo kweDesktop
+Comment[zu]=Ukuhlukaniselana kwe-Desktop
 
 [UserAcceptsConnection]
 Name=UserAcceptsConnection
@@ -35,6 +37,8 @@ Name[mt]=UserJaċċettaKonnessjoni
 Name[pt_BR]=Aceita Conexões do Usuário
 Name[ro]=Conexiune acceptată de utilizator
 Name[sv]=Användare accepterar anslutning
+Name[xh]=Umsebenzisi Wamkela Uxhulumaniso
+Name[zu]=UmsebenziUvumelaUkuxhumana
 Comment=User accepts connection
 Comment[af]=gebruiker aanvaar verbinding
 Comment[bs]=Korisnik prihvata konekciju
@@ -53,6 +57,8 @@ Comment[pt_BR]=O usuário aceita a conexão
 Comment[ro]=Utilizatorul acceptă conexiunea
 Comment[sv]=Användaren accepterar anslutning
 Comment[tr]=Kullanıcı bağlantıyı kabul etti
+Comment[xh]=Umsebenzisi wamkela uxhulumaniso 
+Comment[zu]=Umsebenzi uyakuvumela ukuxhumana
 default_presentation=4
 
 [UserRefusesConnection]
@@ -70,6 +76,8 @@ Name[mt]=UserJirrifjutaKonnessjoni
 Name[pt_BR]=Rejeita Conexões do Usuário
 Name[ro]=Conexiune respinsă de utilizator
 Name[sv]=Användaren vägrar anslutning
+Name[xh]=Umsebenzisi Uyalwala Uxhulumaniso
+Name[zu]=UmsebenzisiWalaUxhumaniso
 Comment=User refuses connection
 Comment[af]=gebruiker weier verbinding
 Comment[bs]=Korisnik odbija konekciju
@@ -88,6 +96,8 @@ Comment[pt_BR]=O usuário rejeita a conexão
 Comment[ro]=Utilizatorul refuză conexiunea
 Comment[sv]=Användaren vägrar anslutning
 Comment[tr]=Kullanıcı bağlantıyı iptal etti
+Comment[xh]=Umsebenzisi wala uxhulumaniso
+Comment[zu]=Umsebenzi awukuvumeli ukuxhumana
 default_presentation=4
 
 [ConnectionClosed]
@@ -106,6 +116,8 @@ Name[pt_BR]=Conexão fechada
 Name[ro]=Conexiune închisă
 Name[sv]=Anslutning stängd
 Name[tr]=Bağlantı Kapatıldı
+Name[xh]=Uxhulumaniso Luvaliwe
+Name[zu]=UkuxhumanisaKuvaliwe
 Comment=Connection closed
 Comment[af]=verbinding gesluit
 Comment[bs]=Konekcija prekinuta
@@ -124,6 +136,8 @@ Comment[pt_BR]=conexão encerrada
 Comment[ro]=Conexiune închisă
 Comment[sv]=Anslutning stängd
 Comment[tr]=Bağlantı kesildi
+Comment[xh]=Uxhulumaniso luvaliwe
+Comment[zu]=Ukuxhumana kuvaliwe
 default_presentation=4
 
 [InvalidPassword]
@@ -143,6 +157,8 @@ Name[pt_BR]=Senha inválida
 Name[ro]=Parolă eronată
 Name[sv]=Ogiltigt lösenord
 Name[tr]=Geçersiz Parola
+Name[xh]=Igama lokugqitha Elingasebenziyo
+Name[zu]=IgamaEliyimfihloLokudlulaOkungasiyilona
 Comment=Invalid password
 Comment[af]=ongeldige wagwoord
 Comment[be]=Некарэктны пароль
@@ -162,6 +178,8 @@ Comment[pt_BR]=senha inválida
 Comment[ro]=Parolă eronată
 Comment[sv]=Ogiltigt lösenord
 Comment[tr]=Geçersiz parola
+Comment[xh]=Igama lokugqitha Alisebenzi
+Comment[zu]=Igama elifihlikeli
 default_presentation=4
 
 [InvalidPasswordInvitations]
@@ -177,6 +195,8 @@ Name[hr]=KrivePizovniceŠifri
 Name[mt]=PasswordĦażinaStediniet
 Name[pt_BR]=Aviso de senha inválida
 Name[sv]=Ogiltigt lösenord vid inbjudan
+Name[xh]=IzimemoZegamalokugqithaEzingasebebenziyo
+Name[zu]=IsimemoSegamaEliyimfihloLokudlulaOkungasiyilona
 Comment=The invited party sent an invalid password. Connection refused.
 Comment[af]=die uitgenooi party gestuur 'n ongeldige wagwoord. verbinding geweier.
 Comment[bs]=Pozvana strana je poslala neispravnu šifru. Konekcija je odbijena.
@@ -193,6 +213,7 @@ Comment[ja]=招待されたパーティは無効なパスワードを送信し�
 Comment[mt]=Il-persuna mistiedna bagħtet password ħażin. Konnessjoni miċħuda.
 Comment[pt_BR]=A parte "convidada" enviou uma senha inválida. Conexão recusada.
 Comment[sv]=Den inbjudna personen skickade ett ogiltigt lösenord. Anslutning vägrades.
+Comment[zu]=Ingxenye emenyiwe ithumele igama lokungena alivunyelwanga. Ukuxhumana kwaliwe.
 default_presentation=2
 
 [NewConnectionOnHold]
@@ -209,6 +230,8 @@ Name[mt]=KonnessjoniĠdidaMiżmuma
 Name[pt_BR]=Nova Conexão
 Name[ro]=Conexiune nouă în aşteptare
 Name[sv]=Ny anslutning väntar
+Name[xh]=Uxhulumano Olutsha Lumisiwe
+Name[zu]=UkuxhumanisaOkushaKubanjiwe
 Comment=Connection requested, user must accept
 Comment[af]=verbinding versoekte, gebruiker moet aanvaar
 Comment[bs]=Zatražena konekcija, korisnik mora prihvatiti
@@ -226,6 +249,8 @@ Comment[mt]=Konnessjoni mitluba, user irid jaċċetta
 Comment[pt_BR]=Conexão requisitada; o usuário deve aceitar
 Comment[ro]=Cerere de conectare; utilizatorul trebuie să accepte
 Comment[sv]=Anslutning begärd, användaren måste acceptera
+Comment[xh]=Uxhulumaniso luceliwe, umsebenzisi kufanele amkele
+Comment[zu]=Ukuxhumanisa kuceliwe, umsebenzi kumele ivunyelwe
 default_presentation=4
 
 [NewConnectionAutoAccepted]
@@ -243,6 +268,8 @@ Name[mt]=KonnessjoniĠdidaAwtoAċċettata
 Name[pt_BR]=Nova Conexão com aceitação automática
 Name[ro]=Conexiune nouă acceptată automat
 Name[sv]=Ny anslutning accepterades automatiskt
+Name[xh]=Uxhulumano Olutsha Lwamkelwe Ngokuzenzekelayo
+Name[zu]=UkuxhumanisaOkushaKokuzenzakalelaKuvunyelwe
 Comment=New connection automatically established
 Comment[af]=nuwe verbinding automaties vasgestel
 Comment[bs]=Automatski uspostavljena nova konekcija
@@ -260,6 +287,7 @@ Comment[mt]=Konnessjoni ġdida aċċettata awtomatikament
 Comment[pt_BR]=Nova conexão estabelecida automaticamente
 Comment[ro]=Conexiune nouă stabilită automat
 Comment[sv]=Ny anslutning automatiskt upprättad
+Comment[zu]=Ukuxhumana okusha kuyazisungulela
 default_presentation=4
 
 [TooManyConnections]
@@ -278,6 +306,8 @@ Name[pt_BR]=Conexões em excesso
 Name[ro]=Prea multe conexiuni
 Name[sv]=För många anslutningar
 Name[tr]=ÇokFazlaBağlantı
+Name[xh]=Uxhulumaniso Oluninzi Kakhulu
+Name[zu]=UkuxhumanaOkuningi
 Comment=Busy, connection refused
 Comment[af]=besig, verbinding geweier
 Comment[bs]=Zauzet, konekcija odbijena
@@ -295,6 +325,8 @@ Comment[mt]=Okkupat, konnessjoni miċħuda
 Comment[pt_BR]=Ocupado; conexão recusada
 Comment[ro]=Ocupat; conexiune refuzată
 Comment[sv]=Upptagen, anslutning vägras
+Comment[xh]=Uxhulumaniso, olu xakekileyo lwalile
+Comment[zu]=Imatasa,ukuxhumana kwaliwe
 default_presentation=4
 default_logfile=
 
@@ -314,6 +346,8 @@ Name[pt_BR]=Conexão não-aceita
 Name[ro]=Conexiune neaşteptată
 Name[sv]=Oväntad anslutning
 Name[tr]=Beklenmedik Bağlantı
+Name[xh]=Uxhulumaniso Olungalindelwanga
+Name[zu]=UkuxhumanaOkungalindelwe
 Comment=Received unexpected connection, abort
 Comment[af]=ontvang onverwagte verbinding, staak
 Comment[bs]=Primio neočekivanu konekciju, prekidam
@@ -331,5 +365,7 @@ Comment[mt]=Irċevejt konnessjoni mhux mistennija, ieqaf
 Comment[pt_BR]=conexão recebida inesperadamente; abortar
 Comment[ro]=A fost recepţionată o conexiune neaşteptată şi a fost anulată
 Comment[sv]=Tog emot oväntad anslutning, avbryter
+Comment[xh]=Ufumene uxhulumaniso olungalindelekanga, lahla
+Comment[zu]=Isithole ukuxhumana okungalindelekanga, hushula
 default_presentation=4
 
