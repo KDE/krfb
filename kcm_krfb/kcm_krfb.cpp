@@ -49,7 +49,7 @@ extern "C" {
     KGlobal::locale()->insertCatalogue("krfb"); // For invitation translations
     return new KcmKRfbFactory("kcm_krfb"); 
   }
-};
+}
 
 
 KcmKRfb::KcmKRfb(QWidget *p, const char *name, const QStringList &) :

@@ -168,7 +168,7 @@ XUpdateScanner::XUpdateScanner(Display *_dpy,
 
 	for (int i = 0; i < MAX_RECENT_HITS; i++)
 		recentHitScanlines[i] = i;
-};
+}
 
 
 XUpdateScanner::~XUpdateScanner()
