@@ -24,11 +24,31 @@
 #include <kpixmap.h>
 #include <kaction.h>
 #include <ksystemtray.h>
+#include <kpassivepopup.h>
 
 class KDialog;
 
+class KPassivePopup2 : public KPassivePopup {
+   	Q_OBJECT
+public: 
+        KPassivePopup2(QWidget *parent);
+        static KPassivePopup2 *message( const QString &caption, const QString &text,
+					const QPixmap &icon,
+					QWidget *parent);
+
+signals:
+	void closed();
+
+protected:
+        /**
+         * Reimplemented to detect close events.
+         */
+        virtual void closeEvent( QCloseEvent *e );
+};
+
 /**
-  *@author Tim Jansen
+  * Implements the trayicon. 
+  * @author Tim Jansen
   */
 
 class TrayIcon : public KSystemTray {
@@ -39,13 +59,21 @@ public:
 
 signals:
 	void showManageInvitations();
+	void diconnectedMessageDisplayed();
+
+public slots:
+        void prepareQuit();
+        void showConnectedMessage();
+        void showDisconnectedMessage();
 
 private:
   	KPixmap trayIconOpen;
+  	KPixmap trayIconClosed;
 	KDialog* aboutDialog;
 	KActionCollection actionCollection;
   	KAction* manageInvitationsAction;
   	KAction* aboutAction;
+	bool quitting;
 
 private slots:
 	void showAbout();

@@ -39,6 +39,7 @@
 
 
 class QCloseEvent;
+class RFBController;
 
 typedef enum {
 	RFB_STOPPED,
@@ -102,6 +103,13 @@ public:
 	virtual void exec();
 };
 
+class SessionEstablishedEvent : public VNCEvent{
+        RFBController *controller;
+public:
+	SessionEstablishedEvent(RFBController *c);
+	virtual void exec();
+};
+
 /**
  * Manages sockets, drives the RGBConnection and triggers the connection
  * dialog.
@@ -113,6 +121,8 @@ public:
  */
 class RFBController : public QObject  {
 	Q_OBJECT
+	
+	friend SessionEstablishedEvent;
 public:
 	RFBController(Configuration *c);
 	virtual ~RFBController();
@@ -146,6 +156,7 @@ private:
 	void stopServer(bool xtestUngrab = true);
 	void sendKNotifyEvent(const QString &name, const QString &desc);
 	bool checkAsyncEvents();
+	void sendSessionEstablished();
 	
 	bool allowRemoteControl;
 	int connectionNum;

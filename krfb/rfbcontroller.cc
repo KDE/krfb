@@ -243,6 +243,16 @@ void KNotifyEvent::exec() {
 	KNotifyClient::event(name, desc);
 }
 
+SessionEstablishedEvent::SessionEstablishedEvent(RFBController *c) :
+        controller(c)
+{ }
+
+void SessionEstablishedEvent::exec() {
+        controller->sendSessionEstablished();
+}
+
+
+
 RFBController::RFBController(Configuration *c) :
 	allowRemoteControl(false),
 	connectionNum(0),
@@ -375,7 +385,8 @@ void RFBController::connectionAccepted(bool aRC)
 
 	server->rfbClientHead->clientGoneHook = clientGoneHook;
 	state = RFB_CONNECTED;
-	emit sessionEstablished();
+	if (!server->rfbAuthPasswdData)
+	        emit sessionEstablished();
 }
 
 void RFBController::acceptConnection(bool aRC)
@@ -550,6 +561,11 @@ bool RFBController::handleCheckPassword(rfbClientPtr cl,
 					.arg(remoteIp));
 		return FALSE;
 	}
+
+	asyncMutex.lock();
+	asyncQueue.append(new SessionEstablishedEvent(this));
+	asyncMutex.unlock();
+        
 	return TRUE;
 }
 
@@ -633,6 +649,11 @@ void RFBController::sendKNotifyEvent(const QString &n, const QString &d)
 	asyncMutex.lock();
 	asyncQueue.append(new KNotifyEvent(n, d));
 	asyncMutex.unlock();
+}
+
+void RFBController::sendSessionEstablished()
+{
+        emit sessionEstablished();
 }
 
 bool RFBController::checkX11Capabilities() {

@@ -24,16 +24,42 @@
 #include <kiconloader.h>
 #include <kpopupmenu.h>
 
+KPassivePopup2::KPassivePopup2(QWidget *parent) :
+   KPassivePopup(parent){
+}
+
+void KPassivePopup2::closeEvent( QCloseEvent *e )
+{
+    KPassivePopup::closeEvent(e);
+    emit closed();
+}
+
+KPassivePopup2 *KPassivePopup2::message( const QString &caption, const QString &text,
+				         const QPixmap &icon,
+				         QWidget *parent)
+{
+    KPassivePopup2 *pop = new KPassivePopup2( parent);
+    pop->setView( caption, text, icon );
+    pop->show();
+
+    return pop;
+}
+
+
 TrayIcon::TrayIcon(KDialog *d, Configuration *c) : 
 	KSystemTray(0, "krfb trayicon"),
 	aboutDialog(d),
-	actionCollection(this)
+	actionCollection(this),
+	quitting(false)
 {
 	KIconLoader *loader = KGlobal::iconLoader();
 	trayIconOpen = loader->loadIcon("eyes-open24", KIcon::User);
-	setPixmap(trayIconOpen);
+	trayIconClosed = loader->loadIcon("eyes-closed24", KIcon::User);
+	setPixmap(trayIconClosed);
 
-	manageInvitationsAction = new KAction(i18n("Manage &invitations"), QString::null, 0, this, SIGNAL(showManageInvitations()), &actionCollection);
+	manageInvitationsAction = new KAction(i18n("Manage &invitations"), QString::null, 
+					      0, this, SIGNAL(showManageInvitations()), 
+					      &actionCollection);
 	manageInvitationsAction->plug(contextMenu());
 
 	contextMenu()->insertSeparator();
@@ -49,4 +75,29 @@ TrayIcon::~TrayIcon(){
 void TrayIcon::showAbout() {
 	aboutDialog->show();
 }
+
+void TrayIcon::prepareQuit() {
+        quitting = true;
+}
+
+void TrayIcon::showConnectedMessage() {
+        setPixmap(trayIconOpen);
+        KPassivePopup2 *p = KPassivePopup2::message(i18n("Desktop Sharing"), 
+						    i18n("The remote user has been authenticated and is now connected."), 
+						    trayIconOpen,
+						    this);
+}
+
+void TrayIcon::showDisconnectedMessage() {
+        if (quitting)
+                return;
+
+        setPixmap(trayIconClosed);
+        KPassivePopup2 *p = KPassivePopup2::message(i18n("Desktop Sharing"), 
+						    i18n("The remote user has closed the connection."), 
+						    trayIconClosed,
+						    this);
+	connect(p, SIGNAL(closed()), this, SIGNAL(diconnectedMessageDisplayed()));
+}
+
 #include "trayicon.moc"

@@ -155,22 +155,27 @@ int main(int argc, char *argv[])
 	KRfbIfaceImpl dcopiface(config);
 	RFBController controller(config);
 
+	QObject::connect(&app, SIGNAL(lastWindowClosed()), // dont show passivepopup
+			 &trayicon, SLOT(prepareQuit()));
 	QObject::connect(&app, SIGNAL(lastWindowClosed()),
 			 &controller, SLOT(closeConnection()));
-
 	QObject::connect(&app, SIGNAL(lastWindowClosed()),
 			 &app, SLOT(quit()));
 
 	QObject::connect(&trayicon, SIGNAL(showManageInvitations()),
 			 config, SLOT(showManageInvitationsDialog()));
+	QObject::connect(&trayicon, SIGNAL(diconnectedMessageDisplayed()),
+			 &app, SLOT(quit()));
 
 	QObject::connect(&dcopiface, SIGNAL(exitApp()),
 			 &app, SLOT(quit()));
 
 	QObject::connect(&controller, SIGNAL(sessionRefused()),
 			 &app, SLOT(quit()));
+	QObject::connect(&controller, SIGNAL(sessionEstablished()),
+			 &trayicon, SLOT(showConnectedMessage()));
 	QObject::connect(&controller, SIGNAL(sessionFinished()),
-			 &app, SLOT(quit()));
+			 &trayicon, SLOT(showDisconnectedMessage()));
 
 	sigset_t sigs;
 	sigemptyset(&sigs);
