@@ -71,7 +71,7 @@ int main(int argc, char *argv[])
 {
 	KAboutData aboutData( "krfb", I18N_NOOP("Desktop Sharing"),
 		VERSION, description, KAboutData::License_GPL,
-		"(c) 2001-2002, Tim Jansen\n"
+		"(c) 2001-2003, Tim Jansen\n"
 		"(c) 2001, Johannes E. Schindelin\n"
 		"(c) 2000, heXoNet Support GmbH, D-66424 Homburg\n"
 		"(c) 2000-2001, Const Kaplinsky\n"
@@ -111,14 +111,14 @@ int main(int argc, char *argv[])
 		if (!kinetdA) {
 		        KMessageBox::error(0,
 					   i18n("Cannot find KInetD. "
-						"Have you restarted KDE after installation?"),
+						"The KDE daemon (kded) may have crashed  or has not been started at all, or the installation failed."),
 					   i18n("Desktop Sharing Error"));
 			return 1;
 		}
 		if (!krfbA) {
 		        KMessageBox::error(0,
-					   i18n("Cannot find KInetD service for Desktop Sharing (KRfb). "
-						"Have you restarted KDE after installation?"),
+					   i18n("Cannot find KInetD service for Desktop Sharing (krfb). "
+						"The installation is incomplete or failed."),
 					   i18n("Desktop Sharing Error"));
 			return 1;
 		}
@@ -158,6 +158,8 @@ int main(int argc, char *argv[])
 
 	QObject::connect(&dcopiface, SIGNAL(exitApp()),
 			 &controller, SLOT(closeConnection()));
+	QObject::connect(&dcopiface, SIGNAL(exitApp()),
+			 &app, SLOT(quit()));
 
 	QObject::connect(&controller, SIGNAL(sessionRefused()),
 			 &app, SLOT(quit()));
