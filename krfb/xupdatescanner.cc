@@ -22,7 +22,10 @@
  * other stuff
  * January 10th 2002: improved hint creation (join adjacent hints)
  * February 20th: use only partial tiles
- *
+ * January 21st 2003: remember last modified scanlines, and scan them and
+ *                    in every cycle, reduce scanlines to every 35th
+ * January 21st 2003: scan lines around the cursor in every cycle
+ * 
  *                   Tim Jansen <tim@tjansen.de>
  */
 
@@ -40,15 +43,27 @@
 
 #include "xupdatescanner.h"
 
-unsigned int scanlines[32] = {  0, 16,  8, 24,
-                                4, 20, 12, 28,
-			       10, 26, 18,  2,
-			       22,  6, 30, 14,
-			        1, 17,  9, 25,
+#define SCANLINES 35
+unsigned int scanlines[SCANLINES] = {  0, 16,  8, 24,
+                                33, 4, 20, 12, 28,
+			       10, 26, 18,  34, 2,
+			       22,  6, 30, 14, 	
+			        1, 17,  32, 9, 25, 
 			        7, 23, 15, 31,
 			       19,  3, 27, 11,
 			       29, 13,  5, 21 };
 #define MAX_ADJ_TOLERANCE 8
+
+#define MAX_RECENT_HITS 12
+unsigned int recentHitScanlines[MAX_RECENT_HITS];
+
+#define CURSOR_SCANLINES 5
+int cursorScanlines[CURSOR_SCANLINES] = {
+		-10, -4, 0, 4, 10
+};
+
+
+
 
 XUpdateScanner::XUpdateScanner(Display *_dpy,
 			       Window _window,
@@ -56,9 +71,7 @@ XUpdateScanner::XUpdateScanner(Display *_dpy,
 			       int _width,
 			       int _height,
 			       int _bitsPerPixel,
-			       int _bytesPerLine,
-			       unsigned int _tileWidth,
-			       unsigned int _tileHeight) : 
+			       int _bytesPerLine) : 
 	dpy(_dpy),
 	window(_window),
 	fb(_fb),
@@ -66,8 +79,8 @@ XUpdateScanner::XUpdateScanner(Display *_dpy,
 	height(_height),
 	bitsPerPixel(_bitsPerPixel),
 	bytesPerLine(_bytesPerLine),
-	tileWidth(_tileWidth),
-	tileHeight(_tileHeight),
+	tileWidth(32),
+	tileHeight(32),
 	count (0),
 	scanline(NULL),
 	tile(NULL)
@@ -116,6 +129,9 @@ XUpdateScanner::XUpdateScanner(Display *_dpy,
 	shminfo_scanline.readOnly = False;
 
 	XShmAttach(dpy, &shminfo_scanline);
+
+	for (int i = 0; i < MAX_RECENT_HITS; i++)
+		recentHitScanlines[i] = i;
 };
 
 
@@ -324,35 +340,69 @@ void XUpdateScanner::createHints(QPtrList<Hint> &hintList)
 	}
 }
 
-void XUpdateScanner::searchUpdates(QPtrList<Hint> &hintList)
+void XUpdateScanner::testScanline(int y, bool rememberHits) {
+	if (y < 0)
+		return;
+	if (y > (int)height)
+		return;
+
+	int x = 0;
+	bool hit = false;
+	XShmGetImage(dpy, window, scanline, 0, y, AllPlanes);
+	
+
+	while (x < width) {
+		int pixelsize = bitsPerPixel >> 3;
+		unsigned char *src = (unsigned char*) scanline->data + 
+			x * pixelsize;
+		unsigned char *dest = fb + 
+			y * bytesPerLine + x * pixelsize;
+		int w = (x + 32) > width ? (width-x) : 32;
+		if (memcmp(dest, src, w * pixelsize)) {
+			hit = true;
+			tileMap[(x / tileWidth) + 
+				(y / tileHeight) * tilesX] = true;
+		}
+		x += 32;
+	}
+
+	if (!rememberHits)
+		return;
+
+	for (int i = 1; i < MAX_RECENT_HITS; i++)
+		recentHitScanlines[i-1] = recentHitScanlines[i];
+	recentHitScanlines[MAX_RECENT_HITS-1] = y;
+}
+
+void XUpdateScanner::searchUpdates(QPtrList<Hint> &hintList, int ptrY)
 {
 	count++;
-	count %= 32;
+	count %= SCANLINES;
 
 	unsigned int i;
-	unsigned int x, y;
+	unsigned int y;
 
 	for (i = 0; i < (tilesX * tilesY); i++) {
 		tileMap[i] = false;
 	}
 
+	// test last scanlines with hits
+	for (i = 0; i < MAX_RECENT_HITS; i++)
+		testScanline(recentHitScanlines[i], true);		
+
+	// test scanlines around the cursor
+	for (i = 0; i < CURSOR_SCANLINES; i++)
+		testScanline(ptrY+cursorScanlines[i], false);
+	// test last/first line of the tiles around the cursor
+	// (assumes tileHeight = 32)
+	testScanline((ptrY&0xffe0)-1, false);
+	testScanline((ptrY|0x1f)+1, false);
+
+	// test every SCANLINESth scanline
 	y = scanlines[count];
-	while (y < height) {
-		XShmGetImage(dpy, window, scanline, 0, y, AllPlanes);
-		x = 0;
-		while (x < width) {
-			int pixelsize = bitsPerPixel >> 3;
-			unsigned char *src = (unsigned char*) scanline->data + 
-				x * pixelsize;
-			unsigned char *dest = fb + 
-				y * bytesPerLine + x * pixelsize;
-			int w = (x + 32) > width ? (width-x) : 32;
-			if (memcmp(dest, src, w * pixelsize)) 
-				tileMap[(x / tileWidth) + 
-					(y / tileHeight) * tilesX] = true;
-			x += 32;
-		}
-		y += 32;
+	while (y < (int)height) {
+		testScanline(y, true);
+		y += SCANLINES;
 	}
 
 	copyAllTiles();

@@ -69,15 +69,16 @@ class XUpdateScanner
 			Window _window,
 			unsigned char *_fb,
 			int _width, int _height,
-			int _bitsPerPixel, int _bytesPerLine,
-			unsigned int _tileWidth = 32,
-			unsigned int _tileHeight = 32);
+			int _bitsPerPixel, int _bytesPerLine);
 	
 	~XUpdateScanner();
-	
-	void searchUpdates( QPtrList<Hint> &hintList);
+
+	// hitList: returns list of changes
+	// ptrY: ptrY: position of the cursor
+	void searchUpdates( QPtrList<Hint> &hintList, int ptrY);
 	
  private:
+	void testScanline(int y, bool rememberHits);
 	bool copyTile(int x, int y, int tx, int ty);
 	void copyAllTiles();
 	void flushHint(int x, int y, int &x0, Hint &hint, 

@@ -555,7 +555,8 @@ void RFBController::idleSlot()
 
 	QPtrList<Hint> v;
 	v.setAutoDelete(true);
-	scanner->searchUpdates(v);
+	QPoint p = QCursor::pos();
+	scanner->searchUpdates(v, p.y());
 
 	Hint *h;
 
@@ -565,7 +566,6 @@ void RFBController::idleSlot()
 				      h->right(),
 				      h->bottom());
 
-	QPoint p = QCursor::pos();
 	asyncMutex.lock();
 	if (!closePending)
 		defaultPtrAddEvent(0, p.x(),p.y(), server->rfbClientHead);
