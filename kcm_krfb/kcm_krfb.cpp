@@ -45,7 +45,7 @@ typedef KGenericFactory<KcmKRfb, QWidget> KcmKRfbFactory;
 K_EXPORT_COMPONENT_FACTORY( libkcm_krfb, KcmKRfbFactory("kcm_krfb") );
 
 KcmKRfb::KcmKRfb(QWidget *p, const char *name, const QStringList &) :
-	KCModule(p, name),
+	KCModule(KcmKRfbFactory::instance(), p, name),
 	m_configuration(KRFB_CONFIGURATION_MODE) {
 
         m_confWidget = new ConfigurationWidget(this);
