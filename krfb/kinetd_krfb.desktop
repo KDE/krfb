@@ -8,9 +8,16 @@ X-KDE-FactoryName=kinetd
 X-KDE-KINETD-id=krfb
 X-KDE-KINETD-port=5900
 X-KDE-KINETD-autoPortRange=100
-X-KDE-KINETD-enabled=true
+X-KDE-KINETD-enabled=false
 X-KDE-KINETD-argument=--kinetd
 X-KDE-KINETD-multiInstance=false
 
 Name=KRfb Desktop Sharing
+Name[da]=KRfb Skrivebords-deling
+Name[el]=KRfb μοίρασμα επιφάνειας εργασίας
+Name[ro]=Partajare ecran KRfb
 Comment=A daemon that allows you to share your desktop
+Comment[af]='n bediener wat laat toe jy aan deel jou werkskerm
+Comment[da]=En dæmon der tillader dig at dele dit skrivebord
+Comment[el]=Ένας δαίμονας που σας επιτρέπει να μοιραστείτε την επιφάνεια εργασίας σας
+Comment[ro]=Un demon care vă permite saă partajaţi sistemul dumneavoastră
