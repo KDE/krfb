@@ -47,6 +47,9 @@ typedef unsigned long KeySym;
 #define SIGNED signed
 /* for some strange reason, "typedef signed char Bool;" yields a four byte
    signed int on IRIX, but only for rfbserver.o!!! */
+#ifdef Bool
+#undef Bool
+#endif
 #define Bool signed char
 #undef FALSE
 #define FALSE 0
