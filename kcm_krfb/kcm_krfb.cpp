@@ -42,7 +42,15 @@
 
 
 typedef KGenericFactory<KcmKRfb, QWidget> KcmKRfbFactory;
-K_EXPORT_COMPONENT_FACTORY( kcm_krfb, KcmKRfbFactory("kcm_krfb") );
+
+// Can't use K_EXPORT_COMPONENT_FACTORY, since insertCatalogue necessary
+extern "C" {
+  void *init_kcm_krfb() {
+    KGlobal::locale()->insertCatalogue("krfb"); // For invitation translations
+    return new KcmKRfbFactory("kcm_krfb"); 
+  }
+};
+
 
 KcmKRfb::KcmKRfb(QWidget *p, const char *name, const QStringList &) :
 	KCModule(KcmKRfbFactory::instance(), p, name),
