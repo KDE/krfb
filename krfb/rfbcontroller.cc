@@ -50,6 +50,7 @@
 #include <qglobal.h>
 #include <qlabel.h>
 #include <qmutex.h>
+#include <qdesktopwidget.h>
 
 #include <X11/Xutil.h>
 #include <X11/extensions/XTest.h>
@@ -150,6 +151,10 @@ static void clientGoneHook(rfbClientPtr)
 	self->handleClientGone();
 }
 
+static void inetdDisconnectHook()
+{
+	self->handleClientGone();
+}
 
 
 void ConnectionDialog::closeEvent(QCloseEvent *)
@@ -178,9 +183,9 @@ void KeyboardEvent::initKeycodes() {
 	int i,j,minkey,maxkey,syms_per_keycode;
 
 	dpy = qt_xdisplay();
-	
+
 	memset(modifiers,-1,sizeof(modifiers));
-	
+
 	XDisplayKeycodes(dpy,&minkey,&maxkey);
 	ASSERT(minkey >= 8);
 	ASSERT(maxkey < 256);
@@ -274,7 +279,12 @@ PointerEvent::PointerEvent(int b, int _x, int _y) :
 }
 
 void PointerEvent::exec() {
-	XTestFakeMotionEvent(dpy, 0, x, y, CurrentTime);
+	static QDesktopWidget desktopWidget;
+
+	int screen = desktopWidget.screenNumber();
+	if (screen < 0)
+		screen = 0;
+	XTestFakeMotionEvent(dpy, screen, x, y, CurrentTime);
 	for(int i = 0; i < 5; i++)
 		if ((buttonMask&(1<<i))!=(button_mask&(1<<i)))
 			XTestFakeButtonEvent(dpy,
@@ -319,6 +329,7 @@ RFBController::RFBController(Configuration *c) :
 	connect(dialog.refuseConnectionButton, SIGNAL(clicked()),
 		SLOT(dialogRefused()));
 	connect(&dialog, SIGNAL(closed()), SLOT(dialogRefused()));
+	connect(&initIdleTimer, SIGNAL(timeout()), SLOT(checkAsyncEvents()));
 	connect(&idleTimer, SIGNAL(timeout()), SLOT(idleSlot()));
 
 	asyncQueue.setAutoDelete(true);
@@ -394,6 +405,7 @@ void RFBController::startServer(int inetdFd, bool xtestGrab)
 	server->kbdAddEvent = keyboardHook;
 	server->ptrAddEvent = pointerHook;
 	server->newClientHook = newClientHook;
+	server->inetdDisconnectHook = inetdDisconnectHook;
 	server->passwordCheck = passwordCheck;
 
 	if (!myCursor)
@@ -417,6 +429,7 @@ void RFBController::startServer(int inetdFd, bool xtestGrab)
 	}
 
 	rfbRunEventLoop(server, -1, TRUE);
+	initIdleTimer.start(IDLE_PAUSE);
 }
 
 void RFBController::stopServer(bool xtestUngrab)
@@ -440,6 +453,7 @@ void RFBController::connectionAccepted(bool aRC)
 
 	allowDesktopControl = aRC;
 	emit desktopControlSettingChanged(aRC);
+	initIdleTimer.stop();
 	idleTimer.start(IDLE_PAUSE);
 
 	server->rfbClientHead->clientGoneHook = clientGoneHook;
@@ -498,6 +512,7 @@ void RFBController::connectionClosed()
 			     .arg(remoteIp));
 
 	idleTimer.stop();
+	initIdleTimer.stop();
 	state = RFB_WAITING;
 	if (forcedClose)
 	        emit quitApp();

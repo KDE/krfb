@@ -207,6 +207,7 @@ typedef Bool (*SetTranslateFunctionProcPtr)(struct _rfbClientRec* cl);
 typedef Bool (*PasswordCheckProcPtr)(struct _rfbClientRec* cl,const char* encryptedPassWord,int len);
 typedef enum rfbNewClientAction (*NewClientHookPtr)(struct _rfbClientRec* cl);
 typedef void (*DisplayHookPtr)(struct _rfbClientRec* cl);
+typedef void (*InetdDisconnectPtr)();
 
 typedef struct {
   CARD32 count;
@@ -344,12 +345,14 @@ typedef struct _rfbScreenInfo
     SetXCutTextProcPtr setXCutText;
     GetCursorProcPtr getCursorPtr;
     SetTranslateFunctionProcPtr setTranslateFunction;
-  
+
     /* newClientHook is called just after a new client is created */
     NewClientHookPtr newClientHook;
     /* displayHook is called just before a frame buffer update */
     DisplayHookPtr displayHook;
-
+    /* inetdDisconnectHook is called when the connection has been
+       interrupted before a client could connect. */
+    InetdDisconnectPtr inetdDisconnectHook;
 #ifdef HAVE_PTHREADS
     MUTEX(cursorMutex);
     Bool backgroundLoop;

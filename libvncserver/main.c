@@ -327,15 +327,17 @@ listenerRun(void *data)
 
     if (rfbScreen->inetdSock != -1) {
        cl = rfbNewClient(rfbScreen, rfbScreen->inetdSock);
-              if (cl && !cl->onHold )
-                rfbStartOnHoldClient(cl);
+       if (cl && !cl->onHold)
+           rfbStartOnHoldClient(cl);
+       else if (rfbScreen->inetdDisconnectHook && !cl)
+           rfbScreen->inetdDisconnectHook();
        return 0;
     }
 
     len = sizeof(peer);
 
     /* TODO: this thread wont die by restarting the server */
-    while ((client_fd = accept(rfbScreen->rfbListenSock, 
+    while ((client_fd = accept(rfbScreen->rfbListenSock,
                                (struct sockaddr*)&peer, &len)) >= 0) {
         cl = rfbNewClient(rfbScreen,client_fd);
         len = sizeof(peer);
@@ -606,6 +608,7 @@ rfbScreenInfoPtr rfbGetScreen(int* argc,char** argv,
    rfbScreen->setTranslateFunction = rfbSetTranslateFunction;
    rfbScreen->newClientHook = defaultNewClientHook;
    rfbScreen->displayHook = 0;
+   rfbScreen->inetdDisconnectHook = 0;
 
    /* initialize client list and iterator mutex */
    rfbClientListInit(rfbScreen);
