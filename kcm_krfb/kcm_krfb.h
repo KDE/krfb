@@ -30,17 +30,14 @@ class KcmKRfb : public KCModule {
 private:
 	Configuration m_configuration;
 	ConfigurationWidget *m_confWidget;
-	KAboutData *m_about;
 	void checkKInetd(bool&, bool&);
 public:
 	KcmKRfb(QWidget *p, const char *name, const QStringList &);
-	~KcmKRfb();
 
 	void load();
 	void save();
 	void defaults();
 	QString quickHelp() const;
-	const KAboutData *aboutData() const;
 private slots:
 	void setInvitationNum(int num);
 	void configChanged();

@@ -63,12 +63,13 @@ KcmKRfb::KcmKRfb(QWidget *p, const char *name, const QStringList &) :
 
 	setButtons(Default|Apply|Reset);
 
-	m_about = new KAboutData( "kcm_krfb", I18N_NOOP("Desktop Sharing Control Module"),
+	KAboutData* about = new KAboutData( "kcm_krfb", I18N_NOOP("Desktop Sharing Control Module"),
 		VERSION,
 		I18N_NOOP("Configure desktop sharing"), KAboutData::License_GPL,
 		"(c) 2002, Tim Jansen\n",
 		0, "http://www.tjansen.de/krfb", "tim@tjansen.de");
-	m_about->addAuthor("Tim Jansen", 0, "tim@tjansen.de");
+	about->addAuthor("Tim Jansen", 0, "tim@tjansen.de");
+	setAboutData( about );
 
 	load();
 
@@ -85,9 +86,6 @@ KcmKRfb::KcmKRfb(QWidget *p, const char *name, const QStringList &) :
 		this, SLOT(setInvitationNum(int)));
 	setInvitationNum(m_configuration.invitations().size());
 	connect(m_confWidget->disableBackgroundCB, SIGNAL(clicked()), SLOT(configChanged()) );
-}
-KcmKRfb::~KcmKRfb() {
-	delete m_about;
 }
 
 void KcmKRfb::configChanged() {
@@ -169,11 +167,6 @@ void KcmKRfb::defaults() {
 	m_confWidget->portInput->setValue(5900);
 	m_confWidget->disableBackgroundCB->setChecked(false);
 	emit changed(true);
-}
-
-const KAboutData *KcmKRfb::aboutData() const
-{
-	return m_about;
 }
 
 QString KcmKRfb::quickHelp() const
