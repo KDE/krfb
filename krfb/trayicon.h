@@ -69,6 +69,7 @@ public slots:
 
 protected:
 	void contextMenuAboutToShow(KPopupMenu*);
+	void mousePressEvent(QMouseEvent *e);
 
 private:
 

@@ -117,4 +117,17 @@ void TrayIcon::contextMenuAboutToShow(KPopupMenu*) {
 	enableControlAction->setChecked(configuration->allowDesktopControl());
 }
 
+void TrayIcon::mousePressEvent(QMouseEvent *e)
+{
+        if (!rect().contains(e->pos()))
+                return;
+
+	if (e->button() == LeftButton) {
+	        contextMenuAboutToShow(contextMenu());
+		contextMenu()->popup(e->globalPos());
+	}
+	else
+	        KSystemTray::mousePressEvent(e);
+}
+
 #include "trayicon.moc"
