@@ -25,10 +25,7 @@ Comments on various aspects of KRfb:
   to concentrate on improving the latter.
 
 Change the following files when releasing a new version:
-- configure.in.in: change the AM_INIT_AUTOMAKE macro
 - krfb/main.cpp: change the VERSION macro
 - kcm_krfb/kcm_krfb.cpp: change the VERSION macro
-- krfb.lsm: change the version field
-
 
 tim@tjansen.de
