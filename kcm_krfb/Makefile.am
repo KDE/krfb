@@ -15,6 +15,6 @@ EXTRA_DIST = $(libkcm_krfb_la_SOURCES)\
              $(kcm_DATA)
 
 # set the include path for X, qt and KDE
-INCLUDES= $(all_includes)
+INCLUDES= -I../krfb $(all_includes)
 
 
