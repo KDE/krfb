@@ -9,7 +9,7 @@
             <x>0</x>
             <y>0</y>
             <width>532</width>
-            <height>325</height>
+            <height>468</height>
         </rect>
     </property>
     <property name="caption">
@@ -218,17 +218,23 @@
                             </widget>
                         </vbox>
                     </widget>
-                    <widget class="QFrame">
-                        <property name="name">
-                            <cstring>Frame13</cstring>
+                    <spacer>
+                        <property name="name" stdset="0">
+                            <cstring>Spacer3</cstring>
                         </property>
-                        <property name="frameShape">
-                            <enum>NoFrame</enum>
+                        <property name="orientation">
+                            <enum>Vertical</enum>
                         </property>
-                        <property name="frameShadow">
-                            <enum>Plain</enum>
+                        <property name="sizeType">
+                            <enum>Expanding</enum>
                         </property>
-                    </widget>
+                        <property name="sizeHint">
+                            <size>
+                                <width>20</width>
+                                <height>20</height>
+                            </size>
+                        </property>
+                    </spacer>
                 </vbox>
             </widget>
             <widget class="QWidget">
@@ -335,17 +341,23 @@ Most VNC clients use a display number instead of the actual port. This display n
                             </widget>
                         </vbox>
                     </widget>
-                    <widget class="QFrame">
-                        <property name="name">
-                            <cstring>Frame8</cstring>
+                    <spacer>
+                        <property name="name" stdset="0">
+                            <cstring>Spacer4</cstring>
                         </property>
-                        <property name="frameShape">
-                            <enum>NoFrame</enum>
+                        <property name="orientation">
+                            <enum>Vertical</enum>
                         </property>
-                        <property name="frameShadow">
-                            <enum>Plain</enum>
+                        <property name="sizeType">
+                            <enum>Expanding</enum>
                         </property>
-                    </widget>
+                        <property name="sizeHint">
+                            <size>
+                                <width>20</width>
+                                <height>20</height>
+                            </size>
+                        </property>
+                    </spacer>
                 </vbox>
             </widget>
         </widget>
