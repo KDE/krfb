@@ -24,7 +24,7 @@
 #include <qlineedit.h>
 #include <qcheckbox.h>
 
-void ConfigurationDialog2::closeEvent(QCloseEvent *) 
+void ConfigurationDialog2::closeEvent(QCloseEvent *)
 {
 	emit closed();
 }
@@ -36,16 +36,16 @@ Configuration::Configuration() :
 	loadFromKConfig();
 	saveToDialog();
 
-	connect(confDlg.okButton, SIGNAL(clicked()), 
+	connect(confDlg.okButton, SIGNAL(clicked()),
 		SLOT(okPressed()));
-	connect(confDlg.cancelButton, SIGNAL(clicked()), 
+	connect(confDlg.cancelButton, SIGNAL(clicked()),
 		SLOT(cancelPressed()));
-	connect(confDlg.applyButton, SIGNAL(clicked()), 
+	connect(confDlg.applyButton, SIGNAL(clicked()),
 		SLOT(applyPressed()));
 	connect(&confDlg, SIGNAL(closed()), SLOT(cancelPressed()));
 }
 
-Configuration::Configuration(bool oneConnection, bool askOnConnect, 
+Configuration::Configuration(bool oneConnection, bool askOnConnect,
 			     bool allowDesktopControl, QString password) :
 	preconfiguredFlag(true),
 	askOnConnectFlag(askOnConnect),
@@ -64,7 +64,7 @@ void Configuration::loadFromKConfig() {
 		return;
 	KConfig *config = KGlobal::config();
 	askOnConnectFlag = config->readBoolEntry("askOnConnect", true);
-	allowDesktopControlFlag = config->readBoolEntry("allowDesktopControl", 
+	allowDesktopControlFlag = config->readBoolEntry("allowDesktopControl",
 							false);
 	passwordString = config->readEntry("password", "");
 }
@@ -92,6 +92,11 @@ void Configuration::saveToDialog() {
 	confDlg.askOnConnectCB->setChecked(askOnConnectFlag);
 	confDlg.allowDesktopControlCB->setChecked(allowDesktopControlFlag);
 	confDlg.passwordInput->setText(passwordString);
+}
+
+void Configuration::reload() {
+	loadFromKConfig();
+	saveToDialog();
 }
 
 bool Configuration::preconfigured() const {

@@ -242,7 +242,7 @@ clientOutput(void *data)
 		UNLOCK(cl->updateMutex); /* we really needn't lock now. */
             }
         }
-        
+
         /* OK, now, to save bandwidth, wait a little while for more
            updates to come along. */
         usleep(cl->screen->rfbDeferUpdateTime * 1000);
@@ -301,8 +301,14 @@ listenerRun(void *data)
 
     len = sizeof(peer);
 
+    if (rfbScreen->inetdSock != -1) {
+	cl = rfbNewClient(rfbScreen, rfbScreen->inetdSock);
+	rfbStartOnHoldClient(cl);
+	return;
+    }
+
     /* TODO: this thread wont die by restarting the server */
-    while ((client_fd = accept(rfbScreen->rfbListenSock, 
+    while ((client_fd = accept(rfbScreen->rfbListenSock,
                                (struct sockaddr*)&peer, &len)) >= 0) {
         cl = rfbNewClient(rfbScreen,client_fd);
         len = sizeof(peer);
@@ -489,7 +495,7 @@ rfbScreenInfoPtr rfbGetScreen(int* argc,char** argv,
    rfbScreen->rfbNeverShared = FALSE;
    rfbScreen->rfbDontDisconnect = FALSE;
    rfbScreen->rfbAuthPasswdData = 0;
-   
+
    rfbScreen->width = width;
    rfbScreen->height = height;
    rfbScreen->bitsPerPixel = rfbScreen->depth = 8*bytesPerPixel;

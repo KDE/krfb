@@ -93,20 +93,7 @@ void PortListener::loadConfig(KService::Ptr s) {
 	if (vmultiInstance.isValid())
 		multiInstance = vmultiInstance.toBool();
 
-	KStandardDirs ksd;
-	QString configName = ksd.findResource("config", "kinetdrc");
-	if (configName.isNull()) {
-		QString d = ksd.saveLocation("config");
-		if (!d.isNull())
-			configName = d + "/kinetdrc";
-		else {
-			valid = false;
-			kdDebug() << "Unable to create configuration" << endl;
-			return;
-		}
-	}
-
-	config = new KConfig(configName);
+	config = new KConfig("kinetdrc");
 	config->setGroup("ListenerConfig");
 	enabled = config->readBoolEntry("enabled_" + serviceName, enabled);
 }
@@ -121,9 +108,10 @@ void PortListener::accepted(KSocket *sock) {
 	}
 
 	process.clearArguments();
-	// TODO: call now:
-	// process << argument << sock->socket();
-	// process.start(DontCare);
+	process << argument << sock->socket();
+	if (!process.start(KProcess::DontCare) {
+		kdDebug() << "kinetd: Calling process failed" << endl;
+	}
 	delete sock;
 }
 

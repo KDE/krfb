@@ -1,8 +1,8 @@
 
 /***************************************************************************
-                                  kinetd.h
+                                 kcm_krfb.h
                                 ------------
-    begin                : Mon Feb 11 2002
+    begin                : Sat Mar 02 2002
     copyright            : (C) 2002 by Tim Jansen
     email                : tim@tjansen.de
  ***************************************************************************/
@@ -16,27 +16,32 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef _KINETD_H_
-#define _KINETD_H_
+#ifndef _KCM_KRFB_H_
+#define _KCM_KRFB_H_
 
-#include <kservice.h>
+#include <qobject.h>
+#include <kcmodule.h>
+#include "configurationwidget.h"
 
-class PortListener {
-
+class KcmKRfb : public KCModule {
+	Q_OBJECT
 private:
-	QString serviceName;
-	int port;
-	QCString execPath;
-	
- public:
-	PortListener(KService::Ptr s);
+	ConfigurationWidget confWidget;
+	KAboutData *about;
+	void checkKInetd(bool &available, bool &enabled);
+	void setKInetd(bool enabled);
+public:
+	KcmKRfb(QWidget *p, const char *name, const QStringList &);
+	~KcmKRfb();
 
-	
-	
-	
-
-	
-}
+	void load();
+	void save();
+	void defaults();
+	QString quickHelp() const;
+	const KAboutData *aboutData() const;
+private slots:
+	void configChanged();
+};
 
 
 #endif

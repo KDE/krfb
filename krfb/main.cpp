@@ -35,7 +35,7 @@
 
 #include <signal.h>
 
-#define VERSION "0.6"
+#define VERSION "0.7"
 
 static const char *description = I18N_NOOP("VNC-compatible server to share "
 					   "KDE desktops");
@@ -71,20 +71,20 @@ int main(int argc, char *argv[])
                 0, "http://www.tjansen.de/krfb", "ml@tjansen.de");
 	aboutData.addAuthor("Tim Jansen", "", "tim@tjansen.de");
         aboutData.addAuthor("Ian Reinhart Geiser", "DCOP interface", "geiseri@kde.org");
-	aboutData.addCredit("Johannes E. Schindelin", 
+	aboutData.addCredit("Johannes E. Schindelin",
 			    I18N_NOOP("libvncserver"));
 	aboutData.addCredit("Const Kaplinsky", 
 			    I18N_NOOP("TightVNC encoder"));
 	aboutData.addCredit("Tridia Corporation", 
 			    I18N_NOOP("ZLib encoder"));
-	aboutData.addCredit("AT&T Laboratories Cambridge", 
+	aboutData.addCredit("AT&T Laboratories Cambridge",
 			    I18N_NOOP("original VNC encoders and "
 				      "protocol design"));
 	aboutData.addCredit("Jens Wagner (heXoNet Support GmbH)", 
 			    I18N_NOOP("x11 update scanner, "
 				      "original code base"));
-	aboutData.addCredit("Jason Spisak", 
-			    I18N_NOOP("Connection side image"), 
+	aboutData.addCredit("Jason Spisak",
+			    I18N_NOOP("Connection side image"),
 			    "kovalid@yahoo.com");
 	KCmdLineArgs::init(argc, argv, &aboutData);
 	KCmdLineArgs::addCmdLineOptions(options);

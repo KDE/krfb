@@ -2,7 +2,7 @@
                                configuration.h
                              -------------------
     begin                : Tue Dec 11 2001
-    copyright            : (C) 2001 by Tim Jansen
+    copyright            : (C) 2001-2002 by Tim Jansen
     email                : tim@tjansen.de
  ***************************************************************************/
 
@@ -33,21 +33,20 @@ signals:
 };
 
 /**
- * This class stores the app's configuration and also 'drives'
- * the configuration dialog.
+ * This class stores the app's configuration
  * @author Tim Jansen
  */
 class Configuration : public QObject {
    	Q_OBJECT
 public:
 	Configuration();
-	Configuration(bool oneConnection, bool askOnConnect, 
+	Configuration(bool oneConnection, bool askOnConnect,
 		      bool allowDesktopControl, QString password);
 	~Configuration();
 
 	bool preconfigured() const;
 	bool oneConnection() const;
-	bool askOnConnect() const; 
+	bool askOnConnect() const;
 	bool allowDesktopControl() const;
 	QString password() const;
 
@@ -55,6 +54,7 @@ public:
         void setAskOnConnect(bool askOnConnect);
         void setAllowDesktopControl(bool allowDesktopControl);
 	void setPassword(QString password);
+	void reload();
 
 signals:
   	void passwordChanged();
@@ -63,10 +63,10 @@ public slots:
 	void showDialog();
 
 private:
-        void loadFromKConfig(); 
-        void loadFromDialog(); 
-        void saveToKConfig(); 
-        void saveToDialog(); 
+        void loadFromKConfig();
+        void loadFromDialog();
+        void saveToKConfig();
+        void saveToDialog();
 
         ConfigurationDialog2 confDlg;
 	QIntValidator *portValidator;

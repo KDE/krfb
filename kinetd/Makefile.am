@@ -4,6 +4,7 @@ METASOURCES = AUTO
 lib_LTLIBRARIES = libkded_kinetd.la
 
 libkded_kinetd_la_SOURCES = kinetd.cpp kinetd.h kinetd.skel
+libkded_kinetd_la_LDFLAGS  = $(all_libraries) -module -avoid-version
 libkded_kinetd_la_LIBADD   = $(LIB_QT) $(LIB_KDECORE) $(LIB_KDEUI)
 
 # Services

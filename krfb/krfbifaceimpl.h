@@ -24,6 +24,7 @@ public:
 	void disconnect();
 //	void setWindowID(int);
 	void exit();
+	void reloadConfig();
 
 	bool oneConnection();
 	void setOneConnection(bool);

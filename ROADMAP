@@ -9,12 +9,16 @@ Version 0.6 (2002/02/18): Improved RFB backend
 
 Version 0.7: Better integration with KDE, improved GUI
 - kded module 'kinetd' that listens on the Rfb port and starts KRfb
+ -> remove debug msgs, better error handling
+ -> fetch new services while running
 - invitation support
+ -> check for xp dialogs
 - kcontrol module
-- on startup a dialog appears that allows the user to invite somebody
-  using email (and later other mechanisms). Dialog can be turned off forever, 
-  of course
-- remove STDOUT/STDERR logging
+-> on startup a dialog appears that allows the user to invite somebody
+   using email (and later other mechanisms). Dialog can be turned off forever, 
+   of course
+-> remove STDOUT/STDERR logging
+-> add isConnected() dcop call
 
 Version 0.8: 
 - i18n

@@ -31,6 +31,10 @@ void KRfbIfaceImpl::exit()
 {
 	emit exitApp();
 }
+void KRfbIfaceImpl::reloadConfig()
+{
+	return configuration->reload();
+}
 bool KRfbIfaceImpl::oneConnection()
 {
 	return configuration->oneConnection();

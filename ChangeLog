@@ -1,3 +1,15 @@
+2002-03-11  Tim Jansen  <tjansen@tjansen.de>
+
+	* integrated KCModule
+
+	* added ui-Files for invitations
+
+	* added multithreaded inetd capabilities to libvncserver
+
+2002-03-02  Tim Jansen  <tjansen@tjansen.de>
+
+	* added kinetd
+
 2002-02-24  Tim Jansen  <tjansen@tjansen.de>
 
 	* fixed DCOP port() call

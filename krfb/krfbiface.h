@@ -20,6 +20,12 @@ k_dcop:
 	virtual void exit() = 0;
 
 	/**
+	 * Tells krfb to re-load the configuration. This is usually
+	 * called by the KControl module.
+	 */
+	virtual void reloadConfig() = 0;
+
+	/**
 	 * If true krfb will disconnect after a client disconnected.
 	 * @return true if oneConnection feature is turned on
 	 */
@@ -60,8 +66,9 @@ k_dcop:
 	virtual void setAllowDesktopControl(bool a) = 0;
 	
 	/**
-	 * Sets the default password. An empty password can be used to deactivate
-	 * the password authentication, but only if krfb is in stand-alone mode.
+	 * Sets the password for uninvited sessions. An empty password can be used 
+	 * to deactivate the password authentication, but only if krfb is in 
+	 * stand-alone mode.
 	 * @param p the password to set
 	 */
 	virtual void setPassword(QString p) = 0;

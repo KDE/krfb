@@ -21,8 +21,12 @@ Comments on various aspects of KRfb:
   for --one-connection
 - the newconnection-dialog is extra large and has the pixmap on the left 
   side to capture the attention of the user before allowing a connection. 
-- the auto-port-selection feature is somewhat inconvenient when you have
-  more than one VNC server running (you cannot know the port). Problems
-  willbe solved in a future version when there is an invitation feature.
+
+Do the following files when releasing a new version:
+- configure.in.in: change the AM_INIT_AUTOMAKE macro
+- krfb/main.cpp: change the VERSION macro
+- kcm_krfb/kcm_krfb.cpp: change the VERSION macro
+- krfb.lsm: change the version field
+
 
 tim@tjansen.de
