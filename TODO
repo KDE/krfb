@@ -3,24 +3,26 @@ For 3.1:
   (documentation)
 
 For 3.2:
+- configurable slp lifetime in kinetd
+- slp registration refresh in kinetd when lifetime expired
 - when krfb is started with URL arguments and without connection
   quality, add some kind of smart algorithm to determine whether the
   other host is local (maybe using SLP to announce the connectivity 
   of a LAN)
 - enhance RFB with SASL authentication (Kerberos)
 - encrypted connections (using SASL and/or SSL/TLS)
+- try to solve the non-atomic KConfig changes problem
 
 Todo (unscheduled features):
 - NAT traversal support if I can find an acceptable implementation
   (probably using TURN, as soon as there is a server and newer spec for that)
+- when OpenSLP supports this, allow scope configuration
 - split krfb into 2 separate programs (server and invitation)
 - look into adding an extension to xfree to improve speed (get noticed of
   screen updates)
 - cut & paste support
 
 Known bugs/problems:
-- the IP address is displayed in the new connection dialog. The host name 
-  would be nicer.
 - the IP address sent in invitation may be wrong on multi-homed machines, 
   and it is always incorrect behind a NAT. Right now it is not possible
   to solve these problems.
