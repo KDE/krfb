@@ -21,7 +21,7 @@ Comments on various aspects of KRfb:
 - most limitations and problems of KRfb are caused either by limitations of
   Rfb (for example no proper authentication of users, no encryption) or
   by lack of a framework in KDE or Linux in general (no discovery of running
-  KRfb servers, no way to connect through a NAT device). In the months I am going
+  KRfb servers, no way to connect through a NAT device). In the next months I am going
   to concentrate on improving the latter.
 
 Change the following files when releasing a new version:
