@@ -1,4 +1,5 @@
 For 3.1:
+- remove krfb from all user-visible places
 - write SLP service template for remote desktop protocols
   (documentation)
 
@@ -10,6 +11,7 @@ Todo (unscheduled features):
 - NAT traversal support if I can find an acceptable implementation
   (probably using TURN, as soon as there is a server and newer spec for that)
 - split krfb into 2 separate programs (server and invitation)
+- soundex support in SLP attributes
 - look into adding an extension to xfree to improve speed (get noticed of
   screen updates)
 - cut & paste support

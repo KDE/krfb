@@ -25,17 +25,11 @@
 #ifndef __KSERVICEREGISTRY_H
 #define __KSERVICEREGISTRY_H
 
-#ifdef HAVE_CONFIG_H
-#include <config.h>
-#endif
-
-#ifdef HAVE_SLP
-#include <slp.h>
-#endif
-
 #include <qstring.h>
 #include <qstringlist.h>
 #include <qmap.h>
+
+class KServiceRegistryPrivate;
 
 /**
  * KServiceRegistry allows you to announce your service using SLP (RFC 2608).
@@ -80,8 +74,14 @@
  * templates is described in RFC 2609, you can find the existing service 
  * templates at http://www.iana.org/assignments/svrloc-templates.htm .
  * 
- *
- * TODO: example of obtaining host address and registering service
+ * Example:
+ * <pre>
+ *   KServiceRegistry ksr;
+ *   KInetAddress kia = KInetAddress->getLocalAddress();
+ *   ksr.registerService(QString("service:remotedesktop.kde:vnc://%1:0").arg(kia->nodeName()),
+ *                       "(type=shared)");
+ *   delete kia;
+ * </pre>
  * 
  * @version $Id$
  * @author Tim Jansen, tim@tjansen.de 
@@ -155,18 +155,7 @@ class KServiceRegistry {
 	void unregisterService(const QString &serviceURL);
 
  private:
-	bool ensureOpen();
-	
-        bool m_opened;
-	QString m_lang;
-
-#ifdef HAVE_SLP
-        SLPHandle m_handle;
-	friend void KServiceRegistryRegReport(SLPHandle slp, 
-					      SLPError errcode, 
-					      void* cookie);
-#endif
-	bool m_cbSuccess;
+	KServiceRegistryPrivate *d;
 };
 
 #endif

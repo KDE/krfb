@@ -17,34 +17,57 @@
  *  the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
  *  Boston, MA 02111-1307, USA.
  */
+/**
+ * TODO: see below..
+ */
 
 #include "config.h"
 #include "kserviceregistry.h"
 #include <kdebug.h>
 
+
 #ifdef HAVE_SLP
+#include <slp.h>
+
+class KServiceRegistryPrivate {
+public:
+	KServiceRegistryPrivate(const QString &lang) :
+		m_opened(false),
+		m_lang(lang) {
+	}
+	bool ensureOpen();
+	
+        bool m_opened;
+	QString m_lang;
+
+        SLPHandle m_handle;
+	friend void KServiceRegistryRegReport(SLPHandle slp, 
+					      SLPError errcode, 
+					      void* cookie);
+	bool m_cbSuccess;
+};
 
 void KServiceRegistryRegReport(SLPHandle, 
 			       SLPError errcode, 
 			       void* cookie) {
-	KServiceRegistry *s = (KServiceRegistry*) cookie;
+	KServiceRegistryPrivate *s = (KServiceRegistryPrivate*) cookie;
 	s->m_cbSuccess = (errcode == SLP_OK);
 	if (errcode < 0)
 		kdDebug() << "KServiceRegistry: error in callback:" << errcode <<endl;
 }
 
 
-KServiceRegistry::KServiceRegistry(const QString &lang) :
-	m_opened(false),
-	m_lang(lang) {
+KServiceRegistry::KServiceRegistry(const QString &lang) {
+	d = new KServiceRegistryPrivate(lang);
 }
 
 KServiceRegistry::~KServiceRegistry() {
-	if (m_opened)
-		SLPClose(m_handle);
+	if (d->m_opened)
+		SLPClose(d->m_handle);
+	delete d;
 }
 
-bool KServiceRegistry::ensureOpen() {
+bool KServiceRegistryPrivate::ensureOpen() {
 	SLPError e;
 
 	if (m_opened)
@@ -60,35 +83,35 @@ bool KServiceRegistry::ensureOpen() {
 }
 
 bool KServiceRegistry::available() {
-	return ensureOpen();
+	return d->ensureOpen();
 }
 
 bool KServiceRegistry::registerService(const QString &serviceURL, 
 				       QString attributes, 
 				       unsigned short lifetime) {
-	if (!ensureOpen())
+	if (!d->ensureOpen())
 		return false;
 
-	m_cbSuccess = true;
-	SLPError e = SLPReg(m_handle,
+	d->m_cbSuccess = true;
+	SLPError e = SLPReg(d->m_handle,
 			    serviceURL.latin1(),
 			    lifetime > 0 ? lifetime : SLP_LIFETIME_MAXIMUM,
 			    0,
 			    attributes.isNull() ? "" : attributes.latin1(),
 			    SLP_TRUE,
 			    KServiceRegistryRegReport,
-			    this);
+			    d);
 	if (e != SLP_OK) {
 		kdDebug() << "KServiceRegistry: error in registerService:" << e <<endl;
 		return false;
 	}
-	return m_cbSuccess;
+	return d->m_cbSuccess;
 }
 
 bool KServiceRegistry::registerService(const QString &serviceURL, 
 				       QMap<QString,QString> attributes, 
 				       unsigned short lifetime) {
-	if (!ensureOpen())
+	if (!d->ensureOpen())
 		return false;
 // TODO: encode strings in map?
 	QString s;
@@ -103,11 +126,11 @@ bool KServiceRegistry::registerService(const QString &serviceURL,
 }
 
 void KServiceRegistry::unregisterService(const QString &serviceURL) {
-	if (!m_opened)
+	if (!d->m_opened)
 		return;
-	SLPDereg(m_handle, serviceURL.latin1(), 
+	SLPDereg(d->m_handle, serviceURL.latin1(), 
 		 KServiceRegistryRegReport,
-		 this);		 
+		 d);		 
 }
 
 QString KServiceRegistry::encodeAttributeValue(const QString &value) {
@@ -123,15 +146,10 @@ QString KServiceRegistry::encodeAttributeValue(const QString &value) {
 #else
 
 KServiceRegistry::KServiceRegistry(const QString &lang) :
-	m_opened(false),
-	m_lang(lang) {
+	d(0) {
 }
 
 KServiceRegistry::~KServiceRegistry() {
-}
-
-bool KServiceRegistry::ensureOpen() {
-	return false;
 }
 
 bool KServiceRegistry::available() {

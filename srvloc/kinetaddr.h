@@ -126,7 +126,7 @@ public:
    * Returns an address that can be used for communication with
    * other computers on the internet.
    * Note that the returned address is not always a real 
-   * internet address, because the computer may not be able to connect 
+   * internet address, because the computer couble be unable to connect 
    * to the internet or is behind a NAT gateway.
    * In the worst case you will get the address of the local loopback 
    * interface.
