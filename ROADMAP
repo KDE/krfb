@@ -1,25 +1,19 @@
 Version 0.5 (2002/01/02): First release
 - first release
-- port x0rfbserver wiith simplified KDE/Qt interface
+- port x0rfbserver with simplified KDE/Qt interface
 
 
 Version 0.6 (2002/02/??): Improve RFB backend
-- improve RFB backend
-- replace x0rfbserver's encoders with those from TightVNCs WinVNC
-<- port ZLib and Tight encodings from TightVNCs WinVNC
-<- clip framebuffer updates to requested region
-<- rewrite Connection to use linked buffers
+- replace x0rfbserver's backend with libvncserver
 <- knotify
-<- UI for multiple users (if libvncserver is chosen)
 
 Version 0.7 (2002/??/??): Better integration with KDE, more end-user friendly
 - i18n
-- kded module or some other way to have a small module listening on the Rfb
-  port (like inetd) that then starts KRfb
+- kded module 'kinetd' to listening on the Rfb port that then starts KRfb
 - kcontrol module to configure the kded thing
 - on startup a dialog appears that allows the user to invite somebody
-  else using email (and later other mechanisms). Dialog can be turned 
-  off, of course
+  using email (and later other mechanisms). Dialog can be turned off forever, 
+  of course
 
 Version 0.8 (2002/??/??): 
 - docs

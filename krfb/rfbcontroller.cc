@@ -26,6 +26,7 @@
 #include <kmessagebox.h>
 #include <klocale.h>
 #include <kextsock.h>
+#include <qcursor.h>
 #include <qwindowdefs.h>
 #include <qtimer.h>
 #include <qcheckbox.h>
@@ -59,13 +60,13 @@ public:
 	}
 };
 
-static void keyboardHook(Bool down, KeySym keySym, rfbClientPtr cl)
+static void keyboardHook(Bool down, KeySym keySym, rfbClientPtr)
 {
 	AppLocker a;
 	self->handleKeyEvent(down?true:false, keySym);
 }
 
-static void pointerHook(int bm, int x, int y, rfbClientPtr cl)
+static void pointerHook(int bm, int x, int y, rfbClientPtr)
 {
 	AppLocker a;
 	self->handlePointerEvent(bm, x, y);
@@ -110,6 +111,7 @@ RFBController::RFBController(Configuration *c) :
 	connect(dialog.refuseConnectionButton, SIGNAL(clicked()),
 		SLOT(dialogRefused()));
 	connect(&dialog, SIGNAL(closed()), SLOT(dialogRefused()));
+	connect(&idleTimer, SIGNAL(timeout()), SLOT(idleSlot()));
 
 	startServer();
 }
@@ -136,10 +138,38 @@ void RFBController::startServer(bool xtestGrab)
 	int h = framebufferImage->height;
 	int bpp = framebufferImage->depth;
 	char *fb = framebufferImage->data;
+	
+	int red_max, green_max, blue_max;
+	int red_shift, green_shift, blue_shift;
 
-	server = rfbGetScreen(0, 0, w, h,
-			      (bpp==4) ? 8 : 5,
-			      0, bpp);
+	if (bpp == 8) {
+		red_max   = 3;
+		green_max = 7;
+		blue_max  = 3;
+		red_shift = 0;
+		green_shift = 2;
+		blue_shift = 5;
+	} else {
+		red_shift = 0;
+		if ( framebufferImage->red_mask )
+			while (!(framebufferImage->red_mask & (1 << red_shift)))
+				red_shift++;
+		green_shift = 0;
+		if (framebufferImage->green_mask)
+			while (!(framebufferImage->green_mask & (1 << green_shift)))
+				green_shift++;
+		blue_shift = 0;
+		if (framebufferImage->blue_mask)
+			while (!(framebufferImage->blue_mask & (1 << blue_shift)))
+				blue_shift++;
+		red_max = framebufferImage->red_mask   >> red_shift;
+		green_max = framebufferImage->green_mask >> green_shift;
+		blue_max = framebufferImage->blue_mask  >> blue_shift;
+	}
+
+	server = rfbGetScreen2(0, 0, w, h, bpp/8,
+			       red_max, green_max, blue_max,
+			       red_shift, green_shift, blue_shift);
 	server->frameBuffer = fb;
 	server->rfbPort = configuration->port();
 	//server->udpPort = configuration->port();
@@ -245,12 +275,12 @@ void RFBController::idleSlot()
 
 	Hint *h;
 
-	for (h = v.first(); h != 0; h = v.next()) 
+	for (h = v.first(); h != 0; h = v.next()) {
 		rfbMarkRectAsModified(server, h->left(),
 				      h->top(),
 				      h->right(),
 				      h->bottom());
-
+	}
 	QPoint p = QCursor::pos();
 	defaultPtrAddEvent(0, p.x(),p.y(), client);
 }
@@ -268,7 +298,7 @@ void RFBController::dialogRefused()
 	emit sessionRefused();
 }
 
-bool RFBController::handleCheckPassword(const char *p, int len) 
+bool RFBController::handleCheckPassword(const char *, int) 
 {
 	return TRUE;
 	// TODO

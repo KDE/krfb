@@ -95,7 +95,7 @@ typedef unsigned long KeySym;
 #undef SOCKET
 #define SOCKET int
 #else
-int max(int,int);
+#define max(a,b) (((a)>(b))?(a):(b))
 #include <sys/time.h>
 #include <netinet/in.h>
 #define SOCKET int
@@ -757,8 +757,8 @@ extern void rfbProcessSizeArguments(int* width,int* height,int* bpp,int* argc, c
 
 /* main.c */
 
-extern void rfbLog(char *format, ...);
-extern void rfbLogPerror(char *str);
+extern void rfbLog(const char *format, ...);
+extern void rfbLogPerror(const char *str);
 
 void rfbScheduleCopyRect(rfbScreenInfoPtr rfbScreen,int x1,int y1,int x2,int y2,int dx,int dy);
 void rfbScheduleCopyRegion(rfbScreenInfoPtr rfbScreen,sraRegionPtr copyRegion,int dx,int dy);
@@ -778,6 +778,10 @@ Bool rfbCheckPasswordByList(rfbClientPtr cl,char* response,int len);
 extern rfbScreenInfoPtr rfbGetScreen(int* argc,char** argv,
  int width,int height,int bitsPerSample,int samplesPerPixel,
  int bytesPerPixel);
+extern rfbScreenInfoPtr rfbGetScreen2(int* argc,char** argv,
+ int width,int height,int bytesPerPixel,
+ int redMax, int greenMax, int blueMax,
+ int redShift, int greenShift, int blueShift);
 extern void rfbInitServer(rfbScreenInfoPtr rfbScreen);
 extern void rfbScreenCleanup(rfbScreenInfoPtr screenInfo);
 

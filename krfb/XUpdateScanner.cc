@@ -31,6 +31,8 @@
 #include <X11/Xutil.h>
 #include <X11/extensions/XShm.h>
 
+#include <string.h>
+
 #include "XUpdateScanner.h"
 
 unsigned int scanlines[32] = {  0, 16,  8, 24,

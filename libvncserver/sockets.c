@@ -69,9 +69,10 @@ struct timeval
 
 #include "rfb.h"
 
-//#ifndef WIN32
+/*#ifndef WIN32
 int max(int i,int j) { return(i<j?j:i); }
-//#endif
+#endif
+*/
 
 int rfbMaxClientWait = 20000;   /* time (ms) after which we decide client has
                                    gone away - needed to stop us hanging */
@@ -270,9 +271,11 @@ rfbCloseClient(cl)
      rfbClientPtr cl;
 {
     LOCK(cl->updateMutex);
-    FD_CLR(cl->sock,&(cl->screen->allFds));
-    close(cl->sock);
-    cl->sock = -1;
+    if (cl->sock != -1) {
+      FD_CLR(cl->sock,&(cl->screen->allFds));
+      close(cl->sock);
+      cl->sock = -1;
+    }
     TSIGNAL(cl->updateCond);
     UNLOCK(cl->updateMutex);
 }
