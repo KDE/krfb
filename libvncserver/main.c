@@ -386,7 +386,7 @@ void defaultSetXCutText(char* text, int len, rfbClientPtr cl)
 
 /* TODO: add a nice VNC or RFB cursor */
 
-#if defined(WIN32) || defined(sparc)
+#if defined(WIN32) || defined(sparc) || defined(_AIX)
 static rfbCursor myCursor = 
 {
    "\000\102\044\030\044\102\000",

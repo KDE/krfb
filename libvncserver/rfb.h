@@ -86,6 +86,10 @@ typedef unsigned long KeySym;
 #define _BYTE_ORDER _LITTLE_ENDIAN
 #undef Bool
 #define Bool int
+#elif defined(_AIX)
+#define _BYTE_ORDER 4321
+#undef Bool
+#define Bool int
 #else
 #include <sys/endian.h>
 #endif
