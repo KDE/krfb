@@ -41,17 +41,20 @@ struct passwd;
 class KUser {
 
 public:
+
+  enum UIDMode{ UseEffectiveUID, UseRealUserID };
+
   /**
    * Creates an object that contains information about the current user.
    * (as returned by getuid(2) or geteuid(2)).
-   * @param effective if true, returns the effective user. If false, the 
-   *        real user will be returned. The difference is that when the 
-   *        user uses a command like "su", this will change the effective 
-   *        user, but not the real user. Use the effective user when 
+   * @param If UseEffectiveUID it passed the effective user is returned. 
+   *        Otherwise the real user will be returned. The difference is that
+   *        that when the user uses a command like "su", this will change the
+   *        effective user, but not the real user. Use the effective user when 
    *        checking permissions, and the real user for displaying
    *        information about the user
    */
-  KUser(bool effective = false);
+  KUser(UIDMode mode = UseEffectiveUID);
 
   /**
    * Creates an object for the user with the given user id.

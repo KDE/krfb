@@ -63,8 +63,8 @@ public:
 };
 
 
-KUser::KUser(bool effective) {
-	fillPasswd(getpwuid(effective ? geteuid() : getuid()));
+KUser::KUser(UIDMode mode) {
+	fillPasswd(getpwuid((mode == UseEffectiveUID) ? geteuid() : getuid()));
 }
 
 KUser::KUser(long uid) {
@@ -88,6 +88,9 @@ KUser::KUser(const KUser &user) {
 }
 
 KUser& KUser::operator =(const KUser& user) {
+	if ( this == &user ) 
+		return *this;
+	
 	delete d;
 	d = new KUserPrivate(user.uid(),
 			     user.gid(),
@@ -112,18 +115,18 @@ bool KUser::operator ==(const KUser& user) {
 
 void KUser::fillPasswd(struct passwd *p) {
 	if (p) {
-		QString gecos = QString::fromUtf8(p->pw_gecos);
+		QString gecos = QString::fromLocal8Bit(p->pw_gecos);
 		QStringList gecosList = QStringList::split(',', gecos, true);
 
 		d = new KUserPrivate(p->pw_uid,
 				     p->pw_gid,
-				     QString::fromUtf8(p->pw_name),
+				     QString::fromLocal8Bit(p->pw_name),
 				     (gecosList.size() > 0) ? gecosList[0] : QString::null,
 				     (gecosList.size() > 1) ? gecosList[1] : QString::null,
 				     (gecosList.size() > 2) ? gecosList[2] : QString::null,
 				     (gecosList.size() > 3) ? gecosList[3] : QString::null,
-				     QString::fromUtf8(p->pw_dir),
-				     QString::fromUtf8(p->pw_shell));
+				     QString::fromLocal8Bit(p->pw_dir),
+				     QString::fromLocal8Bit(p->pw_shell));
 	}
 	else
 		d = new KUserPrivate();
