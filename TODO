@@ -2,7 +2,6 @@
 For 3.2:
 - write SLP service template for remote desktop protocols
   (documentation)
-- trayicon mouse-over text
 - when krfb is started with URL arguments and without connection
   quality, add some kind of smart algorithm to determine whether the
   other host is local (maybe using SLP to announce the connectivity 

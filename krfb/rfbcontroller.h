@@ -149,7 +149,7 @@ public slots:
 	void enableDesktopControl(bool c);
 
 signals:
-        void sessionEstablished();
+        void sessionEstablished(QString host);
 	void sessionFinished();
 	void sessionRefused();
 	void quitApp();

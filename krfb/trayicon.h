@@ -64,7 +64,7 @@ signals:
 
 public slots:
         void prepareQuit();
-        void showConnectedMessage();
+        void showConnectedMessage(QString host);
         void showDisconnectedMessage();
 	void setDesktopControlSetting(bool);
 

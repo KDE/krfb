@@ -453,7 +453,7 @@ void RFBController::connectionAccepted(bool aRC)
 	server->rfbClientHead->clientGoneHook = clientGoneHook;
 	state = RFB_CONNECTED;
 	if (!server->rfbAuthPasswdData)
-	        emit sessionEstablished();
+	        emit sessionEstablished(remoteIp);
 }
 
 void RFBController::acceptConnection(bool aRemoteControl)
@@ -735,7 +735,7 @@ void RFBController::sendKNotifyEvent(const QString &n, const QString &d)
 
 void RFBController::sendSessionEstablished()
 {
-        emit sessionEstablished();
+        emit sessionEstablished(remoteIp);
 }
 
 #ifdef __osf__

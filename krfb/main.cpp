@@ -159,8 +159,8 @@ int main(int argc, char *argv[])
 
 	QObject::connect(&controller, SIGNAL(sessionRefused()),
 			 &app, SLOT(quit()));
-	QObject::connect(&controller, SIGNAL(sessionEstablished()),
-			 &trayicon, SLOT(showConnectedMessage()));
+	QObject::connect(&controller, SIGNAL(sessionEstablished(QString)),
+			 &trayicon, SLOT(showConnectedMessage(QString)));
 	QObject::connect(&controller, SIGNAL(sessionFinished()),
 			 &trayicon, SLOT(showDisconnectedMessage()));
 	QObject::connect(&controller, SIGNAL(desktopControlSettingChanged(bool)),

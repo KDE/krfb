@@ -16,6 +16,7 @@
  ***************************************************************************/
 
 #include "trayicon.h"
+#include <qtooltip.h>
 #include <kstdaction.h>
 #include <kapplication.h>
 #include <klocale.h>
@@ -57,6 +58,7 @@ TrayIcon::TrayIcon(KDialog *d, Configuration *c) :
 	trayIconOpen = loader->loadIcon("eyes-open24", KIcon::User);
 	trayIconClosed = loader->loadIcon("eyes-closed24", KIcon::User);
 	setPixmap(trayIconClosed);
+	QToolTip::add(this, i18n("Desktop Sharing - connecting"));
 
 	manageInvitationsAction = new KAction(i18n("Manage &Invitations"), QString::null, 
 					      0, this, SIGNAL(showManageInvitations()), 
@@ -91,19 +93,21 @@ void TrayIcon::prepareQuit() {
 
 
 
-void TrayIcon::showConnectedMessage() {
+void TrayIcon::showConnectedMessage(QString host) {
 
         setPixmap(trayIconOpen);
         KPassivePopup2::message(i18n("Desktop Sharing"), 
 				i18n("The remote user has been authenticated and is now connected."), 
 				trayIconOpen,
 				this);
+	QToolTip::add(this, i18n("Desktop Sharing - connected with %1").arg(host));
 }
 
 void TrayIcon::showDisconnectedMessage() {
         if (quitting)
                 return;
 
+	QToolTip::add(this, i18n("Desktop Sharing - disconnected"));
         setPixmap(trayIconClosed);
         KPassivePopup2 *p = KPassivePopup2::message(i18n("Desktop Sharing"), 
 						    i18n("The remote user has closed the connection."), 
