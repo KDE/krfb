@@ -134,9 +134,7 @@ int main(int argc, char *argv[])
 
 		config = new Configuration(KRFB_INVITATION_MODE);
 		config->showInvitationDialog();
-		QObject::connect(config, SIGNAL(invitationFinished()),
-				 &app, SLOT(quit()));
-		return app.exec();
+		return 0;
 	}
 	fdString = args->getOption(ARG_KINETD);
 	config = new Configuration(KRFB_KINETD_MODE);	

@@ -194,6 +194,12 @@
         <receiver>ManageInvitationsDialog</receiver>
         <slot>listSelectionChanged()</slot>
     </connection>
+    <connection>
+        <sender>closeButton</sender>
+        <signal>clicked()</signal>
+        <receiver>ManageInvitationsDialog</receiver>
+        <slot>accept()</slot>
+    </connection>
 </connections>
 <includes>
     <include location="global" impldecl="in declaration">klistview.h</include>

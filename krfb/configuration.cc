@@ -32,35 +32,17 @@
 #include <qlineedit.h>
 #include <qcheckbox.h>
 
-ManageInvitationsDialog2::ManageInvitationsDialog2() :
-  ManageInvitationsDialog(0, 0, false, WShowModal)
-{ }
-void ManageInvitationsDialog2::closeEvent(QCloseEvent *)
-{ emit closed(); }
-
-InvitationDialog2::InvitationDialog2() :
-  InvitationDialog(0, 0, false, WShowModal)
-{ }
-void InvitationDialog2::closeEvent(QCloseEvent *)
-{ emit closed(); }
-
-PersonalInvitationDialog2::PersonalInvitationDialog2() :
-  PersonalInvitationDialog(0, 0, false, WShowModal)
-{ }
-void PersonalInvitationDialog2::closeEvent(QCloseEvent *)
-{ emit closed(); }
-
-
 Configuration::Configuration(krfb_mode mode) :
 	m_mode(mode),
+	invMngDlg(0, 0, true),
+	invDlg(0, 0, true),
+	persInvDlg(0, 0, true),
 	portNum(-1)
 {
 	loadFromKConfig();
 	saveToDialogs();
 	doKinetdConf();
 
-	connect(invMngDlg.closeButton, SIGNAL(clicked()), SLOT(invMngDlgClosed()));
-	connect(&invMngDlg, SIGNAL(closed()), SLOT(invMngDlgClosed()));
 	connect(invMngDlg.newPersonalInvitationButton, SIGNAL(clicked()), 
 		SLOT(showPersonalInvitationDialog()));
 	connect(invMngDlg.newEmailInvitationButton, SIGNAL(clicked()), SLOT(inviteEmail()));
@@ -69,8 +51,6 @@ Configuration::Configuration(krfb_mode mode) :
 	invMngDlg.listView->setSelectionMode(QListView::Extended);
 	invMngDlg.listView->setMinimumSize(QSize(400, 100)); // QTs size is much to small
 
-	connect(invDlg.closeButton, SIGNAL(clicked()), SLOT(invDlgClosed()));
-	connect(&invDlg, SIGNAL(closed()), SLOT(invDlgClosed()));
 	connect(invDlg.createInvitationButton, SIGNAL(clicked()),
 		SLOT(showPersonalInvitationDialog()));
 	connect(invDlg.createInvitationEMailButton, SIGNAL(clicked()),
@@ -81,9 +61,6 @@ Configuration::Configuration(krfb_mode mode) :
 	connect(this, SIGNAL(invitationNumChanged(int)), 
 		&invMngDlg, SLOT(listSizeChanged(int)));
         emit invitationNumChanged(invitationList.size());
-
-	connect(persInvDlg.closeButton, SIGNAL(clicked()), SLOT(persInvDlgClosed()));
-	connect(&persInvDlg, SIGNAL(closed()), SLOT(persInvDlgClosed()));
 
 	connect(&refreshTimer, SIGNAL(timeout()), SLOT(refreshTimeout()));
 	refreshTimer.start(1000*60);
@@ -367,11 +344,7 @@ int Configuration::preferredPort() const
 void Configuration::showManageInvitationsDialog() {
         loadFromKConfig();
 	saveToDialogs();
-	invMngDlg.show();
-}
-
-void Configuration::invMngDlgClosed() {
-	invMngDlg.hide();
+	invMngDlg.exec();
 }
 
 void Configuration::invMngDlgDeleteOnePressed() {
@@ -399,17 +372,9 @@ void Configuration::invMngDlgDeleteAllPressed() {
 ////////////// invitation dialog //////////////////////////
 
 void Configuration::showInvitationDialog() {
-	invDlg.show();
-}
-
-void Configuration::invDlgClosed() {
-	closeInvDlg();
+	invDlg.exec();
 	emit invitationFinished();
-}
-
-void Configuration::closeInvDlg() {
 	saveToKConfig();
-	invDlg.hide();
 }
 
 void Configuration::changeInvDlgNum(int newNum) {
@@ -431,11 +396,8 @@ void Configuration::showPersonalInvitationDialog() {
 	persInvDlg.passwordLabel->setText(inv.password());
 	persInvDlg.expirationLabel->setText(
 		inv.expirationTime().toString(Qt::LocalDate));
-	persInvDlg.show();
-}
 
-void Configuration::persInvDlgClosed() {
-	persInvDlg.hide();
+	persInvDlg.exec();
 	invDlg.createInvitationButton->setEnabled(true);
 	invMngDlg.newPersonalInvitationButton->setEnabled(true);
 }

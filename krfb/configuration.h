@@ -37,30 +37,6 @@ enum krfb_mode {
 	KRFB_CONFIGURATION_MODE
 };
 
-class ManageInvitationsDialog2 : public ManageInvitationsDialog {
-	Q_OBJECT
-public:
-	ManageInvitationsDialog2();
-	virtual void closeEvent(QCloseEvent *);
-signals:
-	void closed();
-};
-class InvitationDialog2 : public InvitationDialog {
-	Q_OBJECT
-public:
-	InvitationDialog2();
-	virtual void closeEvent(QCloseEvent *);
-signals:
-	void closed();
-};
-class PersonalInvitationDialog2 : public PersonalInvitationDialog {
-	Q_OBJECT
-public:
-	PersonalInvitationDialog2();
-	virtual void closeEvent(QCloseEvent *);
-signals:
-	void closed();
-};
 
 /**
  * This class stores the app's configuration, manages the
@@ -121,9 +97,9 @@ private:
 
 	krfb_mode m_mode;
 
-	ManageInvitationsDialog2 invMngDlg;
-	InvitationDialog2 invDlg;
-	PersonalInvitationDialog2 persInvDlg;
+	ManageInvitationsDialog invMngDlg;
+	InvitationDialog invDlg;
+	PersonalInvitationDialog persInvDlg;
 	QTimer refreshTimer;
 
 	bool askOnConnectFlag;
@@ -138,14 +114,10 @@ private:
 private slots:
         void refreshTimeout();
 
-	void invMngDlgClosed();
 	void invMngDlgDeleteOnePressed();
 	void invMngDlgDeleteAllPressed();
 
-	void invDlgClosed();
 	void changeInvDlgNum(int newNum);
-
-	void persInvDlgClosed();
 };
 
 #endif
