@@ -94,6 +94,7 @@ class XUpdateScanner
 	int bitsPerPixel, bytesPerLine;
 	unsigned int tileWidth, tileHeight;
 	unsigned int count;
+	bool useShm;
 	
 	XImage *scanline;
 	XShmSegmentInfo shminfo_scanline;

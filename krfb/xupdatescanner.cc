@@ -34,6 +34,7 @@
 #include <sys/types.h>
 #include <sys/ipc.h>
 #include <sys/shm.h>
+#include <stdlib.h>
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
 #include <X11/extensions/XShm.h>
@@ -85,23 +86,42 @@ XUpdateScanner::XUpdateScanner(Display *_dpy,
 	scanline(NULL),
 	tile(NULL)
 {
-	tile = XShmCreateImage(dpy,
-			       DefaultVisual( dpy, 0 ),
-			       bitsPerPixel,
-			       ZPixmap,
-			       NULL,
-			       &shminfo_tile,
-			       tileWidth,
-			       tileHeight);
+	useShm = XShmQueryExtension(dpy);
 
-	shminfo_tile.shmid = shmget(IPC_PRIVATE,
-				    tile->bytes_per_line * tile->height,
-				    IPC_CREAT | 0777);
-	shminfo_tile.shmaddr = tile->data = (char *) 
-		shmat(shminfo_tile.shmid, 0, 0);
-	shminfo_tile.readOnly = False;
+	if (useShm) {
+		tile = XShmCreateImage(dpy,
+				       DefaultVisual( dpy, 0 ),
+				       bitsPerPixel,
+				       ZPixmap,
+				       NULL,
+				       &shminfo_tile,
+				       tileWidth,
+				       tileHeight);
+		
+		shminfo_tile.shmid = shmget(IPC_PRIVATE,
+					    tile->bytes_per_line * tile->height,
+					    IPC_CREAT | 0777);
+		shminfo_tile.shmaddr = tile->data = (char *) 
+			shmat(shminfo_tile.shmid, 0, 0);
+		shminfo_tile.readOnly = False;
 
-	XShmAttach(dpy, &shminfo_tile);
+		XShmAttach(dpy, &shminfo_tile);
+	}
+	else {
+		int tlen = tileWidth*(bitsPerPixel/8);
+		void *data = malloc(tlen*tileHeight);
+		
+		tile = XCreateImage(dpy,
+				    DefaultVisual(dpy, 0),
+				    bitsPerPixel,
+				    ZPixmap,
+				    0,
+				    (char*)data,
+				    tileWidth,
+				    tileHeight,
+				    8,
+				    tlen);
+	}
 
 	tilesX = (width + tileWidth - 1) / tileWidth;
 	tilesY = (height + tileHeight - 1) / tileHeight;
@@ -112,23 +132,39 @@ XUpdateScanner::XUpdateScanner(Display *_dpy,
 	for (i = 0; i < tilesX * tilesY; i++) 
 		tileMap[i] = false;
 
-	scanline = XShmCreateImage(dpy,
-				   DefaultVisual(dpy, 0),
-				   bitsPerPixel,
-				   ZPixmap,
-				   NULL,
-				   &shminfo_scanline,
-				   width,
-				   1);
+	if (useShm) {
+		scanline = XShmCreateImage(dpy,
+					   DefaultVisual(dpy, 0),
+					   bitsPerPixel,
+					   ZPixmap,
+					   NULL,
+					   &shminfo_scanline,
+					   width,
+					   1);
+		
+		shminfo_scanline.shmid = shmget(IPC_PRIVATE,
+						scanline->bytes_per_line,
+						IPC_CREAT | 0777);
+		shminfo_scanline.shmaddr = scanline->data = (char *) 
+			shmat( shminfo_scanline.shmid, 0, 0 );
+		shminfo_scanline.readOnly = False;
 
-	shminfo_scanline.shmid = shmget(IPC_PRIVATE,
-					scanline->bytes_per_line,
-					IPC_CREAT | 0777);
-	shminfo_scanline.shmaddr = scanline->data = (char *) 
-		shmat( shminfo_scanline.shmid, 0, 0 );
-	shminfo_scanline.readOnly = False;
-
-	XShmAttach(dpy, &shminfo_scanline);
+		XShmAttach(dpy, &shminfo_scanline);
+	}
+	else {
+		int slen = width*(bitsPerPixel/8);
+		void *data = malloc(slen);
+		scanline = XCreateImage(dpy,
+					DefaultVisual(dpy, 0),
+					bitsPerPixel,
+					ZPixmap,
+					0,
+					(char*)data,
+					width,
+					1,
+					8,
+					slen);
+	}
 
 	for (int i = 0; i < MAX_RECENT_HITS; i++)
 		recentHitScanlines[i] = i;
@@ -137,16 +173,24 @@ XUpdateScanner::XUpdateScanner(Display *_dpy,
 
 XUpdateScanner::~XUpdateScanner()
 {
-	XShmDetach(dpy, &shminfo_scanline);
-	XDestroyImage(scanline);
-	shmdt(shminfo_scanline.shmaddr);
-	shmctl(shminfo_scanline.shmid, IPC_RMID, 0);
+	if (useShm) {
+		XShmDetach(dpy, &shminfo_scanline);
+		XDestroyImage(scanline);
+		shmdt(shminfo_scanline.shmaddr);
+		shmctl(shminfo_scanline.shmid, IPC_RMID, 0);
+		XShmDetach(dpy, &shminfo_tile);
+		XDestroyImage(tile);
+		shmdt(shminfo_tile.shmaddr);
+		shmctl(shminfo_tile.shmid, IPC_RMID, 0);
+	}
+	else {
+		free(tile->data);
+		free(scanline->data);
+		XDestroyImage(scanline);
+		XDestroyImage(tile);
+	}
 	delete tileMap;
         delete tileRegionMap;
-	XShmDetach(dpy, &shminfo_tile);
-	XDestroyImage(tile);
-	shmdt(shminfo_tile.shmaddr);
-	shmctl(shminfo_tile.shmid, IPC_RMID, 0);
 }
 
 
@@ -161,12 +205,18 @@ bool XUpdateScanner::copyTile(int x, int y, int tx, int ty)
 	if (maxHeight > tileHeight) 
 		maxHeight = tileHeight;
 
-	if ((maxWidth == tileWidth) && (maxHeight == tileHeight)) {
-		XShmGetImage(dpy, window, tile, x, y, AllPlanes);
-	} else {
+	if (useShm) {
+		if ((maxWidth == tileWidth) && (maxHeight == tileHeight)) {
+			XShmGetImage(dpy, window, tile, x, y, AllPlanes);
+		} else {
+			XGetSubImage(dpy, window, x, y, maxWidth, maxHeight, 
+				     AllPlanes, ZPixmap, tile, 0, 0);
+		}
+	}
+	else
 		XGetSubImage(dpy, window, x, y, maxWidth, maxHeight, 
 			     AllPlanes, ZPixmap, tile, 0, 0);
-	}
+
 	unsigned int line;
 	int pixelsize = bitsPerPixel >> 3;
 	unsigned char *src = (unsigned char*) tile->data;
@@ -348,8 +398,11 @@ void XUpdateScanner::testScanline(int y, bool rememberHits) {
 
 	int x = 0;
 	bool hit = false;
-	XShmGetImage(dpy, window, scanline, 0, y, AllPlanes);
-	
+	if (useShm)
+		XShmGetImage(dpy, window, scanline, 0, y, AllPlanes);
+	else
+		XGetSubImage(dpy, window, 0, y, width, 1, 
+			     AllPlanes, ZPixmap, scanline, 0, 0);
 
 	while (x < width) {
 		int pixelsize = bitsPerPixel >> 3;
