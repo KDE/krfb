@@ -4,10 +4,14 @@ Comment=KInetD
 
 [IncomingConnection]
 Name=IncomingConnection
+Name[da]=IndkommendeForbindelse
 Comment=Received incoming connection
+Comment[da]=Modtog indkommende forbindelse
 default_presentation=4
 
 [ProcessFailed]
 Name=ProcessFailed
+Name[da]=ProcesMislykkedes
 Comment=Could not call process to handle connection
+Comment[da]=Kunne ikke kalde proces til at håndtere forbindelse
 default_presentation=4
