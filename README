@@ -11,8 +11,7 @@ x0rfbserver left. Since version 0.6 it uses libvncserver
 
 
 Guide to documentation:
-ROADMAP - KRfb roadmap, progress and future features
-TODO - unscheduled things to be done
+TODO - things to be done
 INSTALL - Very short installation instructions
 NOTES - reasons for various decisions
 DCOP-INTERFACE - short documentation of the DCOP interface

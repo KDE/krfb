@@ -6,26 +6,22 @@ Comments on various aspects of KRfb:
     on the telephone or using VoIP.
   * a user who wants to show something to a friend, so he lets his friend
     connect to his computer
-  * (advanced use case) somebody with several computers that are running
-    GUIs want to control them.
+  * (advanced use case) somebody with several computers, that are running
+    GUIs, wants to control them.
 - cases 1&2 are probably more mainstream and more important for novice users,
   so KRfb is pre-configured for them. Case 3 is for advanced users and
   therefore a little bit more difficult to configure.
 - design goal of KRfb is to make it as easy to use as possible. I tried to
   limit functionality whereever possible.
-- the newconnection-dialog is extra large and has the pixmap on the left
+- the new-connection-dialog is extra large and has the pixmap on the left
   side to capture the attention of the user before allowing a connection.
 - the RFBController class is a mess. The interactions between the threaded, 
-  callback-using libvncserver and the event-driven, single thread qt GUI is 
+  callback-using libvncserver and the event-driven, single thread qt GUI are
   quite complicated and I can only hope that it works.
 - most limitations and problems of KRfb are caused either by limitations of
   Rfb (for example no proper authentication of users, no encryption) or
-  by lack of a framework in KDE or Linux in general (no discovery of running
-  KRfb servers, no way to connect through a NAT device). In the next months I am going
-  to concentrate on improving the latter.
-
-Change the following files when releasing a new version:
-- krfb/main.cpp: change the VERSION macro
-- kcm_krfb/kcm_krfb.cpp: change the VERSION macro
+  by lack of a framework in Linux in general (no way to connect through a 
+  NAT device). In the next months I am going to concentrate on improving the 
+  latter.
 
 tim@tjansen.de
