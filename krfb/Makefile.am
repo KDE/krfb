@@ -28,7 +28,7 @@ lnk_DATA = krfb.desktop
 appdir = $(kde_datadir)/krfb
 app_DATA = eventsrc
 
-KDE_ICON = AUTO
+KDE_ICON = krfb
 
 INCLUDES= -I$(top_srcdir)/krfb/libvncserver $(all_includes)
 
