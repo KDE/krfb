@@ -21,6 +21,9 @@
 #endif
 
 #include <sys/types.h>
+#ifdef __osf__
+typedef int socklen_t;
+#endif
 #ifndef WIN32
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -388,7 +391,7 @@ void defaultSetXCutText(char* text, int len, rfbClientPtr cl)
 
 /* TODO: add a nice VNC or RFB cursor */
 
-#if defined(WIN32) || defined(sparc) || defined(_AIX)
+#if defined(WIN32) || defined(sparc) || defined(_AIX) || defined(__osf__)
 static rfbCursor myCursor = 
 {
    "\000\102\044\030\044\102\000",

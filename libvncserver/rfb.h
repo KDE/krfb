@@ -43,7 +43,9 @@ typedef unsigned short CARD16;
 typedef unsigned int CARD32;
 typedef CARD32 Pixel;
 /* typedef CARD32 KeySym; */
+#ifndef __osf__
 typedef unsigned long KeySym;
+#endif
 #define SIGNED signed
 /* for some strange reason, "typedef signed char Bool;" yields a four byte
    signed int on IRIX, but only for rfbserver.o!!! */
@@ -91,7 +93,12 @@ typedef unsigned long KeySym;
 #undef Bool
 #define Bool int
 #else
+#ifdef __osf__
+#include <machine/endian.h>
+#define _BYTE_ORDER BYTE_ORDER
+#else
 #include <sys/endian.h>
+#endif
 #endif
 
 #ifndef _BYTE_ORDER

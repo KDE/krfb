@@ -57,6 +57,9 @@
 #include <unistd.h>
 #include <arpa/inet.h>
 #endif
+#if defined(__osf__)
+typedef int socklen_t;
+#endif
 #if defined(__linux__) && defined(NEED_TIMEVAL)
 struct timeval 
 {

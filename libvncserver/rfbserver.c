@@ -37,6 +37,9 @@
 #include <arpa/inet.h>
 #endif
 #include <sys/types.h>
+#ifdef __osf__
+typedef int socklen_t;
+#endif
 
 #ifdef CORBA
 #include <vncserverctrl.h>

@@ -38,6 +38,9 @@
 #endif
 #include <fcntl.h>
 #include <errno.h>
+#ifdef __osf__
+typedef int socklen_t;
+#endif
 
 #ifdef USE_LIBWRAP
 #include <tcpd.h>
