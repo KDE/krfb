@@ -24,10 +24,14 @@
 #ifndef KINETADDR_H
 #define KINETADDR_H
 
-#include <netinet/in.h>
 #include <sys/types.h>
+#include <netinet/in.h>
 
 #include <arpa/inet.h>
+
+#if defined(__FreeBSD__)
+#include <sys/socket.h>
+#endif
 
 #include <qobject.h>
 #include <qcstring.h>
