@@ -28,18 +28,25 @@
 #include <klocale.h>
 
 PortListener::PortListener(KService::Ptr s, KConfig *config) :
+	m_port(-1),
 	m_socket(0),
 	m_config(config)
 {
 	loadConfig(s);
 
-	if (m_enabled)
+	if (m_valid && m_enabled)
 		acquirePort();
-	else
-		m_port = -1;
 }
 
-void PortListener::acquirePort() {
+bool PortListener::acquirePort() {
+kdDebug() << "acquire, base="<<m_portBase<<" range="<<m_autoPortRange<<endl;
+	if (m_socket) {
+		if ((m_port >= m_portBase) &&
+		    (m_port < (m_portBase + m_autoPortRange)))
+			return true;
+		else
+			delete m_socket;
+	}
 	m_port = m_portBase;
 	m_socket = new KServerSocket(m_port, false);
 	while (!m_socket->bindAndListen()) {
@@ -48,16 +55,16 @@ void PortListener::acquirePort() {
 			kdDebug() << "Kinetd cannot load service "<<m_serviceName
 				  <<": unable to get port" << endl;
 			m_port = -1;
-			m_enabled = false;
 			delete m_socket;
 			m_socket = 0;
-			return;
+			return false;
 		}
 		delete m_socket;
 		m_socket = new KServerSocket(m_port, false);
 	}
 	connect(m_socket, SIGNAL(accepted(KSocket*)),
 		SLOT(accepted(KSocket*)));
+	return true;
 }
 
 void PortListener::loadConfig(KService::Ptr s) {
@@ -102,9 +109,16 @@ void PortListener::loadConfig(KService::Ptr s) {
 	if (vmultiInstance.isValid())
 		m_multiInstance = vmultiInstance.toBool();
 
+	m_defaultPortBase = m_portBase;
+	m_defaultAutoPortRange = m_autoPortRange;
+
 	m_config->setGroup("ListenerConfig");
 	m_enabled = m_config->readBoolEntry("enabled_" + m_serviceName, 
 					    m_enabled);
+	m_portBase = m_config->readNumEntry("port_base_" + m_serviceName, 
+					    m_portBase);
+	m_autoPortRange = m_config->readNumEntry("auto_port_range_" + m_serviceName, 
+						 m_autoPortRange);
 	QDateTime nullTime;
 	m_expirationTime = m_config->readDateTimeEntry("enabled_expiration_"+m_serviceName, 
 						     &nullTime);
@@ -148,6 +162,30 @@ bool PortListener::isEnabled() {
 
 int PortListener::port() {
 	return m_port;
+}
+
+bool PortListener::setPort(int port, int autoPortRange) {
+	m_config->setGroup("ListenerConfig");
+	if (port > 0) {
+		m_portBase = port;
+		m_autoPortRange = autoPortRange;
+
+		m_config->writeEntry("port_base_" + m_serviceName, m_portBase);
+		m_config->writeEntry("auto_port_range_"+m_serviceName, m_autoPortRange);
+	}
+	else {
+		m_portBase = m_defaultPortBase;
+		m_autoPortRange = m_defaultAutoPortRange;		
+
+		m_config->deleteEntry("port_base_" + m_serviceName);
+		m_config->deleteEntry("auto_port_range_"+m_serviceName);
+	}
+kdDebug() << "set port, new base="<<m_portBase<<" range="<<m_autoPortRange<<endl;
+	m_config->sync();
+	if (m_enabled)
+		return acquirePort();
+	else
+		return false;
 }
 
 void PortListener::setEnabled(bool e) {
@@ -204,7 +242,8 @@ KInetD::KInetD(QCString &n) :
 {
 	m_config = new KConfig("kinetdrc");
 	m_portListeners.setAutoDelete(true);
-	connect(&m_expirationTimer, SIGNAL(timeout()), SLOT(setTimer()));
+	connect(&m_expirationTimer, SIGNAL(timeout()), SLOT(setExpirationTimer()));
+	connect(&m_portRetryTimer, SIGNAL(timeout()), SLOT(portRetryTimer()));
 	loadServiceList();
 }
 
@@ -224,16 +263,45 @@ void KInetD::loadServiceList()
 			m_portListeners.append(pl);
 	}
 
-	setTimer();
+	setExpirationTimer();
+	setPortRetryTimer(true);
 }
 
-void KInetD::setTimer() {
+void KInetD::setExpirationTimer() {
 	QDateTime nextEx = getNextExpirationTime(); // disables expired portlistener!
 	if (!nextEx.isNull())
 		m_expirationTimer.start(QDateTime::currentDateTime().secsTo(nextEx)*1000 + 30000,
 			false);
 	else
 		m_expirationTimer.stop();
+}
+
+void KInetD::portRetryTimer() {
+	setPortRetryTimer(true); 
+}
+
+void KInetD::setPortRetryTimer(bool retry) {
+	int unmappedPorts = 0;
+
+	PortListener *pl = m_portListeners.first();
+	while (pl) {
+		if (pl->isEnabled() && (pl->port() == -1)) 
+			if (retry) {
+				if (!pl->acquirePort())
+					unmappedPorts++;
+			}
+			else if (pl->port() == -1)
+				unmappedPorts++;
+		pl = m_portListeners.next();
+	}
+
+if (unmappedPorts > 0)
+kdDebug() << "re-check timer set"<<endl;
+
+	if (unmappedPorts > 0)
+		m_portRetryTimer.start(30000, false);
+	else
+		m_portRetryTimer.stop();
 }
 
 PortListener *KInetD::getListenerByName(QString name)
@@ -294,6 +362,17 @@ int KInetD::port(QString service)
 	return pl->port();
 }
 
+bool KInetD::setPort(QString service, int port, int autoPortRange)
+{
+	PortListener *pl = getListenerByName(service);
+	if (!pl)
+		return false;
+
+	bool s = pl->setPort(port, autoPortRange);
+	setPortRetryTimer(false);
+	return s;
+}
+
 bool KInetD::isInstalled(QString service)
 {
 	PortListener *pl = getListenerByName(service);
@@ -307,7 +386,7 @@ void KInetD::setEnabled(QString service, bool enable)
 		return;
 
 	pl->setEnabled(enable);
-	setTimer();
+	setExpirationTimer();
 }
 
 void KInetD::setEnabled(QString service, QDateTime expiration)
@@ -317,7 +396,7 @@ void KInetD::setEnabled(QString service, QDateTime expiration)
 		return;
 
 	pl->setEnabled(expiration);
-	setTimer();
+	setExpirationTimer();
 }
 
 

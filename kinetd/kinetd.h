@@ -33,7 +33,9 @@ class PortListener : public QObject {
 private:
 	bool m_valid;
 	QString m_serviceName;
-	int m_port, m_portBase, m_autoPortRange;
+	int m_port;
+	int m_portBase, m_autoPortRange;
+	int m_defaultPortBase, m_defaultAutoPortRange;
 	bool m_multiInstance;
 	QString m_execPath;
 	QString m_argument;
@@ -46,12 +48,12 @@ private:
 	KConfig *m_config;
 
 	void loadConfig(KService::Ptr s);
-	void acquirePort();
 	void setEnabledInternal(bool e, const QDateTime &ex);
 public:
 	PortListener(KService::Ptr s, KConfig *c);
 	~PortListener();
 
+	bool acquirePort();
 	bool isValid();
 	QString name();
 	void setEnabled(bool enabled);
@@ -59,6 +61,7 @@ public:
 	QDateTime expiration();
 	bool isEnabled();
 	int port();
+	bool setPort(int port = -1, int autoProbeRange = 1);
 
 private slots:
 	void accepted(KSocket*);
@@ -101,13 +104,24 @@ k_dcop:
 	 */
 	void setEnabled(QString service, QDateTime expiration);
 
-
 	/**
 	 * Returns the port of the service, or -1 if not listening.
 	 * @param service name of a service as specified in its .desktop file
 	 * @return the port or -1 if no port used or service does not exist
 	 */
 	int port(QString service);
+
+	/**
+	 * Sets the port of the service, and possibly a range of ports to try.
+	 * It will return true if a port could be found. If it didnt find one but is
+	 * enabled it will start a timer that probes that port every 30s.
+	 * @param service name of a service as specified in its .desktop file
+	 * @param port the first port number to try or -1 to restore defaults
+	 * @param autoPortRange the number of ports to try
+	 * @return true if a port could be found or service is disabled, false 
+	 *          otherwise. 
+	 */
+	bool setPort(QString service, int port = -1, int autoPortRange = 1);
 
 	/**
 	 * Tests whether the given service is installed..
@@ -118,13 +132,16 @@ k_dcop:
 
  private:
 	QDateTime getNextExpirationTime();
+	void setPortRetryTimer(bool retry);
 
 	KConfig *m_config;
 	QPtrList<PortListener> m_portListeners;
 	QTimer m_expirationTimer;
+	QTimer m_portRetryTimer;
 
  private slots:
-	void setTimer();
+	void setExpirationTimer();
+	void portRetryTimer();
 
  public:
 	KInetD(QCString &n);
