@@ -53,6 +53,12 @@
                         <property name="name">
                             <cstring>GroupBox1</cstring>
                         </property>
+                        <property name="frameShape">
+                            <enum>Box</enum>
+                        </property>
+                        <property name="frameShadow">
+                            <enum>Sunken</enum>
+                        </property>
                         <property name="title">
                             <string>Invitations</string>
                         </property>
@@ -224,7 +230,7 @@
                         </vbox>
                     </widget>
                     <spacer>
-                        <property name="name" stdset="0">
+                        <property name="name">
                             <cstring>Spacer3</cstring>
                         </property>
                         <property name="orientation">
@@ -232,12 +238,6 @@
                         </property>
                         <property name="sizeType">
                             <enum>Expanding</enum>
-                        </property>
-                        <property name="sizeHint">
-                            <size>
-                                <width>20</width>
-                                <height>20</height>
-                            </size>
                         </property>
                     </spacer>
                 </vbox>
@@ -347,7 +347,7 @@ Most VNC clients use a display number instead of the actual port. This display n
                         </vbox>
                     </widget>
                     <spacer>
-                        <property name="name" stdset="0">
+                        <property name="name">
                             <cstring>Spacer4</cstring>
                         </property>
                         <property name="orientation">
@@ -355,12 +355,6 @@ Most VNC clients use a display number instead of the actual port. This display n
                         </property>
                         <property name="sizeType">
                             <enum>Expanding</enum>
-                        </property>
-                        <property name="sizeHint">
-                            <size>
-                                <width>20</width>
-                                <height>20</height>
-                            </size>
                         </property>
                     </spacer>
                 </vbox>
@@ -379,6 +373,24 @@ Most VNC clients use a display number instead of the actual port. This display n
         <signal>toggled(bool)</signal>
         <receiver>portInputFrame</receiver>
         <slot>setDisabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>allowUninvitedCB</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>confirmConnectionsCB</receiver>
+        <slot>setEnabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>allowUninvitedCB</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>allowDesktopControlCB</receiver>
+        <slot>setEnabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>allowUninvitedCB</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>Frame4</receiver>
+        <slot>setEnabled(bool)</slot>
     </connection>
 </connections>
 <tabstops>
