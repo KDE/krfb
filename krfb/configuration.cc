@@ -131,6 +131,45 @@ int Configuration::port() const {
 	return (portNumber < 100) ? (portNumber + 5900) : portNumber;
 }
 
+void Configuration::setOnceConnection(bool oneConnection)
+{
+        oneConnectionFlag = oneConnection;
+        saveToKConfig();
+        saveToDialog();
+}
+
+void Configuration::setAskOnConnect(bool askOnConnect)
+{
+        askOnConnectFlag = askOnConnect;
+        saveToKConfig();
+        saveToDialog();
+}
+
+void Configuration::setAllowDesktopControl(bool allowDesktopControl)
+{
+        allowDesktopControlFlag = allowDesktopControl;
+        saveToKConfig();
+        saveToDialog();
+}
+
+void Configuration::setPassword(QString password)
+{
+        passwordString = password;
+        saveToKConfig();
+        saveToDialog();
+}
+
+void Configuration::setPort(int port)
+{
+        if ((port >= 5900) && (port < 6000))
+                portNumber = port-5900;
+        else
+                portNumber = port;
+        emit portChanged();
+        saveToKConfig();
+        saveToDialog();
+}
+
 void Configuration::showDialog() {
 	confDlg.show();
 }

@@ -21,7 +21,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 
-#include <kapp.h>
+#include <kapplication.h>
 #include <kdebug.h>
 #include <kmessagebox.h>
 #include <klocale.h>
@@ -119,6 +119,31 @@ KeyboardEvent::KeyboardEvent(bool d, KeySym k) :
 	}
 }
 
+void KeyboardEvent::initKeycodes() {
+	KeySym key,*keymap;
+	int i,j,minkey,maxkey,syms_per_keycode;
+	
+	memset(modifiers,-1,sizeof(modifiers));
+	
+	XDisplayKeycodes(dpy,&minkey,&maxkey);
+	keymap=XGetKeyboardMapping(dpy,minkey,(maxkey - minkey + 1),&syms_per_keycode);
+	
+	for (i = minkey; i <= maxkey; i++)
+		for(j=0;j<syms_per_keycode;j++) {
+			key=keymap[(i-minkey)*syms_per_keycode+j];
+			if(key>=' ' && key<0x100 && i==XKeysymToKeycode(dpy,key)) {
+				keycodes[key]=i;
+				modifiers[key]=j;
+			}
+		}
+	
+	leftShiftCode = XKeysymToKeycode(dpy,XK_Shift_L);
+	rightShiftCode = XKeysymToKeycode(dpy,XK_Shift_R);
+	altGrCode = XKeysymToKeycode(dpy,XK_Mode_switch);
+	
+	XFree ((char *)keymap);
+}
+
 /* this function adjusts the modifiers according to mod (as from modifiers) and ModifierState */
 void KeyboardEvent::tweakModifiers(char mod, bool down) {
 	
@@ -145,31 +170,6 @@ void KeyboardEvent::tweakModifiers(char mod, bool down) {
 	if(!(ModifierState&ALTGR) && mod==2)
 		XTestFakeKeyEvent(dpy, altGrCode,
 					  down, CurrentTime);
-}
-
-void KeyboardEvent::initKeycodes() {
-	KeySym key,*keymap;
-	int i,j,minkey,maxkey,syms_per_keycode;
-	
-	memset(modifiers,-1,sizeof(modifiers));
-	
-	XDisplayKeycodes(dpy,&minkey,&maxkey);
-	keymap=XGetKeyboardMapping(dpy,minkey,(maxkey - minkey + 1),&syms_per_keycode);
-	
-	for (i = minkey; i <= maxkey; i++)
-		for(j=0;j<syms_per_keycode;j++) {
-			key=keymap[(i-minkey)*syms_per_keycode+j];
-			if(key>=' ' && key<0x100 && i==XKeysymToKeycode(dpy,key)) {
-				keycodes[key]=i;
-				modifiers[key]=j;
-			}
-		}
-	
-	leftShiftCode = XKeysymToKeycode(dpy,XK_Shift_L);
-	rightShiftCode = XKeysymToKeycode(dpy,XK_Shift_R);
-	altGrCode = XKeysymToKeycode(dpy,XK_Mode_switch);
-	
-	XFree ((char *)keymap);
 }
 
 void KeyboardEvent::exec() {

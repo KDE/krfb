@@ -1,17 +1,17 @@
 METASOURCES = AUTO
 
 # Code 
-noinst_LIBRARIES = kinetd.a
+noinst_LIBRARIES = libkinetd.a
 
-kinetd_a_SOURCES = kinetd.cpp
-kinetd_a_LDADD   = $(LIB_QT) $(LIB_KDECORE) $(LIB_KDEUI)
+libkinetd_a_SOURCES = kinetd.cpp kinetd.h
+libkinetd_a_LIBADD   = $(LIB_QT) $(LIB_KDECORE) $(LIB_KDEUI)
 
 # Services
 kdedir = $(kde_servicesdir)/kded
 kde_DATA = kdeprintd.desktop
 
 
-EXTRA_DIST = $(krfb_SOURCES) $(kde_DATA) kinetd.h
+EXTRA_DIST = $(libkinetd_a_SOURCES) $(kde_DATA)
 
 
 KDE_ICON = kinetd
@@ -19,8 +19,6 @@ KDE_ICON = kinetd
 # set the include path for X, qt and KDE
 INCLUDES= $(all_includes)
 
-# the library search path. 
-kinetd_a_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 
 CXXFLAGS = @CXXFLAGS@
 

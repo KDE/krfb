@@ -1,3 +1,8 @@
+2002-02-14  Tim Jansen  <tjansen@tjansen.de>
+
+	* krfb/krfbiface.h: integrated DCOP interface patch by 
+          Ian Reinhart Geiser <geiseri@kde.org>. Thanks!
+
 2002-02-04  Tim Jansen  <tim@tjansen.de>
 
 	* replaced x0rfbserver's library with libvncserver

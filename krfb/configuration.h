@@ -49,9 +49,14 @@ public:
 	bool oneConnection() const;
 	bool askOnConnect() const; 
 	bool allowDesktopControl() const;
-
 	QString password() const;
 	int port() const;
+
+        void setOnceConnection(bool oneConnection);
+        void setAskOnConnect(bool askOnConnect);
+        void setAllowDesktopControl(bool allowDesktopControl);
+	void setPassword(QString password);
+	void setPort(int port);
 
 signals:
   	void portChanged();

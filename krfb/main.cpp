@@ -17,12 +17,13 @@
 
 #include "trayicon.h"
 #include "configuration.h"
+#include "krfbifaceimpl.h"
 #include "rfbcontroller.h"
 
 #include <kpixmap.h>
 #include <kaction.h>
 #include <kdebug.h>
-#include <kapp.h>
+#include <kapplication.h>
 #include <ksystemtray.h>
 #include <kcmdlineargs.h>
 #include <kaboutdata.h>
@@ -73,6 +74,7 @@ int main(int argc, char *argv[])
 	        "(c) 1999, AT&T Laboratories Cambridge\n",
                 0, "http://www.tjansen.de/krfb", "ml@tjansen.de");
 	aboutData.addAuthor("Tim Jansen", "", "tim@tjansen.de");
+        aboutData.addAuthor("Ian Reinhart Geiser", "DCOP interface", "geiseri@kde.org");
 	aboutData.addCredit("Johannes E. Schindelin", 
 			    I18N_NOOP("libvncserver"));
 	aboutData.addCredit("Const Kaplinsky", 
@@ -117,6 +119,7 @@ int main(int argc, char *argv[])
 
  	TrayIcon trayicon(new KAboutApplication(&aboutData), 
 			  config);
+	KRfbIfaceImpl dcopiface(config);
 	RFBController controller(config);
 
 	QObject::connect(&app, SIGNAL(lastWindowClosed()),
@@ -130,6 +133,12 @@ int main(int argc, char *argv[])
 
 	QObject::connect(&trayicon, SIGNAL(showConfigure()),
 			 config, SLOT(showDialog()));
+
+	QObject::connect(&dcopiface, SIGNAL(connectionClosed()),
+			 &controller, SLOT(closeConnection()));
+
+	QObject::connect(&dcopiface, SIGNAL(exitApp()),
+			 &controller, SLOT(quit()));
 
 	QObject::connect(config, SIGNAL(portChanged()),
 			 &controller, SLOT(rebind()));

@@ -1,7 +1,7 @@
 SUBDIRS = libvncserver krfb po doc
 
 EXTRA_DIST = admin AUTHORS COPYING ChangeLog INSTALL README TODO NOTES \
-             README_KDE3 krfb.lsm 
+             krfb.lsm 
 
 # not a GNU package. You can remove this line, if 
 # have all needed files, that a GNU package needs
