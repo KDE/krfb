@@ -1,5 +1,5 @@
 /*
- *  This file is part of the KDE libraries
+ *  KUser - represent a user/account
  *  Copyright (C) 2002 Tim Jansen <tim@tjansen.de>
  *
  *  $Id$

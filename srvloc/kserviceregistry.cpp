@@ -1,5 +1,5 @@
 /*
- *  This file is part of the KDE libraries
+ *  Interface to register SLP services.
  *  Copyright (C) 2002 Tim Jansen <tim@tjansen.de>
  *
  *  This library is free software; you can redistribute it and/or

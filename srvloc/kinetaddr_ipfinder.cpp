@@ -1,5 +1,5 @@
 /*
- *  This file is part of the KDE libraries
+ *  Find network adapter's IP address
  *  Copyright (C) 2002 Tim Jansen <tim@tjansen.de>
  *  based on code from KInetSocketAddress:
  *    Copyright (C) 2000,2001 Thiago Macieira <thiagom@mail.com>
