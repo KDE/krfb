@@ -49,7 +49,7 @@ static const char *description = I18N_NOOP("VNC-compatible server to share "
 static KCmdLineOptions options[] =
 {
 	{ ARG_KINETD " ", I18N_NOOP("Used for calling from kinetd."), 0},
-	{ 0, 0, 0 }
+	KCmdLineLastOption
 };
 
 void checkKInetd(bool &kinetdAvailable, bool &krfbAvailable) {
@@ -128,7 +128,7 @@ int main(int argc, char *argv[])
 		return 0;
 	}
 	fdString = args->getOption(ARG_KINETD);
-	config = new Configuration(KRFB_KINETD_MODE);	
+	config = new Configuration(KRFB_KINETD_MODE);
 	args->clear();
 
 	if ((!config->allowUninvitedConnections()) && (config->invitations().size() == 0)) {
