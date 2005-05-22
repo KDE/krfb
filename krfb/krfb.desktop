@@ -1,4 +1,4 @@
-# KDE Config File  
+# KDE Config File
 [Desktop Entry]
 Type=Application
 Exec=krfb -caption "%c" %i %m
@@ -13,6 +13,7 @@ GenericName[cs]=Sdílení pracovní plochy
 GenericName[cy]=Rhannu Penbwrdd
 GenericName[da]=Desktopdeling
 GenericName[de]=Arbeitsfläche freigeben
+GenericName[el]=Κοινή Χρήση Επιφάνειας Εργασίας
 GenericName[es]=Escritorio compartido
 GenericName[et]=Töölaua jagamine
 GenericName[eu]=Mahaigain partekatzea
@@ -22,6 +23,7 @@ GenericName[he]=שיתוף שולחנות עבודה
 GenericName[hu]=Munkaasztal-megosztás
 GenericName[is]=Skjáborðsmiðlun
 GenericName[it]=Condivisione desktop
+GenericName[lt]=Dalinimasis darbastaliu
 GenericName[mt]=Qsim tad-desktop
 GenericName[nl]=Bureaublad delen
 GenericName[pl]=Współdzielenie pulpitu

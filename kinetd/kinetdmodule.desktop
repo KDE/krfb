@@ -12,6 +12,7 @@ Name[cs]=Typ modulu KInetD
 Name[cy]=Math Modiwl KInetD
 Name[da]=KInetD-modultype
 Name[de]=KInetD Modultyp
+Name[el]=Τύπος Μονάδας KInetD
 Name[eo]=KInetD-modulotipo
 Name[es]=Tipo de módulo KInetD
 Name[et]=KInetD mooduli tüüp
@@ -27,6 +28,7 @@ Name[hu]=KInetD modultípus
 Name[is]=KInetD Module tegund
 Name[it]=Tipo modulo KInetD
 Name[ja]=KInetD モジュールタイプ
+Name[lt]=KInetD modulio tipas
 Name[mk]=Тип на модул за KInetD 
 Name[mn]=Модуль KInetD
 Name[ms]=Jenis Modul KInetD
@@ -83,7 +85,7 @@ Type=QString
 [PropertyDef::X-KDE-KINETD-multiInstance]
 Type=bool
 
-# if set, kinetd will register the given URL at the local SLP SA while 
+# if set, kinetd will register the given URL at the local SLP SA while
 # the port is open. It will register one URL for each IP address of the
 # host.
 # The following strings will be substituted:
@@ -105,14 +107,14 @@ Type=QString
 [PropertyDef::X-KDE-KINETD-serviceAttributes]
 Type=QString
 
-# the lifetime of a service in seconds. kinets will renew the service 
+# the lifetime of a service in seconds. kinets will renew the service
 # automatically. Max 65535, never use anything under 2 min. Something like
 # 5-20 minutes is a sane value for most desktop applications.
 [PropertyDef::X-KDE-KINETD-serviceLifetime]
 Type=int
 
-# if set, kinetd will announce service with given name on local network while 
-# the port is open. 
+# if set, kinetd will announce service with given name on local network while
+# the port is open.
 # The following strings will be substituted:
 # %h with the local IP address
 # %f with the user's full name
@@ -121,7 +123,7 @@ Type=int
 [PropertyDef::X-KDE-KINETD-DNSSD-Name]
 Type=QString
 
-# if kinetd announces service on network using DNS-SD, this string will be used as service 
+# if kinetd announces service on network using DNS-SD, this string will be used as service
 # type. It must be in form _yourservice._udp or _yourservice._tcp
 # it uses the same substitution rules as X-KDE-KINETD-DNSSD-Name
 
