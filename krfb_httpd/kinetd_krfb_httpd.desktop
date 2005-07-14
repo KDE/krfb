@@ -68,6 +68,7 @@ Comment[nl]=Een micro webserver voor krfb dat de VNC weergave-applet beschikbaar
 Comment[nn]=Ein ørliten http-nisse for krfb som hjelper visingsprogrammet for VNC.
 Comment[pl]=Mikroskopijny serwer HTTP dla KRfb obsługującego aplet przeglądarki VNC.
 Comment[pt]=Um micro-servidor de HTTP para o krfb que serve a 'applet' de visualização de VNC.
+Comment[pt_BR]=Um micro daemon de http, para o krfb, que serve o miniaplicativo de visualização do VNC.
 Comment[ru]=Микро-демон http для krfb, который обслуживает аплет просмотрщика VNC.
 Comment[sk]=Mikro http démon pre krfb ktorý ovláda prehliadací applet VNC.
 Comment[sl]=Mikro http strežnik za krfb, ki streže ogledovalnikom VNC.
