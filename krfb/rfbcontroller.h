@@ -30,6 +30,9 @@
 #include <qobject.h>
 #include <qtimer.h>
 #include <qmutex.h>
+//Added by qt3to4:
+#include <QCloseEvent>
+#include <Q3PtrList>
 
 #define HAVE_PTHREADS
 #include "rfb.h"
@@ -189,7 +192,7 @@ private:
 	XImage *framebufferImage;
 
 	QMutex asyncMutex;
-	QPtrList<VNCEvent> asyncQueue;
+	Q3PtrList<VNCEvent> asyncQueue;
 
 	bool disableBackgroundPending; // background, as desired by libvncserver
 	bool disableBackgroundState; // real background state

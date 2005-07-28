@@ -40,7 +40,7 @@
                 <cstring>kActiveLabel1</cstring>
             </property>
             <property name="focusPolicy">
-                <enum>NoFocus</enum>
+                <enum>Qt::NoFocus</enum>
             </property>
             <property name="text">
                 <string>KDE Desktop Sharing allows you to invite somebody at a remote location to watch and possibly control your desktop.
@@ -81,7 +81,7 @@
                 <bool>true</bool>
             </property>
             <property name="alignment">
-                <set>AlignTop</set>
+                <set>Qt::AlignTop</set>
             </property>
         </widget>
         <spacer row="4" column="3">
@@ -89,7 +89,7 @@
                 <cstring>spacer4</cstring>
             </property>
             <property name="orientation">
-                <enum>Horizontal</enum>
+                <enum>Qt::Horizontal</enum>
             </property>
             <property name="sizeType">
                 <enum>Expanding</enum>
@@ -120,7 +120,7 @@
                 <cstring>spacer5</cstring>
             </property>
             <property name="orientation">
-                <enum>Vertical</enum>
+                <enum>Qt::Vertical</enum>
             </property>
             <property name="sizeType">
                 <enum>Fixed</enum>
@@ -137,7 +137,7 @@
                 <cstring>spacer3</cstring>
             </property>
             <property name="orientation">
-                <enum>Horizontal</enum>
+                <enum>Qt::Horizontal</enum>
             </property>
             <property name="sizeType">
                 <enum>Expanding</enum>
@@ -173,7 +173,7 @@
                 <cstring>spacer2</cstring>
             </property>
             <property name="orientation">
-                <enum>Vertical</enum>
+                <enum>Qt::Vertical</enum>
             </property>
             <property name="sizeType">
                 <enum>MinimumExpanding</enum>

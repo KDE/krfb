@@ -13,5 +13,5 @@ noinst_HEADERS = kserviceregistry.h uuid.h \
                  getifaddrs.h kinetinterface.h kinetinterfacewatcher.h
 
 # set the include path for X, qt and KDE
-INCLUDES= $(all_includes)
+INCLUDES = $(all_includes)
 

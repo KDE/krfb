@@ -23,10 +23,12 @@
 #include <kapplication.h>
 #include <kmessagebox.h>
 #include <kprocess.h>
-#include <ksockaddr.h>
+#include <ksocketaddress.h>
 #include <kactivelabel.h>
 
 #include <qdatastream.h>
+//Added by qt3to4:
+#include <Q3ValueList>
 #include <dcopclient.h>
 #include <dcopref.h>
 
@@ -63,7 +65,7 @@ Configuration::Configuration(krfb_mode mode) :
 	connect(invMngDlg.newEmailInvitationButton, SIGNAL(clicked()), SLOT(inviteEmail()));
 	connect(invMngDlg.deleteOneButton, SIGNAL(clicked()), SLOT(invMngDlgDeleteOnePressed()));
 	connect(invMngDlg.deleteAllButton, SIGNAL(clicked()), SLOT(invMngDlgDeleteAllPressed()));
-	invMngDlg.listView->setSelectionMode(QListView::Extended);
+	invMngDlg.listView->setSelectionMode(Q3ListView::Extended);
 	invMngDlg.listView->setMinimumSize(QSize(400, 100)); // QTs size is much to small
 
 	connect(&invDlg, SIGNAL(createInviteClicked()),
@@ -124,7 +126,7 @@ void Configuration::setKInetdPort(int p) {
 }
 
 
-void Configuration::removeInvitation(QValueList<Invitation>::iterator it) {
+void Configuration::removeInvitation(Q3ValueList<Invitation>::iterator it) {
 	invitationList.remove(it);
 	save();
 }
@@ -140,7 +142,7 @@ void Configuration::doKinetdConf() {
 	}
 
 	QDateTime lastExpiration;
-	QValueList<Invitation>::iterator it = invitationList.begin();
+	Q3ValueList<Invitation>::iterator it = invitationList.begin();
 	while (it != invitationList.end()) {
 		Invitation &ix = (*it);
 		QDateTime t = ix.expirationTime();
@@ -213,7 +215,7 @@ void Configuration::saveToKConfig() {
 
 void Configuration::saveToDialogs() {
 	invalidateOldInvitations();
-	QValueList<Invitation>::iterator it = invitationList.begin();
+	Q3ValueList<Invitation>::iterator it = invitationList.begin();
 	while (it != invitationList.end()) {
 		Invitation &inv = *(it++);
 		if (!inv.getViewItem())
@@ -242,7 +244,7 @@ Invitation Configuration::createInvitation() {
 }
 
 void Configuration::invalidateOldInvitations() {
-	QValueList<Invitation>::iterator it = invitationList.begin();
+	Q3ValueList<Invitation>::iterator it = invitationList.begin();
 	while (it != invitationList.end()) {
 		if (!(*it).isValid())
 			it = invitationList.remove(it);
@@ -298,7 +300,7 @@ QString Configuration::password() const {
 	return passwordString;
 }
 
-QValueList<Invitation> &Configuration::invitations() {
+Q3ValueList<Invitation> &Configuration::invitations() {
 	return invitationList;
 }
 
@@ -369,7 +371,7 @@ void Configuration::showManageInvitationsDialog() {
 }
 
 void Configuration::invMngDlgDeleteOnePressed() {
-	QValueList<Invitation>::iterator it = invitationList.begin();
+	Q3ValueList<Invitation>::iterator it = invitationList.begin();
 	while (it != invitationList.end()) {
 		Invitation &ix = (*it);
 		KListViewItem *iv = ix.getViewItem();

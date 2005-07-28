@@ -3,7 +3,7 @@ void ManageInvitationsDialog::listSizeChanged(int i) {
 }
 
 void ManageInvitationsDialog::listSelectionChanged() {
-	QListViewItem *i = listView->firstChild();
+	Q3ListViewItem *i = listView->firstChild();
 	while(i) {
 		if (i->isSelected()) {
 			deleteOneButton->setEnabled(true);

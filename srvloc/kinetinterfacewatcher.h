@@ -24,8 +24,8 @@
 
 #include <kinetinterface.h>
 #include <qobject.h>
-#include <qvaluevector.h>
-#include <qcstring.h>
+#include <q3valuevector.h>
+#include <q3cstring.h>
 #include <qstring.h>
 
 

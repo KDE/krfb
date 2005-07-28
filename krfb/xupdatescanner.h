@@ -21,7 +21,7 @@
 #ifndef _hexonet_rfb_XUpdateScanner_h_
 #define _hexonet_rfb_XUpdateScanner_h_
 
-#include <qptrlist.h>
+#include <q3ptrlist.h>
 #include <X11/Xlib.h>
 #include <X11/extensions/XShm.h>
 
@@ -76,15 +76,15 @@ class XUpdateScanner
 
 	// hitList: returns list of changes
 	// ptrY: ptrY: position of the cursor
-	void searchUpdates( QPtrList<Hint> &hintList, int ptrY);
+	void searchUpdates( Q3PtrList<Hint> &hintList, int ptrY);
 
  private:
 	void testScanline(int y, bool rememberHits);
 	bool copyTile(int x, int y, int tx, int ty);
 	void copyAllTiles();
 	void flushHint(int x, int y, int &x0, Hint &hint,
-		       QPtrList<Hint> &hintList);
-	void createHints(QPtrList<Hint> &hintList);
+		       Q3PtrList<Hint> &hintList);
+	void createHints(Q3PtrList<Hint> &hintList);
 	void addTileToHint(int x, int y, int th, Hint &hint);
 	void createHintFromTile(int x, int y, int th, Hint &hint);
 

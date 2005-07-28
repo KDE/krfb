@@ -22,8 +22,8 @@
 #ifndef KINETINTERFACE_H
 #define KINETINTERFACE_H
 
-#include <qvaluevector.h>
-#include <qcstring.h>
+#include <q3valuevector.h>
+#include <q3cstring.h>
 #include <qstring.h>
 
 
@@ -177,7 +177,7 @@ public:
    *                        name
    * @return the list of IP addresses
    */
-  static QValueVector<KInetInterface> getAllInterfaces(bool includeLoopback = false);
+  static Q3ValueVector<KInetInterface> getAllInterfaces(bool includeLoopback = false);
 
 private:
   KInetInterfacePrivate* d;

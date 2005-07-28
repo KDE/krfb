@@ -17,6 +17,10 @@
 
 #include "trayicon.h"
 #include <qtooltip.h>
+//Added by qt3to4:
+#include <QHideEvent>
+#include <QPixmap>
+#include <QMouseEvent>
 #include <kstdaction.h>
 #include <kapplication.h>
 #include <klocale.h>

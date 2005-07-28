@@ -69,10 +69,10 @@
                 <string>Somebody is requesting a connection to your computer. Granting this will allow the remote user to watch your desktop. </string>
             </property>
             <property name="textFormat">
-                <enum>AutoText</enum>
+                <enum>Qt::AutoText</enum>
             </property>
             <property name="alignment">
-                <set>WordBreak|AlignVCenter|AlignLeft</set>
+                <set>Qt::TextWordWrap|Qt::AlignVCenter|Qt::AlignLeft</set>
             </property>
             <property name="indent">
                 <number>0</number>
@@ -173,7 +173,7 @@
                 <cstring>spacer23</cstring>
             </property>
             <property name="orientation">
-                <enum>Vertical</enum>
+                <enum>Qt::Vertical</enum>
             </property>
             <property name="sizeType">
                 <enum>Minimum</enum>
@@ -190,7 +190,7 @@
                 <cstring>spacer22</cstring>
             </property>
             <property name="orientation">
-                <enum>Vertical</enum>
+                <enum>Qt::Vertical</enum>
             </property>
             <property name="sizeType">
                 <enum>Minimum</enum>

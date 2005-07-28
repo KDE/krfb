@@ -33,7 +33,7 @@
 #include <kmessagebox.h>
 #include <qobject.h>
 #include <qwindowdefs.h>
-#include <qcstring.h>
+#include <q3cstring.h>
 #include <qdatastream.h>
 #include <dcopref.h>
 

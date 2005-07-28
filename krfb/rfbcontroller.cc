@@ -51,12 +51,17 @@
 #include <qglobal.h>
 #include <qlabel.h>
 #include <qmutex.h>
-#include <qdeepcopy.h>
+#include <q3deepcopy.h>
 #include <qclipboard.h>
 #include <qdesktopwidget.h>
+//Added by qt3to4:
+#include <Q3ValueList>
+#include <Q3CString>
+#include <Q3PtrList>
 
 #include <X11/Xutil.h>
 #include <X11/extensions/XTest.h>
+#include <QX11Info>
 
 #ifndef ASSERT
 #define ASSERT(x) Q_ASSERT(x)
@@ -193,7 +198,7 @@ void KeyboardEvent::initKeycodes() {
 	KeySym key,*keymap;
 	int i,j,minkey,maxkey,syms_per_keycode;
 
-	dpy = qt_xdisplay();
+	dpy = QX11Info::display();
 
 	memset(modifiers,-1,sizeof(modifiers));
 
@@ -284,7 +289,7 @@ PointerEvent::PointerEvent(int b, int _x, int _y) :
 	y(_y) {
 	if (!initialized) {
 		initialized = true;
-		dpy = qt_xdisplay();
+		dpy = QX11Info::display();
 		buttonMask = 0;
 	}
 }
@@ -385,7 +390,7 @@ RFBController::~RFBController()
 
 void RFBController::startServer(int inetdFd, bool xtestGrab)
 {
-	framebufferImage = XGetImage(qt_xdisplay(),
+	framebufferImage = XGetImage(QX11Info::display(),
 				     QApplication::desktop()->winId(),
 				     0,
 				     0,
@@ -455,7 +460,7 @@ void RFBController::startServer(int inetdFd, bool xtestGrab)
 
 	passwordChanged();
 
-	scanner = new XUpdateScanner(qt_xdisplay(),
+	scanner = new XUpdateScanner(QX11Info::display(),
 				     QApplication::desktop()->winId(),
 				     (unsigned char*)fb, w, h,
 				     server->rfbServerFormat.bitsPerPixel,
@@ -467,7 +472,7 @@ void RFBController::startServer(int inetdFd, bool xtestGrab)
 
 	if (xtestGrab) {
 		disabler.disable = false;
-		XTestGrabControl(qt_xdisplay(), true);
+		XTestGrabControl(QX11Info::display(), true);
 	}
 
 	rfbRunEventLoop(server, -1, TRUE);
@@ -613,7 +618,7 @@ void RFBController::idleSlot()
 
 	rfbUndrawCursor(server);
 
-	QPtrList<Hint> v;
+	Q3PtrList<Hint> v;
 	v.setAutoDelete(true);
 	QPoint p = QCursor::pos();
 	scanner->searchUpdates(v, p.y());
@@ -680,7 +685,7 @@ bool RFBController::handleCheckPassword(rfbClientPtr cl,
 			cl->authChallenge, response, len);
 
 	if (!authd) {
-		QValueList<Invitation>::iterator it =
+		Q3ValueList<Invitation>::iterator it =
 			configuration->invitations().begin();
 		while (it != configuration->invitations().end()) {
 			if (checkPassword((*it).password(),
@@ -825,7 +830,7 @@ void RFBController::clipboardChanged() {
 
 	lastClipboardDirection = LAST_SYNC_TO_CLIENT;
 	lastClipboardText = text;
-	QCString ctext = text.utf8();
+	Q3CString ctext = text.utf8();
 	rfbSendServerCutText(server, ctext.data(), ctext.length());
 }
 
@@ -845,7 +850,7 @@ void RFBController::selectionChanged() {
 
 	lastClipboardDirection = LAST_SYNC_TO_CLIENT;
 	lastClipboardText = text;
-	QCString ctext = text.utf8();
+	Q3CString ctext = text.utf8();
 	rfbSendServerCutText(server, ctext.data(), ctext.length());
 }
 
@@ -877,7 +882,7 @@ extern "C" Bool XShmQueryExtension(Display*);
 
 bool RFBController::checkX11Capabilities() {
 	int bp1, bp2, majorv, minorv;
-	Bool r = XTestQueryExtension(qt_xdisplay(), &bp1, &bp2,
+	Bool r = XTestQueryExtension(QX11Info::display(), &bp1, &bp2,
 				     &majorv, &minorv);
 	if ((!r) || (((majorv*1000)+minorv) < 2002)) {
 		KMessageBox::error(0,
@@ -896,7 +901,7 @@ XTestDisabler::XTestDisabler() :
 
 void XTestDisabler::exec() {
 	if (disable)
-		XTestDiscard(qt_xdisplay());
+		XTestDiscard(QX11Info::display());
 }
 
 #include "rfbcontroller.moc"

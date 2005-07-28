@@ -38,7 +38,7 @@
                 </sizepolicy>
             </property>
             <property name="focusPolicy">
-                <enum>NoFocus</enum>
+                <enum>Qt::NoFocus</enum>
             </property>
             <property name="text">
                 <string>&lt;h2&gt;Personal Invitation&lt;/h2&gt;
@@ -50,7 +50,7 @@ Give the information below to the person that you want to invite (&lt;a href="wh
                 <cstring>spacer9</cstring>
             </property>
             <property name="orientation">
-                <enum>Vertical</enum>
+                <enum>Qt::Vertical</enum>
             </property>
             <property name="sizeType">
                 <enum>Expanding</enum>
@@ -101,7 +101,7 @@ Give the information below to the person that you want to invite (&lt;a href="wh
                 <cstring>spacer10</cstring>
             </property>
             <property name="orientation">
-                <enum>Vertical</enum>
+                <enum>Qt::Vertical</enum>
             </property>
             <property name="sizeType">
                 <enum>Expanding</enum>
@@ -126,7 +126,7 @@ Give the information below to the person that you want to invite (&lt;a href="wh
                 </sizepolicy>
             </property>
             <property name="focusPolicy">
-                <enum>NoFocus</enum>
+                <enum>Qt::NoFocus</enum>
             </property>
             <property name="text">
                 <string>cookie.tjansen.de:0</string>
@@ -177,7 +177,7 @@ Give the information below to the person that you want to invite (&lt;a href="wh
                 </sizepolicy>
             </property>
             <property name="focusPolicy">
-                <enum>NoFocus</enum>
+                <enum>Qt::NoFocus</enum>
             </property>
             <property name="text">
                 <string>12345</string>
@@ -196,7 +196,7 @@ Give the information below to the person that you want to invite (&lt;a href="wh
                 </sizepolicy>
             </property>
             <property name="focusPolicy">
-                <enum>NoFocus</enum>
+                <enum>Qt::NoFocus</enum>
             </property>
             <property name="text">
                 <string>17:12</string>

@@ -43,6 +43,8 @@
 #include <assert.h>
 
 #include "xupdatescanner.h"
+//Added by qt3to4:
+#include <Q3PtrList>
 
 /* ../../krfb/libvncserver/rfb.h */
 #ifdef Bool
@@ -356,7 +358,7 @@ static void printStatistics(Hint &hint) {
 }
 
 void XUpdateScanner::flushHint(int x, int y, int &x0,
-			       Hint &hint, QPtrList<Hint> &hintList)
+			       Hint &hint, Q3PtrList<Hint> &hintList)
 {
 	if (x0 < 0)
 		return;
@@ -371,7 +373,7 @@ void XUpdateScanner::flushHint(int x, int y, int &x0,
 	hintList.append(new Hint(hint));
 }
 
-void XUpdateScanner::createHints(QPtrList<Hint> &hintList)
+void XUpdateScanner::createHints(Q3PtrList<Hint> &hintList)
 {
 	Hint hint;
 	int x0 = -1;
@@ -441,7 +443,7 @@ void XUpdateScanner::testScanline(int y, bool rememberHits) {
 	recentHitScanlines[MAX_RECENT_HITS-1] = y;
 }
 
-void XUpdateScanner::searchUpdates(QPtrList<Hint> &hintList, int ptrY)
+void XUpdateScanner::searchUpdates(Q3PtrList<Hint> &hintList, int ptrY)
 {
 	count++;
 	count %= SCANLINES;

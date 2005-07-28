@@ -25,7 +25,7 @@
 #include "getifaddrs.h"
 
 #include <netinet/in.h>
-#include <ksockaddr.h>
+#include <ksocketaddress.h>
 
 
 class KInetInterfacePrivate {
@@ -172,13 +172,13 @@ KInetSocketAddress *KInetInterface::destinationAddress() const {
 }
 
 KInetSocketAddress *KInetInterface::getPublicInetAddress() {
-	QValueVector<KInetInterface> v = getAllInterfaces(true);		
+	Q3ValueVector<KInetInterface> v = getAllInterfaces(true);		
 
 	// TODO: first step: take the default route interface
 
 	// try to find point-2-point interface, because it may be
 	// a dial-up connection. Take it.
-	QValueVector<KInetInterface>::const_iterator it = v.begin();
+	Q3ValueVector<KInetInterface>::const_iterator it = v.begin();
 	while (it != v.end()) {
 		if (((*it).flags() & (PointToPoint | Up | Running)) &&
 		    (!((*it).flags() & Loopback)) &&
@@ -247,10 +247,10 @@ namespace {
 	}
 }
 
-QValueVector<KInetInterface> KInetInterface::getAllInterfaces(bool includeLoopback) {
+Q3ValueVector<KInetInterface> KInetInterface::getAllInterfaces(bool includeLoopback) {
 	struct kde_ifaddrs *ads;
 	struct kde_ifaddrs *a;
-	QValueVector<KInetInterface> r;
+	Q3ValueVector<KInetInterface> r;
 	if (kde_getifaddrs(&ads))
 		return r;
 

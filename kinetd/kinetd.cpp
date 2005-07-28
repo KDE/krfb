@@ -27,7 +27,7 @@
 #include <kstandarddirs.h>
 #include <kconfig.h>
 #include <knotifyclient.h>
-#include <ksockaddr.h>
+#include <ksocketaddress.h>
 #include <kextsock.h>
 #include <klocale.h>
 #include <kglobal.h>

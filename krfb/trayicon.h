@@ -21,6 +21,10 @@
 #include "configuration.h"
 
 #include <qwidget.h>
+//Added by qt3to4:
+#include <QPixmap>
+#include <QHideEvent>
+#include <QMouseEvent>
 #include <kpixmap.h>
 #include <kaction.h>
 #include <ksystemtray.h>
