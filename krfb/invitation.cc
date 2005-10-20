@@ -31,12 +31,12 @@ QString cryptStr(const QString &aStr) {
 }
 
 // a random string that doesn't contain i, I, o, O, 1, 0
-// based on KApplication::randomString()
+// based on KRandom::randomString()
 static QString readableRandomString(int length) {
    QString str;
    while (length)
    {
-      int r = KApplication::random() % 62;
+      int r = KRandom::random() % 62;
       r += 48;
       if (r > 57) 
 	      r += 7;

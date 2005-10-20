@@ -27,7 +27,7 @@
 #include <kdialog.h>
 #include <kglobal.h>
 #include <kiconloader.h>
-#include <kpopupmenu.h>
+#include <kmenu.h>
 
 KPassivePopup2::KPassivePopup2(QWidget *parent) :
    KPassivePopup(parent){
