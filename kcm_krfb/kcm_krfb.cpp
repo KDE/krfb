@@ -107,7 +107,7 @@ void KcmKRfb::checkKInetd(bool &kinetdAvailable, bool &krfbAvailable) {
 
 	QByteArray sdata, rdata;
 	QCString replyType;
-	QDataStream arg(sdata, IO_WriteOnly);
+	QDataStream arg(sdata, QIODevice::WriteOnly);
 	arg << QString("krfb");
 	if (!d->call ("kded", "kinetd", "isInstalled(QString)", sdata, replyType, rdata))
 		return;
@@ -115,7 +115,7 @@ void KcmKRfb::checkKInetd(bool &kinetdAvailable, bool &krfbAvailable) {
 	if (replyType != "bool")
 		return;
 
-	QDataStream answer(rdata, IO_ReadOnly);
+	QDataStream answer(rdata, QIODevice::ReadOnly);
 	answer >> krfbAvailable;
 	kinetdAvailable = true;
 }
