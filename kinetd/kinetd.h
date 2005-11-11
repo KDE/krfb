@@ -190,7 +190,7 @@ k_dcop:
 	void reregistrationTimer();
 
  public:
-	KInetD(QCString &n);
+	KInetD(const DCOPCString &n);
 	virtual ~KInetD();
 	void loadServiceList();
 	PortListener *getListenerByName(QString name);

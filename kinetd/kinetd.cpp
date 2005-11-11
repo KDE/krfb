@@ -648,9 +648,10 @@ KInetD::~KInetD() {
 }
 
 extern "C" {
-	KDE_EXPORT KDEDModule *create_kinetd(QCString &name)
+	KDE_EXPORT KDEDModule *create_kinetd(const DCOPCString &name)
 	{
         KGlobal::locale()->insertCatalog("kinetd");
 		return new KInetD(name);
 	}
 }
+
