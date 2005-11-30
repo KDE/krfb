@@ -25,7 +25,6 @@
 #include <qradiobutton.h>
 #include <qlineedit.h>
 #include <qbuttongroup.h>
-#include <qcstring.h>
 #include <qdatastream.h>
 #include <kapplication.h>
 #include <kdialog.h>
@@ -53,7 +52,7 @@ extern "C" {
 
 
 KcmKRfb::KcmKRfb(QWidget *p, const char *name, const QStringList &) :
-	KCModule(KcmKRfbFactory::instance(), p, name),
+	KCModule(KcmKRfbFactory::instance(), p),
 	m_configuration(KRFB_CONFIGURATION_MODE) {
 
         m_confWidget = new ConfigurationWidget(this);
@@ -106,8 +105,8 @@ void KcmKRfb::checkKInetd(bool &kinetdAvailable, bool &krfbAvailable) {
 	DCOPClient *d = KApplication::dcopClient();
 
 	QByteArray sdata, rdata;
-	QCString replyType;
-	QDataStream arg(sdata, QIODevice::WriteOnly);
+	DCOPCString replyType;
+	QDataStream arg(&sdata, QIODevice::WriteOnly);
 	arg << QString("krfb");
 	if (!d->call ("kded", "kinetd", "isInstalled(QString)", sdata, replyType, rdata))
 		return;
@@ -115,7 +114,7 @@ void KcmKRfb::checkKInetd(bool &kinetdAvailable, bool &krfbAvailable) {
 	if (replyType != "bool")
 		return;
 
-	QDataStream answer(rdata, QIODevice::ReadOnly);
+	QDataStream answer(&rdata, QIODevice::ReadOnly);
 	answer >> krfbAvailable;
 	kinetdAvailable = true;
 }
