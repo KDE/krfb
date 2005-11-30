@@ -41,7 +41,6 @@
 #include <kdebug.h>
 #include <kmessagebox.h>
 #include <klocale.h>
-#include <kextsock.h>
 #include <qstring.h>
 #include <qcursor.h>
 #include <qwindowdefs.h>
