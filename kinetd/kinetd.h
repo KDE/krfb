@@ -28,7 +28,7 @@
 #include <qdatetime.h>
 #include <qtimer.h>
 #include <dnssd/publicservice.h>
-
+#include <q3ptrlist.h>
 #include "kserviceregistry.h"
 
 class PortListener : public QObject {
@@ -178,7 +178,7 @@ k_dcop:
 
 	KConfig *m_config;
 	KServiceRegistry *m_srvreg;
-	QPtrList<PortListener> m_portListeners;
+	Q3PtrList<PortListener> m_portListeners;
 	QTimer m_expirationTimer;
 	QTimer m_portRetryTimer;
 	QTimer m_reregistrationTimer;
