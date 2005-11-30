@@ -32,10 +32,10 @@ class KInetInterfacePrivate {
 public:
 	QString name;
 	int flags;
-	KInetSocketAddress *address;
-	KInetSocketAddress *netmask;
-	KInetSocketAddress *broadcast;
-	KInetSocketAddress *destination;
+	KNetwork::KInetSocketAddress *address;
+	KNetwork::KInetSocketAddress *netmask;
+	KNetwork::KInetSocketAddress *broadcast;
+	KNetwork::KInetSocketAddress *destination;
 
 	KInetInterfacePrivate() :
 		flags(0),
@@ -47,10 +47,10 @@ public:
 
 	KInetInterfacePrivate(const QString _name, 
 			      int _flags, 
-			      KInetSocketAddress *_address,
-			      KInetSocketAddress *_netmask,
-			      KInetSocketAddress *_broadcast,
-			      KInetSocketAddress *_destination) :
+			      KNetwork::KInetSocketAddress *_address,
+			      KNetwork::KInetSocketAddress *_netmask,
+			      KNetwork::KInetSocketAddress *_broadcast,
+			      KNetwork::KInetSocketAddress *_destination) :
 		name(_name),
 		flags(_flags),
 		address(_address),
@@ -74,19 +74,19 @@ public:
 		name = i.name;
 		flags = i.flags;
 		if (i.address)
-			address = new KInetSocketAddress(*i.address);
+			address = new KNetwork::KInetSocketAddress(*i.address);
 		else
 			address = 0;
 		if (i.netmask)
-			netmask = new KInetSocketAddress(*i.netmask);
+			netmask = new KNetwork::KInetSocketAddress(*i.netmask);
 		else
 			netmask = 0;
 		if (i.broadcast)
-			broadcast = new KInetSocketAddress(*i.broadcast);
+			broadcast = new KNetwork::KInetSocketAddress(*i.broadcast);
 		else
 			broadcast = 0;
 		if (i.destination)
-			destination = new KInetSocketAddress(*i.destination);
+			destination = new KNetwork::KInetSocketAddress(*i.destination);
 		else
 			destination = 0;
 		return *this;
@@ -101,10 +101,10 @@ KInetInterface::KInetInterface() :
 
 KInetInterface::KInetInterface(const QString &_name, 
 			       int _flags, 
-			       KInetSocketAddress *_address,
-			       KInetSocketAddress *_netmask,
-			       KInetSocketAddress *_broadcast,
-			       KInetSocketAddress *_destination) {
+			       KNetwork::KInetSocketAddress *_address,
+			       KNetwork::KInetSocketAddress *_netmask,
+			       KNetwork::KInetSocketAddress *_broadcast,
+			       KNetwork::KInetSocketAddress *_destination) {
 	d = new KInetInterfacePrivate(_name, _flags,
 				      _address, _netmask, 
 				      _broadcast, _destination);
@@ -155,23 +155,23 @@ int KInetInterface::flags() const {
 	return d->flags;
 }
 
-KInetSocketAddress *KInetInterface::address() const {
+KNetwork::KInetSocketAddress *KInetInterface::address() const {
 	return d->address;
 }
 
-KInetSocketAddress *KInetInterface::netmask() const {
+KNetwork::KInetSocketAddress *KInetInterface::netmask() const {
 	return d->netmask;
 }
 
-KInetSocketAddress *KInetInterface::broadcastAddress() const {
+KNetwork::KInetSocketAddress *KInetInterface::broadcastAddress() const {
 	return d->broadcast;
 }
 
-KInetSocketAddress *KInetInterface::destinationAddress() const {
+KNetwork::KInetSocketAddress *KInetInterface::destinationAddress() const {
 	return d->destination;
 }
 
-KInetSocketAddress *KInetInterface::getPublicInetAddress() {
+KNetwork::KInetSocketAddress *KInetInterface::getPublicInetAddress() {
 	Q3ValueVector<KInetInterface> v = getAllInterfaces(true);		
 
 	// TODO: first step: take the default route interface
@@ -184,7 +184,7 @@ KInetSocketAddress *KInetInterface::getPublicInetAddress() {
 		    (!((*it).flags() & Loopback)) &&
 		    (*it).address() &&
             ((*it).address()->family() == AF_INET))
-			return new KInetSocketAddress(*(*it).address());
+			return new KNetwork::KInetSocketAddress(*(*it).address());
 		it++;
 	}
 
@@ -195,7 +195,7 @@ KInetSocketAddress *KInetInterface::getPublicInetAddress() {
 		    (!((*it).flags() & Loopback)) &&
 		    (*it).address() &&
             ((*it).address()->family() == AF_INET))
-			return new KInetSocketAddress(*(*it).address());
+			return new KNetwork::KInetSocketAddress(*(*it).address());
 		it++;
 	}
 
@@ -204,7 +204,7 @@ KInetSocketAddress *KInetInterface::getPublicInetAddress() {
 	while (it != v.end()) {
 		if (((*it).flags() & (Up | Running)) &&
 		    (*it).address())
-			return new KInetSocketAddress(*(*it).address());
+			return new KNetwork::KInetSocketAddress(*(*it).address());
 		it++;
 	}
 
@@ -213,15 +213,15 @@ KInetSocketAddress *KInetInterface::getPublicInetAddress() {
 }
 
 namespace {
-	KInetSocketAddress *createAddress(struct sockaddr *a) {
+	KNetwork::KInetSocketAddress *createAddress(struct sockaddr *a) {
 		if (!a)
 			return 0;
 		else if (a->sa_family == AF_INET)
-			return new KInetSocketAddress((struct sockaddr_in*) a,
+			return new KNetwork::KInetSocketAddress((struct sockaddr_in*) a,
 						      sizeof(struct sockaddr_in));
 #ifdef AF_INET6
 		else if (a->sa_family == AF_INET6)
-			return new KInetSocketAddress((struct sockaddr_in6*) a,
+			return new KNetwork::KInetSocketAddress((struct sockaddr_in6*) a,
 						      sizeof(struct sockaddr_in6));
 #endif
 		else

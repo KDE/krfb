@@ -25,11 +25,9 @@
 #include <q3valuevector.h>
 #include <q3cstring.h>
 #include <qstring.h>
-
+#include <ksocketaddress.h>
 
 class KInetInterfacePrivate;
-class KInetSocketAddress;
-
 /**
  * An Internet (IPv4 or IPv6) network interface. 
  *
@@ -50,10 +48,10 @@ class KInetInterface {
 private:
   KInetInterface(const QString &name, 
 		 int flags, 
-		 KInetSocketAddress *address,
-		 KInetSocketAddress *netmask,
-		 KInetSocketAddress *broadcast,
-		 KInetSocketAddress *destination);
+		 KNetwork::KInetSocketAddress *address,
+		 KNetwork::KInetSocketAddress *netmask,
+		 KNetwork::KInetSocketAddress *broadcast,
+		 KNetwork::KInetSocketAddress *destination);
   
 public:
   /**
@@ -129,7 +127,7 @@ public:
    * @return the address of this interface, can be 0 if the interface
    *         does not have an address
    */
-  KInetSocketAddress *address() const;
+  KNetwork::KInetSocketAddress *address() const;
 
   /**
    * Returns the netmask of the interface.
@@ -138,7 +136,7 @@ public:
    * @return the netmask of this interface, can be 0 if the interface
    *         does not have an address
    */
-  KInetSocketAddress *netmask() const;
+  KNetwork::KInetSocketAddress *netmask() const;
 
   /**
    * Returns the broadcast address of the interface.
@@ -147,7 +145,7 @@ public:
    * @return the broadcast address of this interface. Can be 0 if
    *         the interface is a peer-to-peer interface (like PPP)
    */
-  KInetSocketAddress *broadcastAddress() const;
+  KNetwork::KInetSocketAddress *broadcastAddress() const;
 
   /**
    * Returns the destination / peer address of the interface.
@@ -157,7 +155,7 @@ public:
    * @return the destination address of this interface. Can be 0
    *         if the interface is not a peer-to-peer interface
    */
-  KInetSocketAddress *destinationAddress() const;
+  KNetwork::KInetSocketAddress *destinationAddress() const;
 
   /**
    * Tries to guess the public internet address of this computer.
@@ -168,7 +166,7 @@ public:
    *         The caller takes ownership of the object and is
    *         responsible for freeing it
    */
-  static KInetSocketAddress *getPublicInetAddress();
+  static KNetwork::KInetSocketAddress *getPublicInetAddress();
 
   /**
    * Returns all active interfaces of the system.
