@@ -17,14 +17,14 @@
  ***************************************************************************/
 
 #include "invitation.h"
-
+#include <krandom.h>
 /*
  * Function for (en/de)crypting strings for config file, taken from KMail
  * Author: Stefan Taferner <taferner@alpin.or.at>
  */
 QString cryptStr(const QString &aStr) {
         QString result;
-        for (unsigned int i = 0; i < aStr.length(); i++)
+        for ( int i = 0; i < aStr.length(); i++)
                 result += (aStr[i].unicode() < 0x20) ? aStr[i] :
                                 QChar(0x1001F - aStr[i].unicode());
         return result;

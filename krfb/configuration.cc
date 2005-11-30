@@ -25,6 +25,7 @@
 #include <kprocess.h>
 #include <ksocketaddress.h>
 #include <kactivelabel.h>
+#include <ktoolinvocation.h>
 
 #include <qdatastream.h>
 //Added by qt3to4:
@@ -263,7 +264,7 @@ void Configuration::refreshTimeout() {
 
 QString Configuration::hostname() const
 {
-  	KInetSocketAddress *a = KInetInterface::getPublicInetAddress();
+		KNetwork::KInetSocketAddress *a = KInetInterface::getPublicInetAddress();
 	QString hostName;
 	if (a) {
 		hostName = a->nodeName();
@@ -440,8 +441,7 @@ void Configuration::inviteEmail() {
 	save();
 	emit invitationNumChanged(invitationList.size());
 
-	KApplication *app = KApplication::kApplication();
-	app->invokeMailer(QString::null, QString::null, QString::null,
+	KToolInvocation::invokeMailer(QString::null, QString::null, QString::null,
 		i18n("Desktop Sharing (VNC) invitation"),
 		i18n("You have been invited to a VNC session. If you have the KDE Remote "
                      "Desktop Connection installed, just click on the link below.\n\n"
