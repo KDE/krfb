@@ -172,13 +172,13 @@ KNetwork::KInetSocketAddress *KInetInterface::destinationAddress() const {
 }
 
 KNetwork::KInetSocketAddress *KInetInterface::getPublicInetAddress() {
-	Q3ValueVector<KInetInterface> v = getAllInterfaces(true);		
+	QVector<KInetInterface> v = getAllInterfaces(true);		
 
 	// TODO: first step: take the default route interface
 
 	// try to find point-2-point interface, because it may be
 	// a dial-up connection. Take it.
-	Q3ValueVector<KInetInterface>::const_iterator it = v.begin();
+	QVector<KInetInterface>::const_iterator it = v.begin();
 	while (it != v.end()) {
 		if (((*it).flags() & (PointToPoint | Up | Running)) &&
 		    (!((*it).flags() & Loopback)) &&
@@ -247,10 +247,10 @@ namespace {
 	}
 }
 
-Q3ValueVector<KInetInterface> KInetInterface::getAllInterfaces(bool includeLoopback) {
+QVector<KInetInterface> KInetInterface::getAllInterfaces(bool includeLoopback) {
 	struct kde_ifaddrs *ads;
 	struct kde_ifaddrs *a;
-	Q3ValueVector<KInetInterface> r;
+	QVector<KInetInterface> r;
 	if (kde_getifaddrs(&ads))
 		return r;
 

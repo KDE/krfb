@@ -175,7 +175,7 @@ public:
    *                        name
    * @return the list of IP addresses
    */
-  static Q3ValueVector<KInetInterface> getAllInterfaces(bool includeLoopback = false);
+  static QVector<KInetInterface> getAllInterfaces(bool includeLoopback = false);
 
 private:
   KInetInterfacePrivate* d;
