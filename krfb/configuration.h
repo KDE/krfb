@@ -30,8 +30,6 @@
 #include <qobject.h>
 #include <qvalidator.h>
 #include <qstring.h>
-//Added by qt3to4:
-#include <Q3ValueList>
 
 #include <dcopobject.h>
 
@@ -77,8 +75,8 @@ public:
 	void save();
 	void update();
 
-	Q3ValueList<Invitation> &invitations();
-	void removeInvitation(Q3ValueList<Invitation>::iterator it);
+	QList<Invitation> &invitations();
+	void removeInvitation(QList<Invitation>::iterator it);
 signals:
 	void invitationFinished();
 	void invitationNumChanged(int num);
@@ -123,7 +121,7 @@ private:
 	DCOPRef kinetdRef;
 
 	QString passwordString;
-	Q3ValueList<Invitation> invitationList;
+	QList<Invitation> invitationList;
 
 	bool disableBackgroundFlag;
 	bool disableXShmFlag;

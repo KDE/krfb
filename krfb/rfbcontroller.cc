@@ -54,7 +54,6 @@
 #include <qclipboard.h>
 #include <qdesktopwidget.h>
 //Added by qt3to4:
-#include <Q3ValueList>
 #include <Q3CString>
 #include <Q3PtrList>
 
@@ -684,7 +683,7 @@ bool RFBController::handleCheckPassword(rfbClientPtr cl,
 			cl->authChallenge, response, len);
 
 	if (!authd) {
-		Q3ValueList<Invitation>::iterator it =
+		QList<Invitation>::iterator it =
 			configuration->invitations().begin();
 		while (it != configuration->invitations().end()) {
 			if (checkPassword((*it).password(),

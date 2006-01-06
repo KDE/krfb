@@ -28,8 +28,6 @@
 #include <ktoolinvocation.h>
 
 #include <qdatastream.h>
-//Added by qt3to4:
-#include <Q3ValueList>
 #include <dcopclient.h>
 #include <dcopref.h>
 
@@ -127,7 +125,7 @@ void Configuration::setKInetdPort(int p) {
 }
 
 
-void Configuration::removeInvitation(Q3ValueList<Invitation>::iterator it) {
+void Configuration::removeInvitation(QList<Invitation>::iterator it) {
 	invitationList.remove(it);
 	save();
 }
@@ -143,7 +141,7 @@ void Configuration::doKinetdConf() {
 	}
 
 	QDateTime lastExpiration;
-	Q3ValueList<Invitation>::iterator it = invitationList.begin();
+	QList<Invitation>::iterator it = invitationList.begin();
 	while (it != invitationList.end()) {
 		Invitation &ix = (*it);
 		QDateTime t = ix.expirationTime();
@@ -216,7 +214,7 @@ void Configuration::saveToKConfig() {
 
 void Configuration::saveToDialogs() {
 	invalidateOldInvitations();
-	Q3ValueList<Invitation>::iterator it = invitationList.begin();
+	QList<Invitation>::iterator it = invitationList.begin();
 	while (it != invitationList.end()) {
 		Invitation &inv = *(it++);
 		if (!inv.getViewItem())
@@ -245,7 +243,7 @@ Invitation Configuration::createInvitation() {
 }
 
 void Configuration::invalidateOldInvitations() {
-	Q3ValueList<Invitation>::iterator it = invitationList.begin();
+	QList<Invitation>::iterator it = invitationList.begin();
 	while (it != invitationList.end()) {
 		if (!(*it).isValid())
 			it = invitationList.remove(it);
@@ -301,7 +299,7 @@ QString Configuration::password() const {
 	return passwordString;
 }
 
-Q3ValueList<Invitation> &Configuration::invitations() {
+QList<Invitation> &Configuration::invitations() {
 	return invitationList;
 }
 
@@ -372,7 +370,7 @@ void Configuration::showManageInvitationsDialog() {
 }
 
 void Configuration::invMngDlgDeleteOnePressed() {
-	Q3ValueList<Invitation>::iterator it = invitationList.begin();
+	QList<Invitation>::iterator it = invitationList.begin();
 	while (it != invitationList.end()) {
 		Invitation &ix = (*it);
 		KListViewItem *iv = ix.getViewItem();
