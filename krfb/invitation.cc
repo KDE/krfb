@@ -71,7 +71,7 @@ Invitation::Invitation(const Invitation &x) :
 }
 
 Invitation::Invitation(KConfig* config, int num) {
-	m_password = cryptStr(config->readEntry(QString("password%1").arg(num), ""));
+	m_password = cryptStr(config->readEntry(QString("password%1").arg(num), QString()));
 	m_creationTime = config->readDateTimeEntry(QString("creation%1").arg(num));
 	m_expirationTime = config->readDateTimeEntry(QString("expiration%1").arg(num));
 	m_viewItem = 0;
