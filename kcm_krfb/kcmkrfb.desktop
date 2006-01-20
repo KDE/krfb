@@ -63,6 +63,7 @@ Name[uk]=Спільні стільниці
 Name[ven]=U kovhekana ha Desikithopo
 Name[xh]=Ukwehlulelana kwe Desktop
 Name[zh_CN]=桌面共享
+Name[zh_HK]=桌面分享
 Name[zh_TW]=桌面分享
 Name[zu]=Ukwahlulelana kwe-Desktop
 
@@ -117,6 +118,7 @@ Comment[uk]=Налаштувати спільні стільниці
 Comment[ven]=Dzudzanyani u kovhekana ha desikithopo
 Comment[xh]=Qwalasela Ukusebenzisa ngokuhlangeneyo kwe Desktop 
 Comment[zh_CN]=配置桌面共享
+Comment[zh_HK]=設定桌面分享
 Comment[zh_TW]=設定桌面分享
 Comment[zu]=Hlela kahle Ukwahlulelana kwe-Desktop
 Keywords=desktop sharing,krfb,vnc,sharing,krdc,remote desktop connection,invitation,port,slp,uninvited
