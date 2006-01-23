@@ -21,6 +21,7 @@ X-KDE-KINETD-DNSSD-Properties=type=shared,u=%u,fullname=%f
 Name=KRfb Desktop Sharing
 Name[ar]=KRfb مشاركة سطح المكتب
 Name[bg]=Споделяне на работно място (KRfb)
+Name[bn]=কে-আর-এফ-বি ডেস্কটপ ভাগাভাগি
 Name[bs]=KRfb dijeljenje desktopa
 Name[ca]=Compartició de l'escriptori KRfb
 Name[cs]=Sdílení pracovní plochy KRfb
@@ -78,6 +79,7 @@ Comment=A daemon that allows you to share your desktop
 Comment[af]='n bediener wat laat toe jy na deel jou werkskerm
 Comment[ar]=مراقب يسمح لك بمشاركة سطح مكتبك
 Comment[bg]=Демон за споделяне на работното място
+Comment[bn]=একটি ডিমন যে আপনার ডেস্কটপ ভাগাভাগি করতে আপনাকে অনুমতি দেয়
 Comment[bs]=Daemon koji vam omogućuje da dijelite vaš desktop
 Comment[ca]=Un dimoni que us permetrà compartir el vostre escriptori
 Comment[cs]=Démon umožňující sdílení vaší plochy
