@@ -467,7 +467,7 @@ void Configuration::inviteEmail() {
 ////////////// invoke kcontrol module //////////////////////////
 
 void Configuration::showConfigurationModule() {
-		KRun::run( "kcmshell kcmkrfb", KURL::List() );
+		KRun::run( "kcmshell kcmkrfb", KUrl::List() );
 }
 
 
