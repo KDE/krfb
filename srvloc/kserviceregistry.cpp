@@ -53,7 +53,7 @@ void KServiceRegistryRegReport(SLPHandle,
 	KServiceRegistryPrivate *s = (KServiceRegistryPrivate*) cookie;
 	s->m_cbSuccess = (errcode == SLP_OK);
 	if (errcode < 0)
-		kdDebug() << "KServiceRegistry: error in callback:" << errcode <<endl;
+		kDebug() << "KServiceRegistry: error in callback:" << errcode <<endl;
 }
 
 
@@ -75,7 +75,7 @@ bool KServiceRegistryPrivate::ensureOpen() {
 
 	e = SLPOpen(m_lang.latin1(), SLP_FALSE, &m_handle);
 	if (e != SLP_OK) {
-		kdDebug() << "KServiceRegistry: error while opening:" << e <<endl;
+		kDebug() << "KServiceRegistry: error while opening:" << e <<endl;
 		return false;
 	}
 	m_opened = true;
@@ -102,7 +102,7 @@ bool KServiceRegistry::registerService(const QString &serviceURL,
 			    KServiceRegistryRegReport,
 			    d);
 	if (e != SLP_OK) {
-		kdDebug() << "KServiceRegistry: error in registerService:" << e <<endl;
+		kDebug() << "KServiceRegistry: error in registerService:" << e <<endl;
 		return false;
 	}
 	return d->m_cbSuccess;

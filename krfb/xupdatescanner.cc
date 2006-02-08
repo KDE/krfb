@@ -354,7 +354,7 @@ static void printStatistics(Hint &hint) {
 	ssum += p;
 	snum++;
 	float avg = ssum / snum;
-	kdDebug() << "avg size: "<< avg <<"%"<<endl;
+	kDebug() << "avg size: "<< avg <<"%"<<endl;
 }
 
 void XUpdateScanner::flushHint(int x, int y, int &x0,

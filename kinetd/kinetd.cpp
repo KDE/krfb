@@ -65,7 +65,7 @@ bool PortListener::acquirePort() {
 	while (!m_socket->bindAndListen()) {
 		m_port++;
 		if (m_port >= (m_portBase+m_autoPortRange)) {
-			kdDebug() << "Kinetd cannot load service "<<m_serviceName
+			kDebug() << "Kinetd cannot load service "<<m_serviceName
 				  <<": unable to get port" << endl;
 			m_port = -1;
 			delete m_socket;
@@ -121,14 +121,14 @@ void PortListener::loadConfig(KService::Ptr s) {
 	vddata = s->property("X-KDE-KINETD-DNSSD-Properties");
 
 	if (!vid.isValid()) {
-		kdDebug() << "Kinetd cannot load service "<<m_serviceName
+		kDebug() << "Kinetd cannot load service "<<m_serviceName
 			  <<": no id set" << endl;
 		m_valid = false;
 		return;
 	}
 
 	if (!vport.isValid()) {
-		kdDebug() << "Kinetd cannot load service "<<m_serviceName
+		kDebug() << "Kinetd cannot load service "<<m_serviceName
 			  <<": invalid port" << endl;
 		m_valid = false;
 		return;
@@ -173,7 +173,7 @@ void PortListener::loadConfig(KService::Ptr s) {
 		m_dnssdName = processServiceTemplate(vdname.toString())[0];
 		m_dnssdType = vdtype.toString();
 		m_dnssdRegister = true;
-		kdDebug() << "DNS-SD register is enabled\n";
+		kDebug() << "DNS-SD register is enabled\n";
 	}
 	else 
 	        m_dnssdRegister = false;
@@ -350,7 +350,7 @@ void PortListener::setServiceRegistrationEnabledInternal(bool e) {
 				     *(it++),
 				     *(it2++),
 				     m_serviceLifetime))
-				 kdDebug(7021) << "Failure registering SLP service (no slpd running?)"<< endl;
+				 kDebug(7021) << "Failure registering SLP service (no slpd running?)"<< endl;
 		}
 		m_serviceRegistered = true;
 		// make lifetime 30s shorter, because the timeout is not precise
@@ -414,7 +414,7 @@ KInetD::KInetD(QCString &n) :
 	m_config = new KConfig("kinetdrc");
 	m_srvreg = new KServiceRegistry();
 	if (!m_srvreg->available()) {
-		kdDebug(7021) << "SLP not available"<< endl;
+		kDebug(7021) << "SLP not available"<< endl;
 		delete m_srvreg;
 		m_srvreg = 0;
 	}

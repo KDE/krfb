@@ -180,7 +180,7 @@ int main(int argc, char *argv[])
 	bool ok;
 	int fdNum = fdString.toInt(&ok);
 	if (!ok) {
-	  kdError() << "kinetd fd was not numeric." << endl;
+	  kError() << "kinetd fd was not numeric." << endl;
 	  return 2;
 	}
 	controller.startServer(fdNum);
