@@ -414,10 +414,10 @@
                                         <property name="value">
                                             <number>5900</number>
                                         </property>
-                                        <property name="minValue">
+                                        <property name="minimum">
                                             <number>1024</number>
                                         </property>
-                                        <property name="maxValue">
+                                        <property name="maximum">
                                             <number>32767</number>
                                         </property>
                                         <property name="toolTip" stdset="0">
