@@ -12,7 +12,7 @@
             <height>350</height>
         </rect>
     </property>
-    <property name="caption">
+    <property name="windowTitle">
         <string>Manage Invitations - Desktop Sharing</string>
     </property>
     <property name="icon">
