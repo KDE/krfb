@@ -184,18 +184,18 @@ void PortListener::loadConfig(KService::Ptr s) {
 	m_defaultAutoPortRange = m_autoPortRange;
 
 	m_config->setGroup("ListenerConfig");
-	m_enabled = m_config->readBoolEntry("enabled_" + m_serviceName,
+	m_enabled = m_config->readEntry("enabled_" + m_serviceName,
 					    m_enabled);
-	m_portBase = m_config->readNumEntry("port_base_" + m_serviceName,
+	m_portBase = m_config->readEntry("port_base_" + m_serviceName,
 					    m_portBase);
-	m_autoPortRange = m_config->readNumEntry("auto_port_range_" + m_serviceName,
+	m_autoPortRange = m_config->readEntry("auto_port_range_" + m_serviceName,
 						 m_autoPortRange);
 	QDateTime nullTime;
 	m_expirationTime = m_config->readDateTimeEntry("enabled_expiration_"+m_serviceName,
 						     &nullTime);
 	if ((!m_expirationTime.isNull()) && (m_expirationTime < QDateTime::currentDateTime()))
 		m_enabled = false;
-	m_registerService = m_config->readBoolEntry("enabled_srvreg_"+m_serviceName,
+	m_registerService = m_config->readEntry("enabled_srvreg_"+m_serviceName,
 						     m_registerService);
 }
 

@@ -163,13 +163,13 @@ void Configuration::doKinetdConf() {
 void Configuration::loadFromKConfig() {
 
 	KConfig c("krfbrc");
-	allowUninvitedFlag = c.readBoolEntry("allowUninvited", false);
-	enableSLPFlag = c.readBoolEntry("enableSLP", true);
-	askOnConnectFlag = c.readBoolEntry("confirmUninvitedConnection", true);
-	allowDesktopControlFlag = c.readBoolEntry("allowDesktopControl", false);
-	preferredPortNum = c.readNumEntry("preferredPort", -1);
-	disableBackgroundFlag = c.readBoolEntry("disableBackground", false);
-	disableXShmFlag = c.readBoolEntry("disableXShm", false);
+	allowUninvitedFlag = c.readEntry("allowUninvited", false);
+	enableSLPFlag = c.readEntry("enableSLP", true);
+	askOnConnectFlag = c.readEntry("confirmUninvitedConnection", true);
+	allowDesktopControlFlag = c.readEntry("allowDesktopControl", false);
+	preferredPortNum = c.readEntry("preferredPort", -1);
+	disableBackgroundFlag = c.readEntry("disableBackground", false);
+	disableXShmFlag = c.readEntry("disableXShm", false);
 	if (c.hasKey("uninvitedPasswordCrypted"))
 		passwordString = cryptStr(c.readEntry("uninvitedPasswordCrypted", ""));
 	else
@@ -178,7 +178,7 @@ void Configuration::loadFromKConfig() {
 	unsigned int invNum = invitationList.size();
 	invitationList.clear();
 	c.setGroup("invitations");
-	int num = c.readNumEntry("invitation_num", 0);
+	int num = c.readEntry("invitation_num", 0);
 	for (int i = 0; i < num; i++)
 		invitationList.push_back(Invitation(&c, i));
 
