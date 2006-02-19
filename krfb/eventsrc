@@ -1,69 +1,88 @@
 [!Global!]
 IconName=krfb
 Comment=Desktop Sharing
+Comment[fr]=Partage du bureau
 Comment[x-test]=xxDesktop Sharingxx
 
 [UserAcceptsConnection]
 Name=UserAcceptsConnection
+Name[fr]=L'utilisateur accepte les connexions
 Name[x-test]=xxUserAcceptsConnectionxx
 Comment=User accepts connection
+Comment[fr]=l'utilisateur accepte les connexions
 Comment[x-test]=xxUser accepts connectionxx
 default_presentation=4
 
 [UserRefusesConnection]
 Name=UserRefusesConnection
+Name[fr]=L'utilisateur refuse les connexions
 Name[x-test]=xxUserRefusesConnectionxx
 Comment=User refuses connection
+Comment[fr]=L'utilisateur refuse les connexions
 Comment[x-test]=xxUser refuses connectionxx
 default_presentation=4
 
 [ConnectionClosed]
 Name=ConnectionClosed
+Name[fr]=Connexion fermée
 Name[x-test]=xxConnectionClosedxx
 Comment=Connection closed
+Comment[fr]=Connexion coupée
 Comment[x-test]=xxConnection closedxx
 default_presentation=4
 
 [InvalidPassword]
 Name=InvalidPassword
+Name[fr]=Mots de passe non valable
 Name[x-test]=xxInvalidPasswordxx
 Comment=Invalid password
+Comment[fr]=Mot de passe non valable
 Comment[x-test]=xxInvalid passwordxx
 default_presentation=4
 
 [InvalidPasswordInvitations]
 Name=InvalidPasswordInvitations
+Name[fr]=Invitations de mot de passe non valable
 Name[x-test]=xxInvalidPasswordInvitationsxx
 Comment=The invited party sent an invalid password. Connection refused.
+Comment[fr]=La partie invitée a envoyé un mot de passe non valable. Connexion refusée.
 Comment[x-test]=xxThe invited party sent an invalid password. Connection refused.xx
 default_presentation=2
 
 [NewConnectionOnHold]
 Name=NewConnectionOnHold
+Name[fr]=Nouvelle connexion au raccroché
 Name[x-test]=xxNewConnectionOnHoldxx
 Comment=Connection requested, user must accept
+Comment[fr]=Connexion demandée, l'utilisateur doit accepter
 Comment[x-test]=xxConnection requested, user must acceptxx
 default_presentation=4
 
 [NewConnectionAutoAccepted]
 Name=NewConnectionAutoAccepted
+Name[fr]=Nouvelle connexion auto-acceptée
 Name[x-test]=xxNewConnectionAutoAcceptedxx
 Comment=New connection automatically established
+Comment[fr]=Nouvelle connexion établie automatiquement
 Comment[x-test]=xxNew connection automatically establishedxx
 default_presentation=4
 
 [TooManyConnections]
 Name=TooManyConnections
+Name[fr]=Trop de connexions
 Name[x-test]=xxTooManyConnectionsxx
 Comment=Busy, connection refused
+Comment[fr]=Occupé, connexion refusée
 Comment[x-test]=xxBusy, connection refusedxx
 default_presentation=4
 default_logfile=
 
 [UnexpectedConnection]
 Name=UnexpectedConnection
+Name[fr]=Connexion inattendue
 Name[x-test]=xxUnexpectedConnectionxx
 Comment=Received unexpected connection, abort
+Comment[fr]=Reçu une connexion inattendue, interruption
 Comment[x-test]=xxReceived unexpected connection, abortxx
 default_presentation=4
 

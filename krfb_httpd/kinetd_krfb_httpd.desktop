@@ -14,6 +14,8 @@ X-KDE-KINETD-multiInstance=false
 X-KDE-KINETD-serviceLifetime=1200
 
 Name=KRfb Micro Httpd
+Name[fr]=Micro serveur httpd de KRfb
 Name[x-test]=xxKRfb Micro Httpdxx
 Comment=A micro http daemon for krfb that serves the VNC viewer applet.
+Comment[fr]=Un mini serveur http pour KRfb dédié à l'applet d'affichage de bureaux VNC.
 Comment[x-test]=xxA micro http daemon for krfb that serves the VNC viewer applet.xx
