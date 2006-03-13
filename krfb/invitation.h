@@ -19,7 +19,7 @@
 #define INVITATION_H
 
 #include <kapplication.h>
-#include <klistview.h>
+#include <k3listview.h>
 #include <kconfig.h>
 #include <qobject.h>
 #include <qstring.h>
@@ -43,15 +43,15 @@ public:
 	QDateTime creationTime() const;
 	bool isValid() const;
 
-	void setViewItem(KListViewItem*);
-	KListViewItem* getViewItem() const;
+	void setViewItem(K3ListViewItem*);
+	K3ListViewItem* getViewItem() const;
 	void save(KConfig *config, int num) const;
 private:
 	QString m_password;
 	QDateTime m_creationTime;
 	QDateTime m_expirationTime;
 
-	KListViewItem *m_viewItem;
+	K3ListViewItem *m_viewItem;
 };
 
 #endif

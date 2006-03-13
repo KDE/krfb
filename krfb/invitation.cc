@@ -114,12 +114,12 @@ bool Invitation::isValid() const {
 	return m_expirationTime > QDateTime::currentDateTime();
 }
 
-void Invitation::setViewItem(KListViewItem *i) {
+void Invitation::setViewItem(K3ListViewItem *i) {
 	if (m_viewItem)
 		delete m_viewItem;
 	m_viewItem = i;
 }
 
-KListViewItem *Invitation::getViewItem() const{
+K3ListViewItem *Invitation::getViewItem() const{
 	return m_viewItem;
 }

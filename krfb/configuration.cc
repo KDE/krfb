@@ -218,7 +218,7 @@ void Configuration::saveToDialogs() {
 	while (it != invitationList.end()) {
 		Invitation &inv = *(it++);
 		if (!inv.getViewItem())
-			inv.setViewItem(new KListViewItem(invMngDlg.listView,
+			inv.setViewItem(new K3ListViewItem(invMngDlg.listView,
 				inv.creationTime().toString(Qt::LocalDate),
 				inv.expirationTime().toString(Qt::LocalDate)));
 	}
@@ -373,7 +373,7 @@ void Configuration::invMngDlgDeleteOnePressed() {
 	QList<Invitation>::iterator it = invitationList.begin();
 	while (it != invitationList.end()) {
 		Invitation &ix = (*it);
-		KListViewItem *iv = ix.getViewItem();
+		K3ListViewItem *iv = ix.getViewItem();
 		if (iv && iv->isSelected())
 			it = invitationList.remove(it);
 		else

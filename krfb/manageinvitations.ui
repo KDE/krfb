@@ -62,7 +62,7 @@
                 </size>
             </property>
         </spacer>
-        <widget class="KListView" row="0" column="0" rowspan="5" colspan="1">
+        <widget class="K3ListView" row="0" column="0" rowspan="5" colspan="1">
             <column>
                 <property name="text">
                     <string>Created</string>
