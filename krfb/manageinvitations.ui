@@ -202,7 +202,7 @@
     </connection>
 </connections>
 <includes>
-    <include location="global" impldecl="in declaration">klistview.h</include>
+    <include location="global" impldecl="in declaration">k3listview.h</include>
     <include location="local" impldecl="in implementation">manageinvitations.ui.h</include>
 </includes>
 <slots>
@@ -211,6 +211,6 @@
 </slots>
 <layoutdefaults spacing="6" margin="11"/>
 <includehints>
-    <includehint>klistview.h</includehint>
+    <includehint>k3listview.h</includehint>
 </includehints>
 </UI>
