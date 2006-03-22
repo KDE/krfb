@@ -15,7 +15,7 @@ kde4_add_plugin(kded_kinetd ${kded_kinetd_PART_SRCS})
 
 kde4_install_libtool_file( ${PLUGIN_INSTALL_DIR} kded_kinetd )
 
-target_link_libraries(kded_kinetd  ${QT_AND_KDECORE_LIBS} srvloc kio kdnssd )
+target_link_libraries(kded_kinetd  ${KDE4_KDECORE_LIBS} srvloc kio kdnssd )
 
 install_targets(${LIB_INSTALL_DIR}/kde4 kded_kinetd )
 

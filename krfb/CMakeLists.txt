@@ -24,7 +24,7 @@ kde4_add_dcop_skels(krfb_SRCS krfbiface.h )
 
 kde4_add_executable(krfb ${krfb_SRCS})
 
-target_link_libraries(krfb  ${QT_AND_KDECORE_LIBS} krfbconfig vncserver srvloc Xtst kdeui kio )
+target_link_libraries(krfb  ${KDE4_KDECORE_LIBS} krfbconfig vncserver srvloc Xtst kdeui kio )
 
 install_targets(/bin krfb )
 
