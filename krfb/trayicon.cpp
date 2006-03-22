@@ -59,8 +59,8 @@ TrayIcon::TrayIcon(KDialog *d, Configuration *c) :
 	quitting(false)
 {
 	KIconLoader *loader = KGlobal::iconLoader();
-	trayIconOpen = loader->loadIcon("eyes-open24", KIcon::User);
-	trayIconClosed = loader->loadIcon("eyes-closed24", KIcon::User);
+	trayIconOpen = loader->loadIcon("eyes-open24", K3Icon::User);
+	trayIconClosed = loader->loadIcon("eyes-closed24", K3Icon::User);
 	setPixmap(trayIconClosed);
 	QToolTip::add(this, i18n("Desktop Sharing - connecting"));
 
