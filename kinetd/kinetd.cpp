@@ -208,7 +208,7 @@ void PortListener::accepted(KSocket *sock) {
 	}
 	KExtendedSocket::resolve(ksa, host, port);
 	KNotifyClient::event("IncomingConnection",
-		i18n("Connection from %1").arg(host));
+		i18n("Connection from %1", host));
 	delete ksa;
 
 	if ((!m_enabled) ||
@@ -224,9 +224,9 @@ void PortListener::accepted(KSocket *sock) {
 	m_process << m_execPath << m_argument << QString::number(sock->socket());
 	if (!m_process.start(KProcess::DontCare)) {
 		KNotifyClient::event("ProcessFailed",
-			i18n("Call \"%1 %2 %3\" failed").arg(m_execPath)
-				.arg(m_argument)
-				.arg(sock->socket()));
+			i18n("Call \"%1 %2 %3\" failed", m_execPath,
+				 m_argument,
+				 sock->socket()));
 	}
 
 	delete sock;

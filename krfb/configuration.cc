@@ -441,7 +441,7 @@ void Configuration::inviteEmail() {
 
 	KToolInvocation::invokeMailer(QString::null, QString::null, QString::null,
 		i18n("Desktop Sharing (VNC) invitation"),
-		i18n("You have been invited to a VNC session. If you have the KDE Remote "
+		ki18n("You have been invited to a VNC session. If you have the KDE Remote "
                      "Desktop Connection installed, just click on the link below.\n\n"
 		     "vnc://invitation:%1@%2:%3\n\n"
                      "Otherwise you can use any VNC client with the following parameters:\n\n"
@@ -453,15 +453,16 @@ void Configuration::inviteEmail() {
 		     "	http://%7:%8/\n"
 		     "\n"
 		     "For security reasons this invitation will expire at %9.")
-			.arg(inv.password())
-			.arg(hostname())
-			.arg(port())
-			.arg(hostname())
-			.arg(port())
-			.arg(inv.password())
-			.arg(hostname())
-			.arg(5800) // determine with dcop ... later ...
-			.arg(KGlobal::locale()->formatDateTime(inv.expirationTime())));
+			.subs(inv.password())
+			.subs(hostname())
+			.subs(port())
+			.subs(hostname())
+			.subs(port())
+			.subs(inv.password())
+			.subs(hostname())
+			.subs(5800) // determine with dcop ... later ...
+			.subs(KGlobal::locale()->formatDateTime(inv.expirationTime()))
+			.toString());
 }
 
 ////////////// invoke kcontrol module //////////////////////////

@@ -59,7 +59,7 @@ void InviteDialog::enableInviteButton( bool enable )
 void InviteDialog::setInviteCount( int count )
 {
   m_inviteWidget->btnManageInvite->setText(
-      i18n( "&Manage Invitations (%1)..." ).arg( count ) );
+      i18n( "&Manage Invitations (%1)...", count ) );
 }
 
 #include "invitedialog.moc"

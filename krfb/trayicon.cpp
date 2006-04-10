@@ -105,7 +105,7 @@ void TrayIcon::showConnectedMessage(QString host) {
 				i18n("The remote user has been authenticated and is now connected."),
 				trayIconOpen,
 				this);
-	QToolTip::add(this, i18n("Desktop Sharing - connected with %1").arg(host));
+	QToolTip::add(this, i18n("Desktop Sharing - connected with %1", host));
 }
 
 void TrayIcon::showDisconnectedMessage() {

@@ -95,7 +95,7 @@ void KcmKRfb::setInvitationNum(int num) {
 	if (num == 0)
 		m_confWidget->invitationNumLabel->setText(i18n("You have no open invitation."));
 	else
-		m_confWidget->invitationNumLabel->setText(i18n("Open invitations: %1").arg(num));
+		m_confWidget->invitationNumLabel->setText(i18n("Open invitations: %1", num));
 }
 
 void KcmKRfb::checkKInetd(bool &kinetdAvailable, bool &krfbAvailable) {

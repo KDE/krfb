@@ -376,7 +376,7 @@ RFBController::RFBController(Configuration *c) :
 	if (gethostname(hostname, 255))
 		hostname[0] = 0;
 	hostname[255] = 0;
-	desktopName = i18n("%1@%2 (shared desktop)").arg(KUser().loginName()).arg(hostname);
+	desktopName = i18n("%1@%2 (shared desktop)", KUser().loginName(), hostname);
 }
 
 RFBController::~RFBController()
@@ -510,8 +510,8 @@ void RFBController::connectionAccepted(bool aRC)
 void RFBController::acceptConnection(bool aRemoteControl)
 {
 	KNotifyClient::event("UserAcceptsConnection",
-			     i18n("User accepts connection from %1")
-			     .arg(remoteIp));
+			     i18n("User accepts connection from %1",
+			      remoteIp));
 
 	if (state != RFB_CONNECTING)
 		return;
@@ -523,8 +523,8 @@ void RFBController::acceptConnection(bool aRemoteControl)
 void RFBController::refuseConnection()
 {
 	KNotifyClient::event("UserRefusesConnection",
-			     i18n("User refuses connection from %1")
-			     .arg(remoteIp));
+			     i18n("User refuses connection from %1",
+			      remoteIp));
 
 	if (state != RFB_CONNECTING)
 		return;
@@ -571,8 +571,8 @@ void RFBController::disableBackground(bool state) {
 void RFBController::connectionClosed()
 {
 	KNotifyClient::event("ConnectionClosed",
-			     i18n("Closed connection: %1.")
-			     .arg(remoteIp));
+			     i18n("Closed connection: %1.",
+			      remoteIp));
 
 	idleTimer.stop();
 	initIdleTimer.stop();
@@ -700,13 +700,13 @@ bool RFBController::handleCheckPassword(rfbClientPtr cl,
 	if (!authd) {
 		if (configuration->invitations().size() > 0) {
 			sendKNotifyEvent("InvalidPasswordInvitations",
-					i18n("Failed login attempt from %1: wrong password")
-					.arg(remoteIp));
+					i18n("Failed login attempt from %1: wrong password",
+					 remoteIp));
 }
 		else
 			sendKNotifyEvent("InvalidPassword",
-					i18n("Failed login attempt from %1: wrong password")
-					.arg(remoteIp));
+					i18n("Failed login attempt from %1: wrong password",
+					 remoteIp));
 		return FALSE;
 	}
 
@@ -741,8 +741,8 @@ enum rfbNewClientAction RFBController::handleNewClient(rfbClientPtr cl)
 
 	if (state != RFB_WAITING) {
 		sendKNotifyEvent("TooManyConnections",
-					i18n("Connection refused from %1, already connected.")
-					.arg(host));
+					i18n("Connection refused from %1, already connected.",
+					 host));
 		return RFB_CLIENT_REFUSE;
 	}
 	remoteIp = host;
@@ -751,16 +751,16 @@ enum rfbNewClientAction RFBController::handleNewClient(rfbClientPtr cl)
 	if ((!configuration->askOnConnect()) &&
 	    (configuration->invitations().size() == 0)) {
 		sendKNotifyEvent("NewConnectionAutoAccepted",
-					i18n("Accepted uninvited connection from %1")
-					.arg(remoteIp));
+					i18n("Accepted uninvited connection from %1",
+					 remoteIp));
 
 		connectionAccepted(configuration->allowDesktopControl());
 		return RFB_CLIENT_ACCEPT;
 	}
 
 	sendKNotifyEvent("NewConnectionOnHold",
-				i18n("Received connection from %1, on hold (waiting for confirmation)")
-				.arg(remoteIp));
+				i18n("Received connection from %1, on hold (waiting for confirmation)",
+				 remoteIp));
 
 	dialog.setRemoteHost(remoteIp);
 	dialog.setAllowRemoteControl( true );
