@@ -17,7 +17,7 @@ kde4_install_libtool_file( ${PLUGIN_INSTALL_DIR} kded_kinetd )
 
 target_link_libraries(kded_kinetd  ${KDE4_KDECORE_LIBS} srvloc kio kdnssd )
 
-install_targets(${LIB_INSTALL_DIR}/kde4 kded_kinetd )
+install_targets(${PLUGIN_INSTALL_DIR} kded_kinetd )
 
 
 ########### install files ###############
