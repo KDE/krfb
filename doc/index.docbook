@@ -25,9 +25,8 @@ as Authors, publish date, the abstract, and Keywords -->
 &Brad.Hards;
 &Brad.Hards.mail;
 </author>
-</authorgroup>
-
 <!-- TRANS:ROLES_OF_TRANSLATORS -->
+</authorgroup>
 
 <copyright>
 <year>2003</year>
@@ -369,10 +368,10 @@ as &krdc;.
 </para>
 
 <para>
-The <guilabel>Allow uninvited connections</guilabel> checkbox controls
+The <guilabel>Allow uninvited connections</guilabel> check box controls
 whether &krfb; allows connection without an invitation. If uninvited
 connections are allowed, then you should probably specify a
-password. You can also use the checkboxes here to choose whether you
+password. You can also use the check boxes here to choose whether you
 have to confirm the connection before it proceeds, and whether the
 person connecting can control the desktop, or only view.
 </para>
@@ -397,7 +396,7 @@ password is securely guarded.
 
 <para>
 &krfb; allows you to control whether the background image is passed to
-the client, or not. This is controlled using a checkbox in the
+the client, or not. This is controlled using a check box in the
 <guilabel>Session</guilabel> tab, as shown below.
 </para>
 
@@ -493,7 +492,7 @@ Connection</guibutton>, then the attempt to connect will be terminated.
 
 <para>
 The <guilabel>Allow remote user to control keyboard and
-mouse</guilabel> checkbox determines whether this client can only
+mouse</guilabel> check box determines whether this client can only
 observe, or can take control of your machine. 
 </para>
 
