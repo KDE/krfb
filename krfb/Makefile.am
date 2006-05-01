@@ -30,5 +30,3 @@ KDE_ICON = krfb
 INCLUDES= -I$(top_srcdir)/krfb/libvncserver -I$(top_srcdir)/krfb/srvloc \
            $(all_includes)
 
-messages: rc.cpp
-	$(XGETTEXT) rc.cpp *.cpp *.cc -o $(podir)/krfb.pot

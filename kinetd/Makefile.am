@@ -24,5 +24,3 @@ install-data-local:
 # set the include path for X, qt and KDE
 INCLUDES= -I$(top_srcdir)/krfb/srvloc $(all_includes)
 
-messages: rc.cpp
-	$(XGETTEXT) *.cpp -o $(podir)/kinetd.pot
