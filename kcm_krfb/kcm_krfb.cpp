@@ -57,7 +57,9 @@ KcmKRfb::KcmKRfb(QWidget *p, const char *name, const QStringList &) :
 
         m_confWidget = new ConfigurationWidget(this);
 
-	QVBoxLayout *l = new QVBoxLayout(this, 0, KDialog::spacingHint());
+	QVBoxLayout *l = new QVBoxLayout(this);
+	l->setSpacing(KDialog::spacingHint());
+	l->setMargin(0);
 	l->add(m_confWidget);
 
 	setButtons(Default|Apply|Reset);
