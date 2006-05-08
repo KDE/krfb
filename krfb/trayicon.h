@@ -25,7 +25,7 @@
 #include <QPixmap>
 #include <QHideEvent>
 #include <QMouseEvent>
-#include <kpixmap.h>
+#include <QPixmap>
 #include <kaction.h>
 #include <ksystemtray.h>
 #include <kpassivepopup.h>
@@ -77,8 +77,8 @@ protected:
 
 private:
 
-  	KPixmap trayIconOpen;
-  	KPixmap trayIconClosed;
+  	QPixmap trayIconOpen;
+  	QPixmap trayIconClosed;
 	Configuration *configuration;
 	KDialog* aboutDialog;
 	KActionCollection actionCollection;
