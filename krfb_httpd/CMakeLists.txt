@@ -1,4 +1,3 @@
-kde4_header()
 
 
 
@@ -7,7 +6,6 @@ kde4_header()
 
 install_files( ${SERVICES_INSTALL_DIR} FILES kinetd_krfb_httpd.desktop )
 
-kde4_footer()
 
 
 

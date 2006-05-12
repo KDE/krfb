@@ -1,4 +1,3 @@
-kde4_header()
 
 add_subdirectory( srvloc ) 
 add_subdirectory( kinetd ) 
@@ -13,7 +12,6 @@ add_subdirectory( krfb_httpd )
 ########### install files ###############
 
 
-kde4_footer()
 
 
 

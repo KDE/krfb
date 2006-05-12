@@ -1,4 +1,3 @@
-kde4_header()
 
 include_directories( ${CMAKE_SOURCE_DIR}/krfb/srvloc  )
 
@@ -25,7 +24,6 @@ install_targets(${PLUGIN_INSTALL_DIR} kded_kinetd )
 install_files( ${SERVICETYPES_INSTALL_DIR} FILES kinetdmodule.desktop )
 install_files( ${SERVICES_INSTALL_DIR}/kded FILES kinetd.desktop )
 
-kde4_footer()
 
 
 
