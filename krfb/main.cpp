@@ -144,7 +144,7 @@ int main(int argc, char *argv[])
 	RFBController controller(config);
 	KRfbIfaceImpl dcopiface(&controller);
 
-	QObject::connect(&app, SIGNAL(lastWindowClosed()), // dont show passivepopup
+	QObject::connect(&app, SIGNAL(lastWindowClosed()), // do not show passivepopup
 			 &trayicon, SLOT(prepareQuit()));
 	QObject::connect(&app, SIGNAL(lastWindowClosed()),
 			 &controller, SLOT(closeConnection()));

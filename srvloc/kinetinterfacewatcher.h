@@ -33,9 +33,9 @@ class KInetInterfaceWatcherPrivate;
 
 
 /**
- * KInetInterfaceWatcher can watch the state of one or all 
- * of the system's network interfaces. 
- * The watcher will emit the signal @ref changed() when an 
+ * KInetInterfaceWatcher can watch the state of one or all
+ * of the system's network interfaces.
+ * The watcher will emit the signal @ref changed() when an
  * interface changed or a interface has been added or removed.
  *
  * @author Tim Jansen <tim@tjansen.de>
@@ -49,12 +49,12 @@ public:
   /**
    * Creates a new KInetInterfaceWatcher. Before you can use it,
    * you must @ref start() it.
-   * 
+   *
    * @param interface the name of the interface to watch (e.g.'eth0')
    *                  or QString::null to watch all interfaces
-   * @param minInterval the minimum interval between two checks in 
+   * @param minInterval the minimum interval between two checks in
    *                    seconds. Be careful not to check too often, to
-   *                    avoid unneccessary wasting of CPU time
+   *                    avoid unnecessary wasting of CPU time
    */
   KInetInterfaceWatcher(const QString &interface = QString::null,
 			int minInterval = 60);
@@ -72,9 +72,9 @@ public:
    * it emits a @ref changed() signal.
    * @param interface the name of the interface to watch (e.g.'eth0')
    *                  or QString::null to watch all interfaces
-   * @param minInterval the minimum interval between two checks in 
+   * @param minInterval the minimum interval between two checks in
    *                    seconds. Be careful not to check too often, to
-   *                    avoid unneccessary wasting of CPU time
+   *                    avoid unnecessary wasting of CPU time
    * @see changed()
    * @see stop()
    */
@@ -94,12 +94,12 @@ public:
 
 signals:
   /**
-   * Emitted when one or more watched interfaces have changed. The 
+   * Emitted when one or more watched interfaces have changed. The
    * @p interfaceName is the name of the interface being watched, not
    * the interface that has changed (because more than one interface
-   * may have changed). 
-   * A change occurred, when 
-   * @li a new interface has been added (when watching a single interface, 
+   * may have changed).
+   * A change occurred, when
+   * @li a new interface has been added (when watching a single interface,
    *     only when an interface of that name has been added)
    * @li an interface has been removed (when watching a single interface,
    *     only when this interface has been removed)
@@ -109,7 +109,7 @@ signals:
    * address has changed.
    *
    * @param interfaceName the name of the interface that is watched,
-   *                      by the emitter, or QString::null if all 
+   *                      by the emitter, or QString::null if all
    *                      interfaces are being watched
    * @see start()
    */

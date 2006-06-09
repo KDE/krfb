@@ -42,7 +42,7 @@ public:
    *                  or QString::null to watch all interfaces
    * @param minInterval the minimum interval between two checks in
    *                    seconds. Be careful not to check too often, to
-   *                    avoid unneccessary wasting of CPU time
+   *                    avoid unnecessary wasting of CPU time
    */
 KInetInterfaceWatcher::KInetInterfaceWatcher(const QString &interface,
 					     int minInterval) {

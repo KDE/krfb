@@ -136,8 +136,8 @@ k_dcop:
 
 	/**
 	 * Sets the port of the service, and possibly a range of ports to try.
-	 * It will return true if a port could be found. If it didnt find one but is
-	 * enabled it will start a timer that probes that port every 30s.
+	 * It will return true if a port could be found. If it did not find one
+	 * but is enabled it will start a timer that probes that port every 30s.
 	 * @param service name of a service as specified in its .desktop file
 	 * @param port the first port number to try or -1 to restore defaults
 	 * @param autoPortRange the number of ports to try

@@ -100,7 +100,7 @@ void PortListener::loadConfig(KService::Ptr s) {
 	m_valid = true;
 	m_autoPortRange = 0;
 	m_enabled = true;
-	m_argument = QString::null;
+	m_argument.clear();
 	m_multiInstance = false;
 
 	QVariant vid, vport, vautoport, venabled, vargument, vmultiInstance, vurl,
@@ -152,7 +152,7 @@ void PortListener::loadConfig(KService::Ptr s) {
 		m_registerService = true;
 	}
 	else {
-		m_serviceURL = QString::null;
+		m_serviceURL.clear();
 		m_registerService = false;
 	}
 	if (vsattributes.isValid()) {
@@ -175,9 +175,9 @@ void PortListener::loadConfig(KService::Ptr s) {
 		m_dnssdRegister = true;
 		kDebug() << "DNS-SD register is enabled\n";
 	}
-	else 
+	else
 	        m_dnssdRegister = false;
-		
+
 
 	m_slpLifetimeEnd = QDateTime::currentDateTime().addSecs(m_serviceLifetime);
 	m_defaultPortBase = m_portBase;
