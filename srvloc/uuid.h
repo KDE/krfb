@@ -1,7 +1,7 @@
 /*
  *  Micro UUID library, based on libuuid
- *  Copyright (C) 1996, 1997, 1998, 1999 Theodore Ts'o.
- *  Copyright (C) 2002 Tim Jansen <tim@tjansen.de>
+ *  Copyright 1996, 1997, 1998, 1999 Theodore Ts'o. <tytso@mit.edu>
+ *  Copyright 2002 Tim Jansen <tim@tjansen.de>
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Library General Public

@@ -1,6 +1,6 @@
 /*
  *  Represents an Inet interface
- *  Copyright (C) 2002 Tim Jansen <tim@tjansen.de>
+ *  Copyright 2002 Tim Jansen <tim@tjansen.de>
  *
  *  $Id$
  *

@@ -1,6 +1,6 @@
 /*
  *  Watches Inet interfaces
- *  Copyright (C) 2002 Tim Jansen <tim@tjansen.de>
+ *  Copyright 2002 Tim Jansen <tim@tjansen.de>
  *
  *  $Id$
  *
@@ -41,7 +41,6 @@ class KInetInterfaceWatcherPrivate;
  * @author Tim Jansen <tim@tjansen.de>
  * @short Watches the state of the network interfaces
  * @see KInetInterface
- * @since 3.2
  */
 class KInetInterfaceWatcher : public QObject {
   Q_OBJECT

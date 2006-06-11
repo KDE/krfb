@@ -1,10 +1,6 @@
 /***************************************************************************
-                               invitation.cpp
-                             -------------------
-    begin                : Sat Mar 30 2002
-    copyright            : (C) 2002 by Tim Jansen
-                           (C) Stefan Taferner (password encryption)
-    email                : tim@tjansen.de
+     Copyright 2002 Tim Jansen <tim@tjansen.de>
+     Copyright 2002 Stefan Taferner <taferner@kde.org>
  ***************************************************************************/
 
 /***************************************************************************

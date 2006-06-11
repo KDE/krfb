@@ -1,6 +1,6 @@
 /*
  *  Represents an Inet interface
- *  Copyright (C) 2002 Tim Jansen <tim@tjansen.de>
+ *  Copyright 2002 Tim Jansen <tim@tjansen.de>
  *
  *  $Id$
  *
@@ -42,7 +42,6 @@ class KInetInterfacePrivate;
  * @author Tim Jansen <tim@tjansen.de>
  * @short Represents an IPv4 or IPv6 Network Interface 
  * @see KInetInterfaceWatcher
- * @since 3.2
  */
 class KInetInterface {
 private:

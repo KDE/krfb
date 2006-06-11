@@ -1,6 +1,6 @@
 /*
  *  Interface to register SLP services.
- *  Copyright (C) 2002 Tim Jansen <tim@tjansen.de>
+ *  Copyright 2002 Tim Jansen <tim@tjansen.de>
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Library General Public

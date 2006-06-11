@@ -1,8 +1,8 @@
 /*
  * libuuid - library for generating UUIDs
  * 
- * Copyright (C) 1996, 1997, 1998, 1999 Theodore Ts'o.
- * Copyright (C) 2002 Tim Jansen
+ * Copyright 1996, 1997, 1998, 1999 Theodore Ts'o. <tytso@mit.edu>
+ * Copyright 2002 Tim Jansen <tim@tjansen.de>
  *
  * %Begin-Header%
  * This file may be redistributed under the terms of the GNU 
