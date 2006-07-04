@@ -25,15 +25,15 @@ kde4_add_executable(krfb ${krfb_SRCS})
 
 target_link_libraries(krfb  ${KDE4_KDECORE_LIBS} krfbconfig vncserver srvloc Xtst kdeui kio )
 
-install_targets(/bin krfb )
+install(TARGETS krfb  DESTINATION ${BIN_INSTALL_DIR} )
 
 
 ########### install files ###############
 
-install_files( ${XDG_APPS_DIR} FILES krfb.desktop )
-install_files( ${DATA_INSTALL_DIR}/krfb FILES eventsrc )
-install_files( ${DATA_INSTALL_DIR}/krfb/pics FILES eyes-open24.png eyes-closed24.png connection-side-image.png )
-install_files( ${SERVICES_INSTALL_DIR} FILES kinetd_krfb.desktop )
+install( FILES krfb.desktop  DESTINATION ${XDG_APPS_DIR})
+install( FILES eventsrc  DESTINATION ${DATA_INSTALL_DIR}/krfb)
+install( FILES eyes-open24.png eyes-closed24.png connection-side-image.png  DESTINATION ${DATA_INSTALL_DIR}/krfb/pics)
+install( FILES kinetd_krfb.desktop  DESTINATION ${SERVICES_INSTALL_DIR})
 
 kde4_install_icons( ${ICON_INSTALL_DIR}  hicolor )
 

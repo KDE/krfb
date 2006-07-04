@@ -16,12 +16,12 @@ kde4_install_libtool_file( ${PLUGIN_INSTALL_DIR} kcm_krfb )
 
 target_link_libraries(kcm_krfb  ${KDE4_KDECORE_LIBS} krfbconfig kdeui kio )
 
-install_targets(${PLUGIN_INSTALL_DIR} kcm_krfb )
+install(TARGETS kcm_krfb  DESTINATION ${PLUGIN_INSTALL_DIR})
 
 
 ########### install files ###############
 
-install_files( ${XDG_APPS_DIR} FILES kcmkrfb.desktop )
+install( FILES kcmkrfb.desktop  DESTINATION ${XDG_APPS_DIR})
 
 
 

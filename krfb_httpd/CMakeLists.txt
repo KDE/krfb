@@ -4,7 +4,7 @@
 
 ########### install files ###############
 
-install_files( ${SERVICES_INSTALL_DIR} FILES kinetd_krfb_httpd.desktop )
+install( FILES kinetd_krfb_httpd.desktop  DESTINATION ${SERVICES_INSTALL_DIR})
 
 
 
