@@ -418,7 +418,7 @@
                                             <number>1024</number>
                                         </property>
                                         <property name="maxValue">
-                                            <number>32767</number>
+                                            <number>65535</number>
                                         </property>
                                         <property name="toolTip" stdset="0">
                                             <string>Enter the TCP port number here</string>
