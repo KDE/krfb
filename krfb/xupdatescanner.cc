@@ -140,7 +140,7 @@ XUpdateScanner::XUpdateScanner(Display *_dpy,
 	tilesX = (width + tileWidth - 1) / tileWidth;
 	tilesY = (height + tileHeight - 1) / tileHeight;
 	tileMap = new bool[tilesX * tilesY];
-        tileRegionMap = new struct TileChangeRegion[tilesX * tilesY];
+	tileRegionMap = new struct TileChangeRegion[tilesX * tilesY];
 
 	unsigned int i;
 	for (i = 0; i < tilesX * tilesY; i++)
@@ -203,8 +203,8 @@ XUpdateScanner::~XUpdateScanner()
 		XDestroyImage(scanline);
 		XDestroyImage(tile);
 	}
-	delete tileMap;
-        delete tileRegionMap;
+	delete [] tileMap;
+	delete [] tileRegionMap;
 }
 
 
