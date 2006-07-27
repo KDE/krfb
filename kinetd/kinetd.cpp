@@ -45,6 +45,8 @@ PortListener::PortListener(KService::Ptr s,
 	m_srvreg(srvreg),
 	m_dnssdreg(0)
 {
+	m_dnssdRegistered = false;
+
 	m_uuid = createUUID();
 	loadConfig(s);
 
