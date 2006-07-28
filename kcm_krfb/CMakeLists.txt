@@ -14,7 +14,7 @@ kde4_add_plugin(kcm_krfb ${kcm_krfb_PART_SRCS})
 
 kde4_install_libtool_file( ${PLUGIN_INSTALL_DIR} kcm_krfb )
 
-target_link_libraries(kcm_krfb  ${KDE4_KDECORE_LIBS} krfbconfig kdeui kio )
+target_link_libraries(kcm_krfb  ${KDE4_KIO_LIBS} krfbconfig )
 
 install(TARGETS kcm_krfb  DESTINATION ${PLUGIN_INSTALL_DIR})
 
