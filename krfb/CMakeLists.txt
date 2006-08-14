@@ -35,7 +35,7 @@ install( FILES eventsrc  DESTINATION ${DATA_INSTALL_DIR}/krfb)
 install( FILES eyes-open24.png eyes-closed24.png connection-side-image.png  DESTINATION ${DATA_INSTALL_DIR}/krfb/pics)
 install( FILES kinetd_krfb.desktop  DESTINATION ${SERVICES_INSTALL_DIR})
 
-kde4_install_icons( ${ICON_INSTALL_DIR}  hicolor )
+kde4_install_icons( ${ICON_INSTALL_DIR}   )
 
 
 
