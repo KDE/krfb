@@ -7,6 +7,7 @@ DocPath=krfb/index.html
 Terminal=false
 Name=Krfb
 Name[bn]=কে-আর-এফ-বি
+Name[zh_TW]=Krfb 桌面分享
 GenericName=Desktop Sharing
 GenericName[bg]=Споделяне на раб. място
 GenericName[bn]=ডেস্কটপ ভাগাভাগি
