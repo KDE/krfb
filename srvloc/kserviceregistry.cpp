@@ -140,7 +140,7 @@ QString KServiceRegistry::encodeAttributeValue(const QString &value) {
 		SLPFree(n);
 		return r;
 	}
-	return QString::null;
+	return QString();
 }
 
 #else
