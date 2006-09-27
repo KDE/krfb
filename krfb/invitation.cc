@@ -54,7 +54,7 @@ static QString readableRandomString(int length) {
 
 Invitation::Invitation() :
 	m_viewItem(0) {
-	m_password = readableRandomString(4)+"-"+readableRandomString(3);
+	m_password = readableRandomString(4)+'-'+readableRandomString(3);
 	m_creationTime = QDateTime::currentDateTime();
 	m_expirationTime = QDateTime::currentDateTime().addSecs(INVITATION_DURATION);
 }

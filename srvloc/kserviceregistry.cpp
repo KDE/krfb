@@ -118,7 +118,7 @@ bool KServiceRegistry::registerService(const QString &serviceURL,
 	QMap<QString,QString>::iterator it = attributes.begin();
 	while (it != attributes.end()) {
 		if (!s.isEmpty())
-			s += ",";
+			s += ',';
 		s += QString("(%1=%2)").arg(it.key()).arg(it.data());
 		it++;
 	}
