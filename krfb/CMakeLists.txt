@@ -1,3 +1,4 @@
+project(krfb)
 
 include_directories( ${CMAKE_SOURCE_DIR}/krfb/libvncserver ${CMAKE_SOURCE_DIR}/krfb/srvloc  )
 
