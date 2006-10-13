@@ -6,7 +6,7 @@ include_directories( ${CMAKE_SOURCE_DIR}/krfb/srvloc  )
 
 set(kded_kinetd_PART_SRCS kinetd.cpp )
 
-kde4_automoc(${kded_kinetd_PART_SRCS})
+kde4_automoc(kded_kinetd ${kded_kinetd_PART_SRCS})
 
 kde4_add_dcop_skels(kded_kinetd_PART_SRCS kinetd.h )
 

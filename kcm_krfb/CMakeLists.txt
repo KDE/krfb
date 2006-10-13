@@ -6,7 +6,7 @@
 
 set(kcm_krfb_PART_SRCS kcm_krfb.cpp )
 
-kde4_automoc(${kcm_krfb_PART_SRCS})
+kde4_automoc(kcm_krfb ${kcm_krfb_PART_SRCS})
 
 kde4_add_ui_files(kcm_krfb_PART_SRCS configurationwidget.ui )
 
