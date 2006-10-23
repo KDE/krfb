@@ -16,7 +16,7 @@ set(krfb_SRCS
    trayicon.cpp 
    connectiondialog.cc )
 
-kde4_automoc(krfb ${krfb_SRCS})
+kde4_automoc(${krfb_SRCS})
 
 kde4_add_ui_files(krfb_SRCS connectionwidget.ui )
 
