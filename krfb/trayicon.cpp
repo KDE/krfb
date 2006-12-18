@@ -21,7 +21,7 @@
 #include <QHideEvent>
 #include <QPixmap>
 #include <QMouseEvent>
-#include <kstdaction.h>
+#include <kstandardaction.h>
 #include <kapplication.h>
 #include <klocale.h>
 #include <kdialog.h>
@@ -79,7 +79,7 @@ TrayIcon::TrayIcon(KDialog *d, Configuration *c) :
 
 	contextMenu()->insertSeparator();
 
-	aboutAction = KStdAction::aboutApp(this, SLOT(showAbout()), &actionCollection);
+	aboutAction = KStandardAction::aboutApp(this, SLOT(showAbout()), &actionCollection);
 	aboutAction->plug(contextMenu());
 
 	show();
