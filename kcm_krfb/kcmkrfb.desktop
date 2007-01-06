@@ -3,7 +3,7 @@ Encoding=UTF-8
 Icon=krfb
 Type=Application
 Exec=kcmshell kcmkrfb
-DocPath=help:/krfb/krfb-configuration.html
+DocPath=krfb/krfb-configuration.html
 
 X-KDE-ModuleType=Library
 X-KDE-Library=krfb
