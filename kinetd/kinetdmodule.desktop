@@ -4,6 +4,7 @@
 Type=ServiceType
 X-KDE-ServiceType=KInetDModule
 Name=KInetD Module Type
+Name[el]=Τύπος αρθρώματος KInetD
 Name[fr]=Type de module de KInetD
 Name[x-test]=xxKInetD Module Typexx
 

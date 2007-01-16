@@ -9,6 +9,7 @@ Terminal=false
 Name=Krfb
 Name[x-test]=xxKrfbxx
 GenericName=Desktop Sharing
+GenericName[el]=Κοινή χρήση επιφάνειας εργασίας
 GenericName[fr]=Partage de bureau
 GenericName[x-test]=xxDesktop Sharingxx
 Categories=Qt;KDE;System;

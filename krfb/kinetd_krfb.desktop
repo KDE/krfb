@@ -19,8 +19,10 @@ X-KDE-KINETD-DNSSD-Type=_rfb._tcp
 X-KDE-KINETD-DNSSD-Properties=type=shared,u=%u,fullname=%f
 
 Name=KRfb Desktop Sharing
+Name[el]=Κοινή χρήση επιφάνειας εργασίας KRfb
 Name[fr]=Partage de bureau KRfb
 Name[x-test]=xxKRfb Desktop Sharingxx
 Comment=A daemon that allows you to share your desktop
+Comment[el]=Ένας δαίμονας που σας επιτρέπει να μοιραστείτε την επιφάνεια εργασίας σας
 Comment[fr]=Un démon qui vous permet de partager votre bureau
 Comment[x-test]=xxA daemon that allows you to share your desktopxx

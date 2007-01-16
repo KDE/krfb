@@ -10,13 +10,16 @@ X-KDE-Library=krfb
 X-KDE-ParentApp=kcontrol
 
 Name=Desktop Sharing
+Name[el]=Κοινή χρήση επιφάνειας εργασίας
 Name[fr]=Partage de bureau
 Name[x-test]=xxDesktop Sharingxx
 
 Comment=Configure Desktop Sharing
+Comment[el]=Ρύθμιση της κοινής χρήσης της επιφάνειας εργασίας
 Comment[fr]=Configuration du partage du bureau
 Comment[x-test]=xxConfigure Desktop Sharingxx
 Keywords=desktop sharing,krfb,vnc,sharing,krdc,remote desktop connection,invitation,port,slp,uninvited
+Keywords[el]=κοινή χρήση επιφάνειας εργασίας,krfb,vnc,κοινή χρήση,krdc,σύνδεση σε απομακρυσμένη επιφάνεια εργασίας,πρόσκληση,θύρα,slp,απρόσκλητο
 Keywords[fr]=partage de bureau,krfb,vnc,partage,rdp,krdc,connexion à un bureau distant,invitation,port,slp,non invité
 Keywords[x-test]=xxdesktop sharing,krfb,vnc,sharing,krdc,remote desktop connection,invitation,port,slp,uninvitedxx
 

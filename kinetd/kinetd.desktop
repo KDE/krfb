@@ -9,8 +9,10 @@ X-KDE-FactoryName=kinetd
 X-KDE-Kded-autoload=true
 
 Name=KDE Internet Daemon
+Name[el]=Δαίμονας διαδικτύου για το KDE
 Name[fr]=Démon Internet de KDE
 Name[x-test]=xxKDE Internet Daemonxx
 Comment=An Internet daemon that starts network services on demand
+Comment[el]=Ένας δαίμονας για το διαδίκτυο ο οποίος ξεκινάει τις υπηρεσίες δικτύου όταν απαιτείται
 Comment[fr]=Un démon Internet qui démarre le service réseau à la demande
 Comment[x-test]=xxAn Internet daemon that starts network services on demandxx
