@@ -1,11 +1,11 @@
-[!Global!]
+[Global]
 IconName=krfb
 Comment=Desktop Sharing
 Comment[el]=Κοινή χρήση επιφάνειας εργασίας
 Comment[fr]=Partage du bureau
 Comment[x-test]=xxDesktop Sharingxx
 
-[UserAcceptsConnection]
+[Event/UserAcceptsConnection]
 Name=UserAcceptsConnection
 Name[el]=Ο χρήστης αποδέχεται σύνδεση
 Name[fr]=L'utilisateur accepte les connexions
@@ -14,9 +14,9 @@ Comment=User accepts connection
 Comment[el]=Ο χρήστης αποδέχεται σύνδεση
 Comment[fr]=l'utilisateur accepte les connexions
 Comment[x-test]=xxUser accepts connectionxx
-default_presentation=4
+Action=None
 
-[UserRefusesConnection]
+[Event/UserRefusesConnection]
 Name=UserRefusesConnection
 Name[el]=Ο χρήστης απορρίπτει σύνδεση
 Name[fr]=L'utilisateur refuse les connexions
@@ -25,9 +25,9 @@ Comment=User refuses connection
 Comment[el]=Ο χρήστης απορρίπτει σύνδεση
 Comment[fr]=L'utilisateur refuse les connexions
 Comment[x-test]=xxUser refuses connectionxx
-default_presentation=4
+Action=None
 
-[ConnectionClosed]
+[Event/ConnectionClosed]
 Name=ConnectionClosed
 Name[el]=Η σύνδεση έκλεισε
 Name[fr]=Connexion fermée
@@ -36,9 +36,9 @@ Comment=Connection closed
 Comment[el]=Η σύνδεση έκλεισε
 Comment[fr]=Connexion coupée
 Comment[x-test]=xxConnection closedxx
-default_presentation=4
+Action=None
 
-[InvalidPassword]
+[Event/InvalidPassword]
 Name=InvalidPassword
 Name[el]=Μη έγκυρος κωδικός πρόσβασης
 Name[fr]=Mots de passe non valable
@@ -47,9 +47,9 @@ Comment=Invalid password
 Comment[el]=Μη έγκυρος κωδικός πρόσβασης
 Comment[fr]=Mot de passe non valable
 Comment[x-test]=xxInvalid passwordxx
-default_presentation=4
+Action=None
 
-[InvalidPasswordInvitations]
+[Event/InvalidPasswordInvitations]
 Name=InvalidPasswordInvitations
 Name[el]=Μη έγκυρες προσκλήσεις κωδικού πρόσβασης
 Name[fr]=Invitations de mot de passe non valable
@@ -58,9 +58,9 @@ Comment=The invited party sent an invalid password. Connection refused.
 Comment[el]=Η πλευρά που προσκλήθηκε έστειλε μη έγκυρο κωδικό πρόσβασης. Η σύνδεση απορρίφθηκε.
 Comment[fr]=La partie invitée a envoyé un mot de passe non valable. Connexion refusée.
 Comment[x-test]=xxThe invited party sent an invalid password. Connection refused.xx
-default_presentation=2
+Action=Popup
 
-[NewConnectionOnHold]
+[Event/NewConnectionOnHold]
 Name=NewConnectionOnHold
 Name[el]=Νέα σύνδεση σε αναμονή
 Name[fr]=Nouvelle connexion au raccroché
@@ -69,9 +69,9 @@ Comment=Connection requested, user must accept
 Comment[el]=Αιτήθηκε σύνδεση, ο χρήστης πρέπει να αποδεχθεί
 Comment[fr]=Connexion demandée, l'utilisateur doit accepter
 Comment[x-test]=xxConnection requested, user must acceptxx
-default_presentation=4
+Action=None
 
-[NewConnectionAutoAccepted]
+[Event/NewConnectionAutoAccepted]
 Name=NewConnectionAutoAccepted
 Name[el]=Αυτόματη αποδοχή νέας σύνδεσης
 Name[fr]=Nouvelle connexion auto-acceptée
@@ -80,9 +80,9 @@ Comment=New connection automatically established
 Comment[el]=Νέα σύνδεση αυτόματα αποκαταστάθηκε
 Comment[fr]=Nouvelle connexion établie automatiquement
 Comment[x-test]=xxNew connection automatically establishedxx
-default_presentation=4
+Action=None
 
-[TooManyConnections]
+[Event/TooManyConnections]
 Name=TooManyConnections
 Name[el]=Πάρα πολλές συνδέσεις
 Name[fr]=Trop de connexions
@@ -91,10 +91,10 @@ Comment=Busy, connection refused
 Comment[el]=Απασχολημένο, η σύνδεση απορρίφθηκε
 Comment[fr]=Occupé, connexion refusée
 Comment[x-test]=xxBusy, connection refusedxx
-default_presentation=4
+Action=None
 default_logfile=
 
-[UnexpectedConnection]
+[Event/UnexpectedConnection]
 Name=UnexpectedConnection
 Name[el]=Μη αναμενόμενη σύνδεση
 Name[fr]=Connexion inattendue
@@ -103,5 +103,4 @@ Comment=Received unexpected connection, abort
 Comment[el]=Λήψη μη αναμενόμενης σύνδεσης, εγκατάλειψη
 Comment[fr]=Reçu une connexion inattendue, interruption
 Comment[x-test]=xxReceived unexpected connection, abortxx
-default_presentation=4
-
+Action=None

@@ -35,14 +35,14 @@
                 <string>Welcome to KDE Desktop Sharing</string>
             </property>
         </widget>
-        <widget class="KActiveLabel" row="1" column="1" rowspan="1" colspan="3">
+        <widget class="K3ActiveLabel" row="1" column="1" rowspan="1" colspan="3">
             <property name="name">
                 <cstring>kActiveLabel1</cstring>
             </property>
             <property name="focusPolicy">
                 <enum>Qt::NoFocus</enum>
             </property>
-            <property name="text">
+            <property name="html">
                 <string>KDE Desktop Sharing allows you to invite somebody at a remote location to watch and possibly control your desktop.
 &lt;a href="whatsthis:&lt;p&gt;An invitation creates a one-time password that allows the receiver to connect to your desktop. It is valid for only one successful connection and will expire after an hour if it has not been used. When somebody connects to your computer a dialog will appear and ask you for permission. The connection will not be established before you accept it. In this dialog you can also restrict the other person to view your desktop only, without the ability to move your mouse pointer or press keys.&lt;/p&gt;&lt;p&gt;If you want to create a permanent password for Desktop Sharing, allow 'Uninvited Connections' in the configuration.&lt;/p&gt;"&gt;More about invitations...&lt;/a&gt;</string>
             </property>

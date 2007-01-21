@@ -26,7 +26,7 @@
 #include <kdebug.h>
 #include <kstandarddirs.h>
 #include <kconfig.h>
-#include <knotifyclient.h>
+#include <KNotification>
 #include <ksocketaddress.h>
 #include <kextsock.h>
 #include <klocale.h>
@@ -207,7 +207,7 @@ void PortListener::accepted(KSocket *sock) {
 		return;
 	}
 	KExtendedSocket::resolve(ksa, host, port);
-	KNotifyClient::event("IncomingConnection",
+	KNotification::event("IncomingConnection",
 		i18n("Connection from %1", host));
 	delete ksa;
 
@@ -223,7 +223,7 @@ void PortListener::accepted(KSocket *sock) {
 	m_process.clearArguments();
 	m_process << m_execPath << m_argument << QString::number(sock->socket());
 	if (!m_process.start(KProcess::DontCare)) {
-		KNotifyClient::event("ProcessFailed",
+		KNotification::event("ProcessFailed",
 			i18n("Call \"%1 %2 %3\" failed", m_execPath,
 				 m_argument,
 				 sock->socket()));

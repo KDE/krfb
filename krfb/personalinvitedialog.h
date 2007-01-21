@@ -24,12 +24,12 @@ class PersonalInviteWidget;
 
 #include <qdatetime.h>
 
-#include <kdialogbase.h>
+#include <KDialog>
 
-class PersonalInviteDialog : public KDialogBase
+class PersonalInviteDialog : public KDialog
 {
   public:
-    PersonalInviteDialog( QWidget *parent, const char *name );
+    PersonalInviteDialog( QWidget *parent );
     virtual ~PersonalInviteDialog() {}
 
     void setHost( const QString &host, uint port );

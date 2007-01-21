@@ -25,7 +25,7 @@
         <property name="resizeMode">
             <enum>Fixed</enum>
         </property>
-        <widget class="KActiveLabel" row="0" column="1" rowspan="1" colspan="3">
+        <widget class="K3ActiveLabel" row="0" column="1" rowspan="1" colspan="3">
             <property name="name">
                 <cstring>mainTextLabel</cstring>
             </property>
@@ -113,7 +113,7 @@ Give the information below to the person that you want to invite (&lt;a href="wh
                 </size>
             </property>
         </spacer>
-        <widget class="KActiveLabel" row="2" column="2">
+        <widget class="K3ActiveLabel" row="2" column="2">
             <property name="name">
                 <cstring>hostLabel</cstring>
             </property>
@@ -164,7 +164,7 @@ Give the information below to the person that you want to invite (&lt;a href="wh
                 <string>&lt;b&gt;Expiration time:&lt;/b&gt;</string>
             </property>
         </widget>
-        <widget class="KActiveLabel" row="3" column="2">
+        <widget class="K3ActiveLabel" row="3" column="2">
             <property name="name">
                 <cstring>passwordLabel</cstring>
             </property>
@@ -183,7 +183,7 @@ Give the information below to the person that you want to invite (&lt;a href="wh
                 <string>12345</string>
             </property>
         </widget>
-        <widget class="KActiveLabel" row="4" column="2">
+        <widget class="K3ActiveLabel" row="4" column="2">
             <property name="name">
                 <cstring>expirationLabel</cstring>
             </property>
@@ -218,7 +218,7 @@ Give the information below to the person that you want to invite (&lt;a href="wh
                 <string>&lt;b&gt;Host:&lt;/b&gt;</string>
             </property>
         </widget>
-        <widget class="KActiveLabel" row="2" column="3">
+        <widget class="K3ActiveLabel" row="2" column="3">
             <property name="name">
                 <cstring>hostHelpLabel</cstring>
             </property>

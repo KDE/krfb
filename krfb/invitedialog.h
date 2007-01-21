@@ -22,14 +22,14 @@
 
 class InviteWidget;
 
-#include <kdialogbase.h>
+#include <KDialog>
 
-class InviteDialog : public KDialogBase
+class InviteDialog : public KDialog
 {
   Q_OBJECT
 
   public:
-    InviteDialog( QWidget *parent, const char *name );
+    InviteDialog( QWidget *parent );
     ~InviteDialog() {}
 
     void enableInviteButton( bool enable );

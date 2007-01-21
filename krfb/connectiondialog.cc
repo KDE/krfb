@@ -25,22 +25,27 @@
 
 #include <kiconloader.h>
 #include <klocale.h>
+#include <KStandardGuiItem>
 
-ConnectionDialog::ConnectionDialog( QWidget *parent, const char *name )
-    : KDialogBase( parent, name, true, i18n( "New Connection" ),
-                   Ok|Cancel, Cancel, true )
+ConnectionDialog::ConnectionDialog( QWidget *parent )
+    : KDialog( parent )
 {
+  setCaption(i18n("New Connection"));
+  setButtons(Ok|Cancel);
+  setDefaultButton(Cancel);
+  setModal(true);
+
   m_connectWidget = new ConnectionWidget( this, "ConnectWidget" );
   m_connectWidget->pixmapLabel->setPixmap(
       UserIcon( "connection-side-image.png" ) );
 
-  KGuiItem accept = KStdGuiItem::ok();
+  KGuiItem accept = KStandardGuiItem::ok();
   accept.setText( i18n( "Accept Connection" ) );
-  setButtonOK( accept );
+  setButtonGuiItem(Ok, accept);
 
-  KGuiItem refuse = KStdGuiItem::cancel();
+  KGuiItem refuse = KStandardGuiItem::cancel();
   refuse.setText( i18n( "Refuse Connection" ) );
-  setButtonCancel( refuse );
+  setButtonGuiItem(Cancel, refuse);
 
   setMainWidget( m_connectWidget );
 }

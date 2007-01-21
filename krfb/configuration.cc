@@ -24,12 +24,10 @@
 #include <kmessagebox.h>
 #include <kprocess.h>
 #include <ksocketaddress.h>
-#include <kactivelabel.h>
+#include <k3activelabel.h>
 #include <ktoolinvocation.h>
 
 #include <qdatastream.h>
-#include <dcopclient.h>
-#include <dcopref.h>
 
 #include <qlabel.h>
 #include <qpushbutton.h>
@@ -47,11 +45,17 @@
 Configuration::Configuration(krfb_mode mode) :
 	m_mode(mode),
 	invMngDlg(0, 0, true),
-	invDlg(0, "InviteDialog"),
-	persInvDlg(0, "PersonalInviteDialog"),
-	portNum(-1),
+	invDlg(0),
+	persInvDlg(0),
+	portNum(-1)
+#ifdef __GNUC__
+#warning "Port to DBUS"
+#endif
+#if 0
 	kinetdRef("kded", "kinetd")
+#endif
 {
+#if 0
 	kinetdRef.setDCOPClient(KApplication::dcopClient());
 	loadFromKConfig();
 	saveToDialogs();
@@ -59,6 +63,7 @@ Configuration::Configuration(krfb_mode mode) :
 
     connectDCOPSignal( 0, "KRFB::ConfigChanged", "KRFB_ConfigChanged()",
 						"updateKConfig()", false );
+#endif
 	connect(invMngDlg.newPersonalInvitationButton, SIGNAL(clicked()),
 		SLOT(showPersonalInvitationDialog()));
 	connect(invMngDlg.newEmailInvitationButton, SIGNAL(clicked()), SLOT(inviteEmail()));
@@ -89,39 +94,51 @@ Configuration::~Configuration() {
         save();
 }
 
+#if 0
 void Configuration::updateKConfig()
 {
     loadFromKConfig();
 }
+#endif
 
 void Configuration::setKInetdEnabled(bool enabled) {
+#if 0
 	kinetdRef.send("setEnabled", QString("krfb"), enabled);
 	kinetdRef.send("setEnabled", QString("krfb_httpd"), enabled);
+#endif
 }
 
 void Configuration::setKInetdEnabled(const QDateTime &date) {
+#if 0
 	kinetdRef.send("setEnabled", QString("krfb"), date);
 	kinetdRef.send("setEnabled", QString("krfb_httpd"), date);
+#endif
 }
 
 void Configuration::setKInetdServiceRegistrationEnabled(bool enabled) {
+#if 0
 	kinetdRef.send("setServiceRegistrationEnabled",
 		       QString("krfb"), enabled);
 	kinetdRef.send("setServiceRegistrationEnabled",
 		       QString("krfb_httpd"), enabled);
+#endif
 }
 
 void Configuration::getPortFromKInetd() {
+#if 0
 	DCOPReply r = kinetdRef.call("port", QString("krfb"));
 	if (!r.isValid())
 		return; // nice error msg here?
 	r.get(portNum);
+#endif
 }
 
 void Configuration::setKInetdPort(int p) {
+#if 0
 	DCOPReply r = kinetdRef.call("setPort",
 				     QString("krfb"), p, 1);
 	// nice error msg here?
+#endif
 }
 
 
@@ -429,7 +446,7 @@ void Configuration::inviteEmail() {
 		"You should either encrypt the email or at least send it only in a "
 		"secure network, but not over the Internet."),
 						   i18n("Send Invitation via Email"),
-						   KStdGuiItem::cont(),
+						   KStandardGuiItem::cont(),
 						   "showEmailInvitationWarning");
 	if (r == KMessageBox::Cancel)
 		return;

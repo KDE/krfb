@@ -27,8 +27,10 @@
 #include <QMouseEvent>
 #include <QPixmap>
 #include <kaction.h>
-#include <ksystemtray.h>
+#include <ksystemtrayicon.h>
 #include <kpassivepopup.h>
+#include <KActionCollection>
+#include <KToggleAction>
 
 class KDialog;
 
@@ -55,7 +57,7 @@ protected:
   * @author Tim Jansen
   */
 
-class TrayIcon : public KSystemTray {
+class TrayIcon : public KSystemTrayIcon {
    	Q_OBJECT
 public: 
 	TrayIcon(KDialog*, Configuration*);
@@ -73,7 +75,7 @@ public slots:
 	void setDesktopControlSetting(bool);
 
 protected:
-	void mousePressEvent(QMouseEvent *e);
+	void activated(QSystemTrayIcon::ActivationReason reason);
 
 private:
 

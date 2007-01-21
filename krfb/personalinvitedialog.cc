@@ -22,14 +22,18 @@
 
 #include <qlabel.h>
 
-#include <kactivelabel.h>
+#include <k3activelabel.h>
 #include <kiconloader.h>
 #include <klocale.h>
 
-PersonalInviteDialog::PersonalInviteDialog( QWidget *parent, const char *name )
-    : KDialogBase( parent, name, true, i18n( "Personal Invitation" ),
-                   Close, Close, true )
+PersonalInviteDialog::PersonalInviteDialog( QWidget *parent )
+    : KDialog( parent )
 {
+  setCaption(i18n("Personal Invitation"));
+  setButtons(Close);
+  setDefaultButton(Close);
+  setModal(true);
+
   m_inviteWidget = new PersonalInviteWidget( this, "PersonalInviteWidget" );
   m_inviteWidget->pixmapLabel->setPixmap( 
       UserIcon( "connection-side-image.png" ) );

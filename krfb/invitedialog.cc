@@ -22,21 +22,25 @@
 
 #include <kiconloader.h>
 #include <klocale.h>
-#include <kstdguiitem.h>
+#include <KStandardGuiItem>
 
 #include <qlabel.h>
 #include <qpushbutton.h>
 
-InviteDialog::InviteDialog( QWidget *parent, const char *name )
-    : KDialogBase( parent, name, true, i18n( "Invitation" ),
-      User1|Close|Help, NoDefault, true )
+InviteDialog::InviteDialog( QWidget *parent )
+    : KDialog( parent )
 {
+  setCaption(i18n("Invitation"));
+  setButtons(User1|Close|Help);
+  setDefaultButton(NoDefault);
+  setModal(true);
+
   m_inviteWidget = new InviteWidget( this, "InviteWidget" );
   m_inviteWidget->pixmapLabel->setPixmap(
       UserIcon( "connection-side-image.png" ) );
   setMainWidget( m_inviteWidget );
 
-  setButtonGuiItem( User1, KStdGuiItem::configure() );
+  setButtonGuiItem( User1, KStandardGuiItem::configure() );
 
   connect( m_inviteWidget->btnCreateInvite, SIGNAL( clicked() ),
            SIGNAL( createInviteClicked() ) );

@@ -37,7 +37,7 @@
 #endif
 
 #include <kapplication.h>
-#include <knotifyclient.h>
+#include <KNotification>
 #include <kdebug.h>
 #include <kmessagebox.h>
 #include <klocale.h>
@@ -50,7 +50,6 @@
 #include <qglobal.h>
 #include <qlabel.h>
 #include <qmutex.h>
-#include <q3deepcopy.h>
 #include <qclipboard.h>
 #include <qdesktopwidget.h>
 //Added by qt3to4:
@@ -312,7 +311,7 @@ void PointerEvent::exec() {
 
 ClipboardEvent::ClipboardEvent(RFBController *c, const QString &ctext) :
 	controller(c),
-	text(QDeepCopy<QString>(ctext)) {
+	text(ctext) {
 }
 
 void ClipboardEvent::exec() {
@@ -337,7 +336,7 @@ KNotifyEvent::~KNotifyEvent() {
 }
 
 void KNotifyEvent::exec() {
-	KNotifyClient::event(name, desc);
+	KNotification::event(name, desc);
 }
 
 SessionEstablishedEvent::SessionEstablishedEvent(RFBController *c) :
@@ -352,7 +351,7 @@ RFBController::RFBController(Configuration *c) :
 	allowDesktopControl(false),
 	lastClipboardDirection(LAST_SYNC_TO_SERVER),
 	configuration(c),
-	dialog( 0, "ConnectionDialog" ),
+	dialog(0),
 	disableBackgroundPending(false),
 	disableBackgroundState(false),
 	closePending(false),
@@ -464,8 +463,12 @@ void RFBController::startServer(int inetdFd, bool xtestGrab)
 				     server->rfbServerFormat.bitsPerPixel,
 				     server->paddedWidthInBytes,
 				     !configuration->disableXShm());
-
+#ifdef __GNUC__
+#warning "FIXME (linking problem)"
+#endif
+#if 0
 	rfbInitServer(server);
+#endif
 	state = RFB_WAITING;
 
 	if (xtestGrab) {
@@ -509,7 +512,7 @@ void RFBController::connectionAccepted(bool aRC)
 
 void RFBController::acceptConnection(bool aRemoteControl)
 {
-	KNotifyClient::event("UserAcceptsConnection",
+	KNotification::event("UserAcceptsConnection",
 			     i18n("User accepts connection from %1",
 			      remoteIp));
 
@@ -522,7 +525,7 @@ void RFBController::acceptConnection(bool aRemoteControl)
 
 void RFBController::refuseConnection()
 {
-	KNotifyClient::event("UserRefusesConnection",
+	KNotification::event("UserRefusesConnection",
 			     i18n("User refuses connection from %1",
 			      remoteIp));
 
@@ -562,15 +565,17 @@ void RFBController::disableBackground(bool state) {
 		return;
 
 	disableBackgroundState = state;
+#if 0
 	DCOPRef ref("kdesktop", "KBackgroundIface");
 	ref.setDCOPClient(KApplication::dcopClient());
 
 	ref.send("setBackgroundEnabled(bool)", bool(!state));
+#endif
 }
 
 void RFBController::connectionClosed()
 {
-	KNotifyClient::event("ConnectionClosed",
+	KNotification::event("ConnectionClosed",
 			     i18n("Closed connection: %1.",
 			      remoteIp));
 
@@ -723,6 +728,10 @@ enum rfbNewClientAction RFBController::handleNewClient(rfbClientPtr cl)
 	cl->negotiationFinishedHook = negotiationFinishedHook;
 
 	QString host, port;
+#ifdef __GNUC__
+#warning "FIXME (port KSocketAddress)"
+#endif
+#if 0
 	KSocketAddress *ksa = KExtendedSocket::peerAddress(socket);
 	if (ksa) {
 		hostent *he = 0;
@@ -738,6 +747,7 @@ enum rfbNewClientAction RFBController::handleNewClient(rfbClientPtr cl)
 			host = ksa->nodeName();
 		delete ksa;
 	}
+#endif
 
 	if (state != RFB_WAITING) {
 		sendKNotifyEvent("TooManyConnections",

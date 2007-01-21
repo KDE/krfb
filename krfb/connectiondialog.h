@@ -20,16 +20,16 @@
 #ifndef CONNECTIONDIALOG_H
 #define CONNECTIONDIALOG_H
 
-#include <kdialogbase.h>
+#include <KDialog>
 
 class ConnectionWidget;
 
-class ConnectionDialog : public KDialogBase
+class ConnectionDialog : public KDialog
 {
   Q_OBJECT
 
   public:
-    ConnectionDialog( QWidget *parent, const char *name );
+    ConnectionDialog( QWidget *parent );
     ~ConnectionDialog() {};
 
     void setRemoteHost( const QString &host );

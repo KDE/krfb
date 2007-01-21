@@ -33,9 +33,7 @@
 #include <kaboutdata.h>
 #include <kconfig.h>
 #include <kgenericfactory.h>
-#include <kdatastream.h>
 #include <kdebug.h>
-#include <dcopclient.h>
 
 #define VERSION "0.7"
 
@@ -51,7 +49,7 @@ extern "C" {
 }
 
 
-KcmKRfb::KcmKRfb(QWidget *p, const char *name, const QStringList &) :
+KcmKRfb::KcmKRfb(QWidget *p, const QStringList &) :
 	KCModule(KcmKRfbFactory::instance(), p),
 	m_configuration(KRFB_CONFIGURATION_MODE) {
 
@@ -62,7 +60,7 @@ KcmKRfb::KcmKRfb(QWidget *p, const char *name, const QStringList &) :
 	l->setMargin(0);
 	l->add(m_confWidget);
 
-	setButtons(Default|Apply|Reset);
+	setButtons(Default|Apply|Default);
 
 	KAboutData* about = new KAboutData( "kcm_krfb", I18N_NOOP("Desktop Sharing Control Module"),
 		VERSION,
@@ -104,6 +102,10 @@ void KcmKRfb::checkKInetd(bool &kinetdAvailable, bool &krfbAvailable) {
 	kinetdAvailable = false;
 	krfbAvailable = false;
 
+#ifdef __GNUC__
+#warning "Port to DBUS"
+#endif
+#if 0
 	DCOPClient *d = KApplication::dcopClient();
 
 	QByteArray sdata, rdata;
@@ -119,6 +121,7 @@ void KcmKRfb::checkKInetd(bool &kinetdAvailable, bool &krfbAvailable) {
 	QDataStream answer(&rdata, QIODevice::ReadOnly);
 	answer >> krfbAvailable;
 	kinetdAvailable = true;
+#endif
 }
 
 void KcmKRfb::load() {
@@ -152,7 +155,9 @@ void KcmKRfb::save() {
 		m_configuration.setPreferredPort(m_confWidget->portInput->value());
 	m_configuration.setDisableBackground(m_confWidget->disableBackgroundCB->isChecked());
 	m_configuration.save();
+#if 0
 	kapp->dcopClient()->emitDCOPSignal("KRFB::ConfigChanged", "KRFB_ConfigChanged()", QByteArray());
+#endif
 	emit changed(false);
 }
 

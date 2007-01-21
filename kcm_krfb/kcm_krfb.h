@@ -32,7 +32,7 @@ private:
 	ConfigurationWidget *m_confWidget;
 	void checkKInetd(bool&, bool&);
 public:
-	KcmKRfb(QWidget *p, const char *name, const QStringList &);
+	KcmKRfb(QWidget *p, const QStringList &);
 
 	void load();
 	void save();

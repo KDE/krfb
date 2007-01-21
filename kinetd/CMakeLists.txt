@@ -8,7 +8,8 @@ set(kded_kinetd_PART_SRCS kinetd.cpp )
 
 kde4_automoc(${kded_kinetd_PART_SRCS})
 
-kde4_add_dcop_skels(kded_kinetd_PART_SRCS kinetd.h )
+message(STATUS "Port to krfb DBUS")
+# kde4_add_dcop_skels(kded_kinetd_PART_SRCS kinetd.h )
 
 kde4_add_plugin(kded_kinetd ${kded_kinetd_PART_SRCS})
 
@@ -20,8 +21,9 @@ install(TARGETS kded_kinetd  DESTINATION ${PLUGIN_INSTALL_DIR})
 
 ########### install files ###############
 
-install( FILES kinetdmodule.desktop  DESTINATION ${SERVICETYPES_INSTALL_DIR})
-install( FILES kinetd.desktop  DESTINATION ${SERVICES_INSTALL_DIR}/kded)
+install(FILES kinetd.notifyrc DESTINATION ${DATA_INSTALL_DIR}/krfb)
+install(FILES kinetdmodule.desktop  DESTINATION ${SERVICETYPES_INSTALL_DIR})
+install(FILES kinetd.desktop  DESTINATION ${SERVICES_INSTALL_DIR}/kded)
 
 
 

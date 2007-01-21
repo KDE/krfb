@@ -17,15 +17,20 @@
 
 #include "trayicon.h"
 #include "configuration.h"
+#ifdef __GNUC__
+#warning "Port to DBUS"
+#endif
+#if 0
 #include "krfbifaceimpl.h"
+#endif
 #include "rfbcontroller.h"
 
-#include <kpixmap.h>
+#include <QPixmap>
 #include <kaction.h>
 #include <kdebug.h>
 #include <kapplication.h>
-#include <knotifyclient.h>
-#include <ksystemtray.h>
+#include <KNotification>
+#include <ksystemtrayicon.h>
 #include <kcmdlineargs.h>
 #include <kaboutdata.h>
 #include <kaboutapplication.h>
@@ -35,7 +40,6 @@
 #include <qwindowdefs.h>
 #include <q3cstring.h>
 #include <qdatastream.h>
-#include <dcopref.h>
 
 #include <signal.h>
 
@@ -53,6 +57,7 @@ static KCmdLineOptions options[] =
 };
 
 void checkKInetd(bool &kinetdAvailable, bool &krfbAvailable) {
+#if 0
 	DCOPRef ref("kded", "kinetd");
 	ref.setDCOPClient(KApplication::dcopClient());
 
@@ -65,6 +70,7 @@ void checkKInetd(bool &kinetdAvailable, bool &krfbAvailable) {
 
 	r.get(krfbAvailable);
 	kinetdAvailable = true;
+#endif
 }
 
 int main(int argc, char *argv[])
@@ -132,7 +138,7 @@ int main(int argc, char *argv[])
 	args->clear();
 
 	if ((!config->allowUninvitedConnections()) && (config->invitations().size() == 0)) {
-		KNotifyClient::event("UnexpectedConnection");
+		KNotification::event("UnexpectedConnection");
 		return 1;
         }
 
@@ -142,7 +148,9 @@ int main(int argc, char *argv[])
 	TrayIcon trayicon(new KAboutApplication(&aboutData),
 			  config);
 	RFBController controller(config);
+#if 0
 	KRfbIfaceImpl dcopiface(&controller);
+#endif
 
 	QObject::connect(&app, SIGNAL(lastWindowClosed()), // do not show passivepopup
 			 &trayicon, SLOT(prepareQuit()));
@@ -156,10 +164,12 @@ int main(int argc, char *argv[])
 	QObject::connect(&trayicon, SIGNAL(diconnectedMessageDisplayed()),
 			 &app, SLOT(quit()));
 
+#if 0
 	QObject::connect(&dcopiface, SIGNAL(exitApp()),
 			 &controller, SLOT(closeConnection()));
 	QObject::connect(&dcopiface, SIGNAL(exitApp()),
 			 &app, SLOT(quit()));
+#endif
 
 	QObject::connect(&controller, SIGNAL(sessionRefused()),
 			 &app, SLOT(quit()));

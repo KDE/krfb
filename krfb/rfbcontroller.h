@@ -26,11 +26,9 @@
 #include "configuration.h"
 #include "connectiondialog.h"
 #include "xupdatescanner.h"
-#include <ksock.h>
 #include <qobject.h>
 #include <qtimer.h>
 #include <qmutex.h>
-//Added by qt3to4:
 #include <QCloseEvent>
 #include <Q3PtrList>
 

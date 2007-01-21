@@ -24,14 +24,11 @@
 #include "personalinvitedialog.h"
 #include "invitedialog.h"
 
-#include <dcopref.h>
 #include <kconfig.h>
 #include <qtimer.h>
 #include <qobject.h>
 #include <qvalidator.h>
 #include <qstring.h>
-
-#include <dcopobject.h>
 
 enum krfb_mode {
 	KRFB_UNKNOWN_MODE = 0,
@@ -46,8 +43,7 @@ enum krfb_mode {
  * standalone-config-dialog and all the invitation dialogs
  * @author Tim Jansen
  */
-class Configuration : public QObject, public DCOPObject {
-		K_DCOP
+class Configuration : public QObject {
    	Q_OBJECT
 public:
 	Configuration(krfb_mode mode);
@@ -118,7 +114,9 @@ private:
 
 	int portNum, preferredPortNum;
 
+#if 0
 	DCOPRef kinetdRef;
+#endif
 
 	QString passwordString;
 	QList<Invitation> invitationList;
@@ -126,9 +124,11 @@ private:
 	bool disableBackgroundFlag;
 	bool disableXShmFlag;
 
+#if 0
 k_dcop:
     // Connected to the DCOP signal
-    void updateKConfig();	
+    void updateKConfig();
+#endif
 private slots:
         void refreshTimeout();
 

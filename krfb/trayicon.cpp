@@ -52,35 +52,37 @@ KPassivePopup2 *KPassivePopup2::message( const QString &caption, const QString &
 
 
 TrayIcon::TrayIcon(KDialog *d, Configuration *c) :
-	KSystemTray(0, "krfb trayicon"),
+	KSystemTrayIcon(),
 	configuration(c),
 	aboutDialog(d),
 	actionCollection(this),
 	quitting(false)
 {
-	KIconLoader *loader = KGlobal::iconLoader();
+	KIconLoader *loader = KIconLoader::global();
 	trayIconOpen = loader->loadIcon("eyes-open24", K3Icon::User);
 	trayIconClosed = loader->loadIcon("eyes-closed24", K3Icon::User);
-	setPixmap(trayIconClosed);
-	QToolTip::add(this, i18n("Desktop Sharing - connecting"));
+	setIcon(trayIconClosed);
+	setToolTip(i18n("Desktop Sharing - connecting"));
 
-	manageInvitationsAction = new KAction(i18n("Manage &Invitations"), QString::null,
-					      0, this, SIGNAL(showManageInvitations()),
-					      &actionCollection);
-	manageInvitationsAction->plug(contextMenu());
+	manageInvitationsAction = new KAction(i18n("Manage &Invitations"), &actionCollection);
+	actionCollection.addAction("manage_invitations", manageInvitationsAction);
+	connect(manageInvitationsAction, SIGNAL(toggled()), SIGNAL(showManageInvitations()));
+	contextMenu()->addAction(actionCollection.action("manage_invitations"));
 
-	contextMenu()->insertSeparator();
+	contextMenu()->addSeparator();
 
-	enableControlAction = new KToggleAction(i18n("Enable Remote Control"));
-	enableControlAction->setCheckedState(i18n("Disable Remote Control"));
-	enableControlAction->plug(contextMenu());
+	enableControlAction = new KToggleAction(i18n("Enable Remote Control"), &actionCollection);
+	enableControlAction->setCheckedState(KGuiItem(i18n("Disable Remote Control")));
 	enableControlAction->setEnabled(false);
+	actionCollection.addAction("enable_control", enableControlAction);
 	connect(enableControlAction, SIGNAL(toggled(bool)), SIGNAL(enableDesktopControl(bool)));
+	contextMenu()->addAction("enable_control");
 
-	contextMenu()->insertSeparator();
+	contextMenu()->addSeparator();
 
 	aboutAction = KStandardAction::aboutApp(this, SLOT(showAbout()), &actionCollection);
-	aboutAction->plug(contextMenu());
+	actionCollection.addAction("about", aboutAction);
+	contextMenu()->addAction("about");
 
 	show();
 }
@@ -100,24 +102,24 @@ void TrayIcon::prepareQuit() {
 
 void TrayIcon::showConnectedMessage(QString host) {
 
-        setPixmap(trayIconOpen);
+        setIcon(trayIconOpen);
         KPassivePopup2::message(i18n("Desktop Sharing"),
 				i18n("The remote user has been authenticated and is now connected."),
 				trayIconOpen,
-				this);
-	QToolTip::add(this, i18n("Desktop Sharing - connected with %1", host));
+				(QWidget*)this);
+	setToolTip(i18n("Desktop Sharing - connected with %1", host));
 }
 
 void TrayIcon::showDisconnectedMessage() {
         if (quitting)
                 return;
 
-	QToolTip::add(this, i18n("Desktop Sharing - disconnected"));
-        setPixmap(trayIconClosed);
+	setToolTip(i18n("Desktop Sharing - disconnected"));
+        setIcon(trayIconClosed);
         KPassivePopup2 *p = KPassivePopup2::message(i18n("Desktop Sharing"),
 						    i18n("The remote user has closed the connection."),
 						    trayIconClosed,
-						    this);
+						    (QWidget*)this);
 	connect(p, SIGNAL(hidden()), this, SIGNAL(diconnectedMessageDisplayed()));
 }
 
@@ -126,17 +128,14 @@ void TrayIcon::setDesktopControlSetting(bool b) {
 	enableControlAction->setChecked(b);
 }
 
-void TrayIcon::mousePressEvent(QMouseEvent *e)
+void TrayIcon::activated(QSystemTrayIcon::ActivationReason reason)
 {
-        if (!rect().contains(e->pos()))
-                return;
-
-	if (e->button() == LeftButton) {
-	        contextMenuAboutToShow(contextMenu());
-		contextMenu()->popup(e->globalPos());
-	}
-	else
-	        KSystemTray::mousePressEvent(e);
+    if (reason == QSystemTrayIcon::Trigger)
+    {
+        contextMenu()->popup(QCursor::pos());
+    }
+    else
+        KSystemTrayIcon::activated(reason);
 }
 
 #include "trayicon.moc"

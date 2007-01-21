@@ -1,9 +1,9 @@
-[!Global!]
+[Global]
 IconName=kinetd
 Comment=KInetD
 Comment[x-test]=xxKInetDxx
 
-[IncomingConnection]
+[Event/IncomingConnection]
 Name=IncomingConnection
 Name[el]=Εισερχόμενη σύνδεση
 Name[fr]=Connexion entrante
@@ -12,9 +12,9 @@ Comment=Received incoming connection
 Comment[el]=Λήψη εισερχόμενης σύνδεσης
 Comment[fr]=Reçu une connexion entrante
 Comment[x-test]=xxReceived incoming connectionxx
-default_presentation=4
+Action=None
 
-[ProcessFailed]
+[Event/ProcessFailed]
 Name=ProcessFailed
 Name[el]=Η επεξεργασία απέτυχε
 Name[fr]=Échec du processus
@@ -23,4 +23,4 @@ Comment=Could not call process to handle connection
 Comment[el]=Δεν ήταν δυνατή η κλήση της διεργασίας για τον έλεγχο της σύνδεσης
 Comment[fr]=Impossible d'appeler le processus pour gérer la connexion
 Comment[x-test]=xxCould not call process to handle connectionxx
-default_presentation=4
+Action=None
