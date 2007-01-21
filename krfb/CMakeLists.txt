@@ -42,7 +42,7 @@ message(STATUS "Port krfb to DBUS")
 
 kde4_add_executable(krfb ${krfb_SRCS})
 
-target_link_libraries(krfb ${KDE4_KIO_LIBS} ${KDE4_KDE3SUPPORT_LIBS} libkrfbconfig libvncserver libsrvloc Xtst jpeg pthread)
+target_link_libraries(krfb ${KDE4_KIO_LIBS} ${KDE4_KDE3SUPPORT_LIBS} libkrfbconfig libvncserver libsrvloc ${JPEG_LIBRARIES})
 
 install(TARGETS krfb  DESTINATION ${BIN_INSTALL_DIR})
 

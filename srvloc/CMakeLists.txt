@@ -12,6 +12,6 @@ set(libsrvloc_SRCS
 
 kde4_add_library(libsrvloc ${libsrvloc_SRCS})
 
-target_link_libraries(libsrvloc ${KDE4_KDECORE_LIBS} slp)
+target_link_libraries(libsrvloc ${KDE4_KDECORE_LIBS} ${SLP_LIBRARIES})
 
 install(TARGETS libsrvloc DESTINATION ${LIB_INSTALL_DIR})
