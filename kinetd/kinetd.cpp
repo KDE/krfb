@@ -408,8 +408,8 @@ PortListener::~PortListener() {
 }
 
 
-KInetD::KInetD(QCString &n) :
-	KDEDModule(n)
+KInetD::KInetD() :
+	KDEDModule()
 {
 	m_config = new KConfig("kinetdrc");
 	m_srvreg = new KServiceRegistry();
@@ -643,15 +643,14 @@ bool KInetD::isServiceRegistrationEnabled(QString service)
 KInetD::~KInetD() {
 	m_portListeners.clear();
 	delete m_config;
-	if (m_srvreg)
-		delete m_srvreg;
+        delete m_srvreg;
 }
 
 extern "C" {
-	KDE_EXPORT KDEDModule *create_kinetd(const DCOPCString &name)
+	KDE_EXPORT KDEDModule *create_kinetd()
 	{
         KGlobal::locale()->insertCatalog("kinetd");
-		return new KInetD(name);
+		return new KInetD();
 	}
 }
 

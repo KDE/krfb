@@ -21,7 +21,6 @@
 
 #include <kdedmodule.h>
 #include <kservice.h>
-#include <ksock.h>
 #include <kprocess.h>
 #include <qstringlist.h>
 #include <qstring.h>
@@ -92,9 +91,8 @@ private slots:
 
 class KInetD : public KDEDModule {
 	Q_OBJECT
-	K_DCOP
 
-k_dcop:
+public slots:
 	/**
 	 * Returns a list of all registered services in KInetd.
 	 * To add a service you need to add a .desktop file with
@@ -190,7 +188,7 @@ k_dcop:
 	void reregistrationTimer();
 
  public:
-	KInetD(const DCOPCString &n);
+	KInetD();
 	virtual ~KInetD();
 	void loadServiceList();
 	PortListener *getListenerByName(QString name);
