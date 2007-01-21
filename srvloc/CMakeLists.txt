@@ -10,6 +10,8 @@ set(libsrvloc_SRCS
    kinetinterfacewatcher.cpp
    kserviceregistry.h)
 
+kde4_automoc(${libsrvloc_SRCS})
+
 kde4_add_library(libsrvloc ${libsrvloc_SRCS})
 
 target_link_libraries(libsrvloc ${KDE4_KDECORE_LIBS} ${SLP_LIBRARIES})
