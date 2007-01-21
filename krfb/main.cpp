@@ -71,6 +71,8 @@ void checkKInetd(bool &kinetdAvailable, bool &krfbAvailable) {
 	r.get(krfbAvailable);
 	kinetdAvailable = true;
 #endif
+        kinetdAvailable = false;
+        krfbAvailable = false;
 }
 
 int main(int argc, char *argv[])
