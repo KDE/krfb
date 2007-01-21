@@ -12,11 +12,13 @@
  ***************************************************************************/
 
 #include "krfbifaceimpl.h"
+#include <krfbadaptor.h>
 
 KRfbIfaceImpl::KRfbIfaceImpl(RFBController *c) :
-	DCOPObject("krfbIface"),
 	controller(c)
 {
+    (void)new KrfbAdaptor(this);
+    QDBusConnection::sessionBus().registerObject("/Krfb",this);
 }
 
 void KRfbIfaceImpl::exit()

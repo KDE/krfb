@@ -20,9 +20,7 @@
 #ifdef __GNUC__
 #warning "Port to DBUS"
 #endif
-#if 0
 #include "krfbifaceimpl.h"
-#endif
 #include "rfbcontroller.h"
 
 #include <QPixmap>

@@ -7,9 +7,11 @@ set(krfb_SRCS ${vncserver_SRCS} ${srvloc_SRCS} ${krfbconfig_SRCS}
    rfbcontroller.cc
    xupdatescanner.cc
    main.cpp
-#    krfbifaceimpl.cc
+   krfbifaceimpl.cc
    trayicon.cpp
    connectiondialog.cc)
+
+qt4_add_dbus_adaptor(krfb_SRCS org.kde.krfb.xml krfbifaceimpl.h KRfbIfaceImpl)
 
 kde4_automoc(${krfb_SRCS})
 
@@ -17,9 +19,6 @@ kde4_add_ui3_files(krfb_SRCS connectionwidget.ui
 		manageinvitations.ui
 		personalinvitewidget.ui
 		invitewidget.ui)
-
-message(STATUS "Port krfb to DBUS")
-# kde4_add_dcop_skels(krfb_SRCS krfbiface.h )
 
 kde4_add_executable(krfb ${krfb_SRCS})
 
@@ -33,6 +32,6 @@ install(FILES krfb.desktop DESTINATION ${XDG_APPS_DIR})
 install(FILES krfb.notifyrc DESTINATION ${DATA_INSTALL_DIR}/krfb)
 install(FILES eyes-open24.png eyes-closed24.png connection-side-image.png DESTINATION ${DATA_INSTALL_DIR}/krfb/pics)
 install(FILES kinetd_krfb.desktop DESTINATION ${SERVICES_INSTALL_DIR})
-
+install(FILES org.kde.krfb.xml  DESTINATION ${DBUS_INTERFACES_DIR} )
 kde4_install_icons(${ICON_INSTALL_DIR})
 

@@ -16,9 +16,8 @@
 
 #include <qobject.h>
 #include "rfbcontroller.h"
-#include "krfbiface.h"
 
-class KRfbIfaceImpl : public QObject, public virtual krfbIface
+class KRfbIfaceImpl : public QObject
 {
 	Q_OBJECT
 private:
