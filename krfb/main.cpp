@@ -148,9 +148,7 @@ int main(int argc, char *argv[])
 	TrayIcon trayicon(new KAboutApplication(&aboutData),
 			  config);
 	RFBController controller(config);
-#if 0
 	KRfbIfaceImpl dcopiface(&controller);
-#endif
 
 	QObject::connect(&app, SIGNAL(lastWindowClosed()), // do not show passivepopup
 			 &trayicon, SLOT(prepareQuit()));

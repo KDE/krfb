@@ -1,0 +1,10 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN"
+"http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<node>
+  <interface name="org.kde.krfb">
+    <method name="setAllowDesktopControl">
+      <arg name="a" type="b" direction="in"/>
+    </method>
+    <method name="exit"/>
+  </interface>
+</node>
