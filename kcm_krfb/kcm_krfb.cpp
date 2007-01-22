@@ -39,20 +39,15 @@
 
 
 typedef KGenericFactory<KcmKRfb, QWidget> KcmKRfbFactory;
+K_EXPORT_COMPONENT_FACTORY( krfb, KcmKRfbFactory( "kcm_krfb" ) )
 
-// Can't use K_EXPORT_COMPONENT_FACTORY, since insertCatalogue necessary
-extern "C" {
-  KDE_EXPORT void *init_kcm_krfb() {
-    KGlobal::locale()->insertCatalog("krfb"); // For invitation translations
-    return new KcmKRfbFactory("kcm_krfb"); 
-  }
-}
 
 
 KcmKRfb::KcmKRfb(QWidget *p, const QStringList &) :
 	KCModule(KcmKRfbFactory::instance(), p),
 	m_configuration(KRFB_CONFIGURATION_MODE) {
 
+	KGlobal::locale()->insertCatalog("krfb");
         m_confWidget = new ConfigurationWidget(this);
 
 	QVBoxLayout *l = new QVBoxLayout(this);

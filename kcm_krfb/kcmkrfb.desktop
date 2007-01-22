@@ -1,12 +1,14 @@
 [Desktop Entry]
 Encoding=UTF-8
 Icon=krfb
-Type=Application
 Exec=kcmshell kcmkrfb
+Type=Service
 DocPath=krfb/krfb-configuration.html
+ServiceTypes=KCModule
 
-X-KDE-ModuleType=Library
+
 X-KDE-Library=krfb
+X-KDE-Factoryname=krfb
 X-KDE-ParentApp=kcontrol
 
 Name=Desktop Sharing

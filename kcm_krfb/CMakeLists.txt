@@ -16,4 +16,4 @@ target_link_libraries(kcm_krfb ${KDE4_KDECORE_LIBS} ${KDE4_KDE3SUPPORT_LIBS} ${S
 
 install(TARGETS kcm_krfb DESTINATION ${PLUGIN_INSTALL_DIR})
 
-install( FILES kcmkrfb.desktop DESTINATION ${XDG_APPS_DIR})
+install( FILES kcmkrfb.desktop DESTINATION ${SERVICES_INSTALL_DIR})
