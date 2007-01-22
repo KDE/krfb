@@ -26,6 +26,7 @@
 #include <qstring.h>
 #include <qdatetime.h>
 #include <qtimer.h>
+#include <kserversocket.h>
 #include <dnssd/publicservice.h>
 #include <q3ptrlist.h>
 #include "kserviceregistry.h"
@@ -53,7 +54,7 @@ private:
 	QDateTime m_slpLifetimeEnd;
 	QString m_uuid;
 
-	KServerSocket *m_socket;
+	KNetwork::KServerSocket *m_socket;
 	KProcess m_process;
 
 	KConfig *m_config;

@@ -28,7 +28,7 @@
 #include <kconfig.h>
 #include <KNotification>
 #include <ksocketaddress.h>
-#include <kextsock.h>
+#include <ksocketdevice.h>
 #include <klocale.h>
 #include <kglobal.h>
 
@@ -61,7 +61,7 @@ bool PortListener::acquirePort() {
 			delete m_socket;
 	}
 	m_port = m_portBase;
-	m_socket = new KServerSocket(m_port, false);
+	m_socket = new KNetwork::KServerSocket(m_port, false);
 	while (!m_socket->bindAndListen()) {
 		m_port++;
 		if (m_port >= (m_portBase+m_autoPortRange)) {
@@ -73,7 +73,7 @@ bool PortListener::acquirePort() {
 			return false;
 		}
 		delete m_socket;
-		m_socket = new KServerSocket(m_port, false);
+		m_socket = new KNetwork::KServerSocket(m_port, false);
 	}
 	connect(m_socket, SIGNAL(accepted(KSocket*)),
 		SLOT(accepted(KSocket*)));
@@ -200,8 +200,9 @@ void PortListener::loadConfig(KService::Ptr s) {
 
 void PortListener::accepted(KSocket *sock) {
 	QString host, port;
-	KSocketAddress *ksa = KExtendedSocket::peerAddress(sock->socket());
-	if ((!ksa) || !ksa->address()) {
+	KSocketDevice device(sock->socket());
+	KSocketAddress ksa = device->peerAddress();
+	if ( ksa.address()) {
 		delete sock;
 		return;
 	}
