@@ -89,8 +89,7 @@ bool PortListener::acquirePort() {
 
 void PortListener::freePort() {
 	m_port = -1;
-	if (m_socket)
-		delete m_socket;
+	delete m_socket;
 	m_socket = 0;
 	setServiceRegistrationEnabledInternal(m_registerService);
 	dnssdRegister(false);
