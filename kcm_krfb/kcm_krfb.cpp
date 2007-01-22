@@ -34,7 +34,8 @@
 #include <kconfig.h>
 #include <kgenericfactory.h>
 #include <kdebug.h>
-
+#include <QDBusInterface>
+#include <QDBusReply>
 #define VERSION "0.7"
 
 
@@ -96,27 +97,13 @@ void KcmKRfb::setInvitationNum(int num) {
 void KcmKRfb::checkKInetd(bool &kinetdAvailable, bool &krfbAvailable) {
 	kinetdAvailable = false;
 	krfbAvailable = false;
-
-#ifdef __GNUC__
-#warning "Port to DBUS"
-#endif
-#if 0
-	DCOPClient *d = KApplication::dcopClient();
-
-	QByteArray sdata, rdata;
-	DCOPCString replyType;
-	QDataStream arg(&sdata, QIODevice::WriteOnly);
-	arg << QString("krfb");
-	if (!d->call ("kded", "kinetd", "isInstalled(QString)", sdata, replyType, rdata))
-		return;
-
-	if (replyType != "bool")
-		return;
-
-	QDataStream answer(&rdata, QIODevice::ReadOnly);
-	answer >> krfbAvailable;
-	kinetdAvailable = true;
-#endif
+        //TODO verify it when kinetd will port
+	QDBusInterface kinetd("org.kde.kded", "/modules/kinetd", "org.kde.kinetd");
+	QDBusReply<bool> reply = kinetd.call("isInstalled","krfb");
+	if(!reply.isValid())
+	   return;
+	krfbAvailable = reply;
+	kinetdAvailable=true;
 }
 
 void KcmKRfb::load() {
