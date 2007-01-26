@@ -15,10 +15,6 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifdef HAVE_CONFIG_H
-#include <config.h>
-#endif
-
 /*
  * Contains keyboard & pointer handling from libvncserver's x11vnc.c
  */
@@ -36,6 +32,7 @@
 #include <strings.h>
 #endif
 
+#include <kdefakes.h> // gethostname
 #include <kapplication.h>
 #include <KNotification>
 #include <kdebug.h>

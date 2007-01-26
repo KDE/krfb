@@ -23,11 +23,10 @@
  *                           removed glibc dependencies
  */
 
-#include "config.h"
+#include "getifaddrs.h"
 
 #ifndef HAVE_GETIFADDRS
 
-#include "getifaddrs.h"
 #include <net/if.h>
 #include <sys/socket.h>
 #include <sys/ioctl.h>

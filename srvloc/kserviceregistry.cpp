@@ -21,7 +21,7 @@
  * TODO: see below..
  */
 
-#include "config.h"
+#include "config-krfb.h"
 #include "kserviceregistry.h"
 #include <kdebug.h>
 
@@ -36,19 +36,19 @@ public:
 		m_lang(lang) {
 	}
 	bool ensureOpen();
-	
+
         bool m_opened;
 	QString m_lang;
 
         SLPHandle m_handle;
-	friend void KServiceRegistryRegReport(SLPHandle slp, 
-					      SLPError errcode, 
+	friend void KServiceRegistryRegReport(SLPHandle slp,
+					      SLPError errcode,
 					      void* cookie);
 	bool m_cbSuccess;
 };
 
-void KServiceRegistryRegReport(SLPHandle, 
-			       SLPError errcode, 
+void KServiceRegistryRegReport(SLPHandle,
+			       SLPError errcode,
 			       void* cookie) {
 	KServiceRegistryPrivate *s = (KServiceRegistryPrivate*) cookie;
 	s->m_cbSuccess = (errcode == SLP_OK);
@@ -86,8 +86,8 @@ bool KServiceRegistry::available() {
 	return d->ensureOpen();
 }
 
-bool KServiceRegistry::registerService(const QString &serviceURL, 
-				       QString attributes, 
+bool KServiceRegistry::registerService(const QString &serviceURL,
+				       QString attributes,
 				       unsigned short lifetime) {
 	if (!d->ensureOpen())
 		return false;
@@ -108,8 +108,8 @@ bool KServiceRegistry::registerService(const QString &serviceURL,
 	return d->m_cbSuccess;
 }
 
-bool KServiceRegistry::registerService(const QString &serviceURL, 
-				       QMap<QString,QString> attributes, 
+bool KServiceRegistry::registerService(const QString &serviceURL,
+				       QMap<QString,QString> attributes,
 				       unsigned short lifetime) {
 	if (!d->ensureOpen())
 		return false;
@@ -128,9 +128,9 @@ bool KServiceRegistry::registerService(const QString &serviceURL,
 void KServiceRegistry::unregisterService(const QString &serviceURL) {
 	if (!d->m_opened)
 		return;
-	SLPDereg(d->m_handle, serviceURL.latin1(), 
+	SLPDereg(d->m_handle, serviceURL.latin1(),
 		 KServiceRegistryRegReport,
-		 d);		 
+		 d);
 }
 
 QString KServiceRegistry::encodeAttributeValue(const QString &value) {
