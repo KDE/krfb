@@ -1,5 +1,6 @@
 check_symbol_exists(getifaddrs     "sys/socket.h;netdb.h;ifaddrs.h"     HAVE_GETIFADDRS)
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/config-krfb.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-krfb.h )
+include_directories(${CMAKE_CURRENT_BINARY_DIR}) # for config-krfb.h
 
 set(vncserver_SRCS
    ${CMAKE_SOURCE_DIR}/krfb/libvncserver/main.c
