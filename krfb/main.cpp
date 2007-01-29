@@ -31,7 +31,7 @@
 #include <ksystemtrayicon.h>
 #include <kcmdlineargs.h>
 #include <kaboutdata.h>
-#include <kaboutapplication.h>
+#include <kaboutapplicationdialog.h>
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <qobject.h>
@@ -145,7 +145,7 @@ int main(int argc, char *argv[])
 	if (!RFBController::checkX11Capabilities())
 		return 1;
 
-	TrayIcon trayicon(new KAboutApplication(&aboutData),
+	TrayIcon trayicon(new KAboutApplicationDialog(&aboutData),
 			  config);
 	RFBController controller(config);
 	KRfbIfaceImpl dcopiface(&controller);
