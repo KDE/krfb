@@ -45,7 +45,7 @@ K_EXPORT_COMPONENT_FACTORY( krfb, KcmKRfbFactory( "kcm_krfb" ) )
 
 
 KcmKRfb::KcmKRfb(QWidget *p, const QStringList &) :
-	KCModule(KcmKRfbFactory::instance(), p),
+	KCModule(KcmKRfbFactory::componentData(), p),
 	m_configuration(KRFB_CONFIGURATION_MODE) {
 
 	KGlobal::locale()->insertCatalog("krfb");
