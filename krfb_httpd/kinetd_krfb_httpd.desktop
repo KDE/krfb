@@ -15,6 +15,7 @@ X-KDE-KINETD-serviceLifetime=1200
 
 Name=KRfb Micro Httpd
 Name[ar]=KRfb ميكرو httpd
+Name[bg]=Микро уеб сървър (KRfb - httpd)
 Name[cs]=KRfb mikro Httpd
 Name[cy]=Meicro-Httpd KRfb
 Name[da]=KRfb Micro-Httpd
@@ -43,6 +44,7 @@ Name[x-test]=xxKRfb Micro Httpdxx
 Name[zh_HK]=KRfb 微型網頁伺服器
 Comment=A micro http daemon for krfb that serves the VNC viewer applet.
 Comment[ar]=مراقب httpd صغير لـkrfb الذي يخدم بريمج عرض VNC.
+Comment[bg]=Малък уеб сървър, който обслужва аплета за преглед на VNC
 Comment[ca]=Un micro-dimoni http per a krfb que serveix l'aplet visor VNC.
 Comment[cs]=Mikro HTTP server pro krfb sloužící VNC prohlížeči.
 Comment[cy]=Meicro-daemon http sy'n gwasanaethu'r rhaglennig gwelydd VNC
