@@ -21,7 +21,7 @@
 
 #include <kdedmodule.h>
 #include <kservice.h>
-#include <kprocess.h>
+#include <k3process.h>
 #include <qstringlist.h>
 #include <qstring.h>
 #include <qdatetime.h>
@@ -55,7 +55,7 @@ private:
 	QString m_uuid;
 
 	KNetwork::KServerSocket *m_socket;
-	KProcess m_process;
+	K3Process m_process;
 
 	KConfig *m_config;
 	KServiceRegistry *m_srvreg;

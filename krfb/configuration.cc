@@ -22,7 +22,7 @@
 #include <klocale.h>
 #include <kapplication.h>
 #include <kmessagebox.h>
-#include <kprocess.h>
+#include <k3process.h>
 #include <ksocketaddress.h>
 #include <k3activelabel.h>
 #include <ktoolinvocation.h>

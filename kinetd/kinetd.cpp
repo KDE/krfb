@@ -222,7 +222,7 @@ void PortListener::accepted(KSocket *sock) {
 
 	m_process.clearArguments();
 	m_process << m_execPath << m_argument << QString::number(sock->socket());
-	if (!m_process.start(KProcess::DontCare)) {
+	if (!m_process.start(K3Process::DontCare)) {
 		KNotification::event("ProcessFailed",
 			i18n("Call \"%1 %2 %3\" failed", m_execPath,
 				 m_argument,
