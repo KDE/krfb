@@ -18,34 +18,12 @@
 #ifndef TRAYICON_H
 #define TRAYICON_H
 
-#include <qwidget.h>
-//Added by qt3to4:
-#include <QPixmap>
-#include <QHideEvent>
-#include <QMouseEvent>
-#include <QPixmap>
-#include <kaction.h>
 #include <ksystemtrayicon.h>
 #include <kpassivepopup.h>
 #include <KActionCollection>
 #include <KToggleAction>
 
 class KDialog;
-
-class KPassivePopup2 : public KPassivePopup {
-   	Q_OBJECT
-public:
-        KPassivePopup2(QWidget *parent);
-
-signals:
-	void hidden();
-
-protected:
-        /**
-         * Reimplemented to detect hide events.
-         */
-        virtual void hideEvent( QHideEvent *e );
-};
 
 /**
   * Implements the trayicon.
