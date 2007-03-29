@@ -21,10 +21,11 @@
 #define CONNECTIONDIALOG_H
 
 #include <KDialog>
+#include "ui_rfbconnectionwidget.h"
 
-class ConnectionWidget;
+class QWidget;
 
-class ConnectionDialog : public KDialog
+class ConnectionDialog : public KDialog, public Ui::ConnectionWidget
 {
   Q_OBJECT
 
@@ -37,7 +38,7 @@ class ConnectionDialog : public KDialog
     bool allowRemoteControl();
 
   protected:
-    ConnectionWidget *m_connectWidget;
+    QWidget *m_connectWidget;
 };
 
 #endif // CONNECTIONDIALOG_H

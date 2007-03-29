@@ -3,22 +3,29 @@ project(krfb)
 include_directories(${CMAKE_SOURCE_DIR}/krfb/libvncserver ${CMAKE_SOURCE_DIR}/krfb/srvloc)
 
 
-set(krfb_SRCS ${vncserver_SRCS} ${srvloc_SRCS} ${krfbconfig_SRCS}
-   rfbcontroller.cc
-   xupdatescanner.cc
+##set(krfb_SRCS ${vncserver_SRCS} ${srvloc_SRCS} ${krfbconfig_SRCS}
+set(krfb_SRCS ${vncserver_SRCS}
+#   rfbcontroller.cc
+#   xupdatescanner.cc
    main.cpp
-   krfbifaceimpl.cc
    trayicon.cpp
-   connectiondialog.cc)
+   connectiondialog.cc
+   krfbserver.cpp
+   manageinvitationsdialog.cpp
+   invitedialog.cc
+   invitation.cc
+   connectiondialog.cc
+   personalinvitedialog.cc
+)
 
-qt4_add_dbus_adaptor(krfb_SRCS org.kde.krfb.xml krfbifaceimpl.h KRfbIfaceImpl)
+## qt4_add_dbus_adaptor(krfb_SRCS org.kde.krfb.xml krfbifaceimpl.h KRfbIfaceImpl)
 
 kde4_automoc(${krfb_SRCS})
 
-kde4_add_ui3_files(krfb_SRCS connectionwidget.ui
-		manageinvitations.ui
-		personalinvitewidget.ui
-		invitewidget.ui)
+kde4_add_ui_files(krfb_SRCS rfbconnectionwidget.ui
+        rfbmanageinvitations.ui
+        rfbpersonalinvitewidget.ui
+        rfbinvitewidget.ui)
 
 kde4_add_executable(krfb ${krfb_SRCS})
 

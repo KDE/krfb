@@ -29,6 +29,9 @@
 #include <kiconloader.h>
 #include <kmenu.h>
 
+#include "manageinvitationsdialog.h"
+#include "invitedialog.h"
+
 KPassivePopup2::KPassivePopup2(QWidget *parent) :
    KPassivePopup(parent){
 }
@@ -39,34 +42,24 @@ void KPassivePopup2::hideEvent( QHideEvent *e )
     emit hidden();
 }
 
-KPassivePopup2 *KPassivePopup2::message( const QString &caption, const QString &text,
-				         const QPixmap &icon,
-				         QWidget *parent)
-{
-    KPassivePopup2 *pop = new KPassivePopup2( parent);
-    pop->setView( caption, text, icon );
-    pop->show();
 
-    return pop;
-}
-
-
-TrayIcon::TrayIcon(KDialog *d, Configuration *c) :
+TrayIcon::TrayIcon(KDialog *d) :
 	KSystemTrayIcon(),
-	configuration(c),
 	aboutDialog(d),
 	actionCollection(this),
 	quitting(false)
 {
+
 	KIconLoader *loader = KIconLoader::global();
 	trayIconOpen = loader->loadIcon("eyes-open24", K3Icon::User);
 	trayIconClosed = loader->loadIcon("eyes-closed24", K3Icon::User);
 	setIcon(trayIconClosed);
-	setToolTip(i18n("Desktop Sharing - connecting"));
+
+    setToolTip(i18n("Desktop Sharing - connecting"));
 
 	manageInvitationsAction = new KAction(i18n("Manage &Invitations"), &actionCollection);
 	actionCollection.addAction("manage_invitations", manageInvitationsAction);
-	connect(manageInvitationsAction, SIGNAL(toggled()), SIGNAL(showManageInvitations()));
+	connect(manageInvitationsAction, SIGNAL(triggered(bool)), SLOT(showManageInvitations()));
 	contextMenu()->addAction(actionCollection.action("manage_invitations"));
 
 	contextMenu()->addSeparator();
@@ -103,10 +96,10 @@ void TrayIcon::prepareQuit() {
 void TrayIcon::showConnectedMessage(QString host) {
 
         setIcon(trayIconOpen);
-        KPassivePopup2::message(i18n("Desktop Sharing"),
+        KPassivePopup::message(i18n("Desktop Sharing"),
 				i18n("The remote user has been authenticated and is now connected."),
 				trayIconOpen,
-				(QWidget*)this);
+				this);
 	setToolTip(i18n("Desktop Sharing - connected with %1", host));
 }
 
@@ -116,10 +109,10 @@ void TrayIcon::showDisconnectedMessage() {
 
 	setToolTip(i18n("Desktop Sharing - disconnected"));
         setIcon(trayIconClosed);
-        KPassivePopup2 *p = KPassivePopup2::message(i18n("Desktop Sharing"),
+        KPassivePopup *p = KPassivePopup::message(i18n("Desktop Sharing"),
 						    i18n("The remote user has closed the connection."),
 						    trayIconClosed,
-						    (QWidget*)this);
+						    this);
 	connect(p, SIGNAL(hidden()), this, SIGNAL(diconnectedMessageDisplayed()));
 }
 
@@ -136,6 +129,13 @@ void TrayIcon::activated(QSystemTrayIcon::ActivationReason reason)
     }
     else
         KSystemTrayIcon::activated(reason);
+}
+
+void TrayIcon::showManageInvitations()
+{
+
+    ManageInvitationsDialog invMngDlg(0);
+    invMngDlg.exec();
 }
 
 #include "trayicon.moc"

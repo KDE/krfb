@@ -18,7 +18,6 @@
 */
 
 #include "connectiondialog.h"
-#include "connectionwidget.h"
 
 #include <qcheckbox.h>
 #include <qlabel.h>
@@ -35,8 +34,10 @@ ConnectionDialog::ConnectionDialog( QWidget *parent )
   setDefaultButton(Cancel);
   setModal(true);
 
-  m_connectWidget = new ConnectionWidget( this, "ConnectWidget" );
-  m_connectWidget->pixmapLabel->setPixmap(
+  m_connectWidget = new QWidget( this );
+  setupUi(m_connectWidget);
+
+  pixmapLabel->setPixmap(
       UserIcon( "connection-side-image.png" ) );
 
   KGuiItem accept = KStandardGuiItem::ok();
@@ -52,17 +53,17 @@ ConnectionDialog::ConnectionDialog( QWidget *parent )
 
 void ConnectionDialog::setRemoteHost( const QString &host )
 {
-  m_connectWidget->remoteHost->setText( host );
+  remoteHost->setText( host );
 }
 
 void ConnectionDialog::setAllowRemoteControl( bool b )
 {
-  m_connectWidget->cbAllowRemoteControl->setChecked( b );
+  cbAllowRemoteControl->setChecked( b );
 }
 
 bool ConnectionDialog::allowRemoteControl()
 {
-  return m_connectWidget->cbAllowRemoteControl->isChecked();
+  return cbAllowRemoteControl->isChecked();
 }
 
 #include "connectiondialog.moc"

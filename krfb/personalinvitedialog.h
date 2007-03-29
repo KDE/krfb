@@ -20,13 +20,12 @@
 #ifndef PERSONALINVITEDIALOG_H
 #define PERSONALINVITEDIALOG_H
 
-class PersonalInviteWidget;
-
 #include <qdatetime.h>
-
 #include <KDialog>
+#include "ui_rfbpersonalinvitewidget.h"
 
-class PersonalInviteDialog : public KDialog
+class QWidget;
+class PersonalInviteDialog : public KDialog, public Ui::PersonalInviteWidget
 {
   public:
     PersonalInviteDialog( QWidget *parent );
@@ -37,7 +36,7 @@ class PersonalInviteDialog : public KDialog
     void setExpiration( const QDateTime &expire );
 
   protected:
-    PersonalInviteWidget *m_inviteWidget;
+      QWidget *m_inviteWidget;
 };
 
 #endif // PERSONALINVITEDIALOG_H

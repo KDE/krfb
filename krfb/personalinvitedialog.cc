@@ -18,7 +18,6 @@
 */
 
 #include "personalinvitedialog.h"
-#include "personalinvitewidget.h"
 
 #include <qlabel.h>
 
@@ -34,25 +33,25 @@ PersonalInviteDialog::PersonalInviteDialog( QWidget *parent )
   setDefaultButton(Close);
   setModal(true);
 
-  m_inviteWidget = new PersonalInviteWidget( this, "PersonalInviteWidget" );
-  m_inviteWidget->pixmapLabel->setPixmap( 
-      UserIcon( "connection-side-image.png" ) );
+  m_inviteWidget = new QWidget ( this );
+  setupUi(m_inviteWidget);
+  pixmapLabel->setPixmap( UserIcon( "connection-side-image.png" ) );
 
   setMainWidget( m_inviteWidget );
 }
 
 void PersonalInviteDialog::setHost( const QString &host, uint port )
 {
-  m_inviteWidget->hostLabel->setText( QString( "%1:%2" )
+  hostLabel->setText( QString( "%1:%2" )
       .arg( host ).arg( port ) );
 }
 
 void PersonalInviteDialog::setPassword( const QString &passwd )
 {
-  m_inviteWidget->passwordLabel->setText( passwd );
+  passwordLabel->setText( passwd );
 }
 
 void PersonalInviteDialog::setExpiration( const QDateTime &expire )
 {
-  m_inviteWidget->expirationLabel->setText( expire.toString( Qt::LocalDate ) );
+  expirationLabel->setText( expire.toString( Qt::LocalDate ) );
 }

@@ -18,8 +18,6 @@
 #ifndef TRAYICON_H
 #define TRAYICON_H
 
-#include "configuration.h"
-
 #include <qwidget.h>
 //Added by qt3to4:
 #include <QPixmap>
@@ -36,11 +34,8 @@ class KDialog;
 
 class KPassivePopup2 : public KPassivePopup {
    	Q_OBJECT
-public: 
+public:
         KPassivePopup2(QWidget *parent);
-        static KPassivePopup2 *message( const QString &caption, const QString &text,
-					const QPixmap &icon,
-					QWidget *parent);
 
 signals:
 	void hidden();
@@ -53,26 +48,29 @@ protected:
 };
 
 /**
-  * Implements the trayicon. 
+  * Implements the trayicon.
   * @author Tim Jansen
   */
 
 class TrayIcon : public KSystemTrayIcon {
    	Q_OBJECT
-public: 
-	TrayIcon(KDialog*, Configuration*);
+public:
+	TrayIcon(KDialog*);
 	~TrayIcon();
 
 signals:
-	void showManageInvitations();
+
 	void diconnectedMessageDisplayed();
 	void enableDesktopControl(bool);
+    void quitApp();
 
-public slots:
-        void prepareQuit();
-        void showConnectedMessage(QString host);
-        void showDisconnectedMessage();
-	void setDesktopControlSetting(bool);
+public Q_SLOTS:
+    void prepareQuit();
+    void showConnectedMessage(QString host);
+    void showDisconnectedMessage();
+    void setDesktopControlSetting(bool);
+    void showManageInvitations();
+    void showAbout();
 
 protected:
 	void activated(QSystemTrayIcon::ActivationReason reason);
@@ -81,7 +79,6 @@ private:
 
   	QPixmap trayIconOpen;
   	QPixmap trayIconClosed;
-	Configuration *configuration;
 	KDialog* aboutDialog;
 	KActionCollection actionCollection;
   	KAction* manageInvitationsAction;
@@ -89,8 +86,6 @@ private:
 	KToggleAction* enableControlAction;
 	bool quitting;
 
-private slots:
-	void showAbout();
 };
 
 #endif

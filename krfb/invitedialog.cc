@@ -18,7 +18,6 @@
 */
 
 #include "invitedialog.h"
-#include "invitewidget.h"
 
 #include <kiconloader.h>
 #include <klocale.h>
@@ -26,6 +25,8 @@
 
 #include <qlabel.h>
 #include <qpushbutton.h>
+#include <QToolTip>
+#include <QCursor>
 
 InviteDialog::InviteDialog( QWidget *parent )
     : KDialog( parent )
@@ -35,19 +36,23 @@ InviteDialog::InviteDialog( QWidget *parent )
   setDefaultButton(NoDefault);
   setModal(true);
 
-  m_inviteWidget = new InviteWidget( this, "InviteWidget" );
-  m_inviteWidget->pixmapLabel->setPixmap(
+  m_inviteWidget = new QWidget( this );
+  setupUi(m_inviteWidget);
+
+  pixmapLabel->setPixmap(
       UserIcon( "connection-side-image.png" ) );
   setMainWidget( m_inviteWidget );
 
   setButtonGuiItem( User1, KStandardGuiItem::configure() );
 
-  connect( m_inviteWidget->btnCreateInvite, SIGNAL( clicked() ),
+  connect( btnCreateInvite, SIGNAL( clicked() ),
            SIGNAL( createInviteClicked() ) );
-  connect( m_inviteWidget->btnEmailInvite, SIGNAL( clicked() ),
+  connect( btnEmailInvite, SIGNAL( clicked() ),
            SIGNAL( emailInviteClicked() ) );
-  connect( m_inviteWidget->btnManageInvite, SIGNAL( clicked() ),
+  connect( btnManageInvite, SIGNAL( clicked() ),
            SIGNAL( manageInviteClicked() ) );
+  connect( helpLabel, SIGNAL( linkActivated ( QString ) ),
+           SLOT( showWhatsthis() ));
 }
 
 void InviteDialog::slotUser1()
@@ -57,13 +62,25 @@ void InviteDialog::slotUser1()
 
 void InviteDialog::enableInviteButton( bool enable )
 {
-  m_inviteWidget->btnCreateInvite->setEnabled( enable );
+  btnCreateInvite->setEnabled( enable );
 }
 
 void InviteDialog::setInviteCount( int count )
 {
-  m_inviteWidget->btnManageInvite->setText(
+  btnManageInvite->setText(
       i18n( "&Manage Invitations (%1)...", count ) );
+}
+
+void InviteDialog::showWhatsthis()
+{
+    QToolTip::showText(QCursor::pos(),
+        i18n("An invitation creates a one-time password that allows the receiver to connect to your desktop.\n"
+            "It is valid for only one successful connection and will expire after an hour if it has not been used. \n"
+            "When somebody connects to your computer a dialog will appear and ask you for permission.\n "
+            "The connection will not be established before you accept it. In this dialog you can also\n restrict "
+            "the other person to view your desktop only, without the ability to move your\n mouse pointer or press "
+            "keys.\nIf you want to create a permanent password for Desktop Sharing, allow 'Uninvited Connections' \n"
+            "in the configuration."));
 }
 
 #include "invitedialog.moc"

@@ -16,12 +16,8 @@
  ***************************************************************************/
 
 #include "trayicon.h"
-#include "configuration.h"
-#ifdef __GNUC__
-#warning "Port to DBUS"
-#endif
-#include "krfbifaceimpl.h"
-#include "rfbcontroller.h"
+//#include "configuration.h"
+#include "krfbserver.h"
 
 #include <QPixmap>
 #include <kaction.h>
@@ -34,10 +30,7 @@
 #include <kaboutapplicationdialog.h>
 #include <klocale.h>
 #include <kmessagebox.h>
-#include <qobject.h>
 #include <qwindowdefs.h>
-#include <q3cstring.h>
-#include <qdatastream.h>
 
 #include <signal.h>
 
@@ -45,33 +38,6 @@
 
 static const char description[] = I18N_NOOP("VNC-compatible server to share "
 					   "KDE desktops");
-#define ARG_KINETD "kinetd"
-
-
-static KCmdLineOptions options[] =
-{
-	{ ARG_KINETD " ", I18N_NOOP("Used for calling from kinetd"), 0},
-	KCmdLineLastOption
-};
-
-void checkKInetd(bool &kinetdAvailable, bool &krfbAvailable) {
-#if 0
-	DCOPRef ref("kded", "kinetd");
-	ref.setDCOPClient(KApplication::dcopClient());
-
-	DCOPReply r = ref.call("isInstalled", QString("krfb"));
-	if (!r.isValid()) {
-		kinetdAvailable = false;
-		krfbAvailable = false;
-		return;
-	}
-
-	r.get(krfbAvailable);
-	kinetdAvailable = true;
-#endif
-        kinetdAvailable = false;
-        krfbAvailable = false;
-}
 
 int main(int argc, char *argv[])
 {
@@ -104,94 +70,41 @@ int main(int argc, char *argv[])
 	aboutData.addCredit("Karl Vogel",
 			    I18N_NOOP("KDesktop background deactivation"));
 	KCmdLineArgs::init(argc, argv, &aboutData);
-	KCmdLineArgs::addCmdLineOptions(options);
 
 	KApplication app;
 
-	Configuration *config;
-	KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
-	QString fdString;
-	if (!args->isSet(ARG_KINETD)) {
-		bool kinetdA, krfbA;
-		checkKInetd(kinetdA, krfbA);
-		if (!kinetdA) {
-		        KMessageBox::error(0,
-					   i18n("Cannot find KInetD. "
-						"The KDE daemon (kded) may have crashed or has not been started at all, or the installation failed."),
-					   i18n("Desktop Sharing Error"));
-			return 1;
-		}
-		if (!krfbA) {
-		        KMessageBox::error(0,
-					   i18n("Cannot find KInetD service for Desktop Sharing (krfb). "
-						"The installation is incomplete or failed."),
-					   i18n("Desktop Sharing Error"));
-			return 1;
-		}
-
-		config = new Configuration(KRFB_INVITATION_MODE);
-		config->showInvitationDialog();
-		return 0;
-	}
-	fdString = args->getOption(ARG_KINETD);
-	config = new Configuration(KRFB_KINETD_MODE);
-	args->clear();
-
-	if ((!config->allowUninvitedConnections()) && (config->invitations().size() == 0)) {
-		KNotification::event("UnexpectedConnection");
-		return 1;
-        }
-
-	if (!RFBController::checkX11Capabilities())
-		return 1;
-
-	TrayIcon trayicon(new KAboutApplicationDialog(&aboutData),
-			  config);
-	RFBController controller(config);
-	KRfbIfaceImpl dcopiface(&controller);
+	TrayIcon trayicon(new KAboutApplicationDialog(&aboutData));
+	KrfbServer server;
 
 	QObject::connect(&app, SIGNAL(lastWindowClosed()), // do not show passivepopup
-			 &trayicon, SLOT(prepareQuit()));
+            &trayicon, SLOT(prepareQuit()));
 	QObject::connect(&app, SIGNAL(lastWindowClosed()),
-			 &controller, SLOT(closeConnection()));
+            &server, SLOT(disconnectAndQuit()));
 
-	QObject::connect(&trayicon, SIGNAL(showManageInvitations()),
-			 config, SLOT(showManageInvitationsDialog()));
 	QObject::connect(&trayicon, SIGNAL(enableDesktopControl(bool)),
-			 &controller, SLOT(enableDesktopControl(bool)));
-	QObject::connect(&trayicon, SIGNAL(diconnectedMessageDisplayed()),
-			 &app, SLOT(quit()));
-
-#if 0
-	QObject::connect(&dcopiface, SIGNAL(exitApp()),
-			 &controller, SLOT(closeConnection()));
-	QObject::connect(&dcopiface, SIGNAL(exitApp()),
-			 &app, SLOT(quit()));
-#endif
-
-	QObject::connect(&controller, SIGNAL(sessionRefused()),
-			 &app, SLOT(quit()));
-	QObject::connect(&controller, SIGNAL(sessionEstablished(QString)),
+			 &server, SLOT(enableDesktopControl(bool)));
+	QObject::connect(&server, SIGNAL(sessionEstablished(QString)),
 			 &trayicon, SLOT(showConnectedMessage(QString)));
-	QObject::connect(&controller, SIGNAL(sessionFinished()),
+	QObject::connect(&server, SIGNAL(sessionFinished()),
 			 &trayicon, SLOT(showDisconnectedMessage()));
-	QObject::connect(&controller, SIGNAL(desktopControlSettingChanged(bool)),
+	QObject::connect(&server, SIGNAL(desktopControlSettingChanged(bool)),
 			 &trayicon, SLOT(setDesktopControlSetting(bool)));
-	QObject::connect(&controller, SIGNAL(quitApp()),
-			 &app, SLOT(quit()));
+	QObject::connect(&trayicon, SIGNAL(quitApp()),
+			 &server, SLOT(disconnectAndQuit()));
+    QObject::connect(&server, SIGNAL(quitApp()),
+                      &app, SLOT(quit()));
 
+    //TODO: implement some error reporting mechanism between server and tray icon
+    /*
+    QObject::connect(&trayicon, SIGNAL(diconnectedMessageDisplayed()),
+                      &app, SLOT(quit()));
+    QObject::connect(&server, SIGNAL(sessionRefused()),
+                      &app, SLOT(quit()));
+    */
 	sigset_t sigs;
 	sigemptyset(&sigs);
 	sigaddset(&sigs, SIGPIPE);
 	sigprocmask(SIG_BLOCK, &sigs, 0);
-
-	bool ok;
-	int fdNum = fdString.toInt(&ok);
-	if (!ok) {
-	  kError() << "kinetd fd was not numeric." << endl;
-	  return 2;
-	}
-	controller.startServer(fdNum);
 
 	return app.exec();
 }

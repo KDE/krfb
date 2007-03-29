@@ -20,11 +20,13 @@
 #ifndef INVITEDIALOG_H
 #define INVITEDIALOG_H
 
-class InviteWidget;
+#include "ui_rfbinvitewidget.h"
 
 #include <KDialog>
 
-class InviteDialog : public KDialog
+class QWidget;
+
+class InviteDialog : public KDialog, public Ui::InviteWidget
 {
   Q_OBJECT
 
@@ -34,8 +36,9 @@ class InviteDialog : public KDialog
 
     void enableInviteButton( bool enable );
 
-  public slots:
+  public Q_SLOTS:
     void setInviteCount( int count );
+    void showWhatsthis();
 
   signals:
     void createInviteClicked();
@@ -43,11 +46,11 @@ class InviteDialog : public KDialog
     void manageInviteClicked();
     void configureClicked();
 
-  protected slots:
+  protected Q_SLOTS:
     void slotUser1();
 
   protected:
-    InviteWidget *m_inviteWidget;
+    QWidget *m_inviteWidget;
 };
 
 #endif // INVITEDIALOG_H
