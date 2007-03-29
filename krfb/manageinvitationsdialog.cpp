@@ -1,14 +1,11 @@
-//
-// C++ Implementation: manageinvitationsdialog
-//
-// Description:
-//
-//
-// Author: Alessandro Praduroux <pradu@pradu.it>, (C) 2007
-//
-// Copyright: See COPYING file that comes with this distribution
-//
-//
+/* This file is part of the KDE project
+   Copyright (C) 2007 Alessandro Praduroux <pradu@pradu.it>
+
+   This program is free software; you can redistribute it and/or
+   modify it under the terms of the GNU General Public
+   License as published by the Free Software Foundation; version 2
+   of the License.
+*/
 #include "manageinvitationsdialog.h"
 #include "manageinvitationsdialog.moc"
 
