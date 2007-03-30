@@ -27,7 +27,8 @@
 class QWidget;
 class PersonalInviteDialog : public KDialog, public Ui::PersonalInviteWidget
 {
-  public:
+    Q_OBJECT
+public:
     PersonalInviteDialog( QWidget *parent );
     virtual ~PersonalInviteDialog() {}
 
@@ -35,8 +36,11 @@ class PersonalInviteDialog : public KDialog, public Ui::PersonalInviteWidget
     void setPassword( const QString &passwd );
     void setExpiration( const QDateTime &expire );
 
-  protected:
-      QWidget *m_inviteWidget;
+public Q_SLOTS:
+    void showWhatsthis(const QString &);
+
+protected:
+    QWidget *m_inviteWidget;
 };
 
 #endif // PERSONALINVITEDIALOG_H

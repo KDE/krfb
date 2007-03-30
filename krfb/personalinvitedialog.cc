@@ -18,12 +18,15 @@
 */
 
 #include "personalinvitedialog.h"
+#include "personalinvitedialog.moc"
 
 #include <qlabel.h>
 
-#include <k3activelabel.h>
 #include <kiconloader.h>
 #include <klocale.h>
+
+#include <QToolTip>
+#include <QNetworkInterface>
 
 PersonalInviteDialog::PersonalInviteDialog( QWidget *parent )
     : KDialog( parent )
@@ -37,8 +40,24 @@ PersonalInviteDialog::PersonalInviteDialog( QWidget *parent )
   setupUi(m_inviteWidget);
   pixmapLabel->setPixmap( UserIcon( "connection-side-image.png" ) );
 
+  QList<QNetworkInterface> ifl = QNetworkInterface::allInterfaces();
+
+  foreach (QNetworkInterface nif, ifl) {
+    if (nif.flags() & QNetworkInterface::IsLoopBack) continue;
+    if (nif.flags() & QNetworkInterface::IsRunning) {
+        hostLabel->setText( QString( "%1:5900" ).arg(nif.addressEntries()[0].ip().toString()));
+    }
+  }
+
+  connect( mainTextLabel, SIGNAL( linkActivated ( QString ) ),
+           SLOT( showWhatsthis( QString ) ));
+
+  connect( hostHelpLabel, SIGNAL( linkActivated ( QString ) ),
+           SLOT( showWhatsthis( QString ) ));
+
   setMainWidget( m_inviteWidget );
 }
+
 
 void PersonalInviteDialog::setHost( const QString &host, uint port )
 {
@@ -55,3 +74,21 @@ void PersonalInviteDialog::setExpiration( const QDateTime &expire )
 {
   expirationLabel->setText( expire.toString( Qt::LocalDate ) );
 }
+
+void PersonalInviteDialog::showWhatsthis(const QString &link)
+{
+    if (link == "htc") {
+        QToolTip::showText(QCursor::pos(),
+            i18n("Desktop Sharing uses the VNC protocol. You can use any VNC client to connect. \n"
+                "In KDE the client is called 'Remote Desktop Connection'. Enter the host information\n"
+                "into the client and it will connect.."));
+    } else if (link == "help") {
+        QToolTip::showText(QCursor::pos(),
+            i18n("This field contains the address of your computer and the display number, separated by a colon.\n"
+                "The address is just a hint - you can use any address that can reach your computer. \n"
+                "Desktop Sharing tries to guess your address from your network configuration, but does\n"
+                "not always succeed in doing so. If your computer is behind a firewall it may have a\n"
+                "different address or be unreachable for other computers."));
+    }
+}
+

@@ -20,7 +20,7 @@
     <number>6</number>
    </property>
    <item row="0" column="1" colspan="3" >
-    <widget class="K3ActiveLabel" native="1" name="mainTextLabel" >
+    <widget class="QLabel" name="mainTextLabel" >
      <property name="sizePolicy" >
       <sizepolicy>
        <hsizetype>7</hsizetype>
@@ -31,6 +31,16 @@
      </property>
      <property name="focusPolicy" >
       <enum>Qt::NoFocus</enum>
+     </property>
+     <property name="text" >
+      <string>&lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;style type="text/css">
+p, li { white-space: pre-wrap; }
+&lt;/style>&lt;/head>&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal; text-decoration:none;">
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">&lt;span style=" font-weight:600;">Personal Invitation&lt;/span>&lt;/p>
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Give the information below to the person that you want to invite (&lt;a href="htc">how to connect&lt;/a>). Note that everybody who gets the password can connect, so be careful.&lt;/p>&lt;/body>&lt;/html></string>
+     </property>
+     <property name="wordWrap" >
+      <bool>true</bool>
      </property>
     </widget>
    </item>
@@ -103,7 +113,7 @@
     </spacer>
    </item>
    <item row="2" column="2" >
-    <widget class="K3ActiveLabel" native="1" name="hostLabel" >
+    <widget class="QLabel" name="hostLabel" >
      <property name="sizePolicy" >
       <sizepolicy>
        <hsizetype>3</hsizetype>
@@ -154,7 +164,7 @@
     </widget>
    </item>
    <item row="3" column="2" >
-    <widget class="K3ActiveLabel" native="1" name="passwordLabel" >
+    <widget class="QLabel" name="passwordLabel" >
      <property name="sizePolicy" >
       <sizepolicy>
        <hsizetype>3</hsizetype>
@@ -169,7 +179,7 @@
     </widget>
    </item>
    <item row="4" column="2" >
-    <widget class="K3ActiveLabel" native="1" name="expirationLabel" >
+    <widget class="QLabel" name="expirationLabel" >
      <property name="sizePolicy" >
       <sizepolicy>
        <hsizetype>3</hsizetype>
@@ -202,7 +212,7 @@
     </widget>
    </item>
    <item row="2" column="3" >
-    <widget class="K3ActiveLabel" native="1" name="hostHelpLabel" >
+    <widget class="QLabel" name="hostHelpLabel" >
      <property name="sizePolicy" >
       <sizepolicy>
        <hsizetype>3</hsizetype>
@@ -211,6 +221,12 @@
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
+     <property name="text" >
+      <string>&lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;style type="text/css">
+p, li { white-space: pre-wrap; }
+&lt;/style>&lt;/head>&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal; text-decoration:none;">
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">&lt;a href="help">Help&lt;/a>&lt;/p>&lt;/body>&lt;/html></string>
+     </property>
     </widget>
    </item>
   </layout>
@@ -218,14 +234,6 @@
  <layoutdefault spacing="6" margin="11" />
  <layoutfunction spacing="KDialog::spacingHint" margin="KDialog::marginHint" />
  <pixmapfunction>qPixmapFromMimeSource</pixmapfunction>
- <customwidgets>
-  <customwidget>
-   <class>K3ActiveLabel</class>
-   <extends>QWidget</extends>
-   <header>k3activelabel.h</header>
-   <container>1</container>
-  </customwidget>
- </customwidgets>
  <resources/>
  <connections/>
 </ui>

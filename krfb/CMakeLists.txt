@@ -14,6 +14,7 @@ set(krfb_SRCS ${vncserver_SRCS}
    trayicon.cpp
    krfbserver.cpp
    manageinvitationsdialog.cpp
+   invitationmanager.cpp
    invitedialog.cc
    invitation.cc
    connectiondialog.cc

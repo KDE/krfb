@@ -57,7 +57,6 @@ private:
 
   	QPixmap trayIconOpen;
   	QPixmap trayIconClosed;
-	KDialog* aboutDialog;
 	KActionCollection actionCollection;
   	KAction* manageInvitationsAction;
   	KAction* aboutAction;

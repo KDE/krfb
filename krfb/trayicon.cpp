@@ -22,27 +22,28 @@
 #include <klocale.h>
 #include <kdialog.h>
 #include <kmenu.h>
+#include <kglobal.h>
+#include <kaboutapplicationdialog.h>
 
 #include "manageinvitationsdialog.h"
 #include "invitedialog.h"
 
 
 TrayIcon::TrayIcon(KDialog *d) :
-	KSystemTrayIcon(),
-	aboutDialog(d),
+	KSystemTrayIcon(d),
 	actionCollection(this),
 	quitting(false)
 {
 	setIcon(KIcon("eyes-closed24"));
 
-    setToolTip(i18n("Desktop Sharing - connecting"));
+    setToolTip(i18n("Desktop Sharing - disconnected"));
 
-	manageInvitationsAction = new KAction(i18n("Manage &Invitations"), &actionCollection);
-	actionCollection.addAction("manage_invitations", manageInvitationsAction);
-	connect(manageInvitationsAction, SIGNAL(triggered(bool)), SLOT(showManageInvitations()));
-	contextMenu()->addAction(actionCollection.action("manage_invitations"));
+// 	manageInvitationsAction = new KAction(i18n("Manage &Invitations"), &actionCollection);
+// 	actionCollection.addAction("manage_invitations", manageInvitationsAction);
+// 	connect(manageInvitationsAction, SIGNAL(triggered(bool)), SLOT(showManageInvitations()));
+// 	contextMenu()->addAction(actionCollection.action("manage_invitations"));
 
-	contextMenu()->addSeparator();
+// 	contextMenu()->addSeparator();
 
 	enableControlAction = new KToggleAction(i18n("Enable Remote Control"), &actionCollection);
 	enableControlAction->setCheckedState(KGuiItem(i18n("Disable Remote Control")));
@@ -51,7 +52,7 @@ TrayIcon::TrayIcon(KDialog *d) :
 	connect(enableControlAction, SIGNAL(toggled(bool)), SIGNAL(enableDesktopControl(bool)));
 	contextMenu()->addAction("enable_control");
 
-	contextMenu()->addSeparator();
+    contextMenu()->addSeparator();
 
 	aboutAction = KStandardAction::aboutApp(this, SLOT(showAbout()), &actionCollection);
 	actionCollection.addAction("about", aboutAction);
@@ -64,7 +65,8 @@ TrayIcon::~TrayIcon(){
 }
 
 void TrayIcon::showAbout() {
-	aboutDialog->show();
+    KAboutApplicationDialog(KGlobal::mainComponent().aboutData()).exec();
+// 	aboutDialog->show();
 }
 
 void TrayIcon::prepareQuit() {

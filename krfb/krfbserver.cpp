@@ -42,6 +42,7 @@ void KrfbServer::startListening() {
     connect(_server,SIGNAL(newConnection()),SLOT(newConnection()));
 
     if (!_server->listen(QHostAddress::Any, port)) {
+        // TODO: handle error more gracefully
         kDebug() << "server listen error" << endl;
         deleteLater();
         return;
@@ -64,6 +65,7 @@ void KrfbServer::newConnection()
 
     fdNum = conn->socketDescriptor();
     conn->close();
+    // TODO: start the actual sharing implementation
     //_controller->startServer(fdNum);
 }
 

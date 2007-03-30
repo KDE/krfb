@@ -9,11 +9,17 @@
 #include "manageinvitationsdialog.h"
 #include "manageinvitationsdialog.moc"
 
+#include "personalinvitedialog.h"
+#include "invitationmanager.h"
+#include "invitation.h"
+
 #include <QWidget>
 #include <QToolTip>
 #include <QCursor>
+
 #include <KStandardGuiItem>
 #include <KIconLoader>
+
 
 ManageInvitationsDialog::ManageInvitationsDialog(QWidget *parent)
  : KDialog(parent)
@@ -21,7 +27,7 @@ ManageInvitationsDialog::ManageInvitationsDialog(QWidget *parent)
     setCaption(i18n("Invitation"));
     setButtons(User1|Close|Help);
     setDefaultButton(NoDefault);
-    setModal(true);
+    setModal(false);
 
     QWidget *main = new QWidget(this);
     setupUi(main);
@@ -59,6 +65,11 @@ void ManageInvitationsDialog::showWhatsthis()
 
 void ManageInvitationsDialog::inviteManually()
 {
+    Invitation inv = InvitationManager::self()->addInvitation();
+    PersonalInviteDialog *pid = new PersonalInviteDialog(this);
+    pid->setPassword(inv.password());
+    pid->setExpiration(inv.expirationTime());
+    pid->exec();
 }
 
 void ManageInvitationsDialog::inviteByMail()

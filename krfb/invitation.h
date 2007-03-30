@@ -19,7 +19,6 @@
 #define INVITATION_H
 
 #include <kapplication.h>
-#include <k3listview.h>
 #include <kconfig.h>
 #include <qobject.h>
 #include <qstring.h>
@@ -28,13 +27,11 @@
 
 const int INVITATION_DURATION = 60*60;
 
-QString cryptStr(const QString &aStr);
-
 class Invitation {
 public:
 	Invitation();
 	~Invitation();
-	Invitation(KConfig* config, int num);
+	Invitation(const KConfigGroup &config);
 	Invitation(const Invitation &x);
 	Invitation &operator= (const Invitation&x);
 
@@ -43,15 +40,12 @@ public:
 	QDateTime creationTime() const;
 	bool isValid() const;
 
-	void setViewItem(K3ListViewItem*);
-	K3ListViewItem* getViewItem() const;
-	void save(KConfig *config, int num) const;
+	void save(KConfigGroup &config) const;
 private:
 	QString m_password;
 	QDateTime m_creationTime;
 	QDateTime m_expirationTime;
 
-	K3ListViewItem *m_viewItem;
 };
 
 #endif

@@ -18,6 +18,7 @@
 #include "trayicon.h"
 //#include "configuration.h"
 #include "krfbserver.h"
+#include "manageinvitationsdialog.h"
 
 #include <QPixmap>
 #include <kaction.h>
@@ -42,16 +43,18 @@ static const char description[] = I18N_NOOP("VNC-compatible server to share "
 int main(int argc, char *argv[])
 {
 	KAboutData aboutData( "krfb", I18N_NOOP("Desktop Sharing"),
-		VERSION, description, KAboutData::License_GPL,
-		"(c) 2001-2003, Tim Jansen\n"
-		"(c) 2001, Johannes E. Schindelin\n"
-		"(c) 2000, heXoNet Support GmbH, D-66424 Homburg\n"
-		"(c) 2000-2001, Const Kaplinsky\n"
-		"(c) 2000, Tridia Corporation\n"
-		"(c) 1999, AT&T Laboratories Cambridge\n",
-                0, "", "tim@tjansen.de");
-	aboutData.addAuthor("Tim Jansen", "", "tim@tjansen.de");
-        aboutData.addAuthor("Ian Reinhart Geiser", "DCOP interface", "geiseri@kde.org");
+        VERSION, description, KAboutData::License_GPL,
+        "(c) 2007, Alessandro Praduroux\n"
+            "(c) 2001-2003, Tim Jansen\n"
+        "(c) 2001, Johannes E. Schindelin\n"
+        "(c) 2000, heXoNet Support GmbH, D-66424 Homburg\n"
+        "(c) 2000-2001, Const Kaplinsky\n"
+        "(c) 2000, Tridia Corporation\n"
+        "(c) 1999, AT&T Laboratories Cambridge\n",
+        0, "", "tim@tjansen.de");
+    aboutData.addAuthor("Alessandro Praduroux", I18N_NOOP("KDE4 porting"), "pradu@pradu.it");
+    aboutData.addAuthor("Tim Jansen", "", "tim@tjansen.de");
+    aboutData.addAuthor("Ian Reinhart Geiser", I18N_NOOP("DCOP interface"), "geiseri@kde.org");
 	aboutData.addCredit("Johannes E. Schindelin",
 			    I18N_NOOP("libvncserver"));
 	aboutData.addCredit("Const Kaplinsky",
@@ -73,7 +76,8 @@ int main(int argc, char *argv[])
 
 	KApplication app;
 
-	TrayIcon trayicon(new KAboutApplicationDialog(&aboutData));
+
+    TrayIcon trayicon(new ManageInvitationsDialog);
 	KrfbServer server;
 
 	QObject::connect(&app, SIGNAL(lastWindowClosed()), // do not show passivepopup
