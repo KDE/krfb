@@ -1,6 +1,9 @@
 project(krfb)
 
-include_directories(${CMAKE_SOURCE_DIR}/krfb/libvncserver ${CMAKE_SOURCE_DIR}/krfb/srvloc)
+include_directories(${CMAKE_SOURCE_DIR}/krfb/libvncserver
+    ${CMAKE_SOURCE_DIR}/krfb/srvloc
+    ${CMAKE_CURRENT_BINARY_DIR}
+)
 
 
 ##set(krfb_SRCS ${vncserver_SRCS} ${srvloc_SRCS} ${krfbconfig_SRCS}
