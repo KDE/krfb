@@ -12,7 +12,6 @@ set(krfb_SRCS ${vncserver_SRCS}
 #   xupdatescanner.cc
    main.cpp
    trayicon.cpp
-   connectiondialog.cc
    krfbserver.cpp
    manageinvitationsdialog.cpp
    invitedialog.cc
