@@ -24,6 +24,7 @@
 
 #include <kiconloader.h>
 #include <klocale.h>
+#include <KStandardDirs>
 
 #include <QToolTip>
 #include <QNetworkInterface>
@@ -38,7 +39,7 @@ PersonalInviteDialog::PersonalInviteDialog( QWidget *parent )
 
   m_inviteWidget = new QWidget ( this );
   setupUi(m_inviteWidget);
-  pixmapLabel->setPixmap( UserIcon( "connection-side-image.png" ) );
+  pixmapLabel->setPixmap(KStandardDirs::locate("data", "krfb/pics/connection-side-image.png"));
 
   QList<QNetworkInterface> ifl = QNetworkInterface::allInterfaces();
 

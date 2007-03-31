@@ -103,10 +103,10 @@
       </size>
      </property>
      <property name="frameShape" >
-      <enum>QFrame::WinPanel</enum>
+      <enum>QFrame::StyledPanel</enum>
      </property>
      <property name="frameShadow" >
-      <enum>QFrame::Sunken</enum>
+      <enum>QFrame::Plain</enum>
      </property>
      <property name="lineWidth" >
       <number>0</number>

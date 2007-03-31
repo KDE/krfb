@@ -17,6 +17,7 @@
 #include <QToolTip>
 #include <QCursor>
 
+#include <KStandardDirs>
 #include <KStandardGuiItem>
 #include <KIconLoader>
 
@@ -32,8 +33,7 @@ ManageInvitationsDialog::ManageInvitationsDialog(QWidget *parent)
     QWidget *main = new QWidget(this);
     setupUi(main);
     setMainWidget( main );
-
-    pixmapLabel->setPixmap( UserIcon( "connection-side-image.png" ) );
+    pixmapLabel->setPixmap(KStandardDirs::locate("data", "krfb/pics/connection-side-image.png"));
 
     setButtonGuiItem( User1, KStandardGuiItem::configure() );
 

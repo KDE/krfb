@@ -50,8 +50,7 @@ int main(int argc, char *argv[])
         "(c) 2000, heXoNet Support GmbH, D-66424 Homburg\n"
         "(c) 2000-2001, Const Kaplinsky\n"
         "(c) 2000, Tridia Corporation\n"
-        "(c) 1999, AT&T Laboratories Cambridge\n",
-        0, "", "tim@tjansen.de");
+        "(c) 1999, AT&T Laboratories Cambridge\n");
     aboutData.addAuthor("Alessandro Praduroux", I18N_NOOP("KDE4 porting"), "pradu@pradu.it");
     aboutData.addAuthor("Tim Jansen", "", "tim@tjansen.de");
     aboutData.addAuthor("Ian Reinhart Geiser", I18N_NOOP("DCOP interface"), "geiseri@kde.org");

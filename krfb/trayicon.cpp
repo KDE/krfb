@@ -50,13 +50,13 @@ TrayIcon::TrayIcon(KDialog *d) :
 	enableControlAction->setEnabled(false);
 	actionCollection.addAction("enable_control", enableControlAction);
 	connect(enableControlAction, SIGNAL(toggled(bool)), SIGNAL(enableDesktopControl(bool)));
-	contextMenu()->addAction("enable_control");
+	contextMenu()->addAction(actionCollection.action("enable_control"));
 
     contextMenu()->addSeparator();
 
 	aboutAction = KStandardAction::aboutApp(this, SLOT(showAbout()), &actionCollection);
 	actionCollection.addAction("about", aboutAction);
-	contextMenu()->addAction("about");
+	contextMenu()->addAction(actionCollection.action("about"));
 
 	show();
 }
@@ -66,21 +66,18 @@ TrayIcon::~TrayIcon(){
 
 void TrayIcon::showAbout() {
     KAboutApplicationDialog(KGlobal::mainComponent().aboutData()).exec();
-// 	aboutDialog->show();
 }
 
 void TrayIcon::prepareQuit() {
         quitting = true;
 }
 
-
-
 void TrayIcon::showConnectedMessage(QString host) {
 
         setIcon(KIcon("eyes-open24"));
         KPassivePopup::message(i18n("Desktop Sharing"),
 				i18n("The remote user has been authenticated and is now connected."),
-				trayIconOpen,
+				KIcon("eyes-open24").pixmap(22),
 				this);
 	setToolTip(i18n("Desktop Sharing - connected with %1", host));
 }
@@ -93,7 +90,7 @@ void TrayIcon::showDisconnectedMessage() {
         setIcon(KIcon("eyes-closed24"));
         KPassivePopup *p = KPassivePopup::message(i18n("Desktop Sharing"),
 						    i18n("The remote user has closed the connection."),
-						    trayIconClosed,
+						    KIcon("eyes-closed24").pixmap(22),
 						    this);
 	connect(p, SIGNAL(hidden()), this, SIGNAL(diconnectedMessageDisplayed()));
 }

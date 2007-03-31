@@ -54,9 +54,6 @@ protected:
 	void activated(QSystemTrayIcon::ActivationReason reason);
 
 private:
-
-  	QPixmap trayIconOpen;
-  	QPixmap trayIconClosed;
 	KActionCollection actionCollection;
   	KAction* manageInvitationsAction;
   	KAction* aboutAction;

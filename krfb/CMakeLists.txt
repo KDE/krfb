@@ -32,7 +32,7 @@ kde4_add_ui_files(krfb_SRCS rfbconnectionwidget.ui
 
 kde4_add_executable(krfb ${krfb_SRCS})
 
-target_link_libraries(krfb ${KDE4_KIO_LIBS} ${KDE4_KDE3SUPPORT_LIBS} ${JPEG_LIBRARIES} ${SLP_LIBRARIES})
+target_link_libraries(krfb ${KDE4_KIO_LIBS} ${JPEG_LIBRARIES} ${SLP_LIBRARIES})
 
 install(TARGETS krfb  DESTINATION ${BIN_INSTALL_DIR})
 
