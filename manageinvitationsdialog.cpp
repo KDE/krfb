@@ -16,10 +16,13 @@
 #include <QWidget>
 #include <QToolTip>
 #include <QCursor>
+#include <QDateTime>
 
 #include <KStandardDirs>
 #include <KStandardGuiItem>
 #include <KIconLoader>
+#include <KLocale>
+#include <KGlobal>
 
 
 ManageInvitationsDialog::ManageInvitationsDialog(QWidget *parent)
@@ -43,7 +46,10 @@ ManageInvitationsDialog::ManageInvitationsDialog(QWidget *parent)
              SLOT( inviteManually() ));
     connect( newEmailInvitationButton, SIGNAL( clicked() ),
              SLOT( inviteByMail() ));
+    connect( InvitationManager::self(), SIGNAL( invitationNumChanged( int )),
+             SLOT( reloadInvitations() ));
 
+    reloadInvitations();
 }
 
 ManageInvitationsDialog::~ManageInvitationsDialog()
@@ -74,5 +80,18 @@ void ManageInvitationsDialog::inviteManually()
 
 void ManageInvitationsDialog::inviteByMail()
 {
+}
+
+void ManageInvitationsDialog::reloadInvitations()
+{
+    invitationWidget->clear();
+    KLocale *loc = KGlobal::locale();
+    foreach(Invitation inv, InvitationManager::self()->invitations()) {
+        QStringList strs;
+        strs <<  loc->formatDateTime(inv.creationTime()) << loc->formatDateTime(inv.expirationTime());
+        QTreeWidgetItem *it = new QTreeWidgetItem(strs);
+        invitationWidget->addTopLevelItem(it);
+    }
+    invitationWidget->resizeColumnToContents(0);
 }
 

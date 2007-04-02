@@ -28,12 +28,15 @@ public:
 
     Invitation addInvitation();
 
+    const QList<Invitation> &invitations();
+
 signals:
     void invitationNumChanged(int);
 
 public Q_SLOTS:
 
     void loadInvitations();
+    void saveInvitations();
 
 private:
 

@@ -28,6 +28,7 @@ public Q_SLOTS:
     void showWhatsthis();
     void inviteManually();
     void inviteByMail();
+    void reloadInvitations();
 
 private:
 

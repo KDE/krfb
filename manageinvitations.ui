@@ -55,7 +55,7 @@
     </widget>
    </item>
    <item rowspan="5" row="2" column="1" >
-    <widget class="QTreeWidget" name="treeWidget" >
+    <widget class="QTreeWidget" name="invitationWidget" >
      <property name="sizePolicy" >
       <sizepolicy>
        <hsizetype>7</hsizetype>
@@ -63,6 +63,15 @@
        <horstretch>2</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
+     </property>
+     <property name="alternatingRowColors" >
+      <bool>true</bool>
+     </property>
+     <property name="rootIsDecorated" >
+      <bool>false</bool>
+     </property>
+     <property name="allColumnsShowFocus" >
+      <bool>true</bool>
      </property>
      <column>
       <property name="text" >

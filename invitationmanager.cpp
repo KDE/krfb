@@ -46,6 +46,7 @@ void InvitationManager::invalidateOldInvitations() {
             invitationList.removeAt(invNum);
         }
     }
+    saveInvitations();
 }
 
 
@@ -63,7 +64,6 @@ void InvitationManager::loadInvitations()
     }
 
     invalidateOldInvitations();
-
     if (numInv != invNum) {
         emit invitationNumChanged(invitationList.size());
     }
@@ -75,7 +75,26 @@ Invitation InvitationManager::addInvitation()
     Invitation i;
     invitationList.append(i);
     emit invitationNumChanged(invitationList.size());
+    saveInvitations();
     return i;
+}
+
+const QList< Invitation > & InvitationManager::invitations()
+{
+    return invitationList;
+}
+
+void InvitationManager::saveInvitations()
+{
+    KSharedConfigPtr conf = KGlobal::config();
+    KConfigGroup invitationConfig(conf, "Invitations");
+    int invNum = invitationList.size();
+    invitationConfig.writeEntry("invitation_num",invNum);
+    for (int i = 0; i < invNum; i++) {
+        KConfigGroup ic(conf, QString("Invitation_%1").arg(i));
+        invitationList[i].save(ic);
+    }
+    conf->sync();
 }
 
 

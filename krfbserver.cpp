@@ -1,5 +1,6 @@
 /* This file is part of the KDE project
    Copyright (C) 2007 Alessandro Praduroux <pradu@pradu.it>
+             (C) 2001-2003 by Tim Jansen <tim@tjansen.de>
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public
@@ -16,9 +17,21 @@
 #include <QTcpServer>
 #include <QTcpSocket>
 #include <QTimer>
+#include <QHostInfo>
+#include <QApplication>
+#include <QDesktopWidget>
 
 #include <KConfig>
 #include <KGlobal>
+#include <KUser>
+#include <KLocale>
+
+#include <X11/Xutil.h>
+#include <X11/extensions/XTest.h>
+#include <QX11Info>
+
+#include <rfb/rfb.h>
+
 
 const int DEFAULT_TCP_PORT = 5900;
 
@@ -64,9 +77,8 @@ void KrfbServer::newConnection()
     connect (conn, SIGNAL(disconnected()), SIGNAL(sessionFinished()));
 
     fdNum = conn->socketDescriptor();
-    conn->close();
     // TODO: start the actual sharing implementation
-    //_controller->startServer(fdNum);
+    startServer(fdNum);
 }
 
 void KrfbServer::enableDesktopControl(bool enable)
@@ -79,6 +91,47 @@ void KrfbServer::disconnectAndQuit()
     // TODO: cleanup of existing connections
     _server->close();
     emit quitApp();
+}
+
+void KrfbServer::startServer(int fd)
+{
+    rfbScreenInfoPtr server;
+    XImage *framebufferImage;
+
+    framebufferImage = XGetImage(QX11Info::display(),
+        QApplication::desktop()->winId(),
+        0,
+        0,
+        QApplication::desktop()->width(),
+        QApplication::desktop()->height(),
+        AllPlanes,
+        ZPixmap);
+
+    int w = framebufferImage->width;
+    int h = framebufferImage->height;
+    char *fb = framebufferImage->data;
+
+    rfbLogEnable(0);
+    server = rfbGetScreen(0, 0, w, h,
+            framebufferImage->bits_per_pixel,
+            8,
+            framebufferImage->bits_per_pixel/8);
+
+    server->paddedWidthInBytes = framebufferImage->bytes_per_line;
+    server->frameBuffer = fb;
+    server->autoPort = TRUE;
+    server->inetdSock = fd;
+
+    server->desktopName = i18n("%1@%2 (shared desktop)", KUser().loginName(), QHostInfo::localHostName()).toLatin1();
+
+//     if (!myCursor)
+//         myCursor = rfbMakeXCursor(19, 19, (char*) cur, (char*) mask);
+//     server->cursor = myCursor;
+
+    rfbInitServer(server);
+
+    rfbRunEventLoop(server, -1, TRUE);
+
 }
 
 

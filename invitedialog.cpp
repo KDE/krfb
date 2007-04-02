@@ -24,8 +24,8 @@
 #include <KStandardDirs>
 #include <KStandardGuiItem>
 
-#include <qlabel.h>
-#include <qpushbutton.h>
+#include <QLabel>
+#include <QPushButton>
 #include <QToolTip>
 #include <QCursor>
 

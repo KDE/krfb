@@ -42,6 +42,8 @@ public Q_SLOTS:
     void disconnectAndQuit();
 
 private:
+    void startServer(int fd);
+
     RFBController *_controller;
     QTcpServer *_server;
 

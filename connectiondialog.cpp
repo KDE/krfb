@@ -19,11 +19,11 @@
 
 #include "connectiondialog.h"
 
-#include <qcheckbox.h>
-#include <qlabel.h>
+#include <QCheckBox>
+#include <QLabel>
 
-#include <kiconloader.h>
-#include <klocale.h>
+#include <KIconLoader>
+#include <KLocale>
 #include <KStandardGuiItem>
 
 ConnectionDialog::ConnectionDialog( QWidget *parent )

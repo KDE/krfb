@@ -18,11 +18,11 @@
 #ifndef INVITATION_H
 #define INVITATION_H
 
-#include <kapplication.h>
-#include <kconfig.h>
-#include <qobject.h>
-#include <qstring.h>
-#include <qdatetime.h>
+#include <KApplication>
+#include <KConfig>
+#include <QObject>
+#include <QString>
+#include <QDateTime>
 
 
 const int INVITATION_DURATION = 60*60;

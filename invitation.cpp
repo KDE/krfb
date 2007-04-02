@@ -13,7 +13,7 @@
  ***************************************************************************/
 
 #include "invitation.h"
-#include <krandom.h>
+#include <KRandom>
 /*
  * Function for (en/de)crypting strings for config file, taken from KMail
  * Author: Stefan Taferner <taferner@alpin.or.at>
