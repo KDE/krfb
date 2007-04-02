@@ -21,7 +21,7 @@
 #define CONNECTIONDIALOG_H
 
 #include <KDialog>
-#include "ui_rfbconnectionwidget.h"
+#include "ui_connectionwidget.h"
 
 class QWidget;
 

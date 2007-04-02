@@ -17,31 +17,41 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef PERSONALINVITEDIALOG_H
-#define PERSONALINVITEDIALOG_H
+#ifndef INVITEDIALOG_H
+#define INVITEDIALOG_H
 
-#include <qdatetime.h>
+#include "ui_invitewidget.h"
+
 #include <KDialog>
-#include "ui_rfbpersonalinvitewidget.h"
 
 class QWidget;
-class PersonalInviteDialog : public KDialog, public Ui::PersonalInviteWidget
+
+class InviteDialog : public KDialog, public Ui::InviteWidget
 {
-    Q_OBJECT
-public:
-    PersonalInviteDialog( QWidget *parent );
-    virtual ~PersonalInviteDialog() {}
+  Q_OBJECT
 
-    void setHost( const QString &host, uint port );
-    void setPassword( const QString &passwd );
-    void setExpiration( const QDateTime &expire );
+  public:
+    InviteDialog( QWidget *parent );
+    ~InviteDialog() {}
 
-public Q_SLOTS:
-    void showWhatsthis(const QString &);
+    void enableInviteButton( bool enable );
 
-protected:
+  public Q_SLOTS:
+    void setInviteCount( int count );
+    void showWhatsthis();
+
+  signals:
+    void createInviteClicked();
+    void emailInviteClicked();
+    void manageInviteClicked();
+    void configureClicked();
+
+  protected Q_SLOTS:
+    void slotUser1();
+
+  protected:
     QWidget *m_inviteWidget;
 };
 
-#endif // PERSONALINVITEDIALOG_H
+#endif // INVITEDIALOG_H
 

@@ -11,7 +11,7 @@
 #define MANAGEINVITATIONSDIALOG_H
 
 #include <KDialog>
-#include "ui_rfbmanageinvitations.h"
+#include "ui_manageinvitations.h"
 
 /**
 	@author Alessandro Praduroux <pradu@pradu.it>
