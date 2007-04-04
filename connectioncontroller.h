@@ -11,6 +11,10 @@
 #define CONNECTIONCONTROLLER_H
 
 #include <QThread>
+#include <QImage>
+#include <QMutex>
+#include <QVector>
+#include <QRect>
 
 #include <rfb/rfb.h>
 
@@ -49,6 +53,7 @@ private:
 
 };
 
+
 /**
 	@author Alessandro Praduroux <pradu@pradu.it>
 */
@@ -60,6 +65,11 @@ public:
 
     ~ConnectionController();
 
+public Q_SLOTS:
+
+    void updateFrameBuffer();
+    void processEvents();
+
 protected:
     virtual void run();
 
@@ -67,6 +77,11 @@ private:
     int fd;
     KrfbServer *server;
     XImage *framebufferImage;
+    QImage fbImage;
+    char *fb;
+    QMutex fblock;
+    rfbScreenInfoPtr screen;
+    QVector<QRect> tiles;
 };
 
 #endif

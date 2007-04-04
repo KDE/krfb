@@ -18,6 +18,11 @@
 #include <QApplication>
 #include <QDesktopWidget>
 #include <QTcpSocket>
+#include <QPixmap>
+#include <QMutexLocker>
+#include <QTimer>
+#include <QRegion>
+#include <QBitmap>
 
 #include <KConfig>
 #include <KGlobal>
@@ -29,6 +34,8 @@
 #include "connectioncontroller.moc"
 
 #include <X11/Xutil.h>
+
+const int UPDATE_TIME = 100;
 
 static const char* cur=
         "                   "
@@ -262,15 +269,22 @@ void CurrentController::clipboardToServer(const QString &)
 }
 
 ConnectionController::ConnectionController(int connFd, KrfbServer *parent)
- : QThread(parent), fd(connFd), server(parent)
+ : QThread(parent), fd(connFd), server(parent), fb(0)
 {
+#if 0
     framebufferImage = XGetImage(QX11Info::display(),  QApplication::desktop()->winId(),
                                 0, 0,
                                 QApplication::desktop()->width(),
                                 QApplication::desktop()->height(),
                                 AllPlanes,
                                 ZPixmap);
+#endif
 
+    QTimer *t = new QTimer(this);
+    connect(t, SIGNAL(timeout()), SLOT(updateFrameBuffer()));
+    fbImage = QPixmap::grabWindow(QApplication::desktop()->winId()).toImage();
+    updateFrameBuffer();
+    t->start(UPDATE_TIME);
 }
 
 
@@ -288,8 +302,9 @@ void ConnectionController::run()
     connect(cc, SIGNAL(sessionEstablished(QString)), server, SIGNAL(sessionEstablished(QString)));
     connect(cc, SIGNAL(notification(QString,QString)), server, SLOT(handleNotifications(QString, QString)));
 
-    rfbScreenInfoPtr server;
+    fblock.lock();
 
+#if 0
     int w = framebufferImage->width;
     int h = framebufferImage->height;
     char *fb = framebufferImage->data;
@@ -301,35 +316,127 @@ void ConnectionController::run()
                           framebufferImage->bits_per_pixel/8);
 
     kDebug() << "acquired framebuffer" << endl;
-
     server->paddedWidthInBytes = framebufferImage->bytes_per_line;
-    server->frameBuffer = fb;
-    server->autoPort = true;
-    server->inetdSock = fd;
+
+    kDebug() << "image depth: " << framebufferImage->bits_per_pixel << endl;
+    kDebug() << "image size: " << w << "x" << h << endl;
+    kDebug() << "bytes per line: " << framebufferImage->bytes_per_line << endl;
+
+#else
+
+    int w = fbImage.width();
+    int h = fbImage.height();
+
+    //fb = (char *)fbImage.bits();
+
+    rfbLogEnable(0);
+    screen = rfbGetScreen(0, 0, w, h,
+                            8,
+                            3,
+                            fbImage.depth()/8);
+    screen->paddedWidthInBytes = fbImage.bytesPerLine();
+
+    screen->serverFormat.bitsPerPixel = fbImage.depth();
+    screen->serverFormat.depth = fbImage.depth();
+    screen->serverFormat.trueColour = true;
+
+    screen->serverFormat.bigEndian = false;
+    screen->serverFormat.redShift = 16;
+    screen->serverFormat.greenShift = 8;
+    screen->serverFormat.blueShift = 0;
+    screen->serverFormat.redMax   = 0xff;
+    screen->serverFormat.greenMax = 0xff;
+    screen->serverFormat.blueMax  = 0xff;
+
+    kDebug() << "acquired framebuffer" << endl;
+
+    kDebug() << "image format: " << fbImage.format() << endl;
+    kDebug() << "image depth: " << fbImage.depth() << endl;
+    kDebug() << "image size: " << fbImage.rect() << endl;
+    kDebug() << "bytes per line: " << fbImage.bytesPerLine() << endl;
+#endif
+
+    screen->frameBuffer = fb;
+    screen->autoPort = true;
+    screen->inetdSock = fd;
 
     // server hooks
-    server->newClientHook = newClientHook;
+    screen->newClientHook = newClientHook;
 
-    server->kbdAddEvent = keyboardHook;
-    server->ptrAddEvent = pointerHook;
-    server->newClientHook = newClientHook;
-    server->passwordCheck = passwordCheck;
-    server->setXCutText = clipboardHook;
+    screen->kbdAddEvent = keyboardHook;
+    screen->ptrAddEvent = pointerHook;
+    screen->newClientHook = newClientHook;
+    screen->passwordCheck = passwordCheck;
+    screen->setXCutText = clipboardHook;
 
-    server->desktopName = i18n("%1@%2 (shared desktop)", KUser().loginName(), QHostInfo::localHostName()).toLatin1();
+    screen->desktopName = i18n("%1@%2 (shared desktop)", KUser().loginName(), QHostInfo::localHostName()).toLatin1();
 
     if (!myCursor) {
         myCursor = rfbMakeXCursor(19, 19, (char*) cur, (char*) mask);
     }
-    server->cursor = myCursor;
+    screen->cursor = myCursor;
 
-    rfbInitServer(server);
+    rfbInitServer(screen);
+    fblock.unlock();
 
-    rfbRunEventLoop(server, 1000, false);
-
+    QTimer *t = new QTimer();
+    connect(t, SIGNAL(timeout()), SLOT(processEvents()));
+    rfbProcessEvents(screen, 1000);
+    t->start(UPDATE_TIME);
+    exec();
 }
 
 
+// WARNING: this function is called in the main GUI Thread, not in the connection
+// thread! it can perform GUI calls but needs some care to avoid messing
+// with the shared data.
+void ConnectionController::updateFrameBuffer()
+{
+    QMutexLocker ml(&fblock);
+    QImage img = QPixmap::grabWindow(QApplication::desktop()->winId()).toImage();
+    QSize imgSize = img.size();
+
+    if (!fb){
+        fb = new char[img.numBytes()];
+    }
+
+    // verify what part of the image need to be marked as changed
+    // fbImage is the previous version of the image,
+    // img is the current one
+
+#if 1 // This is actually slower than updating the whole desktop...
+
+    QImage map(imgSize, QImage::Format_Mono);
+    map.fill(0);
+
+    for (int x = 0; x < imgSize.width(); x++) {
+        for (int y = 0; y < imgSize.height(); y++) {
+            if (img.pixel(x,y) != fbImage.pixel(x,y)) {
+                map.setPixel(x,y,1);
+            }
+        }
+    }
+
+    QRegion r(QBitmap::fromImage(map));
+#else
 
 
+#endif
+
+    tiles = tiles + r.rects();
+
+    memcpy(fb, (const char*)img.bits(), img.numBytes());
+    fbImage = img;
+}
+
+void ConnectionController::processEvents()
+{
+    QMutexLocker ml(&fblock);
+    foreach(QRect r, tiles) {
+        rfbMarkRectAsModified(screen, r.top(), r.left(), r.left() + r.width(), r.top() + r.height());
+    }
+    tiles.clear();
+
+    rfbProcessEvents(screen, 1000);
+}
 
