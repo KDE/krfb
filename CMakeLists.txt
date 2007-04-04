@@ -20,6 +20,8 @@ set(krfb_SRCS
    invitation.cpp
    connectiondialog.cpp
    personalinvitedialog.cpp
+   connectioncontroller.cpp
+   events.cpp
 #   rfbcontroller.cc
 #   xupdatescanner.cc
 )

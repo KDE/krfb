@@ -75,26 +75,26 @@ int main(int argc, char *argv[])
 
 	KApplication app;
 
-
     TrayIcon trayicon(new ManageInvitationsDialog);
-	KrfbServer server;
+
+	KrfbServer *server = KrfbServer::self(); // initialize the server manager
 
 	QObject::connect(&app, SIGNAL(lastWindowClosed()), // do not show passivepopup
             &trayicon, SLOT(prepareQuit()));
 	QObject::connect(&app, SIGNAL(lastWindowClosed()),
-            &server, SLOT(disconnectAndQuit()));
+            server, SLOT(disconnectAndQuit()));
 
 	QObject::connect(&trayicon, SIGNAL(enableDesktopControl(bool)),
-			 &server, SLOT(enableDesktopControl(bool)));
-	QObject::connect(&server, SIGNAL(sessionEstablished(QString)),
+			 server, SLOT(enableDesktopControl(bool)));
+	QObject::connect(server, SIGNAL(sessionEstablished(QString)),
 			 &trayicon, SLOT(showConnectedMessage(QString)));
-	QObject::connect(&server, SIGNAL(sessionFinished()),
+	QObject::connect(server, SIGNAL(sessionFinished()),
 			 &trayicon, SLOT(showDisconnectedMessage()));
-	QObject::connect(&server, SIGNAL(desktopControlSettingChanged(bool)),
+	QObject::connect(server, SIGNAL(desktopControlSettingChanged(bool)),
 			 &trayicon, SLOT(setDesktopControlSetting(bool)));
 	QObject::connect(&trayicon, SIGNAL(quitApp()),
-			 &server, SLOT(disconnectAndQuit()));
-    QObject::connect(&server, SIGNAL(quitApp()),
+			 server, SLOT(disconnectAndQuit()));
+    QObject::connect(server, SIGNAL(quitApp()),
                       &app, SLOT(quit()));
 
     //TODO: implement some error reporting mechanism between server and tray icon

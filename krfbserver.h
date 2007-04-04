@@ -11,9 +11,22 @@
 #define KRFBSERVER_H
 
 #include <QObject>
+#include <QTcpServer>
 
-class QTcpServer;
-class RFBController;
+class TcpServer: public QTcpServer {
+    Q_OBJECT
+
+    public:
+        TcpServer(QObject *parent = 0);
+
+    signals:
+
+        void connectionReceived(int fd);
+
+    protected:
+        virtual void incomingConnection(int fd);
+
+};
 
 /**
 This class implements the listening server for the RFB protocol.
@@ -24,29 +37,31 @@ class KrfbServer : public QObject
 {
 Q_OBJECT
 public:
-    KrfbServer();
+
+    static KrfbServer *self();
 
     ~KrfbServer();
 
 signals:
-    void sessionEstablished(const QString&);
+    void sessionEstablished(QString);
     void sessionFinished();
     void desktopControlSettingChanged(bool);
     void quitApp();
 
 public Q_SLOTS:
 
-    void newConnection();
+    void newConnection(int fd);
     void startListening();
     void enableDesktopControl(bool);
     void disconnectAndQuit();
+    void handleNotifications(QString, QString);
 
 private:
+    KrfbServer();
+    static KrfbServer *_self;
+
     void startServer(int fd);
-
-    RFBController *_controller;
-    QTcpServer *_server;
-
+    TcpServer *_server;
 };
 
 #endif

@@ -12,7 +12,6 @@
 #include "krfbserver.h"
 #include "krfbserver.moc"
 
-//#include "rfbcontroller.h"
 
 #include <QTcpServer>
 #include <QTcpSocket>
@@ -25,23 +24,25 @@
 #include <KGlobal>
 #include <KUser>
 #include <KLocale>
+#include <KStaticDeleter>
+#include <KNotification>
 
-#include <X11/Xutil.h>
-#include <X11/extensions/XTest.h>
-#include <QX11Info>
-
-#include <rfb/rfb.h>
-
+#include "connectioncontroller.h"
 
 const int DEFAULT_TCP_PORT = 5900;
 
-KrfbServer::KrfbServer()
-    : QObject(0), _controller(0) //new RFBController(0))
-{
-    QTimer::singleShot(0, this, SLOT(startListening()));
+static KStaticDeleter<KrfbServer> sd;
+KrfbServer * KrfbServer::_self = 0;
+KrfbServer * KrfbServer::self() {
+    if (!_self) sd.setObject(_self, new KrfbServer);
+    return _self;
+}
 
-    // TESTING!!!
-    QTimer::singleShot(100000, this, SLOT(disconnectAndQuit()));
+
+KrfbServer::KrfbServer()
+{
+    kDebug() << "starting " << endl;
+    QTimer::singleShot(0, this, SLOT(startListening()));
 }
 
 void KrfbServer::startListening() {
@@ -51,8 +52,8 @@ void KrfbServer::startListening() {
 
     int port = tcpConfig.readEntry("port",DEFAULT_TCP_PORT);
 
-    _server = new QTcpServer(this);
-    connect(_server,SIGNAL(newConnection()),SLOT(newConnection()));
+    _server = new TcpServer(this);
+    connect(_server,SIGNAL(connectionReceived(int)),SLOT(newConnection(int)));
 
     if (!_server->listen(QHostAddress::Any, port)) {
         // TODO: handle error more gracefully
@@ -60,6 +61,7 @@ void KrfbServer::startListening() {
         deleteLater();
         return;
     }
+    kDebug() << "server listening on port " << DEFAULT_TCP_PORT << endl;
 }
 
 
@@ -68,16 +70,9 @@ KrfbServer::~KrfbServer()
     //delete _controller;
 }
 
-void KrfbServer::newConnection()
+void KrfbServer::newConnection(int fdNum)
 {
-    int fdNum = 0;
-    QTcpSocket *conn = _server->nextPendingConnection();
-    QString peer = conn->peerAddress().toString();
-    emit sessionEstablished(peer);
-    connect (conn, SIGNAL(disconnected()), SIGNAL(sessionFinished()));
-
-    fdNum = conn->socketDescriptor();
-    // TODO: start the actual sharing implementation
+    // TODO: get peer address
     startServer(fdNum);
 }
 
@@ -93,45 +88,28 @@ void KrfbServer::disconnectAndQuit()
     emit quitApp();
 }
 
+
 void KrfbServer::startServer(int fd)
 {
-    rfbScreenInfoPtr server;
-    XImage *framebufferImage;
-
-    framebufferImage = XGetImage(QX11Info::display(),
-        QApplication::desktop()->winId(),
-        0,
-        0,
-        QApplication::desktop()->width(),
-        QApplication::desktop()->height(),
-        AllPlanes,
-        ZPixmap);
-
-    int w = framebufferImage->width;
-    int h = framebufferImage->height;
-    char *fb = framebufferImage->data;
-
-    rfbLogEnable(0);
-    server = rfbGetScreen(0, 0, w, h,
-            framebufferImage->bits_per_pixel,
-            8,
-            framebufferImage->bits_per_pixel/8);
-
-    server->paddedWidthInBytes = framebufferImage->bytes_per_line;
-    server->frameBuffer = fb;
-    server->autoPort = TRUE;
-    server->inetdSock = fd;
-
-    server->desktopName = i18n("%1@%2 (shared desktop)", KUser().loginName(), QHostInfo::localHostName()).toLatin1();
-
-//     if (!myCursor)
-//         myCursor = rfbMakeXCursor(19, 19, (char*) cur, (char*) mask);
-//     server->cursor = myCursor;
-
-    rfbInitServer(server);
-
-    rfbRunEventLoop(server, -1, TRUE);
-
+    ConnectionController *cc = new ConnectionController(fd, this);
+    cc->start();
 }
+
+TcpServer::TcpServer(QObject * parent)
+    :QTcpServer(parent)
+{
+}
+
+void TcpServer::incomingConnection(int fd)
+{
+    emit connectionReceived(fd);
+}
+
+void KrfbServer::handleNotifications(QString name, QString desc )
+{
+    KNotification::event(name, desc);
+}
+
+
 
 
