@@ -22,6 +22,7 @@ set(krfb_SRCS
    personalinvitedialog.cpp
    connectioncontroller.cpp
    events.cpp
+   framebuffer.cpp
 #   rfbcontroller.cc
 #   xupdatescanner.cc
 )

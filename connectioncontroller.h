@@ -18,9 +18,8 @@
 
 #include <rfb/rfb.h>
 
-#include <X11/Xlib.h>
-
 class KrfbServer;
+class FrameBuffer;
 
 /**
 	@author Alessandro Praduroux <pradu@pradu.it>
@@ -38,7 +37,7 @@ public:
     void sendKNotifyEvent(const QString &name, const QString &desc);
     void handleNegotiationFinished(struct _rfbClientRec *cl);
 
-    void handleKeyEvent(bool down, KeySym keySym);
+    void handleKeyEvent(bool down , rfbKeySym keySym );
     void handlePointerEvent( int bm, int x, int y);
     void handleClientGone();
     void clipboardToServer(const QString &);
@@ -51,17 +50,13 @@ Q_SIGNALS:
 
 public Q_SLOTS:
 
-    void updateFrameBuffer();
     void processEvents();
 
 private:
     int fd;
     KrfbServer *server;
-    XImage *framebufferImage;
-    QImage fbImage;
-    char *fb;
+    FrameBuffer *fb;
     rfbScreenInfoPtr screen;
-    QVector<QRect> tiles;
     QString remoteIp;
     rfbClientPtr client;
 };

@@ -33,14 +33,19 @@ const int KeyboardEvent::LEFTSHIFT = 1;
 const int KeyboardEvent::RIGHTSHIFT = 2;
 const int KeyboardEvent::ALTGR = 4;
 char KeyboardEvent::ModifierState;
+bool KeyboardEvent::initDone = false;
+
 
 KeyboardEvent::KeyboardEvent(bool d, KeySym k)
     : down(d), keySym(k)
 {
+    initKeycodes();
 }
 
 void KeyboardEvent::initKeycodes()
 {
+    if (initDone) return;
+    initDone = true;
     KeySym key,*keymap;
     int i,j,minkey,maxkey,syms_per_keycode;
 
@@ -171,7 +176,7 @@ void PointerEvent::exec() {
 }
 
 
-ClipboardEvent::ClipboardEvent(CurrentController *c, const QString &ctext)
+ClipboardEvent::ClipboardEvent(ConnectionController *c, const QString &ctext)
     :controller(c),text(ctext)
 {
 }

@@ -13,7 +13,7 @@
 
 #include <X11/Xlib.h>
 
-class CurrentController;
+class ConnectionController;
 
 class VNCEvent {
 public:
@@ -32,6 +32,7 @@ class KeyboardEvent : public VNCEvent {
     static const int RIGHTSHIFT;
     static const int ALTGR;
     static char ModifierState;
+    static bool initDone;
 
     static void tweakModifiers(signed char mod, bool down);
 public:
@@ -53,10 +54,10 @@ public:
 };
 
 class ClipboardEvent : public VNCEvent {
-    CurrentController *controller;
+    ConnectionController *controller;
     QString text;
 public:
-    ClipboardEvent(CurrentController *c, const QString &text);
+    ClipboardEvent(ConnectionController *c, const QString &text);
     virtual void exec();
 };
 

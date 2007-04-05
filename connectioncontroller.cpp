@@ -7,22 +7,12 @@
    License as published by the Free Software Foundation; version 2
    of the License.
 */
-
-
-#include "invitationmanager.h"
-#include "krfbserver.h"
-
-#include <QThreadStorage>
 #include <QX11Info>
 #include <QHostInfo>
 #include <QApplication>
 #include <QDesktopWidget>
 #include <QTcpSocket>
-#include <QPixmap>
-#include <QMutexLocker>
 #include <QTimer>
-#include <QRegion>
-#include <QBitmap>
 
 #include <KConfig>
 #include <KGlobal>
@@ -32,6 +22,11 @@
 
 #include "connectioncontroller.h"
 #include "connectioncontroller.moc"
+
+#include "events.h"
+#include "invitationmanager.h"
+#include "krfbserver.h"
+#include "framebuffer.h"
 
 #include <X11/Xutil.h>
 
@@ -145,20 +140,7 @@ static bool checkPassword(const QString &p, unsigned char *ochallenge, const cha
 ConnectionController::ConnectionController(int connFd, KrfbServer *parent)
     : QObject(parent), fd(connFd), server(parent), fb(0)
 {
-#if 0
-    framebufferImage = XGetImage(QX11Info::display(),  QApplication::desktop()->winId(),
-    0, 0,
-    QApplication::desktop()->width(),
-    QApplication::desktop()->height(),
-    AllPlanes,
-    ZPixmap);
-#endif
-
-    QTimer *t = new QTimer(this);
-    connect(t, SIGNAL(timeout()), SLOT(updateFrameBuffer()));
-    fbImage = QPixmap::grabWindow(QApplication::desktop()->winId()).toImage();
-    updateFrameBuffer();
-    t->start(UPDATE_TIME);
+    fb = new FrameBuffer(QApplication::desktop()->winId(), this);
 }
 
 
@@ -224,7 +206,6 @@ enum rfbNewClientAction ConnectionController::handleNewClient(rfbClientPtr cl)
     bool allowDesktopControl = srvconf.readEntry("allowDesktopControl",false);
     bool askOnConnect = srvconf.readEntry("askOnConnect",false);
 
-
     client = cl;
     int socket = cl->sock;
     // cl->negotiationFinishedHook = negotiationFinishedHook; ???
@@ -265,7 +246,6 @@ enum rfbNewClientAction ConnectionController::handleNewClient(rfbClientPtr cl)
 
 void ConnectionController::sendKNotifyEvent(const QString & name, const QString & desc)
 {
-    kDebug() << "notification: " << name << "   " << desc << endl;
     emit notification(name, desc);
 }
 
@@ -274,22 +254,27 @@ void ConnectionController::sendSessionEstablished()
     emit sessionEstablished("BAH");
 }
 
-void ConnectionController::handleKeyEvent(bool down, KeySym keySym)
+void ConnectionController::handleKeyEvent(bool down, rfbKeySym keySym)
 {
+    KeyboardEvent ev(down, keySym);
+    ev.exec();
 }
 
 void ConnectionController::handlePointerEvent(int bm, int x, int y)
 {
+    PointerEvent ev(bm, x, y);
+    ev.exec();
 }
 
 void ConnectionController::handleClientGone()
 {
-    kDebug() << "Client gone" << endl;
     rfbCloseClient(client);
 }
 
-void ConnectionController::clipboardToServer(const QString &)
+void ConnectionController::clipboardToServer(const QString &s)
 {
+    ClipboardEvent ev(this, s);
+    ev.exec();
 }
 
 
@@ -297,66 +282,23 @@ void ConnectionController::run()
 {
     kDebug() << "starting server connection" << endl;
 
-
     connect(this, SIGNAL(sessionEstablished(QString)), server, SIGNAL(sessionEstablished(QString)));
     connect(this, SIGNAL(notification(QString,QString)), server, SLOT(handleNotifications(QString, QString)));
 
 
-#if 0
-    int w = framebufferImage->width;
-    int h = framebufferImage->height;
-    char *fb = framebufferImage->data;
+    int w = fb->width();
+    int h = fb->height();
+    int depth = fb->depth();
 
     rfbLogEnable(0);
-    server = rfbGetScreen(0, 0, w, h,
-                          framebufferImage->bits_per_pixel,
-                          8,
-                          framebufferImage->bits_per_pixel/8);
-
-    kDebug() << "acquired framebuffer" << endl;
-    server->paddedWidthInBytes = framebufferImage->bytes_per_line;
-
-    kDebug() << "image depth: " << framebufferImage->bits_per_pixel << endl;
-    kDebug() << "image size: " << w << "x" << h << endl;
-    kDebug() << "bytes per line: " << framebufferImage->bytes_per_line << endl;
-
-#else
-
-    int w = fbImage.width();
-    int h = fbImage.height();
-
-    //fb = (char *)fbImage.bits();
-
-    rfbLogEnable(0);
-    screen = rfbGetScreen(0, 0, w, h,
-                            8,
-                            3,
-                            fbImage.depth()/8);
+    screen = rfbGetScreen(0, 0, w, h, 8, 3,depth / 8);
 
     screen->screenData = (void *)this;
-    screen->paddedWidthInBytes = fbImage.bytesPerLine();
+    screen->paddedWidthInBytes = w * 4;
 
-    screen->serverFormat.bitsPerPixel = fbImage.depth();
-    screen->serverFormat.depth = fbImage.depth();
-    screen->serverFormat.trueColour = true;
+    fb->getServerFormat(screen->serverFormat);
 
-    screen->serverFormat.bigEndian = false;
-    screen->serverFormat.redShift = 16;
-    screen->serverFormat.greenShift = 8;
-    screen->serverFormat.blueShift = 0;
-    screen->serverFormat.redMax   = 0xff;
-    screen->serverFormat.greenMax = 0xff;
-    screen->serverFormat.blueMax  = 0xff;
-
-    kDebug() << "acquired framebuffer" << endl;
-
-    kDebug() << "image format: " << fbImage.format() << endl;
-    kDebug() << "image depth: " << fbImage.depth() << endl;
-    kDebug() << "image size: " << fbImage.rect() << endl;
-    kDebug() << "bytes per line: " << fbImage.bytesPerLine() << endl;
-#endif
-
-    screen->frameBuffer = fb;
+    screen->frameBuffer = fb->data();
     screen->autoPort = true;
     screen->inetdSock = fd;
 
@@ -378,58 +320,26 @@ void ConnectionController::run()
 
     rfbInitServer(screen);
 
+    while (true) {
+        foreach(QRect r, fb->modifiedTiles()) {
+            rfbMarkRectAsModified(screen, r.top(), r.left(), r.left() + r.width(), r.top() + r.height());
+        }
+        fb->modifiedTiles().clear();
+        rfbProcessEvents(screen, 100);
+        qApp->processEvents();
+    }
+
+    /*
     QTimer *t = new QTimer();
     connect(t, SIGNAL(timeout()), SLOT(processEvents()));
-    rfbProcessEvents(screen, 100);
+    rfbProcessEvents(screen, 10);
     t->start(UPDATE_TIME);
+    */
 
 }
 
-
-void ConnectionController::updateFrameBuffer()
-{
-    QImage img = QPixmap::grabWindow(QApplication::desktop()->winId()).toImage();
-    QSize imgSize = img.size();
-
-    if (!fb){
-        fb = new char[img.numBytes()];
-    }
-
-    // verify what part of the image need to be marked as changed
-    // fbImage is the previous version of the image,
-    // img is the current one
-
-#if 1 // This is actually slower than updating the whole desktop...
-
-    QImage map(imgSize, QImage::Format_Mono);
-    map.fill(0);
-
-    for (int x = 0; x < imgSize.width(); x++) {
-        for (int y = 0; y < imgSize.height(); y++) {
-            if (img.pixel(x,y) != fbImage.pixel(x,y)) {
-                map.setPixel(x,y,1);
-            }
-        }
-    }
-
-    QRegion r(QBitmap::fromImage(map));
-#else
-
-
-#endif
-
-    tiles = tiles + r.rects();
-
-    memcpy(fb, (const char*)img.bits(), img.numBytes());
-    fbImage = img;
-}
 
 void ConnectionController::processEvents()
 {
-    foreach(QRect r, tiles) {
-        rfbMarkRectAsModified(screen, r.top(), r.left(), r.left() + r.width(), r.top() + r.height());
-    }
-    tiles.clear();
-    rfbProcessEvents(screen, 100);
 }
 
