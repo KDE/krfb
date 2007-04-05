@@ -81,38 +81,42 @@ static const char* mask=
 
 static rfbCursorPtr myCursor;
 
-QThreadStorage<CurrentController *> controllers;
-
 static enum rfbNewClientAction newClientHook(struct _rfbClientRec *cl)
 {
-    return controllers.localData()->handleNewClient(cl);
+    ConnectionController *cc = static_cast<ConnectionController *>(cl->screen->screenData);
+    return cc->handleNewClient(cl);
 }
 
 static rfbBool passwordCheck(rfbClientPtr cl,
                              const char* encryptedPassword,
                              int len)
 {
-    return controllers.localData()->handleCheckPassword(cl, encryptedPassword, len);
+    ConnectionController *cc = static_cast<ConnectionController *>(cl->screen->screenData);
+    return cc->handleCheckPassword(cl, encryptedPassword, len);
 }
 
-static void keyboardHook(rfbBool down, rfbKeySym keySym, rfbClientPtr)
+static void keyboardHook(rfbBool down, rfbKeySym keySym, rfbClientPtr cl)
 {
-    controllers.localData()->handleKeyEvent(down ? true : false, keySym);
+    ConnectionController *cc = static_cast<ConnectionController *>(cl->screen->screenData);
+    cc->handleKeyEvent(down ? true : false, keySym);
 }
 
-static void pointerHook(int bm, int x, int y, rfbClientPtr)
+static void pointerHook(int bm, int x, int y, rfbClientPtr cl)
 {
-    controllers.localData()->handlePointerEvent(bm, x, y);
+    ConnectionController *cc = static_cast<ConnectionController *>(cl->screen->screenData);
+    cc->handlePointerEvent(bm, x, y);
 }
 
-static void clientGoneHook(rfbClientPtr)
+static void clientGoneHook(rfbClientPtr cl)
 {
-    controllers.localData()->handleClientGone();
+    ConnectionController *cc = static_cast<ConnectionController *>(cl->screen->screenData);
+    cc->handleClientGone();
 }
 
-static void clipboardHook(char* str,int len, rfbClientPtr)
+static void clipboardHook(char* str,int len, rfbClientPtr cl)
 {
-    controllers.localData()->clipboardToServer(QString::fromUtf8(str, len));
+    ConnectionController *cc = static_cast<ConnectionController *>(cl->screen->screenData);
+    cc->clipboardToServer(QString::fromUtf8(str, len));
 }
 
 
@@ -137,12 +141,32 @@ static bool checkPassword(const QString &p, unsigned char *ochallenge, const cha
     return memcmp(challenge, response, len) == 0;
 }
 
-CurrentController::CurrentController(int fd)
-    :connFD(fd)
+
+ConnectionController::ConnectionController(int connFd, KrfbServer *parent)
+    : QObject(parent), fd(connFd), server(parent), fb(0)
+{
+#if 0
+    framebufferImage = XGetImage(QX11Info::display(),  QApplication::desktop()->winId(),
+    0, 0,
+    QApplication::desktop()->width(),
+    QApplication::desktop()->height(),
+    AllPlanes,
+    ZPixmap);
+#endif
+
+    QTimer *t = new QTimer(this);
+    connect(t, SIGNAL(timeout()), SLOT(updateFrameBuffer()));
+    fbImage = QPixmap::grabWindow(QApplication::desktop()->winId()).toImage();
+    updateFrameBuffer();
+    t->start(UPDATE_TIME);
+}
+
+
+ConnectionController::~ConnectionController()
 {
 }
 
-bool CurrentController::handleCheckPassword(rfbClientPtr cl, const char *response, int len)
+bool ConnectionController::handleCheckPassword(rfbClientPtr cl, const char *response, int len)
 {
     KSharedConfigPtr conf = KGlobal::config();
     KConfigGroup srvconf(conf, "Server");
@@ -192,7 +216,7 @@ bool CurrentController::handleCheckPassword(rfbClientPtr cl, const char *respons
 }
 
 
-enum rfbNewClientAction CurrentController::handleNewClient(rfbClientPtr cl)
+enum rfbNewClientAction ConnectionController::handleNewClient(rfbClientPtr cl)
 {
     KSharedConfigPtr conf = KGlobal::config();
     KConfigGroup srvconf(conf, "Server");
@@ -239,70 +263,44 @@ enum rfbNewClientAction CurrentController::handleNewClient(rfbClientPtr cl)
     return RFB_CLIENT_ON_HOLD;
 }
 
-void CurrentController::sendKNotifyEvent(const QString & name, const QString & desc)
+void ConnectionController::sendKNotifyEvent(const QString & name, const QString & desc)
 {
     kDebug() << "notification: " << name << "   " << desc << endl;
     emit notification(name, desc);
 }
 
-void CurrentController::sendSessionEstablished()
+void ConnectionController::sendSessionEstablished()
 {
     emit sessionEstablished("BAH");
 }
 
-void CurrentController::handleKeyEvent(bool down, KeySym keySym)
+void ConnectionController::handleKeyEvent(bool down, KeySym keySym)
 {
 }
 
-void CurrentController::handlePointerEvent(int bm, int x, int y)
+void ConnectionController::handlePointerEvent(int bm, int x, int y)
 {
 }
 
-void CurrentController::handleClientGone()
+void ConnectionController::handleClientGone()
 {
     kDebug() << "Client gone" << endl;
     rfbCloseClient(client);
 }
 
-void CurrentController::clipboardToServer(const QString &)
+void ConnectionController::clipboardToServer(const QString &)
 {
 }
 
-ConnectionController::ConnectionController(int connFd, KrfbServer *parent)
- : QThread(parent), fd(connFd), server(parent), fb(0)
-{
-#if 0
-    framebufferImage = XGetImage(QX11Info::display(),  QApplication::desktop()->winId(),
-                                0, 0,
-                                QApplication::desktop()->width(),
-                                QApplication::desktop()->height(),
-                                AllPlanes,
-                                ZPixmap);
-#endif
-
-    QTimer *t = new QTimer(this);
-    connect(t, SIGNAL(timeout()), SLOT(updateFrameBuffer()));
-    fbImage = QPixmap::grabWindow(QApplication::desktop()->winId()).toImage();
-    updateFrameBuffer();
-    t->start(UPDATE_TIME);
-}
-
-
-ConnectionController::~ConnectionController()
-{
-}
 
 void ConnectionController::run()
 {
     kDebug() << "starting server connection" << endl;
 
-    CurrentController *cc = new CurrentController(fd);
-    controllers.setLocalData(cc);
 
-    connect(cc, SIGNAL(sessionEstablished(QString)), server, SIGNAL(sessionEstablished(QString)));
-    connect(cc, SIGNAL(notification(QString,QString)), server, SLOT(handleNotifications(QString, QString)));
+    connect(this, SIGNAL(sessionEstablished(QString)), server, SIGNAL(sessionEstablished(QString)));
+    connect(this, SIGNAL(notification(QString,QString)), server, SLOT(handleNotifications(QString, QString)));
 
-    fblock.lock();
 
 #if 0
     int w = framebufferImage->width;
@@ -334,6 +332,8 @@ void ConnectionController::run()
                             8,
                             3,
                             fbImage.depth()/8);
+
+    screen->screenData = (void *)this;
     screen->paddedWidthInBytes = fbImage.bytesPerLine();
 
     screen->serverFormat.bitsPerPixel = fbImage.depth();
@@ -377,22 +377,17 @@ void ConnectionController::run()
     screen->cursor = myCursor;
 
     rfbInitServer(screen);
-    fblock.unlock();
 
     QTimer *t = new QTimer();
     connect(t, SIGNAL(timeout()), SLOT(processEvents()));
-    rfbProcessEvents(screen, 1000);
+    rfbProcessEvents(screen, 100);
     t->start(UPDATE_TIME);
-    exec();
+
 }
 
 
-// WARNING: this function is called in the main GUI Thread, not in the connection
-// thread! it can perform GUI calls but needs some care to avoid messing
-// with the shared data.
 void ConnectionController::updateFrameBuffer()
 {
-    QMutexLocker ml(&fblock);
     QImage img = QPixmap::grabWindow(QApplication::desktop()->winId()).toImage();
     QSize imgSize = img.size();
 
@@ -431,12 +426,10 @@ void ConnectionController::updateFrameBuffer()
 
 void ConnectionController::processEvents()
 {
-    QMutexLocker ml(&fblock);
     foreach(QRect r, tiles) {
         rfbMarkRectAsModified(screen, r.top(), r.left(), r.left() + r.width(), r.top() + r.height());
     }
     tiles.clear();
-
-    rfbProcessEvents(screen, 1000);
+    rfbProcessEvents(screen, 100);
 }
 

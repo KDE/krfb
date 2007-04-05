@@ -92,7 +92,7 @@ void KrfbServer::disconnectAndQuit()
 void KrfbServer::startServer(int fd)
 {
     ConnectionController *cc = new ConnectionController(fd, this);
-    cc->start();
+    cc->run();
 }
 
 TcpServer::TcpServer(QObject * parent)

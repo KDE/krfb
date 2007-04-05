@@ -22,12 +22,16 @@
 
 class KrfbServer;
 
-class CurrentController: public QObject {
-    Q_OBJECT
-
+/**
+	@author Alessandro Praduroux <pradu@pradu.it>
+*/
+class ConnectionController : public QObject
+{
+Q_OBJECT
 public:
+    explicit ConnectionController(int connFD, KrfbServer *parent);
 
-    CurrentController(int fd);
+    ~ConnectionController();
 
     bool handleCheckPassword(rfbClientPtr cl, const char *response, int len);
     enum rfbNewClientAction handleNewClient(struct _rfbClientRec *cl);
@@ -39,6 +43,7 @@ public:
     void handleClientGone();
     void clipboardToServer(const QString &);
     void sendSessionEstablished();
+    void run();
 
 Q_SIGNALS:
     void sessionEstablished(QString);
@@ -46,32 +51,8 @@ Q_SIGNALS:
 
 public Q_SLOTS:
 
-private:
-    int connFD;
-    QString remoteIp;
-    rfbClientPtr client;
-
-};
-
-
-/**
-	@author Alessandro Praduroux <pradu@pradu.it>
-*/
-class ConnectionController : public QThread
-{
-Q_OBJECT
-public:
-    explicit ConnectionController(int connFD, KrfbServer *parent);
-
-    ~ConnectionController();
-
-public Q_SLOTS:
-
     void updateFrameBuffer();
     void processEvents();
-
-protected:
-    virtual void run();
 
 private:
     int fd;
@@ -79,9 +60,10 @@ private:
     XImage *framebufferImage;
     QImage fbImage;
     char *fb;
-    QMutex fblock;
     rfbScreenInfoPtr screen;
     QVector<QRect> tiles;
+    QString remoteIp;
+    rfbClientPtr client;
 };
 
 #endif
