@@ -58,6 +58,7 @@ void InvitationManager::loadInvitations()
     KConfigGroup invitationConfig(conf, "Invitations");
     int numInv = invitationConfig.readEntry("invitation_num",0);
 
+    invitationList.clear();
     for (int i = 0; i < numInv; i++) {
         KConfigGroup ic(conf, QString("Invitation_%1").arg(i));
         invitationList.append(Invitation(ic));

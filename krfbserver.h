@@ -11,22 +11,9 @@
 #define KRFBSERVER_H
 
 #include <QObject>
-#include <QTcpServer>
+#include <rfb/rfb.h>
 
-class TcpServer: public QTcpServer {
-    Q_OBJECT
-
-    public:
-        TcpServer(QObject *parent = 0);
-
-    signals:
-
-        void connectionReceived(int fd);
-
-    protected:
-        virtual void incomingConnection(int fd);
-
-};
+class FrameBuffer;
 
 /**
 This class implements the listening server for the RFB protocol.
@@ -42,6 +29,8 @@ public:
 
     ~KrfbServer();
 
+    enum rfbNewClientAction handleNewClient(struct _rfbClientRec *cl);
+
 signals:
     void sessionEstablished(QString);
     void sessionFinished();
@@ -50,18 +39,16 @@ signals:
 
 public Q_SLOTS:
 
-    void newConnection(int fd);
     void startListening();
     void enableDesktopControl(bool);
     void disconnectAndQuit();
-    void handleNotifications(QString, QString);
 
 private:
     KrfbServer();
     static KrfbServer *_self;
 
-    void startServer(int fd);
-    TcpServer *_server;
+
+    FrameBuffer *fb;
 };
 
 #endif

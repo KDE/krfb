@@ -25,9 +25,89 @@
 #include <KUser>
 #include <KLocale>
 #include <KStaticDeleter>
-#include <KNotification>
+#include <KMessageBox>
 
 #include "connectioncontroller.h"
+#include "framebuffer.h"
+
+
+static const char* cur=
+        "                   "
+        " x                 "
+        " xx                "
+        " xxx               "
+        " xxxx              "
+        " xxxxx             "
+        " xxxxxx            "
+        " xxxxxxx           "
+        " xxxxxxxx          "
+        " xxxxxxxxx         "
+        " xxxxxxxxxx        "
+        " xxxxx             "
+        " xx xxx            "
+        " x  xxx            "
+        "     xxx           "
+        "     xxx           "
+        "      xxx          "
+        "      xxx          "
+        "                   ";
+
+static const char* mask=
+        "xx                 "
+        "xxx                "
+        "xxxx               "
+        "xxxxx              "
+        "xxxxxx             "
+        "xxxxxxx            "
+        "xxxxxxxx           "
+        "xxxxxxxxx          "
+        "xxxxxxxxxx         "
+        "xxxxxxxxxxx        "
+        "xxxxxxxxxxxx       "
+        "xxxxxxxxxx         "
+        "xxxxxxxx           "
+        "xxxxxxxx           "
+        "xx  xxxxx          "
+        "    xxxxx          "
+        "     xxxxx         "
+        "     xxxxx         "
+        "      xxx          ";
+
+static rfbCursorPtr myCursor;
+
+
+static enum rfbNewClientAction newClientHook(struct _rfbClientRec *cl)
+{
+    KrfbServer *server = KrfbServer::self();
+    return server->handleNewClient(cl);
+}
+
+static rfbBool passwordCheck(rfbClientPtr cl,
+                             const char* encryptedPassword,
+                             int len)
+{
+    ConnectionController *cc = static_cast<ConnectionController *>(cl->clientData);
+    return cc->handleCheckPassword(cl, encryptedPassword, len);
+}
+
+static void keyboardHook(rfbBool down, rfbKeySym keySym, rfbClientPtr cl)
+{
+    ConnectionController *cc = static_cast<ConnectionController *>(cl->clientData);
+    cc->handleKeyEvent(down ? true : false, keySym);
+}
+
+static void pointerHook(int bm, int x, int y, rfbClientPtr cl)
+{
+    ConnectionController *cc = static_cast<ConnectionController *>(cl->clientData);
+    cc->handlePointerEvent(bm, x, y);
+}
+
+static void clipboardHook(char* str,int len, rfbClientPtr cl)
+{
+    ConnectionController *cc = static_cast<ConnectionController *>(cl->clientData);
+    cc->clipboardToServer(QString::fromUtf8(str, len));
+}
+
 
 const int DEFAULT_TCP_PORT = 5900;
 
@@ -42,38 +122,72 @@ KrfbServer * KrfbServer::self() {
 KrfbServer::KrfbServer()
 {
     kDebug() << "starting " << endl;
+    fb = new FrameBuffer(QApplication::desktop()->winId(), this);
     QTimer::singleShot(0, this, SLOT(startListening()));
 }
 
-void KrfbServer::startListening() {
+void KrfbServer::startListening()
+{
+    rfbScreenInfoPtr screen;
 
     KSharedConfigPtr conf = KGlobal::config();
     KConfigGroup tcpConfig(conf, "TCP");
 
     int port = tcpConfig.readEntry("port",DEFAULT_TCP_PORT);
 
-    _server = new TcpServer(this);
-    connect(_server,SIGNAL(connectionReceived(int)),SLOT(newConnection(int)));
+    int w = fb->width();
+    int h = fb->height();
+    int depth = fb->depth();
 
-    if (!_server->listen(QHostAddress::Any, port)) {
-        // TODO: handle error more gracefully
-        kDebug() << "server listen error" << endl;
-        deleteLater();
-        return;
+    rfbLogEnable(0);
+    screen = rfbGetScreen(0, 0, w, h, 8, 3,depth / 8);
+    screen->paddedWidthInBytes = w * 4;
+
+    fb->getServerFormat(screen->serverFormat);
+
+    screen->frameBuffer = fb->data();
+    screen->autoPort = 0;
+    screen->port = port;
+
+    // server hooks
+    screen->newClientHook = newClientHook;
+
+    screen->kbdAddEvent = keyboardHook;
+    screen->ptrAddEvent = pointerHook;
+    screen->newClientHook = newClientHook;
+    screen->passwordCheck = passwordCheck;
+    screen->setXCutText = clipboardHook;
+
+    screen->desktopName = i18n("%1@%2 (shared desktop)", KUser().loginName(), QHostInfo::localHostName()).toLatin1().data();
+
+    if (!myCursor) {
+        myCursor = rfbMakeXCursor(19, 19, (char*) cur, (char*) mask);
     }
-    kDebug() << "server listening on port " << DEFAULT_TCP_PORT << endl;
+    screen->cursor = myCursor;
+
+    // TODO: configure password data to handle authentication
+    screen->authPasswdData = (void *)1;
+
+    rfbInitServer(screen);
+    if (!rfbIsActive(screen)) {
+        KMessageBox::error(0,"krfb","Address already in use");
+        disconnectAndQuit();
+    };
+
+    while (true) {
+        foreach(QRect r, fb->modifiedTiles()) {
+            rfbMarkRectAsModified(screen, r.top(), r.left(), r.left() + r.width(), r.top() + r.height());
+        }
+        fb->modifiedTiles().clear();
+        rfbProcessEvents(screen, 100);
+        qApp->processEvents();
+    }
 }
 
 
 KrfbServer::~KrfbServer()
 {
     //delete _controller;
-}
-
-void KrfbServer::newConnection(int fdNum)
-{
-    // TODO: get peer address
-    startServer(fdNum);
 }
 
 void KrfbServer::enableDesktopControl(bool enable)
@@ -84,30 +198,16 @@ void KrfbServer::enableDesktopControl(bool enable)
 void KrfbServer::disconnectAndQuit()
 {
     // TODO: cleanup of existing connections
-    _server->close();
     emit quitApp();
 }
 
-
-void KrfbServer::startServer(int fd)
+enum rfbNewClientAction KrfbServer::handleNewClient(struct _rfbClientRec * cl)
 {
-    ConnectionController *cc = new ConnectionController(fd, this);
-    cc->run();
-}
+    ConnectionController *cc = new ConnectionController(cl, this);
 
-TcpServer::TcpServer(QObject * parent)
-    :QTcpServer(parent)
-{
-}
+    connect(cc, SIGNAL(sessionEstablished(QString)), SIGNAL(sessionEstablished(QString)));
 
-void TcpServer::incomingConnection(int fd)
-{
-    emit connectionReceived(fd);
-}
-
-void KrfbServer::handleNotifications(QString name, QString desc )
-{
-    KNotification::event(name, desc);
+    return cc->handleNewClient();
 }
 
 
