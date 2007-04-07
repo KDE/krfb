@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE kcfg SYSTEM
+    "http://www.kde.org/standards/kcfg/1.0/kcfg.xsd">
+<kcfg>
+  <kcfgfile />
+  <group name="TCP">
+    <entry name="useDefaultPort" type="Bool">
+      <label>Use the default port for VNC (5900)</label>
+      <default>true</default>
+    </entry>
+    <entry name="port" type="Int">
+      <label>This is the port on wich krfb will listen.</label>
+      <default>5900</default>
+    </entry>
+  </group>
+  <group name="Security">
+    <entry name="allowDesktopControl" type="Bool">
+      <label>Allow remote connections to manage the desktop.</label>
+      <default>true</default>
+    </entry>
+    <entry name="askOnConnect" type="Bool">
+      <label>Ask before allowing a remote connection.</label>
+      <default>true</default>
+    </entry>
+    <entry name="allowUninvitedConnections" type="Bool">
+      <label>Allow connections without an invitation.</label>
+      <default>false</default>
+    </entry>
+    <entry name="uninvitedConnectionPassword" type="String">
+      <label>Password for uninvited connections.</label>
+    </entry>
+  </group>
+</kcfg>

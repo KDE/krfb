@@ -28,6 +28,7 @@
 #include "events.h"
 #include "krfbserver.h"
 
+#include "krfbconfig.h"
 
 #include <X11/Xutil.h>
 
@@ -73,23 +74,18 @@ ConnectionController::~ConnectionController()
 enum rfbNewClientAction ConnectionController::handleNewClient()
 {
 
-    KSharedConfigPtr conf = KGlobal::config();
-    KConfigGroup srvconf(conf, "Server");
-
-    bool allowDesktopControl = srvconf.readEntry("allowDesktopControl",false);
-    bool askOnConnect = srvconf.readEntry("askOnConnect",true);
+    bool allowDesktopControl = KrfbConfig::allowDesktopControl();
+    bool askOnConnect = KrfbConfig::askOnConnect();
 
     int socket = cl->sock;
     // cl->negotiationFinishedHook = negotiationFinishedHook; ???
-
+    QString remoteIp;
 #if 0
     // TODO: this drops the connection >.<
     QTcpSocket t;
     t.setSocketDescriptor(socket); //, QAbstractSocket::ConnectedState, QIODevice::NotOpen);
-    host = t.peerAddress().toString();
+    remoteIp = t.peerAddress().toString();
 #endif
-
-    QString remoteIp;
 
     if (!askOnConnect && InvitationManager::self()->invitations().size() == 0) {
         KNotification::event("NewConnectionAutoAccepted",
@@ -121,11 +117,8 @@ enum rfbNewClientAction ConnectionController::handleNewClient()
 
 bool ConnectionController::handleCheckPassword(rfbClientPtr cl, const char *response, int len)
 {
-    KSharedConfigPtr conf = KGlobal::config();
-    KConfigGroup srvconf(conf, "Server");
-
-    bool allowUninvited = srvconf.readEntry("allowUninvitedConnections",false);
-    QString password = srvconf.readEntry("uninvitedConnectionPassword",QString());
+    bool allowUninvited = KrfbConfig::allowUninvitedConnections();
+    QString password =  KrfbConfig::uninvitedConnectionPassword();
 
     bool authd = false;
     kDebug() << "about to start autentication" << endl;
@@ -138,7 +131,7 @@ bool ConnectionController::handleCheckPassword(rfbClientPtr cl, const char *resp
         QList<Invitation> invlist = InvitationManager::self()->invitations();
 
         foreach(Invitation it, invlist) {
-            kDebug() << "checking password????!?!?!" << endl;
+            kDebug() << "checking password" << endl;
             if (checkPassword(it.password(), cl->authChallenge, response, len) && it.isValid()) {
                 authd = true;
                 //configuration->removeInvitation(it);

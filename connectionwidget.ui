@@ -6,7 +6,7 @@
     <x>0</x>
     <y>0</y>
     <width>521</width>
-    <height>328</height>
+    <height>318</height>
    </rect>
   </property>
   <layout class="QGridLayout" >
@@ -70,7 +70,7 @@
       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
      </property>
      <property name="wordWrap" >
-      <bool>false</bool>
+      <bool>true</bool>
      </property>
      <property name="margin" >
       <number>0</number>
@@ -174,38 +174,6 @@
       <bool>false</bool>
      </property>
     </widget>
-   </item>
-   <item row="4" column="1" >
-    <spacer>
-     <property name="orientation" >
-      <enum>Qt::Vertical</enum>
-     </property>
-     <property name="sizeType" >
-      <enum>QSizePolicy::Minimum</enum>
-     </property>
-     <property name="sizeHint" >
-      <size>
-       <width>20</width>
-       <height>84</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
-   <item row="2" column="1" >
-    <spacer>
-     <property name="orientation" >
-      <enum>Qt::Vertical</enum>
-     </property>
-     <property name="sizeType" >
-      <enum>QSizePolicy::Minimum</enum>
-     </property>
-     <property name="sizeHint" >
-      <size>
-       <width>20</width>
-       <height>80</height>
-      </size>
-     </property>
-    </spacer>
    </item>
   </layout>
  </widget>

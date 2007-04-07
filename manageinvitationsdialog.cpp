@@ -12,6 +12,7 @@
 #include "personalinvitedialog.h"
 #include "invitationmanager.h"
 #include "invitation.h"
+#include "krfbconfig.h"
 
 #include <QWidget>
 #include <QToolTip>
@@ -23,6 +24,27 @@
 #include <KIconLoader>
 #include <KLocale>
 #include <KGlobal>
+#include <KConfigDialog>
+
+// settings dialog
+#include "ui_configtcp.h"
+#include "ui_configsecurity.h"
+
+class TCP: public QWidget, public Ui::TCP {
+    public:
+        TCP(QWidget *parent=0) :QWidget(parent)
+        {
+            setupUi(this);
+        }
+};
+
+class Security: public QWidget, public Ui::Security {
+    public:
+        Security(QWidget *parent=0) :QWidget(parent)
+        {
+            setupUi(this);
+        }
+};
 
 
 ManageInvitationsDialog::ManageInvitationsDialog(QWidget *parent)
@@ -48,6 +70,7 @@ ManageInvitationsDialog::ManageInvitationsDialog(QWidget *parent)
              SLOT( inviteByMail() ));
     connect( InvitationManager::self(), SIGNAL( invitationNumChanged( int )),
              SLOT( reloadInvitations() ));
+    connect( this, SIGNAL(user1Clicked()),SLOT(showConfiguration()));
 
     reloadInvitations();
 }
@@ -93,5 +116,17 @@ void ManageInvitationsDialog::reloadInvitations()
         invitationWidget->addTopLevelItem(it);
     }
     invitationWidget->resizeColumnToContents(0);
+}
+
+void ManageInvitationsDialog::showConfiguration()
+{
+    if(KConfigDialog::showDialog("settings"))
+        return;
+
+    KConfigDialog *dialog = new KConfigDialog(this, "settings", KrfbConfig::self());
+    dialog->addPage(new TCP, i18n("Network"), "network");
+    dialog->addPage(new Security, i18n("Security"), "encrypted");
+
+    dialog->show();
 }
 

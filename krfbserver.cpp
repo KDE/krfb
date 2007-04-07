@@ -20,7 +20,6 @@
 #include <QApplication>
 #include <QDesktopWidget>
 
-#include <KConfig>
 #include <KGlobal>
 #include <KUser>
 #include <KLocale>
@@ -29,6 +28,7 @@
 
 #include "connectioncontroller.h"
 #include "framebuffer.h"
+#include "krfbconfig.h"
 
 
 static const char* cur=
@@ -109,8 +109,6 @@ static void clipboardHook(char* str,int len, rfbClientPtr cl)
 }
 
 
-const int DEFAULT_TCP_PORT = 5900;
-
 static KStaticDeleter<KrfbServer> sd;
 KrfbServer * KrfbServer::_self = 0;
 KrfbServer * KrfbServer::self() {
@@ -130,10 +128,7 @@ void KrfbServer::startListening()
 {
     rfbScreenInfoPtr screen;
 
-    KSharedConfigPtr conf = KGlobal::config();
-    KConfigGroup tcpConfig(conf, "TCP");
-
-    int port = tcpConfig.readEntry("port",DEFAULT_TCP_PORT);
+    int port = KrfbConfig::port();
 
     int w = fb->width();
     int h = fb->height();

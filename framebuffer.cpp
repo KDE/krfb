@@ -20,6 +20,9 @@ const int UPDATE_TIME = 500;
 FrameBuffer::FrameBuffer(WId id, QObject *parent)
  : QObject(parent), win(id)
 {
+    //TODO: implement reference counting to avoid update the screen
+    // while no client is connected.
+
     fbImage = QPixmap::grabWindow(win).toImage();
     fb = new char[fbImage.numBytes()];
     QTimer *t = new QTimer(this);

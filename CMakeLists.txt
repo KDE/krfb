@@ -23,16 +23,19 @@ set(krfb_SRCS
    connectioncontroller.cpp
    events.cpp
    framebuffer.cpp
-#   rfbcontroller.cc
-#   xupdatescanner.cc
 )
 
 kde4_automoc(${krfb_SRCS})
 
+kde4_add_kcfg_files(krfb_SRCS krfbconfig.kcfgc)
+
 kde4_add_ui_files(krfb_SRCS connectionwidget.ui
         manageinvitations.ui
         personalinvitewidget.ui
-        invitewidget.ui)
+        invitewidget.ui
+        configtcp.ui
+        configsecurity.ui
+        )
 
 kde4_add_executable(krfb ${krfb_SRCS})
 

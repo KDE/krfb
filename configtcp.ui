@@ -1,0 +1,90 @@
+<ui version="4.0" >
+ <class>TCP</class>
+ <widget class="QWidget" name="TCP" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>169</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>Form</string>
+  </property>
+  <layout class="QVBoxLayout" >
+   <item>
+    <widget class="QCheckBox" name="kcfg_useDefaultPort" >
+     <property name="text" >
+      <string>Use default port</string>
+     </property>
+     <property name="checked" >
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" >
+     <property name="spacing" >
+      <number>6</number>
+     </property>
+     <property name="leftMargin" >
+      <number>0</number>
+     </property>
+     <property name="topMargin" >
+      <number>0</number>
+     </property>
+     <property name="rightMargin" >
+      <number>0</number>
+     </property>
+     <property name="bottomMargin" >
+      <number>0</number>
+     </property>
+     <item>
+      <widget class="QLabel" name="label" >
+       <property name="text" >
+        <string>Listening Port:</string>
+       </property>
+       <property name="buddy" >
+        <cstring>kcfg_port</cstring>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QSpinBox" name="kcfg_port" >
+       <property name="enabled" >
+        <bool>false</bool>
+       </property>
+       <property name="maximum" >
+        <number>65535</number>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <tabstops>
+  <tabstop>kcfg_useDefaultPort</tabstop>
+  <tabstop>kcfg_port</tabstop>
+ </tabstops>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>kcfg_useDefaultPort</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>kcfg_port</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>120</x>
+     <y>53</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>277</x>
+     <y>122</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
