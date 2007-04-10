@@ -74,12 +74,11 @@ ConnectionController::~ConnectionController()
 enum rfbNewClientAction ConnectionController::handleNewClient()
 {
 
-    bool allowDesktopControl = KrfbConfig::allowDesktopControl();
     bool askOnConnect = KrfbConfig::askOnConnect();
+    bool allowUninvited = KrfbConfig::allowUninvitedConnections();
 
     int socket = cl->sock;
-    // cl->negotiationFinishedHook = negotiationFinishedHook; ???
-    QString remoteIp;
+
 #if 0
     // TODO: this drops the connection >.<
     QTcpSocket t;
@@ -87,12 +86,19 @@ enum rfbNewClientAction ConnectionController::handleNewClient()
     remoteIp = t.peerAddress().toString();
 #endif
 
-    if (!askOnConnect && InvitationManager::self()->invitations().size() == 0) {
+    if (!allowUninvited && InvitationManager::self()->activeInvitations() == 0) {
+        KNotification::event("ConnectionAttempted",
+                             i18n("Attepted uninvited connection from %1: connection refused",
+                                  remoteIp));
+        return RFB_CLIENT_REFUSE;
+    }
+
+    if (!askOnConnect && InvitationManager::self()->activeInvitations() == 0) {
         KNotification::event("NewConnectionAutoAccepted",
                              i18n("Accepted uninvited connection from %1",
                                   remoteIp));
 
-        sendSessionEstablished();
+        emit sessionEstablished(remoteIp);
         return RFB_CLIENT_ACCEPT;
     }
 
@@ -134,7 +140,7 @@ bool ConnectionController::handleCheckPassword(rfbClientPtr cl, const char *resp
             kDebug() << "checking password" << endl;
             if (checkPassword(it.password(), cl->authChallenge, response, len) && it.isValid()) {
                 authd = true;
-                //configuration->removeInvitation(it);
+                InvitationManager::self()->removeInvitation(it);
                 break;
             }
         }
@@ -158,22 +164,20 @@ bool ConnectionController::handleCheckPassword(rfbClientPtr cl, const char *resp
 }
 
 
-
-void ConnectionController::sendSessionEstablished()
-{
-    emit sessionEstablished("BAH");
-}
-
 void ConnectionController::handleKeyEvent(bool down, rfbKeySym keySym)
 {
-    KeyboardEvent ev(down, keySym);
-    ev.exec();
+    if (controlEnabled) {
+        KeyboardEvent ev(down, keySym);
+        ev.exec();
+    }
 }
 
 void ConnectionController::handlePointerEvent(int bm, int x, int y)
 {
-    PointerEvent ev(bm, x, y);
-    ev.exec();
+    if (controlEnabled) {
+        PointerEvent ev(bm, x, y);
+        ev.exec();
+    }
 }
 
 void ConnectionController::handleClientGone()
@@ -199,4 +203,10 @@ void ConnectionController::dialogRejected()
     kDebug() << "refused connection" << endl;
     rfbRefuseOnHoldClient(cl);
 }
+
+void ConnectionController::setControlEnabled(bool enable)
+{
+    controlEnabled = enable;
+}
+
 

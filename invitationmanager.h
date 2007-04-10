@@ -28,6 +28,10 @@ public:
 
     Invitation addInvitation();
 
+    int activeInvitations();
+
+    void removeInvitation(const Invitation &inv);
+
     const QList<Invitation> &invitations();
 
 signals:

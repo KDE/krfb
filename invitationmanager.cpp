@@ -98,6 +98,14 @@ void InvitationManager::saveInvitations()
     conf->sync();
 }
 
+int InvitationManager::activeInvitations()
+{
+    invalidateOldInvitations();
+    return invitationList.size();
+}
 
-
-
+void InvitationManager::removeInvitation(const Invitation & inv)
+{
+    invitationList.removeAll(inv);
+    emit invitationNumChanged(invitationList.size());
+}

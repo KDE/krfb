@@ -19,6 +19,7 @@
 #include <QHostInfo>
 #include <QApplication>
 #include <QDesktopWidget>
+#include <QPointer>
 
 #include <KGlobal>
 #include <KUser>
@@ -29,6 +30,7 @@
 #include "connectioncontroller.h"
 #include "framebuffer.h"
 #include "krfbconfig.h"
+#include "invitationmanager.h"
 
 
 static const char* cur=
@@ -109,6 +111,17 @@ static void clipboardHook(char* str,int len, rfbClientPtr cl)
 }
 
 
+class KrfbServer::KrfbServerP {
+
+    public:
+        KrfbServerP() : fb(0), screen(0) {};
+
+        FrameBuffer *fb;
+        QList< QPointer<ConnectionController> > controllers;
+        rfbScreenInfoPtr screen;
+};
+
+
 static KStaticDeleter<KrfbServer> sd;
 KrfbServer * KrfbServer::_self = 0;
 KrfbServer * KrfbServer::self() {
@@ -118,11 +131,20 @@ KrfbServer * KrfbServer::self() {
 
 
 KrfbServer::KrfbServer()
+    :d(new KrfbServerP)
 {
     kDebug() << "starting " << endl;
-    fb = new FrameBuffer(QApplication::desktop()->winId(), this);
+    d->fb = new FrameBuffer(QApplication::desktop()->winId(), this);
     QTimer::singleShot(0, this, SLOT(startListening()));
+    connect(InvitationManager::self(), SIGNAL(invitationNumChanged(int)),SLOT(updatePassword()));
+
 }
+
+KrfbServer::~KrfbServer()
+{
+    delete d;
+}
+
 
 void KrfbServer::startListening()
 {
@@ -130,17 +152,18 @@ void KrfbServer::startListening()
 
     int port = KrfbConfig::port();
 
-    int w = fb->width();
-    int h = fb->height();
-    int depth = fb->depth();
+    int w = d->fb->width();
+    int h = d->fb->height();
+    int depth = d->fb->depth();
 
     rfbLogEnable(0);
     screen = rfbGetScreen(0, 0, w, h, 8, 3,depth / 8);
     screen->paddedWidthInBytes = w * 4;
 
-    fb->getServerFormat(screen->serverFormat);
+    d->fb->getServerFormat(screen->serverFormat);
 
-    screen->frameBuffer = fb->data();
+    screen->frameBuffer = d->fb->data();
+    d->screen = screen;
     screen->autoPort = 0;
     screen->port = port;
 
@@ -160,8 +183,8 @@ void KrfbServer::startListening()
     }
     screen->cursor = myCursor;
 
-    // TODO: configure password data to handle authentication
-    screen->authPasswdData = (void *)1;
+    // configure passwords and desktop control here
+    updateSettings();
 
     rfbInitServer(screen);
     if (!rfbIsActive(screen)) {
@@ -170,24 +193,23 @@ void KrfbServer::startListening()
     };
 
     while (true) {
-        foreach(QRect r, fb->modifiedTiles()) {
+        foreach(QRect r, d->fb->modifiedTiles()) {
             rfbMarkRectAsModified(screen, r.top(), r.left(), r.left() + r.width(), r.top() + r.height());
         }
-        fb->modifiedTiles().clear();
+        d->fb->modifiedTiles().clear();
         rfbProcessEvents(screen, 100);
         qApp->processEvents();
     }
 }
 
 
-KrfbServer::~KrfbServer()
-{
-    //delete _controller;
-}
-
 void KrfbServer::enableDesktopControl(bool enable)
 {
-    // TODO
+    foreach (QPointer<ConnectionController> ptr, d->controllers) {
+        if (ptr) {
+            ptr->setControlEnabled(enable);
+        }
+    }
 }
 
 void KrfbServer::disconnectAndQuit()
@@ -200,9 +222,36 @@ enum rfbNewClientAction KrfbServer::handleNewClient(struct _rfbClientRec * cl)
 {
     ConnectionController *cc = new ConnectionController(cl, this);
 
+    d->controllers.append(cc);
+    cc->setControlEnabled(KrfbConfig::allowDesktopControl());
+
     connect(cc, SIGNAL(sessionEstablished(QString)), SIGNAL(sessionEstablished(QString)));
 
     return cc->handleNewClient();
+}
+
+void KrfbServer::updateSettings()
+{
+    enableDesktopControl(KrfbConfig::allowDesktopControl());
+    updatePassword();
+}
+
+void KrfbServer::updatePassword()
+{
+
+    if (!d->screen) return;
+    QString pw = KrfbConfig::uninvitedConnectionPassword();
+    kDebug() << "password: " << pw << " allow " <<
+            KrfbConfig::allowUninvitedConnections() <<
+            " invitations " << InvitationManager::self()->activeInvitations() << endl;
+
+    if (pw.isEmpty() && InvitationManager::self()->activeInvitations() == 0) {
+        kDebug() << "no password from now on" << endl;
+        d->screen->authPasswdData = (void *)0;
+    } else {
+        kDebug() << "Ask for password to accept connections" << endl;
+        d->screen->authPasswdData = (void *)1;
+    }
 }
 
 

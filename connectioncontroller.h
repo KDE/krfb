@@ -32,9 +32,10 @@ public:
     void handlePointerEvent( int bm, int x, int y);
     void handleClientGone();
     void clipboardToServer(const QString &);
-    void sendSessionEstablished();
 
     enum rfbNewClientAction handleNewClient();
+
+    void setControlEnabled(bool enable);
 
 Q_SIGNALS:
     void sessionEstablished(QString);
@@ -47,6 +48,7 @@ protected Q_SLOTS:
 private:
     QString remoteIp;
     struct _rfbClientRec *cl;
+    bool controlEnabled;
     /*
     int fd;
     KrfbServer *server;

@@ -13,6 +13,7 @@
 #include "invitationmanager.h"
 #include "invitation.h"
 #include "krfbconfig.h"
+#include "krfbserver.h"
 
 #include <QWidget>
 #include <QToolTip>
@@ -126,7 +127,7 @@ void ManageInvitationsDialog::showConfiguration()
     KConfigDialog *dialog = new KConfigDialog(this, "settings", KrfbConfig::self());
     dialog->addPage(new TCP, i18n("Network"), "network");
     dialog->addPage(new Security, i18n("Security"), "encrypted");
-
+    connect(dialog, SIGNAL(settingsChanged(QString)),KrfbServer::self(),SLOT(updateSettings()));
     dialog->show();
 }
 

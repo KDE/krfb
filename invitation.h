@@ -35,6 +35,8 @@ public:
 	Invitation(const Invitation &x);
 	Invitation &operator= (const Invitation&x);
 
+    bool operator == (const Invitation &ot);
+
 	QString password() const;
 	QDateTime expirationTime() const;
 	QDateTime creationTime() const;

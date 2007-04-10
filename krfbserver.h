@@ -42,13 +42,16 @@ public Q_SLOTS:
     void startListening();
     void enableDesktopControl(bool);
     void disconnectAndQuit();
+    void updateSettings();
+    void updatePassword();
 
 private:
     KrfbServer();
     static KrfbServer *_self;
 
+    class KrfbServerP;
+    KrfbServerP * const d;
 
-    FrameBuffer *fb;
 };
 
 #endif

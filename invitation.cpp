@@ -102,3 +102,7 @@ bool Invitation::isValid() const {
 	return m_expirationTime > QDateTime::currentDateTime();
 }
 
+bool Invitation::operator ==(const Invitation & ot)
+{
+    return m_creationTime == ot.m_creationTime && m_password == ot.m_password;
+}
