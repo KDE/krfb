@@ -10,6 +10,8 @@
 #ifndef CONNECTIONCONTROLLER_H
 #define CONNECTIONCONTROLLER_H
 
+#include <QObject>
+
 #include <rfb/rfb.h>
 
 class KrfbServer;

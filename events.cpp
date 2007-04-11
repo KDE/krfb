@@ -8,6 +8,7 @@
    of the License.
 */
 
+
 #include <QApplication>
 #include <QX11Info>
 #include <QString>

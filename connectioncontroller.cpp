@@ -7,6 +7,9 @@
    License as published by the Free Software Foundation; version 2
    of the License.
 */
+#include "connectioncontroller.h"
+#include "connectioncontroller.moc"
+
 #include <QX11Info>
 #include <QHostInfo>
 #include <QApplication>
@@ -20,8 +23,6 @@
 #include <KNotification>
 #include <KLocale>
 
-#include "connectioncontroller.h"
-#include "connectioncontroller.moc"
 
 #include "invitationmanager.h"
 #include "connectiondialog.h"
