@@ -78,9 +78,9 @@ enum rfbNewClientAction ConnectionController::handleNewClient()
     bool askOnConnect = KrfbConfig::askOnConnect();
     bool allowUninvited = KrfbConfig::allowUninvitedConnections();
 
-    int socket = cl->sock;
 
 #if 0
+    int socket = cl->sock;
     // TODO: this drops the connection >.<
     QTcpSocket t;
     t.setSocketDescriptor(socket); //, QAbstractSocket::ConnectedState, QIODevice::NotOpen);

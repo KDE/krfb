@@ -12,7 +12,6 @@
 #include "krfbserver.h"
 #include "krfbserver.moc"
 
-
 #include <QTcpServer>
 #include <QTcpSocket>
 #include <QTimer>
@@ -31,6 +30,9 @@
 #include "framebuffer.h"
 #include "krfbconfig.h"
 #include "invitationmanager.h"
+
+#include <X11/Xutil.h>
+#include <X11/extensions/XTest.h>
 
 
 static const char* cur=
@@ -119,6 +121,7 @@ class KrfbServer::KrfbServerP {
         FrameBuffer *fb;
         QList< QPointer<ConnectionController> > controllers;
         rfbScreenInfoPtr screen;
+        bool running;
 };
 
 
@@ -134,7 +137,8 @@ KrfbServer::KrfbServer()
     :d(new KrfbServerP)
 {
     kDebug() << "starting " << endl;
-    d->fb = new FrameBuffer(QApplication::desktop()->winId(), this);
+    d->running = true;
+    d->fb = FrameBuffer::getFrameBuffer(QApplication::desktop()->winId(), this);
     QTimer::singleShot(0, this, SLOT(startListening()));
     connect(InvitationManager::self(), SIGNAL(invitationNumChanged(int)),SLOT(updatePassword()));
 
@@ -158,7 +162,7 @@ void KrfbServer::startListening()
 
     rfbLogEnable(0);
     screen = rfbGetScreen(0, 0, w, h, 8, 3,depth / 8);
-    screen->paddedWidthInBytes = w * 4;
+    screen->paddedWidthInBytes = d->fb->paddedWidth();
 
     d->fb->getServerFormat(screen->serverFormat);
 
@@ -192,7 +196,7 @@ void KrfbServer::startListening()
         disconnectAndQuit();
     };
 
-    while (true) {
+    while (d->running) {
         foreach(QRect r, d->fb->modifiedTiles()) {
             rfbMarkRectAsModified(screen, r.top(), r.left(), r.left() + r.width(), r.top() + r.height());
         }
@@ -200,6 +204,7 @@ void KrfbServer::startListening()
         rfbProcessEvents(screen, 100);
         qApp->processEvents();
     }
+    rfbShutdownServer(screen, true);
 }
 
 
@@ -214,7 +219,7 @@ void KrfbServer::enableDesktopControl(bool enable)
 
 void KrfbServer::disconnectAndQuit()
 {
-    // TODO: cleanup of existing connections
+    d->running = false;
     emit quitApp();
 }
 
@@ -254,6 +259,19 @@ void KrfbServer::updatePassword()
     }
 }
 
+bool KrfbServer::checkX11Capabilities() {
+    int bp1, bp2, majorv, minorv;
+    Bool r = XTestQueryExtension(QX11Info::display(), &bp1, &bp2,
+                                 &majorv, &minorv);
+    if ((!r) || (((majorv*1000)+minorv) < 2002)) {
+        KMessageBox::error(0,
+                           i18n("Your X11 Server does not support the required XTest extension version 2.2. Sharing your desktop is not possible."),
+                                i18n("Desktop Sharing Error"));
+        return false;
+    }
+
+    return true;
+}
 
 
 

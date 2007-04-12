@@ -30,6 +30,7 @@ public:
     ~KrfbServer();
 
     enum rfbNewClientAction handleNewClient(struct _rfbClientRec *cl);
+    bool checkX11Capabilities();
 
 signals:
     void sessionEstablished(QString);

@@ -40,6 +40,7 @@
 static const char description[] = I18N_NOOP("VNC-compatible server to share "
 					   "KDE desktops");
 
+
 int main(int argc, char *argv[])
 {
 	KAboutData aboutData( "krfb", I18N_NOOP("Desktop Sharing"),
@@ -78,6 +79,9 @@ int main(int argc, char *argv[])
     TrayIcon trayicon(new ManageInvitationsDialog);
 
 	KrfbServer *server = KrfbServer::self(); // initialize the server manager
+    if (!server->checkX11Capabilities()) {
+        return 1;
+    }
 
 	QObject::connect(&app, SIGNAL(lastWindowClosed()), // do not show passivepopup
             &trayicon, SLOT(prepareQuit()));
@@ -97,13 +101,6 @@ int main(int argc, char *argv[])
     QObject::connect(server, SIGNAL(quitApp()),
                       &app, SLOT(quit()));
 
-    //TODO: implement some error reporting mechanism between server and tray icon
-    /*
-    QObject::connect(&trayicon, SIGNAL(diconnectedMessageDisplayed()),
-                      &app, SLOT(quit()));
-    QObject::connect(&server, SIGNAL(sessionRefused()),
-                      &app, SLOT(quit()));
-    */
 	sigset_t sigs;
 	sigemptyset(&sigs);
 	sigaddset(&sigs, SIGPIPE);

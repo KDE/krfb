@@ -44,7 +44,7 @@ signals:
 
 public Q_SLOTS:
     void prepareQuit();
-    void showConnectedMessage(QString host);
+    void showConnectedMessage(const QString &host);
     void showDisconnectedMessage();
     void setDesktopControlSetting(bool);
     void showManageInvitations();

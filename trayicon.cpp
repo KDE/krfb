@@ -72,7 +72,7 @@ void TrayIcon::prepareQuit() {
         quitting = true;
 }
 
-void TrayIcon::showConnectedMessage(QString host) {
+void TrayIcon::showConnectedMessage(const QString &host) {
 
         setIcon(KIcon("eyes-open24"));
         KPassivePopup::message(i18n("Desktop Sharing"),

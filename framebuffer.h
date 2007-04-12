@@ -11,12 +11,13 @@
 #define FRAMEBUFFER_H
 
 #include <QObject>
-#include <QImage>
 #include <QRect>
 #include <QVector>
+#include <QWidget>
 
 #include <rfb/rfb.h>
 
+class FrameBuffer;
 /**
 	@author Alessandro Praduroux <pradu@pradu.it>
 */
@@ -24,26 +25,26 @@ class FrameBuffer : public QObject
 {
 Q_OBJECT
 public:
-    explicit FrameBuffer(WId id, QObject *parent = 0);
 
-    ~FrameBuffer();
+    static FrameBuffer* getFrameBuffer(WId id, QObject *parent);
+
+    virtual ~FrameBuffer();
 
     char * data();
 
     QVector<QRect> &modifiedTiles();
-    int width();
-    int height();
-    int depth();
+    virtual int paddedWidth();
+    virtual int width();
+    virtual int height();
+    virtual int depth();
 
-    void getServerFormat(rfbPixelFormat &format);
+    virtual void getServerFormat(rfbPixelFormat &format);
 
-public Q_SLOTS:
-    void updateFrameBuffer();
+protected:
+    explicit FrameBuffer(WId id, QObject *parent = 0);
 
-private:
     WId win;
     char *fb;
-    QImage fbImage;
     QVector<QRect> tiles;
 
 };

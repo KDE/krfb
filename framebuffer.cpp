@@ -10,24 +10,25 @@
 #include "framebuffer.h"
 #include "framebuffer.moc"
 
-#include <QTimer>
-#include <QRegion>
-#include <QPixmap>
-#include <QBitmap>
+#include "config-krfb.h"
 
-const int UPDATE_TIME = 500;
+#include <QX11Info>
+
+#include "qtframebuffer.h"
+#include "x11framebuffer.h"
+
+#include <X11/Xutil.h>
+
+#ifdef HAVE_XDAMAGE
+#include <X11/extensions/Xdamage.h>
+#endif
+
 
 FrameBuffer::FrameBuffer(WId id, QObject *parent)
  : QObject(parent), win(id)
 {
     //TODO: implement reference counting to avoid update the screen
     // while no client is connected.
-
-    fbImage = QPixmap::grabWindow(win).toImage();
-    fb = new char[fbImage.numBytes()];
-    QTimer *t = new QTimer(this);
-    connect(t, SIGNAL(timeout()), SLOT(updateFrameBuffer()));
-    t->start(UPDATE_TIME);
 }
 
 
@@ -41,41 +42,6 @@ char * FrameBuffer::data()
     return fb;
 }
 
-void FrameBuffer::updateFrameBuffer()
-{
-    QImage img = QPixmap::grabWindow(win).toImage();
-    QSize imgSize = img.size();
-
-
-    // verify what part of the image need to be marked as changed
-    // fbImage is the previous version of the image,
-    // img is the current one
-
-#if 0 // This is actually slower than updating the whole desktop...
-
-    QImage map(imgSize, QImage::Format_Mono);
-    map.fill(0);
-
-    for (int x = 0; x < imgSize.width(); x++) {
-        for (int y = 0; y < imgSize.height(); y++) {
-            if (img.pixel(x,y) != fbImage.pixel(x,y)) {
-                map.setPixel(x,y,1);
-            }
-        }
-    }
-
-    QRegion r(QBitmap::fromImage(map));
-    tiles = tiles + r.rects();
-
-#else
-    tiles.append(img.rect());
-#endif
-
-    memcpy(fb, (const char*)img.bits(), img.numBytes());
-    fbImage = img;
-
-}
-
 QVector< QRect > & FrameBuffer::modifiedTiles()
 {
     return tiles;
@@ -83,32 +49,37 @@ QVector< QRect > & FrameBuffer::modifiedTiles()
 
 int FrameBuffer::width()
 {
-    return fbImage.width();
+    return 0;
 }
 
 int FrameBuffer::height()
 {
-    return fbImage.height();
+    return 0;
 }
 
-void FrameBuffer::getServerFormat(rfbPixelFormat & format)
+void FrameBuffer::getServerFormat(rfbPixelFormat &)
 {
-    format.bitsPerPixel = 32;
-    format.depth = 32;
-    format.trueColour = true;
-
-    format.bigEndian = false;
-    format.redShift = 16;
-    format.greenShift = 8;
-    format.blueShift = 0;
-    format.redMax   = 0xff;
-    format.greenMax = 0xff;
-    format.blueMax  = 0xff;
 }
 
 int FrameBuffer::depth()
 {
-    return fbImage.depth();
+    return 32;
+}
+
+FrameBuffer * FrameBuffer::getFrameBuffer(WId id, QObject * parent)
+{
+#ifdef HAVE_XDAMAGE
+    int tmp, er;
+    if (XDamageQueryExtension(QX11Info::display(), &tmp, &er)) {
+        return new X11FrameBuffer(id, parent);
+    }
+#endif
+    return new QtFrameBuffer(id, parent);
+}
+
+int FrameBuffer::paddedWidth()
+{
+    return width() * depth() / 8;
 }
 
 

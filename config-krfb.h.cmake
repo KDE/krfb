@@ -3,3 +3,6 @@
 
 /* Define if SLP is available */
 #cmakedefine HAVE_SLP 1
+
+/* Define if XDamage is available */
+#cmakedefine HAVE_XDAMAGE 1
