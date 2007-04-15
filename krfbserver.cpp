@@ -116,12 +116,13 @@ static void clipboardHook(char* str,int len, rfbClientPtr cl)
 class KrfbServer::KrfbServerP {
 
     public:
-        KrfbServerP() : fb(0), screen(0) {};
+        KrfbServerP() : fb(0), screen(0), numClients(0) {};
 
         FrameBuffer *fb;
         QList< QPointer<ConnectionController> > controllers;
         rfbScreenInfoPtr screen;
         bool running;
+        int numClients;
 };
 
 
@@ -198,9 +199,8 @@ void KrfbServer::startListening()
 
     while (d->running) {
         foreach(QRect r, d->fb->modifiedTiles()) {
-            rfbMarkRectAsModified(screen, r.top(), r.left(), r.left() + r.width(), r.top() + r.height());
+            rfbMarkRectAsModified(screen, r.x(), r.y(), r.right(), r.bottom());
         }
-        d->fb->modifiedTiles().clear();
         rfbProcessEvents(screen, 100);
         qApp->processEvents();
     }
@@ -226,11 +226,16 @@ void KrfbServer::disconnectAndQuit()
 enum rfbNewClientAction KrfbServer::handleNewClient(struct _rfbClientRec * cl)
 {
     ConnectionController *cc = new ConnectionController(cl, this);
+    if (d->numClients == 0) {
+        d->fb->startMonitor();
+        d->numClients++;
+    }
 
     d->controllers.append(cc);
     cc->setControlEnabled(KrfbConfig::allowDesktopControl());
 
     connect(cc, SIGNAL(sessionEstablished(QString)), SIGNAL(sessionEstablished(QString)));
+    connect(cc, SIGNAL(clientDisconnected(ConnectionController *)),SLOT(clientDisconnected(ConnectionController *)));
 
     return cc->handleNewClient();
 }
@@ -271,6 +276,16 @@ bool KrfbServer::checkX11Capabilities() {
     }
 
     return true;
+}
+
+void KrfbServer::clientDisconnected(ConnectionController *cc)
+{
+    kDebug() << "clients--: " << d->numClients << endl;
+    d->numClients--;
+    if (d->numClients == 0) {
+        d->fb->stopMonitor();
+    }
+    disconnect(cc, SIGNAL(clientDisconnected(ConnectionController)),this, SLOT(clientDisconnected(ConnectionController)));
 }
 
 

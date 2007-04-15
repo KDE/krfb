@@ -42,6 +42,7 @@ public:
 Q_SIGNALS:
     void sessionEstablished(QString);
     void notification(QString, QString);
+    void clientDisconnected(ConnectionController *);
 
 protected Q_SLOTS:
     void dialogAccepted();

@@ -39,14 +39,21 @@ public:
 
     ~X11FrameBuffer();
 
+    virtual QList<QRect> modifiedTiles();
     virtual int depth();
     virtual int height();
     virtual int width();
     virtual int paddedWidth();
     virtual void getServerFormat(rfbPixelFormat& format);
+    virtual void startMonitor();
+    virtual void stopMonitor();
+
 
     void handleXDamage( XEvent *event);
 private:
+    void cleanupRects();
+    void acquireEvents();
+
     class P;
     P * const d;
 };

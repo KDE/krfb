@@ -13,6 +13,7 @@
 #include <QImage>
 #include "framebuffer.h"
 
+class QTimer;
 /**
 	@author Alessandro Praduroux <pradu@pradu.it>
 */
@@ -29,13 +30,15 @@ public:
     virtual int width();
     virtual int paddedWidth();
     virtual void getServerFormat(rfbPixelFormat& format);
+    virtual void startMonitor();
+    virtual void stopMonitor();
 
 public Q_SLOTS:
     void updateFrameBuffer();
 
 private:
     QImage fbImage;
-
+    QTimer *t;
 };
 
 #endif

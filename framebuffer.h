@@ -12,7 +12,7 @@
 
 #include <QObject>
 #include <QRect>
-#include <QVector>
+#include <QList>
 #include <QWidget>
 
 #include <rfb/rfb.h>
@@ -32,11 +32,13 @@ public:
 
     char * data();
 
-    QVector<QRect> &modifiedTiles();
+    virtual QList<QRect> modifiedTiles();
     virtual int paddedWidth();
     virtual int width();
     virtual int height();
     virtual int depth();
+    virtual void startMonitor();
+    virtual void stopMonitor();
 
     virtual void getServerFormat(rfbPixelFormat &format);
 
@@ -45,7 +47,7 @@ protected:
 
     WId win;
     char *fb;
-    QVector<QRect> tiles;
+    QList<QRect> tiles;
 
 };
 

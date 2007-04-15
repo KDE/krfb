@@ -3,6 +3,7 @@ project(krfb)
 
 check_symbol_exists(rfbInitServer  "rfb/rfb.h"     HAVE_LIBVNCSERVER)
 macro_bool_to_01(X11_Xdamage_FOUND HAVE_XDAMAGE)
+macro_bool_to_01(X11_XShm_FOUND HAVE_XSHM)
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/config-krfb.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-krfb.h )
 include_directories(${CMAKE_CURRENT_BINARY_DIR}) # for config-krfb.h
 

@@ -183,6 +183,7 @@ void ConnectionController::handlePointerEvent(int bm, int x, int y)
 
 void ConnectionController::handleClientGone()
 {
+    emit clientDisconnected(this);
     kDebug() << "client gone" << endl;
     deleteLater();
 }

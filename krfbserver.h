@@ -14,7 +14,7 @@
 #include <rfb/rfb.h>
 
 class FrameBuffer;
-
+class ConnectionController;
 /**
 This class implements the listening server for the RFB protocol.
 
@@ -45,6 +45,7 @@ public Q_SLOTS:
     void disconnectAndQuit();
     void updateSettings();
     void updatePassword();
+    void clientDisconnected(ConnectionController *);
 
 private:
     KrfbServer();

@@ -23,9 +23,8 @@ QtFrameBuffer::QtFrameBuffer(WId id, QObject *parent)
 {
     fbImage = QPixmap::grabWindow(win).toImage();
     fb = new char[fbImage.numBytes()];
-    QTimer *t = new QTimer(this);
+    t = new QTimer(this);
     connect(t, SIGNAL(timeout()), SLOT(updateFrameBuffer()));
-    t->start(UPDATE_TIME);
 }
 
 
@@ -101,5 +100,15 @@ void QtFrameBuffer::updateFrameBuffer()
 int QtFrameBuffer::paddedWidth()
 {
     return fbImage.width() * 4;
+}
+
+void QtFrameBuffer::startMonitor()
+{
+    t->start(UPDATE_TIME);
+}
+
+void QtFrameBuffer::stopMonitor()
+{
+    t->stop();
 }
 

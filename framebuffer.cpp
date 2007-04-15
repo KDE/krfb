@@ -10,7 +10,7 @@
 #include "framebuffer.h"
 #include "framebuffer.moc"
 
-#include "config-krfb.h"
+#include <config-krfb.h>
 
 #include <QX11Info>
 
@@ -42,9 +42,11 @@ char * FrameBuffer::data()
     return fb;
 }
 
-QVector< QRect > & FrameBuffer::modifiedTiles()
+QList< QRect > FrameBuffer::modifiedTiles()
 {
-    return tiles;
+    QList<QRect> ret = tiles;
+    tiles.clear();
+    return ret;
 }
 
 int FrameBuffer::width()
@@ -75,11 +77,20 @@ FrameBuffer * FrameBuffer::getFrameBuffer(WId id, QObject * parent)
     }
 #endif
     return new QtFrameBuffer(id, parent);
+
 }
 
 int FrameBuffer::paddedWidth()
 {
     return width() * depth() / 8;
+}
+
+void FrameBuffer::startMonitor()
+{
+}
+
+void FrameBuffer::stopMonitor()
+{
 }
 
 
