@@ -26,7 +26,6 @@
 #include <qlineedit.h>
 #include <qbuttongroup.h>
 #include <qdatastream.h>
-#include <kapplication.h>
 #include <kdialog.h>
 #include <knuminput.h>
 #include <klocale.h>

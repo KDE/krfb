@@ -23,7 +23,6 @@
 #include <QPixmap>
 #include <kaction.h>
 #include <kdebug.h>
-#include <kapplication.h>
 #include <KNotification>
 #include <ksystemtrayicon.h>
 #include <kcmdlineargs.h>

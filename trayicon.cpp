@@ -18,7 +18,6 @@
 #include "trayicon.h"
 
 #include <kstandardaction.h>
-#include <kapplication.h>
 #include <klocale.h>
 #include <kdialog.h>
 #include <kmenu.h>
