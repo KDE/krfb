@@ -29,6 +29,7 @@
 #include <kaboutdata.h>
 #include <kaboutapplicationdialog.h>
 #include <klocale.h>
+#include <kapplication.h>
 #include <kmessagebox.h>
 #include <qwindowdefs.h>
 
