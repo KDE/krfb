@@ -31,6 +31,7 @@ public:
     int activeInvitations();
 
     void removeInvitation(const Invitation &inv);
+    void removeAllInvitations();
 
     const QList<Invitation> &invitations();
 

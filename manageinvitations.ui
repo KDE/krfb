@@ -207,6 +207,13 @@ p, li { white-space: pre-wrap; }
   </layout>
  </widget>
  <layoutdefault spacing="6" margin="11" />
+ <tabstops>
+  <tabstop>invitationWidget</tabstop>
+  <tabstop>newPersonalInvitationButton</tabstop>
+  <tabstop>newEmailInvitationButton</tabstop>
+  <tabstop>deleteAllButton</tabstop>
+  <tabstop>deleteOneButton</tabstop>
+ </tabstops>
  <includes>
   <include location="global" >k3listview.h</include>
   <include location="local" >k3listview.h</include>

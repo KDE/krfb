@@ -30,6 +30,9 @@ public Q_SLOTS:
     void inviteByMail();
     void reloadInvitations();
     void showConfiguration();
+    void deleteAll();
+    void deleteCurrent();
+    void selectionChanged();
 
 private:
 

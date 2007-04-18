@@ -25,6 +25,7 @@
 #include <KLocale>
 #include <KStaticDeleter>
 #include <KMessageBox>
+#include <dnssd/publicservice.h>
 
 #include "connectioncontroller.h"
 #include "framebuffer.h"
@@ -197,6 +198,11 @@ void KrfbServer::startListening()
         disconnectAndQuit();
     };
 
+    if (KrfbConfig::publishService()) {
+        DNSSD::PublicService *service = new DNSSD::PublicService(i18n("%1@%2 (shared desktop)", KUser().loginName(), QHostInfo::localHostName()),"_rfb._tcp",port);
+        service->publishAsync();
+    }
+
     while (d->running) {
         foreach(QRect r, d->fb->modifiedTiles()) {
             rfbMarkRectAsModified(screen, r.x(), r.y(), r.right(), r.bottom());
@@ -205,6 +211,7 @@ void KrfbServer::startListening()
         qApp->processEvents();
     }
     rfbShutdownServer(screen, true);
+    emit quitApp();
 }
 
 
@@ -220,7 +227,6 @@ void KrfbServer::enableDesktopControl(bool enable)
 void KrfbServer::disconnectAndQuit()
 {
     d->running = false;
-    emit quitApp();
 }
 
 enum rfbNewClientAction KrfbServer::handleNewClient(struct _rfbClientRec * cl)

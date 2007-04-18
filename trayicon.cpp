@@ -22,6 +22,7 @@
 #include <kdialog.h>
 #include <kmenu.h>
 #include <kglobal.h>
+#include <kactioncollection.h>
 #include <kaboutapplicationdialog.h>
 
 #include "manageinvitationsdialog.h"
@@ -30,7 +31,6 @@
 
 TrayIcon::TrayIcon(KDialog *d) :
 	KSystemTrayIcon(d),
-	actionCollection(this),
 	quitting(false)
 {
 	setIcon(KIcon("eyes-closed24"));
@@ -44,18 +44,15 @@ TrayIcon::TrayIcon(KDialog *d) :
 
 // 	contextMenu()->addSeparator();
 
-	enableControlAction = new KToggleAction(i18n("Enable Remote Control"), &actionCollection);
+	enableControlAction = new KToggleAction(i18n("Enable Remote Control"), actionCollection());
 	enableControlAction->setCheckedState(KGuiItem(i18n("Disable Remote Control")));
 	enableControlAction->setEnabled(false);
-	actionCollection.addAction("enable_control", enableControlAction);
+	actionCollection()->addAction("enable_control", enableControlAction);
 	connect(enableControlAction, SIGNAL(toggled(bool)), SIGNAL(enableDesktopControl(bool)));
-	contextMenu()->addAction(actionCollection.action("enable_control"));
+	contextMenu()->addAction(actionCollection()->action("enable_control"));
 
     contextMenu()->addSeparator();
-
-	aboutAction = KStandardAction::aboutApp(this, SLOT(showAbout()), &actionCollection);
-	actionCollection.addAction("about", aboutAction);
-	contextMenu()->addAction(actionCollection.action("about"));
+    contextMenu()->addAction(KStandardAction::aboutApp(this, SLOT(showAbout()), actionCollection()));
 
 	show();
 }
@@ -97,16 +94,6 @@ void TrayIcon::showDisconnectedMessage() {
 void TrayIcon::setDesktopControlSetting(bool b) {
 	enableControlAction->setEnabled(true);
 	enableControlAction->setChecked(b);
-}
-
-void TrayIcon::activated(QSystemTrayIcon::ActivationReason reason)
-{
-    if (reason == QSystemTrayIcon::Trigger)
-    {
-        contextMenu()->popup(QCursor::pos());
-    }
-    else
-        KSystemTrayIcon::activated(reason);
 }
 
 void TrayIcon::showManageInvitations()

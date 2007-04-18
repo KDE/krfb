@@ -50,11 +50,7 @@ public Q_SLOTS:
     void showManageInvitations();
     void showAbout();
 
-protected:
-	void activated(QSystemTrayIcon::ActivationReason reason);
-
 private:
-	KActionCollection actionCollection;
   	KAction* manageInvitationsAction;
   	KAction* aboutAction;
 	KToggleAction* enableControlAction;

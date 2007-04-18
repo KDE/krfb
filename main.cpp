@@ -83,11 +83,6 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-	QObject::connect(&app, SIGNAL(lastWindowClosed()), // do not show passivepopup
-            &trayicon, SLOT(prepareQuit()));
-	QObject::connect(&app, SIGNAL(lastWindowClosed()),
-            server, SLOT(disconnectAndQuit()));
-
 	QObject::connect(&trayicon, SIGNAL(enableDesktopControl(bool)),
 			 server, SLOT(enableDesktopControl(bool)));
 	QObject::connect(server, SIGNAL(sessionEstablished(QString)),
@@ -96,7 +91,7 @@ int main(int argc, char *argv[])
 			 &trayicon, SLOT(showDisconnectedMessage()));
 	QObject::connect(server, SIGNAL(desktopControlSettingChanged(bool)),
 			 &trayicon, SLOT(setDesktopControlSetting(bool)));
-	QObject::connect(&trayicon, SIGNAL(quitApp()),
+    QObject::connect(&trayicon, SIGNAL(quitSelected()),
 			 server, SLOT(disconnectAndQuit()));
     QObject::connect(server, SIGNAL(quitApp()),
                       &app, SLOT(quit()));

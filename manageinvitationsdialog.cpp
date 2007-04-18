@@ -26,6 +26,7 @@
 #include <KLocale>
 #include <KGlobal>
 #include <KConfigDialog>
+#include <KMessageBox>
 
 // settings dialog
 #include "ui_configtcp.h"
@@ -72,6 +73,12 @@ ManageInvitationsDialog::ManageInvitationsDialog(QWidget *parent)
     connect( InvitationManager::self(), SIGNAL( invitationNumChanged( int )),
              SLOT( reloadInvitations() ));
     connect( this, SIGNAL(user1Clicked()),SLOT(showConfiguration()));
+    connect( deleteAllButton, SIGNAL( clicked() ),
+             SLOT( deleteAll() ));
+    connect( deleteOneButton, SIGNAL( clicked() ),
+             SLOT( deleteCurrent() ));
+    connect( invitationWidget, SIGNAL(itemSelectionChanged ()),
+             SLOT( selectionChanged() ));
 
     reloadInvitations();
 }
@@ -115,8 +122,10 @@ void ManageInvitationsDialog::reloadInvitations()
         strs <<  loc->formatDateTime(inv.creationTime()) << loc->formatDateTime(inv.expirationTime());
         QTreeWidgetItem *it = new QTreeWidgetItem(strs);
         invitationWidget->addTopLevelItem(it);
+        it->setData(0,Qt::UserRole+1, inv.creationTime());
     }
     invitationWidget->resizeColumnToContents(0);
+    deleteAllButton->setEnabled(InvitationManager::self()->activeInvitations() > 0);
 }
 
 void ManageInvitationsDialog::showConfiguration()
@@ -129,5 +138,49 @@ void ManageInvitationsDialog::showConfiguration()
     dialog->addPage(new Security, i18n("Security"), "encrypted");
     connect(dialog, SIGNAL(settingsChanged(QString)),KrfbServer::self(),SLOT(updateSettings()));
     dialog->show();
+}
+
+void ManageInvitationsDialog::deleteAll()
+{
+    if (KMessageBox::warningContinueCancel(this,
+        i18n("<qt>Are you sure you want to delete all invitations?</qt>"),
+        i18n("Confirm delete Invitations"),
+        KStandardGuiItem::ok(),
+        KStandardGuiItem::cancel(),
+        QString("krfbdeleteallinv")) !=
+        KMessageBox::Continue)
+    {
+        return;
+    }
+
+    InvitationManager::self()->removeAllInvitations();
+}
+
+void ManageInvitationsDialog::deleteCurrent()
+{
+    if (KMessageBox::warningContinueCancel(this,
+        i18n("<qt>Are you sure you want to delete this invitation?</qt>"),
+        i18n("Confirm delete Invitations"),
+        KStandardGuiItem::ok(),
+        KStandardGuiItem::cancel(),
+        QString("krfbdeleteoneinv")) !=
+        KMessageBox::Continue)
+    {
+        return;
+    }
+    QList<QTreeWidgetItem *> itl = invitationWidget->selectedItems();
+    foreach(QTreeWidgetItem *itm, itl) {
+        foreach(Invitation inv, InvitationManager::self()->invitations()) {
+            if (inv.creationTime() == itm->data(0,Qt::UserRole+1)) {
+                InvitationManager::self()->removeInvitation(inv);
+            }
+        }
+    }
+
+}
+
+void ManageInvitationsDialog::selectionChanged()
+{
+    deleteOneButton->setEnabled(invitationWidget->selectedItems().size() > 0);
 }
 

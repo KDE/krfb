@@ -13,18 +13,9 @@
  ***************************************************************************/
 
 #include "invitation.h"
+
 #include <KRandom>
-/*
- * Function for (en/de)crypting strings for config file, taken from KMail
- * Author: Stefan Taferner <taferner@alpin.or.at>
- */
-static QString cryptStr(const QString &aStr) {
-        QString result;
-        for ( int i = 0; i < aStr.length(); i++)
-                result += (aStr[i].unicode() < 0x20) ? aStr[i] :
-                                QChar(0x1001F - aStr[i].unicode());
-        return result;
-}
+#include <KStringHandler>
 
 // a random string that doesn't contain i, I, o, O, 1, 0
 // based on KRandom::randomString()
@@ -65,7 +56,8 @@ Invitation::Invitation(const Invitation &x)
 }
 
 Invitation::Invitation(const KConfigGroup &config) {
-	m_password = cryptStr(config.readEntry("password", QString()));
+	m_password = KStringHandler::obscure(config.readEntry("password", QString()));
+    kDebug() << "read: " << config.readEntry("password", QString()) << " = " << m_password << endl;
 	m_creationTime = config.readEntry("creation", QDateTime());
 	m_expirationTime = config.readEntry("expiration", QDateTime());
 }
@@ -81,7 +73,8 @@ Invitation &Invitation::operator= (const Invitation&x) {
 }
 
 void Invitation::save(KConfigGroup &config) const {
-	config.writeEntry("password", cryptStr(m_password));
+    kDebug() << "write: " << m_password << ": " << KStringHandler::obscure(m_password) << endl;
+    config.writeEntry("password", KStringHandler::obscure(m_password));
 	config.writeEntry("creation", m_creationTime);
 	config.writeEntry("expiration", m_expirationTime);
 }

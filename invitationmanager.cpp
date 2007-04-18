@@ -107,5 +107,13 @@ int InvitationManager::activeInvitations()
 void InvitationManager::removeInvitation(const Invitation & inv)
 {
     invitationList.removeAll(inv);
+    saveInvitations();
+    emit invitationNumChanged(invitationList.size());
+}
+
+void InvitationManager::removeAllInvitations()
+{
+    invitationList.clear();
+    saveInvitations();
     emit invitationNumChanged(invitationList.size());
 }

@@ -12,6 +12,10 @@
       <label>This is the port on wich krfb will listen.</label>
       <default>5900</default>
     </entry>
+    <entry name="publishService" type="Bool">
+      <label>Announce the service on the local network</label>
+      <default>true</default>
+    </entry>
   </group>
   <group name="Security">
     <entry name="allowDesktopControl" type="Bool">

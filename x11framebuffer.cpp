@@ -117,6 +117,7 @@ X11FrameBuffer::~X11FrameBuffer()
     shmctl(d->shminfo.shmid, IPC_RMID, 0);
 #endif
     delete d;
+    fb = 0; // already deleted by XDestroyImage
 }
 
 
