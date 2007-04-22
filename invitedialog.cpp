@@ -26,7 +26,7 @@
 
 #include <QLabel>
 #include <QPushButton>
-#include <QToolTip>
+
 #include <QCursor>
 
 InviteDialog::InviteDialog( QWidget *parent )

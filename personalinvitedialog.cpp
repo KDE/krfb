@@ -26,7 +26,7 @@
 #include <klocale.h>
 #include <KStandardDirs>
 
-#include <QToolTip>
+
 #include <QNetworkInterface>
 
 PersonalInviteDialog::PersonalInviteDialog( QWidget *parent )

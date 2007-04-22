@@ -16,7 +16,7 @@
 #include "krfbserver.h"
 
 #include <QWidget>
-#include <QToolTip>
+
 #include <QCursor>
 #include <QDateTime>
 
