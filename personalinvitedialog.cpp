@@ -20,7 +20,8 @@
 #include "personalinvitedialog.h"
 #include "personalinvitedialog.moc"
 
-#include <qlabel.h>
+#include <QtGui/QLabel>
+#include <QtGui/QToolTip>
 
 #include <kiconloader.h>
 #include <klocale.h>

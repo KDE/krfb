@@ -24,10 +24,10 @@
 #include <KStandardDirs>
 #include <KStandardGuiItem>
 
-#include <QLabel>
-#include <QPushButton>
-
-#include <QCursor>
+#include <QtGui/QLabel>
+#include <QtGui/QPushButton>
+#include <QtGui/QToolTip>
+#include <QtGui/QCursor>
 
 InviteDialog::InviteDialog( QWidget *parent )
     : KDialog( parent )
