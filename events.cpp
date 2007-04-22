@@ -11,7 +11,7 @@
 
 #include <QApplication>
 #include <QX11Info>
-#include <QString>
+
 #include <QDesktopWidget>
 #include <QClipboard>
 

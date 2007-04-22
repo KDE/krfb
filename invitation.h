@@ -21,7 +21,7 @@
 #include <KApplication>
 #include <KConfig>
 #include <QObject>
-#include <QString>
+
 #include <QDateTime>
 
 
