@@ -124,6 +124,7 @@ class KrfbServer::KrfbServerP {
         rfbScreenInfoPtr screen;
         bool running;
         int numClients;
+        QByteArray desktopName;
 };
 
 
@@ -182,7 +183,8 @@ void KrfbServer::startListening()
     screen->passwordCheck = passwordCheck;
     screen->setXCutText = clipboardHook;
 
-    screen->desktopName = i18n("%1@%2 (shared desktop)", KUser().loginName(), QHostInfo::localHostName()).toLatin1().data();
+    d->desktopName = i18n("%1@%2 (shared desktop)", KUser().loginName(), QHostInfo::localHostName()).toLatin1();
+    screen->desktopName = d->desktopName.constData();
 
     if (!myCursor) {
         myCursor = rfbMakeXCursor(19, 19, (char*) cur, (char*) mask);
