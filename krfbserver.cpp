@@ -128,10 +128,10 @@ class KrfbServer::KrfbServerP {
 };
 
 
-static KStaticDeleter<KrfbServer> sd;
+static KStaticDeleter<KrfbServer> sdServer;
 KrfbServer * KrfbServer::_self = 0;
 KrfbServer * KrfbServer::self() {
-    if (!_self) sd.setObject(_self, new KrfbServer);
+    if (!_self) sdServer.setObject(_self, new KrfbServer);
     return _self;
 }
 
