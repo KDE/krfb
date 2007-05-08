@@ -19,6 +19,8 @@
 #include <QToolTip>
 #include <QCursor>
 #include <QDateTime>
+#include <QNetworkInterface>
+
 
 #include <KStandardDirs>
 #include <KStandardGuiItem>
@@ -27,6 +29,7 @@
 #include <KGlobal>
 #include <KConfigDialog>
 #include <KMessageBox>
+#include <KToolInvocation>
 
 // settings dialog
 #include "ui_configtcp.h"
@@ -111,6 +114,48 @@ void ManageInvitationsDialog::inviteManually()
 
 void ManageInvitationsDialog::inviteByMail()
 {
+    int r = KMessageBox::warningContinueCancel(this,
+            i18n("When sending an invitation by email, note that everybody who reads this email "
+                "will be able to connect to your computer for one hour, or until the first "
+                "successful connection took place, whichever comes first. \n"
+                "You should either encrypt the email or at least send it only in a "
+                "secure network, but not over the Internet."),
+            i18n("Send Invitation via Email"),
+            KStandardGuiItem::cont(),
+            KStandardGuiItem::cancel(),
+            "showEmailInvitationWarning");
+    if (r == KMessageBox::Cancel)
+        return;
+
+    QList<QNetworkInterface> ifl = QNetworkInterface::allInterfaces();
+    QString host;
+    int port = KrfbConfig::port();
+    foreach (QNetworkInterface nif, ifl) {
+        if (nif.flags() & QNetworkInterface::IsLoopBack) continue;
+        if (nif.flags() & QNetworkInterface::IsRunning) {
+            host = nif.addressEntries()[0].ip().toString();
+        }
+    }
+
+    Invitation inv = InvitationManager::self()->addInvitation();
+    KToolInvocation::invokeMailer(QString::null, QString::null, QString::null,
+            i18n("Desktop Sharing (VNC) invitation"),
+            ki18n("You have been invited to a VNC session. If you have the KDE Remote "
+                  "Desktop Connection installed, just click on the link below.\n\n"
+                  "vnc://invitation:%1@%2:%3\n\n"
+                  "Otherwise you can use any VNC client with the following parameters:\n\n"
+                  "Host: %4:%5\n"
+                  "Password: %6\n\n"
+                  "For security reasons this invitation will expire at %7.")
+            .subs(inv.password())
+            .subs(host)
+            .subs(port)
+            .subs(host)
+            .subs(port)
+            .subs(inv.password())
+            .subs(KGlobal::locale()->formatDateTime(inv.expirationTime()))
+            .toString());
+
 }
 
 void ManageInvitationsDialog::reloadInvitations()

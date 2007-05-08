@@ -32,6 +32,30 @@
 #include "krfbconfig.h"
 
 #include <X11/Xutil.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+
+
+static QString peerAddress(int sock) {
+
+    const int ADDR_SIZE = 50;
+    struct sockaddr sa;
+    socklen_t salen = sizeof(struct sockaddr);
+    if (getpeername(sock, &sa, &salen) == 0) {
+        if (sa.sa_family == AF_INET) {
+            struct sockaddr_in *si = (struct sockaddr_in *)&sa;
+            return QString(inet_ntoa(si->sin_addr));
+        }
+        if (sa.sa_family == AF_INET6) {
+            char inetbuf[ADDR_SIZE];
+            inet_ntop(sa.sa_family, &sa, inetbuf, ADDR_SIZE);
+            return QString(inetbuf);
+        }
+        return QString("not a network address");
+    }
+    return QString("unable to determine...");
+}
 
 static void clientGoneHook(rfbClientPtr cl)
 {
@@ -78,14 +102,7 @@ enum rfbNewClientAction ConnectionController::handleNewClient()
     bool askOnConnect = KrfbConfig::askOnConnect();
     bool allowUninvited = KrfbConfig::allowUninvitedConnections();
 
-
-#if 0
-    int socket = cl->sock;
-    // TODO: this drops the connection >.<
-    QTcpSocket t;
-    t.setSocketDescriptor(socket); //, QAbstractSocket::ConnectedState, QIODevice::NotOpen);
-    remoteIp = t.peerAddress().toString();
-#endif
+    remoteIp = peerAddress(cl->sock);
 
     if (!allowUninvited && InvitationManager::self()->activeInvitations() == 0) {
         KNotification::event("ConnectionAttempted",
@@ -107,7 +124,6 @@ enum rfbNewClientAction ConnectionController::handleNewClient()
                          i18n("Received connection from %1, on hold (waiting for confirmation)",
                               remoteIp));
 
-    //cl->screen->authPasswdData = (void *)1;
     cl->clientGoneHook = clientGoneHook;
 
     ConnectionDialog *dialog = new ConnectionDialog(0);

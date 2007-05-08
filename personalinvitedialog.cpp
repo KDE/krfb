@@ -22,13 +22,13 @@
 
 #include <QtGui/QLabel>
 #include <QtGui/QToolTip>
+#include <QNetworkInterface>
 
 #include <kiconloader.h>
 #include <klocale.h>
 #include <KStandardDirs>
 
-
-#include <QNetworkInterface>
+#include "krfbconfig.h"
 
 PersonalInviteDialog::PersonalInviteDialog( QWidget *parent )
     : KDialog( parent )
@@ -37,6 +37,8 @@ PersonalInviteDialog::PersonalInviteDialog( QWidget *parent )
   setButtons(Close);
   setDefaultButton(Close);
   setModal(true);
+
+  int port = KrfbConfig::port();
 
   m_inviteWidget = new QWidget ( this );
   setupUi(m_inviteWidget);
@@ -47,7 +49,7 @@ PersonalInviteDialog::PersonalInviteDialog( QWidget *parent )
   foreach (QNetworkInterface nif, ifl) {
     if (nif.flags() & QNetworkInterface::IsLoopBack) continue;
     if (nif.flags() & QNetworkInterface::IsRunning) {
-        hostLabel->setText( QString( "%1:5900" ).arg(nif.addressEntries()[0].ip().toString()));
+        hostLabel->setText( QString( "%1:%2" ).arg(nif.addressEntries()[0].ip().toString()).arg(port));
     }
   }
 
