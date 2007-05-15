@@ -214,10 +214,7 @@ p, li { white-space: pre-wrap; }
   <tabstop>deleteAllButton</tabstop>
   <tabstop>deleteOneButton</tabstop>
  </tabstops>
- <includes>
-  <include location="global" >k3listview.h</include>
-  <include location="local" >k3listview.h</include>
- </includes>
+ <includes/>
  <resources/>
  <connections/>
 </ui>
