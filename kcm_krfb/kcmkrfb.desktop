@@ -186,4 +186,4 @@ Keywords[uk]=спільні стільниці,krfb,vnc,спільний,rdp,krd
 Keywords[zh_CN]=desktop sharing,krfb,vnc,sharing,krdc,remote desktop connection,invitation,port,slp,uninvited,桌面共享,共享,远程桌面连接,邀请,端口,未邀请
 Keywords[zh_TW]=desktop sharing,krfb,vnc,sharing,rdp,krdc,remote desktop connection,rdp,桌面分享,分享,遠端桌面連線,invitation,port,slp,uninvited
 
-Categories=Qt;KDE;X-KDE-settings-network;
+Categories=Qt;KDE;X-KDE-settings-network;Settings;Network;
