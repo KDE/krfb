@@ -52,4 +52,4 @@ GenericName[uz]=Иш столи билан бўлишиш
 GenericName[x-test]=xxDesktop Sharingxx
 GenericName[zh_HK]=桌面分享
 GenericName[zh_TW]=桌面分享
-Categories=Qt;KDE;System;
+Categories=Qt;KDE;System;RemoteAccess;Network;
