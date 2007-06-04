@@ -13,7 +13,6 @@
 #include <QObject>
 #include <rfb/rfb.h>
 
-class FrameBuffer;
 class ConnectionController;
 /**
 This class implements the listening server for the RFB protocol.
