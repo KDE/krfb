@@ -1,6 +1,7 @@
 # describes the servicetype that you need to implement in order to use
 # kinetd.
 [Desktop Entry]
+Encoding=UTF-8
 Type=ServiceType
 X-KDE-ServiceType=KInetDModule
 Name=KInetD Module Type
