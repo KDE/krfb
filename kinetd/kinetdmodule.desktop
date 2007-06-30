@@ -5,7 +5,6 @@ Encoding=UTF-8
 Type=ServiceType
 X-KDE-ServiceType=KInetDModule
 Name=KInetD Module Type
-Name[ar]=KInetD نوع وحدة
 Name[br]=Seurt ar mollad KInetD
 Name[ca]=Tipus de mòdul del KInetD
 Name[cs]=Typ modulu KInetD
