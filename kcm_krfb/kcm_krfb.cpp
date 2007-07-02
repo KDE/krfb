@@ -57,12 +57,12 @@ KcmKRfb::KcmKRfb(QWidget *p, const QStringList &) :
 
 	setButtons(Default|Apply|Default);
 
-	KAboutData* about = new KAboutData( "kcm_krfb", I18N_NOOP("Desktop Sharing Control Module"),
+	KAboutData* about = new KAboutData( "kcm_krfb", 0, ki18n("Desktop Sharing Control Module"),
 		VERSION,
-		I18N_NOOP("Configure desktop sharing"), KAboutData::License_GPL,
-		"(c) 2002, Tim Jansen\n",
-		0, "http://www.tjansen.de/krfb", "tim@tjansen.de");
-	about->addAuthor("Tim Jansen", 0, "tim@tjansen.de");
+		ki18n("Configure desktop sharing"), KAboutData::License_GPL,
+		ki18n("(c) 2002, Tim Jansen\n"),
+		KLocalizedString(), "http://www.tjansen.de/krfb", "tim@tjansen.de");
+	about->addAuthor(ki18n("Tim Jansen"), KLocalizedString(), "tim@tjansen.de");
 	setAboutData( about );
 
 	load();

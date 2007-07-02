@@ -43,35 +43,35 @@ static const char description[] = I18N_NOOP("VNC-compatible server to share "
 
 int main(int argc, char *argv[])
 {
-	KAboutData aboutData( "krfb", I18N_NOOP("Desktop Sharing"),
-        VERSION, description, KAboutData::License_GPL,
-        "(c) 2007, Alessandro Praduroux\n"
+	KAboutData aboutData( "krfb", 0, ki18n("Desktop Sharing"),
+        VERSION, ki18n(description), KAboutData::License_GPL,
+        ki18n("(c) 2007, Alessandro Praduroux\n"
             "(c) 2001-2003, Tim Jansen\n"
         "(c) 2001, Johannes E. Schindelin\n"
         "(c) 2000, heXoNet Support GmbH, D-66424 Homburg\n"
         "(c) 2000-2001, Const Kaplinsky\n"
         "(c) 2000, Tridia Corporation\n"
-        "(c) 1999, AT&T Laboratories Cambridge\n");
-    aboutData.addAuthor("Alessandro Praduroux", I18N_NOOP("KDE4 porting"), "pradu@pradu.it");
-    aboutData.addAuthor("Tim Jansen", "", "tim@tjansen.de");
-    aboutData.addAuthor("Ian Reinhart Geiser", I18N_NOOP("DCOP interface"), "geiseri@kde.org");
-	aboutData.addCredit("Johannes E. Schindelin",
-			    I18N_NOOP("libvncserver"));
-	aboutData.addCredit("Const Kaplinsky",
-			    I18N_NOOP("TightVNC encoder"));
-	aboutData.addCredit("Tridia Corporation",
-			    I18N_NOOP("ZLib encoder"));
-	aboutData.addCredit("AT&T Laboratories Cambridge",
-			    I18N_NOOP("original VNC encoders and "
+        "(c) 1999, AT&T Laboratories Cambridge\n"));
+    aboutData.addAuthor(ki18n("Alessandro Praduroux"), ki18n("KDE4 porting"), "pradu@pradu.it");
+    aboutData.addAuthor(ki18n("Tim Jansen"), KLocalizedString(), "tim@tjansen.de");
+    aboutData.addAuthor(ki18n("Ian Reinhart Geiser"), ki18n("DCOP interface"), "geiseri@kde.org");
+	aboutData.addCredit(ki18n("Johannes E. Schindelin"),
+			    ki18n("libvncserver"));
+	aboutData.addCredit(ki18n("Const Kaplinsky"),
+			    ki18n("TightVNC encoder"));
+	aboutData.addCredit(ki18n("Tridia Corporation"),
+			    ki18n("ZLib encoder"));
+	aboutData.addCredit(ki18n("AT&T Laboratories Cambridge"),
+			    ki18n("original VNC encoders and "
 				      "protocol design"));
-	aboutData.addCredit("Jens Wagner (heXoNet Support GmbH)",
-			    I18N_NOOP("X11 update scanner, "
+	aboutData.addCredit(ki18n("Jens Wagner (heXoNet Support GmbH)"),
+			    ki18n("X11 update scanner, "
 				      "original code base"));
-	aboutData.addCredit("Jason Spisak",
-			    I18N_NOOP("Connection side image"),
+	aboutData.addCredit(ki18n("Jason Spisak"),
+			    ki18n("Connection side image"),
 			    "kovalid@yahoo.com");
-	aboutData.addCredit("Karl Vogel",
-			    I18N_NOOP("KDesktop background deactivation"));
+	aboutData.addCredit(ki18n("Karl Vogel"),
+			    ki18n("KDesktop background deactivation"));
 	KCmdLineArgs::init(argc, argv, &aboutData);
 
 	KApplication app;
