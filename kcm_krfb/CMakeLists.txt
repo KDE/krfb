@@ -2,8 +2,6 @@ include_directories(${CMAKE_BINARY_DIR}/krfb/krfb/ ${CMAKE_SOURCE_DIR}/krfb/srvl
 
 set(kcm_krfb_PART_SRCS kcm_krfb.cpp ${srvloc_SRCS} ${krfbconfig_SRCS})
 
-kde4_automoc(${kcm_krfb_PART_SRCS})
-
 kde4_add_ui3_files(kcm_krfb_PART_SRCS configurationwidget.ui)
 kde4_add_ui3_files(kcm_krfb_PART_SRCS
 	${CMAKE_SOURCE_DIR}/krfb/krfb/manageinvitations.ui

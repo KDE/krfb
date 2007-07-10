@@ -6,8 +6,6 @@ include_directories( ${CMAKE_SOURCE_DIR}/krfb/srvloc  )
 
 set(kded_kinetd_PART_SRCS kinetd.cpp ${srvloc_SRCS})
 
-kde4_automoc(${kded_kinetd_PART_SRCS})
-
 message(STATUS "Port to krfb DBUS")
 # kde4_add_dcop_skels(kded_kinetd_PART_SRCS kinetd.h )
 
