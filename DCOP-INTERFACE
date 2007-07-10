@@ -1,9 +1,0 @@
-DCOP Interfaces:
-
-// Exits the application, disconnects clients
-void exit()
-// Set the desktop to be controlable from remote clients
-void setAllowDesktopControl(bool)
-
-
-
