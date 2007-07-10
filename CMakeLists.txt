@@ -27,7 +27,6 @@ set(krfb_SRCS
    x11framebuffer.cpp
 )
 
-kde4_automoc(${krfb_SRCS})
 
 kde4_add_kcfg_files(krfb_SRCS krfbconfig.kcfgc)
 
