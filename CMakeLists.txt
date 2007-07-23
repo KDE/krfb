@@ -46,7 +46,7 @@ install(TARGETS krfb  DESTINATION ${BIN_INSTALL_DIR})
 
 ########### install files ###############
 
-install(FILES krfb.desktop DESTINATION ${XDG_APPS_DIR})
+install(FILES krfb.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
 install(FILES krfb.notifyrc DESTINATION ${DATA_INSTALL_DIR}/krfb)
 install(FILES eyes-open24.png eyes-closed24.png connection-side-image.png DESTINATION ${DATA_INSTALL_DIR}/krfb/pics)
 kde4_install_icons(${ICON_INSTALL_DIR})
