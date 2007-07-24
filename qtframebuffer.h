@@ -21,7 +21,7 @@ class QtFrameBuffer : public FrameBuffer
 {
 Q_OBJECT
 public:
-    QtFrameBuffer(WId id, QObject *parent = 0);
+    explicit QtFrameBuffer(WId id, QObject *parent = 0);
 
     ~QtFrameBuffer();
 

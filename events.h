@@ -11,9 +11,15 @@
 #ifndef EVENTS_H
 #define EVENTS_H
 
+#include <QDesktopWidget>
+#include <QEvent>
+#include <QString>
+
 #include <X11/Xlib.h>
 
 class ConnectionController;
+
+class QCursor;
 
 class VNCEvent {
 public:

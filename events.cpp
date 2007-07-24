@@ -8,17 +8,10 @@
    of the License.
 */
 
+#include "events.h"
 
 #include <QApplication>
 #include <QX11Info>
-
-#include <QDesktopWidget>
-#include <QClipboard>
-
-#include <KNotification>
-
-#include "events.h"
-#include "connectioncontroller.h"
 
 #include <X11/Xutil.h>
 #include <X11/keysym.h>

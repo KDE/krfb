@@ -138,7 +138,7 @@ void ManageInvitationsDialog::inviteByMail()
     }
 
     Invitation inv = InvitationManager::self()->addInvitation();
-    KToolInvocation::invokeMailer(QString::null, QString::null, QString::null,
+    KToolInvocation::invokeMailer(QString(), QString(), QString(),
             i18n("Desktop Sharing (VNC) invitation"),
             ki18n("You have been invited to a VNC session. If you have the KDE Remote "
                   "Desktop Connection installed, just click on the link below.\n\n"
