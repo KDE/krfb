@@ -139,7 +139,7 @@ the frame-buffer level, which roughly corresponds to the rendered
 screen image, which means that it can be applied to all windowing
 systems (including X11, &MacOS; and &Microsoft; &Windows;). Remote
 Frame Buffer applications exist for many platforms, and can often be
-free re-distributed.
+freely re-distributed.
 </para>
 
 <para>
