@@ -350,7 +350,7 @@ void PortListener::setServiceRegistrationEnabledInternal(bool e) {
 				     *(it++),
 				     *(it2++),
 				     m_serviceLifetime))
-				 kDebug(7021) << "Failure registering SLP service (no slpd running?)"<< endl;
+				 kDebug(7021) << "Failure registering SLP service (no slpd running?)";
 		}
 		m_serviceRegistered = true;
 		// make lifetime 30s shorter, because the timeout is not precise
@@ -414,7 +414,7 @@ KInetD::KInetD() :
 	m_config = new KConfig("kinetdrc");
 	m_srvreg = new KServiceRegistry();
 	if (!m_srvreg->available()) {
-		kDebug(7021) << "SLP not available"<< endl;
+		kDebug(7021) << "SLP not available";
 		delete m_srvreg;
 		m_srvreg = 0;
 	}

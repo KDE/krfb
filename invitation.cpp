@@ -57,7 +57,7 @@ Invitation::Invitation(const Invitation &x)
 
 Invitation::Invitation(const KConfigGroup &config) {
 	m_password = KStringHandler::obscure(config.readEntry("password", QString()));
-    kDebug() << "read: " << config.readEntry("password", QString()) << " = " << m_password << endl;
+    kDebug() << "read: " << config.readEntry("password", QString()) << " = " << m_password;
 	m_creationTime = config.readEntry("creation", QDateTime());
 	m_expirationTime = config.readEntry("expiration", QDateTime());
 }
@@ -73,7 +73,7 @@ Invitation &Invitation::operator= (const Invitation&x) {
 }
 
 void Invitation::save(KConfigGroup &config) const {
-    kDebug() << "write: " << m_password << ": " << KStringHandler::obscure(m_password) << endl;
+    kDebug() << "write: " << m_password << ": " << KStringHandler::obscure(m_password);
     config.writeEntry("password", KStringHandler::obscure(m_password));
 	config.writeEntry("creation", m_creationTime);
 	config.writeEntry("expiration", m_expirationTime);

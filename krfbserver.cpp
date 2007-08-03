@@ -139,7 +139,7 @@ KrfbServer * KrfbServer::self() {
 KrfbServer::KrfbServer()
     :d(new KrfbServerP)
 {
-    kDebug() << "starting " << endl;
+    kDebug() << "starting ";
     d->running = true;
     d->fb = FrameBuffer::getFrameBuffer(QApplication::desktop()->winId(), this);
     QTimer::singleShot(0, this, SLOT(startListening()));
@@ -264,10 +264,10 @@ void KrfbServer::updatePassword()
             " invitations " << InvitationManager::self()->activeInvitations() << endl;
 
     if (pw.isEmpty() && InvitationManager::self()->activeInvitations() == 0) {
-        kDebug() << "no password from now on" << endl;
+        kDebug() << "no password from now on";
         d->screen->authPasswdData = (void *)0;
     } else {
-        kDebug() << "Ask for password to accept connections" << endl;
+        kDebug() << "Ask for password to accept connections";
         d->screen->authPasswdData = (void *)1;
     }
 }
@@ -288,7 +288,7 @@ bool KrfbServer::checkX11Capabilities() {
 
 void KrfbServer::clientDisconnected(ConnectionController *cc)
 {
-    kDebug() << "clients--: " << d->numClients << endl;
+    kDebug() << "clients--: " << d->numClients;
     d->numClients--;
     if (d->numClients == 0) {
         d->fb->stopMonitor();

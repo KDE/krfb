@@ -144,7 +144,7 @@ bool ConnectionController::handleCheckPassword(rfbClientPtr cl, const char *resp
     QString password =  KrfbConfig::uninvitedConnectionPassword();
 
     bool authd = false;
-    kDebug() << "about to start autentication" << endl;
+    kDebug() << "about to start autentication";
 
     if (allowUninvited) {
         authd = checkPassword(password, cl->authChallenge, response, len);
@@ -154,7 +154,7 @@ bool ConnectionController::handleCheckPassword(rfbClientPtr cl, const char *resp
         QList<Invitation> invlist = InvitationManager::self()->invitations();
 
         foreach(Invitation it, invlist) {
-            kDebug() << "checking password" << endl;
+            kDebug() << "checking password";
             if (checkPassword(it.password(), cl->authChallenge, response, len) && it.isValid()) {
                 authd = true;
                 InvitationManager::self()->removeInvitation(it);
@@ -200,7 +200,7 @@ void ConnectionController::handlePointerEvent(int bm, int x, int y)
 void ConnectionController::handleClientGone()
 {
     emit clientDisconnected(this);
-    kDebug() << "client gone" << endl;
+    kDebug() << "client gone";
     deleteLater();
 }
 
@@ -218,7 +218,7 @@ void ConnectionController::dialogAccepted()
 
 void ConnectionController::dialogRejected()
 {
-    kDebug() << "refused connection" << endl;
+    kDebug() << "refused connection";
     rfbRefuseOnHoldClient(cl);
 }
 
