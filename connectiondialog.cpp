@@ -34,11 +34,12 @@ ConnectionDialog::ConnectionDialog( QWidget *parent )
   setDefaultButton(Cancel);
   setModal(true);
 
+  setMinimumSize(500, 200);
+
   m_connectWidget = new QWidget( this );
   setupUi(m_connectWidget);
 
-  pixmapLabel->setPixmap(
-      UserIcon( "connection-side-image.png" ) );
+  pixmapLabel->setPixmap(KIcon("krfb").pixmap(128));
 
   KGuiItem accept = KStandardGuiItem::ok();
   accept.setText( i18n( "Accept Connection" ) );

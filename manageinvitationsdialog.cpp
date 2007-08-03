@@ -21,8 +21,6 @@
 #include <QDateTime>
 #include <QNetworkInterface>
 
-
-#include <KStandardDirs>
 #include <KStandardGuiItem>
 #include <KIconLoader>
 #include <KLocale>
@@ -58,12 +56,11 @@ ManageInvitationsDialog::ManageInvitationsDialog(QWidget *parent)
     setCaption(i18n("Invitation"));
     setButtons(User1|Close|Help);
     setDefaultButton(NoDefault);
-    setModal(false);
 
-    QWidget *main = new QWidget(this);
-    setupUi(main);
-    setMainWidget( main );
-    pixmapLabel->setPixmap(KStandardDirs::locate("data", "krfb/pics/connection-side-image.png"));
+    setMinimumSize(500, 330);
+
+    setupUi(mainWidget());
+    pixmapLabel->setPixmap(KIcon("krfb").pixmap(128));
 
     setButtonGuiItem( User1, KStandardGuiItem::configure() );
 

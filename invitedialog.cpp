@@ -21,7 +21,6 @@
 
 #include <kiconloader.h>
 #include <klocale.h>
-#include <KStandardDirs>
 #include <KStandardGuiItem>
 
 #include <QtGui/QLabel>
@@ -37,10 +36,12 @@ InviteDialog::InviteDialog( QWidget *parent )
   setDefaultButton(NoDefault);
   setModal(true);
 
+  setMinimumSize(500, 300);
+
   m_inviteWidget = new QWidget( this );
   setupUi(m_inviteWidget);
 
-  pixmapLabel->setPixmap(KStandardDirs::locate("data", "krfb/pics/connection-side-image.png"));
+  pixmapLabel->setPixmap(KIcon("krfb").pixmap(128));
   setMainWidget( m_inviteWidget );
 
   setButtonGuiItem( User1, KStandardGuiItem::configure() );

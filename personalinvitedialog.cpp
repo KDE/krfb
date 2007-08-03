@@ -26,7 +26,6 @@
 
 #include <kiconloader.h>
 #include <klocale.h>
-#include <KStandardDirs>
 
 #include "krfbconfig.h"
 
@@ -38,11 +37,13 @@ PersonalInviteDialog::PersonalInviteDialog( QWidget *parent )
   setDefaultButton(Close);
   setModal(true);
 
+  setMinimumSize(500, 250);
+
   int port = KrfbConfig::port();
 
   m_inviteWidget = new QWidget ( this );
   setupUi(m_inviteWidget);
-  pixmapLabel->setPixmap(KStandardDirs::locate("data", "krfb/pics/connection-side-image.png"));
+  pixmapLabel->setPixmap(KIcon("krfb").pixmap(128));
 
   QList<QNetworkInterface> ifl = QNetworkInterface::allInterfaces();
 
