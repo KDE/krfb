@@ -7,7 +7,7 @@ DocPath=krfb/krfb-configuration.html
 ServiceTypes=KCModule
 
 
-X-KDE-Library=krfb
+X-KDE-Library=kcm_krfb
 X-KDE-Factoryname=krfb
 X-KDE-ParentApp=kcontrol
 
