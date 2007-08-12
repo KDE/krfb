@@ -46,7 +46,7 @@
       <bool>false</bool>
      </property>
      <property name="text" >
-      <string>Uninvited connections password</string>
+      <string>Uninvited connections password:</string>
      </property>
      <property name="buddy" >
       <cstring>kcfg_uninvitedConnectionPassword</cstring>

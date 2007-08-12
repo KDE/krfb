@@ -6,7 +6,7 @@ Comment[fr]=Partage du bureau
 Comment[x-test]=xxDesktop Sharingxx
 
 [Event/UserAcceptsConnection]
-Name=UserAcceptsConnection
+Name=User Accepts Connection
 Name[el]=Ο χρήστης αποδέχεται σύνδεση
 Name[fr]=L'utilisateur accepte les connexions
 Name[x-test]=xxUserAcceptsConnectionxx
@@ -17,7 +17,7 @@ Comment[x-test]=xxUser accepts connectionxx
 Action=None
 
 [Event/UserRefusesConnection]
-Name=UserRefusesConnection
+Name=User Refuses Connection
 Name[el]=Ο χρήστης απορρίπτει σύνδεση
 Name[fr]=L'utilisateur refuse les connexions
 Name[x-test]=xxUserRefusesConnectionxx
@@ -28,7 +28,7 @@ Comment[x-test]=xxUser refuses connectionxx
 Action=None
 
 [Event/ConnectionClosed]
-Name=ConnectionClosed
+Name=Connection Closed
 Name[el]=Η σύνδεση έκλεισε
 Name[fr]=Connexion fermée
 Name[x-test]=xxConnectionClosedxx
@@ -39,7 +39,7 @@ Comment[x-test]=xxConnection closedxx
 Action=None
 
 [Event/InvalidPassword]
-Name=InvalidPassword
+Name=Invalid Password
 Name[el]=Μη έγκυρος κωδικός πρόσβασης
 Name[fr]=Mots de passe non valable
 Name[x-test]=xxInvalidPasswordxx
@@ -50,7 +50,7 @@ Comment[x-test]=xxInvalid passwordxx
 Action=None
 
 [Event/InvalidPasswordInvitations]
-Name=InvalidPasswordInvitations
+Name=Invalid Password Invitations
 Name[el]=Μη έγκυρες προσκλήσεις κωδικού πρόσβασης
 Name[fr]=Invitations de mot de passe non valable
 Name[x-test]=xxInvalidPasswordInvitationsxx
@@ -61,7 +61,7 @@ Comment[x-test]=xxThe invited party sent an invalid password. Connection refused
 Action=Popup
 
 [Event/NewConnectionOnHold]
-Name=NewConnectionOnHold
+Name=New Connection on Hold
 Name[el]=Νέα σύνδεση σε αναμονή
 Name[fr]=Nouvelle connexion au raccroché
 Name[x-test]=xxNewConnectionOnHoldxx
@@ -72,7 +72,7 @@ Comment[x-test]=xxConnection requested, user must acceptxx
 Action=None
 
 [Event/NewConnectionAutoAccepted]
-Name=NewConnectionAutoAccepted
+Name=New Connection Auto Accepted
 Name[el]=Αυτόματη αποδοχή νέας σύνδεσης
 Name[fr]=Nouvelle connexion auto-acceptée
 Name[x-test]=xxNewConnectionAutoAcceptedxx
@@ -83,7 +83,7 @@ Comment[x-test]=xxNew connection automatically establishedxx
 Action=None
 
 [Event/TooManyConnections]
-Name=TooManyConnections
+Name=Too Many Connections
 Name[el]=Πάρα πολλές συνδέσεις
 Name[fr]=Trop de connexions
 Name[x-test]=xxTooManyConnectionsxx
@@ -95,7 +95,7 @@ Action=None
 default_logfile=
 
 [Event/UnexpectedConnection]
-Name=UnexpectedConnection
+Name=Unexpected Connection
 Name[el]=Μη αναμενόμενη σύνδεση
 Name[fr]=Connexion inattendue
 Name[x-test]=xxUnexpectedConnectionxx

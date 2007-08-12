@@ -47,7 +47,7 @@
      <item>
       <widget class="QLabel" name="label" >
        <property name="text" >
-        <string>Listening Port:</string>
+        <string>Listening port:</string>
        </property>
        <property name="buddy" >
         <cstring>kcfg_port</cstring>
