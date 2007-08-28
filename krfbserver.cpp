@@ -23,7 +23,7 @@
 #include <KGlobal>
 #include <KUser>
 #include <KLocale>
-#include <KStaticDeleter>
+#include <K3StaticDeleter>
 #include <KMessageBox>
 #include <dnssd/publicservice.h>
 
