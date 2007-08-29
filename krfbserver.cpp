@@ -128,7 +128,7 @@ class KrfbServer::KrfbServerP {
 };
 
 
-static KStaticDeleter<KrfbServer> sdServer;
+static K3StaticDeleter<KrfbServer> sdServer;
 KrfbServer * KrfbServer::_self = 0;
 KrfbServer * KrfbServer::self() {
     if (!_self) sdServer.setObject(_self, new KrfbServer);
