@@ -23,7 +23,6 @@
 #include <KGlobal>
 #include <KUser>
 #include <KLocale>
-#include <K3StaticDeleter>
 #include <KMessageBox>
 #include <dnssd/publicservice.h>
 
@@ -127,12 +126,16 @@ class KrfbServer::KrfbServerP {
         QByteArray desktopName;
 };
 
+class KrfbServerPrivate
+{
+public:
+    KrfbServer instance;
+};
 
-static K3StaticDeleter<KrfbServer> sdServer;
-KrfbServer * KrfbServer::_self = 0;
+K_GLOBAL_STATIC(KrfbServerPrivate, krfbServerPrivate)
+
 KrfbServer * KrfbServer::self() {
-    if (!_self) sdServer.setObject(_self, new KrfbServer);
-    return _self;
+    return &krfbServerPrivate->instance;
 }
 
 

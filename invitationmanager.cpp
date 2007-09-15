@@ -9,18 +9,22 @@
 #include "invitationmanager.h"
 #include "invitationmanager.moc"
 
-#include <K3StaticDeleter>
 #include <KConfigGroup>
 #include <KConfig>
 #include <KGlobal>
 
 #include <QTimer>
 
-static K3StaticDeleter<InvitationManager> sd;
-InvitationManager * InvitationManager::_self = 0;
+class InvitationManagerPrivate
+{
+public:
+    InvitationManager instance;
+};
+
+K_GLOBAL_STATIC(InvitationManagerPrivate, invitationManagerPrivate)
+
 InvitationManager * InvitationManager::self() {
-    if (!_self) sd.setObject(_self, new InvitationManager);
-    return _self;
+    return &invitationManagerPrivate->instance;
 }
 
 InvitationManager::InvitationManager()

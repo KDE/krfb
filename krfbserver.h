@@ -22,6 +22,7 @@ This class implements the listening server for the RFB protocol.
 class KrfbServer : public QObject
 {
 Q_OBJECT
+friend class KrfbServerPrivate;
 public:
 
     static KrfbServer *self();
