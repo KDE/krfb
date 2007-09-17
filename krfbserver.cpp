@@ -147,7 +147,6 @@ KrfbServer::KrfbServer()
     d->fb = FrameBuffer::getFrameBuffer(QApplication::desktop()->winId(), this);
     QTimer::singleShot(0, this, SLOT(startListening()));
     connect(InvitationManager::self(), SIGNAL(invitationNumChanged(int)),SLOT(updatePassword()));
-
 }
 
 KrfbServer::~KrfbServer()
@@ -216,6 +215,10 @@ void KrfbServer::startListening()
         qApp->processEvents();
     }
     rfbShutdownServer(screen, true);
+    // framebuffer has to be deleted before X11 connection goes down
+    delete d->fb;
+    d->fb = 0;
+
     emit quitApp();
 }
 
