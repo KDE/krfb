@@ -63,6 +63,7 @@ Name[uk]=Спільні стільниці
 Name[vi]=Chia sẻ màn hình nền
 Name[x-test]=xxDesktop Sharingxx
 Name[xh]=Ukwehlulelana kwe Desktop
+Name[zh_CN]=桌面共享
 Name[zh_HK]=桌面分享
 Name[zh_TW]=桌面分享
 
@@ -117,6 +118,7 @@ Comment[uk]=Налаштувати спільні стільниці
 Comment[vi]=Cấu hình chia sẻ màn hình nền
 Comment[x-test]=xxConfigure Desktop Sharingxx
 Comment[xh]=Qwalasela Ukusebenzisa ngokuhlangeneyo kwe Desktop 
+Comment[zh_CN]=配置桌面共享
 Comment[zh_HK]=設定桌面分享
 Comment[zh_TW]=設定桌面分享
 Keywords=desktop sharing,krfb,vnc,sharing,krdc,remote desktop connection,invitation,port,slp,uninvited
@@ -160,6 +162,7 @@ Keywords[tr]=masaüstü paylaşımı,krfb,vnc,paylaşım,krdc,uzak masaüstü ba
 Keywords[uk]=спільні стільниці,krfb,vnc,спільний,rdp,krdc,з'єднання віддаленої стільниці,запрошення,rdp,slp,без запрошення
 Keywords[vi]=chia sẻ màn hình,krfb,vnc,chia sẻ,krdc,màn hình ở xa kết nối,mời kết nối,cổng,slp,không được mời
 Keywords[x-test]=xxdesktop sharing,krfb,vnc,sharing,krdc,remote desktop connection,invitation,port,slp,uninvitedxx
+Keywords[zh_CN]=桌面共享,krfb,vnc,共享,krdc,远程桌面连接,邀请,端口,slp,未邀请
 Keywords[zh_TW]=desktop sharing,krfb,vnc,sharing,rdp,krdc,remote desktop connection,rdp,桌面分享,分享,遠端桌面連線,invitation,port,slp,uninvited
 
 Categories=Qt;KDE;X-KDE-settings-network;Settings;
