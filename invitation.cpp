@@ -72,11 +72,11 @@ Invitation &Invitation::operator= (const Invitation&x) {
 	return *this;
 }
 
-void Invitation::save(KConfigGroup &config) const {
-    kDebug() << "write: " << m_password << ": " << KStringHandler::obscure(m_password);
+void Invitation::save(KConfigGroup &config) const 
+{
     config.writeEntry("password", KStringHandler::obscure(m_password));
-	config.writeEntry("creation", m_creationTime);
-	config.writeEntry("expiration", m_expirationTime);
+    config.writeEntry("creation", m_creationTime);
+    config.writeEntry("expiration", m_expirationTime);
 }
 
 QString Invitation::password() const {
