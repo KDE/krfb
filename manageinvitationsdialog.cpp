@@ -106,7 +106,7 @@ void ManageInvitationsDialog::inviteManually()
     PersonalInviteDialog *pid = new PersonalInviteDialog(this);
     pid->setPassword(inv.password());
     pid->setExpiration(inv.expirationTime());
-    pid->exec();
+    pid->show();
 }
 
 void ManageInvitationsDialog::inviteByMail()
@@ -210,6 +210,11 @@ void ManageInvitationsDialog::deleteCurrent()
     {
         return;
     }
+
+    // disable updates while deleting items, otherwise the list would invalidate itself
+    disconnect(InvitationManager::self(), SIGNAL(invitationNumChanged(int)),
+               this, SLOT(reloadInvitations()));
+
     QList<QTreeWidgetItem *> itl = invitationWidget->selectedItems();
     foreach(QTreeWidgetItem *itm, itl) {
         foreach(Invitation inv, InvitationManager::self()->invitations()) {
@@ -219,6 +224,11 @@ void ManageInvitationsDialog::deleteCurrent()
         }
     }
 
+    // update it manually
+    reloadInvitations();
+
+    connect(InvitationManager::self(), SIGNAL(invitationNumChanged(int)),
+            SLOT(reloadInvitations()));
 }
 
 void ManageInvitationsDialog::selectionChanged()
