@@ -135,20 +135,19 @@ void ManageInvitationsDialog::inviteByMail()
     }
 
     Invitation inv = InvitationManager::self()->addInvitation();
+    KUrl invUrl(QString("vnc://invitation:%1@%2:%3").arg(inv.password()).arg(host).arg(port));
     KToolInvocation::invokeMailer(QString(), QString(), QString(),
             i18n("Desktop Sharing (VNC) invitation"),
             ki18n("You have been invited to a VNC session. If you have the KDE Remote "
                   "Desktop Connection installed, just click on the link below.\n\n"
-                  "vnc://invitation:%1@%2:%3\n\n"
+                  "%1\n\n"
                   "Otherwise you can use any VNC client with the following parameters:\n\n"
-                  "Host: %4:%5\n"
-                  "Password: %6\n\n"
-                  "For security reasons this invitation will expire at %7.")
-            .subs(inv.password())
+                  "Host: %2:%3\n"
+                  "Password: %4\n\n"
+                  "For security reasons this invitation will expire at %5.")
+            .subs(invUrl.url())
             .subs(host)
-            .subs(port)
-            .subs(host)
-            .subs(port)
+            .subs(QString::number(port))
             .subs(inv.password())
             .subs(KGlobal::locale()->formatDateTime(inv.expirationTime()))
             .toString());
