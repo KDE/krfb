@@ -39,6 +39,7 @@ Comment[tr]=Masaüstü Paylaşımı
 Comment[x-test]=xxDesktop Sharingxx
 Comment[xh]=Ulwahlulelano lwe Desktop
 Comment[zh_HK]=桌面分享
+Comment[zh_TW]=桌面分享
 
 [Event/UserAcceptsConnection]
 Name=User Accepts Connection
@@ -49,6 +50,7 @@ Name[pt]=O Utilizador Aceita a Ligação
 Name[pt_BR]=O Utilizador Aceita a Ligação
 Name[sv]=Användaren accepterar anslutning
 Name[x-test]=xxUser Accepts Connectionxx
+Name[zh_TW]=使用者接受連線
 Comment=User accepts connection
 Comment[af]=Gebruiker aanvaar verbinding
 Comment[ca]=L'usuari accepta la connexió
@@ -87,6 +89,7 @@ Comment[tr]=Kullanıcı bağlantıyı kabul etti
 Comment[x-test]=xxUser accepts connectionxx
 Comment[xh]=Umsebenzisi wamkela uxhulumaniso
 Comment[zh_HK]=用戶接受連線
+Comment[zh_TW]=使用者接受連線
 Action=None
 
 [Event/UserRefusesConnection]
@@ -98,6 +101,7 @@ Name[pt]=O Utilizador Recusa a Ligação
 Name[pt_BR]=O Utilizador Recusa a Ligação
 Name[sv]=Användaren vägrar anslutning
 Name[x-test]=xxUser Refuses Connectionxx
+Name[zh_TW]=使用者拒絕連線
 Comment=User refuses connection
 Comment[af]=Gebruiker weier verbinding
 Comment[ca]=L'usuari refusa la connexió
@@ -136,6 +140,7 @@ Comment[tr]=Kullanıcı bağlantıyı iptal etti
 Comment[x-test]=xxUser refuses connectionxx
 Comment[xh]=Umsebenzisi wala uxhulumaniso
 Comment[zh_HK]=用戶拒絕連線
+Comment[zh_TW]=使用者拒絕連線使用者
 Action=None
 
 [Event/ConnectionClosed]
@@ -147,6 +152,7 @@ Name[pt]=Ligação Fechada
 Name[pt_BR]=Ligação Fechada
 Name[sv]=Anslutning stängd
 Name[x-test]=xxConnection Closedxx
+Name[zh_TW]=連線已關閉
 Comment=Connection closed
 Comment[af]=Verbinding gesluit
 Comment[br]=Serret eo ar gevreadenn
@@ -187,6 +193,7 @@ Comment[uz]=Алоқа узилди
 Comment[x-test]=xxConnection closedxx
 Comment[xh]=Uxhulumaniso luvaliwe
 Comment[zh_HK]=連線已關閉
+Comment[zh_TW]=連線已關閉
 Action=None
 
 [Event/InvalidPassword]
@@ -198,6 +205,7 @@ Name[pt]=Senha Inválida
 Name[pt_BR]=Senha Inválida
 Name[sv]=Ogiltigt lösenord
 Name[x-test]=xxInvalid Passwordxx
+Name[zh_TW]=不正確的密碼
 Comment=Invalid password
 Comment[af]=Ongeldige wagwoord
 Comment[br]=Tremenger siek 
@@ -239,6 +247,7 @@ Comment[wa]=Sicret nén valide
 Comment[x-test]=xxInvalid passwordxx
 Comment[xh]=Igama lokugqitha elingasebenziyo
 Comment[zh_HK]=無效的密碼
+Comment[zh_TW]=不正確的密碼
 Action=None
 
 [Event/InvalidPasswordInvitations]
@@ -249,6 +258,7 @@ Name[pt]=Convites de Senha Inválidos
 Name[pt_BR]=Convites de Senha Inválidos
 Name[sv]=Ogiltigt lösenord vid inbjudan
 Name[x-test]=xxInvalid Password Invitationsxx
+Name[zh_TW]=不合法的密碼邀請
 Comment=The invited party sent an invalid password. Connection refused.
 Comment[af]=Die uitgenooi party gestuur 'n ongeldige wagwoord. Verbinding geweier.
 Comment[ca]=La part invitada ha enviat una contrasenya no vàlida. Connexió refusada.
@@ -285,6 +295,7 @@ Comment[tr]=Davet edilenden gönderilmiş geçersiz parola. Bağlantı rededildi
 Comment[x-test]=xxThe invited party sent an invalid password. Connection refused.xx
 Comment[xh]=Umhlangano omenyiweyo uthumele igama lokugqitha elisebenzayo. Uxhulumano lwa liwe.
 Comment[zh_HK]=被邀請的一方送出無效的密碼。已拒絕連線。
+Comment[zh_TW]=邀請的人送出了不合法的密碼邀請。連線已拒絕。
 Action=Popup
 
 [Event/NewConnectionOnHold]
@@ -296,6 +307,7 @@ Name[pt]=Ligação Nova em Espera
 Name[pt_BR]=Ligação Nova em Espera
 Name[sv]=Ny anslutning väntar
 Name[x-test]=xxNew Connection on Holdxx
+Name[zh_TW]=新連線等待處理
 Comment=Connection requested, user must accept
 Comment[af]=Verbinding versoekte, gebruiker moet aanvaar
 Comment[ca]=Connexió sol·licitada, l'usuari ha d'acceptar-la
@@ -334,6 +346,7 @@ Comment[tr]=Bağlantı isteği, kullanıcı kabul etmeli
 Comment[x-test]=xxConnection requested, user must acceptxx
 Comment[xh]=Uxhulumaniso luceliwe, umsebenzisi kufanele amkele
 Comment[zh_HK]=已請求連線，用戶必須接受
+Comment[zh_TW]=連線已要求，必須等使用者接受
 Action=None
 
 [Event/NewConnectionAutoAccepted]
@@ -345,6 +358,7 @@ Name[pt]=Nova Ligação Aceite Automaticamente
 Name[pt_BR]=Nova Ligação Aceite Automaticamente
 Name[sv]=Ny anslutning accepterades automatiskt
 Name[x-test]=xxNew Connection Auto Acceptedxx
+Name[zh_TW]=新連線自動接受
 Comment=New connection automatically established
 Comment[af]=Nuwe verbinding automaties vasgestel
 Comment[ca]=Nova connexió establerta automàticament
@@ -383,6 +397,7 @@ Comment[tr]=Yeni bağlantı otomatik olarak kuruldu
 Comment[x-test]=xxNew connection automatically establishedxx
 Comment[xh]=Uxhulumaniso olutsha lufunyenwe ngokuzenzekelayo
 Comment[zh_HK]=已自動建立新連線
+Comment[zh_TW]=新連線自動建立
 Action=None
 
 [Event/TooManyConnections]
@@ -394,6 +409,7 @@ Name[pt]=Demasiadas Ligações
 Name[pt_BR]=Demasiadas Ligações
 Name[sv]=För många anslutningar
 Name[x-test]=xxToo Many Connectionsxx
+Name[zh_TW]=太多連線
 Comment=Busy, connection refused
 Comment[af]=Besig, verbinding geweier
 Comment[br]=Dalc'het, kevreadenn disteuleret
@@ -434,6 +450,7 @@ Comment[uz]=Банд, алоқа рад этилди
 Comment[x-test]=xxBusy, connection refusedxx
 Comment[xh]=Uxhulumaniso, olu xakekileyo lwaliwe
 Comment[zh_HK]=忙碌，已拒絕連線
+Comment[zh_TW]=忙碌，連線被拒
 Action=None
 default_logfile=
 
@@ -446,6 +463,7 @@ Name[pt]=Ligação Inesperada
 Name[pt_BR]=Ligação Inesperada
 Name[sv]=Oväntad anslutning
 Name[x-test]=xxUnexpected Connectionxx
+Name[zh_TW]=未知的連線
 Comment=Received unexpected connection, abort
 Comment[af]=Ontvang onverwagte verbinding, staak
 Comment[ca]=Rebuda una connexió inesperada, avortant
@@ -483,4 +501,5 @@ Comment[tr]=Babul edilmiş beklenmedik bağlantı, durdur
 Comment[x-test]=xxReceived unexpected connection, abortxx
 Comment[xh]=Ufumene uxhulumaniso olungalindelekanga, lahla
 Comment[zh_HK]=接收到非預期的連線，中止
+Comment[zh_TW]=已接收到未知的連線，中止。
 Action=None
