@@ -22,6 +22,7 @@
 #include <KUser>
 #include <KNotification>
 #include <KLocale>
+#include <KDebug>
 
 
 #include "invitationmanager.h"
