@@ -14,6 +14,8 @@
 
 #include "invitation.h"
 
+#include <KConfigGroup>
+#include <KDebug>
 #include <KRandom>
 #include <KStringHandler>
 
