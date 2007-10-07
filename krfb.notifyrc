@@ -43,6 +43,7 @@ Comment[zh_TW]=桌面分享
 
 [Event/UserAcceptsConnection]
 Name=User Accepts Connection
+Name[ca]=L'usuari accepta la connexió
 Name[el]=Ο χρήστης δέχεται τη σύνδεση
 Name[ga]=Glacann an tÚsáideoir Le Ceangal
 Name[ja]=ユーザが接続を許可
@@ -94,6 +95,7 @@ Action=None
 
 [Event/UserRefusesConnection]
 Name=User Refuses Connection
+Name[ca]=L'usuari refusa la connexió
 Name[el]=Ο χρήστης απέρριψε τη σύνδεση
 Name[ga]=Diúltíonn an tÚsáideoir Le Ceangal
 Name[ja]=ユーザが接続を拒否
@@ -145,6 +147,7 @@ Action=None
 
 [Event/ConnectionClosed]
 Name=Connection Closed
+Name[ca]=Connexió tancada
 Name[el]=Η σύνδεση έκλεισε
 Name[ga]=Ceangal Dúnta
 Name[ja]=接続切断
@@ -198,6 +201,7 @@ Action=None
 
 [Event/InvalidPassword]
 Name=Invalid Password
+Name[ca]=Contrasenya no vàlida
 Name[el]=Μη έγκυρος κωδικός πρόσβασης
 Name[ga]=Focal Faire Neamhbhailí
 Name[ja]=無効なパスワード
@@ -252,6 +256,7 @@ Action=None
 
 [Event/InvalidPasswordInvitations]
 Name=Invalid Password Invitations
+Name[ca]=Contrasenya de les invitacions no vàlides
 Name[el]=Μη έγκυρος κωδικός πρόσβασης πρόσκλησης
 Name[ja]=招待に対する無効なパスワード
 Name[pt]=Convites de Senha Inválidos
@@ -300,6 +305,7 @@ Action=Popup
 
 [Event/NewConnectionOnHold]
 Name=New Connection on Hold
+Name[ca]=Nova connexió en espera
 Name[el]=Νέα σύνδεση σε αναμονή
 Name[ga]=Ceangal Nua Ag Fanacht
 Name[ja]=保留中の新規接続
@@ -351,6 +357,7 @@ Action=None
 
 [Event/NewConnectionAutoAccepted]
 Name=New Connection Auto Accepted
+Name[ca]=Nova connexió acceptada automàticament
 Name[el]=Αυτόματη αποδοχή νέας σύνδεσης
 Name[ga]=Ceangal nua bunaithe go huathoibríoch
 Name[ja]=新規接続の自動受け入れ
@@ -402,6 +409,7 @@ Action=None
 
 [Event/TooManyConnections]
 Name=Too Many Connections
+Name[ca]=Massa connexions
 Name[el]=Πάρα πολλές συνδέσεις
 Name[ga]=An Iomarca Ceangal
 Name[ja]=多すぎる接続
@@ -456,6 +464,7 @@ default_logfile=
 
 [Event/UnexpectedConnection]
 Name=Unexpected Connection
+Name[ca]=Connexió inesperada
 Name[el]=Μη αναμενόμενη σύνδεση
 Name[ga]=Nasc Gan Choinne
 Name[ja]=予期しない接続
