@@ -1,7 +1,7 @@
 [Desktop Entry]
 Encoding=UTF-8
 Icon=krfb
-Exec=kcmshell kcmkrfb
+Exec=kcmshell4 kcmkrfb
 Type=Service
 DocPath=krfb/krfb-configuration.html
 ServiceTypes=KCModule
