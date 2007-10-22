@@ -39,7 +39,10 @@ kde4_add_ui_files(krfb_SRCS connectionwidget.ui
 
 kde4_add_executable(krfb ${krfb_SRCS})
 
-target_link_libraries(krfb ${JPEG_LIBRARIES} ${SLP_LIBRARIES} ${LIBVNCSERVER_LIBRARIES} ${X11_XTest_LIB} ${X11_Xdamage_LIB} ${KDE4_KDNSSD_LIBRARY})
+target_link_libraries(krfb ${JPEG_LIBRARIES} ${SLP_LIBRARIES} ${LIBVNCSERVER_LIBRARIES} ${X11_Xdamage_LIB} ${KDE4_KDNSSD_LIBRARY})
+if(X11_XTest_FOUND)
+  target_link_libraries(krfb ${X11_XTest_Lib})
+endif(X11_XTest_FOUND)
 
 install(TARGETS krfb  DESTINATION ${BIN_INSTALL_DIR})
 
