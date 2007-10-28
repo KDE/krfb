@@ -150,6 +150,7 @@ Keywords[cy]=rhannu penbwrdd,krfb,vnc,rhannu,rdp,krdc,cysylltiad penbwrdd pell,g
 Keywords[da]=desktopdeling,krfb,vnc,deling,krdc,ekstern desktopforbindelse,invitation,port,slp,ikke inviteret
 Keywords[de]=Arbeitsfläche freigeben,krfb,VNC,freigeben,krdc,Entfernte Arbeitsfläche,Einladung,Port,slp,uneingeladen
 Keywords[el]=κοινή χρήση επιφάνειας εργασίας,krfb,vnc,κοινή χρήση,krdc,σύνδεση σε απομακρυσμένη επιφάνεια εργασίας,πρόσκληση,θύρα,slp,απρόσκλητο
+Keywords[eo]=tabulo,tabulokomunigado,foraj tabuloj
 Keywords[es]=escritorio compartido,krfb,vnc,compartir,rdp,krdc, conexión escritorio remoto,invitación,puerto,slp,no invitado
 Keywords[et]=töölaua jagamine,krfb,vnc,jagamine,rdp,krdc,kaugtöölaua ühendus,rdp,kutse,port,slp,kutsumata
 Keywords[eu]=mahaigain partekatzea,krfb,vnc,partekatzea,krdc,urruneko mahaigain konexioa,gonbidapena,ataka,slp,gonbidapen gabea
