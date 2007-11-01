@@ -241,10 +241,8 @@ void KrfbServer::disconnectAndQuit()
 enum rfbNewClientAction KrfbServer::handleNewClient(struct _rfbClientRec * cl)
 {
     ConnectionController *cc = new ConnectionController(cl, this);
-    if (d->numClients == 0) {
+    if (d->numClients++ == 0)
         d->fb->startMonitor();
-        d->numClients++;
-    }
 
     d->controllers.append(cc);
     cc->setControlEnabled(KrfbConfig::allowDesktopControl());
@@ -296,12 +294,10 @@ bool KrfbServer::checkX11Capabilities() {
 void KrfbServer::clientDisconnected(ConnectionController *cc)
 {
     kDebug() << "clients--: " << d->numClients;
-    d->numClients--;
-    if (d->numClients == 0) {
+    if (!--d->numClients) {
         d->fb->stopMonitor();
     }
     disconnect(cc, SIGNAL(clientDisconnected(ConnectionController)),this, SLOT(clientDisconnected(ConnectionController)));
 }
-
 
 
