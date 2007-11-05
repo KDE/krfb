@@ -140,8 +140,8 @@ public slots:
 	 * @param service name of a service as specified in its .desktop file
 	 * @param port the first port number to try or -1 to restore defaults
 	 * @param autoPortRange the number of ports to try
-	 * @return true if a port could be found or service is disabled, false 
-	 *          otherwise. 
+	 * @return true if a port could be found or service is disabled, false
+	 *          otherwise.
 	 */
 	bool setPort(QString service, int port = -1, int autoPortRange = 1);
 
@@ -189,7 +189,7 @@ public slots:
 	void reregistrationTimer();
 
  public:
-	KInetD();
+	KInetD(QObject* parent, const QList<QVariant>&);
 	virtual ~KInetD();
 	void loadServiceList();
 	PortListener *getListenerByName(QString name);

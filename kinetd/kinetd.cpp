@@ -35,6 +35,14 @@
 #include <unistd.h>
 #include <fcntl.h>
 
+#include <kpluginfactory.h>
+#include <kpluginloader.h>
+
+K_PLUGIN_FACTORY(KInetDFactory,
+                 registerPlugin<KInetD>();
+    )
+K_EXPORT_PLUGIN(KInetDFactory("kinetd"))
+
 PortListener::PortListener(KService::Ptr s,
 			   KConfig *config,
 			   KServiceRegistry *srvreg) :
@@ -255,11 +263,11 @@ QStringList PortListener::processServiceTemplate(const QString &a) {
 		QString hostName = address->nodeName();
 		KUser u;
 		QString x = a; // replace does not work in const QString. Why??
-		l.append(x.replace(QRegExp("%h"), KServiceRegistry::encodeAttributeValue(hostName))
-			 .replace(QRegExp("%p"), QString::number(m_port))
-			 .replace(QRegExp("%u"), KServiceRegistry::encodeAttributeValue(u.loginName()))
-			 .replace(QRegExp("%i"), KServiceRegistry::encodeAttributeValue(m_uuid))
-			 .replace(QRegExp("%f"), KServiceRegistry::encodeAttributeValue(u.fullName())));
+		l.append(x.replace(QString("%h"), KServiceRegistry::encodeAttributeValue(hostName))
+			 .replace(QString("%p"), QString::number(m_port))
+			 .replace(QString("%u"), KServiceRegistry::encodeAttributeValue(u.loginName()))
+			 .replace(QString("%i"), KServiceRegistry::encodeAttributeValue(m_uuid))
+			 .replace(QString("%f"), KServiceRegistry::encodeAttributeValue(u.fullName())));
 	}
 	return l;
 }
@@ -408,8 +416,8 @@ PortListener::~PortListener() {
 }
 
 
-KInetD::KInetD() :
-	KDEDModule()
+KInetD::KInetD(QObject* parent, const QList<QVariant>&) :
+	KDEDModule(parent)
 {
 	m_config = new KConfig("kinetdrc");
 	m_srvreg = new KServiceRegistry();
@@ -645,12 +653,3 @@ KInetD::~KInetD() {
 	delete m_config;
         delete m_srvreg;
 }
-
-extern "C" {
-	KDE_EXPORT KDEDModule *create_kinetd()
-	{
-        KGlobal::locale()->insertCatalog("kinetd");
-		return new KInetD();
-	}
-}
-
