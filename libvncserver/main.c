@@ -260,6 +260,7 @@ clientOutput(void *data)
 	    UNLOCK(cl->updateMutex);
 
             if (!haveUpdate) {
+                LOCK(cl->updateMutex);
                 TIMEDWAIT(cl->updateCond, cl->updateMutex, PING_MS);
 		UNLOCK(cl->updateMutex); /* we really needn't lock now. */
 		if (!haveUpdate)
