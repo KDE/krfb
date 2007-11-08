@@ -51,7 +51,7 @@ int main(int argc, char *argv[])
         "(c) 2000, heXoNet Support GmbH, D-66424 Homburg\n"
         "(c) 2000-2001, Const Kaplinsky\n"
         "(c) 2000, Tridia Corporation\n"
-        "(c) 1999, AT&T Laboratories Cambridge\n"));
+        "(c) 1999, AT&T Laboratories Boston\n"));
     aboutData.addAuthor(ki18n("Alessandro Praduroux"), ki18n("KDE4 porting"), "pradu@pradu.it");
     aboutData.addAuthor(ki18n("Tim Jansen"), KLocalizedString(), "tim@tjansen.de");
     aboutData.addAuthor(ki18n("Ian Reinhart Geiser"), ki18n("DCOP interface"), "geiseri@kde.org");
@@ -61,7 +61,7 @@ int main(int argc, char *argv[])
 			    ki18n("TightVNC encoder"));
 	aboutData.addCredit(ki18n("Tridia Corporation"),
 			    ki18n("ZLib encoder"));
-	aboutData.addCredit(ki18n("AT&T Laboratories Cambridge"),
+	aboutData.addCredit(ki18n("AT&T Laboratories Boston"),
 			    ki18n("original VNC encoders and "
 				      "protocol design"));
 	aboutData.addCredit(ki18n("Jens Wagner (heXoNet Support GmbH)"),
