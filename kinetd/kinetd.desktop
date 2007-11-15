@@ -1,8 +1,7 @@
 [Desktop Entry]
-Encoding=UTF-8
 Type=Service
 
-ServiceTypes=KDEDModule
+X-KDE-ServiceTypes=KDEDModule
 X-KDE-ModuleType=Library
 X-KDE-Library=kinetd
 X-KDE-Kded-autoload=true
