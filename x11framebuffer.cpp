@@ -55,7 +55,7 @@ X11FrameBuffer::X11FrameBuffer(WId id, QObject* parent)
 {
 #ifdef HAVE_XSHM
     d->useShm = XShmQueryExtension(QX11Info::display());
-    kDebug() << "shm: " << d->useShm << endl;
+    kDebug() << "shm: " << d->useShm;
 #else
     d->useShm = false;
 #endif
@@ -194,24 +194,24 @@ void X11FrameBuffer::cleanupRects() {
     QList<QRect> cpy = tiles;
     bool inserted = false;
     tiles.clear();
-//     kDebug() << "before cleanup: " << cpy.size() << endl;
+//     kDebug() << "before cleanup: " << cpy.size();
     foreach (QRect r, cpy) {
         if (tiles.size() > 0) {
             for(int i = 0; i < tiles.size(); i++) {
-    //             kDebug() << r << tiles[i] << endl;
+    //             kDebug() << r << tiles[i];
                 if (r.intersects(tiles[i])) {
                     tiles[i] |= r;
                     inserted = true;
                     break;
-    //                 kDebug() << "merged into " << tiles[i] << endl;
+    //                 kDebug() << "merged into " << tiles[i];
                 }
             }
             if (!inserted) {
                 tiles.append(r);
-    //             kDebug() << "appended " << r << endl;
+    //             kDebug() << "appended " << r;
             }
         } else {
-    //         kDebug() << "appended " << r << endl;
+    //         kDebug() << "appended " << r;
             tiles.append(r);
         }
     }
@@ -230,7 +230,7 @@ void X11FrameBuffer::cleanupRects() {
             tiles[i].setRight(d->framebufferImage->width);
         }
     }
-//     kDebug() << "after cleanup: " << tiles.size() << endl;
+//     kDebug() << "after cleanup: " << tiles.size();
 }
 
 void X11FrameBuffer::acquireEvents() {
@@ -255,7 +255,7 @@ QList< QRect > X11FrameBuffer::modifiedTiles()
 #ifdef HAVE_XSHM
 
             foreach(QRect r, tiles) {
-//                 kDebug() << r << endl;
+//                 kDebug() << r;
                 gl |= r;
                 int y = r.y();
                 int x = r.x();
@@ -267,7 +267,7 @@ QList< QRect > X11FrameBuffer::modifiedTiles()
                         if (x+d->updateTile->width > d->framebufferImage->width) {
                             x = d->framebufferImage->width - d->updateTile->width;
                         }
-//                         kDebug() << "x: " << x << " (" << r.x() << ") y: " << y << " (" << r.y() << ") " << r << endl;
+//                         kDebug() << "x: " << x << " (" << r.x() << ") y: " << y << " (" << r.y() << ") " << r;
                         XShmGetImage(QX11Info::display(), win, d->updateTile, x, y, AllPlanes);
                         int pxsize =  d->framebufferImage->bits_per_pixel / 8;
                         char *dest = fb + ((d->framebufferImage->bytes_per_line * y) + (x*pxsize));
@@ -301,8 +301,8 @@ QList< QRect > X11FrameBuffer::modifiedTiles()
             }
         }
     }
-//     kDebug() << "tot: " << gl << endl;
-//     kDebug() << tiles.size() << endl;
+//     kDebug() << "tot: " << gl;
+//     kDebug() << tiles.size();
     ret = tiles;
     tiles.clear();
     return ret;
