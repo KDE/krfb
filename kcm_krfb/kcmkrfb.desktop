@@ -176,6 +176,7 @@ Keywords[nn]=skrivebordsdeling,krfb,vnc,deling,krdc,nettverksskrivebord,invitasj
 Keywords[pl]=współdzielenie pulpitu,krfb,vnc,współdzielenie,rdp,krdc,zdalne połączenie, zdalne biurko, zdalny pulpit, zaproszenie,port,slp
 Keywords[pt]=partilha do ecrã,krfb,vnc,partilha,krdc,ligação a um ecrã remoto,convite,porto,slp,sem convite
 Keywords[pt_BR]=compartilhamento de desktop,krfb,vnc,compartilhamento,krdc,conexão a desktop remoto,convite,porta,slp,não convidado
+Keywords[ru]=desktop sharing,krfb,vnc,sharing,krdc,remote desktop connection,invitation,port,slp,uninvited,совместные ресурсы,рабочий стол,удалённая работа
 Keywords[sk]=zdieľanie plochy,krfb,vnc,zdieľanie,rdp,krdc,pripojenie vzdialenej pracovnej plochy,rdp
 Keywords[sl]=namizje,souporaba,krfb,vnc,krdc,povezava oddaljenega namizja, povabilo,port,slp,nepovabljen
 Keywords[sr]=desktop sharing,krfb,vnc,sharing,krdc,remote desktop connection,invitation,port,slp,uninvited,радна површина,дељење,позив,порт,непозван,удаљено
