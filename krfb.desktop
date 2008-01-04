@@ -1,7 +1,7 @@
 # KDE Config File
 [Desktop Entry]
 Type=Application
-Exec=krfb -caption "%c"
+Exec=krfb -caption "%c" %i
 Icon=krfb
 X-DocPath=krfb/index.html
 Terminal=false
