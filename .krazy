@@ -1,1 +1,1 @@
-IGNORESUBS kinetd
+SKIP /kinetd/

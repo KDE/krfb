@@ -9,7 +9,7 @@
       <default>true</default>
     </entry>
     <entry name="port" type="Int">
-      <label>This is the port on wich krfb will listen.</label>
+      <label>This is the port on which krfb will listen.</label>
       <default>5900</default>
     </entry>
     <entry name="publishService" type="Bool">
