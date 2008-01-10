@@ -38,6 +38,7 @@
 #include <kdebug.h>
 #include <dcopclient.h>
 
+#undef VERSION
 #define VERSION "0.7"
 
 
