@@ -39,6 +39,7 @@
 
 #include <signal.h>
 
+#undef VERSION
 #define VERSION "1.0"
 
 static const char description[] = I18N_NOOP("VNC-compatible server to share "
