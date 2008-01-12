@@ -177,6 +177,7 @@ void ManageInvitationsDialog::showConfiguration()
     KConfigDialog *dialog = new KConfigDialog(this, "settings", KrfbConfig::self());
     dialog->addPage(new TCP, i18n("Network"), "network-workgroup");
     dialog->addPage(new Security, i18n("Security"), "security-high");
+    dialog->setHelp(QString(),"krfb");
     connect(dialog, SIGNAL(settingsChanged(QString)),KrfbServer::self(),SLOT(updateSettings()));
     dialog->show();
 }
