@@ -95,7 +95,7 @@ p, li { white-space: pre-wrap; }
      </property>
      <column>
       <property name="text" >
-       <string>Created</string>
+       <string>Creation Time</string>
       </property>
      </column>
      <column>

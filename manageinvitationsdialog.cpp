@@ -55,6 +55,7 @@ ManageInvitationsDialog::ManageInvitationsDialog(QWidget *parent)
 {
     setCaption(i18n("Invitation"));
     setButtons(User1|Close|Help);
+    setHelp(QString(), "krfb");
     setDefaultButton(NoDefault);
 
     setMinimumSize(500, 330);
