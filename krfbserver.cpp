@@ -209,7 +209,7 @@ void KrfbServer::startListening()
     }
 
     while (d->running) {
-        foreach(QRect r, d->fb->modifiedTiles()) {
+        foreach(const QRect &r, d->fb->modifiedTiles()) {
             rfbMarkRectAsModified(screen, r.x(), r.y(), r.right(), r.bottom());
         }
         rfbProcessEvents(screen, 100);

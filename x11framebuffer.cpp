@@ -195,7 +195,7 @@ void X11FrameBuffer::cleanupRects() {
     bool inserted = false;
     tiles.clear();
 //     kDebug() << "before cleanup: " << cpy.size();
-    foreach (QRect r, cpy) {
+    foreach (const QRect &r, cpy) {
         if (tiles.size() > 0) {
             for(int i = 0; i < tiles.size(); i++) {
     //             kDebug() << r << tiles[i];
@@ -254,7 +254,7 @@ QList< QRect > X11FrameBuffer::modifiedTiles()
         if (d->useShm) {
 #ifdef HAVE_XSHM
 
-            foreach(QRect r, tiles) {
+            foreach(const QRect &r, tiles) {
 //                 kDebug() << r;
                 gl |= r;
                 int y = r.y();
@@ -285,7 +285,7 @@ QList< QRect > X11FrameBuffer::modifiedTiles()
             }
 #endif
         } else {
-            foreach(QRect r, tiles) {
+            foreach(const QRect &r, tiles) {
                 XGetSubImage(QX11Info::display(),
                     win,
                     r.left(),

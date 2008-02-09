@@ -47,7 +47,7 @@ PersonalInviteDialog::PersonalInviteDialog( QWidget *parent )
 
   QList<QNetworkInterface> ifl = QNetworkInterface::allInterfaces();
 
-  foreach (QNetworkInterface nif, ifl) {
+  foreach (const QNetworkInterface &nif, ifl) {
     if (nif.flags() & QNetworkInterface::IsLoopBack) continue;
     if (nif.flags() & QNetworkInterface::IsRunning && !nif.addressEntries().isEmpty()) {
         hostLabel->setText( QString( "%1:%2" ).arg(nif.addressEntries().first().ip().toString()).arg(port));

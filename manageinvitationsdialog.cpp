@@ -128,7 +128,7 @@ void ManageInvitationsDialog::inviteByMail()
     QList<QNetworkInterface> ifl = QNetworkInterface::allInterfaces();
     QString host;
     int port = KrfbConfig::port();
-    foreach (QNetworkInterface nif, ifl) {
+    foreach (const QNetworkInterface &nif, ifl) {
         if (nif.flags() & QNetworkInterface::IsLoopBack) continue;
         if (nif.flags() & QNetworkInterface::IsRunning) {
             host = nif.addressEntries()[0].ip().toString();
@@ -159,7 +159,7 @@ void ManageInvitationsDialog::reloadInvitations()
 {
     invitationWidget->clear();
     KLocale *loc = KGlobal::locale();
-    foreach(Invitation inv, InvitationManager::self()->invitations()) {
+    foreach(const Invitation &inv, InvitationManager::self()->invitations()) {
         QStringList strs;
         strs <<  loc->formatDateTime(inv.creationTime()) << loc->formatDateTime(inv.expirationTime());
         QTreeWidgetItem *it = new QTreeWidgetItem(strs);
@@ -218,7 +218,7 @@ void ManageInvitationsDialog::deleteCurrent()
 
     QList<QTreeWidgetItem *> itl = invitationWidget->selectedItems();
     foreach(QTreeWidgetItem *itm, itl) {
-        foreach(Invitation inv, InvitationManager::self()->invitations()) {
+        foreach(const Invitation &inv, InvitationManager::self()->invitations()) {
             if (inv.creationTime() == itm->data(0,Qt::UserRole+1)) {
                 InvitationManager::self()->removeInvitation(inv);
             }

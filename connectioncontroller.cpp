@@ -154,7 +154,7 @@ bool ConnectionController::handleCheckPassword(rfbClientPtr cl, const char *resp
     if (!authd) {
         QList<Invitation> invlist = InvitationManager::self()->invitations();
 
-        foreach(Invitation it, invlist) {
+        foreach(const Invitation &it, invlist) {
             kDebug() << "checking password";
             if (checkPassword(it.password(), cl->authChallenge, response, len) && it.isValid()) {
                 authd = true;
