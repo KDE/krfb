@@ -40,7 +40,14 @@ extern "C"
 /* TODO: this stuff has to go into autoconf */
 typedef unsigned char CARD8;
 typedef unsigned short CARD16;
+
+#ifdef LONG64
+typedef unsigned long CARD64;
 typedef unsigned int CARD32;
+#else
+typedef unsigned long CARD32;
+#endif
+
 typedef CARD32 Pixel;
 /* typedef CARD32 KeySym; */
 #ifndef __osf__
