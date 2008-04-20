@@ -32,7 +32,6 @@
 #include <kapplication.h>
 #include <kmessagebox.h>
 #include <qwindowdefs.h>
-#include <KIcon>
 
 #include <signal.h>
 
@@ -76,7 +75,6 @@ int main(int argc, char *argv[])
 	KCmdLineArgs::init(argc, argv, &aboutData);
 
 	KApplication app;
-	QApplication::setWindowIcon(KIcon("krfb"));
     TrayIcon trayicon(new ManageInvitationsDialog);
 
 	KrfbServer *server = KrfbServer::self(); // initialize the server manager
