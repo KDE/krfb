@@ -68,6 +68,7 @@ Comment[hu]=Mini HTTP-szolgáltatás a KRfb-hez, a VNC nézegető használatáho
 Comment[is]=Verulega lítill vefþjónn sem veitir aðgang í VNC.
 Comment[it]=Un micro demone http per krfb che server l'applet di VNC viewer. 
 Comment[ja]=krfb 用のマイクロ http デーモン (VNC ビューアアプレットを提供)
+Comment[ka]=მიკრო http დემონი krfbსთვის, რომელიც ემსახურება VNC მხილველის აპლეტს.
 Comment[kk]=VNC қарау апплетті қамтамасыз ететін krfb үшін шағын http қызметі.
 Comment[km]=ដេមិន http តូច​មួយ​សម្រាប់ krfb ដែល​បម្រើ​អាប់ភ្លេត​មើល VNC ។
 Comment[lt]=Micro http tarnyba skirta krfb ir aptarnaujanti VNC žiūriklį.
