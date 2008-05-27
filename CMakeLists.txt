@@ -44,7 +44,7 @@ if(X11_XTest_FOUND)
   target_link_libraries(krfb ${X11_XTest_LIB})
 endif(X11_XTest_FOUND)
 
-install(TARGETS krfb  DESTINATION ${BIN_INSTALL_DIR})
+install(TARGETS krfb  ${INSTALL_TARGETS_DEFAULT_ARGS})
 
 ########### install files ###############
 
