@@ -199,7 +199,7 @@ void KrfbServer::startListening()
 
     rfbInitServer(screen);
     if (!rfbIsActive(screen)) {
-        KMessageBox::error(0,"krfb","Address already in use");
+        KMessageBox::error(0,i18n("Address already in use"),"krfb");
         disconnectAndQuit();
     };
 
