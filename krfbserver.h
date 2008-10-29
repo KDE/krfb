@@ -36,13 +36,13 @@ signals:
     void sessionEstablished(QString);
     void sessionFinished();
     void desktopControlSettingChanged(bool);
-    void quitApp();
 
 public Q_SLOTS:
 
     void startListening();
+    void processRfbEvents();
+    void shutdown();
     void enableDesktopControl(bool);
-    void disconnectAndQuit();
     void updateSettings();
     void updatePassword();
     void clientDisconnected(ConnectionController *);

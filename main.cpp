@@ -75,6 +75,7 @@ int main(int argc, char *argv[])
 	KCmdLineArgs::init(argc, argv, &aboutData);
 
 	KApplication app;
+        app.setQuitOnLastWindowClosed(false);
     TrayIcon trayicon(new ManageInvitationsDialog);
 
 	KrfbServer *server = KrfbServer::self(); // initialize the server manager
@@ -90,10 +91,6 @@ int main(int argc, char *argv[])
 			 &trayicon, SLOT(showDisconnectedMessage()));
 	QObject::connect(server, SIGNAL(desktopControlSettingChanged(bool)),
 			 &trayicon, SLOT(setDesktopControlSetting(bool)));
-    QObject::connect(&trayicon, SIGNAL(quitSelected()),
-			 server, SLOT(disconnectAndQuit()));
-    QObject::connect(server, SIGNAL(quitApp()),
-                      &app, SLOT(quit()));
 
 	sigset_t sigs;
 	sigemptyset(&sigs);

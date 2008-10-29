@@ -122,9 +122,9 @@ class KrfbServer::KrfbServerP {
         FrameBuffer *fb;
         QList< QPointer<ConnectionController> > controllers;
         rfbScreenInfoPtr screen;
-        bool running;
         int numClients;
         QByteArray desktopName;
+        QTimer rfbProcessEventTimer;
 };
 
 class KrfbServerPrivate
@@ -144,7 +144,6 @@ KrfbServer::KrfbServer()
     :d(new KrfbServerP)
 {
     kDebug() << "starting ";
-    d->running = true;
     d->fb = FrameBuffer::getFrameBuffer(QApplication::desktop()->winId(), this);
     QTimer::singleShot(0, this, SLOT(startListening()));
     connect(InvitationManager::self(), SIGNAL(invitationNumChanged(int)),SLOT(updatePassword()));
@@ -200,7 +199,9 @@ void KrfbServer::startListening()
     rfbInitServer(screen);
     if (!rfbIsActive(screen)) {
         KMessageBox::error(0,i18n("Address already in use"),"krfb");
-        disconnectAndQuit();
+        shutdown();
+        qApp->quit();
+        return;
     };
 
     if (KrfbConfig::publishService()) {
@@ -208,19 +209,31 @@ void KrfbServer::startListening()
         service->publishAsync();
     }
 
-    while (d->running) {
-        foreach(const QRect &r, d->fb->modifiedTiles()) {
-            rfbMarkRectAsModified(screen, r.x(), r.y(), r.right(), r.bottom());
-        }
-        rfbProcessEvents(screen, 100);
-        qApp->processEvents();
+    /* Integrate the rfb event mechanism with qt's event loop.
+     * Call processRfbEvents() every time the qt event loop is run,
+     * so that it also processes and delivers rfb events and call
+     * shutdown() when QApplication exits to shutdown the rfb server
+     * before the X11 connection goes down.
+     */
+    connect(&d->rfbProcessEventTimer, SIGNAL(timeout()), SLOT(processRfbEvents()));
+    connect(qApp, SIGNAL(aboutToQuit()), SLOT(shutdown()));
+    d->rfbProcessEventTimer.start(0);
+}
+
+void KrfbServer::processRfbEvents()
+{
+    foreach(const QRect &r, d->fb->modifiedTiles()) {
+        rfbMarkRectAsModified(d->screen, r.x(), r.y(), r.right(), r.bottom());
     }
-    rfbShutdownServer(screen, true);
+    rfbProcessEvents(d->screen, 100);
+}
+
+void KrfbServer::shutdown()
+{
+    rfbShutdownServer(d->screen, true);
     // framebuffer has to be deleted before X11 connection goes down
     delete d->fb;
     d->fb = 0;
-
-    emit quitApp();
 }
 
 
@@ -231,11 +244,6 @@ void KrfbServer::enableDesktopControl(bool enable)
             ptr->setControlEnabled(enable);
         }
     }
-}
-
-void KrfbServer::disconnectAndQuit()
-{
-    d->running = false;
 }
 
 enum rfbNewClientAction KrfbServer::handleNewClient(struct _rfbClientRec * cl)
