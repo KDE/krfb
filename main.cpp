@@ -76,7 +76,10 @@ int main(int argc, char *argv[])
 
 	KApplication app;
         app.setQuitOnLastWindowClosed(false);
-    TrayIcon trayicon(new ManageInvitationsDialog);
+
+    ManageInvitationsDialog invitationsDialog;
+    invitationsDialog.show();
+    TrayIcon trayicon(&invitationsDialog);
 
 	KrfbServer *server = KrfbServer::self(); // initialize the server manager
     if (!server->checkX11Capabilities()) {
