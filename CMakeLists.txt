@@ -6,6 +6,12 @@ macro_bool_to_01(X11_XShm_FOUND HAVE_XSHM)
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/config-krfb.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-krfb.h )
 include_directories(${CMAKE_CURRENT_BINARY_DIR}) # for config-krfb.h
 
+if(Q_WS_X11)
+  if(NOT X11_XTest_FOUND)
+    macro_log_feature(X11_XTest_FOUND "libXtst" "X11 Testing Resource extension library" "http://xorg.freedesktop.org" FALSE "" "useful for automated testing of X clients.")
+  endif(NOT X11_XTest_FOUND)
+endif(Q_WS_X11)
+
 #add_subdirectory(kinetd)
 #add_subdirectory(kcm_krfb)
 if (HAVE_LIBVNCSERVER)
