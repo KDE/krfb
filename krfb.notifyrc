@@ -2,6 +2,7 @@
 IconName=krfb
 Comment=Desktop Sharing
 Comment[af]=Werkskerm Deeling
+Comment[ar]=مشاركة سطح المكتب
 Comment[bn]=ডেস্কটপ ভাগাভাগি
 Comment[br]=Rannañ ar vurev
 Comment[ca]=Compartició de l'escriptori
@@ -56,6 +57,7 @@ Comment[zh_TW]=桌面分享
 
 [Event/UserAcceptsConnection]
 Name=User Accepts Connection
+Name[ar]=المستخدم يقبل الاتصال
 Name[ca]=L'usuari accepta la connexió
 Name[cs]=Uživatel přijímá spojení
 Name[da]=Bruger accepterer forbindelse
@@ -96,6 +98,7 @@ Name[zh_CN]=用户接受连接
 Name[zh_TW]=使用者接受連線
 Comment=User accepts connection
 Comment[af]=Gebruiker aanvaar verbinding
+Comment[ar]=المستخدم يقبل الاتصال
 Comment[bn]=ব্যবহারকারী সংযোগ গ্রহণ করে
 Comment[ca]=L'usuari accepta la connexió
 Comment[cs]=Uživatel přijímá spojení
@@ -150,6 +153,7 @@ Action=None
 
 [Event/UserRefusesConnection]
 Name=User Refuses Connection
+Name[ar]=المستخدم يرفض الاتصال
 Name[ca]=L'usuari refusa la connexió
 Name[cs]=Uživatel odmítá spojení
 Name[da]=Bruger afslår forbindelse
@@ -190,6 +194,7 @@ Name[zh_CN]=用户拒绝连接
 Name[zh_TW]=使用者拒絕連線
 Comment=User refuses connection
 Comment[af]=Gebruiker weier verbinding
+Comment[ar]=المستخدم يرفض الاتصال
 Comment[bn]=ব্যবহারকারী সংযোগ অস্বীকার করে
 Comment[ca]=L'usuari refusa la connexió
 Comment[cs]=Uživatel odmítá spojení
@@ -244,6 +249,7 @@ Action=None
 
 [Event/ConnectionClosed]
 Name=Connection Closed
+Name[ar]=الاتصال أغلق
 Name[ca]=Connexió tancada
 Name[cs]=Spojení ukončeno
 Name[da]=Forbindelse lukket
@@ -284,6 +290,7 @@ Name[zh_CN]=连接关闭
 Name[zh_TW]=連線已關閉
 Comment=Connection closed
 Comment[af]=Verbinding gesluit
+Comment[ar]=تمّ غلق الاتصال
 Comment[bn]=সংযোগ বন্ধ করা হল
 Comment[br]=Serret eo ar gevreadenn
 Comment[ca]=Connexió tancada
@@ -341,6 +348,7 @@ Action=None
 
 [Event/InvalidPassword]
 Name=Invalid Password
+Name[ar]=كلمة المرور غير صحيحة
 Name[ca]=Contrasenya no vàlida
 Name[cs]=Neplatné heslo
 Name[da]=Ugyldigt kodeord
@@ -381,6 +389,7 @@ Name[zh_CN]=无效密码
 Name[zh_TW]=不正確的密碼
 Comment=Invalid password
 Comment[af]=Ongeldige wagwoord
+Comment[ar]=كلمة المرور غير صحيحة
 Comment[bn]=অবৈধ পাসওয়ার্ড
 Comment[br]=Tremenger siek 
 Comment[ca]=Contrasenya no vàlida
@@ -440,6 +449,7 @@ Action=None
 
 [Event/InvalidPasswordInvitations]
 Name=Invalid Password Invitations
+Name[ar]=كلمة المرور الدعوات غير صحيحة
 Name[ca]=Contrasenya de les invitacions no vàlides
 Name[cs]=Neplatné hesla výzev
 Name[da]=Ugyldige kodeordsinvitationer
@@ -480,6 +490,7 @@ Name[zh_CN]=无效密码邀请
 Name[zh_TW]=不合法的密碼邀請
 Comment=The invited party sent an invalid password. Connection refused.
 Comment[af]=Die uitgenooi party gestuur 'n ongeldige wagwoord. Verbinding geweier.
+Comment[ar]=المدعو أرسل كلمة مرور غير صحيحة. رفض الإتصال.
 Comment[bn]=আমন্ত্রিত দল একটি অবৈধ পাসওয়ার্ড পাঠাল। সংযোগ অস্বীকার করা হল।
 Comment[ca]=La part invitada ha enviat una contrasenya no vàlida. Connexió refusada.
 Comment[cs]=Pozvaná strana poslala neplatné heslo. Spojení odmítnuto.
@@ -533,6 +544,7 @@ Action=Popup
 
 [Event/NewConnectionOnHold]
 Name=New Connection on Hold
+Name[ar]=اتصال جديد  على التوقف
 Name[ca]=Nova connexió en espera
 Name[cs]=Nové spojení pozdrženo
 Name[da]=Ny forbindelse sat til at vente
@@ -572,6 +584,7 @@ Name[zh_CN]=新连接已搁置
 Name[zh_TW]=新連線等待處理
 Comment=Connection requested, user must accept
 Comment[af]=Verbinding versoekte, gebruiker moet aanvaar
+Comment[ar]=الاتصال طلب، يجب موافقة المستخدم
 Comment[bn]=সংযোগ অনুরোধ করা হল, ব্যবহারকারীকে অবশ্যই স্বীকার করতে হবে
 Comment[ca]=Connexió sol·licitada, l'usuari ha d'acceptar-la
 Comment[cs]=Vyžadováno spojení, uživatel musí přijmout
@@ -625,6 +638,7 @@ Action=None
 
 [Event/NewConnectionAutoAccepted]
 Name=New Connection Auto Accepted
+Name[ar]=اتصال جديد مقبول تلقائيا
 Name[ca]=Nova connexió acceptada automàticament
 Name[cs]=Nové spojení automaticky přijato
 Name[da]=Ny forbindelse automatisk accepteret
@@ -665,6 +679,7 @@ Name[zh_CN]=新连接自动接受
 Name[zh_TW]=新連線自動接受
 Comment=New connection automatically established
 Comment[af]=Nuwe verbinding automaties vasgestel
+Comment[ar]=اتصال جديد مفعل تلقائيا 
 Comment[bn]=নতুন সংযোগ স্বয়ংক্রীয়ভাবে স্থাপন করা হল
 Comment[ca]=Nova connexió establerta automàticament
 Comment[cs]=Automaticky navázáno nové spojení
@@ -719,6 +734,7 @@ Action=None
 
 [Event/TooManyConnections]
 Name=Too Many Connections
+Name[ar]=اتصالات عديدة
 Name[ca]=Massa connexions
 Name[cs]=Příliš mnoho spojení
 Name[da]=For mange forbindelser
@@ -759,6 +775,7 @@ Name[zh_CN]=连接过多
 Name[zh_TW]=太多連線
 Comment=Busy, connection refused
 Comment[af]=Besig, verbinding geweier
+Comment[ar]=مشغول، الإتصال رفض
 Comment[bn]=ব্যস্ত, সংযোগ অস্বীকার করল
 Comment[br]=Dalc'het, kevreadenn disteuleret
 Comment[ca]=Ocupat, connexió refusada
@@ -817,6 +834,7 @@ default_logfile=
 
 [Event/UnexpectedConnection]
 Name=Unexpected Connection
+Name[ar]=الاتصال غير متوقّع
 Name[ca]=Connexió inesperada
 Name[cs]=Neočekávané spojení
 Name[da]=Uventet forbindelse
@@ -857,6 +875,7 @@ Name[zh_CN]=未预料的连接
 Name[zh_TW]=未知的連線
 Comment=Received unexpected connection, abort
 Comment[af]=Ontvang onverwagte verbinding, staak
+Comment[ar]=استقبال اتصال غير متوقع، إنهاء
 Comment[bn]=অপ্রত্যাশিত সংযোগ গ্রহণ করল, বাতিল করুন
 Comment[ca]=Rebuda una connexió inesperada, avortant
 Comment[cs]=Obdrženo neočekávané spojení, přerušeno

@@ -4,6 +4,7 @@
 Type=ServiceType
 X-KDE-ServiceType=KInetDModule
 Name=KInetD Module Type
+Name[ar]=KInetD نوع الوحدة
 Name[bg]=Модул на KInetD
 Name[bn]=কে-আইনেট-ডি মডিউল ধরন
 Name[br]=Seurt ar mollad KInetD
