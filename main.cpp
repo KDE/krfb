@@ -74,12 +74,18 @@ int main(int argc, char *argv[])
 			    ki18n("KDesktop background deactivation"));
 	KCmdLineArgs::init(argc, argv, &aboutData);
 
+	KCmdLineOptions options;
+	options.add("nodialog", ki18n("Do not show the invitations management dialog at startup"));
+	KCmdLineArgs::addCmdLineOptions(options);
+
 	KApplication app;
         app.setQuitOnLastWindowClosed(false);
 
-    ManageInvitationsDialog invitationsDialog;
-    invitationsDialog.show();
-    TrayIcon trayicon(&invitationsDialog);
+
+	ManageInvitationsDialog invitationsDialog;
+	if ( KCmdLineArgs::parsedArgs()->isSet("dialog") )
+	    invitationsDialog.show();
+	TrayIcon trayicon(&invitationsDialog);
 
 	KrfbServer *server = KrfbServer::self(); // initialize the server manager
     if (!server->checkX11Capabilities()) {
