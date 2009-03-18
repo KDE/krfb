@@ -131,7 +131,8 @@ void ManageInvitationsDialog::inviteByMail()
     foreach (const QNetworkInterface &nif, ifl) {
         if (nif.flags() & QNetworkInterface::IsLoopBack) continue;
         if (nif.flags() & QNetworkInterface::IsRunning) {
-            host = nif.addressEntries()[0].ip().toString();
+	    if(!nif.addressEntries().isEmpty())
+               host = nif.addressEntries()[0].ip().toString();
         }
     }
 
