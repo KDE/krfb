@@ -495,7 +495,6 @@ Most VNC clients use a display number instead of the actual port. This display n
     <tabstop>passwordInput</tabstop>
     <tabstop>portInput</tabstop>
 </tabstops>
-<layoutdefaults spacing="6" margin="11"/>
 <customwidgets>
     <customwidget>
         <class>KIntNumInput</class>
