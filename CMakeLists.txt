@@ -5,6 +5,7 @@ macro_bool_to_01(X11_Xdamage_FOUND HAVE_XDAMAGE)
 macro_bool_to_01(X11_XShm_FOUND HAVE_XSHM)
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/config-krfb.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-krfb.h )
 include_directories(${CMAKE_CURRENT_BINARY_DIR}) # for config-krfb.h
+include_directories(${LIBKNOTIFICATIONITEM-1_INCLUDE_DIR})
 
 if(Q_WS_X11)
   if(NOT X11_XTest_FOUND)
@@ -45,7 +46,7 @@ kde4_add_ui_files(krfb_SRCS connectionwidget.ui
 
 kde4_add_executable(krfb ${krfb_SRCS})
 
-target_link_libraries(krfb ${JPEG_LIBRARIES}  ${LIBVNCSERVER_LIBRARIES} ${X11_Xdamage_LIB} ${KDE4_KDNSSD_LIBS})
+target_link_libraries(krfb ${LIBKNOTIFICATIONITEM-1_LIBRARIES} ${JPEG_LIBRARIES}  ${LIBVNCSERVER_LIBRARIES} ${X11_Xdamage_LIB} ${KDE4_KDNSSD_LIBS})
 if(X11_XTest_FOUND)
   target_link_libraries(krfb ${X11_XTest_LIB})
 endif(X11_XTest_FOUND)

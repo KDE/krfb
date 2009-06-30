@@ -18,10 +18,10 @@
 #ifndef TRAYICON_H
 #define TRAYICON_H
 
-#include <ksystemtrayicon.h>
 #include <kpassivepopup.h>
 #include <KActionCollection>
 #include <KToggleAction>
+#include <knotificationitem.h>
 
 class KDialog;
 
@@ -30,7 +30,7 @@ class KDialog;
   * @author Tim Jansen
   */
 
-class TrayIcon : public KSystemTrayIcon {
+class TrayIcon : public Experimental::KNotificationItem {
    	Q_OBJECT
 public:
 	TrayIcon(KDialog*);

@@ -30,13 +30,13 @@
 
 
 TrayIcon::TrayIcon(KDialog *d)
-  : KSystemTrayIcon(d),
+  : Experimental::KNotificationItem(d),
     quitting(false)
 {
-    setIcon(KIcon("krfb").pixmap(22, 22, KIcon::Disabled));
+    setIconByPixmap(KIcon("krfb").pixmap(22, 22, KIcon::Disabled));
 
-    setToolTip(i18n("Desktop Sharing - disconnected"));
-
+    setToolTipTitle(i18n("Desktop Sharing - disconnected"));
+    setCategory(Experimental::KNotificationItem::ApplicationStatus);
 // 	manageInvitationsAction = new KAction(i18n("Manage &Invitations"), &actionCollection);
 // 	actionCollection.addAction("manage_invitations", manageInvitationsAction);
 // 	connect(manageInvitationsAction, SIGNAL(triggered(bool)), SLOT(showManageInvitations()));
@@ -54,7 +54,6 @@ TrayIcon::TrayIcon(KDialog *d)
     contextMenu()->addSeparator();
     contextMenu()->addAction(KStandardAction::aboutApp(this, SLOT(showAbout()), actionCollection()));
 
-    show();
 }
 
 TrayIcon::~TrayIcon()
@@ -74,12 +73,12 @@ void TrayIcon::prepareQuit()
 void TrayIcon::showConnectedMessage(const QString &host)
 {
 
-    setIcon(KIcon("krfb"));
+    setIconByPixmap(KIcon("krfb"));
     KPassivePopup::message(i18n("Desktop Sharing"),
                            i18n("The remote user has been authenticated and is now connected."),
                            KIcon("krfb").pixmap(22, 22),
-                           this);
-    setToolTip(i18n("Desktop Sharing - connected with %1", host));
+                           (QWidget*)0);
+    setToolTipTitle(i18n("Desktop Sharing - connected with %1", host));
 }
 
 void TrayIcon::showDisconnectedMessage()
@@ -87,12 +86,12 @@ void TrayIcon::showDisconnectedMessage()
     if (quitting)
         return;
 
-    setToolTip(i18n("Desktop Sharing - disconnected"));
-    setIcon(KIcon("krfb").pixmap(22, 22, KIcon::Disabled));
+    setToolTipTitle(i18n("Desktop Sharing - disconnected"));
+    setIconByPixmap(KIcon("krfb").pixmap(22, 22, KIcon::Disabled));
     KPassivePopup *p = KPassivePopup::message(i18n("Desktop Sharing"),
                                               i18n("The remote user has closed the connection."),
                                               KIcon("krfb").pixmap(22, 22, KIcon::Disabled),
-                                              this);
+                                              (QWidget*)0);
     connect(p, SIGNAL(hidden()), this, SIGNAL(diconnectedMessageDisplayed()));
 }
 
