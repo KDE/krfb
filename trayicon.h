@@ -30,7 +30,7 @@ class KDialog;
   * @author Tim Jansen
   */
 
-class TrayIcon : public Experimental::KNotificationItem {
+class TrayIcon : public KNotificationItem {
    	Q_OBJECT
 public:
 	TrayIcon(KDialog*);

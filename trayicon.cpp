@@ -30,13 +30,13 @@
 
 
 TrayIcon::TrayIcon(KDialog *d)
-  : Experimental::KNotificationItem(d),
+  : KNotificationItem(d),
     quitting(false)
 {
     setIconByPixmap(KIcon("krfb").pixmap(22, 22, KIcon::Disabled));
 
     setToolTipTitle(i18n("Desktop Sharing - disconnected"));
-    setCategory(Experimental::KNotificationItem::ApplicationStatus);
+    setCategory(KNotificationItem::ApplicationStatus);
 // 	manageInvitationsAction = new KAction(i18n("Manage &Invitations"), &actionCollection);
 // 	actionCollection.addAction("manage_invitations", manageInvitationsAction);
 // 	connect(manageInvitationsAction, SIGNAL(triggered(bool)), SLOT(showManageInvitations()));
