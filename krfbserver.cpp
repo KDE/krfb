@@ -164,9 +164,14 @@ void KrfbServer::startListening()
     int w = d->fb->width();
     int h = d->fb->height();
     int depth = d->fb->depth();
+    
+    int bpp = depth >> 3;
+    if (bpp != 1 && bpp != 2 && bpp != 4) bpp = 4;
+    kDebug() << "bpp: " << bpp;
 
     rfbLogEnable(0);
-    screen = rfbGetScreen(0, 0, w, h, 8, 3,depth / 8);
+    screen = rfbGetScreen(0, 0, w, h, 8, 3, bpp);
+    
     screen->paddedWidthInBytes = d->fb->paddedWidth();
 
     d->fb->getServerFormat(screen->serverFormat);
