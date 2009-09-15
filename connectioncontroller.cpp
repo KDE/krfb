@@ -113,6 +113,10 @@ enum rfbNewClientAction ConnectionController::handleNewClient()
         return RFB_CLIENT_REFUSE;
     }
 
+    // In the remaining cases, the connection will be at least partially established, so we need
+    // the clientGoneHook to be called when the connection ends.
+    cl->clientGoneHook = clientGoneHook;
+
     if (!askOnConnect && InvitationManager::self()->activeInvitations() == 0) {
         KNotification::event("NewConnectionAutoAccepted",
                              i18n("Accepted uninvited connection from %1",
@@ -125,8 +129,6 @@ enum rfbNewClientAction ConnectionController::handleNewClient()
     KNotification::event("NewConnectionOnHold",
                          i18n("Received connection from %1, on hold (waiting for confirmation)",
                               remoteIp));
-
-    cl->clientGoneHook = clientGoneHook;
 
     ConnectionDialog *dialog = new ConnectionDialog(0);
     dialog->setRemoteHost(remoteIp);
