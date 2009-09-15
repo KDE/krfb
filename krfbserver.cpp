@@ -309,8 +309,9 @@ void KrfbServer::clientDisconnected(ConnectionController *cc)
     kDebug() << "clients--: " << d->numClients;
     if (!--d->numClients) {
         d->fb->stopMonitor();
+        kDebug() << "stopMonitor: d->numClients = " << d->numClients;
     }
-    disconnect(cc, SIGNAL(clientDisconnected(ConnectionController)),this, SLOT(clientDisconnected(ConnectionController)));
+    disconnect(cc, SIGNAL(clientDisconnected(ConnectionController*)),this, SLOT(clientDisconnected(ConnectionController*)));
 
     Q_EMIT sessionFinished();
 }
