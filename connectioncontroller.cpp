@@ -99,6 +99,7 @@ ConnectionController::~ConnectionController()
 
 enum rfbNewClientAction ConnectionController::handleNewClient()
 {
+    kDebug();
 
     bool askOnConnect = KrfbConfig::askOnConnect();
     bool allowUninvited = KrfbConfig::allowUninvitedConnections();
@@ -215,6 +216,7 @@ void ConnectionController::dialogAccepted()
 {
     // rfbStartOnHoldClient(cl);
     cl->onHold = false;
+    emit sessionEstablished(remoteIp);
 }
 
 void ConnectionController::dialogRejected()
