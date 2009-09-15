@@ -31,6 +31,7 @@ QtFrameBuffer::QtFrameBuffer(WId id, QObject *parent)
 QtFrameBuffer::~QtFrameBuffer()
 {
     delete [] fb;
+    fb = 0;
 }
 
 int QtFrameBuffer::depth()
