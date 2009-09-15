@@ -311,6 +311,8 @@ void KrfbServer::clientDisconnected(ConnectionController *cc)
         d->fb->stopMonitor();
     }
     disconnect(cc, SIGNAL(clientDisconnected(ConnectionController)),this, SLOT(clientDisconnected(ConnectionController)));
+
+    Q_EMIT sessionFinished();
 }
 
 
