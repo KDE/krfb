@@ -79,6 +79,7 @@ void TrayIcon::showConnectedMessage(const QString &host)
                            KIcon("krfb").pixmap(22, 22),
                            (QWidget*)0);
     setToolTipTitle(i18n("Desktop Sharing - connected with %1", host));
+    setStatus(KNotificationItem::Active);
 }
 
 void TrayIcon::showDisconnectedMessage()
@@ -93,6 +94,7 @@ void TrayIcon::showDisconnectedMessage()
                                               KIcon("krfb").pixmap(22, 22, KIcon::Disabled),
                                               (QWidget*)0);
     connect(p, SIGNAL(hidden()), this, SIGNAL(diconnectedMessageDisplayed()));
+    setStatus(KNotificationItem::Passive);
 }
 
 void TrayIcon::setDesktopControlSetting(bool b)
