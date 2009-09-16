@@ -216,8 +216,15 @@ void ConnectionController::clipboardToServer(const QString &s)
 
 void ConnectionController::dialogAccepted()
 {
+    ConnectionDialog *dialog = qobject_cast<ConnectionDialog*>(sender());
+
+    if (!dialog) {
+        kWarning() << "Wrong type of sender.";
+        return;
+    }
     // rfbStartOnHoldClient(cl);
     cl->onHold = false;
+    setControlEnabled(dialog->cbAllowRemoteControl->isChecked());
     emit sessionEstablished(remoteIp);
 }
 
