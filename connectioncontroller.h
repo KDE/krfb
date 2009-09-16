@@ -39,6 +39,9 @@ public:
 
     void setControlEnabled(bool enable);
 
+    void setControlCanBeEnabled(bool canBeEnabled);
+    bool controlCanBeEnabled() const;
+
 Q_SIGNALS:
     void sessionEstablished(QString);
     void notification(QString, QString);
@@ -52,6 +55,7 @@ private:
     QString remoteIp;
     struct _rfbClientRec *cl;
     bool controlEnabled;
+    bool m_controlCanBeEnabled;
     /*
     int fd;
     KrfbServer *server;

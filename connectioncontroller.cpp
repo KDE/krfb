@@ -225,6 +225,7 @@ void ConnectionController::dialogAccepted()
     // rfbStartOnHoldClient(cl);
     cl->onHold = false;
     setControlEnabled(dialog->cbAllowRemoteControl->isChecked());
+    setControlCanBeEnabled(dialog->cbAllowRemoteControl->isChecked());
     emit sessionEstablished(remoteIp);
 }
 
@@ -237,6 +238,16 @@ void ConnectionController::dialogRejected()
 void ConnectionController::setControlEnabled(bool enable)
 {
     controlEnabled = enable;
+}
+
+void ConnectionController::setControlCanBeEnabled(bool canBeEnabled)
+{
+    m_controlCanBeEnabled = canBeEnabled;
+}
+
+bool ConnectionController::controlCanBeEnabled() const
+{
+    return m_controlCanBeEnabled;
 }
 
 

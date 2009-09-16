@@ -246,7 +246,9 @@ void KrfbServer::enableDesktopControl(bool enable)
 {
     foreach (QPointer<ConnectionController> ptr, d->controllers) {
         if (ptr) {
-            ptr->setControlEnabled(enable);
+            if (ptr->controlCanBeEnabled()) {
+                ptr->setControlEnabled(enable);
+            }
         }
     }
 }
@@ -259,6 +261,7 @@ enum rfbNewClientAction KrfbServer::handleNewClient(struct _rfbClientRec * cl)
 
     d->controllers.append(cc);
     cc->setControlEnabled(KrfbConfig::allowDesktopControl());
+    cc->setControlCanBeEnabled(KrfbConfig::allowDesktopControl());
 
     connect(cc, SIGNAL(sessionEstablished(QString)), SIGNAL(sessionEstablished(QString)));
     connect(cc, SIGNAL(clientDisconnected(ConnectionController *)),SLOT(clientDisconnected(ConnectionController *)));
