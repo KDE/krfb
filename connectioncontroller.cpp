@@ -132,7 +132,7 @@ enum rfbNewClientAction ConnectionController::handleNewClient()
 
     ConnectionDialog *dialog = new ConnectionDialog(0);
     dialog->setRemoteHost(remoteIp);
-    dialog->setAllowRemoteControl( true );
+    dialog->setAllowRemoteControl(KrfbConfig::allowDesktopControl());
 
     connect(dialog, SIGNAL(okClicked()), SLOT(dialogAccepted()));
     connect(dialog, SIGNAL(cancelClicked()), SLOT(dialogRejected()));

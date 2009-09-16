@@ -60,6 +60,7 @@ void ConnectionDialog::setRemoteHost( const QString &host )
 void ConnectionDialog::setAllowRemoteControl( bool b )
 {
   cbAllowRemoteControl->setChecked( b );
+  cbAllowRemoteControl->setVisible(b);
 }
 
 bool ConnectionDialog::allowRemoteControl()
