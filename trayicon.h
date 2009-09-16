@@ -38,7 +38,7 @@ public:
 
 signals:
 
-	void diconnectedMessageDisplayed();
+        void disconnectedMessageDisplayed();
 	void enableDesktopControl(bool);
     void quitApp();
 

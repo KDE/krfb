@@ -24,6 +24,7 @@
 #include <kglobal.h>
 #include <kactioncollection.h>
 #include <kaboutapplicationdialog.h>
+#include <KNotification>
 
 #include "manageinvitationsdialog.h"
 #include "invitedialog.h"
@@ -74,11 +75,11 @@ void TrayIcon::showConnectedMessage(const QString &host)
 {
 
     setIconByPixmap(KIcon("krfb"));
-    KPassivePopup::message(i18n("Desktop Sharing"),
-                           i18n("The remote user has been authenticated and is now connected."),
-                           KIcon("krfb").pixmap(22, 22),
-                           (QWidget*)0);
+    KNotification::event("UserAcceptsConnection",
+                           i18n("The remote user %1 is now connected.",
+                                host));
     setToolTipTitle(i18n("Desktop Sharing - connected with %1", host));
+
     setStatus(KNotificationItem::Active);
 }
 
@@ -89,12 +90,11 @@ void TrayIcon::showDisconnectedMessage()
 
     setToolTipTitle(i18n("Desktop Sharing - disconnected"));
     setIconByPixmap(KIcon("krfb").pixmap(22, 22, KIcon::Disabled));
-    KPassivePopup *p = KPassivePopup::message(i18n("Desktop Sharing"),
-                                              i18n("The remote user has closed the connection."),
-                                              KIcon("krfb").pixmap(22, 22, KIcon::Disabled),
-                                              (QWidget*)0);
-    connect(p, SIGNAL(hidden()), this, SIGNAL(diconnectedMessageDisplayed()));
+    KNotification::event("ConnectionClosed", i18n("The remote user has closed the connection."));
+
     setStatus(KNotificationItem::Passive);
+
+    Q_EMIT disconnectedMessageDisplayed();
 }
 
 void TrayIcon::setDesktopControlSetting(bool b)
