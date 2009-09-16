@@ -163,7 +163,7 @@ Comment[x-test]=xxUser accepts connectionxx
 Comment[zh_CN]=用户接受连接
 Comment[zh_HK]=用戶接受連線
 Comment[zh_TW]=使用者接受連線
-Action=None
+Action=Popup
 
 [Event/UserRefusesConnection]
 Name=User Refuses Connection
@@ -269,7 +269,7 @@ Comment[x-test]=xxUser refuses connectionxx
 Comment[zh_CN]=用户拒绝连接
 Comment[zh_HK]=用戶拒絕連線
 Comment[zh_TW]=使用者拒絕連線使用者
-Action=None
+Action=Popup
 
 [Event/ConnectionClosed]
 Name=Connection Closed
@@ -379,7 +379,7 @@ Comment[x-test]=xxConnection closedxx
 Comment[zh_CN]=连接关闭
 Comment[zh_HK]=連線已關閉
 Comment[zh_TW]=連線已關閉
-Action=None
+Action=Popup
 
 [Event/InvalidPassword]
 Name=Invalid Password
@@ -491,7 +491,7 @@ Comment[x-test]=xxInvalid passwordxx
 Comment[zh_CN]=无效密码
 Comment[zh_HK]=無效的密碼
 Comment[zh_TW]=不正確的密碼
-Action=None
+Action=Popup
 
 [Event/InvalidPasswordInvitations]
 Name=Invalid Password Invitations
@@ -566,7 +566,7 @@ Comment[hu]=A meghívott fél érvénytelen jelszót küldött. A csatlakozási 
 Comment[is]=Boðinn aðili sendi ógilt lykilorð. Tengingu hafnað
 Comment[it]=La parte invitata ha inviato una password non valida. Connessione rifiutata.
 Comment[ja]=招待された人が無効なパスワードを送ってきました。接続を拒否しました。
-Comment[km]=ភាគី​ដែល​បាន​អញ្ជើញ បាន​ផ្ញើ​ពាក្យ​សម្ងាត់​មិន​ត្រឹមត្រូវ ។ ការ​តភ្ជាប់​ត្រូវ​បាន​បដិសេធ ។
+Comment[km]=ភាគី​ដែល​បាន​អញ្ជើញ បាន​ផ្ញើ​ពាក្យ​សម្ងាត់​មិន​ត្រឹមត្រូវ ។ ការ​តភ្ជាប់​ត្រូវ​បាន​បដិសេធ ។
 Comment[ko]=초대한 사람이 잘못된 비밀번호를 보냈습니다. 연결이 잘못되었습니다.
 Comment[lt]=Pakviestoji pusė atsiuntė neteisingą slaptažodį. Ryšys nutrauktas.
 Comment[lv]=Ielūgtā persona nosūtīja nepareizu paroli. Savienojums noraidīts.
@@ -702,7 +702,7 @@ Comment[x-test]=xxConnection requested, user must acceptxx
 Comment[zh_CN]=连接已请求，用户必须接受
 Comment[zh_HK]=已請求連線，用戶必須接受
 Comment[zh_TW]=連線已要求，必須等使用者接受
-Action=None
+Action=Popup
 
 [Event/NewConnectionAutoAccepted]
 Name=New Connection Auto Accepted
@@ -808,7 +808,7 @@ Comment[x-test]=xxNew connection automatically establishedxx
 Comment[zh_CN]=自动建立新连接
 Comment[zh_HK]=已自動建立新連線
 Comment[zh_TW]=新連線自動建立
-Action=None
+Action=Popup
 
 [Event/TooManyConnections]
 Name=Too Many Connections
@@ -917,8 +917,7 @@ Comment[x-test]=xxBusy, connection refusedxx
 Comment[zh_CN]=对方处于忙碌状态，连接被拒绝
 Comment[zh_HK]=忙碌，已拒絕連線
 Comment[zh_TW]=忙碌，連線被拒
-Action=None
-default_logfile=
+Action=Popup
 
 [Event/UnexpectedConnection]
 Name=Unexpected Connection
@@ -1023,4 +1022,4 @@ Comment[x-test]=xxReceived unexpected connection, abortxx
 Comment[zh_CN]=收到意外连接，已中止
 Comment[zh_HK]=接收到非預期的連線，中止
 Comment[zh_TW]=已接收到未知的連線，中止。
-Action=None
+Action=Popup

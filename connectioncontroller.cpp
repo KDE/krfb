@@ -107,7 +107,7 @@ enum rfbNewClientAction ConnectionController::handleNewClient()
     remoteIp = peerAddress(cl->sock);
 
     if (!allowUninvited && InvitationManager::self()->activeInvitations() == 0) {
-        KNotification::event("ConnectionAttempted",
+        KNotification::event("UnexpectedConnection",
                              i18n("Refused uninvited connection attempt from %1",
                                   remoteIp));
         return RFB_CLIENT_REFUSE;
