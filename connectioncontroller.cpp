@@ -117,7 +117,7 @@ enum rfbNewClientAction ConnectionController::handleNewClient()
     // the clientGoneHook to be called when the connection ends.
     cl->clientGoneHook = clientGoneHook;
 
-    if (!askOnConnect && InvitationManager::self()->activeInvitations() == 0) {
+    if (!askOnConnect) {
         KNotification::event("NewConnectionAutoAccepted",
                              i18n("Accepted uninvited connection from %1",
                                   remoteIp));
