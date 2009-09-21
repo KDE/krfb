@@ -12,9 +12,6 @@
   <property name="windowTitle" >
    <string>Manage Invitations - Desktop Sharing</string>
   </property>
-  <property name="windowIcon" >
-   <iconset/>
-  </property>
   <layout class="QGridLayout" >
    <item row="0" column="1" colspan="2" >
     <widget class="QLabel" name="TextLabel2" >
