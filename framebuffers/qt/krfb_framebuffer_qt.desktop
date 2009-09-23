@@ -1,0 +1,13 @@
+[Desktop Entry]
+Encoding=UTF-8
+Comment=Qt based Framebuffer for KRfb.
+Name=Qt Framebuffer for KRfb
+Type=Service
+ServiceTypes=krfb/framebuffer
+
+X-KDE-Library=krfb_framebuffer_qt
+X-KDE-PluginInfo-Name=qt
+X-KDE-PluginInfo-Version=0.1
+X-KDE-PluginInfo-Website=http://www.kde.org
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true

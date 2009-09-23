@@ -15,18 +15,19 @@
 #include <QList>
 #include <QWidget>
 
+#include <kdemacros.h>
+
 #include <rfb/rfb.h>
 
 class FrameBuffer;
 /**
 	@author Alessandro Praduroux <pradu@pradu.it>
 */
-class FrameBuffer : public QObject
+class KDE_EXPORT FrameBuffer : public QObject
 {
 Q_OBJECT
 public:
-
-    static FrameBuffer* getFrameBuffer(WId id, QObject *parent);
+    explicit FrameBuffer(WId id, QObject *parent = 0);
 
     virtual ~FrameBuffer();
 
@@ -43,11 +44,12 @@ public:
     virtual void getServerFormat(rfbPixelFormat &format);
 
 protected:
-    explicit FrameBuffer(WId id, QObject *parent = 0);
-
     WId win;
     char *fb;
     QList<QRect> tiles;
+
+private:
+    Q_DISABLE_COPY(FrameBuffer);
 
 };
 

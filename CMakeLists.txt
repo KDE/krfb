@@ -16,6 +16,64 @@ endif(Q_WS_X11)
 #add_subdirectory(kcm_krfb)
 if (HAVE_LIBVNCSERVER)
 
+#####################################
+# First target: libkrfb - a library
+# for linking plugins against.
+
+set (libkrfb_SRCS
+     framebuffer.cpp
+     framebufferplugin.cpp
+)
+
+set (libkrfb_HDRS
+     framebuffer.h
+     framebufferplugin.h
+)
+
+kde4_add_library (libkrfb
+                  SHARED
+                  ${libkrfb_SRCS}
+)
+
+target_link_libraries (libkrfb
+                       ${QT_QTCORE_LIBRARY}
+                       ${QT_QTGUI_LIBRARY}
+                       ${X11_X11_LIB}
+)
+
+# This is needed because otherwise we have two targets called krfb (application and library)
+set_target_properties (libkrfb PROPERTIES
+                       OUTPUT_NAME krfb
+)
+
+set_target_properties (libkrfb PROPERTIES
+                       VERSION ${GENERIC_LIB_VERSION}
+                       SOVERSION ${GENERIC_LIB_VERSION}
+)
+
+install (TARGETS libkrfb
+         ${INSTALL_TARGETS_DEFAULT_ARGS}
+)
+
+install (FILES ${libkrfb_HDRS}
+         DESTINATION ${INCLUDE_INSTALL_DIR}/KRfb
+)
+
+install (FILES
+         krfb-framebuffer.desktop
+         DESTINATION ${SERVICETYPES_INSTALL_DIR}
+)
+
+#####################################
+# Build the plugins
+
+include_directories (${CMAKE_CURRENT_SOURCE_DIR})
+add_subdirectory (framebuffers)
+
+#####################################
+# Second target: krfb - the app
+# itself.
+
 set(krfb_SRCS
    main.cpp
    trayicon.cpp
@@ -28,9 +86,7 @@ set(krfb_SRCS
    personalinvitedialog.cpp
    connectioncontroller.cpp
    events.cpp
-   framebuffer.cpp
-   qtframebuffer.cpp
-   x11framebuffer.cpp
+   framebuffermanager.cpp
 )
 
 kde4_add_kcfg_files(krfb_SRCS krfbconfig.kcfgc)
@@ -45,7 +101,18 @@ kde4_add_ui_files(krfb_SRCS connectionwidget.ui
 
 kde4_add_executable(krfb ${krfb_SRCS})
 
-target_link_libraries(krfb ${JPEG_LIBRARIES}  ${LIBVNCSERVER_LIBRARIES} ${X11_Xext_LIB} ${X11_X11_LIB} ${X11_Xdamage_LIB} ${QT_QTNETWORK_LIBRARY} ${KDE4_KDNSSD_LIBS} ${KDE4_KDEUI_LIBS})
+target_link_libraries(krfb
+                      libkrfb
+                      ${JPEG_LIBRARIES}
+                      ${LIBVNCSERVER_LIBRARIES}
+                      ${X11_Xext_LIB}
+                      ${X11_X11_LIB}
+                      ${X11_Xdamage_LIB}
+                      ${QT_QTNETWORK_LIBRARY}
+                      ${KDE4_KDNSSD_LIBS}
+                      ${KDE4_KDEUI_LIBS}
+)
+
 if(X11_XTest_FOUND)
   target_link_libraries(krfb ${X11_XTest_LIB})
 endif(X11_XTest_FOUND)

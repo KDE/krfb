@@ -29,6 +29,7 @@
 
 #include "connectioncontroller.h"
 #include "framebuffer.h"
+#include "framebuffermanager.h"
 #include "krfbconfig.h"
 #include "invitationmanager.h"
 
@@ -117,9 +118,9 @@ static void clipboardHook(char* str,int len, rfbClientPtr cl)
 class KrfbServer::KrfbServerP {
 
     public:
-        KrfbServerP() : fb(0), screen(0), numClients(0) {};
+        KrfbServerP() : screen(0), numClients(0) {};
 
-        FrameBuffer *fb;
+        QSharedPointer<FrameBuffer> fb;
         QList< QPointer<ConnectionController> > controllers;
         rfbScreenInfoPtr screen;
         int numClients;
@@ -144,7 +145,7 @@ KrfbServer::KrfbServer()
     :d(new KrfbServerP)
 {
     kDebug() << "starting ";
-    d->fb = FrameBuffer::getFrameBuffer(QApplication::desktop()->winId(), this);
+    d->fb = FrameBufferManager::instance()->frameBuffer(QApplication::desktop()->winId());
     QTimer::singleShot(0, this, SLOT(startListening()));
     connect(InvitationManager::self(), SIGNAL(invitationNumChanged(int)),SLOT(updatePassword()));
 }
@@ -237,8 +238,7 @@ void KrfbServer::shutdown()
 {
     rfbShutdownServer(d->screen, true);
     // framebuffer has to be deleted before X11 connection goes down
-    delete d->fb;
-    d->fb = 0;
+    d->fb.clear();
 }
 
 
