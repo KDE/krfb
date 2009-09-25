@@ -1,7 +1,19 @@
 [Desktop Entry]
 Encoding=UTF-8
 Comment=X11 XDamage/XShm based Framebuffer for KRfb.
+Comment[pt]='Framebuffer' baseado no XDamage/XShm do X11 para o KRfb.
+Comment[pt_BR]=Framebuffer baseado no XDamage/XShm do X11 para o KRfb.
+Comment[sv]=X11 XDamage/XShm-baserad rambuffert för Krfb.
+Comment[tr]=KRfb için X11 XDamage/XShm temelli Çerçeve Tamponu.
+Comment[uk]=Заснований на XDamage/XShm X11 буфер кадрів для KRfb.
+Comment[x-test]=xxX11 XDamage/XShm based Framebuffer for KRfb.xx
 Name=X11 Framebuffer for KRfb
+Name[pt]='Framebuffer' do X11 para o KRfb
+Name[pt_BR]=Framebuffer do X11 para o KRfb
+Name[sv]=X11-rambuffert för Krfb
+Name[tr]=KRfb için X11 Çerçeve Tamponu
+Name[uk]=Буфер кадрів X11 для KRfb
+Name[x-test]=xxX11 Framebuffer for KRfbxx
 Type=Service
 ServiceTypes=krfb/framebuffer
 

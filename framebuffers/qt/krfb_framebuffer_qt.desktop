@@ -1,7 +1,19 @@
 [Desktop Entry]
 Encoding=UTF-8
 Comment=Qt based Framebuffer for KRfb.
+Comment[pt]='Framebuffer' baseado no Qt para o KRfb.
+Comment[pt_BR]=Framebuffer baseado no Qt para o KRfb.
+Comment[sv]=Qt-baserad rambuffert för Krfb.
+Comment[tr]=KRfb için Qt temelli Çerçeve tamponu.
+Comment[uk]=Заснований на Qt буфер кадрів для KRfb.
+Comment[x-test]=xxQt based Framebuffer for KRfb.xx
 Name=Qt Framebuffer for KRfb
+Name[pt]='Framebuffer' do Qt para o KRfb
+Name[pt_BR]=Framebuffer do Qt para o KRfb
+Name[sv]=Qt-rambuffert för Krfb
+Name[tr]=KRfb için Qt Çerçeve tamponu
+Name[uk]=Буфер кадрів на Qt для KRfb
+Name[x-test]=xxQt Framebuffer for KRfbxx
 Type=Service
 ServiceTypes=krfb/framebuffer
 
