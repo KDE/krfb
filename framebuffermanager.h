@@ -47,7 +47,7 @@ public:
     QSharedPointer<FrameBuffer> frameBuffer(WId id);
 
 private:
-    Q_DISABLE_COPY(FrameBufferManager);
+    Q_DISABLE_COPY(FrameBufferManager)
 
     FrameBufferManager();
 

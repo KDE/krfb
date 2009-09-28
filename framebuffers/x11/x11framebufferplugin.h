@@ -40,7 +40,7 @@ public:
     virtual FrameBuffer *frameBuffer(WId id);
 
 private:
-    Q_DISABLE_COPY(X11FrameBufferPlugin);
+    Q_DISABLE_COPY(X11FrameBufferPlugin)
 };
 
 
