@@ -49,7 +49,7 @@ protected:
     QList<QRect> tiles;
 
 private:
-    Q_DISABLE_COPY(FrameBuffer);
+    Q_DISABLE_COPY(FrameBuffer)
 
 };
 
