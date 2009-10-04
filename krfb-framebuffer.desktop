@@ -5,6 +5,7 @@ X-KDE-ServiceType=krfb/framebuffer
 Comment=Frame Buffer plugins for KRfb
 Comment[et]=KRfb kaadripuhvri plugin
 Comment[nds]=Bildpuffer-Modulen för KRfb
+Comment[nl]=Framebuffer-plugins voor KRfb
 Comment[pt]='Plugins' de 'framebuffers' para o KRfb
 Comment[pt_BR]=Plug-ins de framebuffers para o KRfb
 Comment[sv]=Insticksprogram med rambuffert för Krfb
