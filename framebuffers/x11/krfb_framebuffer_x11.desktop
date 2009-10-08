@@ -2,6 +2,7 @@
 Encoding=UTF-8
 Comment=X11 XDamage/XShm based Framebuffer for KRfb.
 Comment[et]=KRfb X11 XDamage/XShm põhine kaadripuhver
+Comment[gl]=Framebuffer baseado en Xll XDamage/Xshm para XRfb.
 Comment[nb]=Rammebuffer for KRfb basert på X11 XDamage/XShm.
 Comment[nds]=Op X11-XDamage/-XShm opbuut Bildpuffer för KRfb
 Comment[nl]=Op X11 XDamage/XShm gebaseerd framebuffer voor KRfb.
@@ -13,6 +14,7 @@ Comment[uk]=Заснований на XDamage/XShm X11 буфер кадрів �
 Comment[x-test]=xxX11 XDamage/XShm based Framebuffer for KRfb.xx
 Name=X11 Framebuffer for KRfb
 Name[et]=KRfb X11 kaadripuhver
+Name[gl]=Framebuffer de X11 para KRfb
 Name[nb]=X11 rammebuffer for KRfb
 Name[nds]=X11-Bildpuffer för KRfb
 Name[nl]=X11 framebuffer voor KRfb

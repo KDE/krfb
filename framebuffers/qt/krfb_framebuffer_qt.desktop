@@ -2,6 +2,7 @@
 Encoding=UTF-8
 Comment=Qt based Framebuffer for KRfb.
 Comment[et]=KRfb Qt põhine kaadripuhver
+Comment[gl]=Framebuffer baseado en Qt para KRfb.
 Comment[nb]=Qt-basert rammebuffer for KRfb.
 Comment[nds]=Op Qt opbuut Bildpuffer för KRfb
 Comment[nl]=Op Qt gebaseerd framebuffer voor KRfb.
@@ -13,6 +14,7 @@ Comment[uk]=Заснований на Qt буфер кадрів для KRfb.
 Comment[x-test]=xxQt based Framebuffer for KRfb.xx
 Name=Qt Framebuffer for KRfb
 Name[et]=KRfb Qt kaadripuhver
+Name[gl]=Framebuffer de Qt para KRfb
 Name[nb]=Qt rammebuffer for KRfb
 Name[nds]=Qt-Bildpuffer för KRfb
 Name[nl]=Qt-framebuffer voor KRfb
