@@ -1,6 +1,7 @@
 [Desktop Entry]
 Encoding=UTF-8
 Comment=X11 XDamage/XShm based Framebuffer for KRfb.
+Comment[en_GB]=X11 XDamage/XShm based Framebuffer for KRfb.
 Comment[et]=KRfb X11 XDamage/XShm põhine kaadripuhver
 Comment[gl]=Framebuffer baseado en Xll XDamage/Xshm para XRfb.
 Comment[ko]=KRfb를 위한 X11 XDamage/XShm 기반 프레임버퍼.
@@ -14,6 +15,7 @@ Comment[tr]=KRfb için X11 XDamage/XShm temelli Çerçeve Tamponu.
 Comment[uk]=Заснований на XDamage/XShm X11 буфер кадрів для KRfb.
 Comment[x-test]=xxX11 XDamage/XShm based Framebuffer for KRfb.xx
 Name=X11 Framebuffer for KRfb
+Name[en_GB]=X11 Framebuffer for KRfb
 Name[et]=KRfb X11 kaadripuhver
 Name[gl]=Framebuffer de X11 para KRfb
 Name[ko]=KRfb를 위한 X11 프레임버퍼
