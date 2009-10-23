@@ -14,6 +14,7 @@ Comment[sv]=X11 XDamage/XShm-baserad rambuffert för Krfb.
 Comment[tr]=KRfb için X11 XDamage/XShm temelli Çerçeve Tamponu.
 Comment[uk]=Заснований на XDamage/XShm X11 буфер кадрів для KRfb.
 Comment[x-test]=xxX11 XDamage/XShm based Framebuffer for KRfb.xx
+Comment[zh_TW]=KRfb 的 X11 XDamage/XShm based Framebuffer
 Name=X11 Framebuffer for KRfb
 Name[en_GB]=X11 Framebuffer for KRfb
 Name[et]=KRfb X11 kaadripuhver
@@ -28,6 +29,7 @@ Name[sv]=X11-rambuffert för Krfb
 Name[tr]=KRfb için X11 Çerçeve Tamponu
 Name[uk]=Буфер кадрів X11 для KRfb
 Name[x-test]=xxX11 Framebuffer for KRfbxx
+Name[zh_TW]=KRfb 的 X11 Framebuffer
 Type=Service
 ServiceTypes=krfb/framebuffer
 

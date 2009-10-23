@@ -14,6 +14,7 @@ Comment[sv]=Qt-baserad rambuffert för Krfb.
 Comment[tr]=KRfb için Qt temelli Çerçeve tamponu.
 Comment[uk]=Заснований на Qt буфер кадрів для KRfb.
 Comment[x-test]=xxQt based Framebuffer for KRfb.xx
+Comment[zh_TW]=KRfb 的 Qt-based Framebuffer
 Name=Qt Framebuffer for KRfb
 Name[en_GB]=Qt Framebuffer for KRfb
 Name[et]=KRfb Qt kaadripuhver
@@ -28,6 +29,7 @@ Name[sv]=Qt-rambuffert för Krfb
 Name[tr]=KRfb için Qt Çerçeve tamponu
 Name[uk]=Буфер кадрів на Qt для KRfb
 Name[x-test]=xxQt Framebuffer for KRfbxx
+Name[zh_TW]=Krfb 的 Qt Framebuffer
 Type=Service
 ServiceTypes=krfb/framebuffer
 
