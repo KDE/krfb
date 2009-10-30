@@ -31,13 +31,13 @@
 
 
 TrayIcon::TrayIcon(KDialog *d)
-  : KNotificationItem(d),
+  : KStatusNotifierItem(d),
     quitting(false)
 {
     setIconByPixmap(KIcon("krfb").pixmap(22, 22, KIcon::Disabled));
 
     setToolTipTitle(i18n("Desktop Sharing - disconnected"));
-    setCategory(KNotificationItem::ApplicationStatus);
+    setCategory(KStatusNotifierItem::ApplicationStatus);
 // 	manageInvitationsAction = new KAction(i18n("Manage &Invitations"), &actionCollection);
 // 	actionCollection.addAction("manage_invitations", manageInvitationsAction);
 // 	connect(manageInvitationsAction, SIGNAL(triggered(bool)), SLOT(showManageInvitations()));
@@ -80,7 +80,7 @@ void TrayIcon::showConnectedMessage(const QString &host)
                                 host));
     setToolTipTitle(i18n("Desktop Sharing - connected with %1", host));
 
-    setStatus(KNotificationItem::Active);
+    setStatus(KStatusNotifierItem::Active);
 }
 
 void TrayIcon::showDisconnectedMessage()
@@ -92,7 +92,7 @@ void TrayIcon::showDisconnectedMessage()
     setIconByPixmap(KIcon("krfb").pixmap(22, 22, KIcon::Disabled));
     KNotification::event("ConnectionClosed", i18n("The remote user has closed the connection."));
 
-    setStatus(KNotificationItem::Passive);
+    setStatus(KStatusNotifierItem::Passive);
 
     Q_EMIT disconnectedMessageDisplayed();
 }

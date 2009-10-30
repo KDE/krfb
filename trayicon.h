@@ -21,7 +21,7 @@
 #include <kpassivepopup.h>
 #include <KActionCollection>
 #include <KToggleAction>
-#include <knotificationitem.h>
+#include <kstatusnotifieritem.h>
 
 class KDialog;
 
@@ -30,7 +30,7 @@ class KDialog;
   * @author Tim Jansen
   */
 
-class TrayIcon : public KNotificationItem {
+class TrayIcon : public KStatusNotifierItem {
    	Q_OBJECT
 public:
 	TrayIcon(KDialog*);
