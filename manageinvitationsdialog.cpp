@@ -28,6 +28,7 @@
 #include <KConfigDialog>
 #include <KMessageBox>
 #include <KToolInvocation>
+#include <KSystemTimeZone>
 
 // settings dialog
 #include "ui_configtcp.h"
@@ -146,12 +147,13 @@ void ManageInvitationsDialog::inviteByMail()
                   "Otherwise you can use any VNC client with the following parameters:\n\n"
                   "Host: %2:%3\n"
                   "Password: %4\n\n"
-                  "For security reasons this invitation will expire at %5.")
+                  "For security reasons this invitation will expire at %5 (%6).")
             .subs(invUrl.url())
             .subs(host)
             .subs(QString::number(port))
             .subs(inv.password())
             .subs(KGlobal::locale()->formatDateTime(inv.expirationTime()))
+            .subs(KSystemTimeZones::local().name())
             .toString());
 
 }
