@@ -18,7 +18,7 @@ target_link_libraries (krfb_framebuffer_x11
                        ${X11_X11_LIB}
                        ${X11_Xdamage_LIB}
                        ${X11_Xext_LIB}
-                       libkrfb
+                       krfbprivate
 )
 
 install (TARGETS krfb_framebuffer_x11

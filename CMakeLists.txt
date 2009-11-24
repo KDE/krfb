@@ -20,43 +20,29 @@ if (HAVE_LIBVNCSERVER)
 # First target: libkrfb - a library
 # for linking plugins against.
 
-set (libkrfb_SRCS
+set (krfbprivate_SRCS
      framebuffer.cpp
      framebufferplugin.cpp
 )
 
-set (libkrfb_HDRS
-     framebuffer.h
-     framebufferplugin.h
-)
-
-kde4_add_library (libkrfb
+kde4_add_library (krfbprivate
                   SHARED
-                  ${libkrfb_SRCS}
+                  ${krfbprivate_SRCS}
 )
 
-target_link_libraries (libkrfb
+target_link_libraries (krfbprivate
                        ${QT_QTCORE_LIBRARY}
                        ${QT_QTGUI_LIBRARY}
                        ${X11_X11_LIB}
 )
 
-# This is needed because otherwise we have two targets called krfb (application and library)
-set_target_properties (libkrfb PROPERTIES
-                       OUTPUT_NAME krfb
-)
-
-set_target_properties (libkrfb PROPERTIES
+set_target_properties (krfbprivate PROPERTIES
                        VERSION ${GENERIC_LIB_VERSION}
                        SOVERSION ${GENERIC_LIB_VERSION}
 )
 
-install (TARGETS libkrfb
+install (TARGETS krfbprivate
          ${INSTALL_TARGETS_DEFAULT_ARGS}
-)
-
-install (FILES ${libkrfb_HDRS}
-         DESTINATION ${INCLUDE_INSTALL_DIR}/KRfb
 )
 
 install (FILES
@@ -102,7 +88,7 @@ kde4_add_ui_files(krfb_SRCS connectionwidget.ui
 kde4_add_executable(krfb ${krfb_SRCS})
 
 target_link_libraries(krfb
-                      libkrfb
+                      krfbprivate
                       ${JPEG_LIBRARIES}
                       ${LIBVNCSERVER_LIBRARIES}
                       ${X11_Xext_LIB}
