@@ -3,6 +3,7 @@ Encoding=UTF-8
 Comment=X11 XDamage/XShm based Framebuffer for KRfb.
 Comment[ca]=«Framebuffer» basat en XDamage/XShmQt de l'X11 per al KRfb.
 Comment[da]=X11 XDamage/XShm-baseret framebuffer til KRfb.
+Comment[de]=X11 XDamage/XShm-basierter Framebuffer für KRfb.
 Comment[en_GB]=X11 XDamage/XShm based Framebuffer for KRfb.
 Comment[es]=Esquema de buffer para KRfb basado en XDamage/XShm
 Comment[et]=KRfb X11 XDamage/XShm põhine kaadripuhver
