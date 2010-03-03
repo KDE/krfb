@@ -43,15 +43,15 @@ Please respect the format of the date (YYYY-MM-DD) and of the version
 (V.MM.LL), it could be used by automation scripts.
 Do NOT change these in the translation. -->
 
-<date>2003-09-17</date>
-<releaseinfo>1.0.1</releaseinfo>
+<date>2010-02-09</date>
+<releaseinfo>&kde; 4.4</releaseinfo>
 
 <!-- Abstract about this handbook -->
 
 <abstract>
 <para>
 &krfb; is a server application that allows you to share your current
-session with a user on another machine, who can use a VNC client to
+session with a user on another machine, who can use a <acronym>VNC</acronym> client to
 view or even control the desktop.
 </para>
 </abstract>
@@ -94,12 +94,12 @@ revision history. (see installation appendix comment) -->
 
 <para>
 &krfb; is a server application that allows you to share your current
-session with a user on another machine, who can use a VNC client to
+session with a user on another machine, who can use a <acronym>VNC</acronym> client to
 view or even control the desktop.
 </para>
 
 <para>
-You would typically use &krfb; with the &kde;  VNC client, which is
+You would typically use &krfb; with the &kde;  <acronym>VNC</acronym> client, which is
 &krdc;, since it closely matches the special features of &krfb;.
 </para>
 
@@ -181,9 +181,6 @@ the screenshot below.
 	  <imageobject>
 	    <imagedata fileref="screenshot.png" format="PNG"/>
 	  </imageobject>
-	  <imageobject>
-	    <imagedata fileref="screenshot.eps" format="EPS"/>
-	  </imageobject>
 	  <textobject>
 	    <phrase>&krfb; main window</phrase>
 	  </textobject>
@@ -193,7 +190,7 @@ the screenshot below.
 
 <para>
 When you want to allow someone to access your desktop, you can create
-an personal invitation using the <guibutton>Create Personal
+an personal invitation using the <guibutton>New Personal
 Invitation...</guibutton> button, which will bring up a window
 containing the information needed to access your desktop. An example
 is shown below.
@@ -205,9 +202,6 @@ is shown below.
 	<mediaobject>
 	  <imageobject>
 	    <imagedata fileref="personal_invitation.png" format="PNG"/>
-	  </imageobject>
-	  <imageobject>
-	    <imagedata fileref="personal_invitation.eps" format="EPS"/>
 	  </imageobject>
 	  <textobject>
 	    <phrase>Example &krfb; personal invitation</phrase>
@@ -225,7 +219,7 @@ have the correct password.
 <para>
 Since you may want to invite someone to access your desktop by email,
 &krfb; can create invitations as email messages. You can create such
-an invitation using the <guibutton>Invite via Email...</guibutton>
+an invitation using the <guibutton>New Email Invitation...</guibutton>
 button on the &krfb; main window. This will usually bring up an email
 message that looks like the following, ready for you to type in the
 email address of the person you are sending the invitation to.
@@ -237,9 +231,6 @@ email address of the person you are sending the invitation to.
 	<mediaobject>
 	  <imageobject>
 	    <imagedata fileref="email_invitation.png" format="PNG"/>
-	  </imageobject>
-	  <imageobject>
-	    <imagedata fileref="email_invitation.eps" format="EPS"/>
 	  </imageobject>
 	  <textobject>
 	    <phrase>Example &krfb; email invitation</phrase>
@@ -273,49 +264,23 @@ invitation information that way.
 
 <para>
 Having created an invitation (either a personal invitation or one that
-was sent by email), &krfb; allows you to manage those invitations. The
-dialog to control these is available using <guibutton>Manage
-Invitations...</guibutton> on the &krfb; main window. If you select
-that button, &krfb; will bring up a window as shown below.
-</para>
-
-<para>
-<screenshot>
-<screeninfo>&krfb; invitation management</screeninfo>
-	<mediaobject>
-	  <imageobject>
-	    <imagedata fileref="invitation_management.png" format="PNG"/>
-	  </imageobject>
-	  <imageobject>
-	    <imagedata fileref="invitation_management.eps" format="EPS"/>
-	  </imageobject>
-	  <textobject>
-	    <phrase>&krfb; invitation management</phrase>
-	  </textobject>
-	</mediaobject>
-</screenshot>
-</para>
-
-<para>
-The invitation management window allows you to create more invitations
-(using the <guibutton>New Personal Invitation...</guibutton> and
-<guibutton>New Email Invitation...</guibutton> buttons, which have the
-same effect as the <guibutton>Create Personal Invitation...</guibutton>
-and <guibutton>Invite via Email...</guibutton> buttons on the &krfb; main
-window.
-</para>
-
-<para>
-The invitation managment window also allows you to delete existing
+was sent by email), &krfb; main window allows you to delete existing
 invitations. To just delete one of the invitations, select it with the
-mouse or keyboard tabs (it should become highlighted), and then select
+mouse (it should become highlighted), and then select
 the <guibutton>Delete</guibutton>. To delete all invitations, just
 select the <guibutton>Delete All</guibutton> button.
 </para>
 
-<!-- OK, so this is obvious, I only did it for completeness -->
+</sect1>
+
+<sect1 id="krfb-qit">
+<title>Quit &krfb;</title>
+
 <para>
-Selecting <guibutton>Close</guibutton> closes this dialog.
+If you close the &krfb; main window the server keeps running, which is
+indicated by an icon in the system tray.
+To stop &krfb; right click on the  icon in the systems tray and select
+<guimenuitem>Quit</guimenuitem>.
 </para>
 
 </sect1>
@@ -323,40 +288,29 @@ Selecting <guibutton>Close</guibutton> closes this dialog.
 <sect1 id="krfb-configuration">
 <title>Configuring &krfb;</title>
 <para>
-In addition to the main &krfb; interface shown and described above, you can also
-control &krfb; using its control module, which you can access using
-the normal &kde; control center, and you can also access using the
+In addition to the main &krfb; interface shown and described above, 
+you can also control &krfb;  using the
 <guibutton>Configure...</guibutton> on the &krfb; main window. The &krfb;
-configuration is controlled using a tabbed window, as shown in the
-screenshot below: 
+configuration has two pages, as shown in the screenshot below: 
+</para>
+
+<para>
+The <guilabel>Network</guilabel> page allows control over the port that
+&krfb; uses, as shown below.
 </para>
 
 <para>
 <screenshot>
-<screeninfo>&krfb; Configuration (Access Tab)</screeninfo>
+<screeninfo>&krfb; Configuration (Network page)</screeninfo>
 	<mediaobject>
 	  <imageobject>
-	    <imagedata fileref="configuration_access.png" format="PNG"/>
-	  </imageobject>
-	  <imageobject>
-	    <imagedata fileref="configuration_access.eps" format="EPS"/>
+	    <imagedata fileref="configuration_network.png" format="PNG"/>
 	  </imageobject>
 	  <textobject>
-	    <phrase>&krfb; Configuration (Access Tab)</phrase>
+	    <phrase>&krfb; Configuration (Network page)</phrase>
 	  </textobject>
 	</mediaobject>
 </screenshot>
-</para>
-
-<para>
-The <guilabel>Access</guilabel> tab allows you configure settings
-related to access to the &krfb; server.
-</para>
-
-<para>
-The <guibutton>Create and Manage Invitations...</guibutton> takes you to
-the <link linkend="krfb-managing-invitations">&krfb; invitation management window</link>,
-which was described previously.
 </para>
 
 <para>
@@ -365,6 +319,35 @@ controls whether &krfb; announces invitations over the network using
 Service Location Protocol. This is normally a good idea, but only
 works really well with a Service Location Protocol aware client, such
 as &krdc;.
+</para>
+
+<para>
+If you select the <guilabel>Use default port</guilabel> checkbox, 
+then &krfb; will locate a suitable port, and invitations will match 
+this port. If you deselect the this checkbox, you can specify a particular
+port. Specifying a particular port may be useful if you are using
+port-forwarding on the firewall. Note that if Service Location
+Protocol is turned on, this will automatically deal with identifying
+the correct port.
+</para>
+
+<para>
+The <guilabel>Security</guilabel> page allows you configure settings
+related to access to the &krfb; server.
+</para>
+
+<para>
+<screenshot>
+<screeninfo>&krfb; Configuration (Security page)</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="configuration_security.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase>&krfb; Configuration (Security page)</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
 </para>
 
 <para>
@@ -378,83 +361,20 @@ person connecting can control the desktop, or only view.
 
 <para>
 If the machine is a workstation, and you choose to allow uninvited
-connections, you probably want to select the <guilabel>Confirm
-uninvited connections before accepting</guilabel>. Conversely, if the
+connections, you probably want to select the <guilabel>Ask 
+before accepting connections </guilabel>. Conversely, if the
 machine is a server and you are using &krfb; for remote
-administration, you probably want to deselect <guilabel>Confirm
-uninvited connections before accepting</guilabel>.
+administration, you probably want to deselect this option.
 </para>
 
 <note>
 <para>
-&krfb; uses the normal RFB password system, which does not transfer
+&krfb; uses the normal <acronym>RFB</acronym> password system, which does not transfer
 your password in the clear across the network. Instead, it uses a
 challenge-response system. This is reasonably secure, as long as the
 password is securely guarded.
 </para>
 </note>
-
-<para>
-&krfb; allows you to control whether the background image is passed to
-the client, or not. This is controlled using a check box in the
-<guilabel>Session</guilabel> tab, as shown below.
-</para>
-
-<para>
-<screenshot>
-<screeninfo>&krfb; Configuration (Session Tab)</screeninfo>
-	<mediaobject>
-	  <imageobject>
-	    <imagedata fileref="configuration_session.png" format="PNG"/>
-	  </imageobject>
-	  <imageobject>
-	    <imagedata fileref="configuration_session.eps" format="EPS"/>
-	  </imageobject>
-	  <textobject>
-	    <phrase>&krfb; Configuration (Session Tab)</phrase>
-	  </textobject>
-	</mediaobject>
-</screenshot>
-</para>
-
-<para>
-If you check the box, &krfb; will not transfer the background
-image. If you leave it blank, it is up to the client whether the
-background image is transferred or not transferred.
-</para>
-
-<para>
-The <guilabel>Network</guilabel> tab allows control over the port that
-&krfb; uses, as shown below.
-</para>
-
-<para>
-<screenshot>
-<screeninfo>&krfb; Configuration (Network Tab)</screeninfo>
-	<mediaobject>
-	  <imageobject>
-	    <imagedata fileref="configuration_network.png" format="PNG"/>
-	  </imageobject>
-	  <imageobject>
-	    <imagedata fileref="configuration_network.eps" format="EPS"/>
-	  </imageobject>
-	  <textobject>
-	    <phrase>&krfb; Configuration (Network Tab)</phrase>
-	  </textobject>
-	</mediaobject>
-</screenshot>
-</para>
-
-<para>
-If you select the <guilabel>Assign port automatically</guilabel>
-checkbox, then &krfb; will locate a suitable port, and invitations
-will match this port. If you deselect the <guilabel>Assign port
-automatically</guilabel> checkbox, you can specify a particular
-port. Specifying a particular port may be useful if you are using
-port-forwarding on the firewall. Note that if Service Location
-Protocol is turned on, this will automatically deal with identifying
-the correct port.
-</para>
 
 </sect1>
 
@@ -472,9 +392,6 @@ accepting uninvited connections without warning.
 	<mediaobject>
 	  <imageobject>
 	    <imagedata fileref="connection.png" format="PNG"/>
-	  </imageobject>
-	  <imageobject>
-	    <imagedata fileref="connection.eps" format="EPS"/>
 	  </imageobject>
 	  <textobject>
 	    <phrase>&krfb; Connection Window</phrase>
@@ -504,73 +421,6 @@ window in the dock, that shows that the connection has been made.
 </para>
 
 </sect1>
-</chapter>
-
-<chapter id="dcop">
-<title>Developer's Guide to &krfb;</title>
-
-<para>
-&krfb; supports a small number of &DCOP; commands, which are described
-in this chapter. If you aren't familiar with &DCOP;, then you don't
-need to worry about this. However if you'd like to automate some of
-your &krfb; (or other &kde; application) actions, &DCOP; is a useful
-tool. You can find out more about &DCOP; in its on-line documentation,
-and in tutorials on <ulink
-url="http://developer.kde.org">http://developer.kde.org</ulink>.
-</para>
-
-<para>
-You can shut down the &krfb; application using the quit command, as
-shown in this example:
-</para>
-
-<informalexample>
-<screen>
-<prompt>&percnt;</prompt>dcop krfb-1507 MainApplication-Interface quit
-</screen>
-</informalexample>
-
-<note>
-<para>
-You will need to change the <userinput>krfb-1507</userinput> in the
-example to match the instance of &krfb; that you actually want to
-shutdown. If you run <command>dcop</command> with no options, you will
-get a list of all applications that are running and &DCOP; can
-control.
-</para>
-</note>
-
-</chapter>
-
-<chapter id="faq">
-<title>Questions and Answers</title>
-
-<!-- (OPTIONAL but recommended) This chapter should include all of the silly
-(and not-so-silly) newbie questions that fill up your mailbox. This chapter
-should be reserved for BRIEF questions and answers! If one question uses more
-than a page or so then it should probably be part of the
-"Using this Application" chapter instead. You should use links to
-cross-reference questions to the parts of your documentation that answer them.
-This is also a great place to provide pointers to other FAQ's if your users
-must do some complicated configuration on other programs in order for your
-application work. -->
-
-
-&reporting.bugs;
-&updating.documentation;
-
-<!-- Needs some content.
-<qandaset id="faqlist">
-<qandaentry>
-<question>
-<para>A question </para>
-</question>
-<answer>
-<para>and an answer.</para>
-</answer>
-</qandaentry>
-</qandaset>
--->
 </chapter>
 
 <chapter id="credits">
