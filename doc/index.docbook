@@ -324,7 +324,7 @@ as &krdc;.
 <para>
 If you select the <guilabel>Use default port</guilabel> checkbox, 
 then &krfb; will locate a suitable port, and invitations will match 
-this port. If you deselect the this checkbox, you can specify a particular
+this port. If you deselect this checkbox, you can specify a particular
 port. Specifying a particular port may be useful if you are using
 port-forwarding on the firewall. Note that if Service Location
 Protocol is turned on, this will automatically deal with identifying
