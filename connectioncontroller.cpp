@@ -36,6 +36,7 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
+#include <strings.h>
 
 
 static QString peerAddress(int sock) {
