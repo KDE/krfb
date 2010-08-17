@@ -84,11 +84,11 @@ void KeyboardEvent::tweakModifiers(signed char mod, bool down)
     if(isShift && mod != 1) {
         if(ModifierState & LEFTSHIFT) {
             XTestFakeKeyEvent(dpy, leftShiftCode,
-                            !down, CurrentTime);
+                            down, CurrentTime);
         }
         if(ModifierState & RIGHTSHIFT) {
             XTestFakeKeyEvent(dpy, rightShiftCode,
-                            !down, CurrentTime);
+                            down, CurrentTime);
         }
     }
 
