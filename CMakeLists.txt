@@ -1,15 +1,17 @@
 project(krfb)
 
 if(NOT INSIDE_KDENETWORK)
-    set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/../cmake/modules ${CMAKE_MODULE_PATH})
+    message("Not building inside KDENetwork, loading KDE CMake Macros.")
+
+    set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/modules ${CMAKE_MODULE_PATH})
+
     find_package(KDE4 REQUIRED)
 
     include(KDE4Defaults)
     include(MacroLibrary)
 
     include(CheckSymbolExists)
-    find_package(LibVNCServer)
-    macro_optional_find_package(LibVNCServer)
+    find_package(LibVNCServer REQUIRED)
 
     set(CMAKE_REQUIRED_DEFINITIONS ${_KDE_PLATFORM_DEFINITIONS})
 
@@ -51,7 +53,7 @@ target_link_libraries (krfbprivate
                        ${QT_QTCORE_LIBRARY}
                        ${QT_QTGUI_LIBRARY}
                        ${X11_X11_LIB}
-		       ${LIBVNCSERVER_LIBRARIES}
+                       ${LIBVNCSERVER_LIBRARIES}
 )
 
 set_target_properties (krfbprivate PROPERTIES
