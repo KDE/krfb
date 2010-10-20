@@ -127,7 +127,7 @@ install(TARGETS krfb  ${INSTALL_TARGETS_DEFAULT_ARGS})
 
 ########### install files ###############
 
-install(FILES krfb.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
+install(PROGRAMS krfb.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
 install(FILES krfb.notifyrc DESTINATION ${DATA_INSTALL_DIR}/krfb)
 
 endif (HAVE_LIBVNCSERVER)
