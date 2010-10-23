@@ -24,7 +24,7 @@
 
 #include <QtCore/QObject>
 
-#include <rfb/rfb.h>
+#include "rfb.h"
 
 class AbstractRfbServer;
 

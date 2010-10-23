@@ -22,7 +22,7 @@
 
 #include "sockethelpers.h"
 
-#include <rfb/rfb.h>
+#include "rfb.h"
 
 #include <KDebug>
 #include <KGlobal>

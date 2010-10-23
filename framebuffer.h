@@ -17,7 +17,7 @@
 
 #include <kdemacros.h>
 
-#include <rfb/rfb.h>
+#include "rfb.h"
 
 class FrameBuffer;
 /**

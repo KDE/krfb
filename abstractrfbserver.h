@@ -27,7 +27,7 @@
 #include <QtCore/QObject>
 #include <QtCore/QSharedPointer>
 
-#include <rfb/rfb.h>
+#include "rfb.h"
 
 class AbstractConnectionController;
 

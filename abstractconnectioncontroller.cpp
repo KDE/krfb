@@ -20,7 +20,6 @@
  *   Boston, MA 02110-1301, USA.
  */
 
-// RFB.H Why do you have to redefine the whole of fscking c++???
 #include <KDebug>
 
 #include "abstractconnectioncontroller.h"

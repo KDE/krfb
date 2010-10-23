@@ -18,7 +18,6 @@
  *   Boston, MA 02110-1301, USA.
  */
 
-// FUCKING RFB.H DIE DAMMIT
 #include "servermanager.h"
 
 #include "abstractrfbserver.h"
