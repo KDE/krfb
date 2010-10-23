@@ -8,35 +8,34 @@
    version 2 of the License, or (at your option) any later version.
 */
 
-#include "servermanager.h"
-
 #include "krfbserver.h"
-#include "krfbserver.moc"
 
+#include "abstractconnectioncontroller.h"
+#include "framebuffer.h"
+#include "framebuffermanager.h"
+#include "krfbconfig.h"
 #include "krfbconnectioncontroller.h"
+#include "invitationmanager.h"
+#include "servermanager.h"
+#include "sockethelpers.h"
 
-#include <QTcpServer>
-#include <QTcpSocket>
-#include <QTimer>
-#include <QHostInfo>
-#include <QApplication>
-#include <QDesktopWidget>
-#include <QPointer>
+#include <dnssd/publicservice.h>
 
 #include <KGlobal>
 #include <KUser>
 #include <KLocale>
 #include <KDebug>
 #include <KMessageBox>
-#include <dnssd/publicservice.h>
 
-#include "abstractconnectioncontroller.h"
-#include "framebuffer.h"
-#include "framebuffermanager.h"
-#include "krfbconfig.h"
-#include "invitationmanager.h"
-#include "sockethelpers.h"
+#include <QtCore/QPointer>
+#include <QtCore/QTimer>
 
+#include <QtGui/QApplication>
+#include <QtGui/QDesktopWidget>
+
+#include <QtNetwork/QHostInfo>
+#include <QtNetwork/QTcpServer>
+#include <QtNetwork/QTcpSocket>
 
 KrfbServer::KrfbServer()
     : AbstractRfbServer()
@@ -96,4 +95,6 @@ enum rfbNewClientAction KrfbServer::handleNewClient(struct _rfbClientRec * cl)
     return cc->handleNewClient();
 }
 
+
+#include "krfbserver.moc"
 

@@ -20,8 +20,9 @@
 #ifndef CONNECTIONDIALOG_H
 #define CONNECTIONDIALOG_H
 
-#include <KDialog>
 #include "ui_connectionwidget.h"
+
+#include <KDialog>
 
 class QWidget;
 

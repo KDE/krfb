@@ -10,14 +10,15 @@
 #ifndef FRAMEBUFFER_H
 #define FRAMEBUFFER_H
 
-#include <QObject>
-#include <QRect>
-#include <QList>
-#include <QWidget>
+#include "rfb.h"
 
 #include <kdemacros.h>
 
-#include "rfb.h"
+#include <QtCore/QObject>
+#include <QtCore/QRect>
+#include <QtCore/QList>
+
+#include <QtGui/QWidget>
 
 class FrameBuffer;
 /**

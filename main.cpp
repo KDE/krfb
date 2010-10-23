@@ -15,24 +15,23 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "trayicon.h"
-//#include "configuration.h"
 #include "krfbserver.h"
 #include "manageinvitationsdialog.h"
 #include "servermanager.h"
+#include "trayicon.h"
 
-#include <QPixmap>
-#include <kaction.h>
-#include <kdebug.h>
+#include <KAboutApplicationDialog>
+#include <KAboutData>
+#include <KAction>
+#include <KApplication>
+#include <KCmdLineArgs>
+#include <KDebug>
+#include <KLocale>
+#include <KMessageBox>
 #include <KNotification>
-#include <ksystemtrayicon.h>
-#include <kcmdlineargs.h>
-#include <kaboutdata.h>
-#include <kaboutapplicationdialog.h>
-#include <klocale.h>
-#include <kapplication.h>
-#include <kmessagebox.h>
-#include <qwindowdefs.h>
+
+#include <QtGui/QPixmap>
+#include <QtGui/qwindowdefs.h>
 
 #include <signal.h>
 

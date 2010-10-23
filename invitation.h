@@ -20,10 +20,9 @@
 
 #include <KApplication>
 #include <KConfig>
-#include <QObject>
 
-#include <QDateTime>
-
+#include <QtCore/QDateTime>
+#include <QtCore/QObject>
 
 const int INVITATION_DURATION = 60*60;
 

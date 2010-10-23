@@ -17,18 +17,17 @@
 
 #include "trayicon.h"
 
-#include <kstandardaction.h>
-#include <klocale.h>
-#include <kdialog.h>
-#include <kmenu.h>
-#include <kglobal.h>
-#include <kactioncollection.h>
-#include <kaboutapplicationdialog.h>
-#include <KNotification>
-
-#include "manageinvitationsdialog.h"
 #include "invitedialog.h"
+#include "manageinvitationsdialog.h"
 
+#include <KAboutApplicationDialog>
+#include <KActionCollection>
+#include <KDialog>
+#include <KGlobal>
+#include <KLocale>
+#include <KMenu>
+#include <KNotification>
+#include <KStandardAction>
 
 TrayIcon::TrayIcon(KDialog *d)
   : KStatusNotifierItem(d),

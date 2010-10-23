@@ -18,16 +18,16 @@
 */
 
 #include "personalinvitedialog.h"
-#include "personalinvitedialog.moc"
+
+#include "krfbconfig.h"
+
+#include <KIconLoader>
+#include <KLocale>
 
 #include <QtGui/QLabel>
 #include <QtGui/QToolTip>
-#include <QNetworkInterface>
 
-#include <kiconloader.h>
-#include <klocale.h>
-
-#include "krfbconfig.h"
+#include <QtNetwork/QNetworkInterface>
 
 PersonalInviteDialog::PersonalInviteDialog( QWidget *parent )
     : KDialog( parent )
@@ -96,4 +96,7 @@ void PersonalInviteDialog::showWhatsthis(const QString &link)
                 "different address or be unreachable for other computers."));
     }
 }
+
+
+#include "personalinvitedialog.moc"
 

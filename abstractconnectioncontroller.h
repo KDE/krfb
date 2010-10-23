@@ -22,9 +22,9 @@
 #ifndef KRFB_ABSTRACTCONNECTIONCONTROLLER_H
 #define KRFB_ABSTRACTCONNECTIONCONTROLLER_H
 
-#include <QtCore/QObject>
-
 #include "rfb.h"
+
+#include <QtCore/QObject>
 
 class AbstractRfbServer;
 

@@ -12,8 +12,8 @@
 
 #include "abstractconnectioncontroller.h"
 
-#include <QApplication>
-#include <QX11Info>
+#include <QtGui/QApplication>
+#include <QtGui/QX11Info>
 
 #include <X11/Xutil.h>
 #include <X11/keysym.h>

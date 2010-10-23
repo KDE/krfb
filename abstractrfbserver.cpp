@@ -18,23 +18,22 @@
  *   Boston, MA 02110-1301, USA.
  */
 
-#include "servermanager.h"
-
 #include "abstractrfbserver.h"
 
 #include "abstractconnectioncontroller.h"
 #include "framebuffer.h"
 #include "invitationmanager.h"
 #include "krfbconfig.h"
+#include "servermanager.h"
 #include "sockethelpers.h"
-
-#include <QtCore/QPointer>
-#include <QtCore/QSharedPointer>
-#include <QtCore/QTimer>
 
 #include <KDebug>
 #include <KLocale>
 #include <KMessageBox>
+
+#include <QtCore/QPointer>
+#include <QtCore/QSharedPointer>
+#include <QtCore/QTimer>
 
 #include <X11/Xutil.h>
 #include <X11/extensions/XTest.h>

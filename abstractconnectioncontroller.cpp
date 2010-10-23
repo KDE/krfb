@@ -20,15 +20,18 @@
  *   Boston, MA 02110-1301, USA.
  */
 
-#include <KDebug>
-
 #include "abstractconnectioncontroller.h"
 
 #include "abstractrfbserver.h"
 #include "connectiondialog.h"
-#include "events.h"
+
+#include <KDebug>
 
 #include <string.h>
+
+// events.h includes Xlib.h, which must always be included after all Qt headers,
+// so this must always be the last #include.
+#include "events.h"
 
 static void clientGoneHook(rfbClientPtr cl)
 {

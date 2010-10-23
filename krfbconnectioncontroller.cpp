@@ -22,30 +22,33 @@
 
 #include "krfbconnectioncontroller.h"
 
-#include <QX11Info>
-#include <QHostInfo>
-#include <QApplication>
-#include <QDesktopWidget>
-#include <QTcpSocket>
-#include <QTimer>
-
-#include <KConfig>
-#include <KGlobal>
-#include <KUser>
-#include <KNotification>
-#include <KLocale>
-#include <KDebug>
-
-
-#include "invitationmanager.h"
 #include "connectiondialog.h"
-#include "events.h"
+#include "invitationmanager.h"
+#include "krfbconfig.h"
 #include "krfbserver.h"
 #include "sockethelpers.h"
 
-#include "krfbconfig.h"
+#include <KConfig>
+#include <KDebug>
+#include <KGlobal>
+#include <KLocale>
+#include <KNotification>
+#include <KUser>
+
+#include <QtCore/QTimer>
+
+#include <QtGui/QApplication>
+#include <QtGui/QDesktopWidget>
+#include <QtGui/QX11Info>
+
+#include <QtNetwork/QHostInfo>
+#include <QtNetwork/QTcpSocket>
 
 #include <X11/Xutil.h>
+
+// events.h includes Xlib.h, which must always be included after all Qt headers,
+// so this must always be the last #include.
+#include "events.h"
 
 static bool checkPassword(const QString &p, unsigned char *ochallenge, const char *response, int len)
 {

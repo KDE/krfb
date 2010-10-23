@@ -18,10 +18,10 @@
 #ifndef TRAYICON_H
 #define TRAYICON_H
 
-#include <kpassivepopup.h>
 #include <KActionCollection>
+#include <KPassivePopup>
+#include <KStatusNotifierItem>
 #include <KToggleAction>
-#include <kstatusnotifieritem.h>
 
 class KDialog;
 

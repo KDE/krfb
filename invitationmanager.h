@@ -9,10 +9,10 @@
 #ifndef INVITATIONMANAGER_H
 #define INVITATIONMANAGER_H
 
-#include <QObject>
-#include <QList>
 #include "invitation.h"
 
+#include <QtCore/QList>
+#include <QtCore/QObject>
 
 class InvitationManagerPrivate;
 /**

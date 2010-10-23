@@ -20,9 +20,11 @@
 #ifndef PERSONALINVITEDIALOG_H
 #define PERSONALINVITEDIALOG_H
 
-#include <qdatetime.h>
-#include <KDialog>
 #include "ui_personalinvitewidget.h"
+
+#include <KDialog>
+
+#include <QtCore/QDateTime>
 
 class QWidget;
 class PersonalInviteDialog : public KDialog, public Ui::PersonalInviteWidget

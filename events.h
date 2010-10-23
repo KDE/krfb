@@ -11,9 +11,9 @@
 #ifndef EVENTS_H
 #define EVENTS_H
 
-#include <QDesktopWidget>
-#include <QEvent>
-#include <QString>
+#include <QtCore/QEvent>
+#include <QtCore/QString>
+#include <QtGui/QDesktopWidget>
 
 #include <X11/Xlib.h>
 

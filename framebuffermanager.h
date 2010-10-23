@@ -29,6 +29,7 @@
 #include <QtCore/QObject>
 #include <QtCore/QSharedPointer>
 #include <QtCore/QWeakPointer>
+
 #include <QtGui/QWidget>
 
 class FrameBufferPlugin;

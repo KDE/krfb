@@ -10,8 +10,9 @@
 #ifndef MANAGEINVITATIONSDIALOG_H
 #define MANAGEINVITATIONSDIALOG_H
 
-#include <KDialog>
 #include "ui_manageinvitations.h"
+
+#include <KDialog>
 
 /**
 	@author Alessandro Praduroux <pradu@pradu.it>

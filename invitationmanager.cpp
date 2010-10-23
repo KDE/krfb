@@ -13,7 +13,7 @@
 #include <KConfig>
 #include <KGlobal>
 
-#include <QTimer>
+#include <QtCore/QTimer>
 
 class InvitationManagerPrivate
 {

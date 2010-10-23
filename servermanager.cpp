@@ -21,7 +21,6 @@
 #include "servermanager.h"
 
 #include "sockethelpers.h"
-
 #include "rfb.h"
 
 #include <KDebug>

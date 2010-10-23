@@ -24,6 +24,7 @@
 #include <kdemacros.h>
 
 #include <QtCore/QVariantList>
+
 #include <QtGui/QWidget>
 
 class FrameBuffer;

@@ -23,11 +23,10 @@
 #define KRFB_ABSTRACTRFBSERVER_H
 
 #include "framebuffer.h"
+#include "rfb.h"
 
 #include <QtCore/QObject>
 #include <QtCore/QSharedPointer>
-
-#include "rfb.h"
 
 class AbstractConnectionController;
 

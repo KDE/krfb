@@ -19,14 +19,14 @@
 
 #include "invitedialog.h"
 
-#include <kiconloader.h>
-#include <klocale.h>
+#include <KIconLoader>
+#include <KLocale>
 #include <KStandardGuiItem>
 
+#include <QtGui/QCursor>
 #include <QtGui/QLabel>
 #include <QtGui/QPushButton>
 #include <QtGui/QToolTip>
-#include <QtGui/QCursor>
 
 InviteDialog::InviteDialog( QWidget *parent )
     : KDialog( parent )

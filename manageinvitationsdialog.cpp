@@ -7,33 +7,30 @@
    version 2 of the License, or (at your option) any later version.
 */
 #include "manageinvitationsdialog.h"
-#include "manageinvitationsdialog.moc"
 
-#include "personalinvitedialog.h"
 #include "invitationmanager.h"
 #include "invitation.h"
 #include "krfbconfig.h"
 #include "krfbserver.h"
+#include "personalinvitedialog.h"
 #include "servermanager.h"
-
-#include <QWidget>
-#include <QToolTip>
-#include <QCursor>
-#include <QDateTime>
-#include <QNetworkInterface>
-
-#include <KStandardGuiItem>
-#include <KIconLoader>
-#include <KLocale>
-#include <KGlobal>
-#include <KConfigDialog>
-#include <KMessageBox>
-#include <KToolInvocation>
-#include <KSystemTimeZone>
-
-// settings dialog
 #include "ui_configtcp.h"
 #include "ui_configsecurity.h"
+
+#include <KConfigDialog>
+#include <KGlobal>
+#include <KIconLoader>
+#include <KLocale>
+#include <KMessageBox>
+#include <KStandardGuiItem>
+#include <KSystemTimeZone>
+#include <KToolInvocation>
+
+#include <QtGui/QWidget>
+#include <QtGui/QToolTip>
+#include <QtGui/QCursor>
+#include <QtCore/QDateTime>
+#include <QtNetwork/QNetworkInterface>
 
 class TCP: public QWidget, public Ui::TCP {
     public:
@@ -240,4 +237,7 @@ void ManageInvitationsDialog::selectionChanged()
 {
     deleteOneButton->setEnabled(invitationWidget->selectedItems().size() > 0);
 }
+
+
+#include "manageinvitationsdialog.moc"
 
