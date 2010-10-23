@@ -47,6 +47,26 @@
 
 #include <X11/Xutil.h>
 
+static bool checkPassword(const QString &p, unsigned char *ochallenge, const char *response, int len)
+{
+    if ((len == 0) && (p.length() == 0)) {
+        return true;
+    }
+
+    char passwd[MAXPWLEN];
+    unsigned char challenge[CHALLENGESIZE];
+
+    memcpy(challenge, ochallenge, CHALLENGESIZE);
+    bzero(passwd, MAXPWLEN);
+    if (!p.isNull()) {
+        strncpy(passwd, p.toLatin1(),
+                (MAXPWLEN <= p.length()) ? MAXPWLEN : p.length());
+    }
+
+    rfbEncryptBytes(challenge, passwd);
+    return memcmp(challenge, response, len) == 0;
+}
+
 KrfbConnectionController::KrfbConnectionController(struct _rfbClientRec *_cl,
                                                    AbstractRfbServer * parent)
   : AbstractConnectionController(_cl, parent),

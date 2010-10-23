@@ -28,8 +28,6 @@
 
 class AbstractRfbServer;
 
-bool checkPassword(const QString &p, unsigned char *ochallenge, const char *response, int len);
-
 class AbstractConnectionController : public QObject
 {
     Q_OBJECT
