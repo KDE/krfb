@@ -19,6 +19,7 @@
 //#include "configuration.h"
 #include "krfbserver.h"
 #include "manageinvitationsdialog.h"
+#include "servermanager.h"
 
 #include <QPixmap>
 #include <kaction.h>
@@ -87,7 +88,7 @@ int main(int argc, char *argv[])
 	    invitationsDialog.show();
 	TrayIcon trayicon(&invitationsDialog);
 
-	KrfbServer *server = KrfbServer::self(); // initialize the server manager
+        KrfbServer *server = ServerManager::instance()->newServer(); // initialize the server manager
     if (!server->checkX11Capabilities()) {
         return 1;
     }

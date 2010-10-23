@@ -93,6 +93,8 @@ set(krfb_SRCS
    connectioncontroller.cpp
    events.cpp
    framebuffermanager.cpp
+   servermanager.cpp
+   sockethelpers.cpp
 )
 
 kde4_add_kcfg_files(krfb_SRCS krfbconfig.kcfgc)

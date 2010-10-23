@@ -14,6 +14,7 @@
 #include "invitation.h"
 #include "krfbconfig.h"
 #include "krfbserver.h"
+#include "servermanager.h"
 
 #include <QWidget>
 #include <QToolTip>
@@ -182,7 +183,7 @@ void ManageInvitationsDialog::showConfiguration()
     dialog->addPage(new TCP, i18n("Network"), "network-workgroup");
     dialog->addPage(new Security, i18n("Security"), "security-high");
     dialog->setHelp(QString(),"krfb");
-    connect(dialog, SIGNAL(settingsChanged(QString)),KrfbServer::self(),SLOT(updateSettings()));
+    connect(dialog, SIGNAL(settingsChanged(QString)),ServerManager::instance(),SLOT(updateServers()));
     dialog->show();
 }
 

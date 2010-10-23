@@ -32,6 +32,8 @@
 #include "framebuffermanager.h"
 #include "krfbconfig.h"
 #include "invitationmanager.h"
+#include "servermanager.h"
+#include "sockethelpers.h"
 
 #include <X11/Xutil.h>
 #include <X11/extensions/XTest.h>
@@ -84,7 +86,7 @@ static rfbCursorPtr myCursor;
 
 static enum rfbNewClientAction newClientHook(struct _rfbClientRec *cl)
 {
-    KrfbServer *server = KrfbServer::self();
+    KrfbServer *server = ServerManager::instance()->serverForClient(cl);
     return server->handleNewClient(cl);
 }
 
@@ -118,7 +120,7 @@ static void clipboardHook(char* str,int len, rfbClientPtr cl)
 class KrfbServer::KrfbServerP {
 
     public:
-        KrfbServerP() : screen(0), numClients(0) {};
+        KrfbServerP() : screen(0), numClients(0), listeningPort(0) {};
 
         QSharedPointer<FrameBuffer> fb;
         QList< QPointer<ConnectionController> > controllers;
@@ -126,20 +128,9 @@ class KrfbServer::KrfbServerP {
         int numClients;
         QByteArray desktopName;
         QTimer rfbProcessEventTimer;
+        QString listeningAddress;
+        unsigned int listeningPort;
 };
-
-class KrfbServerPrivate
-{
-public:
-    KrfbServer instance;
-};
-
-K_GLOBAL_STATIC(KrfbServerPrivate, krfbServerPrivate)
-
-KrfbServer * KrfbServer::self() {
-    return &krfbServerPrivate->instance;
-}
-
 
 KrfbServer::KrfbServer()
     :d(new KrfbServerP)
@@ -210,6 +201,11 @@ void KrfbServer::startListening()
         return;
     };
 
+    d->listeningPort = localPort(screen->listenSock);
+    d->listeningAddress = localAddress(screen->listenSock);
+
+    kDebug() << "Listen port:" << d->listeningPort << "Listen Address:" << d->listeningAddress;
+
     if (KrfbConfig::publishService()) {
         DNSSD::PublicService *service = new DNSSD::PublicService(i18n("%1@%2 (shared desktop)", KUser().loginName(), QHostInfo::localHostName()),"_rfb._tcp",port);
         service->publishAsync();
@@ -239,6 +235,9 @@ void KrfbServer::shutdown()
     rfbShutdownServer(d->screen, true);
     // framebuffer has to be deleted before X11 connection goes down
     d->fb.clear();
+
+    d->listeningPort = 0;
+    d->listeningAddress.clear();
 }
 
 
@@ -319,4 +318,13 @@ void KrfbServer::clientDisconnected(ConnectionController *cc)
     Q_EMIT sessionFinished();
 }
 
+QString KrfbServer::listeningAddress() const
+{
+    return d->listeningAddress;
+}
+
+unsigned int KrfbServer::listeningPort() const
+{
+    return d->listeningPort;
+}
 

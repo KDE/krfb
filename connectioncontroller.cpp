@@ -29,35 +29,13 @@
 #include "connectiondialog.h"
 #include "events.h"
 #include "krfbserver.h"
+#include "sockethelpers.h"
 
 #include "krfbconfig.h"
 
 #include <X11/Xutil.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
+
 #include <strings.h>
-
-
-static QString peerAddress(int sock) {
-
-    const int ADDR_SIZE = 50;
-    struct sockaddr sa;
-    socklen_t salen = sizeof(struct sockaddr);
-    if (getpeername(sock, &sa, &salen) == 0) {
-        if (sa.sa_family == AF_INET) {
-            struct sockaddr_in *si = (struct sockaddr_in *)&sa;
-            return QString(inet_ntoa(si->sin_addr));
-        }
-        if (sa.sa_family == AF_INET6) {
-            char inetbuf[ADDR_SIZE];
-            inet_ntop(sa.sa_family, &sa, inetbuf, ADDR_SIZE);
-            return QString(inetbuf);
-        }
-        return QString("not a network address");
-    }
-    return QString("unable to determine...");
-}
 
 static void clientGoneHook(rfbClientPtr cl)
 {

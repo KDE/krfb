@@ -22,11 +22,8 @@ This class implements the listening server for the RFB protocol.
 class KrfbServer : public QObject
 {
 Q_OBJECT
-friend class KrfbServerPrivate;
+friend class ServerManager;
 public:
-
-    static KrfbServer *self();
-
     ~KrfbServer();
 
     enum rfbNewClientAction handleNewClient(struct _rfbClientRec *cl);
@@ -47,9 +44,11 @@ public Q_SLOTS:
     void updatePassword();
     void clientDisconnected(ConnectionController *);
 
+    QString listeningAddress() const;
+    unsigned int listeningPort() const;
+
 private:
     KrfbServer();
-    static KrfbServer *_self;
 
     class KrfbServerP;
     KrfbServerP * const d;
