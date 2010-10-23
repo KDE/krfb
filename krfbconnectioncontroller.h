@@ -19,33 +19,29 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KRFB_KRFBSERVER_H
-#define KRFB_KRFBSERVER_H
+#ifndef KRFB_KRFBCONNECTIONCONTROLLER_H
+#define KRFB_KRFBCONNECTIONCONTROLLER_H
 
-#include "abstractrfbserver.h"
+#include "abstractconnectioncontroller.h"
 
-class KrfbServer : public AbstractRfbServer
+class KrfbConnectionController : public AbstractConnectionController
 {
-Q_OBJECT
-friend class ServerManager;
+    Q_OBJECT
+    
 public:
-    virtual ~KrfbServer();
+    KrfbConnectionController(struct _rfbClientRec *_cl, AbstractRfbServer *parent);
+    virtual ~KrfbConnectionController();
 
-    virtual enum rfbNewClientAction handleNewClient(struct _rfbClientRec *cl);
+    virtual bool handleCheckPassword(rfbClientPtr cl, const char *response, int len);
 
-public Q_SLOTS:
-    void doStartListening();
+    virtual void handleClientGone();
 
-    virtual void updateSettings();
+    virtual enum rfbNewClientAction handleNewClient();
 
 private:
-    KrfbServer();
-
-    class KrfbServerPrivate;
-    KrfbServerPrivate * const d;
-
+    bool m_clientGoneRequiresAction;
 };
 
 
-#endif  // Header guard
+#endif  // Header Guard
 

@@ -17,7 +17,7 @@
 
 #include <X11/Xlib.h>
 
-class ConnectionController;
+class AbstractConnectionController;
 
 class QCursor;
 
@@ -60,10 +60,10 @@ public:
 };
 
 class ClipboardEvent : public VNCEvent {
-    ConnectionController *controller;
+    AbstractConnectionController *controller;
     QString text;
 public:
-    ClipboardEvent(ConnectionController *c, const QString &text);
+    ClipboardEvent(AbstractConnectionController *c, const QString &text);
     virtual void exec();
 };
 

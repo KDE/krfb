@@ -10,6 +10,8 @@
 
 #include "events.h"
 
+#include "abstractconnectioncontroller.h"
+
 #include <QApplication>
 #include <QX11Info>
 
@@ -171,7 +173,7 @@ void PointerEvent::exec() {
 }
 
 
-ClipboardEvent::ClipboardEvent(ConnectionController *c, const QString &ctext)
+ClipboardEvent::ClipboardEvent(AbstractConnectionController *c, const QString &ctext)
     :controller(c),text(ctext)
 {
 }

@@ -83,18 +83,20 @@ add_subdirectory (framebuffers)
 set(krfb_SRCS
    main.cpp
    trayicon.cpp
-   krfbserver.cpp
    manageinvitationsdialog.cpp
    invitationmanager.cpp
    invitedialog.cpp
    invitation.cpp
    connectiondialog.cpp
    personalinvitedialog.cpp
-   connectioncontroller.cpp
    events.cpp
    framebuffermanager.cpp
    servermanager.cpp
    sockethelpers.cpp
+   abstractrfbserver.cpp
+   abstractconnectioncontroller.cpp
+   krfbserver.cpp
+   krfbconnectioncontroller.cpp
 )
 
 kde4_add_kcfg_files(krfb_SRCS krfbconfig.kcfgc)
