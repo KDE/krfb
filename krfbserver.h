@@ -40,10 +40,6 @@ public Q_SLOTS:
 
 private:
     KrfbServer();
-
-    class KrfbServerPrivate;
-    KrfbServerPrivate * const d;
-
 };
 
 

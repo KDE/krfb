@@ -39,15 +39,8 @@
 #include "sockethelpers.h"
 
 
-class KrfbServer::KrfbServerPrivate {
-
-    public:
-        KrfbServerPrivate() {};
-};
-
 KrfbServer::KrfbServer()
-    : AbstractRfbServer(),
-    d(new KrfbServerPrivate)
+    : AbstractRfbServer()
 
 {
     kDebug() << "starting ";
@@ -57,7 +50,6 @@ KrfbServer::KrfbServer()
 
 KrfbServer::~KrfbServer()
 {
-    delete d;
 }
 
 
