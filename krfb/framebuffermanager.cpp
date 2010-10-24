@@ -64,25 +64,26 @@ void FrameBufferManager::loadPlugins()
     KService::List offers = KServiceTypeTrader::self()->query("krfb/framebuffer");
 
     KService::List::const_iterator iter;
-    for (iter = offers.constBegin(); iter < offers.constEnd(); ++iter) {
-       QString error;
-       KService::Ptr service = *iter;
 
-       KPluginFactory *factory = KPluginLoader(service->library()).factory();
+    for (iter = offers.constBegin(); iter < offers.constEnd(); ++iter) {
+        QString error;
+        KService::Ptr service = *iter;
+
+        KPluginFactory *factory = KPluginLoader(service->library()).factory();
 
         if (!factory) {
             kWarning() << "KPluginFactory could not load the plugin:" << service->library();
             continue;
         }
 
-       FrameBufferPlugin *plugin = factory->create<FrameBufferPlugin>(this);
+        FrameBufferPlugin *plugin = factory->create<FrameBufferPlugin>(this);
 
-       if (plugin) {
-           kDebug() << "Loaded plugin:" << service->name();
-           m_plugins.insert(service->library(), plugin);
-       } else {
-           kDebug() << error;
-       }
+        if (plugin) {
+            kDebug() << "Loaded plugin:" << service->name();
+            m_plugins.insert(service->library(), plugin);
+        } else {
+            kDebug() << error;
+        }
     }
 }
 
@@ -104,7 +105,8 @@ QSharedPointer<FrameBuffer> FrameBufferManager::frameBuffer(WId id)
     }
 
     // We don't already have that frame buffer.
-    QMap<QString, FrameBufferPlugin*>::const_iterator iter = m_plugins.constBegin();
+    QMap<QString, FrameBufferPlugin *>::const_iterator iter = m_plugins.constBegin();
+
     while (iter != m_plugins.constEnd()) {
 
         if (iter.key() == KrfbConfig::preferredFrameBufferPlugin()) {

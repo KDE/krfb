@@ -26,7 +26,7 @@
 
 
 QtFrameBufferPlugin::QtFrameBufferPlugin(QObject *parent, const QVariantList &args)
-  : FrameBufferPlugin(parent, args)
+    : FrameBufferPlugin(parent, args)
 {
 }
 

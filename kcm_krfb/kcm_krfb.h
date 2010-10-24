@@ -27,22 +27,23 @@
 #include "configurationwidget.h"
 #include "../krfb/configuration.h"
 
-class KcmKRfb : public KCModule {
-	Q_OBJECT
+class KcmKRfb : public KCModule
+{
+    Q_OBJECT
 private:
-	Configuration m_configuration;
-	ConfigurationWidget *m_confWidget;
-	void checkKInetd(bool&, bool&);
+    Configuration m_configuration;
+    ConfigurationWidget *m_confWidget;
+    void checkKInetd(bool &, bool &);
 public:
-	KcmKRfb(QWidget *p, const QStringList &);
+    KcmKRfb(QWidget *p, const QStringList &);
 
-	void load();
-	void save();
-	void defaults();
-	QString quickHelp() const;
+    void load();
+    void save();
+    void defaults();
+    QString quickHelp() const;
 private slots:
-	void setInvitationNum(int num);
-	void configChanged();
+    void setInvitationNum(int num);
+    void configChanged();
 };
 
 

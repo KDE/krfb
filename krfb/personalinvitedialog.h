@@ -31,12 +31,12 @@ class PersonalInviteDialog : public KDialog, public Ui::PersonalInviteWidget
 {
     Q_OBJECT
 public:
-    PersonalInviteDialog( QWidget *parent );
+    PersonalInviteDialog(QWidget *parent);
     virtual ~PersonalInviteDialog() {}
 
-    void setHost( const QString &host, uint port );
-    void setPassword( const QString &passwd );
-    void setExpiration( const QDateTime &expire );
+    void setHost(const QString &host, uint port);
+    void setPassword(const QString &passwd);
+    void setExpiration(const QDateTime &expire);
 
 public Q_SLOTS:
     void showWhatsthis(const QString &);

@@ -23,7 +23,7 @@
 #include "framebuffer.h"
 
 FrameBufferPlugin::FrameBufferPlugin(QObject *parent, const QVariantList &)
-  : QObject(parent)
+    : QObject(parent)
 {
 }
 

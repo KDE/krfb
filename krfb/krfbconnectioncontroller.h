@@ -27,7 +27,7 @@
 class KrfbConnectionController : public AbstractConnectionController
 {
     Q_OBJECT
-    
+
 public:
     KrfbConnectionController(struct _rfbClientRec *_cl, AbstractRfbServer *parent);
     virtual ~KrfbConnectionController();

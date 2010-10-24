@@ -28,28 +28,28 @@ class QWidget;
 
 class InviteDialog : public KDialog, public Ui::InviteWidget
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    InviteDialog( QWidget *parent );
+public:
+    InviteDialog(QWidget *parent);
     ~InviteDialog() {}
 
-    void enableInviteButton( bool enable );
+    void enableInviteButton(bool enable);
 
-  public Q_SLOTS:
-    void setInviteCount( int count );
+public Q_SLOTS:
+    void setInviteCount(int count);
     void showWhatsthis();
 
-  signals:
+signals:
     void createInviteClicked();
     void emailInviteClicked();
     void manageInviteClicked();
     void configureClicked();
 
-  protected Q_SLOTS:
+protected Q_SLOTS:
     void slotUser1();
 
-  protected:
+protected:
     QWidget *m_inviteWidget;
 };
 

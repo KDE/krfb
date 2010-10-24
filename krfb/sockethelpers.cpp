@@ -26,30 +26,37 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 
-QString peerAddress(int sock) {
+QString peerAddress(int sock)
+{
 
     const int ADDR_SIZE = 50;
     struct sockaddr sa;
     socklen_t salen = sizeof(struct sockaddr);
+
     if (getpeername(sock, &sa, &salen) == 0) {
         if (sa.sa_family == AF_INET) {
             struct sockaddr_in *si = (struct sockaddr_in *)&sa;
             return QString(inet_ntoa(si->sin_addr));
         }
+
         if (sa.sa_family == AF_INET6) {
             char inetbuf[ADDR_SIZE];
             inet_ntop(sa.sa_family, &sa, inetbuf, ADDR_SIZE);
             return QString(inetbuf);
         }
+
         return QString("not a network address");
     }
+
     return QString("unable to determine...");
 }
 
-unsigned short peerPort(int sock) {
+unsigned short peerPort(int sock)
+{
 
     struct sockaddr sa;
     socklen_t salen = sizeof(struct sockaddr);
+
     if (getpeername(sock, &sa, &salen) == 0) {
         struct sockaddr_in *si = (struct sockaddr_in *)&sa;
         return si->sin_port;
@@ -58,30 +65,37 @@ unsigned short peerPort(int sock) {
     return 0;
 }
 
-QString localAddress(int sock) {
+QString localAddress(int sock)
+{
 
     const int ADDR_SIZE = 50;
     struct sockaddr sa;
     socklen_t salen = sizeof(struct sockaddr);
+
     if (getsockname(sock, &sa, &salen) == 0) {
         if (sa.sa_family == AF_INET) {
             struct sockaddr_in *si = (struct sockaddr_in *)&sa;
             return QString(inet_ntoa(si->sin_addr));
         }
+
         if (sa.sa_family == AF_INET6) {
             char inetbuf[ADDR_SIZE];
             inet_ntop(sa.sa_family, &sa, inetbuf, ADDR_SIZE);
             return QString(inetbuf);
         }
+
         return QString("not a network address");
     }
+
     return QString("unable to determine...");
 }
 
-unsigned short localPort(int sock) {
+unsigned short localPort(int sock)
+{
 
     struct sockaddr sa;
     socklen_t salen = sizeof(struct sockaddr);
+
     if (getsockname(sock, &sa, &salen) == 0) {
         struct sockaddr_in *si = (struct sockaddr_in *)&sa;
         return si->sin_port;

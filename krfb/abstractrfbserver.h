@@ -77,7 +77,7 @@ private:
     Q_DISABLE_COPY(AbstractRfbServer)
 
     class AbstractRfbServerPrivate;
-    AbstractRfbServerPrivate * const d;
+    AbstractRfbServerPrivate *const d;
 
 };
 

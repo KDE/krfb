@@ -15,7 +15,7 @@
 
 
 FrameBuffer::FrameBuffer(WId id, QObject *parent)
- : QObject(parent), win(id)
+    : QObject(parent), win(id)
 {
 }
 
@@ -24,7 +24,7 @@ FrameBuffer::~FrameBuffer()
     delete fb;
 }
 
-char * FrameBuffer::data()
+char *FrameBuffer::data()
 {
     return fb;
 }

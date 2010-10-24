@@ -30,16 +30,17 @@ class KDialog;
   * @author Tim Jansen
   */
 
-class TrayIcon : public KStatusNotifierItem {
-   	Q_OBJECT
+class TrayIcon : public KStatusNotifierItem
+{
+    Q_OBJECT
 public:
-	TrayIcon(KDialog*);
-	~TrayIcon();
+    TrayIcon(KDialog *);
+    ~TrayIcon();
 
 signals:
 
-        void disconnectedMessageDisplayed();
-	void enableDesktopControl(bool);
+    void disconnectedMessageDisplayed();
+    void enableDesktopControl(bool);
     void quitApp();
 
 public Q_SLOTS:
@@ -51,10 +52,10 @@ public Q_SLOTS:
     void showAbout();
 
 private:
-  	KAction* manageInvitationsAction;
-  	KAction* aboutAction;
-	KToggleAction* enableControlAction;
-	bool quitting;
+    KAction *manageInvitationsAction;
+    KAction *aboutAction;
+    KToggleAction *enableControlAction;
+    bool quitting;
 
 };
 

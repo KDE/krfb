@@ -23,7 +23,8 @@ public:
 
 K_GLOBAL_STATIC(InvitationManagerPrivate, invitationManagerPrivate)
 
-InvitationManager * InvitationManager::self() {
+InvitationManager *InvitationManager::self()
+{
     return &invitationManagerPrivate->instance;
 }
 
@@ -33,7 +34,7 @@ InvitationManager::InvitationManager()
 
     QTimer *refreshTimer = new QTimer(this);
     connect(refreshTimer, SIGNAL(timeout()), SLOT(loadInvitations()));
-    refreshTimer->start(1000*60);
+    refreshTimer->start(1000 * 60);
 }
 
 
@@ -42,14 +43,16 @@ InvitationManager::~InvitationManager()
 
 }
 
-void InvitationManager::invalidateOldInvitations() {
+void InvitationManager::invalidateOldInvitations()
+{
     int invNum = invitationList.size();
 
-    while(invNum--) {
+    while (invNum--) {
         if (!invitationList[invNum].isValid()) {
             invitationList.removeAt(invNum);
         }
     }
+
     saveInvitations();
 }
 
@@ -60,15 +63,17 @@ void InvitationManager::loadInvitations()
 
     KSharedConfigPtr conf = KGlobal::config();
     KConfigGroup invitationConfig(conf, "Invitations");
-    int numInv = invitationConfig.readEntry("invitation_num",0);
+    int numInv = invitationConfig.readEntry("invitation_num", 0);
 
     invitationList.clear();
+
     for (int i = 0; i < numInv; i++) {
         KConfigGroup ic(conf, QString("Invitation_%1").arg(i));
         invitationList.append(Invitation(ic));
     }
 
     invalidateOldInvitations();
+
     if (numInv != invNum) {
         emit invitationNumChanged(invitationList.size());
     }
@@ -94,11 +99,13 @@ void InvitationManager::saveInvitations()
     KSharedConfigPtr conf = KGlobal::config();
     KConfigGroup invitationConfig(conf, "Invitations");
     int invNum = invitationList.size();
-    invitationConfig.writeEntry("invitation_num",invNum);
+    invitationConfig.writeEntry("invitation_num", invNum);
+
     for (int i = 0; i < invNum; i++) {
         KConfigGroup ic(conf, QString("Invitation_%1").arg(i));
         invitationList[i].save(ic);
     }
+
     conf->sync();
 }
 
@@ -108,7 +115,7 @@ int InvitationManager::activeInvitations()
     return invitationList.size();
 }
 
-void InvitationManager::removeInvitation(const Invitation & inv)
+void InvitationManager::removeInvitation(const Invitation &inv)
 {
     invitationList.removeAll(inv);
     saveInvitations();

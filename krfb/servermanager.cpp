@@ -55,9 +55,9 @@ KrfbServer *ServerManager::serverForClient(struct _rfbClientRec *cl)
 {
     kDebug();
 
-    foreach (KrfbServer *server, m_servers) {
+    foreach(KrfbServer * server, m_servers) {
         if ((server->listeningAddress() == localAddress(cl->sock)) &&
-            (server->listeningPort() == localPort(cl->sock))) {
+                (server->listeningPort() == localPort(cl->sock))) {
             return server;
         } else if ((server->listeningAddress() == "0.0.0.0") &&
                    (server->listeningPort() == localPort(cl->sock))) {
@@ -79,11 +79,12 @@ KrfbServer *ServerManager::newServer()
     return ret;
 }
 
-void ServerManager::updateServers() {
+void ServerManager::updateServers()
+{
     kDebug();
 
     // Inform all servers that the configuration has been changed.
-    foreach (KrfbServer *server, m_servers) {
+    foreach(KrfbServer * server, m_servers) {
         server->updateSettings();
     }
 }

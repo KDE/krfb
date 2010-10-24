@@ -43,7 +43,7 @@ KrfbServer::KrfbServer()
 {
     kDebug() << "starting ";
     QTimer::singleShot(0, this, SLOT(doStartListening()));
-    connect(InvitationManager::self(), SIGNAL(invitationNumChanged(int)),SLOT(updatePassword()));
+    connect(InvitationManager::self(), SIGNAL(invitationNumChanged(int)), SLOT(updatePassword()));
 }
 
 KrfbServer::~KrfbServer()
@@ -63,10 +63,10 @@ void KrfbServer::doStartListening()
 
     if (KrfbConfig::publishService()) {
         DNSSD::PublicService *service = new DNSSD::PublicService(i18n("%1@%2 (shared desktop)",
-                                                                      KUser().loginName(),
-                                                                      QHostInfo::localHostName()),
-                                                                 "_rfb._tcp",
-                                                                 listeningPort());
+                KUser().loginName(),
+                QHostInfo::localHostName()),
+                "_rfb._tcp",
+                listeningPort());
         service->publishAsync();
     }
 
@@ -82,7 +82,7 @@ void KrfbServer::updateSettings()
     updatePassword();
 }
 
-enum rfbNewClientAction KrfbServer::handleNewClient(struct _rfbClientRec * cl)
+enum rfbNewClientAction KrfbServer::handleNewClient(struct _rfbClientRec *cl)
 {
     KrfbConnectionController *cc = new KrfbConnectionController(cl, this);
 
@@ -90,7 +90,7 @@ enum rfbNewClientAction KrfbServer::handleNewClient(struct _rfbClientRec * cl)
     cc->setControlCanBeEnabled(KrfbConfig::allowDesktopControl());
 
     connect(cc, SIGNAL(sessionEstablished(QString)), SIGNAL(sessionEstablished(QString)));
-    connect(cc, SIGNAL(clientDisconnected(AbstractConnectionController *)),SLOT(clientDisconnected(AbstractConnectionController *)));
+    connect(cc, SIGNAL(clientDisconnected(AbstractConnectionController *)), SLOT(clientDisconnected(AbstractConnectionController *)));
 
     return cc->handleNewClient();
 }

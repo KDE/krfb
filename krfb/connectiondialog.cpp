@@ -26,46 +26,46 @@
 #include <QtGui/QCheckBox>
 #include <QtGui/QLabel>
 
-ConnectionDialog::ConnectionDialog( QWidget *parent )
-    : KDialog( parent )
+ConnectionDialog::ConnectionDialog(QWidget *parent)
+    : KDialog(parent)
 {
-  setCaption(i18n("New Connection"));
-  setButtons(Ok|Cancel);
-  setDefaultButton(Cancel);
-  setModal(true);
+    setCaption(i18n("New Connection"));
+    setButtons(Ok | Cancel);
+    setDefaultButton(Cancel);
+    setModal(true);
 
-  setMinimumSize(500, 200);
+    setMinimumSize(500, 200);
 
-  m_connectWidget = new QWidget( this );
-  setupUi(m_connectWidget);
+    m_connectWidget = new QWidget(this);
+    setupUi(m_connectWidget);
 
-  pixmapLabel->setPixmap(KIcon("krfb").pixmap(128));
+    pixmapLabel->setPixmap(KIcon("krfb").pixmap(128));
 
-  KGuiItem accept = KStandardGuiItem::ok();
-  accept.setText( i18n( "Accept Connection" ) );
-  setButtonGuiItem(Ok, accept);
+    KGuiItem accept = KStandardGuiItem::ok();
+    accept.setText(i18n("Accept Connection"));
+    setButtonGuiItem(Ok, accept);
 
-  KGuiItem refuse = KStandardGuiItem::cancel();
-  refuse.setText( i18n( "Refuse Connection" ) );
-  setButtonGuiItem(Cancel, refuse);
+    KGuiItem refuse = KStandardGuiItem::cancel();
+    refuse.setText(i18n("Refuse Connection"));
+    setButtonGuiItem(Cancel, refuse);
 
-  setMainWidget( m_connectWidget );
+    setMainWidget(m_connectWidget);
 }
 
-void ConnectionDialog::setRemoteHost( const QString &host )
+void ConnectionDialog::setRemoteHost(const QString &host)
 {
-  remoteHost->setText( host );
+    remoteHost->setText(host);
 }
 
-void ConnectionDialog::setAllowRemoteControl( bool b )
+void ConnectionDialog::setAllowRemoteControl(bool b)
 {
-  cbAllowRemoteControl->setChecked( b );
-  cbAllowRemoteControl->setVisible(b);
+    cbAllowRemoteControl->setChecked(b);
+    cbAllowRemoteControl->setVisible(b);
 }
 
 bool ConnectionDialog::allowRemoteControl()
 {
-  return cbAllowRemoteControl->isChecked();
+    return cbAllowRemoteControl->isChecked();
 }
 
 #include "connectiondialog.moc"

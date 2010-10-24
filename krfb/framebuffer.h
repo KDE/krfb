@@ -22,17 +22,17 @@
 
 class FrameBuffer;
 /**
-	@author Alessandro Praduroux <pradu@pradu.it>
+    @author Alessandro Praduroux <pradu@pradu.it>
 */
 class KDE_EXPORT FrameBuffer : public QObject
 {
-Q_OBJECT
+    Q_OBJECT
 public:
     explicit FrameBuffer(WId id, QObject *parent = 0);
 
     virtual ~FrameBuffer();
 
-    char * data();
+    char *data();
 
     virtual QList<QRect> modifiedTiles();
     virtual int paddedWidth();

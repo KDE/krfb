@@ -26,8 +26,8 @@
 
 class KrfbServer : public AbstractRfbServer
 {
-Q_OBJECT
-friend class ServerManager;
+    Q_OBJECT
+    friend class ServerManager;
 public:
     virtual ~KrfbServer();
 

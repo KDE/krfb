@@ -41,29 +41,33 @@ KeyboardEvent::KeyboardEvent(bool d, KeySym k)
 
 void KeyboardEvent::initKeycodes()
 {
-    if (initDone) return;
+    if (initDone) {
+        return;
+    }
+
     initDone = true;
-    KeySym key,*keymap;
-    int i,j,minkey,maxkey,syms_per_keycode;
+    KeySym key, *keymap;
+    int i, j, minkey, maxkey, syms_per_keycode;
 
     dpy = QX11Info::display();
 
-    memset(modifiers,-1,sizeof(modifiers));
+    memset(modifiers, -1, sizeof(modifiers));
 
-    XDisplayKeycodes(dpy,&minkey,&maxkey);
+    XDisplayKeycodes(dpy, &minkey, &maxkey);
     Q_ASSERT(minkey >= 8);
     Q_ASSERT(maxkey < 256);
-    keymap = (KeySym*) XGetKeyboardMapping(dpy, minkey,
-            (maxkey - minkey + 1),
-            &syms_per_keycode);
+    keymap = (KeySym *) XGetKeyboardMapping(dpy, minkey,
+                                            (maxkey - minkey + 1),
+                                            &syms_per_keycode);
     Q_ASSERT(keymap);
 
     for (i = minkey; i <= maxkey; i++) {
-        for (j=0; j<syms_per_keycode; j++) {
+        for (j = 0; j < syms_per_keycode; j++) {
             key = keymap[(i-minkey)*syms_per_keycode+j];
-            if (key>=' ' && key<0x100 && i==XKeysymToKeycode(dpy,key)) {
-                keycodes[key]=i;
-                modifiers[key]=j;
+
+            if (key >= ' ' && key < 0x100 && i == XKeysymToKeycode(dpy, key)) {
+                keycodes[key] = i;
+                modifiers[key] = j;
             }
         }
     }
@@ -72,66 +76,75 @@ void KeyboardEvent::initKeycodes()
     rightShiftCode = XKeysymToKeycode(dpy, XK_Shift_R);
     altGrCode = XKeysymToKeycode(dpy, XK_Mode_switch);
 
-    XFree ((char *)keymap);
+    XFree((char *)keymap);
 }
 
 /* this function adjusts the modifiers according to mod (as from modifiers) and ModifierState */
 void KeyboardEvent::tweakModifiers(signed char mod, bool down)
 {
 
-    bool isShift = ModifierState & (LEFTSHIFT|RIGHTSHIFT);
-    if(mod < 0)
+    bool isShift = ModifierState & (LEFTSHIFT | RIGHTSHIFT);
+
+    if (mod < 0) {
         return;
+    }
 
-    if(isShift && mod != 1) {
-        if(ModifierState & LEFTSHIFT) {
+    if (isShift && mod != 1) {
+        if (ModifierState & LEFTSHIFT) {
             XTestFakeKeyEvent(dpy, leftShiftCode,
-                            down, CurrentTime);
+                              down, CurrentTime);
         }
-        if(ModifierState & RIGHTSHIFT) {
+
+        if (ModifierState & RIGHTSHIFT) {
             XTestFakeKeyEvent(dpy, rightShiftCode,
-                            down, CurrentTime);
+                              down, CurrentTime);
         }
     }
 
-    if(!isShift && mod==1) {
+    if (!isShift && mod == 1) {
         XTestFakeKeyEvent(dpy, leftShiftCode,
-                        down, CurrentTime);
+                          down, CurrentTime);
     }
 
-    if((ModifierState&ALTGR) && mod != 2) {
+    if ((ModifierState & ALTGR) && mod != 2) {
         XTestFakeKeyEvent(dpy, altGrCode,
-                        !down, CurrentTime);
+                          !down, CurrentTime);
     }
 
-    if(!(ModifierState&ALTGR) && mod==2) {
+    if (!(ModifierState & ALTGR) && mod == 2) {
         XTestFakeKeyEvent(dpy, altGrCode,
-                        down, CurrentTime);
+                          down, CurrentTime);
     }
 }
 
-void KeyboardEvent::exec() {
+void KeyboardEvent::exec()
+{
 #define ADJUSTMOD(sym,state) \
     if(keySym==sym) { if(down) ModifierState|=state; else ModifierState&=~state; }
 
-    ADJUSTMOD(XK_Shift_L,LEFTSHIFT);
-    ADJUSTMOD(XK_Shift_R,RIGHTSHIFT);
-    ADJUSTMOD(XK_Mode_switch,ALTGR);
+    ADJUSTMOD(XK_Shift_L, LEFTSHIFT);
+    ADJUSTMOD(XK_Shift_R, RIGHTSHIFT);
+    ADJUSTMOD(XK_Mode_switch, ALTGR);
 
-    if(keySym>=' ' && keySym<0x100) {
+    if (keySym >= ' ' && keySym < 0x100) {
         KeyCode k;
+
         if (down) {
-            tweakModifiers(modifiers[keySym],True);
+            tweakModifiers(modifiers[keySym], True);
         }
+
         k = keycodes[keySym];
+
         if (k != NoSymbol) {
             XTestFakeKeyEvent(dpy, k, down, CurrentTime);
         }
+
         if (down) {
-            tweakModifiers(modifiers[keySym],False);
+            tweakModifiers(modifiers[keySym], False);
         }
     } else {
-        KeyCode k = XKeysymToKeycode(dpy, keySym );
+        KeyCode k = XKeysymToKeycode(dpy, keySym);
+
         if (k != NoSymbol) {
             XTestFakeKeyEvent(dpy, k, down, CurrentTime);
         }
@@ -143,7 +156,7 @@ Display *PointerEvent::dpy;
 int PointerEvent::buttonMask = 0;
 
 PointerEvent::PointerEvent(int b, int _x, int _y)
-    : button_mask(b),x(_x),y(_y)
+    : button_mask(b), x(_x), y(_y)
 {
     if (!initialized) {
         initialized = true;
@@ -152,20 +165,24 @@ PointerEvent::PointerEvent(int b, int _x, int _y)
     }
 }
 
-void PointerEvent::exec() {
+void PointerEvent::exec()
+{
     QDesktopWidget *desktopWidget = QApplication::desktop();
 
     int screen = desktopWidget->screenNumber();
-    if (screen < 0)
+
+    if (screen < 0) {
         screen = 0;
+    }
+
     XTestFakeMotionEvent(dpy, screen, x, y, CurrentTime);
 
-    for(int i = 0; i < 5; i++) {
-        if ((buttonMask&(1<<i))!=(button_mask&(1<<i))) {
+    for (int i = 0; i < 5; i++) {
+        if ((buttonMask&(1 << i)) != (button_mask&(1 << i))) {
             XTestFakeButtonEvent(dpy,
-                i+1,
-                (button_mask&(1<<i))?True:False,
-                CurrentTime);
+                                 i + 1,
+                                 (button_mask&(1 << i)) ? True : False,
+                                 CurrentTime);
         }
     }
 
@@ -174,17 +191,19 @@ void PointerEvent::exec() {
 
 
 ClipboardEvent::ClipboardEvent(AbstractConnectionController *c, const QString &ctext)
-    :controller(c),text(ctext)
+    : controller(c), text(ctext)
 {
 }
 
 void ClipboardEvent::exec()
 {
 #if 0
+
     if ((controller->lastClipboardDirection == ConnectionController::LAST_SYNC_TO_CLIENT) &&
-        (controller->lastClipboardText == text)) {
+            (controller->lastClipboardText == text)) {
         return;
     }
+
     controller->lastClipboardDirection = ConnectionController::LAST_SYNC_TO_SERVER;
     controller->lastClipboardText = text;
 

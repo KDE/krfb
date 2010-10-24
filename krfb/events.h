@@ -21,13 +21,15 @@ class AbstractConnectionController;
 
 class QCursor;
 
-class VNCEvent {
+class VNCEvent
+{
 public:
     virtual void exec() = 0;
     virtual ~VNCEvent();
 };
 
-class KeyboardEvent : public VNCEvent {
+class KeyboardEvent : public VNCEvent
+{
     bool down;
     KeySym keySym;
 
@@ -48,7 +50,8 @@ public:
     virtual void exec();
 };
 
-class PointerEvent : public VNCEvent {
+class PointerEvent : public VNCEvent
+{
     int button_mask, x, y;
 
     static bool initialized;
@@ -59,7 +62,8 @@ public:
     virtual void exec();
 };
 
-class ClipboardEvent : public VNCEvent {
+class ClipboardEvent : public VNCEvent
+{
     AbstractConnectionController *controller;
     QString text;
 public:

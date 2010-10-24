@@ -19,7 +19,7 @@
 const int UPDATE_TIME = 500;
 
 QtFrameBuffer::QtFrameBuffer(WId id, QObject *parent)
- : FrameBuffer(id, parent)
+    : FrameBuffer(id, parent)
 {
     fbImage = QPixmap::grabWindow(win).toImage();
     fb = new char[fbImage.numBytes()];
@@ -49,7 +49,7 @@ int QtFrameBuffer::width()
     return fbImage.width();
 }
 
-void QtFrameBuffer::getServerFormat(rfbPixelFormat& format)
+void QtFrameBuffer::getServerFormat(rfbPixelFormat &format)
 {
     format.bitsPerPixel = 32;
     format.depth = 32;
@@ -80,12 +80,12 @@ void QtFrameBuffer::updateFrameBuffer()
     map.fill(0);
 
     for (int x = 0; x < imgSize.width(); x++) {
-    for (int y = 0; y < imgSize.height(); y++) {
-    if (img.pixel(x,y) != fbImage.pixel(x,y)) {
-    map.setPixel(x,y,1);
-}
-}
-}
+        for (int y = 0; y < imgSize.height(); y++) {
+            if (img.pixel(x, y) != fbImage.pixel(x, y)) {
+                map.setPixel(x, y, 1);
+            }
+        }
+    }
 
     QRegion r(QBitmap::fromImage(map));
     tiles = tiles + r.rects();
@@ -94,7 +94,7 @@ void QtFrameBuffer::updateFrameBuffer()
     tiles.append(img.rect());
 #endif
 
-    memcpy(fb, (const char*)img.bits(), img.numBytes());
+    memcpy(fb, (const char *)img.bits(), img.numBytes());
     fbImage = img;
 
 }

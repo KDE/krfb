@@ -26,7 +26,7 @@
 
 
 X11FrameBufferPlugin::X11FrameBufferPlugin(QObject *parent, const QVariantList &args)
-  : FrameBufferPlugin(parent, args)
+    : FrameBufferPlugin(parent, args)
 {
 }
 

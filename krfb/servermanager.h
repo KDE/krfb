@@ -47,7 +47,7 @@ private:
 
     ServerManager();
 
-    QSet<KrfbServer*> m_servers;
+    QSet<KrfbServer *> m_servers;
 };
 
 

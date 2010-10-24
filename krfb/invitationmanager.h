@@ -16,12 +16,12 @@
 
 class InvitationManagerPrivate;
 /**
-	@author Alessandro Praduroux <pradu@pradu.it>
+    @author Alessandro Praduroux <pradu@pradu.it>
 */
 class InvitationManager : public QObject
 {
-Q_OBJECT
-friend class InvitationManagerPrivate;
+    Q_OBJECT
+    friend class InvitationManagerPrivate;
 public:
     static InvitationManager *self();
 

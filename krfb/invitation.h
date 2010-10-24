@@ -24,28 +24,29 @@
 #include <QtCore/QDateTime>
 #include <QtCore/QObject>
 
-const int INVITATION_DURATION = 60*60;
+const int INVITATION_DURATION = 60 * 60;
 
-class Invitation {
+class Invitation
+{
 public:
-	Invitation();
-	~Invitation();
-	Invitation(const KConfigGroup &config);
-	Invitation(const Invitation &x);
-	Invitation &operator= (const Invitation&x);
+    Invitation();
+    ~Invitation();
+    Invitation(const KConfigGroup &config);
+    Invitation(const Invitation &x);
+    Invitation &operator= (const Invitation &x);
 
     bool operator == (const Invitation &ot);
 
-	QString password() const;
-	QDateTime expirationTime() const;
-	QDateTime creationTime() const;
-	bool isValid() const;
+    QString password() const;
+    QDateTime expirationTime() const;
+    QDateTime creationTime() const;
+    bool isValid() const;
 
-	void save(KConfigGroup &config) const;
+    void save(KConfigGroup &config) const;
 private:
-	QString m_password;
-	QDateTime m_creationTime;
-	QDateTime m_expirationTime;
+    QString m_password;
+    QDateTime m_creationTime;
+    QDateTime m_expirationTime;
 
 };
 

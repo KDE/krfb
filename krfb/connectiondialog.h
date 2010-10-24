@@ -28,17 +28,17 @@ class QWidget;
 
 class ConnectionDialog : public KDialog, public Ui::ConnectionWidget
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    ConnectionDialog( QWidget *parent );
+public:
+    ConnectionDialog(QWidget *parent);
     ~ConnectionDialog() {};
 
-    void setRemoteHost( const QString &host );
-    void setAllowRemoteControl( bool b );
+    void setRemoteHost(const QString &host);
+    void setAllowRemoteControl(bool b);
     bool allowRemoteControl();
 
-  protected:
+protected:
     QWidget *m_connectWidget;
 };
 

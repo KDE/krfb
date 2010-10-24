@@ -14,14 +14,15 @@
 
 class X11FrameBuffer;
 
-class EvWidget: public QWidget {
+class EvWidget: public QWidget
+{
     Q_OBJECT
 
 public:
     EvWidget(X11FrameBuffer *x11fb);
 
 protected:
-    bool x11Event ( XEvent * event );
+    bool x11Event(XEvent *event);
 
 private:
     X11FrameBuffer *fb;
@@ -29,13 +30,13 @@ private:
 };
 
 /**
-	@author Alessandro Praduroux <pradu@pradu.it>
+    @author Alessandro Praduroux <pradu@pradu.it>
 */
 class X11FrameBuffer : public FrameBuffer
 {
-Q_OBJECT
+    Q_OBJECT
 public:
-    X11FrameBuffer(WId id, QObject* parent = 0);
+    X11FrameBuffer(WId id, QObject *parent = 0);
 
     ~X11FrameBuffer();
 
@@ -44,18 +45,18 @@ public:
     virtual int height();
     virtual int width();
     virtual int paddedWidth();
-    virtual void getServerFormat(rfbPixelFormat& format);
+    virtual void getServerFormat(rfbPixelFormat &format);
     virtual void startMonitor();
     virtual void stopMonitor();
 
 
-    void handleXDamage( XEvent *event);
+    void handleXDamage(XEvent *event);
 private:
     void cleanupRects();
     void acquireEvents();
 
     class P;
-    P * const d;
+    P *const d;
 };
 
 #endif

@@ -30,19 +30,19 @@
 #include <KStandardAction>
 
 TrayIcon::TrayIcon(KDialog *d)
-  : KStatusNotifierItem(d),
-    quitting(false)
+    : KStatusNotifierItem(d),
+      quitting(false)
 {
     setIconByPixmap(KIcon("krfb").pixmap(22, 22, KIcon::Disabled));
 
     setToolTipTitle(i18n("Desktop Sharing - disconnected"));
     setCategory(KStatusNotifierItem::ApplicationStatus);
-// 	manageInvitationsAction = new KAction(i18n("Manage &Invitations"), &actionCollection);
-// 	actionCollection.addAction("manage_invitations", manageInvitationsAction);
-// 	connect(manageInvitationsAction, SIGNAL(triggered(bool)), SLOT(showManageInvitations()));
-// 	contextMenu()->addAction(actionCollection.action("manage_invitations"));
+//  manageInvitationsAction = new KAction(i18n("Manage &Invitations"), &actionCollection);
+//  actionCollection.addAction("manage_invitations", manageInvitationsAction);
+//  connect(manageInvitationsAction, SIGNAL(triggered(bool)), SLOT(showManageInvitations()));
+//  contextMenu()->addAction(actionCollection.action("manage_invitations"));
 
-// 	contextMenu()->addSeparator();
+//  contextMenu()->addSeparator();
 
     enableControlAction = new KToggleAction(i18n("Enable Remote Control"), actionCollection());
     enableControlAction->setCheckedState(KGuiItem(i18n("Disable Remote Control")));
@@ -75,8 +75,8 @@ void TrayIcon::showConnectedMessage(const QString &host)
 
     setIconByPixmap(KIcon("krfb"));
     KNotification::event("UserAcceptsConnection",
-                           i18n("The remote user %1 is now connected.",
-                                host));
+                         i18n("The remote user %1 is now connected.",
+                              host));
     setToolTipTitle(i18n("Desktop Sharing - connected with %1", host));
 
     setStatus(KStatusNotifierItem::Active);
@@ -84,8 +84,9 @@ void TrayIcon::showConnectedMessage(const QString &host)
 
 void TrayIcon::showDisconnectedMessage()
 {
-    if (quitting)
+    if (quitting) {
         return;
+    }
 
     setToolTipTitle(i18n("Desktop Sharing - disconnected"));
     setIconByPixmap(KIcon("krfb").pixmap(22, 22, KIcon::Disabled));

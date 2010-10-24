@@ -61,6 +61,7 @@ static bool checkPassword(const QString &p, unsigned char *ochallenge, const cha
 
     memcpy(challenge, ochallenge, CHALLENGESIZE);
     bzero(passwd, MAXPWLEN);
+
     if (!p.isNull()) {
         strncpy(passwd, p.toLatin1(),
                 (MAXPWLEN <= p.length()) ? MAXPWLEN : p.length());
@@ -71,9 +72,9 @@ static bool checkPassword(const QString &p, unsigned char *ochallenge, const cha
 }
 
 KrfbConnectionController::KrfbConnectionController(struct _rfbClientRec *_cl,
-                                                   AbstractRfbServer * parent)
-  : AbstractConnectionController(_cl, parent),
-    m_clientGoneRequiresAction(false)
+        AbstractRfbServer *parent)
+    : AbstractConnectionController(_cl, parent),
+      m_clientGoneRequiresAction(false)
 {
     kDebug();
 }
@@ -143,8 +144,9 @@ bool KrfbConnectionController::handleCheckPassword(rfbClientPtr cl, const char *
     if (!authd) {
         QList<Invitation> invlist = InvitationManager::self()->invitations();
 
-        foreach(const Invitation &it, invlist) {
+        foreach(const Invitation & it, invlist) {
             kDebug() << "checking password";
+
             if (checkPassword(it.password(), cl->authChallenge, response, len) && it.isValid()) {
                 authd = true;
                 InvitationManager::self()->removeInvitation(it);
@@ -156,13 +158,14 @@ bool KrfbConnectionController::handleCheckPassword(rfbClientPtr cl, const char *
     if (!authd) {
         if (InvitationManager::self()->invitations().size() > 0) {
             KNotification::event("InvalidPasswordInvitations",
-                             i18n("Failed login attempt from %1: wrong password",
-                                  remoteIp));
+                                 i18n("Failed login attempt from %1: wrong password",
+                                      remoteIp));
         } else {
             KNotification::event("InvalidPassword",
-                             i18n("Failed login attempt from %1: wrong password",
-                                  remoteIp));
+                                 i18n("Failed login attempt from %1: wrong password",
+                                      remoteIp));
         }
+
         return false;
     }
 

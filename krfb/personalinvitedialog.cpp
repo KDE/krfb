@@ -29,71 +29,74 @@
 
 #include <QtNetwork/QNetworkInterface>
 
-PersonalInviteDialog::PersonalInviteDialog( QWidget *parent )
-    : KDialog( parent )
+PersonalInviteDialog::PersonalInviteDialog(QWidget *parent)
+    : KDialog(parent)
 {
-  setCaption(i18n("Personal Invitation"));
-  setButtons(Close);
-  setDefaultButton(Close);
-  setModal(true);
+    setCaption(i18n("Personal Invitation"));
+    setButtons(Close);
+    setDefaultButton(Close);
+    setModal(true);
 
-  setMinimumSize(500, 250);
+    setMinimumSize(500, 250);
 
-  int port = KrfbConfig::port();
+    int port = KrfbConfig::port();
 
-  m_inviteWidget = new QWidget ( this );
-  setupUi(m_inviteWidget);
-  pixmapLabel->setPixmap(KIcon("krfb").pixmap(128));
+    m_inviteWidget = new QWidget(this);
+    setupUi(m_inviteWidget);
+    pixmapLabel->setPixmap(KIcon("krfb").pixmap(128));
 
-  QList<QNetworkInterface> ifl = QNetworkInterface::allInterfaces();
+    QList<QNetworkInterface> ifl = QNetworkInterface::allInterfaces();
 
-  foreach (const QNetworkInterface &nif, ifl) {
-    if (nif.flags() & QNetworkInterface::IsLoopBack) continue;
-    if (nif.flags() & QNetworkInterface::IsRunning && !nif.addressEntries().isEmpty()) {
-        hostLabel->setText( QString( "%1:%2" ).arg(nif.addressEntries().first().ip().toString()).arg(port));
+    foreach(const QNetworkInterface & nif, ifl) {
+        if (nif.flags() & QNetworkInterface::IsLoopBack) {
+            continue;
+        }
+
+        if (nif.flags() & QNetworkInterface::IsRunning && !nif.addressEntries().isEmpty()) {
+            hostLabel->setText(QString("%1:%2").arg(nif.addressEntries().first().ip().toString()).arg(port));
+        }
     }
-  }
 
-  connect( mainTextLabel, SIGNAL( linkActivated ( QString ) ),
-           SLOT( showWhatsthis( QString ) ));
+    connect(mainTextLabel, SIGNAL(linkActivated(QString)),
+            SLOT(showWhatsthis(QString)));
 
-  connect( hostHelpLabel, SIGNAL( linkActivated ( QString ) ),
-           SLOT( showWhatsthis( QString ) ));
+    connect(hostHelpLabel, SIGNAL(linkActivated(QString)),
+            SLOT(showWhatsthis(QString)));
 
-  setMainWidget( m_inviteWidget );
+    setMainWidget(m_inviteWidget);
 }
 
 
-void PersonalInviteDialog::setHost( const QString &host, uint port )
+void PersonalInviteDialog::setHost(const QString &host, uint port)
 {
-  hostLabel->setText( QString( "%1:%2" )
-      .arg( host ).arg( port ) );
+    hostLabel->setText(QString("%1:%2")
+                       .arg(host).arg(port));
 }
 
-void PersonalInviteDialog::setPassword( const QString &passwd )
+void PersonalInviteDialog::setPassword(const QString &passwd)
 {
-  passwordLabel->setText( passwd );
+    passwordLabel->setText(passwd);
 }
 
-void PersonalInviteDialog::setExpiration( const QDateTime &expire )
+void PersonalInviteDialog::setExpiration(const QDateTime &expire)
 {
-  expirationLabel->setText( expire.toString( Qt::LocalDate ) );
+    expirationLabel->setText(expire.toString(Qt::LocalDate));
 }
 
 void PersonalInviteDialog::showWhatsthis(const QString &link)
 {
     if (link == "htc") {
         QToolTip::showText(QCursor::pos(),
-            i18n("Desktop Sharing uses the VNC protocol. You can use any VNC client to connect. \n"
-                "In KDE the client is called 'Remote Desktop Connection'. Enter the host information\n"
-                "into the client and it will connect.."));
+                           i18n("Desktop Sharing uses the VNC protocol. You can use any VNC client to connect. \n"
+                                "In KDE the client is called 'Remote Desktop Connection'. Enter the host information\n"
+                                "into the client and it will connect.."));
     } else if (link == "help") {
         QToolTip::showText(QCursor::pos(),
-            i18n("This field contains the address of your computer and the display number, separated by a colon.\n"
-                "The address is just a hint - you can use any address that can reach your computer. \n"
-                "Desktop Sharing tries to guess your address from your network configuration, but does\n"
-                "not always succeed in doing so. If your computer is behind a firewall it may have a\n"
-                "different address or be unreachable for other computers."));
+                           i18n("This field contains the address of your computer and the display number, separated by a colon.\n"
+                                "The address is just a hint - you can use any address that can reach your computer. \n"
+                                "Desktop Sharing tries to guess your address from your network configuration, but does\n"
+                                "not always succeed in doing so. If your computer is behind a firewall it may have a\n"
+                                "different address or be unreachable for other computers."));
     }
 }
 

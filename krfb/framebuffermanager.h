@@ -54,7 +54,7 @@ private:
 
     void loadPlugins();
 
-    QMap<QString, FrameBufferPlugin*> m_plugins;
+    QMap<QString, FrameBufferPlugin *> m_plugins;
     QMap<WId, QWeakPointer<FrameBuffer> > m_frameBuffers;
 };
 

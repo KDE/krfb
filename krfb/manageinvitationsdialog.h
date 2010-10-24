@@ -15,11 +15,11 @@
 #include <KDialog>
 
 /**
-	@author Alessandro Praduroux <pradu@pradu.it>
+    @author Alessandro Praduroux <pradu@pradu.it>
 */
 class ManageInvitationsDialog : public KDialog, private Ui::ManageInvitationsDialog
 {
-Q_OBJECT
+    Q_OBJECT
 public:
     ManageInvitationsDialog(QWidget *parent = 0);
 

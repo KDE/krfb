@@ -15,11 +15,11 @@
 
 class QTimer;
 /**
-	@author Alessandro Praduroux <pradu@pradu.it>
+    @author Alessandro Praduroux <pradu@pradu.it>
 */
 class QtFrameBuffer : public FrameBuffer
 {
-Q_OBJECT
+    Q_OBJECT
 public:
     explicit QtFrameBuffer(WId id, QObject *parent = 0);
 
@@ -29,7 +29,7 @@ public:
     virtual int height();
     virtual int width();
     virtual int paddedWidth();
-    virtual void getServerFormat(rfbPixelFormat& format);
+    virtual void getServerFormat(rfbPixelFormat &format);
     virtual void startMonitor();
     virtual void stopMonitor();
 
