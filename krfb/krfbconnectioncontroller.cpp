@@ -28,6 +28,7 @@
 #include "krfbserver.h"
 #include "sockethelpers.h"
 
+#include <strings.h>
 #include <KConfig>
 #include <KDebug>
 #include <KGlobal>
