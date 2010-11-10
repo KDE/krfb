@@ -40,8 +40,6 @@
 #include <signal.h>
 #include <X11/extensions/XTest.h>
 
-#define VERSION "1.0"
-
 static const char description[] = I18N_NOOP("VNC-compatible server to share "
                                   "KDE desktops");
 
@@ -64,8 +62,8 @@ static bool checkX11Capabilities()
 
 int main(int argc, char *argv[])
 {
-    KAboutData aboutData("krfb", 0, ki18n("Desktop Sharing"),
-                         VERSION, ki18n(description), KAboutData::License_GPL,
+    KAboutData aboutData("krfb", 0, ki18n("Desktop Sharing"), KDE_VERSION_STRING,
+                         ki18n(description), KAboutData::License_GPL,
                          ki18n("(c) 2009-2010, Collabora Ltd.\n"
                                "(c) 2007, Alessandro Praduroux\n"
                                "(c) 2001-2003, Tim Jansen\n"
