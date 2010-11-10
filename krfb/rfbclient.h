@@ -37,11 +37,10 @@ public:
 
     static bool controlCanBeEnabled();
     bool controlEnabled() const;
-    void setControlEnabled(bool enabled);
-
     bool isOnHold() const;
 
 public Q_SLOTS:
+    void setControlEnabled(bool enabled);
     void setOnHold(bool onHold);
     void closeConnection();
 
@@ -50,12 +49,7 @@ Q_SIGNALS:
     void holdStatusChanged(bool onHold);
 
 protected:
-    friend class RfbServer;
-    friend class RfbServerManager;
-
-    ///called by RfbServerManager to send framebuffer updates
-    ///and check for possible disconnection
-    void update();
+    friend class RfbServer; //the following event handling methods are called by RfbServer
 
     virtual void handleKeyboardEvent(bool down, rfbKeySym keySym);
     virtual void handleMouseEvent(int buttonMask, int x, int y);
@@ -78,6 +72,11 @@ private Q_SLOTS:
     void onSocketActivated();
 
 private:
+    ///called by RfbServerManager to send framebuffer updates
+    ///and check for possible disconnection
+    void update();
+    friend class RfbServerManager;
+
     struct Private;
     Private *const d;
 };
