@@ -21,6 +21,7 @@
 #include "connectiondialog.h"
 #include "krfbconfig.h"
 #include "sockethelpers.h"
+#include "events.h"
 #include <QtCore/QSocketNotifier>
 #include <KDebug>
 #include <KNotification>
@@ -76,11 +77,6 @@ void RfbClient::setControlEnabled(bool enabled)
         d->controlEnabled = enabled;
         Q_EMIT controlEnabledChanged(enabled);
     }
-}
-
-rfbClientPtr RfbClient::rfbClient() const
-{
-    return d->client;
 }
 
 void RfbClient::update()
@@ -152,6 +148,48 @@ void RfbClient::setStatusConnected()
         d->connected = true;
         Q_EMIT connected(this);
     }
+}
+
+void RfbClient::handleKeyboardEvent(bool down, rfbKeySym keySym)
+{
+    if (d->controlEnabled) {
+        EventHandler::handleKeyboard(down, keySym);
+    }
+}
+
+void RfbClient::handleMouseEvent(int buttonMask, int x, int y)
+{
+    if (d->controlEnabled) {
+        EventHandler::handlePointer(buttonMask, x, y);
+    }
+}
+
+bool RfbClient::checkPassword(const QByteArray & encryptedPassword)
+{
+    Q_UNUSED(encryptedPassword);
+
+    return d->client->screen->authPasswdData == (void*)0;
+}
+
+bool RfbClient::vncAuthCheckPassword(const QByteArray& password, const QByteArray& encryptedPassword) const
+{
+    if (password.isEmpty() && encryptedPassword.isEmpty()) {
+        return true;
+    }
+
+    char passwd[MAXPWLEN];
+    unsigned char challenge[CHALLENGESIZE];
+
+    memcpy(challenge, d->client->authChallenge, CHALLENGESIZE);
+    bzero(passwd, MAXPWLEN);
+
+    if (!password.isEmpty()) {
+        strncpy(passwd, password,
+                (MAXPWLEN <= password.size()) ? MAXPWLEN : password.size());
+    }
+
+    rfbEncryptBytes(challenge, passwd);
+    return memcmp(challenge, encryptedPassword, encryptedPassword.size()) == 0;
 }
 
 void RfbClient::onSocketActivated()

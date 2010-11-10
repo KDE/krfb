@@ -39,6 +39,7 @@ public:
         : RfbClient(client, parent) {}
 
     virtual rfbNewClientAction doHandle();
+    virtual bool checkPassword(const QByteArray & encryptedPassword);
 };
 
 rfbNewClientAction InvitationsRfbClient::doHandle()
@@ -54,27 +55,47 @@ rfbNewClientAction InvitationsRfbClient::doHandle()
     return RfbClient::doHandle();
 }
 
-//***********
-
-static bool doCheckPassword(const QString &p, unsigned char *ochallenge, const char *response, int len)
+bool InvitationsRfbClient::checkPassword(const QByteArray & encryptedPassword)
 {
-    if ((len == 0) && (p.length() == 0)) {
-        return true;
+    bool allowUninvited = KrfbConfig::allowUninvitedConnections();
+    QByteArray password =  KrfbConfig::uninvitedConnectionPassword().toLocal8Bit();
+
+    bool authd = false;
+    kDebug() << "about to start autentication";
+
+    if (allowUninvited) {
+        authd = vncAuthCheckPassword(password, encryptedPassword);
     }
 
-    char passwd[MAXPWLEN];
-    unsigned char challenge[CHALLENGESIZE];
+    if (!authd) {
+        QList<Invitation> invlist = InvitationManager::self()->invitations();
 
-    memcpy(challenge, ochallenge, CHALLENGESIZE);
-    bzero(passwd, MAXPWLEN);
+        foreach(const Invitation & it, invlist) {
+            kDebug() << "checking password";
 
-    if (!p.isNull()) {
-        strncpy(passwd, p.toLatin1(),
-                (MAXPWLEN <= p.length()) ? MAXPWLEN : p.length());
+            if (vncAuthCheckPassword(it.password().toLocal8Bit(), encryptedPassword)
+                && it.isValid())
+            {
+                authd = true;
+                InvitationManager::self()->removeInvitation(it);
+                break;
+            }
+        }
     }
 
-    rfbEncryptBytes(challenge, passwd);
-    return memcmp(challenge, response, len) == 0;
+    if (!authd) {
+        if (InvitationManager::self()->invitations().size() > 0) {
+            KNotification::event("InvalidPasswordInvitations",
+                                 i18n("Failed login attempt from %1: wrong password", name()));
+        } else {
+            KNotification::event("InvalidPassword",
+                                 i18n("Failed login attempt from %1: wrong password", name()));
+        }
+
+        return false;
+    }
+
+    return true;
 }
 
 //***********
@@ -93,52 +114,6 @@ void InvitationsRfbServer::init()
 RfbClient* InvitationsRfbServer::newClient(rfbClientPtr client)
 {
     return new InvitationsRfbClient(client, this);
-}
-
-bool InvitationsRfbServer::checkPassword(RfbClient* client, const char* encryptedPassword, int len)
-{
-    bool allowUninvited = KrfbConfig::allowUninvitedConnections();
-    QString password =  KrfbConfig::uninvitedConnectionPassword();
-
-    bool authd = false;
-    kDebug() << "about to start autentication";
-
-    if (allowUninvited) {
-        authd = doCheckPassword(password, client->rfbClient()->authChallenge, encryptedPassword, len);
-    }
-
-    if (!authd) {
-        QList<Invitation> invlist = InvitationManager::self()->invitations();
-
-        foreach(const Invitation & it, invlist) {
-            kDebug() << "checking password";
-
-            if (doCheckPassword(it.password(), client->rfbClient()->authChallenge,
-                                encryptedPassword, len)
-                && it.isValid())
-            {
-                authd = true;
-                InvitationManager::self()->removeInvitation(it);
-                break;
-            }
-        }
-    }
-
-    if (!authd) {
-        if (InvitationManager::self()->invitations().size() > 0) {
-            KNotification::event("InvalidPasswordInvitations",
-                                 i18n("Failed login attempt from %1: wrong password",
-                                      client->name()));
-        } else {
-            KNotification::event("InvalidPassword",
-                                 i18n("Failed login attempt from %1: wrong password",
-                                      client->name()));
-        }
-
-        return false;
-    }
-
-    return true;
 }
 
 void InvitationsRfbServer::startAndCheck()

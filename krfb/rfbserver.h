@@ -52,10 +52,6 @@ private Q_SLOTS:
 protected:
     virtual RfbClient *newClient(rfbClientPtr client) = 0;
 
-    virtual void handleKeyboardEvent(RfbClient *client, rfbBool down, rfbKeySym keySym);
-    virtual void handleMouseEvent(RfbClient *client, int buttonMask, int x, int y);
-    virtual bool checkPassword(RfbClient *client, const char *encryptedPassword, int len);
-
 private:
     static rfbNewClientAction newClientHook(rfbClientPtr cl);
     static void clientGoneHook(rfbClientPtr cl);

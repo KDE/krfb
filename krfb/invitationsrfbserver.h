@@ -32,7 +32,6 @@ protected:
     InvitationsRfbServer() : RfbServer(0) {}
 
     virtual RfbClient* newClient(rfbClientPtr client);
-    virtual bool checkPassword(RfbClient* client, const char* encryptedPassword, int len);
 
 private Q_SLOTS:
     void startAndCheck();

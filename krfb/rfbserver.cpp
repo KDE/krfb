@@ -18,7 +18,6 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 #include "rfbserver.h"
-#include "events.h"
 #include "rfbservermanager.h"
 #include <QtCore/QSocketNotifier>
 #include <KDebug>
@@ -53,32 +52,6 @@ RfbServer::~RfbServer()
     delete d;
 
     RfbServerManager::instance()->unregisterServer(this);
-}
-
-void RfbServer::handleKeyboardEvent(RfbClient* client, rfbBool down, rfbKeySym keySym)
-{
-    if (client->controlEnabled()) {
-        EventHandler::handleKeyboard(down, keySym);
-    }
-}
-
-void RfbServer::handleMouseEvent(RfbClient* client, int buttonMask, int x, int y)
-{
-    if (client->controlEnabled()) {
-        EventHandler::handlePointer(buttonMask, x, y);
-    }
-}
-
-/** Default implementation returns false if a password is required.
- * Reimplement to do more useful stuff
- */
-bool RfbServer::checkPassword(RfbClient* client, const char* encryptedPassword, int len)
-{
-    Q_UNUSED(client);
-    Q_UNUSED(encryptedPassword);
-    Q_UNUSED(len);
-
-    return !d->passwordRequired;
 }
 
 QByteArray RfbServer::listeningAddress() const
@@ -259,25 +232,22 @@ void RfbServer::clientGoneHook(rfbClientPtr cl)
 //static
 rfbBool RfbServer::passwordCheck(rfbClientPtr cl, const char *encryptedPassword, int len)
 {
-    RfbServer *server = static_cast<RfbServer*>(cl->screen->screenData);
     RfbClient *client = static_cast<RfbClient*>(cl->clientData);
-    return server->checkPassword(client, encryptedPassword, len);
+    return client->checkPassword(QByteArray::fromRawData(encryptedPassword, len));
 }
 
 //static
 void RfbServer::keyboardHook(rfbBool down, rfbKeySym keySym, rfbClientPtr cl)
 {
-    RfbServer *server = static_cast<RfbServer*>(cl->screen->screenData);
     RfbClient *client = static_cast<RfbClient*>(cl->clientData);
-    server->handleKeyboardEvent(client, down ? true : false, keySym);
+    client->handleKeyboardEvent(down ? true : false, keySym);
 }
 
 //static
 void RfbServer::pointerHook(int bm, int x, int y, rfbClientPtr cl)
 {
-    RfbServer *server = static_cast<RfbServer*>(cl->screen->screenData);
     RfbClient *client = static_cast<RfbClient*>(cl->clientData);
-    server->handleMouseEvent(client, bm, x, y);
+    client->handleMouseEvent(bm, x, y);
 }
 
 //static
