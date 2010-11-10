@@ -32,6 +32,11 @@
 #include <QtGui/QPixmap>
 #include <QtGui/qwindowdefs.h>
 
+#ifdef KRFB_WITH_TELEPATHY_TUBES
+# include "tubesclienthandler.h"
+# include <TelepathyQt4/ClientRegistrar>
+#endif
+
 #include <signal.h>
 #include <X11/extensions/XTest.h>
 
@@ -103,6 +108,12 @@ int main(int argc, char *argv[])
 
     //init the core
     InvitationsRfbServer::init();
+
+#ifdef KRFB_WITH_TELEPATHY_TUBES
+    Tp::ClientRegistrarPtr clientRegistrar = Tp::ClientRegistrar::create();
+    clientRegistrar->registerClient(Tp::AbstractClientPtr(new TubesClientHandler),
+                                    "krfb_rfb_handler");
+#endif
 
     //init the GUI
     ManageInvitationsDialog invitationsDialog;

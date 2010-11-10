@@ -12,6 +12,7 @@ if(NOT INSIDE_KDENETWORK)
 
     include(CheckSymbolExists)
     find_package(LibVNCServer REQUIRED)
+    find_package(TelepathyQt4)
 
     set(CMAKE_REQUIRED_DEFINITIONS ${_KDE_PLATFORM_DEFINITIONS})
 

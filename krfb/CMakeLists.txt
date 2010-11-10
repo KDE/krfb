@@ -41,6 +41,11 @@ install (FILES
 # Second target: krfb - the app
 # itself.
 
+if(TELEPATHY_QT4_FOUND)
+    add_definitions(-DKRFB_WITH_TELEPATHY_TUBES)
+    include_directories(${TELEPATHY_QT4_INCLUDE_DIR})
+endif(TELEPATHY_QT4_FOUND)
+
 set (krfb_SRCS
      connectiondialog.cpp
      events.cpp
@@ -58,6 +63,14 @@ set (krfb_SRCS
      rfbclient.cpp
      invitationsrfbserver.cpp
 )
+
+if (TELEPATHY_QT4_FOUND)
+    set (krfb_SRCS
+         ${krfb_SRCS}
+         tubesrfbserver.cpp
+         tubesclienthandler.cpp
+    )
+endif (TELEPATHY_QT4_FOUND)
 
 kde4_add_kcfg_files (krfb_SRCS
                      krfbconfig.kcfgc
@@ -88,6 +101,12 @@ target_link_libraries (krfb
                        ${KDE4_KDEUI_LIBS}
 )
 
+if (TELEPATHY_QT4_FOUND)
+    target_link_libraries(krfb
+                          ${TELEPATHY_QT4_LIBRARIES}
+    )
+endif (TELEPATHY_QT4_FOUND)
+
 if (X11_XTest_FOUND)
     target_link_libraries (krfb
                            ${X11_XTest_LIB}
@@ -97,6 +116,15 @@ endif (X11_XTest_FOUND)
 install (TARGETS krfb
          ${INSTALL_TARGETS_DEFAULT_ARGS}
 )
+
+if (TELEPATHY_QT4_FOUND)
+    configure_file(org.freedesktop.Telepathy.Client.krfb_rfb_handler.service.in
+                   org.freedesktop.Telepathy.Client.krfb_rfb_handler.service)
+    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/org.freedesktop.Telepathy.Client.krfb_rfb_handler.service
+            DESTINATION ${DBUS_SERVICES_INSTALL_DIR})
+
+    install(FILES krfb_rfb_handler.client DESTINATION ${CMAKE_INSTALL_PREFIX}/share/telepathy/clients/)
+endif (TELEPATHY_QT4_FOUND)
 
 ########### install files ###############
 

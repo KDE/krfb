@@ -1,0 +1,3 @@
+[D-BUS Service]
+Name=org.freedesktop.Telepathy.Client.krfb_rfb_handler
+Exec=@CMAKE_INSTALL_PREFIX@/bin/krfb --nodialog
