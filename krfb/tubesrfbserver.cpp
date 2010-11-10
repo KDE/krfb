@@ -144,6 +144,7 @@ TubesRfbServer::TubesRfbServer(const Tp::ChannelPtr & channel, QObject *parent)
 
     setListeningPort(6789);
     setListeningAddress("127.0.0.1");  // Listen only on the loopback network interface
+    setPasswordRequired(false);
 }
 
 TubesRfbServer::~TubesRfbServer()
