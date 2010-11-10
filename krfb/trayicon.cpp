@@ -30,8 +30,7 @@
 #include <KStandardAction>
 
 TrayIcon::TrayIcon(KDialog *d)
-    : KStatusNotifierItem(d),
-      quitting(false)
+    : KStatusNotifierItem(d)
 {
     setIconByPixmap(KIcon("krfb").pixmap(22, 22, KIcon::Disabled));
 
@@ -41,16 +40,11 @@ TrayIcon::TrayIcon(KDialog *d)
     enableControlAction = new KToggleAction(i18n("Enable Remote Control"), actionCollection());
     enableControlAction->setCheckedState(KGuiItem(i18n("Disable Remote Control")));
     enableControlAction->setEnabled(false);
-    actionCollection()->addAction("enable_control", enableControlAction);
     connect(enableControlAction, SIGNAL(toggled(bool)), SIGNAL(enableDesktopControl(bool)));
-    contextMenu()->addAction(actionCollection()->action("enable_control"));
+    contextMenu()->addAction(enableControlAction);
 
     contextMenu()->addSeparator();
     contextMenu()->addAction(KStandardAction::aboutApp(this, SLOT(showAbout()), actionCollection()));
-}
-
-TrayIcon::~TrayIcon()
-{
 }
 
 void TrayIcon::showAbout()
@@ -58,14 +52,8 @@ void TrayIcon::showAbout()
     KAboutApplicationDialog(KGlobal::mainComponent().aboutData()).exec();
 }
 
-void TrayIcon::prepareQuit()
-{
-    quitting = true;
-}
-
 void TrayIcon::showConnectedMessage(const QString &host)
 {
-
     setIconByPixmap(KIcon("krfb"));
     KNotification::event("UserAcceptsConnection",
                          i18n("The remote user %1 is now connected.",
@@ -77,10 +65,6 @@ void TrayIcon::showConnectedMessage(const QString &host)
 
 void TrayIcon::showDisconnectedMessage()
 {
-    if (quitting) {
-        return;
-    }
-
     setToolTipTitle(i18n("Desktop Sharing - disconnected"));
     setIconByPixmap(KIcon("krfb").pixmap(22, 22, KIcon::Disabled));
     KNotification::event("ConnectionClosed", i18n("The remote user has closed the connection."));

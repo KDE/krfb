@@ -18,8 +18,6 @@
 #ifndef TRAYICON_H
 #define TRAYICON_H
 
-#include <KActionCollection>
-#include <KPassivePopup>
 #include <KStatusNotifierItem>
 #include <KToggleAction>
 
@@ -35,16 +33,12 @@ class TrayIcon : public KStatusNotifierItem
     Q_OBJECT
 public:
     TrayIcon(KDialog *);
-    ~TrayIcon();
 
 signals:
-
     void disconnectedMessageDisplayed();
     void enableDesktopControl(bool);
-    void quitApp();
 
 public Q_SLOTS:
-    void prepareQuit();
     void showConnectedMessage(const QString &host);
     void showDisconnectedMessage();
     void setDesktopControlSetting(bool);
@@ -53,8 +47,6 @@ public Q_SLOTS:
 private:
     KAction *aboutAction;
     KToggleAction *enableControlAction;
-    bool quitting;
-
 };
 
 #endif
