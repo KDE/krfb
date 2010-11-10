@@ -66,7 +66,7 @@ class TubesRfbClient : public RfbClient
 public:
     TubesRfbClient(rfbClientPtr client, QObject* parent = 0);
 
-    virtual QString name();
+    virtual QString name() const;
     void setContact(const Tp::ContactPtr & contact);
 
 protected:
@@ -82,7 +82,7 @@ TubesRfbClient::TubesRfbClient(rfbClientPtr client, QObject* parent)
 {
 }
 
-QString TubesRfbClient::name()
+QString TubesRfbClient::name() const
 {
     if (m_contact) {
         return m_contact->alias();

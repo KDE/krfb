@@ -54,7 +54,7 @@ RfbClient::~RfbClient()
     delete d;
 }
 
-QString RfbClient::name()
+QString RfbClient::name() const
 {
     return peerAddress(d->client->sock) + ":" + QString::number(peerPort(d->client->sock));
 }

@@ -32,7 +32,7 @@ public:
     virtual ~RfbClient();
 
     /** Returns a name for the client, to be shown to the user */
-    virtual QString name();
+    virtual QString name() const;
 
     static bool controlCanBeEnabled();
     bool controlEnabled() const;
