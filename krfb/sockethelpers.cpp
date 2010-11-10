@@ -59,7 +59,7 @@ unsigned short peerPort(int sock)
 
     if (getpeername(sock, &sa, &salen) == 0) {
         struct sockaddr_in *si = (struct sockaddr_in *)&sa;
-        return si->sin_port;
+        return ntohs(si->sin_port);
     }
 
     return 0;
@@ -98,7 +98,7 @@ unsigned short localPort(int sock)
 
     if (getsockname(sock, &sa, &salen) == 0) {
         struct sockaddr_in *si = (struct sockaddr_in *)&sa;
-        return si->sin_port;
+        return ntohs(si->sin_port);
     }
 
     return 0;
