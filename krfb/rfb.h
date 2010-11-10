@@ -6,7 +6,7 @@
 #ifndef KRFB_RFB_H
 #define KRFB_RFB_H
 
-#include <rfb/rfb.h>
+#include "rfb/rfb.h"
 
 #undef TRUE
 #undef FALSE
