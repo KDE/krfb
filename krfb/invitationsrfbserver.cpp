@@ -79,25 +79,15 @@ static bool doCheckPassword(const QString &p, unsigned char *ochallenge, const c
 
 //***********
 
-static InvitationsRfbServer *s_server = 0;
 
 void InvitationsRfbServer::init()
 {
-    if (!s_server) {
-        s_server = new InvitationsRfbServer;
-        s_server->setListeningPort(KrfbConfig::port());
-        s_server->setListeningAddress("0.0.0.0");  // Listen on all available network addresses
-        s_server->setPasswordRequired(true);
-        QTimer::singleShot(0, s_server, SLOT(startAndCheck()));
-    }
-}
-
-void InvitationsRfbServer::cleanup()
-{
-    if (s_server) {
-        delete s_server;
-        s_server = 0;
-    }
+    InvitationsRfbServer *server;
+    server = new InvitationsRfbServer;
+    server->setListeningPort(KrfbConfig::port());
+    server->setListeningAddress("0.0.0.0");  // Listen on all available network addresses
+    server->setPasswordRequired(true);
+    QTimer::singleShot(0, server, SLOT(startAndCheck()));
 }
 
 RfbClient* InvitationsRfbServer::newClient(rfbClientPtr client)

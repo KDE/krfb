@@ -29,6 +29,7 @@ class RfbClient : public QObject
     Q_PROPERTY(bool controlEnabled READ controlEnabled WRITE setControlEnabled NOTIFY controlEnabledChanged)
 public:
     RfbClient(rfbClientPtr client, QObject *parent = 0);
+    virtual ~RfbClient();
 
     /** Returns a name for the client, to be shown to the user */
     virtual QString name();
@@ -38,28 +39,38 @@ public:
     void setControlEnabled(bool enabled);
 
     ///returns the internal rfbClient
-    rfbClientPtr rfbClient() const { return m_client; }
+    rfbClientPtr rfbClient() const;
+
+public Q_SLOTS:
+    void setOnHold(bool onHold);
+    void closeConnection();
 
 Q_SIGNALS:
     void controlEnabledChanged(bool enabled);
     void connected(RfbClient *self);
 
 protected:
+    friend class RfbServer;
     friend class RfbServerManager;
-    ///called by RfbServerManager to begin handling the client
+
+    ///called by RfbServer to begin handling the client
     virtual rfbNewClientAction doHandle();
 
-    bool isConnected() const { return m_connected; }
+    ///called by RfbServerManager to send framebuffer updates
+    ///and check for possible disconnection
+    void update();
+
+    bool isConnected() const;
     void setStatusConnected(); ///call to declare the client as connected
 
 private Q_SLOTS:
+    void onSocketActivated();
     void dialogAccepted();
     void dialogRejected();
 
 private:
-    bool m_connected;
-    bool m_controlEnabled;
-    rfbClientPtr m_client;
+    struct Private;
+    Private *const d;
 };
 
 #endif // RFBCLIENT_H

@@ -101,9 +101,9 @@ void TubesRfbClient::setContact(const Tp::ContactPtr & contact)
         //we were previously on hold, so we now need to act if
         //the parent's doHandle() says we must do something else
         if (action == RFB_CLIENT_ACCEPT) {
-            rfbStartOnHoldClient(rfbClient());
+            setOnHold(false);
         } else if (action == RFB_CLIENT_REFUSE) {
-            rfbRefuseOnHoldClient(rfbClient());
+            closeConnection();
         } //else if action == RFB_CLIENT_ON_HOLD there is nothing to do
     }
 }

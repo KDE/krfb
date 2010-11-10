@@ -22,6 +22,7 @@
 
 #include "rfb.h"
 #include "rfbclient.h"
+#include <QtCore/QRect>
 
 class RfbServer : public QObject
 {
@@ -29,12 +30,6 @@ class RfbServer : public QObject
 public:
     RfbServer(QObject *parent = 0);
     virtual ~RfbServer();
-
-    virtual RfbClient *newClient(rfbClientPtr client) = 0;
-
-    virtual void handleKeyboardEvent(RfbClient *client, rfbBool down, rfbKeySym keySym);
-    virtual void handleMouseEvent(RfbClient *client, int buttonMask, int x, int y);
-    virtual bool checkPassword(RfbClient *client, const char *encryptedPassword, int len);
 
     QByteArray listeningAddress() const;
     int listeningPort() const;
@@ -48,7 +43,28 @@ public Q_SLOTS:
     bool start();
     void stop(bool disconnectClients = true);
 
+    void updateScreen(const QList<QRect> & modifiedTiles);
+    void updateCursorPosition(const QPoint & position);
+
+private Q_SLOTS:
+    void onListenSocketActivated();
+
+protected:
+    virtual RfbClient *newClient(rfbClientPtr client) = 0;
+
+    virtual void handleKeyboardEvent(RfbClient *client, rfbBool down, rfbKeySym keySym);
+    virtual void handleMouseEvent(RfbClient *client, int buttonMask, int x, int y);
+    virtual bool checkPassword(RfbClient *client, const char *encryptedPassword, int len);
+
 private:
+    static rfbNewClientAction newClientHook(rfbClientPtr cl);
+    static void clientGoneHook(rfbClientPtr cl);
+
+    static rfbBool passwordCheck(rfbClientPtr cl, const char *encryptedPassword, int len);
+    static void keyboardHook(rfbBool down, rfbKeySym keySym, rfbClientPtr cl);
+    static void pointerHook(int bm, int x, int y, rfbClientPtr cl);
+    static void clipboardHook(char *str, int len, rfbClientPtr cl);
+
     Q_DISABLE_COPY(RfbServer)
 
     struct Private;

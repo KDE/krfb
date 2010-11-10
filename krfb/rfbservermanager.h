@@ -39,19 +39,17 @@ Q_SIGNALS:
 
 private Q_SLOTS:
     void init();
-    void processRfbEvents();
+    void updateScreens();
     void cleanup();
 
 private:
-    /** Returns the id of the server, which should be >0. -1 means failed to start. */
-    int startServer(RfbServer *server);
-    void stopServer(int id, bool disconnectClients);
+    void registerServer(RfbServer *server);
+    void unregisterServer(RfbServer *server);
+
+    rfbScreenInfoPtr newScreen();
 
     void addClient(RfbClient *cc);
     void removeClient(RfbClient *cc);
-
-    static rfbNewClientAction newClientHook(rfbClientPtr cl);
-    static void clientGoneHook(rfbClientPtr cl);
 
     RfbServerManager();
     virtual ~RfbServerManager();

@@ -128,9 +128,6 @@ int main(int argc, char *argv[])
     sigaddset(&sigs, SIGPIPE);
     sigprocmask(SIG_BLOCK, &sigs, 0);
 
-    int ret = app.exec();
-
-    //cleanup
-    InvitationsRfbServer::cleanup();
+    return app.exec();
 }
 

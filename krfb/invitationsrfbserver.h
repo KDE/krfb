@@ -27,7 +27,6 @@ class InvitationsRfbServer : public RfbServer
     Q_OBJECT
 public:
     static void init();
-    static void cleanup();
 
 protected:
     InvitationsRfbServer() : RfbServer(0) {}

@@ -21,20 +21,42 @@
 #include "connectiondialog.h"
 #include "krfbconfig.h"
 #include "sockethelpers.h"
+#include <QtCore/QSocketNotifier>
 #include <KDebug>
 #include <KNotification>
+#include <poll.h>
+
+struct RfbClient::Private
+{
+    Private(rfbClientPtr client) :
+        connected(false),
+        controlEnabled(false),
+        client(client)
+    {}
+
+    bool connected;
+    bool controlEnabled;
+    rfbClientPtr client;
+    QSocketNotifier *notifier;
+};
 
 RfbClient::RfbClient(rfbClientPtr client, QObject* parent)
-    : QObject(parent),
-      m_connected(false),
-      m_controlEnabled(false),
-      m_client(client)
+    : QObject(parent), d(new Private(client))
 {
+    d->notifier = new QSocketNotifier(client->sock, QSocketNotifier::Read, this);
+    d->notifier->setEnabled(false);
+    connect(d->notifier, SIGNAL(activated(int)), this, SLOT(onSocketActivated()));
+}
+
+RfbClient::~RfbClient()
+{
+    kDebug();
+    delete d;
 }
 
 QString RfbClient::name()
 {
-    return peerAddress(m_client->sock) + ":" + QString::number(peerPort(m_client->sock));
+    return peerAddress(d->client->sock) + ":" + QString::number(peerPort(d->client->sock));
 }
 
 //static
@@ -45,15 +67,50 @@ bool RfbClient::controlCanBeEnabled()
 
 bool RfbClient::controlEnabled() const
 {
-    return m_controlEnabled;
+    return d->controlEnabled;
 }
 
 void RfbClient::setControlEnabled(bool enabled)
 {
-    if (controlCanBeEnabled() && m_controlEnabled != enabled) {
-        m_controlEnabled = enabled;
+    if (controlCanBeEnabled() && d->controlEnabled != enabled) {
+        d->controlEnabled = enabled;
         Q_EMIT controlEnabledChanged(enabled);
     }
+}
+
+rfbClientPtr RfbClient::rfbClient() const
+{
+    return d->client;
+}
+
+void RfbClient::update()
+{
+    rfbUpdateClient(d->client);
+
+    //This is how we handle disconnection.
+    //if rfbUpdateClient() finds out that it can't write to the socket,
+    //it closes it and sets it to -1. So, we just have to check this here
+    //and call rfbClientConnectionGone() if necessary. This will call
+    //the clientGoneHook which in turn will remove this RfbClient instance
+    //from the server manager and will call deleteLater() to delete it
+    if (d->client->sock == -1) {
+        kDebug() << "disconnected during update";
+        d->notifier->setEnabled(false);
+        rfbClientConnectionGone(d->client);
+    }
+}
+
+void RfbClient::setOnHold(bool onHold)
+{
+    d->client->onHold = onHold;
+    d->notifier->setEnabled(!onHold);
+}
+
+void RfbClient::closeConnection()
+{
+    d->notifier->setEnabled(false);
+    rfbCloseClient(d->client);
+    rfbClientConnectionGone(d->client);
 }
 
 rfbNewClientAction RfbClient::doHandle()
@@ -84,11 +141,42 @@ rfbNewClientAction RfbClient::doHandle()
     return RFB_CLIENT_ON_HOLD;
 }
 
+bool RfbClient::isConnected() const
+{
+    return d->connected;
+}
+
 void RfbClient::setStatusConnected()
 {
-    if (!m_connected) {
-        m_connected = true;
+    if (!d->connected) {
+        d->connected = true;
         Q_EMIT connected(this);
+    }
+}
+
+void RfbClient::onSocketActivated()
+{
+    //Process not only one, but all pending messages.
+    //poll() idea/code copied from vino:
+    // Copyright (C) 2003 Sun Microsystems, Inc.
+    // License: GPL v2 or later
+    struct pollfd pollfd = { d->client->sock, POLLIN|POLLPRI, 0 };
+
+    while(poll(&pollfd, 1, 0) == 1) {
+        rfbProcessClientMessage(d->client);
+
+        //This is how we handle disconnection.
+        //if rfbProcessClientMessage() finds out that it can't read the socket,
+        //it closes it and sets it to -1. So, we just have to check this here
+        //and call rfbClientConnectionGone() if necessary. This will call
+        //the clientGoneHook which in turn will remove this RfbClient instance
+        //from the server manager and will call deleteLater() to delete it
+        if (d->client->sock == -1) {
+            kDebug() << "disconnected from socket signal";
+            d->notifier->setEnabled(false);
+            rfbClientConnectionGone(d->client);
+            break;
+        }
     }
 }
 
@@ -101,8 +189,7 @@ void RfbClient::dialogAccepted()
         return;
     }
 
-    // rfbStartOnHoldClient(cl);
-    m_client->onHold = false;
+    setOnHold(false);
     setControlEnabled(dialog->cbAllowRemoteControl->isChecked());
     setStatusConnected();
 }
@@ -110,7 +197,7 @@ void RfbClient::dialogAccepted()
 void RfbClient::dialogRejected()
 {
     kDebug() << "refused connection";
-    rfbRefuseOnHoldClient(m_client);
+    closeConnection();
 }
 
 #include "rfbclient.moc"
