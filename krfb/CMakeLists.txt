@@ -42,22 +42,21 @@ install (FILES
 # itself.
 
 set (krfb_SRCS
-     abstractconnectioncontroller.cpp
-     abstractrfbserver.cpp
      connectiondialog.cpp
      events.cpp
      framebuffermanager.cpp
      invitation.cpp
      invitedialog.cpp
      invitationmanager.cpp
-     krfbconnectioncontroller.cpp
-     krfbserver.cpp
      main.cpp
      manageinvitationsdialog.cpp
      personalinvitedialog.cpp
-     servermanager.cpp
      sockethelpers.cpp
      trayicon.cpp
+     rfbservermanager.cpp
+     rfbserver.cpp
+     rfbclient.cpp
+     invitationsrfbserver.cpp
 )
 
 kde4_add_kcfg_files (krfb_SRCS

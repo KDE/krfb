@@ -15,10 +15,9 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "krfbserver.h"
 #include "manageinvitationsdialog.h"
-#include "servermanager.h"
 #include "trayicon.h"
+#include "invitationsrfbserver.h"
 
 #include <KAboutApplicationDialog>
 #include <KAboutData>
@@ -34,12 +33,29 @@
 #include <QtGui/qwindowdefs.h>
 
 #include <signal.h>
+#include <X11/extensions/XTest.h>
 
 #define VERSION "1.0"
 
 static const char description[] = I18N_NOOP("VNC-compatible server to share "
                                   "KDE desktops");
 
+static bool checkX11Capabilities()
+{
+    int bp1, bp2, majorv, minorv;
+    Bool r = XTestQueryExtension(QX11Info::display(), &bp1, &bp2,
+                                 &majorv, &minorv);
+
+    if ((!r) || (((majorv * 1000) + minorv) < 2002)) {
+        KMessageBox::error(0,
+                           i18n("Your X11 Server does not support the required XTest extension "
+                                "version 2.2. Sharing your desktop is not possible."),
+                           i18n("Desktop Sharing Error"));
+        return false;
+    }
+
+    return true;
+}
 
 int main(int argc, char *argv[])
 {
@@ -81,35 +97,29 @@ int main(int argc, char *argv[])
     KApplication app;
     app.setQuitOnLastWindowClosed(false);
 
+    if (!checkX11Capabilities()) {
+        return 1;
+    }
 
+    //init the core
+    InvitationsRfbServer::init();
+
+    //init the GUI
     ManageInvitationsDialog invitationsDialog;
+    TrayIcon trayicon(&invitationsDialog);
 
     if (KCmdLineArgs::parsedArgs()->isSet("dialog")) {
         invitationsDialog.show();
     }
-
-    TrayIcon trayicon(&invitationsDialog);
-
-    KrfbServer *server = ServerManager::instance()->newServer(); // initialize the server manager
-
-    if (!server->checkX11Capabilities()) {
-        return 1;
-    }
-
-    QObject::connect(&trayicon, SIGNAL(enableDesktopControl(bool)),
-                     server, SLOT(enableDesktopControl(bool)));
-    QObject::connect(server, SIGNAL(sessionEstablished(QString)),
-                     &trayicon, SLOT(showConnectedMessage(QString)));
-    QObject::connect(server, SIGNAL(sessionFinished()),
-                     &trayicon, SLOT(showDisconnectedMessage()));
-    QObject::connect(server, SIGNAL(desktopControlSettingChanged(bool)),
-                     &trayicon, SLOT(setDesktopControlSetting(bool)));
 
     sigset_t sigs;
     sigemptyset(&sigs);
     sigaddset(&sigs, SIGPIPE);
     sigprocmask(SIG_BLOCK, &sigs, 0);
 
-    return app.exec();
+    int ret = app.exec();
+
+    //cleanup
+    InvitationsRfbServer::cleanup();
 }
 
