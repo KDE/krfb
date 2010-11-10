@@ -66,16 +66,21 @@ int main(int argc, char *argv[])
 {
     KAboutData aboutData("krfb", 0, ki18n("Desktop Sharing"),
                          VERSION, ki18n(description), KAboutData::License_GPL,
-                         ki18n("(c) 2007, Alessandro Praduroux\n"
+                         ki18n("(c) 2009-2010, Collabora Ltd.\n"
+                               "(c) 2007, Alessandro Praduroux\n"
                                "(c) 2001-2003, Tim Jansen\n"
                                "(c) 2001, Johannes E. Schindelin\n"
-                               "(c) 2000, heXoNet Support GmbH, D-66424 Homburg\n"
                                "(c) 2000-2001, Const Kaplinsky\n"
                                "(c) 2000, Tridia Corporation\n"
                                "(c) 1999, AT&T Laboratories Boston\n"));
+    aboutData.addAuthor(ki18n("George Goldberg"),
+                        ki18n("Telepathy tubes support"),
+                        "george.goldberg@collabora.co.uk");
+    aboutData.addAuthor(ki18n("George Kiagiadakis"),
+                        KLocalizedString(),
+                        "george.kiagiadakis@collabora.co.uk");
     aboutData.addAuthor(ki18n("Alessandro Praduroux"), ki18n("KDE4 porting"), "pradu@pradu.it");
-    aboutData.addAuthor(ki18n("Tim Jansen"), KLocalizedString(), "tim@tjansen.de");
-    aboutData.addAuthor(ki18n("Ian Reinhart Geiser"), ki18n("DCOP interface"), "geiseri@kde.org");
+    aboutData.addAuthor(ki18n("Tim Jansen"), ki18n("Original author"), "tim@tjansen.de");
     aboutData.addCredit(ki18n("Johannes E. Schindelin"),
                         ki18n("libvncserver"));
     aboutData.addCredit(ki18n("Const Kaplinsky"),
@@ -85,14 +90,6 @@ int main(int argc, char *argv[])
     aboutData.addCredit(ki18n("AT&T Laboratories Boston"),
                         ki18n("original VNC encoders and "
                               "protocol design"));
-    aboutData.addCredit(ki18n("Jens Wagner (heXoNet Support GmbH)"),
-                        ki18n("X11 update scanner, "
-                              "original code base"));
-    aboutData.addCredit(ki18n("Jason Spisak"),
-                        ki18n("Connection side image"),
-                        "kovalid@yahoo.com");
-    aboutData.addCredit(ki18n("Karl Vogel"),
-                        ki18n("KDesktop background deactivation"));
     KCmdLineArgs::init(argc, argv, &aboutData);
 
     KCmdLineOptions options;
