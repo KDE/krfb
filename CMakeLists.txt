@@ -11,7 +11,6 @@ if(NOT INSIDE_KDENETWORK)
     include(MacroLibrary)
 
     include(CheckSymbolExists)
-    find_package(LibVNCServer REQUIRED)
     find_package(TelepathyQt4)
 
     set(CMAKE_REQUIRED_DEFINITIONS ${_KDE_PLATFORM_DEFINITIONS})
@@ -20,15 +19,14 @@ if(NOT INSIDE_KDENETWORK)
     include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} ${KDE4_INCLUDES})
 endif(NOT INSIDE_KDENETWORK)
 
-# FIXME: Can we merge this check back into FindLibVNCServer.cmake?
-check_symbol_exists(rfbInitServer "rfb/rfb.h" HAVE_LIBVNCSERVER)
-
 macro_bool_to_01(X11_Xdamage_FOUND HAVE_XDAMAGE)
 macro_bool_to_01(X11_XShm_FOUND HAVE_XSHM)
 
 include_directories ("${CMAKE_CURRENT_BINARY_DIR}/krfb"
                      "${CMAKE_CURRENT_SOURCE_DIR}/krfb"
                      "${CMAKE_CURRENT_SOURCE_DIR}/krfb/ui"
+                     "${CMAKE_CURRENT_SOURCE_DIR}/libvncserver/"
+                     "${CMAKE_CURRENT_BINARY_DIR}/libvncserver/"
 )
 
 if(Q_WS_X11)
@@ -37,10 +35,10 @@ if(Q_WS_X11)
   endif(NOT X11_XTest_FOUND)
 endif(Q_WS_X11)
 
-if (HAVE_LIBVNCSERVER)
-    #add_subdirectory(kinetd)
-    #add_subdirectory(kcm_krfb)
-    add_subdirectory(krfb)
-    add_subdirectory (framebuffers)
-endif (HAVE_LIBVNCSERVER)
+add_subdirectory(libvncserver)
+add_subdirectory(krfb)
+add_subdirectory (framebuffers)
 
+if (NOT INSIDE_KDENETWORK)
+    macro_display_feature_log()
+endif ()

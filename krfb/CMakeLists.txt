@@ -20,7 +20,6 @@ target_link_libraries (krfbprivate
                        ${QT_QTCORE_LIBRARY}
                        ${QT_QTGUI_LIBRARY}
                        ${X11_X11_LIB}
-                       ${LIBVNCSERVER_LIBRARIES}
 )
 
 set_target_properties (krfbprivate PROPERTIES
@@ -91,8 +90,8 @@ kde4_add_executable (krfb
 
 target_link_libraries (krfb
                        krfbprivate
+                       vncserver
                        ${JPEG_LIBRARIES}
-                       ${LIBVNCSERVER_LIBRARIES}
                        ${X11_Xext_LIB}
                        ${X11_X11_LIB}
                        ${X11_Xdamage_LIB}
