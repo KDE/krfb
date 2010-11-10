@@ -37,11 +37,15 @@ struct RfbClient::Private
     bool controlEnabled;
     rfbClientPtr client;
     QSocketNotifier *notifier;
+    QString remoteAddressString;
 };
 
 RfbClient::RfbClient(rfbClientPtr client, QObject* parent)
     : QObject(parent), d(new Private(client))
 {
+    d->remoteAddressString = peerAddress(d->client->sock) + ":" +
+                             QString::number(peerPort(d->client->sock));
+
     d->notifier = new QSocketNotifier(client->sock, QSocketNotifier::Read, this);
     d->notifier->setEnabled(false);
     connect(d->notifier, SIGNAL(activated(int)), this, SLOT(onSocketActivated()));
@@ -55,7 +59,7 @@ RfbClient::~RfbClient()
 
 QString RfbClient::name() const
 {
-    return peerAddress(d->client->sock) + ":" + QString::number(peerPort(d->client->sock));
+    return d->remoteAddressString;
 }
 
 //static
