@@ -21,17 +21,13 @@
  */
 
 #include "abstractconnectioncontroller.h"
-
 #include "abstractrfbserver.h"
 #include "connectiondialog.h"
+#include "events.h"
 
 #include <KDebug>
 
 #include <string.h>
-
-// events.h includes Xlib.h, which must always be included after all Qt headers,
-// so this must always be the last #include.
-#include "events.h"
 
 static void clientGoneHook(rfbClientPtr cl)
 {
@@ -85,23 +81,20 @@ void AbstractConnectionController::dialogRejected()
 void AbstractConnectionController::handleKeyEvent(bool down, rfbKeySym keySym)
 {
     if (controlEnabled) {
-        KeyboardEvent ev(down, keySym);
-        ev.exec();
+        EventHandler::handleKeyboard(down, keySym);
     }
 }
 
 void AbstractConnectionController::handlePointerEvent(int bm, int x, int y)
 {
     if (controlEnabled) {
-        PointerEvent ev(bm, x, y);
-        ev.exec();
+        EventHandler::handlePointer(bm, x, y);
     }
 }
 
 void AbstractConnectionController::clipboardToServer(const QString &s)
 {
-    ClipboardEvent ev(this, s);
-    ev.exec();
+    //TODO implement me
 }
 
 void AbstractConnectionController::setControlEnabled(bool enable)

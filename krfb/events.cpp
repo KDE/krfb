@@ -1,55 +1,80 @@
-/* This file is part of the KDE project
+/*
+   This file is part of the KDE project
+
+   Copyright (C) 2010 Collabora Ltd.
+     @author George Kiagiadakis <george.kiagiadakis@collabora.co.uk>
    Copyright (C) 2007 Alessandro Praduroux <pradu@pradu.it>
-             (C) 2001-2003 by Tim Jansen <tim@tjansen.de>
+   Copyright (C) 2001-2003 by Tim Jansen <tim@tjansen.de>
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public
    License as published by the Free Software Foundation; either
    version 2 of the License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with this program; see the file COPYING.  If not, write to
+   the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+   Boston, MA 02110-1301, USA.
 */
 
 #include "events.h"
 
-#include "abstractconnectioncontroller.h"
-
 #include <QtGui/QApplication>
 #include <QtGui/QX11Info>
+#include <QtGui/QDesktopWidget>
+#include <KGlobal>
 
 #include <X11/Xutil.h>
 #include <X11/keysym.h>
 #include <X11/extensions/XTest.h>
 
+enum {
+    LEFTSHIFT = 1,
+    RIGHTSHIFT = 2,
+    ALTGR = 4
+};
 
-Display *KeyboardEvent::dpy;
-signed char KeyboardEvent::modifiers[0x100];
-KeyCode KeyboardEvent::keycodes[0x100];
-KeyCode KeyboardEvent::leftShiftCode;
-KeyCode KeyboardEvent::rightShiftCode;
-KeyCode KeyboardEvent::altGrCode;
-const int KeyboardEvent::LEFTSHIFT = 1;
-const int KeyboardEvent::RIGHTSHIFT = 2;
-const int KeyboardEvent::ALTGR = 4;
-char KeyboardEvent::ModifierState;
-bool KeyboardEvent::initDone = false;
-
-
-KeyboardEvent::KeyboardEvent(bool d, KeySym k)
-    : down(d), keySym(k)
+class EventData
 {
-    initKeycodes();
+public:
+    EventData();
+
+    //keyboard
+    Display *dpy;
+    signed char modifiers[0x100];
+    KeyCode keycodes[0x100];
+    KeyCode leftShiftCode;
+    KeyCode rightShiftCode;
+    KeyCode altGrCode;
+    char modifierState;
+
+    //mouse
+    int buttonMask;
+
+private:
+    void init();
+};
+
+K_GLOBAL_STATIC(EventData, data);
+
+EventData::EventData()
+{
+    init();
 }
 
-void KeyboardEvent::initKeycodes()
+void EventData::init()
 {
-    if (initDone) {
-        return;
-    }
+    dpy = QX11Info::display();
+    buttonMask = 0;
 
-    initDone = true;
+    //initialize keycodes
     KeySym key, *keymap;
     int i, j, minkey, maxkey, syms_per_keycode;
-
-    dpy = QX11Info::display();
 
     memset(modifiers, -1, sizeof(modifiers));
 
@@ -79,48 +104,47 @@ void KeyboardEvent::initKeycodes()
     XFree((char *)keymap);
 }
 
-/* this function adjusts the modifiers according to mod (as from modifiers) and ModifierState */
-void KeyboardEvent::tweakModifiers(signed char mod, bool down)
+/* this function adjusts the modifiers according to mod (as from modifiers) and data->modifierState */
+static void tweakModifiers(signed char mod, bool down)
 {
-
-    bool isShift = ModifierState & (LEFTSHIFT | RIGHTSHIFT);
+    bool isShift = data->modifierState & (LEFTSHIFT | RIGHTSHIFT);
 
     if (mod < 0) {
         return;
     }
 
     if (isShift && mod != 1) {
-        if (ModifierState & LEFTSHIFT) {
-            XTestFakeKeyEvent(dpy, leftShiftCode,
+        if (data->modifierState & LEFTSHIFT) {
+            XTestFakeKeyEvent(data->dpy, data->leftShiftCode,
                               down, CurrentTime);
         }
 
-        if (ModifierState & RIGHTSHIFT) {
-            XTestFakeKeyEvent(dpy, rightShiftCode,
+        if (data->modifierState & RIGHTSHIFT) {
+            XTestFakeKeyEvent(data->dpy, data->rightShiftCode,
                               down, CurrentTime);
         }
     }
 
     if (!isShift && mod == 1) {
-        XTestFakeKeyEvent(dpy, leftShiftCode,
+        XTestFakeKeyEvent(data->dpy, data->leftShiftCode,
                           down, CurrentTime);
     }
 
-    if ((ModifierState & ALTGR) && mod != 2) {
-        XTestFakeKeyEvent(dpy, altGrCode,
+    if ((data->modifierState & ALTGR) && mod != 2) {
+        XTestFakeKeyEvent(data->dpy, data->altGrCode,
                           !down, CurrentTime);
     }
 
-    if (!(ModifierState & ALTGR) && mod == 2) {
-        XTestFakeKeyEvent(dpy, altGrCode,
+    if (!(data->modifierState & ALTGR) && mod == 2) {
+        XTestFakeKeyEvent(data->dpy, data->altGrCode,
                           down, CurrentTime);
     }
 }
 
-void KeyboardEvent::exec()
+void EventHandler::handleKeyboard(bool down, rfbKeySym keySym)
 {
 #define ADJUSTMOD(sym,state) \
-    if(keySym==sym) { if(down) ModifierState|=state; else ModifierState&=~state; }
+    if(keySym==sym) { if(down) data->modifierState|=state; else data->modifierState&=~state; }
 
     ADJUSTMOD(XK_Shift_L, LEFTSHIFT);
     ADJUSTMOD(XK_Shift_R, RIGHTSHIFT);
@@ -130,42 +154,28 @@ void KeyboardEvent::exec()
         KeyCode k;
 
         if (down) {
-            tweakModifiers(modifiers[keySym], True);
+            tweakModifiers(data->modifiers[keySym], True);
         }
 
-        k = keycodes[keySym];
+        k = data->keycodes[keySym];
 
         if (k != NoSymbol) {
-            XTestFakeKeyEvent(dpy, k, down, CurrentTime);
+            XTestFakeKeyEvent(data->dpy, k, down, CurrentTime);
         }
 
         if (down) {
-            tweakModifiers(modifiers[keySym], False);
+            tweakModifiers(data->modifiers[keySym], False);
         }
     } else {
-        KeyCode k = XKeysymToKeycode(dpy, keySym);
+        KeyCode k = XKeysymToKeycode(data->dpy, keySym);
 
         if (k != NoSymbol) {
-            XTestFakeKeyEvent(dpy, k, down, CurrentTime);
+            XTestFakeKeyEvent(data->dpy, k, down, CurrentTime);
         }
     }
 }
 
-bool PointerEvent::initialized = false;
-Display *PointerEvent::dpy;
-int PointerEvent::buttonMask = 0;
-
-PointerEvent::PointerEvent(int b, int _x, int _y)
-    : button_mask(b), x(_x), y(_y)
-{
-    if (!initialized) {
-        initialized = true;
-        dpy = QX11Info::display();
-        buttonMask = 0;
-    }
-}
-
-void PointerEvent::exec()
+void EventHandler::handlePointer(int buttonMask, int x, int y)
 {
     QDesktopWidget *desktopWidget = QApplication::desktop();
 
@@ -175,44 +185,16 @@ void PointerEvent::exec()
         screen = 0;
     }
 
-    XTestFakeMotionEvent(dpy, screen, x, y, CurrentTime);
+    XTestFakeMotionEvent(data->dpy, screen, x, y, CurrentTime);
 
     for (int i = 0; i < 5; i++) {
-        if ((buttonMask&(1 << i)) != (button_mask&(1 << i))) {
-            XTestFakeButtonEvent(dpy,
+        if ((data->buttonMask&(1 << i)) != (buttonMask&(1 << i))) {
+            XTestFakeButtonEvent(data->dpy,
                                  i + 1,
-                                 (button_mask&(1 << i)) ? True : False,
+                                 (buttonMask&(1 << i)) ? True : False,
                                  CurrentTime);
         }
     }
 
-    buttonMask = button_mask;
-}
-
-
-ClipboardEvent::ClipboardEvent(AbstractConnectionController *c, const QString &ctext)
-    : controller(c), text(ctext)
-{
-}
-
-void ClipboardEvent::exec()
-{
-#if 0
-
-    if ((controller->lastClipboardDirection == ConnectionController::LAST_SYNC_TO_CLIENT) &&
-            (controller->lastClipboardText == text)) {
-        return;
-    }
-
-    controller->lastClipboardDirection = ConnectionController::LAST_SYNC_TO_SERVER;
-    controller->lastClipboardText = text;
-
-    controller->clipboard->setText(text, QClipboard::Clipboard);
-    controller->clipboard->setText(text, QClipboard::Selection);
-#endif
-}
-
-
-VNCEvent::~ VNCEvent()
-{
+    data->buttonMask = buttonMask;
 }
