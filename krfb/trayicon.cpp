@@ -49,7 +49,9 @@ TrayIcon::TrayIcon(KDialog *d)
 
 void TrayIcon::showAbout()
 {
-    KAboutApplicationDialog(KGlobal::mainComponent().aboutData()).exec();
+    KDialog *dlg = new KAboutApplicationDialog(KGlobal::mainComponent().aboutData());
+    dlg->setAttribute(Qt::WA_DeleteOnClose, true);
+    dlg->show();
 }
 
 void TrayIcon::showConnectedMessage(const QString &host)
