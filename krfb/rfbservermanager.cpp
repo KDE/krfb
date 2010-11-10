@@ -32,6 +32,7 @@
 #include <KDebug>
 #include <KLocale>
 #include <KUser>
+#include <KNotification>
 
 static const char *cur =
     "                   "
@@ -209,6 +210,9 @@ void RfbServerManager::addClient(RfbClient* cc)
     }
     d->clients.insert(cc);
 
+    KNotification::event("UserAcceptsConnection",
+                         i18n("The remote user %1 is now connected.", cc->name()));
+
     Q_EMIT clientConnected(cc);
 }
 
@@ -220,6 +224,8 @@ void RfbServerManager::removeClient(RfbClient* cc)
         d->fb->stopMonitor();
         d->rfbUpdateTimer.stop();
     }
+
+    KNotification::event("ConnectionClosed", i18n("The remote user %1 disconnected.", cc->name()));
 
     Q_EMIT clientDisconnected(cc);
 }

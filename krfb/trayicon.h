@@ -22,6 +22,8 @@
 #include <KToggleAction>
 
 class KDialog;
+class RfbClient;
+class ClientActions;
 
 /**
   * Implements the trayicon.
@@ -34,19 +36,14 @@ class TrayIcon : public KStatusNotifierItem
 public:
     TrayIcon(KDialog *);
 
-signals:
-    void disconnectedMessageDisplayed();
-    void enableDesktopControl(bool);
-
 public Q_SLOTS:
-    void showConnectedMessage(const QString &host);
-    void showDisconnectedMessage();
-    void setDesktopControlSetting(bool);
+    void onClientConnected(RfbClient *client);
+    void onClientDisconnected(RfbClient *client);
     void showAbout();
 
 private:
-    KAction *aboutAction;
-    KToggleAction *enableControlAction;
+    KAction *m_aboutAction;
+    QHash<RfbClient*, ClientActions*> m_clientActions;
 };
 
 #endif
