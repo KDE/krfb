@@ -12,9 +12,15 @@
   </property>
   <layout class="QVBoxLayout">
    <item>
-    <widget class="QCheckBox" name="kcfg_allowUninvitedConnections">
+    <widget class="QCheckBox" name="kcfg_askOnConnect">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
      <property name="text">
-      <string>Allow uninvited connections</string>
+      <string>Ask before accepting connections</string>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
      </property>
     </widget>
    </item>
@@ -29,15 +35,9 @@
     </widget>
    </item>
    <item>
-    <widget class="QCheckBox" name="kcfg_askOnConnect">
-     <property name="enabled">
-      <bool>false</bool>
-     </property>
+    <widget class="QCheckBox" name="kcfg_allowUninvitedConnections">
      <property name="text">
-      <string>Ask before accepting connections</string>
-     </property>
-     <property name="checked">
-      <bool>true</bool>
+      <string>Allow uninvited connections</string>
      </property>
     </widget>
    </item>
@@ -88,22 +88,6 @@
  </customwidgets>
  <resources/>
  <connections>
-  <connection>
-   <sender>kcfg_allowUninvitedConnections</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>kcfg_askOnConnect</receiver>
-   <slot>setEnabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>22</x>
-     <y>24</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>29</x>
-     <y>80</y>
-    </hint>
-   </hints>
-  </connection>
   <connection>
    <sender>kcfg_allowUninvitedConnections</sender>
    <signal>toggled(bool)</signal>
