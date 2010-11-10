@@ -30,7 +30,7 @@
 struct RfbClient::Private
 {
     Private(rfbClientPtr client) :
-        controlEnabled(false),
+        controlEnabled(KrfbConfig::allowDesktopControl()),
         client(client)
     {}
 
