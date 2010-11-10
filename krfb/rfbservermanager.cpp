@@ -75,6 +75,36 @@ static const char *mask =
     "     xxxxx         "
     "      xxx          ";
 
+/*  copied from vino's bundled libvncserver...
+ *  Copyright (C) 2000, 2001 Const Kaplinsky.  All Rights Reserved.
+ *  Copyright (C) 1999 AT&T Laboratories Cambridge.  All Rights Reserved.
+ */
+static void krfb_rfbSetCursorPosition(rfbScreenInfoPtr screen, rfbClientPtr client, int x, int y)
+{
+    rfbClientIteratorPtr iterator;
+    rfbClientPtr cl;
+
+    if (x == screen->cursorX || y == screen->cursorY)
+        return;
+
+    LOCK(screen->cursorMutex);
+    screen->cursorX = x;
+    screen->cursorY = y;
+    UNLOCK(screen->cursorMutex);
+
+    /* Inform all clients about this cursor movement. */
+    iterator = rfbGetClientIterator(screen);
+    while ((cl = rfbClientIteratorNext(iterator)) != NULL) {
+        cl->cursorWasMoved = TRUE;
+    }
+    rfbReleaseClientIterator(iterator);
+
+    /* The cursor was moved by this client, so don't send CursorPos. */
+    if (client) {
+        client->cursorWasMoved = FALSE;
+    }
+}
+
 struct RfbClientData
 {
     RfbClientData(RfbClient *c, RfbServer *s)
@@ -181,6 +211,10 @@ void RfbServerManager::processRfbEvents()
         it.next();
         rfbScreenInfoPtr screen = it.value();
 
+        //update the cursor position
+        QPoint currentCursorPos = QCursor::pos();
+        krfb_rfbSetCursorPosition(screen, NULL, currentCursorPos.x(), currentCursorPos.y());
+
         foreach(const QRect & r, d->fb->modifiedTiles()) {
             rfbMarkRectAsModified(screen, r.x(), r.y(), r.right(), r.bottom());
         }
@@ -200,6 +234,7 @@ void RfbServerManager::cleanup()
         rfbScreenCleanup(screen);
     }
 
+    d->myCursor->cleanup = true;
     rfbFreeCursor(d->myCursor);
     d->fb.clear();
     d->rfbProcessEventTimer.stop();
