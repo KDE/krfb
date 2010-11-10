@@ -48,11 +48,9 @@ public Q_SLOTS:
     void showConnectedMessage(const QString &host);
     void showDisconnectedMessage();
     void setDesktopControlSetting(bool);
-    void showManageInvitations();
     void showAbout();
 
 private:
-    KAction *manageInvitationsAction;
     KAction *aboutAction;
     KToggleAction *enableControlAction;
     bool quitting;

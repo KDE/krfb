@@ -37,12 +37,6 @@ TrayIcon::TrayIcon(KDialog *d)
 
     setToolTipTitle(i18n("Desktop Sharing - disconnected"));
     setCategory(KStatusNotifierItem::ApplicationStatus);
-//  manageInvitationsAction = new KAction(i18n("Manage &Invitations"), &actionCollection);
-//  actionCollection.addAction("manage_invitations", manageInvitationsAction);
-//  connect(manageInvitationsAction, SIGNAL(triggered(bool)), SLOT(showManageInvitations()));
-//  contextMenu()->addAction(actionCollection.action("manage_invitations"));
-
-//  contextMenu()->addSeparator();
 
     enableControlAction = new KToggleAction(i18n("Enable Remote Control"), actionCollection());
     enableControlAction->setCheckedState(KGuiItem(i18n("Disable Remote Control")));
@@ -53,7 +47,6 @@ TrayIcon::TrayIcon(KDialog *d)
 
     contextMenu()->addSeparator();
     contextMenu()->addAction(KStandardAction::aboutApp(this, SLOT(showAbout()), actionCollection()));
-
 }
 
 TrayIcon::~TrayIcon()
@@ -101,12 +94,6 @@ void TrayIcon::setDesktopControlSetting(bool b)
 {
     enableControlAction->setEnabled(true);
     enableControlAction->setChecked(b);
-}
-
-void TrayIcon::showManageInvitations()
-{
-    ManageInvitationsDialog invMngDlg(0);
-    invMngDlg.exec();
 }
 
 #include "trayicon.moc"
