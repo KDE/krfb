@@ -86,6 +86,10 @@ kde4_add_ui_files (krfb_SRCS
                    ui/personalinvitewidget.ui
 )
 
+if (TELEPATHY_QT4_FOUND)
+    kde4_add_ui_files(krfb_SRCS ui/tubesconnectionwidget.ui)
+endif()
+
 kde4_add_executable (krfb
                      ${krfb_SRCS}
 )

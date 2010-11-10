@@ -1,4 +1,6 @@
 /* This file is part of the KDE project
+   Copyright (C) 2010 Collabora Ltd <info@collabora.co.uk>
+      @author George Kiagiadakis <george.kiagiadakis@collabora.co.uk>
    Copyright (C) 2004 Nadeem Hasan <nhasan@kde.org>
 
    This program is free software; you can redistribute it and/or
@@ -21,26 +23,60 @@
 #define CONNECTIONDIALOG_H
 
 #include "ui_connectionwidget.h"
-
 #include <KDialog>
 
-class QWidget;
-
-class ConnectionDialog : public KDialog, public Ui::ConnectionWidget
+template <typename UI>
+class ConnectionDialog : public KDialog
 {
-    Q_OBJECT
-
 public:
     ConnectionDialog(QWidget *parent);
     ~ConnectionDialog() {};
 
-    void setRemoteHost(const QString &host);
     void setAllowRemoteControl(bool b);
     bool allowRemoteControl();
 
 protected:
     QWidget *m_connectWidget;
+    UI m_ui;
 };
+
+template <typename UI>
+void ConnectionDialog<UI>::setAllowRemoteControl(bool b)
+{
+    m_ui.cbAllowRemoteControl->setChecked(b);
+    m_ui.cbAllowRemoteControl->setVisible(b);
+}
+
+template <typename UI>
+bool ConnectionDialog<UI>::allowRemoteControl()
+{
+    return m_ui.cbAllowRemoteControl->isChecked();
+}
+
+//*********
+
+class InvitationsConnectionDialog : public ConnectionDialog<Ui::ConnectionWidget>
+{
+    Q_OBJECT
+public:
+    InvitationsConnectionDialog(QWidget *parent);
+    void setRemoteHost(const QString & host);
+};
+
+//*********
+
+#ifdef KRFB_WITH_TELEPATHY_TUBES
+# include "ui_tubesconnectionwidget.h"
+
+class TubesConnectionDialog : public ConnectionDialog<Ui::TubesConnectionWidget>
+{
+    Q_OBJECT
+public:
+    TubesConnectionDialog(QWidget *parent);
+    void setContactName(const QString & name);
+};
+
+#endif // KRFB_WITH_TELEPATHY_TUBES
 
 #endif // CONNECTIONDIALOG_H
 

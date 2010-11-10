@@ -1,4 +1,6 @@
 /* This file is part of the KDE project
+   Copyright (C) 2010 Collabora Ltd <info@collabora.co.uk>
+      @author George Kiagiadakis <george.kiagiadakis@collabora.co.uk>
    Copyright (C) 2004 Nadeem Hasan <nhasan@kde.org>
 
    This program is free software; you can redistribute it and/or
@@ -26,7 +28,8 @@
 #include <QtGui/QCheckBox>
 #include <QtGui/QLabel>
 
-ConnectionDialog::ConnectionDialog(QWidget *parent)
+template <typename UI>
+ConnectionDialog<UI>::ConnectionDialog(QWidget *parent)
     : KDialog(parent)
 {
     setCaption(i18n("New Connection"));
@@ -37,9 +40,9 @@ ConnectionDialog::ConnectionDialog(QWidget *parent)
     setMinimumSize(500, 200);
 
     m_connectWidget = new QWidget(this);
-    setupUi(m_connectWidget);
+    m_ui.setupUi(m_connectWidget);
 
-    pixmapLabel->setPixmap(KIcon("krfb").pixmap(128));
+    m_ui.pixmapLabel->setPixmap(KIcon("krfb").pixmap(128));
 
     KGuiItem accept = KStandardGuiItem::ok();
     accept.setText(i18n("Accept Connection"));
@@ -52,20 +55,30 @@ ConnectionDialog::ConnectionDialog(QWidget *parent)
     setMainWidget(m_connectWidget);
 }
 
-void ConnectionDialog::setRemoteHost(const QString &host)
+//**********
+
+InvitationsConnectionDialog::InvitationsConnectionDialog(QWidget *parent)
+    : ConnectionDialog<Ui::ConnectionWidget>(parent)
 {
-    remoteHost->setText(host);
 }
 
-void ConnectionDialog::setAllowRemoteControl(bool b)
+void InvitationsConnectionDialog::setRemoteHost(const QString &host)
 {
-    cbAllowRemoteControl->setChecked(b);
-    cbAllowRemoteControl->setVisible(b);
+    m_ui.remoteHost->setText(host);
 }
 
-bool ConnectionDialog::allowRemoteControl()
+//**********
+
+TubesConnectionDialog::TubesConnectionDialog(QWidget *parent)
+    : ConnectionDialog<Ui::TubesConnectionWidget>(parent)
 {
-    return cbAllowRemoteControl->isChecked();
+}
+
+void TubesConnectionDialog::setContactName(const QString & name)
+{
+    QString txt = i18n("You have requested to share your desktop with %1. If you proceed, "
+                       "you will allow the remote user to watch your desktop.", name);
+    m_ui.mainTextLabel->setText(txt);
 }
 
 #include "connectiondialog.moc"

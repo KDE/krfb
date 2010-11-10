@@ -88,7 +88,7 @@ void PendingInvitationsRfbClient::processNewClient()
                             i18n("Received connection from %1, on hold (waiting for confirmation)",
                                 host));
 
-        ConnectionDialog *dialog = new ConnectionDialog(0);
+        InvitationsConnectionDialog *dialog = new InvitationsConnectionDialog(0);
         dialog->setRemoteHost(host);
         dialog->setAllowRemoteControl(KrfbConfig::allowDesktopControl());
 
@@ -101,11 +101,11 @@ void PendingInvitationsRfbClient::processNewClient()
 
 void PendingInvitationsRfbClient::dialogAccepted()
 {
-    ConnectionDialog *dialog = qobject_cast<ConnectionDialog *>(sender());
+    InvitationsConnectionDialog *dialog = qobject_cast<InvitationsConnectionDialog *>(sender());
     Q_ASSERT(dialog);
 
     InvitationsRfbClient *client = new InvitationsRfbClient(m_rfbClient, parent());
-    client->setControlEnabled(dialog->cbAllowRemoteControl->isChecked());
+    client->setControlEnabled(dialog->allowRemoteControl());
     accept(client);
 }
 

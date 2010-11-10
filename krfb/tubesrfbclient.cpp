@@ -61,9 +61,8 @@ void PendingTubesRfbClient::showConfirmationDialog()
                             i18n("Received connection from %1, on hold (waiting for confirmation)",
                                 name));
 
-        //TODO use a different dialog here, more suitable for the tubes use case
-        ConnectionDialog *dialog = new ConnectionDialog(0);
-        dialog->setRemoteHost(name);
+        TubesConnectionDialog *dialog = new TubesConnectionDialog(0);
+        dialog->setContactName(name);
         dialog->setAllowRemoteControl(KrfbConfig::allowDesktopControl());
 
         connect(dialog, SIGNAL(okClicked()), SLOT(dialogAccepted()));
@@ -75,11 +74,11 @@ void PendingTubesRfbClient::showConfirmationDialog()
 
 void PendingTubesRfbClient::dialogAccepted()
 {
-    ConnectionDialog *dialog = qobject_cast<ConnectionDialog *>(sender());
+    TubesConnectionDialog *dialog = qobject_cast<TubesConnectionDialog *>(sender());
     Q_ASSERT(dialog);
 
     TubesRfbClient *client = new TubesRfbClient(m_rfbClient, m_contact, parent());
-    client->setControlEnabled(dialog->cbAllowRemoteControl->isChecked());
+    client->setControlEnabled(dialog->allowRemoteControl());
     accept(client);
 }
 
