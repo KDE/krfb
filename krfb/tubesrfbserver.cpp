@@ -17,6 +17,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 #include "tubesrfbserver.h"
+#include "tubesrfbclient.h"
 #include "sockethelpers.h"
 
 #include <QtGui/QApplication>
@@ -61,72 +62,11 @@ const QDBusArgument &operator>>(const QDBusArgument &argument,
 
 //**************
 
-class TubesRfbClient : public RfbClient
-{
-public:
-    TubesRfbClient(rfbClientPtr client, QObject* parent = 0);
-
-    virtual QString name() const;
-    void setContact(const Tp::ContactPtr & contact);
-
-protected:
-    virtual rfbNewClientAction doHandle();
-
-private:
-    Tp::ContactPtr m_contact;
-    bool m_doHandleCalled;
-};
-
-TubesRfbClient::TubesRfbClient(rfbClientPtr client, QObject* parent)
-    : RfbClient(client, parent), m_doHandleCalled(false)
-{
-}
-
-QString TubesRfbClient::name() const
-{
-    if (m_contact) {
-        return m_contact->alias();
-    } else {
-        return RfbClient::name();
-    }
-}
-
-void TubesRfbClient::setContact(const Tp::ContactPtr & contact)
-{
-    m_contact = contact;
-    if (m_doHandleCalled) {
-        //doHandle has already been called, so we need to call the parent's implementation here
-        rfbNewClientAction action = RfbClient::doHandle();
-
-        //we were previously on hold, so we now need to act if
-        //the parent's doHandle() says we must do something else
-        if (action == RFB_CLIENT_ACCEPT) {
-            setOnHold(false);
-        } else if (action == RFB_CLIENT_REFUSE) {
-            closeConnection();
-        } //else if action == RFB_CLIENT_ON_HOLD there is nothing to do
-    }
-}
-
-rfbNewClientAction TubesRfbClient::doHandle()
-{
-    if (!m_contact) {
-        //no associated contact yet, hold.
-        m_doHandleCalled = true; //act when a contact is set
-        return RFB_CLIENT_ON_HOLD;
-    } else {
-        //we have a contact, begin handling
-        return RfbClient::doHandle();
-    }
-}
-
-//**************
-
 struct TubesRfbServer::Private
 {
     Tp::ChannelPtr channel;
     QHash<int, Tp::ContactPtr> contactsPerPort;
-    QHash<int, TubesRfbClient*> clientsPerPort;
+    QHash<int, PendingTubesRfbClient*> clientsPerPort;
 };
 
 TubesRfbServer::TubesRfbServer(const Tp::ChannelPtr & channel, QObject *parent)
@@ -153,11 +93,11 @@ TubesRfbServer::~TubesRfbServer()
     delete d;
 }
 
-RfbClient* TubesRfbServer::newClient(rfbClientPtr client)
+PendingRfbClient* TubesRfbServer::newClient(rfbClientPtr client)
 {
     kDebug() << "new tubes client";
 
-    TubesRfbClient *c = new TubesRfbClient(client, this);
+    PendingTubesRfbClient *c = new PendingTubesRfbClient(client, this);
     int port = peerPort(client->sock);
 
     d->clientsPerPort[port] = c;

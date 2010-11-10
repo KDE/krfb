@@ -19,87 +19,17 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 #include "invitationsrfbserver.h"
+#include "invitationsrfbclient.h"
 #include "krfbconfig.h"
-#include "invitationmanager.h"
 #include "rfbservermanager.h"
 #include <QtCore/QTimer>
+#include <QtGui/QApplication>
 #include <QtNetwork/QHostInfo>
 #include <KNotification>
 #include <KLocale>
 #include <KMessageBox>
 #include <KUser>
 #include <DNSSD/PublicService>
-
-//************
-
-class InvitationsRfbClient : public RfbClient
-{
-public:
-    InvitationsRfbClient(rfbClientPtr client, QObject* parent = 0)
-        : RfbClient(client, parent) {}
-
-    virtual rfbNewClientAction doHandle();
-    virtual bool checkPassword(const QByteArray & encryptedPassword);
-};
-
-rfbNewClientAction InvitationsRfbClient::doHandle()
-{
-    bool allowUninvited = KrfbConfig::allowUninvitedConnections();
-
-    if (!allowUninvited && InvitationManager::self()->activeInvitations() == 0) {
-        KNotification::event("UnexpectedConnection",
-                             i18n("Refused uninvited connection attempt from %1", name()));
-        return RFB_CLIENT_REFUSE;
-    }
-
-    return RfbClient::doHandle();
-}
-
-bool InvitationsRfbClient::checkPassword(const QByteArray & encryptedPassword)
-{
-    bool allowUninvited = KrfbConfig::allowUninvitedConnections();
-    QByteArray password =  KrfbConfig::uninvitedConnectionPassword().toLocal8Bit();
-
-    bool authd = false;
-    kDebug() << "about to start autentication";
-
-    if (allowUninvited) {
-        authd = vncAuthCheckPassword(password, encryptedPassword);
-    }
-
-    if (!authd) {
-        QList<Invitation> invlist = InvitationManager::self()->invitations();
-
-        foreach(const Invitation & it, invlist) {
-            kDebug() << "checking password";
-
-            if (vncAuthCheckPassword(it.password().toLocal8Bit(), encryptedPassword)
-                && it.isValid())
-            {
-                authd = true;
-                InvitationManager::self()->removeInvitation(it);
-                break;
-            }
-        }
-    }
-
-    if (!authd) {
-        if (InvitationManager::self()->invitations().size() > 0) {
-            KNotification::event("InvalidPasswordInvitations",
-                                 i18n("Failed login attempt from %1: wrong password", name()));
-        } else {
-            KNotification::event("InvalidPassword",
-                                 i18n("Failed login attempt from %1: wrong password", name()));
-        }
-
-        return false;
-    }
-
-    return true;
-}
-
-//***********
-
 
 void InvitationsRfbServer::init()
 {
@@ -111,9 +41,9 @@ void InvitationsRfbServer::init()
     QTimer::singleShot(0, server, SLOT(startAndCheck()));
 }
 
-RfbClient* InvitationsRfbServer::newClient(rfbClientPtr client)
+PendingRfbClient* InvitationsRfbServer::newClient(rfbClientPtr client)
 {
-    return new InvitationsRfbClient(client, this);
+    return new PendingInvitationsRfbClient(client, this);
 }
 
 void InvitationsRfbServer::startAndCheck()

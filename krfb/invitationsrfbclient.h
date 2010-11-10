@@ -1,8 +1,6 @@
 /*
-    Copyright (C) 2009-2010 Collabora Ltd <info@collabora.co.uk>
-      @author George Goldberg <george.goldberg@collabora.co.uk>
+    Copyright (C) 2010 Collabora Ltd <info@collabora.co.uk>
       @author George Kiagiadakis <george.kiagiadakis@collabora.co.uk>
-    Copyright (C) 2007 Alessandro Praduroux <pradu@pradu.it>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public
@@ -17,27 +15,34 @@
     You should have received a copy of the GNU Lesser General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#ifndef INVITATIONSRFBSERVER_H
-#define INVITATIONSRFBSERVER_H
+#ifndef INVITATIONSRFBCLIENT_H
+#define INVITATIONSRFBCLIENT_H
 
-#include "rfbserver.h"
+#include "rfbclient.h"
 
-class InvitationsRfbServer : public RfbServer
+class InvitationsRfbClient : public RfbClient
+{
+public:
+    InvitationsRfbClient(rfbClientPtr client, QObject* parent = 0)
+        : RfbClient(client, parent) {}
+
+protected:
+    virtual bool checkPassword(const QByteArray & encryptedPassword);
+};
+
+
+class PendingInvitationsRfbClient : public PendingRfbClient
 {
     Q_OBJECT
 public:
-    static void init();
+    PendingInvitationsRfbClient(rfbClientPtr client, QObject *parent = 0)
+        : PendingRfbClient(client, parent) {}
 
-protected:
-    InvitationsRfbServer() : RfbServer(0) {}
-
-    virtual PendingRfbClient* newClient(rfbClientPtr client);
+protected Q_SLOTS:
+    virtual void processNewClient();
 
 private Q_SLOTS:
-    void startAndCheck();
-
-private:
-    Q_DISABLE_COPY(InvitationsRfbServer)
+    void dialogAccepted();
 };
 
-#endif // INVITATIONSRFBSERVER_H
+#endif // INVITATIONSRFBCLIENT_H

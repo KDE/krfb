@@ -29,7 +29,7 @@ public:
     TubesRfbServer(const Tp::ChannelPtr & channel, QObject* parent = 0);
     virtual ~TubesRfbServer();
 
-    virtual RfbClient* newClient(rfbClientPtr client);
+    virtual PendingRfbClient* newClient(rfbClientPtr client);
 
 private Q_SLOTS:
     void close();

@@ -61,12 +61,14 @@ set (krfb_SRCS
      rfbserver.cpp
      rfbclient.cpp
      invitationsrfbserver.cpp
+     invitationsrfbclient.cpp
 )
 
 if (TELEPATHY_QT4_FOUND)
     set (krfb_SRCS
          ${krfb_SRCS}
          tubesrfbserver.cpp
+         tubesrfbclient.cpp
          tubesclienthandler.cpp
     )
 endif (TELEPATHY_QT4_FOUND)

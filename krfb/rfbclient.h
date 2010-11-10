@@ -27,6 +27,7 @@ class RfbClient : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(bool controlEnabled READ controlEnabled WRITE setControlEnabled NOTIFY controlEnabledChanged)
+    Q_PROPERTY(bool onHold READ isOnHold WRITE setOnHold NOTIFY holdStatusChanged)
 public:
     RfbClient(rfbClientPtr client, QObject *parent = 0);
     virtual ~RfbClient();
@@ -38,27 +39,23 @@ public:
     bool controlEnabled() const;
     void setControlEnabled(bool enabled);
 
+    bool isOnHold() const;
+
 public Q_SLOTS:
     void setOnHold(bool onHold);
     void closeConnection();
 
 Q_SIGNALS:
     void controlEnabledChanged(bool enabled);
-    void connected(RfbClient *self);
+    void holdStatusChanged(bool onHold);
 
 protected:
     friend class RfbServer;
     friend class RfbServerManager;
 
-    ///called by RfbServer to begin handling the client
-    virtual rfbNewClientAction doHandle();
-
     ///called by RfbServerManager to send framebuffer updates
     ///and check for possible disconnection
     void update();
-
-    bool isConnected() const;
-    void setStatusConnected(); ///call to declare the client as connected
 
     virtual void handleKeyboardEvent(bool down, rfbKeySym keySym);
     virtual void handleMouseEvent(int buttonMask, int x, int y);
@@ -79,12 +76,31 @@ protected:
 
 private Q_SLOTS:
     void onSocketActivated();
-    void dialogAccepted();
-    void dialogRejected();
 
 private:
     struct Private;
     Private *const d;
+};
+
+
+class PendingRfbClient : public QObject
+{
+    Q_OBJECT
+public:
+    PendingRfbClient(rfbClientPtr client, QObject *parent = 0);
+    virtual ~PendingRfbClient();
+
+Q_SIGNALS:
+    void finished(RfbClient *client);
+
+protected Q_SLOTS:
+    virtual void processNewClient() = 0;
+
+    void accept(RfbClient *newClient);
+    void reject();
+
+protected:
+    rfbClientPtr m_rfbClient;
 };
 
 #endif // RFBCLIENT_H

@@ -203,20 +203,26 @@ void RfbServer::onListenSocketActivated()
     rfbProcessNewConnection(d->screen);
 }
 
+void RfbServer::pendingClientFinished(RfbClient *client)
+{
+    kDebug();
+    if (client) {
+        RfbServerManager::instance()->addClient(client);
+    }
+}
+
 //static
 rfbNewClientAction RfbServer::newClientHook(rfbClientPtr cl)
 {
     kDebug() << "New client";
     RfbServer *server = static_cast<RfbServer*>(cl->screen->screenData);
 
-    RfbClient *client = server->newClient(cl);
-    RfbServerManager::instance()->addClient(client);
+    PendingRfbClient *pendingClient = server->newClient(cl);
+    connect(pendingClient, SIGNAL(finished(RfbClient*)),
+            server, SLOT(pendingClientFinished(RfbClient*)));
 
-    //clientData is used by the static callbacks to determine their context
-    cl->clientData = client;
     cl->clientGoneHook = clientGoneHook;
-
-    return client->doHandle();
+    return RFB_CLIENT_ON_HOLD;
 }
 
 //static

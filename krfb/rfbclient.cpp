@@ -30,12 +30,10 @@
 struct RfbClient::Private
 {
     Private(rfbClientPtr client) :
-        connected(false),
         controlEnabled(false),
         client(client)
     {}
 
-    bool connected;
     bool controlEnabled;
     rfbClientPtr client;
     QSocketNotifier *notifier;
@@ -79,27 +77,18 @@ void RfbClient::setControlEnabled(bool enabled)
     }
 }
 
-void RfbClient::update()
+bool RfbClient::isOnHold() const
 {
-    rfbUpdateClient(d->client);
-
-    //This is how we handle disconnection.
-    //if rfbUpdateClient() finds out that it can't write to the socket,
-    //it closes it and sets it to -1. So, we just have to check this here
-    //and call rfbClientConnectionGone() if necessary. This will call
-    //the clientGoneHook which in turn will remove this RfbClient instance
-    //from the server manager and will call deleteLater() to delete it
-    if (d->client->sock == -1) {
-        kDebug() << "disconnected during update";
-        d->notifier->setEnabled(false);
-        rfbClientConnectionGone(d->client);
-    }
+    return d->client->onHold ? true : false;
 }
 
 void RfbClient::setOnHold(bool onHold)
 {
-    d->client->onHold = onHold;
-    d->notifier->setEnabled(!onHold);
+    if (isOnHold() != onHold) {
+        d->client->onHold = onHold;
+        d->notifier->setEnabled(!onHold);
+        Q_EMIT holdStatusChanged(onHold);
+    }
 }
 
 void RfbClient::closeConnection()
@@ -107,47 +96,6 @@ void RfbClient::closeConnection()
     d->notifier->setEnabled(false);
     rfbCloseClient(d->client);
     rfbClientConnectionGone(d->client);
-}
-
-rfbNewClientAction RfbClient::doHandle()
-{
-    kDebug();
-
-    if (!KrfbConfig::askOnConnect()) {
-        KNotification::event("NewConnectionAutoAccepted",
-                             i18n("Accepted connection from %1", name()));
-
-        setStatusConnected();
-        return RFB_CLIENT_ACCEPT;
-    }
-
-    KNotification::event("NewConnectionOnHold",
-                         i18n("Received connection from %1, on hold (waiting for confirmation)",
-                              name()));
-
-    ConnectionDialog *dialog = new ConnectionDialog(0);
-    dialog->setRemoteHost(name());
-    dialog->setAllowRemoteControl(KrfbConfig::allowDesktopControl());
-
-    connect(dialog, SIGNAL(okClicked()), SLOT(dialogAccepted()));
-    connect(dialog, SIGNAL(cancelClicked()), SLOT(dialogRejected()));
-
-    dialog->show();
-
-    return RFB_CLIENT_ON_HOLD;
-}
-
-bool RfbClient::isConnected() const
-{
-    return d->connected;
-}
-
-void RfbClient::setStatusConnected()
-{
-    if (!d->connected) {
-        d->connected = true;
-        Q_EMIT connected(this);
-    }
 }
 
 void RfbClient::handleKeyboardEvent(bool down, rfbKeySym keySym)
@@ -218,24 +166,62 @@ void RfbClient::onSocketActivated()
     }
 }
 
-void RfbClient::dialogAccepted()
+void RfbClient::update()
 {
-    ConnectionDialog *dialog = qobject_cast<ConnectionDialog *>(sender());
+    rfbUpdateClient(d->client);
 
-    if (!dialog) {
-        kWarning() << "Wrong type of sender.";
-        return;
+    //This is how we handle disconnection.
+    //if rfbUpdateClient() finds out that it can't write to the socket,
+    //it closes it and sets it to -1. So, we just have to check this here
+    //and call rfbClientConnectionGone() if necessary. This will call
+    //the clientGoneHook which in turn will remove this RfbClient instance
+    //from the server manager and will call deleteLater() to delete it
+    if (d->client->sock == -1) {
+        kDebug() << "disconnected during update";
+        d->notifier->setEnabled(false);
+        rfbClientConnectionGone(d->client);
     }
-
-    setOnHold(false);
-    setControlEnabled(dialog->cbAllowRemoteControl->isChecked());
-    setStatusConnected();
 }
 
-void RfbClient::dialogRejected()
+//*************
+
+PendingRfbClient::PendingRfbClient(rfbClientPtr client, QObject *parent)
+    : QObject(parent), m_rfbClient(client)
+{
+    kDebug();
+    QMetaObject::invokeMethod(this, "processNewClient", Qt::QueuedConnection);
+}
+
+PendingRfbClient::~PendingRfbClient()
+{
+    kDebug();
+}
+
+void PendingRfbClient::accept(RfbClient *newClient)
+{
+    kDebug() << "accepted connection";
+
+    m_rfbClient->clientData = newClient;
+    newClient->setOnHold(false);
+
+    Q_EMIT finished(newClient);
+    deleteLater();
+}
+
+static void clientGoneHookNoop(rfbClientPtr cl) { Q_UNUSED(cl); }
+
+void PendingRfbClient::reject()
 {
     kDebug() << "refused connection";
-    closeConnection();
+
+    //override the clientGoneHook that was previously set by RfbServer
+    m_rfbClient->clientGoneHook = clientGoneHookNoop;
+    rfbCloseClient(m_rfbClient);
+    rfbClientConnectionGone(m_rfbClient);
+
+    Q_EMIT finished(NULL);
+    deleteLater();
 }
+
 
 #include "rfbclient.moc"

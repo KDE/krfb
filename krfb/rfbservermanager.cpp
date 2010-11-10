@@ -209,8 +209,7 @@ void RfbServerManager::addClient(RfbClient* cc)
     }
     d->clients.insert(cc);
 
-    QObject::connect(cc, SIGNAL(connected(RfbClient*)),
-                     this, SIGNAL(clientConnected(RfbClient*)));
+    Q_EMIT clientConnected(cc);
 }
 
 void RfbServerManager::removeClient(RfbClient* cc)
@@ -222,9 +221,7 @@ void RfbServerManager::removeClient(RfbClient* cc)
         d->rfbUpdateTimer.stop();
     }
 
-    if (cc->isConnected()) {
-        Q_EMIT clientDisconnected(cc);
-    }
+    Q_EMIT clientDisconnected(cc);
 }
 
 #include "rfbservermanager.moc"

@@ -48,9 +48,10 @@ public Q_SLOTS:
 
 private Q_SLOTS:
     void onListenSocketActivated();
+    void pendingClientFinished(RfbClient *client);
 
 protected:
-    virtual RfbClient *newClient(rfbClientPtr client) = 0;
+    virtual PendingRfbClient *newClient(rfbClientPtr client) = 0;
 
 private:
     static rfbNewClientAction newClientHook(rfbClientPtr cl);
