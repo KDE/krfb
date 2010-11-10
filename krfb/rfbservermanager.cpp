@@ -158,6 +158,7 @@ void RfbServerManager::init()
 
     d->fb = FrameBufferManager::instance()->frameBuffer(QApplication::desktop()->winId());
     d->myCursor = rfbMakeXCursor(19, 19, (char *) cur, (char *) mask);
+    d->myCursor->cleanup = false;
     d->desktopName = QString("%1@%2 (shared desktop)") //FIXME check if we can use utf8
                         .arg(KUser().loginName(),QHostInfo::localHostName()).toLatin1();
 
