@@ -235,6 +235,19 @@ void ManageInvitationsDialog::selectionChanged()
     m_ui.deleteOneButton->setEnabled(m_ui.invitationWidget->selectedItems().size() > 0);
 }
 
+void ManageInvitationsDialog::readProperties(const KConfigGroup& group)
+{
+    if (group.readEntry("Visible", true)) {
+        show();
+    }
+    KMainWindow::readProperties(group);
+}
+
+void ManageInvitationsDialog::saveProperties(KConfigGroup& group)
+{
+    group.writeEntry("Visible", isVisible());
+    KMainWindow::saveProperties(group);
+}
 
 #include "manageinvitationsdialog.moc"
 

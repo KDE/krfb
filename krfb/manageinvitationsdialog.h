@@ -35,6 +35,10 @@ public Q_SLOTS:
     void deleteCurrent();
     void selectionChanged();
 
+protected:
+    virtual void readProperties(const KConfigGroup & group);
+    virtual void saveProperties(KConfigGroup & group);
+
 private:
     Ui::ManageInvitationsDialog m_ui;
 };

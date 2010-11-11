@@ -114,7 +114,9 @@ int main(int argc, char *argv[])
     ManageInvitationsDialog invitationsDialog;
     TrayIcon trayicon(&invitationsDialog);
 
-    if (KCmdLineArgs::parsedArgs()->isSet("dialog")) {
+    if (app.isSessionRestored() && KMainWindow::canBeRestored(1)) {
+        invitationsDialog.restore(1, false);
+    } else if (KCmdLineArgs::parsedArgs()->isSet("dialog")) {
         invitationsDialog.show();
     }
 
