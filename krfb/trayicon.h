@@ -34,7 +34,7 @@ class TrayIcon : public KStatusNotifierItem
 {
     Q_OBJECT
 public:
-    TrayIcon(KDialog *);
+    TrayIcon(QWidget *mainWindow);
 
 public Q_SLOTS:
     void onClientConnected(RfbClient *client);

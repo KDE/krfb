@@ -94,8 +94,8 @@ ClientActions::~ClientActions()
 
 //**********
 
-TrayIcon::TrayIcon(KDialog *d)
-    : KStatusNotifierItem(d)
+TrayIcon::TrayIcon(QWidget *mainWindow)
+    : KStatusNotifierItem(mainWindow)
 {
     setIconByPixmap(KIcon("krfb").pixmap(22, 22, KIcon::Disabled));
 

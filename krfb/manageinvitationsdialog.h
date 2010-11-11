@@ -12,12 +12,12 @@
 
 #include "ui_manageinvitations.h"
 
-#include <KDialog>
+#include <KXmlGuiWindow>
 
 /**
     @author Alessandro Praduroux <pradu@pradu.it>
 */
-class ManageInvitationsDialog : public KDialog, private Ui::ManageInvitationsDialog
+class ManageInvitationsDialog : public KXmlGuiWindow
 {
     Q_OBJECT
 public:
@@ -36,7 +36,7 @@ public Q_SLOTS:
     void selectionChanged();
 
 private:
-
+    Ui::ManageInvitationsDialog m_ui;
 };
 
 #endif

@@ -23,6 +23,8 @@
 #include <KStandardGuiItem>
 #include <KSystemTimeZone>
 #include <KToolInvocation>
+#include <KStandardAction>
+#include <KActionCollection>
 
 #include <QtGui/QWidget>
 #include <QtGui/QToolTip>
@@ -48,35 +50,28 @@ public:
 
 
 ManageInvitationsDialog::ManageInvitationsDialog(QWidget *parent)
-    : KDialog(parent)
+    : KXmlGuiWindow(parent)
 {
-    setCaption(i18n("Invitation"));
-    setButtons(User1 | Close | Help);
-    setHelp(QString(), "krfb");
-    setDefaultButton(NoDefault);
+    setAttribute(Qt::WA_DeleteOnClose, false);
 
-    setMinimumSize(500, 330);
+    QWidget *mainWidget = new QWidget;
+    m_ui.setupUi(mainWidget);
+    m_ui.pixmapLabel->setPixmap(KIcon("krfb").pixmap(128));
+    setCentralWidget(mainWidget);
 
-    setupUi(mainWidget());
-    pixmapLabel->setPixmap(KIcon("krfb").pixmap(128));
+    connect(m_ui.helpLabel, SIGNAL(linkActivated(QString)), SLOT(showWhatsthis()));
+    connect(m_ui.newPersonalInvitationButton, SIGNAL(clicked()), SLOT(inviteManually()));
+    connect(m_ui.newEmailInvitationButton, SIGNAL(clicked()), SLOT(inviteByMail()));
+    connect(InvitationManager::self(), SIGNAL(invitationNumChanged(int)), SLOT(reloadInvitations()));
+    connect(m_ui.deleteAllButton, SIGNAL(clicked()), SLOT(deleteAll()));
+    connect(m_ui.deleteOneButton, SIGNAL(clicked()), SLOT(deleteCurrent()));
+    connect(m_ui.invitationWidget, SIGNAL(itemSelectionChanged()), SLOT(selectionChanged()));
 
-    setButtonGuiItem(User1, KStandardGuiItem::configure());
+    KStandardAction::quit(QCoreApplication::instance(), SLOT(quit()), actionCollection());
+    KStandardAction::preferences(this, SLOT(showConfiguration()), actionCollection());
 
-    connect(helpLabel, SIGNAL(linkActivated(QString)),
-            SLOT(showWhatsthis()));
-    connect(newPersonalInvitationButton, SIGNAL(clicked()),
-            SLOT(inviteManually()));
-    connect(newEmailInvitationButton, SIGNAL(clicked()),
-            SLOT(inviteByMail()));
-    connect(InvitationManager::self(), SIGNAL(invitationNumChanged(int)),
-            SLOT(reloadInvitations()));
-    connect(this, SIGNAL(user1Clicked()), SLOT(showConfiguration()));
-    connect(deleteAllButton, SIGNAL(clicked()),
-            SLOT(deleteAll()));
-    connect(deleteOneButton, SIGNAL(clicked()),
-            SLOT(deleteCurrent()));
-    connect(invitationWidget, SIGNAL(itemSelectionChanged()),
-            SLOT(selectionChanged()));
+    setupGUI(QSize(550, 330));
+    setAutoSaveSettings();
 
     reloadInvitations();
 }
@@ -162,17 +157,17 @@ void ManageInvitationsDialog::inviteByMail()
 
 void ManageInvitationsDialog::reloadInvitations()
 {
-    invitationWidget->clear();
+    m_ui.invitationWidget->clear();
     KLocale *loc = KGlobal::locale();
     foreach(const Invitation & inv, InvitationManager::self()->invitations()) {
         QStringList strs;
         strs <<  loc->formatDateTime(inv.creationTime()) << loc->formatDateTime(inv.expirationTime());
         QTreeWidgetItem *it = new QTreeWidgetItem(strs);
-        invitationWidget->addTopLevelItem(it);
+        m_ui.invitationWidget->addTopLevelItem(it);
         it->setData(0, Qt::UserRole + 1, inv.creationTime());
     }
-    invitationWidget->resizeColumnToContents(0);
-    deleteAllButton->setEnabled(InvitationManager::self()->activeInvitations() > 0);
+    m_ui.invitationWidget->resizeColumnToContents(0);
+    m_ui.deleteAllButton->setEnabled(InvitationManager::self()->activeInvitations() > 0);
 }
 
 void ManageInvitationsDialog::showConfiguration()
@@ -219,7 +214,7 @@ void ManageInvitationsDialog::deleteCurrent()
     disconnect(InvitationManager::self(), SIGNAL(invitationNumChanged(int)),
                this, SLOT(reloadInvitations()));
 
-    QList<QTreeWidgetItem *> itl = invitationWidget->selectedItems();
+    QList<QTreeWidgetItem *> itl = m_ui.invitationWidget->selectedItems();
     foreach(QTreeWidgetItem * itm, itl) {
         foreach(const Invitation & inv, InvitationManager::self()->invitations()) {
             if (inv.creationTime() == itm->data(0, Qt::UserRole + 1)) {
@@ -237,7 +232,7 @@ void ManageInvitationsDialog::deleteCurrent()
 
 void ManageInvitationsDialog::selectionChanged()
 {
-    deleteOneButton->setEnabled(invitationWidget->selectedItems().size() > 0);
+    m_ui.deleteOneButton->setEnabled(m_ui.invitationWidget->selectedItems().size() > 0);
 }
 
 
