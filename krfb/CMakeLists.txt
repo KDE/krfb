@@ -29,6 +29,7 @@ set_target_properties (krfbprivate PROPERTIES
 
 install (TARGETS krfbprivate
          ${INSTALL_TARGETS_DEFAULT_ARGS}
+         LIBRARY NAMELINK_SKIP
 )
 
 install (FILES
