@@ -26,7 +26,7 @@
 #include <KDebug>
 #include <KNotification>
 #include <poll.h>
-#include <string.h> //for bzero()
+#include <strings.h> //for bzero()
 
 struct RfbClient::Private
 {
