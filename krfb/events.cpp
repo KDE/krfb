@@ -60,7 +60,7 @@ private:
     void init();
 };
 
-K_GLOBAL_STATIC(EventData, data);
+K_GLOBAL_STATIC(EventData, data)
 
 EventData::EventData()
 {

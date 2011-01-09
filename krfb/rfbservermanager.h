@@ -53,7 +53,7 @@ private:
 
     RfbServerManager();
     virtual ~RfbServerManager();
-    Q_DISABLE_COPY(RfbServerManager);
+    Q_DISABLE_COPY(RfbServerManager)
 
     friend class RfbServer;
     friend class RfbServerManagerStatic;
