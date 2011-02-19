@@ -36,7 +36,7 @@ public:
                                 const QList<Tp::ChannelPtr> &channels,
                                 const QList<Tp::ChannelRequestPtr> &requestsSatisfied,
                                 const QDateTime &userActionTime,
-                                const QVariantMap &handlerInfo);
+                                const Tp::AbstractClientHandler::HandlerInfo &handlerInfo);
 
 };
 

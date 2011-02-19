@@ -21,6 +21,7 @@
 #include "tubesclienthandler.h"
 #include "tubesrfbserver.h"
 
+#include <TelepathyQt4/ChannelClassSpecList>
 #include <TelepathyQt4/Constants>
 #include <TelepathyQt4/Debug>
 
@@ -28,19 +29,18 @@
 
 using namespace Tp;
 
-static inline Tp::ChannelClassList channelClassList()
+static inline Tp::ChannelClassSpecList channelClassSpecList()
 {
-    QMap<QString, QDBusVariant> filter0;
-    filter0[TELEPATHY_INTERFACE_CHANNEL ".ChannelType"] =
-            QDBusVariant(TELEPATHY_INTERFACE_CHANNEL_TYPE_STREAM_TUBE);
-    filter0[TELEPATHY_INTERFACE_CHANNEL_TYPE_STREAM_TUBE ".Service"] = QDBusVariant("rfb");
-    filter0[TELEPATHY_INTERFACE_CHANNEL ".Requested"] = QDBusVariant(true);
-
-    return Tp::ChannelClassList() << Tp::ChannelClass(filter0);
+    Tp::ChannelClassSpec spec = Tp::ChannelClassSpec();
+    spec.setChannelType(TP_QT4_IFACE_CHANNEL_TYPE_STREAM_TUBE);
+    spec.setTargetHandleType(Tp::HandleTypeContact);
+    spec.setRequested(true);
+    spec.setProperty(QLatin1String(TP_QT4_IFACE_CHANNEL_TYPE_STREAM_TUBE ".Service"),QVariant("rfb"));
+    return Tp::ChannelClassSpecList() << spec;
 }
 
 TubesClientHandler::TubesClientHandler()
-  : AbstractClientHandler(channelClassList(), false)
+  : AbstractClientHandler(channelClassSpecList())
 {
     kDebug();
 
@@ -68,7 +68,7 @@ void TubesClientHandler::handleChannels(const Tp::MethodInvocationContextPtr<> &
                                         const QList<Tp::ChannelPtr> &channels,
                                         const QList<Tp::ChannelRequestPtr> &requestsSatisfied,
                                         const QDateTime &userActionTime,
-                                        const QVariantMap &handlerInfo)
+                                        const Tp::AbstractClientHandler::HandlerInfo &handlerInfo)
 {
     kDebug();
 

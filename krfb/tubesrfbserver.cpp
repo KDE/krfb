@@ -143,7 +143,7 @@ void TubesRfbServer::onChannelReady(Tp::PendingOperation *op)
 
     Tp::Contacts contacts = d->channel->groupContacts();
 
-    Tp::ContactManager *contactManager = d->channel->connection()->contactManager();
+    Tp::ContactManagerPtr contactManager = d->channel->connection()->contactManager();
 
     if (!contactManager) {
         kWarning() << "Invalid Contact Manager.";
@@ -154,7 +154,7 @@ void TubesRfbServer::onChannelReady(Tp::PendingOperation *op)
         return;
     }
 
-    QSet<Tp::Contact::Feature> features;
+    Tp::Features features;
     features << Tp::Contact::FeatureAlias;
 
     connect(contactManager->upgradeContacts(contacts.toList(), features),
@@ -198,10 +198,10 @@ void TubesRfbServer::offerTube()
                  const QString&)));
 
     /* Interface used to control the tube state */
-    Tp::Client::ChannelInterfaceTubeInterface *tubeInterface = d->channel->tubeInterface();
+    Tp::Client::ChannelInterfaceTubeInterface *tubeInterface = d->channel->interface<Tp::Client::ChannelInterfaceTubeInterface>();
 
     /* Interface used to control stream tube */
-    Tp::Client::ChannelTypeStreamTubeInterface *streamTubeInterface = d->channel->streamTubeInterface();
+    Tp::Client::ChannelTypeStreamTubeInterface *streamTubeInterface = d->channel->interface<Tp::Client::ChannelTypeStreamTubeInterface>();
 
     if (streamTubeInterface && tubeInterface) {
         kDebug() << "Offering tube";
