@@ -175,28 +175,30 @@ void RfbServerManager::unregisterServer(RfbServer* server)
 
 rfbScreenInfoPtr RfbServerManager::newScreen()
 {
-    rfbScreenInfoPtr screen;
+    rfbScreenInfoPtr screen = NULL;
 
-    int w = d->fb->width();
-    int h = d->fb->height();
-    int depth = d->fb->depth();
-    int bpp = depth >> 3;
+    if (!d->fb.isNull()) {
+        int w = d->fb->width();
+        int h = d->fb->height();
+        int depth = d->fb->depth();
+        int bpp = depth >> 3;
 
-    if (bpp != 1 && bpp != 2 && bpp != 4) {
-        bpp = 4;
+        if (bpp != 1 && bpp != 2 && bpp != 4) {
+            bpp = 4;
+        }
+
+        kDebug() << "bpp: " << bpp;
+
+        rfbLogEnable(0);
+
+        screen = rfbGetScreen(0, 0, w, h, 8, 3, bpp);
+        screen->paddedWidthInBytes = d->fb->paddedWidth();
+        d->fb->getServerFormat(screen->serverFormat);
+        screen->frameBuffer = d->fb->data();
+
+        screen->desktopName = d->desktopName.constData();
+        screen->cursor = d->myCursor;
     }
-
-    kDebug() << "bpp: " << bpp;
-
-    rfbLogEnable(0);
-
-    screen = rfbGetScreen(0, 0, w, h, 8, 3, bpp);
-    screen->paddedWidthInBytes = d->fb->paddedWidth();
-    d->fb->getServerFormat(screen->serverFormat);
-    screen->frameBuffer = d->fb->data();
-
-    screen->desktopName = d->desktopName.constData();
-    screen->cursor = d->myCursor;
 
     return screen;
 }

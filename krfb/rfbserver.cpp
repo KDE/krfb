@@ -88,6 +88,9 @@ bool RfbServer::start()
 {
     if (!d->screen) {
         d->screen = RfbServerManager::instance()->newScreen();
+        if (!d->screen) {
+            return false;
+        }
 
         // server hooks
         d->screen->screenData = this;
