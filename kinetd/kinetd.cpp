@@ -91,8 +91,8 @@ bool PortListener::acquirePort()
         m_socket = new KNetwork::KServerSocket(m_port, false);
     }
 
-    connect(m_socket, SIGNAL(accepted(KSocket *)),
-            SLOT(accepted(KSocket *)));
+    connect(m_socket, SIGNAL(accepted(KSocket*)),
+            SLOT(accepted(KSocket*)));
 
     bool s = m_registerService;
     bool sd = m_dnssdRegister;

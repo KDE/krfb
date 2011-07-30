@@ -79,8 +79,8 @@ TubesRfbServer::TubesRfbServer(const Tp::ChannelPtr & channel, QObject *parent)
 
     d->channel = channel;
     connect(d->channel->becomeReady(),
-            SIGNAL(finished(Tp::PendingOperation *)),
-            SLOT(onChannelReady(Tp::PendingOperation *)));
+            SIGNAL(finished(Tp::PendingOperation*)),
+            SLOT(onChannelReady(Tp::PendingOperation*)));
 
     setListeningPort(6789);
     setListeningAddress("127.0.0.1");  // Listen only on the loopback network interface
@@ -193,7 +193,7 @@ void TubesRfbServer::offerTube()
     }
 
     connect(d->channel.data(),
-            SIGNAL(invalidated(Tp::DBusProxy*, const QString&, const QString&)),
+            SIGNAL(invalidated(Tp::DBusProxy*,QString,QString)),
             SLOT(onChannelInvalidated(Tp::DBusProxy*, const QString&,
                  const QString&)));
 
@@ -229,8 +229,8 @@ void TubesRfbServer::offerTube()
         connect(new QDBusPendingCallWatcher(ret, this), SIGNAL(finished(QDBusPendingCallWatcher*)),
                 SLOT(onOfferTubeFinished(QDBusPendingCallWatcher*)));
         connect(streamTubeInterface,
-                SIGNAL(NewRemoteConnection(uint, QDBusVariant, uint)),
-                SLOT(onNewRemoteConnection(uint, QDBusVariant, uint)));
+                SIGNAL(NewRemoteConnection(uint,QDBusVariant,uint)),
+                SLOT(onNewRemoteConnection(uint,QDBusVariant,uint)));
     }
 }
 

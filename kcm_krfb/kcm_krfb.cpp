@@ -68,7 +68,7 @@ KcmKRfb::KcmKRfb(QWidget *p, const QStringList &) :
 
     load();
 
-    connect(m_confWidget->passwordInput, SIGNAL(textChanged(const QString &)), SLOT(configChanged()));
+    connect(m_confWidget->passwordInput, SIGNAL(textChanged(QString)), SLOT(configChanged()));
     connect(m_confWidget->allowUninvitedCB, SIGNAL(clicked()), SLOT(configChanged()));
     connect(m_confWidget->enableSLPCB, SIGNAL(clicked()), SLOT(configChanged()));
     connect(m_confWidget->confirmConnectionsCB, SIGNAL(clicked()), SLOT(configChanged()));
