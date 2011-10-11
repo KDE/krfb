@@ -101,7 +101,7 @@ rfbEncryptAndStorePasswd(char *passwd, char *fname)
     for (i = 0; i < 8; i++) {
 	putc(encryptedPasswd[i], fp);
     }
-  
+
     fclose(fp);
     return 0;
 }
@@ -118,14 +118,18 @@ rfbDecryptPasswdFromFile(char *fname)
 {
     FILE *fp;
     int i, ch;
-    if ((fp = fopen(fname,"r")) == NULL) return NULL;
-
     unsigned char *passwd = (unsigned char *)malloc(9);
+
+    if ((fp = fopen(fname,"r")) == NULL) {
+	free(passwd);
+	return NULL;
+    }
 
     for (i = 0; i < 8; i++) {
 	ch = getc(fp);
 	if (ch == EOF) {
 	    fclose(fp);
+	    free(passwd);
 	    return NULL;
 	}
 	passwd[i] = ch;
@@ -159,7 +163,7 @@ rfbRandomBytes(unsigned char *bytes)
     }
 
     for (i = 0; i < CHALLENGESIZE; i++) {
-	bytes[i] = (unsigned char)(random() & 255);    
+	bytes[i] = (unsigned char)(random() & 255);
     }
 }
 
@@ -190,4 +194,18 @@ rfbEncryptBytes(unsigned char *bytes, char *passwd)
     for (i = 0; i < CHALLENGESIZE; i += 8) {
 	rfbDes(bytes+i, bytes+i);
     }
+}
+
+void
+rfbEncryptBytes2(unsigned char *where, const int length, unsigned char *key) {
+  int i, j;
+  rfbDesKey(key, EN0);
+  for (i = 0; i< 8; i++)
+    where[i] ^= key[i];
+  rfbDes(where, where);
+  for (i = 8; i < length; i += 8) {
+    for (j = 0; j < 8; j++)
+      where[i + j] ^= where[i + j - 8];
+      rfbDes(where + i, where + i);
+  }
 }

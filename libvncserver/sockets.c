@@ -116,12 +116,8 @@ rfbInitSockets(rfbScreenInfoPtr rfbScreen)
     if (rfbScreen->inetdSock != -1) {
 	const int one = 1;
 
-#ifndef WIN32
-	if (fcntl(rfbScreen->inetdSock, F_SETFL, O_NONBLOCK) < 0) {
-	    rfbLogPerror("fcntl");
+        if(!rfbSetNonBlocking(rfbScreen->inetdSock))
 	    return;
-	}
-#endif
 
 	if (setsockopt(rfbScreen->inetdSock, IPPROTO_TCP, TCP_NODELAY,
 		       (char *)&one, sizeof(one)) < 0) {
@@ -222,8 +218,6 @@ rfbCheckFds(rfbScreenInfoPtr rfbScreen,long usec)
     struct sockaddr_in addr;
     socklen_t addrlen = sizeof(addr);
     char buf[6];
-    const int one = 1;
-    int sock;
     rfbClientIteratorPtr i;
     rfbClientPtr cl;
     int result = 0;
@@ -336,33 +330,30 @@ rfbProcessNewConnection(rfbScreenInfoPtr rfbScreen)
     socklen_t addrlen = sizeof(addr);
 
     if ((sock = accept(rfbScreen->listenSock,
-                    (struct sockaddr *)&addr, &addrlen)) < 0) {
-        rfbLogPerror("rfbCheckFds: accept");
-        return FALSE;
+		       (struct sockaddr *)&addr, &addrlen)) < 0) {
+      rfbLogPerror("rfbCheckFds: accept");
+      return FALSE;
     }
 
-#ifndef WIN32
-    if (fcntl(sock, F_SETFL, O_NONBLOCK) < 0) {
-        rfbLogPerror("rfbCheckFds: fcntl");
-        closesocket(sock);
-        return FALSE;
+    if(!rfbSetNonBlocking(sock)) {
+      closesocket(sock);
+      return FALSE;
     }
-#endif
 
     if (setsockopt(sock, IPPROTO_TCP, TCP_NODELAY,
-                (char *)&one, sizeof(one)) < 0) {
-        rfbLogPerror("rfbCheckFds: setsockopt");
-        closesocket(sock);
-        return FALSE;
+		   (char *)&one, sizeof(one)) < 0) {
+      rfbLogPerror("rfbCheckFds: setsockopt");
+      closesocket(sock);
+      return FALSE;
     }
 
 #ifdef USE_LIBWRAP
     if(!hosts_ctl("vnc",STRING_UNKNOWN,inet_ntoa(addr.sin_addr),
-                STRING_UNKNOWN)) {
-        rfbLog("Rejected connection from client %s\n",
-                inet_ntoa(addr.sin_addr));
-        closesocket(sock);
-        return FALSE;
+		  STRING_UNKNOWN)) {
+      rfbLog("Rejected connection from client %s\n",
+	     inet_ntoa(addr.sin_addr));
+      closesocket(sock);
+      return FALSE;
     }
 #endif
 
@@ -432,13 +423,10 @@ rfbConnect(rfbScreenInfoPtr rfbScreen,
 	return -1;
     }
 
-#ifndef WIN32
-    if (fcntl(sock, F_SETFL, O_NONBLOCK) < 0) {
-	rfbLogPerror("fcntl failed");
-	closesocket(sock);
+    if(!rfbSetNonBlocking(sock)) {
+        closesocket(sock);
 	return -1;
     }
-#endif
 
     if (setsockopt(sock, IPPROTO_TCP, TCP_NODELAY,
 		   (char *)&one, sizeof(one)) < 0) {
@@ -522,7 +510,11 @@ rfbReadExactTimeout(rfbClientPtr cl, char* buf, int len, int timeout)
 
 int rfbReadExact(rfbClientPtr cl,char* buf,int len)
 {
-  return(rfbReadExactTimeout(cl,buf,len,rfbMaxClientWait));
+  /* favor the per-screen value if set */
+  if(cl->screen && cl->screen->maxClientWait)
+    return(rfbReadExactTimeout(cl,buf,len,cl->screen->maxClientWait));
+  else
+    return(rfbReadExactTimeout(cl,buf,len,rfbMaxClientWait));
 }
 
 /*
@@ -541,6 +533,7 @@ rfbWriteExact(rfbClientPtr cl,
     fd_set fds;
     struct timeval tv;
     int totalTimeWaited = 0;
+    const int timeout = (cl->screen && cl->screen->maxClientWait) ? cl->screen->maxClientWait : rfbMaxClientWait;
 
 #undef DEBUG_WRITE_EXACT
 #ifdef DEBUG_WRITE_EXACT
@@ -576,7 +569,7 @@ rfbWriteExact(rfbClientPtr cl,
                 return n;
             }
 
-            /* Retry every 5 seconds until we exceed rfbMaxClientWait.  We
+            /* Retry every 5 seconds until we exceed timeout.  We
                need to do this because select doesn't necessarily return
                immediately when the other end has gone away */
 
@@ -586,6 +579,9 @@ rfbWriteExact(rfbClientPtr cl,
             tv.tv_usec = 0;
             n = select(sock+1, NULL, &fds, NULL /* &fds */, &tv);
 	    if (n < 0) {
+#ifdef WIN32
+                errno=WSAGetLastError();
+#endif
        	        if(errno==EINTR)
 		    continue;
                 rfbLogPerror("WriteExact: select");
@@ -594,7 +590,7 @@ rfbWriteExact(rfbClientPtr cl,
             }
             if (n == 0) {
                 totalTimeWaited += 5000;
-                if (totalTimeWaited >= rfbMaxClientWait) {
+                if (totalTimeWaited >= timeout) {
                     errno = ETIMEDOUT;
                     UNLOCK(cl->outputMutex);
                     return -1;
@@ -652,7 +648,7 @@ rfbListenOnTCPPort(int port,
 	closesocket(sock);
 	return -1;
     }
-    if (listen(sock, 5) < 0) {
+    if (listen(sock, 32) < 0) {
 	closesocket(sock);
 	return -1;
     }
@@ -718,4 +714,24 @@ rfbListenOnUDPPort(int port,
     }
 
     return sock;
+}
+
+/*
+ * rfbSetNonBlocking sets a socket into non-blocking mode.
+ */
+rfbBool
+rfbSetNonBlocking(int sock)
+{
+#ifdef WIN32
+  unsigned long block=1;
+  if(ioctlsocket(sock, FIONBIO, &block) == SOCKET_ERROR) {
+    errno=WSAGetLastError();
+#else
+  int flags = fcntl(sock, F_GETFL);
+  if(flags < 0 || fcntl(sock, F_SETFL, flags | O_NONBLOCK) < 0) {
+#endif
+    rfbLogPerror("Setting socket to non-blocking failed");
+    return FALSE;
+  }
+  return TRUE;
 }

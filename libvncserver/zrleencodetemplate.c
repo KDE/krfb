@@ -84,12 +84,10 @@ static const int bitsPerPackedPixel[] = {
   0, 1, 2, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4
 };
 
-static zrlePaletteHelper paletteHelper;
-
 #endif /* ZRLE_ONCE */
 
 void ZRLE_ENCODE_TILE (PIXEL_T* data, int w, int h, zrleOutStream* os,
-		int zywrle_level, int *zywrleBuf);
+		int zywrle_level, int *zywrleBuf, void *paletteHelper);
 
 #if BPP!=8
 #define ZYWRLE_ENCODE
@@ -111,8 +109,12 @@ static void ZRLE_ENCODE (int x, int y, int w, int h,
 
       GET_IMAGE_INTO_BUF(tx,ty,tw,th,buf);
 
+      if (cl->paletteHelper == NULL) {
+          cl->paletteHelper = (void *) calloc(sizeof(zrlePaletteHelper), 1);
+      }
+
       ZRLE_ENCODE_TILE((PIXEL_T*)buf, tw, th, os,
-		      cl->zywrleLevel, cl->zywrleBuf);
+		      cl->zywrleLevel, cl->zywrleBuf, cl->paletteHelper);
     }
   }
   zrleOutStreamFlush(os);
@@ -120,7 +122,7 @@ static void ZRLE_ENCODE (int x, int y, int w, int h,
 
 
 void ZRLE_ENCODE_TILE(PIXEL_T* data, int w, int h, zrleOutStream* os,
-	int zywrle_level, int *zywrleBuf)
+	int zywrle_level, int *zywrleBuf,  void *paletteHelper)
 {
   /* First find the palette and the number of runs */
 
@@ -140,7 +142,7 @@ void ZRLE_ENCODE_TILE(PIXEL_T* data, int w, int h, zrleOutStream* os,
   PIXEL_T* end = ptr + h * w;
   *end = ~*(end-1); /* one past the end is different so the while loop ends */
 
-  ph = &paletteHelper;
+  ph = (zrlePaletteHelper *) paletteHelper;
   zrlePaletteHelperInit(ph);
 
   while (ptr < end) {
@@ -289,7 +291,7 @@ void ZRLE_ENCODE_TILE(PIXEL_T* data, int w, int h, zrleOutStream* os,
 #if BPP!=8
       if (zywrle_level > 0 && !(zywrle_level & 0x80)) {
         ZYWRLE_ANALYZE(data, data, w, h, w, zywrle_level, zywrleBuf);
-	ZRLE_ENCODE_TILE(data, w, h, os, zywrle_level | 0x80, zywrleBuf);
+	ZRLE_ENCODE_TILE(data, w, h, os, zywrle_level | 0x80, zywrleBuf, paletteHelper);
       }
       else
 #endif

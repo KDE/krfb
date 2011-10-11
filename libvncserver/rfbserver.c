@@ -54,10 +54,6 @@
 #endif
 #endif
 
-#ifdef CORBA
-#include <vncserverctrl.h>
-#endif
-
 #ifdef DEBUGPROTO
 #undef DEBUGPROTO
 #define DEBUGPROTO(x) x
@@ -214,15 +210,11 @@ rfbNewClientConnection(rfbScreenInfoPtr rfbScreen,
     rfbClientPtr cl;
 
     cl = rfbNewClient(rfbScreen,sock);
-#ifdef CORBA
-    if(cl!=NULL)
-      newConnection(cl, (KEYBOARD_DEVICE|POINTER_DEVICE),1,1,1);
-#endif
 }
 
 
 /*
- * rfbReverseConnection is called by the CORBA stuff to make an outward
+ * rfbReverseConnection is called to make an outward
  * connection to a "listening" RFB client.
  */
 
@@ -307,13 +299,10 @@ rfbNewTCPOrUDPClient(rfbScreenInfoPtr rfbScreen,
       }
       rfbReleaseClientIterator(iterator);
 
-#ifndef WIN32
-      if (fcntl(sock, F_SETFL, O_NONBLOCK) < 0) {
-	rfbLogPerror("fcntl failed");
+      if(!rfbSetNonBlocking(sock)) {
 	close(sock);
 	return NULL;
       }
-#endif
 
       if (setsockopt(sock, IPPROTO_TCP, TCP_NODELAY,
 		     (char *)&one, sizeof(one)) < 0) {
@@ -327,6 +316,7 @@ rfbNewTCPOrUDPClient(rfbScreenInfoPtr rfbScreen,
 
       INIT_MUTEX(cl->outputMutex);
       INIT_MUTEX(cl->refCountMutex);
+      INIT_MUTEX(cl->sendMutex);
       INIT_COND(cl->deleteCond);
 
       cl->state = RFB_PROTOCOL_VERSION;
@@ -484,7 +474,7 @@ rfbClientConnectionGone(rfbClientPtr cl)
     if (cl->next)
         cl->next->prev = cl->prev;
 
-    if(cl->sock>0)
+    if(cl->sock>=0)
 	close(cl->sock);
 
     if (cl->scaledScreen!=NULL)
@@ -495,6 +485,10 @@ rfbClientConnectionGone(rfbClientPtr cl)
 #endif
 
     rfbFreeUltraData(cl);
+
+    /* free buffers holding pixel data before and after encoding */
+    free(cl->beforeEncBuf);
+    free(cl->afterEncBuf);
 
 #ifdef LIBVNCSERVER_HAVE_LIBPTHREAD
     if(cl->screen->backgroundLoop != FALSE) {
@@ -550,9 +544,9 @@ rfbClientConnectionGone(rfbClientPtr cl)
     UNLOCK(cl->outputMutex);
     TINI_MUTEX(cl->outputMutex);
 
-#ifdef CORBA
-    destroyConnection(cl);
-#endif
+    LOCK(cl->sendMutex);
+    UNLOCK(cl->sendMutex);
+    TINI_MUTEX(cl->sendMutex);
 
     rfbPrintStats(cl);
 
@@ -609,14 +603,9 @@ rfbProcessClientProtocolVersion(rfbClientPtr cl)
 
     pv[sz_rfbProtocolVersionMsg] = 0;
     if (sscanf(pv,rfbProtocolVersionFormat,&major_,&minor_) != 2) {
-        char name[1024]; 
-	if(sscanf(pv,"RFB %03d.%03d %1023s\n",&major_,&minor_,name) != 3) {
-	    rfbErr("rfbProcessClientProtocolVersion: not a valid RFB client: %s\n", pv);
-	    rfbCloseClient(cl);
-	    return;
-	}
-	free(cl->host);
-	cl->host=strdup(name);
+	rfbErr("rfbProcessClientProtocolVersion: not a valid RFB client: %s\n", pv);
+	rfbCloseClient(cl);
+	return;
     }
     rfbLog("Client Protocol Version %d.%d\n", major_, minor_);
 
@@ -882,16 +871,16 @@ rfbSendSupportedMessages(rfbClientPtr cl)
     /*rfbSetBit(msgs.client2server, rfbSetServerInput);  */
     /*rfbSetBit(msgs.client2server, rfbSetSW);           */
     /*rfbSetBit(msgs.client2server, rfbTextChat);        */
-    /*rfbSetBit(msgs.client2server, rfbKeyFrameRequest); */
     rfbSetBit(msgs.client2server, rfbPalmVNCSetScaleFactor);
+    rfbSetBit(msgs.client2server, rfbXvp);
 
     rfbSetBit(msgs.server2client, rfbFramebufferUpdate);
     rfbSetBit(msgs.server2client, rfbSetColourMapEntries);
     rfbSetBit(msgs.server2client, rfbBell);
     rfbSetBit(msgs.server2client, rfbServerCutText);
     rfbSetBit(msgs.server2client, rfbResizeFrameBuffer);
-    /*rfbSetBit(msgs.server2client, rfbKeyFrameUpdate);  */
     rfbSetBit(msgs.server2client, rfbPalmVNCReSizeFrameBuffer);
+    rfbSetBit(msgs.server2client, rfbXvp);
 
     memcpy(&cl->updateBuf[cl->ublen], (char *)&msgs, sz_rfbSupportedMessages);
     cl->ublen += sz_rfbSupportedMessages;
@@ -1037,6 +1026,33 @@ rfbSendServerIdentity(rfbClientPtr cl)
     return TRUE;
 }
 
+/*
+ * Send an xvp server message
+ */
+
+rfbBool
+rfbSendXvp(rfbClientPtr cl, uint8_t version, uint8_t code)
+{
+    rfbXvpMsg xvp;
+
+    xvp.type = rfbXvp;
+    xvp.pad = 0;
+    xvp.version = version;
+    xvp.code = code;
+
+    LOCK(cl->sendMutex);
+    if (rfbWriteExact(cl, (char *)&xvp, sz_rfbXvpMsg) < 0) {
+      rfbLogPerror("rfbSendXvp: write");
+      rfbCloseClient(cl);
+    }
+    UNLOCK(cl->sendMutex);
+
+    rfbStatRecordMessageSent(cl, rfbXvp, sz_rfbXvpMsg, sz_rfbXvpMsg);
+
+    return TRUE;
+}
+
+
 rfbBool rfbSendTextChatMessage(rfbClientPtr cl, uint32_t length, char *buffer)
 {
     rfbTextChatMsg tc;
@@ -1102,9 +1118,11 @@ rfbBool rfbSendFileTransferMessage(rfbClientPtr cl, uint8_t contentType, uint8_t
     /*
     rfbLog("rfbSendFileTransferMessage( %dtype, %dparam, %dsize, %dlen, %p)\n", contentType, contentParam, size, length, buffer);
     */
+    LOCK(cl->sendMutex);
     if (rfbWriteExact(cl, (char *)&ft, sz_rfbFileTransferMsg) < 0) {
         rfbLogPerror("rfbSendFileTransferMessage: write");
         rfbCloseClient(cl);
+        UNLOCK(cl->sendMutex);
         return FALSE;
     }
 
@@ -1113,9 +1131,11 @@ rfbBool rfbSendFileTransferMessage(rfbClientPtr cl, uint8_t contentType, uint8_t
         if (rfbWriteExact(cl, buffer, length) < 0) {
             rfbLogPerror("rfbSendFileTransferMessage: write");
             rfbCloseClient(cl);
+            UNLOCK(cl->sendMutex);
             return FALSE;
         }
     }
+    UNLOCK(cl->sendMutex);
 
     rfbStatRecordMessageSent(cl, rfbFileTransfer, sz_rfbFileTransferMsg+length, sz_rfbFileTransferMsg+length);
 
@@ -1250,7 +1270,11 @@ rfbBool rfbSendDirContent(rfbClientPtr cl, int length, char *buffer)
                 /*
                 rfbLog("rfbProcessFileTransfer() rfbDirContentRequest: rfbRDirContent: Sending \"%s\"\n", (char *)win32filename.cFileName);
                 */
-                if (rfbSendFileTransferMessage(cl, rfbDirPacket, rfbADirectory, 0, nOptLen, (char *)&win32filename)==FALSE) return FALSE;
+                if (rfbSendFileTransferMessage(cl, rfbDirPacket, rfbADirectory, 0, nOptLen, (char *)&win32filename)==FALSE)
+                {
+                    closedir(dirp);
+                    return FALSE;
+                }
             }
         }
     }
@@ -1326,6 +1350,9 @@ rfbBool rfbSendFileTransferChunk(rfbClientPtr cl)
 	n = select(cl->sock + 1, NULL, &wfds, NULL, &tv);
 
 	if (n<0) {
+#ifdef WIN32
+	    errno=WSAGetLastError();
+#endif
             rfbLog("rfbSendFileTransferChunk() select failed: %s\n", strerror(errno));
 	}
         /* We have space on the transmit queue */
@@ -1345,6 +1372,9 @@ rfbBool rfbSendFileTransferChunk(rfbClientPtr cl)
                 return retval;
             case -1:
                 /* TODO : send an error msg to the client... */
+#ifdef WIN32
+	        errno=WSAGetLastError();
+#endif
                 rfbLog("rfbSendFileTransferChunk(): %s\n",strerror(errno));
                 retval = rfbSendFileTransferMessage(cl, rfbAbortFileTransfer, 0, 0, 0, NULL);
                 close(cl->fileTransfer.fd);
@@ -1525,12 +1555,15 @@ rfbBool rfbProcessFileTransfer(rfbClientPtr cl, uint8_t contentType, uint8_t con
 
         /* TODO: finish 64-bit file size support */
         sizeHtmp = 0;        
+        LOCK(cl->sendMutex);
         if (rfbWriteExact(cl, (char *)&sizeHtmp, 4) < 0) {
           rfbLogPerror("rfbProcessFileTransfer: write");
           rfbCloseClient(cl);
+          UNLOCK(cl->sendMutex);
           if (buffer!=NULL) free(buffer);
           return FALSE;
         }
+        UNLOCK(cl->sendMutex);
         break;
 
     case rfbFileHeader:
@@ -1624,7 +1657,7 @@ rfbBool rfbProcessFileTransfer(rfbClientPtr cl, uint8_t contentType, uint8_t con
 #ifdef LIBVNCSERVER_HAVE_LIBZ
                 /* compressed packet */
                 nRet = uncompress(compBuff,&nRawBytes,(const unsigned char*)buffer, length);
-                retval=write(cl->fileTransfer.fd, compBuff, nRawBytes);
+                retval=write(cl->fileTransfer.fd, (char*)compBuff, nRawBytes);
 #else
                 /* Write the file out as received... */
                 retval=write(cl->fileTransfer.fd, buffer, length);
@@ -1983,7 +2016,15 @@ rfbProcessClientNormalMessage(rfbClientPtr cl)
                           "%s\n", cl->host);
                   cl->enableServerIdentity = TRUE;
                 }
-                break;           
+                break;
+	    case rfbEncodingXvp:
+	        rfbLog("Enabling Xvp protocol extension for client "
+		        "%s\n", cl->host);
+		if (!rfbSendXvp(cl, 1, rfbXvp_Init)) {
+		  rfbCloseClient(cl);
+		  return;
+		}
+                break;
             default:
 #ifdef LIBVNCSERVER_HAVE_LIBZ
 		if ( enc >= (uint32_t)rfbEncodingCompressLevel0 &&
@@ -2122,6 +2163,7 @@ rfbProcessClientNormalMessage(rfbClientPtr cl)
 	    if (!cl->format.trueColour) {
 		if (!rfbSetClientColourMap(cl, 0, 0)) {
 		    sraRgnDestroy(tmpRegion);
+		    TSIGNAL(cl->updateCond);
 		    UNLOCK(cl->updateMutex);
 		    return;
 		}
@@ -2366,6 +2408,28 @@ rfbProcessClientNormalMessage(rfbClientPtr cl)
       rfbSendNewScaleSize(cl);
       return;
 
+    case rfbXvp:
+
+      if ((n = rfbReadExact(cl, ((char *)&msg) + 1,
+          sz_rfbXvpMsg - 1)) <= 0) {
+          if (n != 0)
+            rfbLogPerror("rfbProcessClientNormalMessage: read");
+          rfbCloseClient(cl);
+          return;
+      }
+      rfbStatRecordMessageRcvd(cl, msg.type, sz_rfbXvpMsg, sz_rfbXvpMsg);
+
+      /* only version when is defined, so echo back a fail */
+      if(msg.xvp.version != 1) {
+	rfbSendXvp(cl, msg.xvp.version, rfbXvp_Fail);
+      }
+      else {
+	/* if the hook exists and fails, send a fail msg */
+	if(cl->screen->xvpHook && !cl->screen->xvpHook(cl, msg.xvp.version, msg.xvp.code))
+	  rfbSendXvp(cl, 1, rfbXvp_Fail);
+      }
+      return;
+
     default:
 	{
 	    rfbExtensionData *e,*next;
@@ -2433,9 +2497,14 @@ rfbSendFramebufferUpdate(rfbClientPtr cl,
       fu->nRects = Swap16IfLE(1);
       cl->ublen = sz_rfbFramebufferUpdateMsg;
       if (!rfbSendNewFBSize(cl, cl->scaledScreen->width, cl->scaledScreen->height)) {
+	if(cl->screen->displayFinishedHook)
+	  cl->screen->displayFinishedHook(cl, FALSE);
         return FALSE;
       }
-      return rfbSendUpdateBuf(cl);
+      result = rfbSendUpdateBuf(cl);
+      if(cl->screen->displayFinishedHook)
+	cl->screen->displayFinishedHook(cl, result);
+      return result;
     }
     
     /*
@@ -2551,6 +2620,8 @@ rfbSendFramebufferUpdate(rfbClientPtr cl,
        !sendSupportedMessages && !sendSupportedEncodings && !sendServerIdentity) {
       sraRgnDestroy(updateRegion);
       UNLOCK(cl->updateMutex);
+      if(cl->screen->displayFinishedHook)
+	cl->screen->displayFinishedHook(cl, TRUE);
       return TRUE;
     }
 
@@ -2747,7 +2818,7 @@ rfbSendFramebufferUpdate(rfbClientPtr cl,
        if (!rfbSendServerIdentity(cl))
            goto updateFailed;
    }
-   
+
     if (!sraRgnEmpty(updateCopyRegion)) {
 	if (!rfbSendCopyRegion(cl,updateCopyRegion,dx,dy))
 	        goto updateFailed;
@@ -2828,6 +2899,9 @@ updateFailed:
         sraRgnReleaseIterator(i);
     sraRgnDestroy(updateRegion);
     sraRgnDestroy(updateCopyRegion);
+
+    if(cl->screen->displayFinishedHook)
+      cl->screen->displayFinishedHook(cl, result);
     return result;
 }
 
@@ -3103,12 +3177,15 @@ rfbSendSetColourMapEntries(rfbClientPtr cl,
 
     len += nColours * 3 * 2;
 
+    LOCK(cl->sendMutex);
     if (rfbWriteExact(cl, wbuf, len) < 0) {
 	rfbLogPerror("rfbSendSetColourMapEntries: write");
 	rfbCloseClient(cl);
         if (wbuf != buf) free(wbuf);
+        UNLOCK(cl->sendMutex);
 	return FALSE;
     }
+    UNLOCK(cl->sendMutex);
 
     rfbStatRecordMessageSent(cl, rfbSetColourMapEntries, len, len);
     if (wbuf != buf) free(wbuf);
@@ -3129,10 +3206,12 @@ rfbSendBell(rfbScreenInfoPtr rfbScreen)
     i = rfbGetClientIterator(rfbScreen);
     while((cl=rfbClientIteratorNext(i))) {
 	b.type = rfbBell;
+        LOCK(cl->sendMutex);
 	if (rfbWriteExact(cl, (char *)&b, sz_rfbBellMsg) < 0) {
 	    rfbLogPerror("rfbSendBell: write");
 	    rfbCloseClient(cl);
 	}
+        UNLOCK(cl->sendMutex);
     }
     rfbStatRecordMessageSent(cl, rfbBell, sz_rfbBellMsg, sz_rfbBellMsg);
     rfbReleaseClientIterator(i);
@@ -3154,16 +3233,19 @@ rfbSendServerCutText(rfbScreenInfoPtr rfbScreen,char *str, int len)
     while ((cl = rfbClientIteratorNext(iterator)) != NULL) {
         sct.type = rfbServerCutText;
         sct.length = Swap32IfLE(len);
+        LOCK(cl->sendMutex);
         if (rfbWriteExact(cl, (char *)&sct,
                        sz_rfbServerCutTextMsg) < 0) {
             rfbLogPerror("rfbSendServerCutText: write");
             rfbCloseClient(cl);
+            UNLOCK(cl->sendMutex);
             continue;
         }
         if (rfbWriteExact(cl, str, len) < 0) {
             rfbLogPerror("rfbSendServerCutText: write");
             rfbCloseClient(cl);
         }
+        UNLOCK(cl->sendMutex);
         rfbStatRecordMessageSent(cl, rfbServerCutText, sz_rfbServerCutTextMsg+len, sz_rfbServerCutTextMsg+len);
     }
     rfbReleaseClientIterator(iterator);
@@ -3183,7 +3265,7 @@ void
 rfbNewUDPConnection(rfbScreenInfoPtr rfbScreen,
                     int sock)
 {
-    if (write(sock, &ptrAcceleration, 1) < 0) {
+  if (write(sock, (char*) &ptrAcceleration, 1) < 0) {
 	rfbLogPerror("rfbNewUDPConnection: write");
     }
 }
