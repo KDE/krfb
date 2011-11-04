@@ -5,6 +5,7 @@ Comment[ast]=Esquema de buffer pa KRfb basáu en XDamage/XShm
 Comment[bs]=X11 XDamage/XShm baziran framebafer za KRfb.
 Comment[ca]=«Framebuffer» basat en XDamage/XShmQt de l'X11 per al KRfb.
 Comment[ca@valencia]=«Framebuffer» basat en XDamage/XShmQt de l'X11 per al KRfb.
+Comment[cs]=Framebuffer založený na X11 XDamage/XShm pro KRfb.
 Comment[da]=X11 XDamage/XShm-baseret framebuffer til KRfb.
 Comment[de]=X11 XDamage/XShm-basierter Framebuffer für KRfb.
 Comment[en_GB]=X11 XDamage/XShm based Framebuffer for KRfb.
