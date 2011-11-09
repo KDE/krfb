@@ -37,7 +37,7 @@ include_directories ("${CMAKE_CURRENT_BINARY_DIR}/krfb"
 
 if(Q_WS_X11)
   if(NOT X11_XTest_FOUND)
-    macro_log_feature(X11_XTest_FOUND "libXtst" "X11 Testing Resource extension library" "http://xorg.freedesktop.org" FALSE "" "useful for automated testing of X clients.")
+    message(FATAL_ERROR "krfb requires the libXtst (http://xorg.freedesktop.org) to be built")
   endif(NOT X11_XTest_FOUND)
 endif(Q_WS_X11)
 
