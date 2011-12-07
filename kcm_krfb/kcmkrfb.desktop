@@ -159,5 +159,10 @@ Comment[zh_CN]=配置桌面共享
 Comment[zh_HK]=設定桌面分享
 Comment[zh_TW]=設定桌面分享
 X-KDE-Keywords=desktop sharing,krfb,vnc,sharing,krdc,remote desktop connection,invitation,port,slp,uninvited
+X-KDE-Keywords[nl]=delen van bureaublad,krfb,vnc,delen,krdc,verbinding naar bureaublad op afstand,invitatie,poort,slp,ongenodigd
+X-KDE-Keywords[pt_BR]=compartilhamento da área de trabalho,krfb,vnc,compartilhar,krdc,conexão à área de trabalho remota,convite,porta,desconvidar
+X-KDE-Keywords[sv]=dela skrivbord,krfb,vnc,dela,krdc,fjärrskrivbordsanslutning,inbjudan,port,slp,oinbjuden
+X-KDE-Keywords[uk]=krfb,vnc,sharing,krdc,remote desktop connection,invitation,port,slp,uninvited,спільне використання,керування,оприлюднення,віддалене з’єднання,запрошення,порт,небажане
+X-KDE-Keywords[x-test]=xxdesktop sharing,krfb,vnc,sharing,krdc,remote desktop connection,invitation,port,slp,uninvitedxx
 
 Categories=Qt;KDE;X-KDE-settings-network;Settings;
