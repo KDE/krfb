@@ -160,6 +160,7 @@ Comment[zh_HK]=設定桌面分享
 Comment[zh_TW]=設定桌面分享
 X-KDE-Keywords=desktop sharing,krfb,vnc,sharing,krdc,remote desktop connection,invitation,port,slp,uninvited
 X-KDE-Keywords[ca]=compartició d'escriptori,krfb,vnc,compartició,krdc,connexió d'escriptori remot,invitació,port,slp,no invitat
+X-KDE-Keywords[ca@valencia]=compartició d'escriptori,krfb,vnc,compartició,krdc,connexió d'escriptori remot,invitació,port,slp,no invitat
 X-KDE-Keywords[da]=skrivebordsdeling,krfb,vnc,deling,krdc,remote desktop,fjernskrivebord,invitation,port,slp,uinviteret
 X-KDE-Keywords[de]=freigabe der arbeitsfläche,krfb,vnc,freigabe,krdc,fernwartung,einladung,port,slp
 X-KDE-Keywords[es]=compartición de escritorio,krfb,vnc,compartición,krdc,conexión de escritorio en remoto,invitación,puerto,slp,no invitado
