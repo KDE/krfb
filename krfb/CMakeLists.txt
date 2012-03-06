@@ -41,7 +41,7 @@ install (FILES
 # Second target: krfb - the app
 # itself.
 
-if(BUILD_EXPERIMENTAL_TUBES_SUPPORT AND TelepathyQt4_FOUND)
+if(TelepathyQt4_FOUND)
     add_definitions(-DKRFB_WITH_TELEPATHY_TUBES)
     include_directories(${TELEPATHY_QT4_INCLUDE_DIR})
 endif()
@@ -65,7 +65,7 @@ set (krfb_SRCS
      invitationsrfbclient.cpp
 )
 
-if(BUILD_EXPERIMENTAL_TUBES_SUPPORT AND TelepathyQt4_FOUND)
+if(TelepathyQt4_FOUND)
     set (krfb_SRCS
          ${krfb_SRCS}
          tubesrfbserver.cpp
@@ -86,7 +86,7 @@ kde4_add_ui_files (krfb_SRCS
                    ui/personalinvitewidget.ui
 )
 
-if(BUILD_EXPERIMENTAL_TUBES_SUPPORT AND TelepathyQt4_FOUND)
+if(TelepathyQt4_FOUND)
     kde4_add_ui_files(krfb_SRCS ui/tubesconnectionwidget.ui)
 endif()
 
@@ -106,7 +106,7 @@ target_link_libraries (krfb
                        ${KDE4_KDEUI_LIBS}
 )
 
-if(BUILD_EXPERIMENTAL_TUBES_SUPPORT AND TelepathyQt4_FOUND)
+if(TelepathyQt4_FOUND)
     target_link_libraries(krfb
                           ${TELEPATHY_QT4_LIBRARIES}
     )
@@ -122,7 +122,7 @@ install (TARGETS krfb
          ${INSTALL_TARGETS_DEFAULT_ARGS}
 )
 
-if(BUILD_EXPERIMENTAL_TUBES_SUPPORT AND TelepathyQt4_FOUND)
+if(TelepathyQt4_FOUND)
     configure_file(org.freedesktop.Telepathy.Client.krfb_rfb_handler.service.in
                    org.freedesktop.Telepathy.Client.krfb_rfb_handler.service)
     install(FILES ${CMAKE_CURRENT_BINARY_DIR}/org.freedesktop.Telepathy.Client.krfb_rfb_handler.service
