@@ -1,5 +1,5 @@
 /*
-    Copyright (C) 2009-2010 Collabora Ltd. <info@collabora.co.uk>
+    Copyright (C) 2009-2011 Collabora Ltd. <info@collabora.co.uk>
       @author George Goldberg <george.goldberg@collabora.co.uk>
       @author George Kiagiadakis <george.kiagiadakis@collabora.co.uk>
 
@@ -20,29 +20,43 @@
 #define TUBESRFBSERVER_H
 
 #include "rfbserver.h"
-#include <TelepathyQt4/Channel>
+#include <QtNetwork/QHostAddress>
+#include <TelepathyQt4/Types>
 
 class TubesRfbServer : public RfbServer
 {
     Q_OBJECT
 public:
-    TubesRfbServer(const Tp::ChannelPtr & channel, QObject* parent = 0);
+    static void init();
+
     virtual ~TubesRfbServer();
+
+protected:
+    TubesRfbServer(QObject *parent = 0);
 
     virtual PendingRfbClient* newClient(rfbClientPtr client);
 
 private Q_SLOTS:
-    void close();
-    void cleanup();
-    void onChannelReady(Tp::PendingOperation *op);
-    void onContactsUpgraded(Tp::PendingOperation *op);
-    void offerTube();
-    void onOfferTubeFinished(QDBusPendingCallWatcher *watcher);
-    void onTubeStateChanged(uint state);
-    void onNewRemoteConnection(uint handle, QDBusVariant connectionParam, uint connectionId);
-    void onChannelInvalidated(Tp::DBusProxy *proxy,
-                              const QString &errorName,
-                              const QString &errorMessage);
+    void startAndCheck();
+
+    void onTubeRequested();
+    void onTubeClosed();
+
+    void onNewTcpConnection(
+            const QHostAddress &sourceAddress,
+            quint16 sourcePort,
+            const Tp::AccountPtr &account,
+            const Tp::ContactPtr &contact,
+            const Tp::OutgoingStreamTubeChannelPtr &tube);
+
+    void onTcpConnectionClosed(
+            const QHostAddress &sourceAddress,
+            quint16 sourcePort,
+            const Tp::AccountPtr &account,
+            const Tp::ContactPtr &contact,
+            const QString &error,
+            const QString &message,
+            const Tp::OutgoingStreamTubeChannelPtr &tube);
 
 private:
     struct Private;

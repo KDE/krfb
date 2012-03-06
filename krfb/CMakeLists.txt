@@ -70,7 +70,6 @@ if (BUILD_EXPERIMENTAL_TUBES_SUPPORT AND TELEPATHY_QT4_FOUND)
          ${krfb_SRCS}
          tubesrfbserver.cpp
          tubesrfbclient.cpp
-         tubesclienthandler.cpp
     )
 endif (BUILD_EXPERIMENTAL_TUBES_SUPPORT AND TELEPATHY_QT4_FOUND)
 

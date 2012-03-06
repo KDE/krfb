@@ -33,8 +33,7 @@
 #include <QtGui/qwindowdefs.h>
 
 #ifdef KRFB_WITH_TELEPATHY_TUBES
-# include "tubesclienthandler.h"
-# include <TelepathyQt4/ClientRegistrar>
+# include "tubesrfbserver.h"
 #endif
 
 #include <signal.h>
@@ -105,9 +104,7 @@ int main(int argc, char *argv[])
     InvitationsRfbServer::init();
 
 #ifdef KRFB_WITH_TELEPATHY_TUBES
-    Tp::ClientRegistrarPtr clientRegistrar = Tp::ClientRegistrar::create();
-    clientRegistrar->registerClient(Tp::AbstractClientPtr(new TubesClientHandler),
-                                    "krfb_rfb_handler");
+    TubesRfbServer::init();
 #endif
 
     //init the GUI

@@ -1,5 +1,5 @@
 /*
-    Copyright (C) 2009-2010 Collabora Ltd. <info@collabora.co.uk>
+    Copyright (C) 2009-2011 Collabora Ltd. <info@collabora.co.uk>
       @author George Goldberg <george.goldberg@collabora.co.uk>
       @author George Kiagiadakis <george.kiagiadakis@collabora.co.uk>
 
@@ -20,71 +20,89 @@
 #include "tubesrfbclient.h"
 #include "sockethelpers.h"
 
-#include <QtGui/QApplication>
 #include <KDebug>
-#include <KMessageBox>
-#include <KLocale>
+#include <KRandom>
 
-#include <TelepathyQt4/Connection>
+#include <TelepathyQt4/Debug>
 #include <TelepathyQt4/Contact>
-#include <TelepathyQt4/ContactManager>
-#include <TelepathyQt4/PendingContacts>
-#include <TelepathyQt4/PendingOperation>
-#include <TelepathyQt4/PendingReady>
+#include <TelepathyQt4/AccountFactory>
+#include <TelepathyQt4/ConnectionFactory>
+#include <TelepathyQt4/ContactFactory>
+#include <TelepathyQt4/ChannelFactory>
+#include <TelepathyQt4/OutgoingStreamTubeChannel>
+#include <TelepathyQt4/StreamTubeServer>
 
-/* workaround for QtDBus bug */
-struct StreamTubeAddress
-{
-    QString address;
-    uint port;
-};
-Q_DECLARE_METATYPE(StreamTubeAddress);
-
-//Marshall the StreamTubeAddress data into a D-Bus argument
-QDBusArgument &operator<<(QDBusArgument &argument,
-        const StreamTubeAddress &streamTubeAddress)
-{
-    argument.beginStructure();
-    argument << streamTubeAddress.address << streamTubeAddress.port;
-    argument.endStructure();
-    return argument;
-}
-
-// Retrieve the StreamTubeAddress data from the D-Bus argument
-const QDBusArgument &operator>>(const QDBusArgument &argument,
-        StreamTubeAddress &streamTubeAddress)
-{
-    argument.beginStructure();
-    argument >> streamTubeAddress.address >> streamTubeAddress.port;
-    argument.endStructure();
-    return argument;
-}
-
-//**************
 
 struct TubesRfbServer::Private
 {
-    Tp::ChannelPtr channel;
-    QHash<int, Tp::ContactPtr> contactsPerPort;
-    QHash<int, PendingTubesRfbClient*> clientsPerPort;
+    Tp::StreamTubeServerPtr stubeServer;
+    QHash<quint16, Tp::ContactPtr> contactsPerPort;
+    QHash<quint16, PendingTubesRfbClient*> clientsPerPort;
 };
 
-TubesRfbServer::TubesRfbServer(const Tp::ChannelPtr & channel, QObject *parent)
+void TubesRfbServer::init()
+{
+    new TubesRfbServer();
+    //RfbServerManager takes care of deletion
+}
+
+TubesRfbServer::TubesRfbServer(QObject *parent)
     : RfbServer(parent), d(new Private)
 {
-    kDebug() << "starting ";
+    kDebug() << "starting";
 
-    /* Registering struct containing the tube address */
-    qDBusRegisterMetaType<StreamTubeAddress>();
+    Tp::enableDebug(true);
+    Tp::enableWarnings(true);
+    Tp::registerTypes();
 
-    d->channel = channel;
-    connect(d->channel->becomeReady(),
-            SIGNAL(finished(Tp::PendingOperation*)),
-            SLOT(onChannelReady(Tp::PendingOperation*)));
+    Tp::AccountFactoryPtr  accountFactory = Tp::AccountFactory::create(
+            QDBusConnection::sessionBus(), Tp::Account::FeatureCore);
 
-    setListeningPort(6789);
-    setListeningAddress("127.0.0.1");  // Listen only on the loopback network interface
+    Tp::ConnectionFactoryPtr connectionFactory = Tp::ConnectionFactory::create(
+            QDBusConnection::sessionBus(), Tp::Connection::FeatureCore);
+
+    Tp::ChannelFactoryPtr channelFactory = Tp::ChannelFactory::create(
+            QDBusConnection::sessionBus());
+
+    Tp::ContactFactoryPtr contactFactory = Tp::ContactFactory::create(
+            Tp::Contact::FeatureAlias);
+
+    d->stubeServer = Tp::StreamTubeServer::create(
+            QStringList() << QLatin1String("rfb"),
+            QStringList(),
+            QLatin1String("krfb_rfb_handler"),
+            true,
+            accountFactory,
+            connectionFactory,
+            channelFactory,
+            contactFactory);
+
+    connect(d->stubeServer.data(),
+            SIGNAL(tubeRequested(Tp::AccountPtr,Tp::OutgoingStreamTubeChannelPtr,
+                                 QDateTime,Tp::ChannelRequestHints)),
+            SLOT(onTubeRequested()));
+    connect(d->stubeServer.data(),
+            SIGNAL(tubeClosed(Tp::AccountPtr,Tp::OutgoingStreamTubeChannelPtr,QString,QString)),
+            SLOT(onTubeClosed()));
+
+    connect(d->stubeServer.data(),
+            SIGNAL(newTcpConnection(QHostAddress,quint16,Tp::AccountPtr,
+                                    Tp::ContactPtr,Tp::OutgoingStreamTubeChannelPtr)),
+            SLOT(onNewTcpConnection(QHostAddress,quint16,Tp::AccountPtr,
+                                    Tp::ContactPtr,Tp::OutgoingStreamTubeChannelPtr)));
+    connect(d->stubeServer.data(),
+            SIGNAL(tcpConnectionClosed(QHostAddress,quint16,Tp::AccountPtr,Tp::ContactPtr,
+                                       QString,QString,Tp::OutgoingStreamTubeChannelPtr)),
+            SLOT(onTcpConnectionClosed(QHostAddress,quint16,Tp::AccountPtr,Tp::ContactPtr,
+                                       QString,QString,Tp::OutgoingStreamTubeChannelPtr)));
+
+    // Pick a random port in the private range (49152–65535)
+    setListeningPort((KRandom::random() % 16383) + 49152);
+    // Listen only on the loopback network interface
+    setListeningAddress("127.0.0.1");
     setPasswordRequired(false);
+
+    QTimer::singleShot(0, this, SLOT(startAndCheck()));
 }
 
 TubesRfbServer::~TubesRfbServer()
@@ -93,12 +111,80 @@ TubesRfbServer::~TubesRfbServer()
     delete d;
 }
 
+void TubesRfbServer::startAndCheck()
+{
+    if (!start()) {
+        //try a few times with different ports
+        bool ok = false;
+        for (int i=0; !ok && i<5; i++) {
+            setListeningPort((KRandom::random() % 16383) + 49152);
+            ok = start();
+        }
+
+        if (!ok) {
+            kError() << "Failed to start tubes rfb server";
+            return;
+        }
+    }
+
+    //TODO listeningAddress() should be a QHostAddress
+    d->stubeServer->exportTcpSocket(QHostAddress(QString::fromAscii(listeningAddress())),
+                                    listeningPort());
+}
+
+void TubesRfbServer::onTubeRequested()
+{
+    kDebug() << "Got a tube";
+}
+
+void TubesRfbServer::onTubeClosed()
+{
+    kDebug() << "tube closed";
+}
+
+void TubesRfbServer::onNewTcpConnection(const QHostAddress & sourceAddress,
+                                        quint16 sourcePort,
+                                        const Tp::AccountPtr & account,
+                                        const Tp::ContactPtr & contact,
+                                        const Tp::OutgoingStreamTubeChannelPtr & tube)
+{
+    Q_UNUSED(account);
+    Q_UNUSED(tube);
+
+    kDebug() << "CM signaled tube connection from" << sourceAddress << ":" << sourcePort;
+
+    d->contactsPerPort[sourcePort] = contact;
+    if (d->clientsPerPort.contains(sourcePort)) {
+        kDebug() << "client already exists";
+        d->clientsPerPort[sourcePort]->setContact(contact);
+    }
+}
+
+void TubesRfbServer::onTcpConnectionClosed(const QHostAddress& sourceAddress,
+                                           quint16 sourcePort,
+                                           const Tp::AccountPtr& account,
+                                           const Tp::ContactPtr& contact,
+                                           const QString& error,
+                                           const QString& message,
+                                           const Tp::OutgoingStreamTubeChannelPtr& tube)
+{
+    Q_UNUSED(account);
+    Q_UNUSED(contact);
+    Q_UNUSED(tube);
+
+    kDebug() << "Connection from" << sourceAddress << ":" << sourcePort << "closed."
+             << error << message;
+
+    d->clientsPerPort.remove(sourcePort);
+    d->contactsPerPort.remove(sourcePort);
+}
+
 PendingRfbClient* TubesRfbServer::newClient(rfbClientPtr client)
 {
-    kDebug() << "new tubes client";
-
     PendingTubesRfbClient *c = new PendingTubesRfbClient(client, this);
-    int port = peerPort(client->sock);
+    quint16 port = peerPort(client->sock);
+
+    kDebug() << "new tube client on port" << port;
 
     d->clientsPerPort[port] = c;
     if (d->contactsPerPort.contains(port)) {
@@ -107,188 +193,6 @@ PendingRfbClient* TubesRfbServer::newClient(rfbClientPtr client)
     }
 
     return c;
-}
-
-/************************** TP TUBES CODE ************************************/
-
-void TubesRfbServer::close()
-{
-    kDebug();
-    d->channel->requestClose();
-}
-
-void TubesRfbServer::cleanup()
-{
-    kDebug();
-
-    d->clientsPerPort.clear();
-    d->contactsPerPort.clear();
-
-    stop();
-    deleteLater();
-}
-
-void TubesRfbServer::onChannelReady(Tp::PendingOperation *op)
-{
-    kDebug();
-
-    if (op->isError()) {
-        kWarning() << "Getting channel ready faied:" << op->errorName() << op->errorMessage();
-        KMessageBox::error(QApplication::activeWindow(),
-                           i18n("An error occurred sharing your desktop."),
-                           i18n("Error"));
-        cleanup();
-        return;
-    }
-
-    Tp::Contacts contacts = d->channel->groupContacts();
-
-    Tp::ContactManagerPtr contactManager = d->channel->connection()->contactManager();
-
-    if (!contactManager) {
-        kWarning() << "Invalid Contact Manager.";
-        KMessageBox::error(QApplication::activeWindow(),
-                           i18n("An unknown error occurred sharing your desktop."),
-                           i18n("Error"));
-        close();
-        return;
-    }
-
-    Tp::Features features;
-    features << Tp::Contact::FeatureAlias;
-
-    connect(contactManager->upgradeContacts(contacts.toList(), features),
-            SIGNAL(finished(Tp::PendingOperation*)),
-            SLOT(onContactsUpgraded(Tp::PendingOperation*)));
-}
-
-void TubesRfbServer::onContactsUpgraded(Tp::PendingOperation *op)
-{
-    kDebug();
-
-    if (op->isError()) {
-        kWarning() << "Upgrading contacts failed:" << op->errorName() << op->errorMessage();
-        KMessageBox::error(QApplication::activeWindow(),
-                           i18n("An unknown error occurred sharing your desktop."),
-                           i18n("Error"));
-        close();
-        return;
-    }
-
-    offerTube();
-}
-
-void TubesRfbServer::offerTube()
-{
-    kDebug() << "Channel is ready!";
-
-    //start the rfb server
-    if (!start()) {
-        kWarning() << "Could not start rfb server";
-        KMessageBox::error(QApplication::activeWindow(),
-                           i18n("Failed to activate the rfb server."),
-                           i18n("Error"));
-        close();
-        return;
-    }
-
-    connect(d->channel.data(),
-            SIGNAL(invalidated(Tp::DBusProxy*,QString,QString)),
-            SLOT(onChannelInvalidated(Tp::DBusProxy*, const QString&,
-                 const QString&)));
-
-    /* Interface used to control the tube state */
-    Tp::Client::ChannelInterfaceTubeInterface *tubeInterface = d->channel->interface<Tp::Client::ChannelInterfaceTubeInterface>();
-
-    /* Interface used to control stream tube */
-    Tp::Client::ChannelTypeStreamTubeInterface *streamTubeInterface = d->channel->interface<Tp::Client::ChannelTypeStreamTubeInterface>();
-
-    if (streamTubeInterface && tubeInterface) {
-        kDebug() << "Offering tube";
-
-        connect(tubeInterface,
-                SIGNAL(TubeChannelStateChanged(uint)),
-                SLOT(onTubeStateChanged(uint)));
-
-        // Offer the stream tube
-        StreamTubeAddress streamTubeAddress;
-        streamTubeAddress.address = listeningAddress();
-        streamTubeAddress.port = listeningPort();
-
-        kDebug() << "Offering:" << streamTubeAddress.port << streamTubeAddress.address;
-
-        QDBusVariant address;
-        address.setVariant(qVariantFromValue(streamTubeAddress));
-
-        QDBusPendingReply<> ret = streamTubeInterface->Offer(
-                uint(Tp::SocketAddressTypeIPv4),
-                address,
-                uint(Tp::SocketAccessControlPort),
-                QVariantMap());
-
-        connect(new QDBusPendingCallWatcher(ret, this), SIGNAL(finished(QDBusPendingCallWatcher*)),
-                SLOT(onOfferTubeFinished(QDBusPendingCallWatcher*)));
-        connect(streamTubeInterface,
-                SIGNAL(NewRemoteConnection(uint,QDBusVariant,uint)),
-                SLOT(onNewRemoteConnection(uint,QDBusVariant,uint)));
-    }
-}
-
-void TubesRfbServer::onOfferTubeFinished(QDBusPendingCallWatcher *watcher)
-{
-    QDBusPendingReply<void> reply = *watcher;
-    if (reply.isError()) {
-        kWarning() << "Offer tube failed:" << reply.error();
-
-        if (reply.error().name() == TELEPATHY_ERROR_NOT_AVAILABLE) {
-            KMessageBox::error(QApplication::activeWindow(),
-                               i18n("An error occurred sharing your desktop. The person you are "
-                                    "trying to share your desktop with does not have the required "
-                                    "software installed to access it."),
-                               i18n("Error"));
-        } else {
-            KMessageBox::error(QApplication::activeWindow(),
-                               i18n("An unknown error occurred sharing your desktop."),
-                               i18n("Error"));
-        }
-     } else {
-         kDebug() << "Offer Tube succeeded.";
-     }
-}
-
-void TubesRfbServer::onTubeStateChanged(uint state)
-{
-    kDebug() << "Tube state changed:" << state;
-}
-
-void TubesRfbServer::onNewRemoteConnection(uint handle, QDBusVariant connectionParam, uint connectionId)
-{
-    Q_UNUSED(connectionId);
-
-    QVariant v = connectionParam.variant();
-    kDebug() << "variant:" << v;
-    StreamTubeAddress ipv4address = qdbus_cast<StreamTubeAddress>(v);
-
-    kDebug() << "NewRemoteConnection: port:" << ipv4address.port << ipv4address.address;
-
-    Q_FOREACH(const Tp::ContactPtr & c, d->channel->groupContacts()) {
-        if (c->handle().value(0) == handle) {
-            d->contactsPerPort[ipv4address.port] = c;
-            if (d->clientsPerPort.contains(ipv4address.port)) {
-                kDebug() << "client already exists";
-                d->clientsPerPort[ipv4address.port]->setContact(c);
-            }
-            break;
-        }
-    }
-}
-
-void TubesRfbServer::onChannelInvalidated(Tp::DBusProxy *proxy,
-        const QString &errorName, const QString &errorMessage)
-{
-    Q_UNUSED(proxy);
-    kDebug() << "Tube channel invalidated:" << errorName << errorMessage;
-    cleanup();
 }
 
 #include "tubesrfbserver.moc"
