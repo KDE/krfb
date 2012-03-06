@@ -23,14 +23,14 @@
 #include <KDebug>
 #include <KRandom>
 
-#include <TelepathyQt4/Debug>
-#include <TelepathyQt4/Contact>
-#include <TelepathyQt4/AccountFactory>
-#include <TelepathyQt4/ConnectionFactory>
-#include <TelepathyQt4/ContactFactory>
-#include <TelepathyQt4/ChannelFactory>
-#include <TelepathyQt4/OutgoingStreamTubeChannel>
-#include <TelepathyQt4/StreamTubeServer>
+#include <TelepathyQt/Debug>
+#include <TelepathyQt/Contact>
+#include <TelepathyQt/AccountFactory>
+#include <TelepathyQt/ConnectionFactory>
+#include <TelepathyQt/ContactFactory>
+#include <TelepathyQt/ChannelFactory>
+#include <TelepathyQt/OutgoingStreamTubeChannel>
+#include <TelepathyQt/StreamTubeServer>
 
 
 struct TubesRfbServer::Private

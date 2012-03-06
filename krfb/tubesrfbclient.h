@@ -19,7 +19,7 @@
 #define TUBESRFBCLIENT_H
 
 #include "rfbclient.h"
-#include <TelepathyQt4/Contact>
+#include <TelepathyQt/Contact>
 
 class TubesRfbClient : public RfbClient
 {

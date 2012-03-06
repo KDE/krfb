@@ -21,7 +21,7 @@
 
 #include "rfbserver.h"
 #include <QtNetwork/QHostAddress>
-#include <TelepathyQt4/Types>
+#include <TelepathyQt/Types>
 
 class TubesRfbServer : public RfbServer
 {

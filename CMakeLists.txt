@@ -16,7 +16,7 @@ if(NOT INSIDE_KDENETWORK)
         message(WARNING "You enabled experimental Tubes support. Expect breakage!!")
 
         macro_optional_find_package(TelepathyQt4)
-        macro_log_feature(TELEPATHY_QT4_FOUND "telepathy-qt4" "Telepathy Qt Bindings" "http://telepathy.freedesktop.org" FALSE "0.18" "Needed to build Telepathy Tubes support.")
+        macro_log_feature(TelepathyQt4_FOUND "telepathy-qt" "Telepathy Qt Bindings" "http://telepathy.freedesktop.org" FALSE "0.9" "Needed to build Telepathy Tubes support.")
     endif (BUILD_EXPERIMENTAL_TUBES_SUPPORT)
 
     set(CMAKE_REQUIRED_DEFINITIONS ${_KDE_PLATFORM_DEFINITIONS})
