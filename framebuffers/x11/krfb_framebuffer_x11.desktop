@@ -2,7 +2,6 @@
 Encoding=UTF-8
 Comment=X11 XDamage/XShm based Framebuffer for KRfb.
 Comment[ast]=Esquema de buffer pa KRfb basáu en XDamage/XShm
-Comment[bs]=X11 XDamage/XShm baziran framebafer za KRfb.
 Comment[ca]=«Framebuffer» basat en XDamage/XShmQt de l'X11 per al KRfb.
 Comment[ca@valencia]=«Framebuffer» basat en XDamage/XShmQt de l'X11 per al KRfb.
 Comment[cs]=Framebuffer založený na X11 XDamage/XShm pro KRfb.
@@ -48,7 +47,6 @@ Comment[zh_CN]=基于 X11 XDamage/XShm 扩展的 KRfb 帧缓冲机制。
 Comment[zh_TW]=KRfb 的 X11 XDamage/XShm based Framebuffer
 Name=X11 Framebuffer for KRfb
 Name[ast]=Buffer de X11 pa KRfb
-Name[bs]=X11 frame bafer za KRfb
 Name[ca]=«Framebuffer» de l'X11 per al KRfb.
 Name[ca@valencia]=«Framebuffer» de l'X11 per al KRfb.
 Name[cs]=X11 Framebuffer pro KRfb
