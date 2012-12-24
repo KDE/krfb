@@ -2,6 +2,7 @@
 Encoding=UTF-8
 Comment=Qt based Framebuffer for KRfb.
 Comment[ast]=Esquema Qt de buffer pa KRfb
+Comment[bs]=Kadrobafer za KRfb na osnovu Qt
 Comment[ca]=«Framebuffer» basat en Qt per al KRfb.
 Comment[ca@valencia]=«Framebuffer» basat en Qt per al KRfb.
 Comment[cs]=Framebuffer založený na Qt pro KRfb.
@@ -47,6 +48,7 @@ Comment[zh_CN]=基于 Qt 的 KRfb 帧缓冲机制
 Comment[zh_TW]=KRfb 的 Qt-based Framebuffer
 Name=Qt Framebuffer for KRfb
 Name[ast]=Esquema Qt de buffer pa KRfb
+Name[bs]=Qt-ov kadrobafer za KRFB
 Name[ca]=«Framebuffer» Qt per al KRfb.
 Name[ca@valencia]=«Framebuffer» Qt per al KRfb.
 Name[cs]=Qt Framebuffer pro KRfb
