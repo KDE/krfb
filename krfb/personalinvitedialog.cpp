@@ -92,7 +92,7 @@ void PersonalInviteDialog::showWhatsthis(const QString &link)
                                 "into the client and it will connect.."));
     } else if (link == "help") {
         QToolTip::showText(QCursor::pos(),
-                           i18n("This field contains the address of your computer and the display number, separated by a colon.\n"
+                           i18n("This field contains the address of your computer and the port number, separated by a colon.\n"
                                 "The address is just a hint - you can use any address that can reach your computer. \n"
                                 "Desktop Sharing tries to guess your address from your network configuration, but does\n"
                                 "not always succeed in doing so. If your computer is behind a firewall it may have a\n"
