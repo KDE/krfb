@@ -3,6 +3,7 @@
 Type=Application
 Exec=krfb -caption %c %i
 Icon=krfb
+X-DBUS-StartupType=Unique
 X-DocPath=krfb/index.html
 Terminal=false
 Name=Krfb

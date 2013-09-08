@@ -22,7 +22,7 @@
 #include <KAboutApplicationDialog>
 #include <KAboutData>
 #include <KAction>
-#include <KApplication>
+#include <KUniqueApplication>
 #include <KCmdLineArgs>
 #include <KDebug>
 #include <KLocale>
@@ -93,7 +93,7 @@ int main(int argc, char *argv[])
     options.add("nodialog", ki18n("Do not show the invitations management dialog at startup"));
     KCmdLineArgs::addCmdLineOptions(options);
 
-    KApplication app;
+    KUniqueApplication app;
     app.setQuitOnLastWindowClosed(false);
 
     if (!checkX11Capabilities()) {
