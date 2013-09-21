@@ -15,7 +15,7 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "manageinvitationsdialog.h"
+#include "mainwindow.h"
 #include "trayicon.h"
 #include "invitationsrfbserver.h"
 
@@ -108,13 +108,13 @@ int main(int argc, char *argv[])
 #endif
 
     //init the GUI
-    ManageInvitationsDialog invitationsDialog;
-    TrayIcon trayicon(&invitationsDialog);
+    MainWindow mainWindow;
+    TrayIcon trayicon(&mainWindow);
 
     if (app.isSessionRestored() && KMainWindow::canBeRestored(1)) {
-        invitationsDialog.restore(1, false);
+        mainWindow.restore(1, false);
     } else if (KCmdLineArgs::parsedArgs()->isSet("dialog")) {
-        invitationsDialog.show();
+        mainWindow.show();
     }
 
     sigset_t sigs;

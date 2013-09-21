@@ -18,8 +18,7 @@
 */
 #include "trayicon.h"
 
-#include "invitedialog.h"
-#include "manageinvitationsdialog.h"
+#include "mainwindow.h"
 #include "rfbservermanager.h"
 #include "rfbclient.h"
 

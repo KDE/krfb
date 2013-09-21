@@ -54,7 +54,7 @@ set (krfb_SRCS
      invitedialog.cpp
      invitationmanager.cpp
      main.cpp
-     manageinvitationsdialog.cpp
+     mainwindow.cpp
      personalinvitedialog.cpp
      sockethelpers.cpp
      trayicon.cpp
@@ -82,7 +82,7 @@ kde4_add_ui_files (krfb_SRCS
                    ui/configsecurity.ui
                    ui/connectionwidget.ui
                    ui/invitewidget.ui
-                   ui/manageinvitations.ui
+                   ui/mainwidget.ui
                    ui/personalinvitewidget.ui
 )
 
