@@ -50,12 +50,8 @@ set (krfb_SRCS
      connectiondialog.cpp
      events.cpp
      framebuffermanager.cpp
-     invitation.cpp
-     invitedialog.cpp
-     invitationmanager.cpp
      main.cpp
      mainwindow.cpp
-     personalinvitedialog.cpp
      sockethelpers.cpp
      trayicon.cpp
      rfbservermanager.cpp
@@ -81,9 +77,7 @@ kde4_add_ui_files (krfb_SRCS
                    ui/configtcp.ui
                    ui/configsecurity.ui
                    ui/connectionwidget.ui
-                   ui/invitewidget.ui
                    ui/mainwidget.ui
-                   ui/personalinvitewidget.ui
 )
 
 if(TelepathyQt4_FOUND)

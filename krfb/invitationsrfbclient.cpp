@@ -19,7 +19,6 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 #include "invitationsrfbclient.h"
-#include "invitationmanager.h"
 #include "krfbconfig.h"
 #include "sockethelpers.h"
 #include "connectiondialog.h"
@@ -28,58 +27,20 @@
 
 bool InvitationsRfbClient::checkPassword(const QByteArray & encryptedPassword)
 {
-    bool allowUninvited = KrfbConfig::allowUninvitedConnections();
-    QByteArray password =  KrfbConfig::uninvitedConnectionPassword().toLocal8Bit();
-
-    bool authd = false;
+    QByteArray password ;
     kDebug() << "about to start autentication";
 
-    if (allowUninvited) {
-        authd = vncAuthCheckPassword(password, encryptedPassword);
-    }
-
-    if (!authd) {
-        QList<Invitation> invlist = InvitationManager::self()->invitations();
-
-        foreach(const Invitation & it, invlist) {
-            kDebug() << "checking password";
-
-            if (vncAuthCheckPassword(it.password().toLocal8Bit(), encryptedPassword)
-                && it.isValid())
-            {
-                authd = true;
-                InvitationManager::self()->removeInvitation(it);
-                break;
-            }
-        }
-    }
-
-    if (!authd) {
-        if (InvitationManager::self()->invitations().size() > 0) {
-            KNotification::event("InvalidPasswordInvitations",
-                                 i18n("Failed login attempt from %1: wrong password", name()));
-        } else {
-            KNotification::event("InvalidPassword",
-                                 i18n("Failed login attempt from %1: wrong password", name()));
-        }
-
-        return false;
-    }
-
-    return true;
+    //TODO Check password when server is started
+    kWarning() << "This build is broken. No incoming request can be accepted.";
+    return vncAuthCheckPassword(password, encryptedPassword);
 }
 
 
 void PendingInvitationsRfbClient::processNewClient()
 {
     QString host = peerAddress(m_rfbClient->sock) + ":" + QString::number(peerPort(m_rfbClient->sock));
-    bool allowUninvited = KrfbConfig::allowUninvitedConnections();
 
-    if (!allowUninvited && InvitationManager::self()->activeInvitations() == 0) {
-        KNotification::event("UnexpectedConnection",
-                             i18n("Refused uninvited connection attempt from %1", host));
-        reject();
-    } else if (!KrfbConfig::askOnConnect()) {
+    if (!KrfbConfig::askOnConnect()) {
         KNotification::event("NewConnectionAutoAccepted",
                              i18n("Accepted connection from %1", host));
         accept(new InvitationsRfbClient(m_rfbClient, parent()));
