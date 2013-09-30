@@ -29,16 +29,56 @@
 #include <KLocale>
 #include <KMessageBox>
 #include <KUser>
+#include <KRandom>
 #include <DNSSD/PublicService>
 
+//static
+InvitationsRfbServer *InvitationsRfbServer::instance;
+
+//static
 void InvitationsRfbServer::init()
 {
-    InvitationsRfbServer *server;
-    server = new InvitationsRfbServer;
-    server->setListeningPort(KrfbConfig::port());
-    server->setListeningAddress("0.0.0.0");  // Listen on all available network addresses
-    server->setPasswordRequired(true);
-    QTimer::singleShot(0, server, SLOT(startAndCheck()));
+    instance = new InvitationsRfbServer;
+    instance->m_publicService = new DNSSD::PublicService(
+            i18n("%1@%2 (shared desktop)",
+                KUser().loginName(),
+                QHostInfo::localHostName()),
+            "_rfb._tcp",
+            KrfbConfig::port());
+    instance->setListeningAddress("0.0.0.0");
+    instance->setListeningPort(KrfbConfig::port());
+    instance->setPasswordRequired(true);
+}
+
+const QString& InvitationsRfbServer::desktopPassword() const
+{
+    return m_desktopPassword;
+}
+
+void InvitationsRfbServer::setDesktopPassword(const QString& password)
+{
+    m_desktopPassword = password;
+}
+
+bool InvitationsRfbServer::start()
+{
+    if(RfbServer::start()) {
+        m_publicService->publishAsync();
+        return true;
+    }
+    return false;
+}
+
+void InvitationsRfbServer::stop(bool disconnectClients)
+{
+    if(m_publicService->isPublished())
+        m_publicService->stop();
+    RfbServer::stop(disconnectClients);
+}
+
+InvitationsRfbServer::InvitationsRfbServer()
+{
+    m_desktopPassword = readableRandomString(4)+"-"+readableRandomString(3);
 }
 
 PendingRfbClient* InvitationsRfbServer::newClient(rfbClientPtr client)
@@ -46,26 +86,34 @@ PendingRfbClient* InvitationsRfbServer::newClient(rfbClientPtr client)
     return new PendingInvitationsRfbClient(client, this);
 }
 
-void InvitationsRfbServer::startAndCheck()
+// a random string that doesn't contain i, I, o, O, 1, l, 0
+// based on KRandom::randomString()
+QString InvitationsRfbServer::readableRandomString(int length)
 {
-    if (!start()) {
-        KMessageBox::error(0, i18n("Failed to start the krfb server. Invitation-based sharing "
-                                   "will not work. Try setting another port in the settings and "
-                                   "restart krfb."));
-    } else {
-        //publish service
-        if (KrfbConfig::publishService()) {
-            DNSSD::PublicService *service = new DNSSD::PublicService(i18n("%1@%2 (shared desktop)",
-                    KUser().loginName(),
-                    QHostInfo::localHostName()),
-                    "_rfb._tcp",
-                    listeningPort());
-            service->publishAsync();
+    QString str;
+    while (length) {
+        int r = KRandom::random() % 62;
+        r += 48;
+        if (r > 57) {
+            r += 7;
         }
-
-        //disconnect when qApp quits
-        connect(qApp, SIGNAL(aboutToQuit()), this, SLOT(stop()));
+        if (r > 90) {
+            r += 6;
+        }
+        char c = char(r);
+        if ((c == 'i') ||
+                (c == 'I') ||
+                (c == '1') ||
+                (c == 'l') ||
+                (c == 'o') ||
+                (c == 'O') ||
+                (c == '0')) {
+            continue;
+        }
+        str += c;
+        length--;
     }
+    return str;
 }
 
 #include "invitationsrfbserver.moc"

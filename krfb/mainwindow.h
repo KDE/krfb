@@ -37,11 +37,8 @@ class MainWindow : public KXmlGuiWindow
 
     private:
         Ui::MainWidget m_ui;
-        QString m_password;
         bool m_passwordEditable;
         KLineEdit *m_passwordLineEdit;
-
-        static QString readableRandomString(int length);
     };
 
 #endif

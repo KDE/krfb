@@ -8,6 +8,7 @@
    version 2 of the License, or (at your option) any later version.
 */
 #include "mainwindow.h"
+#include "invitationsrfbserver.h"
 
 #include "krfbconfig.h"
 #include "ui_configtcp.h"
@@ -22,7 +23,6 @@
 #include <KToolInvocation>
 #include <KStandardAction>
 #include <KActionCollection>
-#include <KRandom>
 
 #include <QtGui/QWidget>
 #include <QtNetwork/QNetworkInterface>
@@ -79,8 +79,8 @@ MainWindow::MainWindow(QWidget *parent)
     }
 
     //Figure out the password
-    m_password = readableRandomString(4) + '-' + readableRandomString(3);
-    m_ui.passwordDisplayLabel->setText(m_password);
+    m_ui.passwordDisplayLabel->setText(
+            InvitationsRfbServer::instance->desktopPassword());
 
     KStandardAction::quit(QCoreApplication::instance(), SLOT(quit()), actionCollection());
     KStandardAction::preferences(this, SLOT(showConfiguration()), actionCollection());
@@ -100,25 +100,36 @@ void MainWindow::editPassword()
     if(m_passwordEditable) {
         m_passwordEditable = false;
         m_ui.passwordEditButton->setIcon(KIcon("document-properties"));
-        m_password = m_passwordLineEdit->text();
-        m_ui.passwordDisplayLabel->setText(m_password);
-        m_passwordLineEdit->setVisible(false);
         m_ui.passwordGridLayout->removeWidget(m_passwordLineEdit);
+        InvitationsRfbServer::instance->setDesktopPassword(
+                m_passwordLineEdit->text());
+        m_ui.passwordDisplayLabel->setText(
+                InvitationsRfbServer::instance->desktopPassword());
+        m_passwordLineEdit->setVisible(false);
     } else {
         m_passwordEditable = true;
         m_ui.passwordEditButton->setIcon(KIcon("document-save"));
-        m_passwordLineEdit->setText(m_password);
-        m_passwordLineEdit->setVisible(true);
         m_ui.passwordGridLayout->addWidget(m_passwordLineEdit,0,0);
+        m_passwordLineEdit->setText(
+                InvitationsRfbServer::instance->desktopPassword());
+        m_passwordLineEdit->setVisible(true);
+        m_passwordLineEdit->setFocus(Qt::MouseFocusReason);
     }
 }
 
 void MainWindow::toggleDesktopSharing(bool enable)
 {
     if(enable) {
-        //TODO Start Server
-        kWarning() << "This build is broken. No incoming request can be accepted.";
+        if(!InvitationsRfbServer::instance->start()) {
+            KMessageBox::error(0,
+                    i18n("Failed to start the krfb server. Desktop sharing "
+                        "will not work. Try setting another port in the settings "
+                        "and restart krfb."));
+        }
+        connect(qApp, SIGNAL(aboutToQuit()), InvitationsRfbServer::instance, SLOT(stop()));
     } else {
+        disconnect(qApp, SIGNAL(aboutToQuit()), InvitationsRfbServer::instance, SLOT(stop()));
+        InvitationsRfbServer::instance->stop();
         if(m_passwordEditable) {
             m_passwordEditable = false;
             m_passwordLineEdit->setVisible(false);
@@ -152,36 +163,6 @@ void MainWindow::saveProperties(KConfigGroup& group)
 {
     group.writeEntry("Visible", isVisible());
     KMainWindow::saveProperties(group);
-}
-
-// a random string that doesn't contain i, I, o, O, 1, l, 0
-// based on KRandom::randomString()
-QString MainWindow::readableRandomString(int length)
-{
-    QString str;
-    while (length) {
-        int r = KRandom::random() % 62;
-        r += 48;
-        if (r > 57) {
-            r += 7;
-        }
-        if (r > 90) {
-            r += 6;
-        }
-        char c = char(r);
-        if ((c == 'i') ||
-                (c == 'I') ||
-                (c == '1') ||
-                (c == 'l') ||
-                (c == 'o') ||
-                (c == 'O') ||
-                (c == '0')) {
-            continue;
-        }
-        str += c;
-        length--;
-    }
-    return str;
 }
 
 #include "mainwindow.moc"

@@ -40,8 +40,8 @@ public:
     void setPasswordRequired(bool passwordRequired);
 
 public Q_SLOTS:
-    bool start();
-    void stop(bool disconnectClients = true);
+    virtual bool start();
+    virtual void stop(bool disconnectClients = true);
 
     void updateScreen(const QList<QRect> & modifiedTiles);
     void updateCursorPosition(const QPoint & position);

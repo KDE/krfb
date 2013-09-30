@@ -22,21 +22,33 @@
 
 #include "rfbserver.h"
 
+namespace DNSSD {
+    class PublicService;
+}
+
 class InvitationsRfbServer : public RfbServer
 {
     Q_OBJECT
 public:
+    static InvitationsRfbServer *instance;
     static void init();
 
-protected:
-    InvitationsRfbServer() : RfbServer(0) {}
+    const QString& desktopPassword() const;
+    void setDesktopPassword(const QString&);
 
+public Q_SLOTS:
+    bool start();
+    void stop(bool disconnectClients=true);
+
+protected:
+    InvitationsRfbServer();
     virtual PendingRfbClient* newClient(rfbClientPtr client);
 
-private Q_SLOTS:
-    void startAndCheck();
-
 private:
+    DNSSD::PublicService *m_publicService;
+    QString m_desktopPassword;
+
+    QString readableRandomString(int);
     Q_DISABLE_COPY(InvitationsRfbServer)
 };
 

@@ -19,6 +19,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 #include "invitationsrfbclient.h"
+#include "invitationsrfbserver.h"
 #include "krfbconfig.h"
 #include "sockethelpers.h"
 #include "connectiondialog.h"
@@ -30,9 +31,9 @@ bool InvitationsRfbClient::checkPassword(const QByteArray & encryptedPassword)
     QByteArray password ;
     kDebug() << "about to start autentication";
 
-    //TODO Check password when server is started
-    kWarning() << "This build is broken. No incoming request can be accepted.";
-    return vncAuthCheckPassword(password, encryptedPassword);
+    return vncAuthCheckPassword(
+            InvitationsRfbServer::instance->desktopPassword().toLocal8Bit(),
+            encryptedPassword);
 }
 
 
