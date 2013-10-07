@@ -35,10 +35,14 @@ public:
 
     const QString& desktopPassword() const;
     void setDesktopPassword(const QString&);
+    const QString& unattendedPassword() const;
+    void setUnattendedPassword(const QString&);
+    bool allowUnattendedAccess() const;
 
 public Q_SLOTS:
     bool start();
     void stop(bool disconnectClients=true);
+    void toggleUnattendedAccess(bool allow=true);
 
 protected:
     InvitationsRfbServer();
@@ -46,7 +50,9 @@ protected:
 
 private:
     DNSSD::PublicService *m_publicService;
+    bool m_allowUnattendedAccess;
     QString m_desktopPassword;
+    QString m_unattendedPassword;
 
     QString readableRandomString(int);
     Q_DISABLE_COPY(InvitationsRfbServer)

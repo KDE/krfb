@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>580</width>
-    <height>230</height>
+    <width>600</width>
+    <height>340</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -18,14 +18,14 @@
   </property>
   <property name="minimumSize">
    <size>
-    <width>580</width>
-    <height>230</height>
+    <width>600</width>
+    <height>340</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>580</width>
-    <height>230</height>
+    <width>600</width>
+    <height>340</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -73,6 +73,9 @@
          <bold>true</bold>
         </font>
        </property>
+       <property name="whatsThis">
+        <string>KDE Desktop Sharing</string>
+       </property>
        <property name="text">
         <string>KDE Desktop Sharing</string>
        </property>
@@ -95,6 +98,9 @@
          <height>40</height>
         </size>
        </property>
+       <property name="whatsThis">
+        <string>KDE Desktop Sharing</string>
+       </property>
        <property name="text">
         <string>KDE Desktop Sharing allows you to grant permission to someone at a remote location for viewing and possibly controlling your desktop.</string>
        </property>
@@ -105,8 +111,11 @@
      </item>
      <item>
       <widget class="QCheckBox" name="enableSharingCheckBox">
+       <property name="whatsThis">
+        <string>Starts/Stops Remote Desktop Sharing</string>
+       </property>
        <property name="text">
-        <string>Enable Desktop Sharing</string>
+        <string>&amp;Enable Desktop Sharing</string>
        </property>
       </widget>
      </item>
@@ -127,10 +136,16 @@
        <layout class="QVBoxLayout" name="verticalLayout">
         <item>
          <layout class="QFormLayout" name="addressFormLayout">
+          <property name="fieldGrowthPolicy">
+           <enum>QFormLayout::ExpandingFieldsGrow</enum>
+          </property>
           <item row="0" column="0">
            <widget class="QLabel" name="addressLabel">
             <property name="text">
-             <string>Address</string>
+             <string>&amp;Address</string>
+            </property>
+            <property name="buddy">
+             <cstring>addressAboutButton</cstring>
             </property>
            </widget>
           </item>
@@ -138,8 +153,11 @@
            <layout class="QGridLayout" name="addressGridLayout">
             <item row="0" column="1">
              <widget class="QToolButton" name="addressAboutButton">
+              <property name="whatsThis">
+               <string>More about this address</string>
+              </property>
               <property name="text">
-               <string/>
+               <string>About</string>
               </property>
               <property name="icon">
                <iconset theme="help-about">
@@ -156,6 +174,9 @@
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
+              <property name="whatsThis">
+               <string>Address required by remote users to connect to your desktop. Click about button on the right for more info.</string>
+              </property>
               <property name="text">
                <string>127.0.0.1 : 5900</string>
               </property>
@@ -170,10 +191,16 @@
         </item>
         <item>
          <layout class="QFormLayout" name="passwordFormLayout">
+          <property name="fieldGrowthPolicy">
+           <enum>QFormLayout::ExpandingFieldsGrow</enum>
+          </property>
           <item row="0" column="0">
            <widget class="QLabel" name="passwordLabel">
             <property name="text">
-             <string>Password</string>
+             <string>&amp;Password</string>
+            </property>
+            <property name="buddy">
+             <cstring>passwordEditButton</cstring>
             </property>
            </widget>
           </item>
@@ -181,8 +208,11 @@
            <layout class="QGridLayout" name="passwordGridLayout">
             <item row="0" column="1">
              <widget class="QToolButton" name="passwordEditButton">
+              <property name="whatsThis">
+               <string>Edit/Save Desktop Sharing Password</string>
+              </property>
               <property name="text">
-               <string/>
+               <string>Edit</string>
               </property>
               <property name="icon">
                <iconset theme="document-edit">
@@ -199,6 +229,9 @@
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
+              <property name="whatsThis">
+               <string>Password required by remote users to connect to your desktop. Click the edit button on the right to change password.</string>
+              </property>
               <property name="text">
                <string>TemporaryPassword</string>
               </property>
@@ -214,10 +247,120 @@
        </layout>
       </widget>
      </item>
+     <item>
+      <widget class="QGroupBox" name="unattendedGroupBox">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="whatsThis">
+        <string>Unattended Access allows a remote user with the password to gain control to your desktop without your explicit confirmation.</string>
+       </property>
+       <property name="title">
+        <string>Unattended Access</string>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <layout class="QHBoxLayout" name="unattendedDetailsLayout">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>10</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>10</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="unattendedAboutLabel">
+            <property name="whatsThis">
+             <string>Unattended Access allows a remote user with the password to gain control to your desktop without your explicit confirmation. Click &quot;About&quot; button on right to know more.</string>
+            </property>
+            <property name="text">
+             <string>Unattended Access allows a remote user with the password to gain control to your desktop without your explicit confirmation.</string>
+            </property>
+            <property name="wordWrap">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="unattendedAboutButton">
+            <property name="whatsThis">
+             <string>Know more about Unattended Access</string>
+            </property>
+            <property name="text">
+             <string>About</string>
+            </property>
+            <property name="icon">
+             <iconset theme="help-about">
+              <normaloff/>
+             </iconset>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="unattendedSettingsLayout">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>10</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>10</number>
+          </property>
+          <item>
+           <widget class="QCheckBox" name="enableUnattendedCheckBox">
+            <property name="whatsThis">
+             <string>Starts/Stops unattended access to your desktop. Click on button on right to change password, and &quot;About&quot; button to know more.</string>
+            </property>
+            <property name="text">
+             <string>Enable &amp;Unattended Access</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="KPushButton" name="unattendedPasswordButton">
+            <property name="whatsThis">
+             <string>Change password for Unattended Access</string>
+            </property>
+            <property name="text">
+             <string>&amp;Change Password</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+     </item>
     </layout>
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>KPushButton</class>
+   <extends>QPushButton</extends>
+   <header>kpushbutton.h</header>
+  </customwidget>
+ </customwidgets>
+ <tabstops>
+  <tabstop>enableSharingCheckBox</tabstop>
+  <tabstop>addressAboutButton</tabstop>
+  <tabstop>passwordEditButton</tabstop>
+  <tabstop>unattendedAboutButton</tabstop>
+  <tabstop>enableUnattendedCheckBox</tabstop>
+  <tabstop>unattendedPasswordButton</tabstop>
+ </tabstops>
  <resources/>
  <connections>
   <connection>
@@ -227,12 +370,28 @@
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>245</x>
-     <y>118</y>
+     <x>382</x>
+     <y>87</y>
     </hint>
     <hint type="destinationlabel">
      <x>245</x>
      <y>140</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>enableSharingCheckBox</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>unattendedGroupBox</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>320</x>
+     <y>76</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>325</x>
+     <y>214</y>
     </hint>
    </hints>
   </connection>

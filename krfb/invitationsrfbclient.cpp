@@ -31,6 +31,12 @@ bool InvitationsRfbClient::checkPassword(const QByteArray & encryptedPassword)
     QByteArray password ;
     kDebug() << "about to start autentication";
 
+    if(InvitationsRfbServer::instance->allowUnattendedAccess() && vncAuthCheckPassword(
+            InvitationsRfbServer::instance->unattendedPassword().toLocal8Bit(),
+            encryptedPassword) ) {
+        return true;
+    }
+
     return vncAuthCheckPassword(
             InvitationsRfbServer::instance->desktopPassword().toLocal8Bit(),
             encryptedPassword);
@@ -41,7 +47,7 @@ void PendingInvitationsRfbClient::processNewClient()
 {
     QString host = peerAddress(m_rfbClient->sock) + ":" + QString::number(peerPort(m_rfbClient->sock));
 
-    if (!KrfbConfig::askOnConnect()) {
+    if (InvitationsRfbServer::instance->allowUnattendedAccess()) {
         KNotification::event("NewConnectionAutoAccepted",
                              i18n("Accepted connection from %1", host));
         accept(new InvitationsRfbClient(m_rfbClient, parent()));

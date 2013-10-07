@@ -23,6 +23,8 @@
 #include <KToolInvocation>
 #include <KStandardAction>
 #include <KActionCollection>
+#include <KLineEdit>
+#include <KNewPasswordDialog>
 
 #include <QtGui/QWidget>
 #include <QtNetwork/QNetworkInterface>
@@ -63,6 +65,10 @@ MainWindow::MainWindow(QWidget *parent)
             this,SLOT(editPassword()));
     connect(m_ui.enableSharingCheckBox,SIGNAL(toggled(bool)),
             this, SLOT(toggleDesktopSharing(bool)));
+    connect(m_ui.enableUnattendedCheckBox, SIGNAL(toggled(bool)),
+            InvitationsRfbServer::instance, SLOT(toggleUnattendedAccess(bool)));
+    connect(m_ui.unattendedPasswordButton, SIGNAL(clicked()),
+            this, SLOT(editUnattendedPassword()));
 
     // Figure out the address
     int port = KrfbConfig::port();
@@ -86,7 +92,7 @@ MainWindow::MainWindow(QWidget *parent)
     KStandardAction::preferences(this, SLOT(showConfiguration()), actionCollection());
 
     setupGUI();
-    setFixedSize(QSize(580, 250));
+    setFixedSize(QSize(600, 360));
 
    // setAutoSaveSettings();
 }
@@ -116,6 +122,16 @@ void MainWindow::editPassword()
         m_passwordLineEdit->setFocus(Qt::MouseFocusReason);
     }
 }
+
+void MainWindow::editUnattendedPassword()
+{
+    KNewPasswordDialog dialog(this);
+    dialog.setPrompt(i18n("Enter a new password for Unattended Access"));
+    if(dialog.exec()) {
+        InvitationsRfbServer::instance->setUnattendedPassword(dialog.password());
+    }
+}
+
 
 void MainWindow::toggleDesktopSharing(bool enable)
 {

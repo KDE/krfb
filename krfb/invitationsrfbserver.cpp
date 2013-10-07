@@ -60,6 +60,21 @@ void InvitationsRfbServer::setDesktopPassword(const QString& password)
     m_desktopPassword = password;
 }
 
+const QString& InvitationsRfbServer::unattendedPassword() const
+{
+    return m_unattendedPassword;
+}
+
+void InvitationsRfbServer::setUnattendedPassword(const QString& password)
+{
+    m_unattendedPassword = password;
+}
+
+bool InvitationsRfbServer::allowUnattendedAccess() const
+{
+    return m_allowUnattendedAccess;
+}
+
 bool InvitationsRfbServer::start()
 {
     if(RfbServer::start()) {
@@ -76,9 +91,16 @@ void InvitationsRfbServer::stop(bool disconnectClients)
     RfbServer::stop(disconnectClients);
 }
 
+void InvitationsRfbServer::toggleUnattendedAccess(bool allow)
+{
+    m_allowUnattendedAccess = allow;
+}
+
 InvitationsRfbServer::InvitationsRfbServer()
 {
     m_desktopPassword = readableRandomString(4)+"-"+readableRandomString(3);
+    m_unattendedPassword = readableRandomString(4)+"-"+readableRandomString(3);
+    m_allowUnattendedAccess = false;
 }
 
 PendingRfbClient* InvitationsRfbServer::newClient(rfbClientPtr client)

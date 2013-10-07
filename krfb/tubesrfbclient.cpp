@@ -52,24 +52,18 @@ void PendingTubesRfbClient::showConfirmationDialog()
 {
     QString name = m_contact->alias();
 
-    if (!KrfbConfig::askOnConnect()) {
-        KNotification::event("NewConnectionAutoAccepted",
-                             i18n("Accepted connection from %1", name));
-        accept(new TubesRfbClient(m_rfbClient, m_contact, parent()));
-    } else {
-        KNotification::event("NewConnectionOnHold",
-                            i18n("Received connection from %1, on hold (waiting for confirmation)",
-                                name));
+    KNotification::event("NewConnectionOnHold",
+                        i18n("Received connection from %1, on hold (waiting for confirmation)",
+                            name));
 
-        TubesConnectionDialog *dialog = new TubesConnectionDialog(0);
-        dialog->setContactName(name);
-        dialog->setAllowRemoteControl(KrfbConfig::allowDesktopControl());
+    TubesConnectionDialog *dialog = new TubesConnectionDialog(0);
+    dialog->setContactName(name);
+    dialog->setAllowRemoteControl(KrfbConfig::allowDesktopControl());
 
-        connect(dialog, SIGNAL(okClicked()), SLOT(dialogAccepted()));
-        connect(dialog, SIGNAL(cancelClicked()), SLOT(reject()));
+    connect(dialog, SIGNAL(okClicked()), SLOT(dialogAccepted()));
+    connect(dialog, SIGNAL(cancelClicked()), SLOT(reject()));
 
-        dialog->show();
-    }
+    dialog->show();
 }
 
 void PendingTubesRfbClient::dialogAccepted()

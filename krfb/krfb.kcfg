@@ -22,16 +22,17 @@
       <label>Allow remote connections to manage the desktop.</label>
       <default>true</default>
     </entry>
-    <entry name="askOnConnect" type="Bool">
-      <label>Ask before allowing a remote connection.</label>
-      <default>true</default>
-    </entry>
-    <entry name="allowUninvitedConnections" type="Bool">
+    <entry name="allowUnattendedAccess" type="Bool">
       <label>Allow connections without an invitation.</label>
       <default>false</default>
     </entry>
-    <entry name="uninvitedConnectionPassword" type="String">
+    <entry name="unattendedAccessPassword" type="String">
       <label>Password for uninvited connections.</label>
+      <default>DefaultPassword</default>
+    </entry>
+    <entry name="desktopSharingPassword" type="String">
+      <label>Password for uninvited connections.</label>
+      <default>DefaultPassword</default>
     </entry>
   </group>
   <group name="FrameBuffer">

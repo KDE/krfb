@@ -33,6 +33,7 @@ class MainWindow : public KXmlGuiWindow
 
     private Q_SLOTS:
         void editPassword();
+        void editUnattendedPassword();
         void toggleDesktopSharing(bool enable);
 
     private:
