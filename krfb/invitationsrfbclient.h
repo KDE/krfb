@@ -25,9 +25,6 @@ class InvitationsRfbClient : public RfbClient
 public:
     InvitationsRfbClient(rfbClientPtr client, QObject* parent = 0)
         : RfbClient(client, parent) {}
-
-protected:
-    virtual bool checkPassword(const QByteArray & encryptedPassword);
 };
 
 
@@ -35,14 +32,20 @@ class PendingInvitationsRfbClient : public PendingRfbClient
 {
     Q_OBJECT
 public:
-    PendingInvitationsRfbClient(rfbClientPtr client, QObject *parent = 0)
-        : PendingRfbClient(client, parent) {}
+    PendingInvitationsRfbClient(rfbClientPtr client, QObject *parent = 0);
+    virtual ~PendingInvitationsRfbClient();
 
 protected Q_SLOTS:
     virtual void processNewClient();
+    virtual void onSocketActivated();
+    virtual bool checkPassword(const QByteArray & encryptedPassword);
 
 private Q_SLOTS:
     void dialogAccepted();
+
+private:
+    struct Private;
+    Private* const d;
 };
 
 #endif // INVITATIONSRFBCLIENT_H

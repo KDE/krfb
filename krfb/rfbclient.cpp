@@ -117,34 +117,6 @@ void RfbClient::handleMouseEvent(int buttonMask, int x, int y)
     }
 }
 
-bool RfbClient::checkPassword(const QByteArray & encryptedPassword)
-{
-    Q_UNUSED(encryptedPassword);
-
-    return d->client->screen->authPasswdData == (void*)0;
-}
-
-bool RfbClient::vncAuthCheckPassword(const QByteArray& password, const QByteArray& encryptedPassword) const
-{
-    if (password.isEmpty() && encryptedPassword.isEmpty()) {
-        return true;
-    }
-
-    char passwd[MAXPWLEN];
-    unsigned char challenge[CHALLENGESIZE];
-
-    memcpy(challenge, d->client->authChallenge, CHALLENGESIZE);
-    bzero(passwd, MAXPWLEN);
-
-    if (!password.isEmpty()) {
-        strncpy(passwd, password,
-                (MAXPWLEN <= password.size()) ? MAXPWLEN : password.size());
-    }
-
-    rfbEncryptBytes(challenge, passwd);
-    return memcmp(challenge, encryptedPassword, encryptedPassword.size()) == 0;
-}
-
 void RfbClient::onSocketActivated()
 {
     //Process not only one, but all pending messages.
@@ -193,14 +165,11 @@ void RfbClient::update()
 PendingRfbClient::PendingRfbClient(rfbClientPtr client, QObject *parent)
     : QObject(parent), m_rfbClient(client)
 {
-    kDebug();
-    QMetaObject::invokeMethod(this, "processNewClient", Qt::QueuedConnection);
+    m_rfbClient->clientData = this;
 }
 
 PendingRfbClient::~PendingRfbClient()
-{
-    kDebug();
-}
+{}
 
 void PendingRfbClient::accept(RfbClient *newClient)
 {
@@ -228,5 +197,32 @@ void PendingRfbClient::reject()
     deleteLater();
 }
 
+bool PendingRfbClient::checkPassword(const QByteArray & encryptedPassword)
+{
+    Q_UNUSED(encryptedPassword);
+
+    return m_rfbClient->screen->authPasswdData == (void*)0;
+}
+
+bool PendingRfbClient::vncAuthCheckPassword(const QByteArray& password, const QByteArray& encryptedPassword) const
+{
+    if (password.isEmpty() && encryptedPassword.isEmpty()) {
+        return true;
+    }
+
+    char passwd[MAXPWLEN];
+    unsigned char challenge[CHALLENGESIZE];
+
+    memcpy(challenge, m_rfbClient->authChallenge, CHALLENGESIZE);
+    bzero(passwd, MAXPWLEN);
+
+    if (!password.isEmpty()) {
+        strncpy(passwd, password,
+                (MAXPWLEN <= password.size()) ? MAXPWLEN : password.size());
+    }
+
+    rfbEncryptBytes(challenge, passwd);
+    return memcmp(challenge, encryptedPassword, encryptedPassword.size()) == 0;
+}
 
 #include "rfbclient.moc"

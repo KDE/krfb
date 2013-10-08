@@ -241,7 +241,8 @@ void RfbServer::clientGoneHook(rfbClientPtr cl)
 //static
 rfbBool RfbServer::passwordCheck(rfbClientPtr cl, const char *encryptedPassword, int len)
 {
-    RfbClient *client = static_cast<RfbClient*>(cl->clientData);
+    PendingRfbClient *client = static_cast<PendingRfbClient*>(cl->clientData);
+    Q_ASSERT(client);
     return client->checkPassword(QByteArray::fromRawData(encryptedPassword, len));
 }
 

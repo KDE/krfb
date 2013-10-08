@@ -18,6 +18,7 @@
     You should have received a copy of the GNU Lesser General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
+#include "rfb.h"
 #include "invitationsrfbclient.h"
 #include "invitationsrfbserver.h"
 #include "krfbconfig.h"
@@ -25,33 +26,48 @@
 #include "connectiondialog.h"
 #include <KNotification>
 #include <KLocale>
+#include <QtCore/QSocketNotifier>
+#include <poll.h>
 
-bool InvitationsRfbClient::checkPassword(const QByteArray & encryptedPassword)
+struct PendingInvitationsRfbClient::Private
 {
-    QByteArray password ;
-    kDebug() << "about to start autentication";
+    Private(rfbClientPtr client) :
+        client(client),
+        askOnConnect(true)
+    {}
 
-    if(InvitationsRfbServer::instance->allowUnattendedAccess() && vncAuthCheckPassword(
-            InvitationsRfbServer::instance->unattendedPassword().toLocal8Bit(),
-            encryptedPassword) ) {
-        return true;
-    }
+    rfbClientPtr client;
+    QSocketNotifier *notifier;
+    bool askOnConnect;
+};
 
-    return vncAuthCheckPassword(
-            InvitationsRfbServer::instance->desktopPassword().toLocal8Bit(),
-            encryptedPassword);
+PendingInvitationsRfbClient::PendingInvitationsRfbClient(rfbClientPtr client, QObject *parent) :
+    PendingRfbClient(client, parent),
+    d(new Private(client))
+{
+    d->notifier = new QSocketNotifier(client->sock, QSocketNotifier::Read, this);
+    d->notifier->setEnabled(true);
+    connect(d->notifier, SIGNAL(activated(int)),
+            this, SLOT(onSocketActivated()));
 }
 
+PendingInvitationsRfbClient::~PendingInvitationsRfbClient()
+{
+    delete d;
+}
 
 void PendingInvitationsRfbClient::processNewClient()
 {
     QString host = peerAddress(m_rfbClient->sock) + ":" + QString::number(peerPort(m_rfbClient->sock));
 
-    if (InvitationsRfbServer::instance->allowUnattendedAccess()) {
+    if (d->askOnConnect == false) {
+
         KNotification::event("NewConnectionAutoAccepted",
                              i18n("Accepted connection from %1", host));
         accept(new InvitationsRfbClient(m_rfbClient, parent()));
+
     } else {
+
         KNotification::event("NewConnectionOnHold",
                             i18n("Received connection from %1, on hold (waiting for confirmation)",
                                 host));
@@ -65,6 +81,59 @@ void PendingInvitationsRfbClient::processNewClient()
 
         dialog->show();
     }
+}
+
+static void clientGoneHookNoop(rfbClientPtr cl) { Q_UNUSED(cl); }
+
+void PendingInvitationsRfbClient::onSocketActivated()
+{
+    //Process not only one, but all pending messages.
+    //poll() idea/code copied from vino:
+    // Copyright (C) 2003 Sun Microsystems, Inc.
+    // License: GPL v2 or later
+    struct pollfd pollfd = { d->client->sock, POLLIN|POLLPRI, 0 };
+
+    while(poll(&pollfd, 1, 0) == 1) {
+
+        if(d->client->state == rfbClientRec::RFB_INITIALISATION) {
+            d->notifier->setEnabled(false);
+            //Client is Authenticated
+            processNewClient();
+            break;
+        }
+        rfbProcessClientMessage(d->client);
+
+        //This is how we handle disconnection.
+        //if rfbProcessClientMessage() finds out that it can't read the socket,
+        //it closes it and sets it to -1. So, we just have to check this here
+        //and call rfbClientConnectionGone() if necessary. This will call
+        //the clientGoneHook which in turn will remove this RfbClient instance
+        //from the server manager and will call deleteLater() to delete it
+        if (d->client->sock == -1) {
+            d->client->clientGoneHook = clientGoneHookNoop;
+            kDebug() << "disconnected from socket signal";
+            d->notifier->setEnabled(false);
+            rfbClientConnectionGone(d->client);
+            break;
+        }
+    }
+}
+
+bool PendingInvitationsRfbClient::checkPassword(const QByteArray & encryptedPassword)
+{
+    QByteArray password ;
+    kDebug() << "about to start autentication";
+
+    if(InvitationsRfbServer::instance->allowUnattendedAccess() && vncAuthCheckPassword(
+            InvitationsRfbServer::instance->unattendedPassword().toLocal8Bit(),
+            encryptedPassword) ) {
+        d->askOnConnect = false;
+        return true;
+    }
+
+    return vncAuthCheckPassword(
+            InvitationsRfbServer::instance->desktopPassword().toLocal8Bit(),
+            encryptedPassword);
 }
 
 void PendingInvitationsRfbClient::dialogAccepted()

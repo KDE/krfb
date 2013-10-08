@@ -24,8 +24,10 @@
 class TubesRfbClient : public RfbClient
 {
 public:
-    TubesRfbClient(rfbClientPtr client, const Tp::ContactPtr & contact, QObject* parent = 0)
-        : RfbClient(client, parent), m_contact(contact) {}
+    TubesRfbClient(rfbClientPtr client,
+            const Tp::ContactPtr &contact, QObject *parent=0)
+        : RfbClient(client, parent), m_contact(contact)
+    {}
 
     virtual QString name() const;
 
@@ -33,13 +35,13 @@ private:
     Tp::ContactPtr m_contact;
 };
 
+//*********
 
 class PendingTubesRfbClient : public PendingRfbClient
 {
     Q_OBJECT
 public:
-    PendingTubesRfbClient(rfbClientPtr client, QObject* parent = 0)
-        : PendingRfbClient(client, parent), m_processNewClientCalled(false) {}
+    PendingTubesRfbClient(rfbClientPtr client, QObject* parent = 0);
 
     void setContact(const Tp::ContactPtr & contact);
 

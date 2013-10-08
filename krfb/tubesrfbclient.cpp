@@ -27,6 +27,14 @@ QString TubesRfbClient::name() const
     return m_contact->alias();
 }
 
+//********
+
+PendingTubesRfbClient::PendingTubesRfbClient(rfbClientPtr client, QObject* parent) :
+    PendingRfbClient(client, parent),
+    m_processNewClientCalled(false)
+{
+    processNewClient();
+}
 
 void PendingTubesRfbClient::setContact(const Tp::ContactPtr & contact)
 {

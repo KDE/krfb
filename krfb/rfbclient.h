@@ -54,20 +54,6 @@ protected:
     virtual void handleKeyboardEvent(bool down, rfbKeySym keySym);
     virtual void handleMouseEvent(int buttonMask, int x, int y);
 
-    /** This method is supposed to check if the provided \a encryptedPassword
-     * matches the criteria for authenticating the client.
-     * The default implementation returns false if a password is required.
-     * Reimplement to do more useful stuff.
-     */
-    virtual bool checkPassword(const QByteArray & encryptedPassword);
-
-    /** This method checks if the \a encryptedPassword that was sent from the remote
-     * user matches the \a password that you have specified localy to be the password
-     * for this connection. This assumes that the standard VNC authentication mechanism
-     * is used. Returns true if the password matches or false otherwise.
-     */
-    bool vncAuthCheckPassword(const QByteArray & password, const QByteArray & encryptedPassword) const;
-
 private Q_SLOTS:
     void onSocketActivated();
 
@@ -99,6 +85,23 @@ protected Q_SLOTS:
     void reject();
 
 protected:
+
+    friend class RfbServer; //Following two methods are handled by RfbServer
+
+    /** This method is supposed to check if the provided \a encryptedPassword
+     * matches the criteria for authenticating the client.
+     * The default implementation returns false if a password is required.
+     * Reimplement to do more useful stuff.
+     */
+    virtual bool checkPassword(const QByteArray & encryptedPassword);
+
+    /** This method checks if the \a encryptedPassword that was sent from the remote
+     * user matches the \a password that you have specified localy to be the password
+     * for this connection. This assumes that the standard VNC authentication mechanism
+     * is used. Returns true if the password matches or false otherwise.
+     */
+    bool vncAuthCheckPassword(const QByteArray & password, const QByteArray & encryptedPassword) const;
+
     rfbClientPtr m_rfbClient;
 };
 
