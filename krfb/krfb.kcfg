@@ -28,11 +28,9 @@
     </entry>
     <entry name="unattendedAccessPassword" type="String">
       <label>Password for uninvited connections.</label>
-      <default>DefaultPassword</default>
     </entry>
     <entry name="desktopSharingPassword" type="String">
       <label>Password for uninvited connections.</label>
-      <default>DefaultPassword</default>
     </entry>
   </group>
   <group name="FrameBuffer">

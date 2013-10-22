@@ -59,6 +59,9 @@ MainWindow::MainWindow(QWidget *parent)
     QWidget *mainWidget = new QWidget;
     m_ui.setupUi(mainWidget);
     m_ui.krfbIconLabel->setPixmap(KIcon("krfb").pixmap(128));
+    m_ui.enableUnattendedCheckBox->setChecked(
+            InvitationsRfbServer::instance->allowUnattendedAccess());
+
     setCentralWidget(mainWidget);
 
     connect(m_ui.passwordEditButton,SIGNAL(clicked()),
@@ -69,6 +72,8 @@ MainWindow::MainWindow(QWidget *parent)
             InvitationsRfbServer::instance, SLOT(toggleUnattendedAccess(bool)));
     connect(m_ui.unattendedPasswordButton, SIGNAL(clicked()),
             this, SLOT(editUnattendedPassword()));
+    connect(InvitationsRfbServer::instance, SIGNAL(passwordChanged(const QString&)),
+            this, SLOT(passwordChanged(const QString&)));
 
     // Figure out the address
     int port = KrfbConfig::port();
@@ -94,7 +99,7 @@ MainWindow::MainWindow(QWidget *parent)
     setupGUI();
     setFixedSize(QSize(600, 360));
 
-   // setAutoSaveSettings();
+    setAutoSaveSettings();
 }
 
 MainWindow::~MainWindow()
@@ -152,6 +157,12 @@ void MainWindow::toggleDesktopSharing(bool enable)
             m_ui.passwordEditButton->setIcon(KIcon("document-properties"));
         }
     }
+}
+
+void MainWindow::passwordChanged(const QString& password)
+{
+    m_passwordLineEdit->setText(password);
+    m_ui.passwordDisplayLabel->setText(password);
 }
 
 void MainWindow::showConfiguration()

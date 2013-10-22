@@ -22,6 +22,10 @@
 
 #include "rfbserver.h"
 
+namespace KWallet {
+    class Wallet;
+}
+
 namespace DNSSD {
     class PublicService;
 }
@@ -39,6 +43,9 @@ public:
     void setUnattendedPassword(const QString&);
     bool allowUnattendedAccess() const;
 
+Q_SIGNALS:
+    void passwordChanged(const QString&);
+
 public Q_SLOTS:
     bool start();
     void stop(bool disconnectClients=true);
@@ -46,13 +53,18 @@ public Q_SLOTS:
 
 protected:
     InvitationsRfbServer();
+    virtual ~InvitationsRfbServer();
     virtual PendingRfbClient* newClient(rfbClientPtr client);
+
+private Q_SLOTS:
+    void walletOpened(bool);
 
 private:
     DNSSD::PublicService *m_publicService;
     bool m_allowUnattendedAccess;
     QString m_desktopPassword;
     QString m_unattendedPassword;
+    KWallet::Wallet *m_wallet;
 
     QString readableRandomString(int);
     Q_DISABLE_COPY(InvitationsRfbServer)

@@ -35,6 +35,7 @@ class MainWindow : public KXmlGuiWindow
         void editPassword();
         void editUnattendedPassword();
         void toggleDesktopSharing(bool enable);
+        void passwordChanged(const QString&);
 
     private:
         Ui::MainWidget m_ui;
