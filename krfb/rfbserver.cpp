@@ -20,6 +20,8 @@
 #include "rfbserver.h"
 #include "rfbservermanager.h"
 #include <QtCore/QSocketNotifier>
+#include <QApplication>
+#include <QClipboard>
 #include <KDebug>
 
 struct RfbServer::Private
@@ -136,6 +138,8 @@ bool RfbServer::start()
     d->notifier = new QSocketNotifier(d->screen->listenSock, QSocketNotifier::Read, this);
     d->notifier->setEnabled(true);
     connect(d->notifier, SIGNAL(activated(int)), this, SLOT(onListenSocketActivated()));
+    connect(QApplication::clipboard(), SIGNAL(dataChanged()),
+            this, SLOT(krfbSendServerCutText()));
 
     return true;
 }
@@ -201,6 +205,15 @@ void RfbServer::updateCursorPosition(const QPoint & position)
     }
 }
 
+void RfbServer::krfbSendServerCutText()
+{
+    if(d->screen) {
+        QString text = QApplication::clipboard()->text();
+        rfbSendServerCutText(d->screen,
+                text.toLocal8Bit().data(),text.length());
+    }
+}
+
 void RfbServer::onListenSocketActivated()
 {
     rfbProcessNewConnection(d->screen);
@@ -263,7 +276,7 @@ void RfbServer::pointerHook(int bm, int x, int y, rfbClientPtr cl)
 //static
 void RfbServer::clipboardHook(char *str, int len, rfbClientPtr cl)
 {
-    //TODO implement me
+    QApplication::clipboard()->setText(QString::fromLocal8Bit(str,len));
 }
 
 #include "rfbserver.moc"

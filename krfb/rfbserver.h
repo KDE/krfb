@@ -47,6 +47,7 @@ public Q_SLOTS:
     void updateCursorPosition(const QPoint & position);
 
 private Q_SLOTS:
+    void krfbSendServerCutText();
     void onListenSocketActivated();
     void pendingClientFinished(RfbClient *client);
 
