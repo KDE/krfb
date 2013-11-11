@@ -72,6 +72,10 @@ MainWindow::MainWindow(QWidget *parent)
             InvitationsRfbServer::instance, SLOT(toggleUnattendedAccess(bool)));
     connect(m_ui.unattendedPasswordButton, SIGNAL(clicked()),
             this, SLOT(editUnattendedPassword()));
+    connect(m_ui.addressAboutButton, SIGNAL(clicked()),
+            this, SLOT(aboutConnectionAddress()));
+    connect(m_ui.unattendedAboutButton, SIGNAL(clicked()),
+            this, SLOT(aboutUnattendedMode()));
     connect(InvitationsRfbServer::instance, SIGNAL(passwordChanged(const QString&)),
             this, SLOT(passwordChanged(const QString&)));
 
@@ -163,6 +167,20 @@ void MainWindow::passwordChanged(const QString& password)
 {
     m_passwordLineEdit->setText(password);
     m_ui.passwordDisplayLabel->setText(password);
+}
+
+void MainWindow::aboutConnectionAddress()
+{
+    KMessageBox::about(this,
+            i18n("This field contains the address of your computer and the port number, separated by a colon.\n\nThe address is just a hint - you can use any address that can reach your computer.\n\nDesktop Sharing tries to guess your address from your network configuration, but does not always succeed in doing so.\n\nIf your computer is behind a firewall it may have a different address or be unreachable for other computers."),
+            i18n("KDE Desktop Sharing"));
+}
+
+void MainWindow::aboutUnattendedMode()
+{
+    KMessageBox::about(this,
+            i18n("Any remote user with normal desktop sharing password will have to be authenticated.\n\nIf unattended access is on, and the remote user provides unattended mode password, desktop sharing access will be granted without explicit confirmation."),
+            i18n("KDE Desktop Sharing"));
 }
 
 void MainWindow::showConfiguration()
