@@ -23,13 +23,23 @@
 #include <QtNetwork/QHostAddress>
 #include <TelepathyQt/Types>
 
+#ifdef KRFB_WITH_KDE_TELEPATHY
+namespace KTp {
+    class ContactsListModel;
+}
+#endif
+
 class TubesRfbServer : public RfbServer
 {
     Q_OBJECT
 public:
+    static TubesRfbServer *instance;
     static void init();
 
     virtual ~TubesRfbServer();
+#ifdef KRFB_WITH_KDE_TELEPATHY
+    KTp::ContactsListModel *contactsListModel();
+#endif
 
 protected:
     TubesRfbServer(QObject *parent = 0);
@@ -58,9 +68,19 @@ private Q_SLOTS:
             const QString &message,
             const Tp::OutgoingStreamTubeChannelPtr &tube);
 
+#ifdef KRFB_WITH_KDE_TELEPATHY
+    void onAccountManagerReady();
+#endif
+
 private:
     struct Private;
     Private *const d;
+
+#ifdef KRFB_WITH_KDE_TELEPATHY
+    KTp::ContactsListModel *m_contactsListModel;
+    Tp::AccountManagerPtr m_accountManager;
+#endif
+
 };
 
 #endif // TUBESRFBSERVER_H

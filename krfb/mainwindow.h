@@ -15,6 +15,17 @@
 
 #include <KXmlGuiWindow>
 
+#ifdef KRFB_WITH_KDE_TELEPATHY
+#include <KTp/contact.h>
+#include <TelepathyQt/PendingReady>
+namespace KTp {
+    class ContactViewWidget;
+}
+namespace Tp {
+    class PendingOperation;
+}
+#endif
+
 class KLineEdit;
 
 class MainWindow : public KXmlGuiWindow
@@ -24,6 +35,7 @@ class MainWindow : public KXmlGuiWindow
     public:
         MainWindow(QWidget *parent = 0);
         ~MainWindow();
+
     public Q_SLOTS:
         void showConfiguration();
 
@@ -38,11 +50,19 @@ class MainWindow : public KXmlGuiWindow
         void passwordChanged(const QString&);
         void aboutConnectionAddress();
         void aboutUnattendedMode();
+#ifdef KRFB_WITH_KDE_TELEPATHY
+        void onContactDoubleClicked(const Tp::AccountPtr &, const KTp::ContactPtr &);
+        void pendingDesktopShareFinished(Tp::PendingOperation*);
+#endif
 
     private:
         Ui::MainWidget m_ui;
         bool m_passwordEditable;
         KLineEdit *m_passwordLineEdit;
-    };
+#ifdef KRFB_WITH_KDE_TELEPATHY
+        KTp::ContactViewWidget *m_contactViewWidget;
+#endif
+
+};
 
 #endif

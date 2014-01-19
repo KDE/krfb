@@ -46,6 +46,11 @@ if(TelepathyQt4_FOUND)
     include_directories(${TELEPATHY_QT4_INCLUDE_DIR})
 endif()
 
+if(KTP_FOUND)
+    add_definitions(-DKRFB_WITH_KDE_TELEPATHY)
+    include_directories(${KTP_INCLUDE_DIR})
+endif()
+
 set (krfb_SRCS
      connectiondialog.cpp
      events.cpp
@@ -103,6 +108,14 @@ target_link_libraries (krfb
 if(TelepathyQt4_FOUND)
     target_link_libraries(krfb
                           ${TELEPATHY_QT4_LIBRARIES}
+    )
+endif()
+
+if(KTP_FOUND)
+    target_link_libraries(krfb
+                          ${KTP_LIBRARIES}
+                          ${KTP_MODELS_LIBRARIES}
+                          ${KTP_WIDGETS_LIBRARIES}
     )
 endif()
 

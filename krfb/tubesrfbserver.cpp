@@ -32,6 +32,13 @@
 #include <TelepathyQt/OutgoingStreamTubeChannel>
 #include <TelepathyQt/StreamTubeServer>
 
+#ifdef KRFB_WITH_KDE_TELEPATHY
+#include <TelepathyQt/AccountSet>
+#include <TelepathyQt/AccountManager>
+#include <TelepathyQt/PendingReady>
+#include <KTp/Models/contacts-list-model.h>
+#include <KTp/contact-factory.h>
+#endif
 
 struct TubesRfbServer::Private
 {
@@ -40,10 +47,16 @@ struct TubesRfbServer::Private
     QHash<quint16, PendingTubesRfbClient*> clientsPerPort;
 };
 
+//static
+TubesRfbServer *TubesRfbServer::instance;
+
+//static
 void TubesRfbServer::init()
 {
-    new TubesRfbServer();
+    instance = new TubesRfbServer;
     //RfbServerManager takes care of deletion
+
+    instance->startAndCheck();
 }
 
 TubesRfbServer::TubesRfbServer(QObject *parent)
@@ -56,14 +69,51 @@ TubesRfbServer::TubesRfbServer(QObject *parent)
     Tp::registerTypes();
 
     Tp::AccountFactoryPtr  accountFactory = Tp::AccountFactory::create(
-            QDBusConnection::sessionBus(), Tp::Account::FeatureCore);
+            QDBusConnection::sessionBus(),
+            Tp::Features() << Tp::Account::FeatureCore
+            << Tp::Account::FeatureAvatar
+            << Tp::Account::FeatureCapabilities
+            << Tp::Account::FeatureProtocolInfo
+            << Tp::Account::FeatureProfile);
 
     Tp::ConnectionFactoryPtr connectionFactory = Tp::ConnectionFactory::create(
-            QDBusConnection::sessionBus(), Tp::Connection::FeatureCore);
+            QDBusConnection::sessionBus(),
+            Tp::Features() << Tp::Connection::FeatureCore
+            << Tp::Connection::FeatureSelfContact);
 
     Tp::ChannelFactoryPtr channelFactory = Tp::ChannelFactory::create(
             QDBusConnection::sessionBus());
 
+#ifdef KRFB_WITH_KDE_TELEPATHY
+    Tp::ContactFactoryPtr contactFactory = KTp::ContactFactory::create(
+            Tp::Features() << Tp::Contact::FeatureAlias
+            <<Tp::Contact::FeatureAvatarToken
+            <<Tp::Contact::FeatureAvatarData
+            <<Tp::Contact::FeatureSimplePresence
+            <<Tp::Contact::FeatureCapabilities
+            <<Tp::Contact::FeatureClientTypes);
+
+    m_accountManager = Tp::AccountManager::create(
+            QDBusConnection::sessionBus(),
+            accountFactory,
+            connectionFactory,
+            channelFactory,
+            contactFactory);
+
+    d->stubeServer = Tp::StreamTubeServer::create(
+            m_accountManager,
+            QStringList() << QLatin1String("rfb"),
+            QStringList(),
+            QLatin1String("krfb_rfb_handler"),
+            true);
+
+    connect(m_accountManager->becomeReady(),
+            SIGNAL(finished(Tp::PendingOperation*)),
+            this,
+            SLOT(onAccountManagerReady()));
+
+    m_contactsListModel = new KTp::ContactsListModel(this);
+#else
     Tp::ContactFactoryPtr contactFactory = Tp::ContactFactory::create(
             Tp::Contact::FeatureAlias);
 
@@ -76,6 +126,7 @@ TubesRfbServer::TubesRfbServer(QObject *parent)
             connectionFactory,
             channelFactory,
             contactFactory);
+#endif  //KRFB_WITH_KDE_TELEPATHY
 
     connect(d->stubeServer.data(),
             SIGNAL(tubeRequested(Tp::AccountPtr,Tp::OutgoingStreamTubeChannelPtr,
@@ -101,8 +152,6 @@ TubesRfbServer::TubesRfbServer(QObject *parent)
     // Listen only on the loopback network interface
     setListeningAddress("127.0.0.1");
     setPasswordRequired(false);
-
-    QTimer::singleShot(0, this, SLOT(startAndCheck()));
 }
 
 TubesRfbServer::~TubesRfbServer()
@@ -110,6 +159,13 @@ TubesRfbServer::~TubesRfbServer()
     kDebug();
     delete d;
 }
+
+#ifdef KRFB_WITH_KDE_TELEPATHY
+KTp::ContactsListModel *TubesRfbServer::contactsListModel()
+{
+    return m_contactsListModel;
+}
+#endif
 
 void TubesRfbServer::startAndCheck()
 {
@@ -130,6 +186,7 @@ void TubesRfbServer::startAndCheck()
     //TODO listeningAddress() should be a QHostAddress
     d->stubeServer->exportTcpSocket(QHostAddress(QString::fromAscii(listeningAddress())),
                                     listeningPort());
+    connect(qApp, SIGNAL(aboutToQuit()), this, SLOT(stop()));
 }
 
 void TubesRfbServer::onTubeRequested()
@@ -194,5 +251,12 @@ PendingRfbClient* TubesRfbServer::newClient(rfbClientPtr client)
 
     return c;
 }
+
+#ifdef KRFB_WITH_KDE_TELEPATHY
+void TubesRfbServer::onAccountManagerReady()
+{
+    m_contactsListModel->setAccountManager(m_accountManager);
+}
+#endif
 
 #include "tubesrfbserver.moc"
