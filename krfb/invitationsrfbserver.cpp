@@ -86,7 +86,8 @@ bool InvitationsRfbServer::allowUnattendedAccess() const
 bool InvitationsRfbServer::start()
 {
     if(RfbServer::start()) {
-        m_publicService->publishAsync();
+        if(KrfbConfig::publishService())
+            m_publicService->publishAsync();
         return true;
     }
     return false;
