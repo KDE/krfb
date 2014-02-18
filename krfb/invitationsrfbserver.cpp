@@ -116,6 +116,7 @@ InvitationsRfbServer::InvitationsRfbServer()
 
 InvitationsRfbServer::~InvitationsRfbServer()
 {
+    stop();
     KSharedConfigPtr config = KGlobal::config();
     KConfigGroup krfbConfig(config,"Security");
     krfbConfig.writeEntry("allowUnattendedAccess",m_allowUnattendedAccess);

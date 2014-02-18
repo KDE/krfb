@@ -157,6 +157,7 @@ TubesRfbServer::TubesRfbServer(QObject *parent)
 TubesRfbServer::~TubesRfbServer()
 {
     kDebug();
+    stop();
     delete d;
 }
 
@@ -186,7 +187,6 @@ void TubesRfbServer::startAndCheck()
     //TODO listeningAddress() should be a QHostAddress
     d->stubeServer->exportTcpSocket(QHostAddress(QString::fromAscii(listeningAddress())),
                                     listeningPort());
-    connect(qApp, SIGNAL(aboutToQuit()), this, SLOT(stop()));
 }
 
 void TubesRfbServer::onTubeRequested()

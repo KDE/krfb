@@ -47,7 +47,6 @@ RfbServer::RfbServer(QObject *parent)
 
 RfbServer::~RfbServer()
 {
-    stop();
     if (d->screen) {
         rfbScreenCleanup(d->screen);
     }

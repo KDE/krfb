@@ -183,14 +183,12 @@ void MainWindow::toggleDesktopSharing(bool enable)
 {
     if(enable) {
         if(!InvitationsRfbServer::instance->start()) {
-            KMessageBox::error(0,
+            KMessageBox::error(this,
                     i18n("Failed to start the krfb server. Desktop sharing "
                         "will not work. Try setting another port in the settings "
                         "and restart krfb."));
         }
-        connect(qApp, SIGNAL(aboutToQuit()), InvitationsRfbServer::instance, SLOT(stop()));
     } else {
-        disconnect(qApp, SIGNAL(aboutToQuit()), InvitationsRfbServer::instance, SLOT(stop()));
         InvitationsRfbServer::instance->stop();
         if(m_passwordEditable) {
             m_passwordEditable = false;
@@ -232,7 +230,7 @@ void MainWindow::onContactDoubleClicked(const Tp::AccountPtr &account, const KTp
 void MainWindow::pendingDesktopShareFinished(Tp::PendingOperation *operation)
 {
     if(operation->isError()) {
-        KMessageBox::error(0,
+        KMessageBox::error(this,
                 operation->errorName() + ": " + operation->errorMessage());
     }
 }
