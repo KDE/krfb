@@ -27,6 +27,7 @@
 #include <KNewPasswordDialog>
 
 #include <QtGui/QWidget>
+#include <QtGui/QSizePolicy>
 #include <QtNetwork/QNetworkInterface>
 
 #ifdef KRFB_WITH_KDE_TELEPATHY
@@ -117,13 +118,15 @@ MainWindow::MainWindow(QWidget *parent)
     connect(m_ui.enableSharingCheckBox, SIGNAL(toggled(bool)),
             m_contactViewWidget, SLOT(setEnabled(bool)));
     m_contactViewWidget->setIconSize(QSize(32,32));
-    m_contactViewWidget->setMaximumWidth(120);
-    m_contactViewWidget->setMaximumHeight(300);
+    m_contactViewWidget->setMinimumWidth(120);
+    m_contactViewWidget->setMaximumWidth(360);
+    m_contactViewWidget->setMinimumHeight(300);
     m_contactViewWidget->contactFilterLineEdit()->setClickMessage(i18n("Search in Contacts..."));
     m_contactViewWidget->filter()->setPresenceTypeFilterFlags(KTp::ContactsFilterModel::ShowOnlyConnected);
     m_contactViewWidget->filter()->setTubesFilterStrings(QStringList("rfb"));
     m_contactViewWidget->filter()->setCapabilityFilterFlags(KTp::ContactsFilterModel::FilterByTubes);
 
+    m_contactViewWidget->setSizePolicy(QSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding));
     m_ui.tpContactsLayout->addWidget(m_contactViewWidget);
     connect(m_contactViewWidget, SIGNAL(contactDoubleClicked(const Tp::AccountPtr &, const KTp::ContactPtr &)),
         this, SLOT(onContactDoubleClicked(const Tp::AccountPtr &, const KTp::ContactPtr &)));
@@ -134,12 +137,6 @@ MainWindow::MainWindow(QWidget *parent)
     KStandardAction::preferences(this, SLOT(showConfiguration()), actionCollection());
 
     setupGUI();
-
-#ifdef KRFB_WITH_KDE_TELEPATHY
-    setFixedSize(QSize(720, 360));
-#else
-    setFixedSize(QSize(600, 360));
-#endif
 
     setAutoSaveSettings();
 }

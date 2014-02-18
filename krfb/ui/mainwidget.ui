@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="sizePolicy">
-   <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
     <horstretch>0</horstretch>
     <verstretch>0</verstretch>
    </sizepolicy>
@@ -24,8 +24,8 @@
   </property>
   <property name="maximumSize">
    <size>
-    <width>720</width>
-    <height>340</height>
+    <width>16777215</width>
+    <height>16777215</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -53,18 +53,27 @@
    </item>
    <item>
     <layout class="QVBoxLayout" name="rightLayout">
+     <property name="sizeConstraint">
+      <enum>QLayout::SetMaximumSize</enum>
+     </property>
      <item>
       <widget class="QLabel" name="titleLabel">
        <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
+        <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
+       <property name="minimumSize">
+        <size>
+         <width>400</width>
+         <height>20</height>
+        </size>
+       </property>
        <property name="maximumSize">
         <size>
          <width>16777215</width>
-         <height>20</height>
+         <height>40</height>
         </size>
        </property>
        <property name="font">
@@ -87,15 +96,21 @@
      <item>
       <widget class="QLabel" name="aboutLabel">
        <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
+        <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
+       <property name="minimumSize">
+        <size>
+         <width>400</width>
+         <height>40</height>
+        </size>
+       </property>
        <property name="maximumSize">
         <size>
          <width>16777215</width>
-         <height>40</height>
+         <height>80</height>
         </size>
        </property>
        <property name="whatsThis">
@@ -111,6 +126,24 @@
      </item>
      <item>
       <widget class="QCheckBox" name="enableSharingCheckBox">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>400</width>
+         <height>20</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>40</height>
+        </size>
+       </property>
        <property name="whatsThis">
         <string>Starts/Stops Remote Desktop Sharing</string>
        </property>
@@ -124,6 +157,12 @@
        <property name="enabled">
         <bool>false</bool>
        </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="minimumSize">
         <size>
          <width>0</width>
@@ -136,11 +175,23 @@
        <layout class="QVBoxLayout" name="verticalLayout">
         <item>
          <layout class="QFormLayout" name="addressFormLayout">
+          <property name="sizeConstraint">
+           <enum>QLayout::SetMaximumSize</enum>
+          </property>
           <property name="fieldGrowthPolicy">
            <enum>QFormLayout::ExpandingFieldsGrow</enum>
           </property>
+          <property name="formAlignment">
+           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+          </property>
           <item row="0" column="0">
            <widget class="QLabel" name="addressLabel">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="text">
              <string>&amp;Address</string>
             </property>
@@ -151,8 +202,17 @@
           </item>
           <item row="0" column="1">
            <layout class="QGridLayout" name="addressGridLayout">
+            <property name="sizeConstraint">
+             <enum>QLayout::SetMaximumSize</enum>
+            </property>
             <item row="0" column="1">
              <widget class="QToolButton" name="addressAboutButton">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="whatsThis">
                <string>More about this address</string>
               </property>
@@ -169,7 +229,7 @@
             <item row="0" column="0">
              <widget class="QLabel" name="addressDisplayLabel">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+               <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -191,11 +251,23 @@
         </item>
         <item>
          <layout class="QFormLayout" name="passwordFormLayout">
+          <property name="sizeConstraint">
+           <enum>QLayout::SetMaximumSize</enum>
+          </property>
           <property name="fieldGrowthPolicy">
            <enum>QFormLayout::ExpandingFieldsGrow</enum>
           </property>
+          <property name="formAlignment">
+           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+          </property>
           <item row="0" column="0">
            <widget class="QLabel" name="passwordLabel">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="text">
              <string>&amp;Password</string>
             </property>
@@ -206,8 +278,17 @@
           </item>
           <item row="0" column="1">
            <layout class="QGridLayout" name="passwordGridLayout">
+            <property name="sizeConstraint">
+             <enum>QLayout::SetMaximumSize</enum>
+            </property>
             <item row="0" column="1">
              <widget class="QToolButton" name="passwordEditButton">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="whatsThis">
                <string>Edit/Save Desktop Sharing Password</string>
               </property>
@@ -224,7 +305,7 @@
             <item row="0" column="0">
              <widget class="QLabel" name="passwordDisplayLabel">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+               <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -252,6 +333,12 @@
        <property name="enabled">
         <bool>false</bool>
        </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="whatsThis">
         <string>Unattended Access allows a remote user with the password to gain control to your desktop without your explicit confirmation.</string>
        </property>
@@ -275,6 +362,18 @@
           </property>
           <item>
            <widget class="QLabel" name="unattendedAboutLabel">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>80</height>
+             </size>
+            </property>
             <property name="whatsThis">
              <string>Unattended Access allows a remote user with the password to gain control to your desktop without your explicit confirmation. Click &quot;About&quot; button on right to know more.</string>
             </property>
@@ -288,6 +387,12 @@
           </item>
           <item>
            <widget class="QToolButton" name="unattendedAboutButton">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="whatsThis">
              <string>Know more about Unattended Access</string>
             </property>
@@ -319,6 +424,18 @@
           </property>
           <item>
            <widget class="QCheckBox" name="enableUnattendedCheckBox">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>80</height>
+             </size>
+            </property>
             <property name="whatsThis">
              <string>Starts/Stops unattended access to your desktop. Click on button on right to change password, and &quot;About&quot; button to know more.</string>
             </property>
@@ -329,11 +446,29 @@
           </item>
           <item>
            <widget class="KPushButton" name="unattendedPasswordButton">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>320</width>
+              <height>80</height>
+             </size>
+            </property>
             <property name="whatsThis">
              <string>Change password for Unattended Access</string>
             </property>
             <property name="text">
-             <string>&amp;Change Password</string>
+             <string>&amp;Change Unattended Password</string>
             </property>
            </widget>
           </item>
@@ -347,7 +482,7 @@
    <item>
     <layout class="QVBoxLayout" name="tpContactsLayout">
      <property name="sizeConstraint">
-      <enum>QLayout::SetMinAndMaxSize</enum>
+      <enum>QLayout::SetMinimumSize</enum>
      </property>
     </layout>
    </item>
@@ -364,7 +499,6 @@
   <tabstop>enableSharingCheckBox</tabstop>
   <tabstop>addressAboutButton</tabstop>
   <tabstop>passwordEditButton</tabstop>
-  <tabstop>unattendedAboutButton</tabstop>
   <tabstop>enableUnattendedCheckBox</tabstop>
   <tabstop>unattendedPasswordButton</tabstop>
  </tabstops>
