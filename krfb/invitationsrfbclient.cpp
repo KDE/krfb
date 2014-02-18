@@ -41,10 +41,13 @@ struct PendingInvitationsRfbClient::Private
     bool askOnConnect;
 };
 
+static void clientGoneHookNoop(rfbClientPtr cl) { Q_UNUSED(cl); }
+
 PendingInvitationsRfbClient::PendingInvitationsRfbClient(rfbClientPtr client, QObject *parent) :
     PendingRfbClient(client, parent),
     d(new Private(client))
 {
+    d->client->clientGoneHook = clientGoneHookNoop;
     d->notifier = new QSocketNotifier(client->sock, QSocketNotifier::Read, this);
     d->notifier->setEnabled(true);
     connect(d->notifier, SIGNAL(activated(int)),
@@ -83,8 +86,6 @@ void PendingInvitationsRfbClient::processNewClient()
     }
 }
 
-static void clientGoneHookNoop(rfbClientPtr cl) { Q_UNUSED(cl); }
-
 void PendingInvitationsRfbClient::onSocketActivated()
 {
     //Process not only one, but all pending messages.
@@ -110,7 +111,6 @@ void PendingInvitationsRfbClient::onSocketActivated()
         //the clientGoneHook which in turn will remove this RfbClient instance
         //from the server manager and will call deleteLater() to delete it
         if (d->client->sock == -1) {
-            d->client->clientGoneHook = clientGoneHookNoop;
             kDebug() << "disconnected from socket signal";
             d->notifier->setEnabled(false);
             rfbClientConnectionGone(d->client);

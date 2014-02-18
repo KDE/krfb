@@ -223,6 +223,7 @@ void RfbServer::pendingClientFinished(RfbClient *client)
     kDebug();
     if (client) {
         RfbServerManager::instance()->addClient(client);
+        client->getRfbClientPtr()->clientGoneHook = clientGoneHook;
     }
 }
 
@@ -236,7 +237,6 @@ rfbNewClientAction RfbServer::newClientHook(rfbClientPtr cl)
     connect(pendingClient, SIGNAL(finished(RfbClient*)),
             server, SLOT(pendingClientFinished(RfbClient*)));
 
-    cl->clientGoneHook = clientGoneHook;
     return RFB_CLIENT_ON_HOLD;
 }
 

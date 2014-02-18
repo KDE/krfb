@@ -103,6 +103,11 @@ void RfbClient::closeConnection()
     rfbClientConnectionGone(d->client);
 }
 
+rfbClientPtr RfbClient::getRfbClientPtr()
+{
+    return d->client;
+}
+
 void RfbClient::handleKeyboardEvent(bool down, rfbKeySym keySym)
 {
     if (d->controlEnabled) {

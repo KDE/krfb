@@ -51,6 +51,7 @@ Q_SIGNALS:
 protected:
     friend class RfbServer; //the following event handling methods are called by RfbServer
 
+    rfbClientPtr getRfbClientPtr();
     virtual void handleKeyboardEvent(bool down, rfbKeySym keySym);
     virtual void handleMouseEvent(int buttonMask, int x, int y);
 
