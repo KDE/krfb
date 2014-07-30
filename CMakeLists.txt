@@ -32,6 +32,8 @@ set(CMAKE_MODULE_PATH
     ${CMAKE_MODULE_PATH}
 )
 
+find_package(LibVNCServer REQUIRED)
+
 macro_optional_find_package(TelepathyQt4)
 macro_log_feature(TelepathyQt4_FOUND "telepathy-qt" "Telepathy Qt Bindings" "http://telepathy.freedesktop.org" FALSE "0.9" "Needed to build Telepathy Tubes support.")
 
@@ -44,8 +46,6 @@ macro_bool_to_01(X11_XShm_FOUND HAVE_XSHM)
 include_directories ("${CMAKE_CURRENT_BINARY_DIR}/krfb"
                      "${CMAKE_CURRENT_SOURCE_DIR}/krfb"
                      "${CMAKE_CURRENT_SOURCE_DIR}/krfb/ui"
-                     "${CMAKE_CURRENT_SOURCE_DIR}/libvncserver/"
-                     "${CMAKE_CURRENT_BINARY_DIR}/libvncserver/"
 )
 
 if(Q_WS_X11)
@@ -54,9 +54,8 @@ if(Q_WS_X11)
   endif(NOT X11_XTest_FOUND)
 endif(Q_WS_X11)
 
-add_subdirectory(libvncserver)
 add_subdirectory(krfb)
-add_subdirectory (framebuffers)
+add_subdirectory(framebuffers)
 add_subdirectory(doc)
 
 if (NOT INSIDE_KDENETWORK)

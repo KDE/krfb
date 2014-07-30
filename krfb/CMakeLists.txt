@@ -20,6 +20,7 @@ target_link_libraries (krfbprivate
                        ${QT_QTCORE_LIBRARY}
                        ${QT_QTGUI_LIBRARY}
                        ${X11_X11_LIB}
+                       ${LIBVNCSERVER_LIBRARIES}
 )
 
 set_target_properties (krfbprivate PROPERTIES
@@ -103,6 +104,7 @@ target_link_libraries (krfb
                        ${QT_QTNETWORK_LIBRARY}
                        ${KDE4_KDNSSD_LIBS}
                        ${KDE4_KDEUI_LIBS}
+                       ${LIBVNCSERVER_LIBRARIES}
 )
 
 if(TelepathyQt4_FOUND)
