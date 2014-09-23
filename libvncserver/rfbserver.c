@@ -2428,6 +2428,11 @@ rfbProcessClientNormalMessage(rfbClientPtr cl)
           rfbCloseClient(cl);
           return;
       }
+      if (msg.ssc.scale == 0) {
+          rfbLogPerror("rfbProcessClientNormalMessage: will not accept a scale factor of zero");
+          rfbCloseClient(cl);
+          return;
+      }
       rfbStatRecordMessageRcvd(cl, msg.type, sz_rfbSetScaleMsg, sz_rfbSetScaleMsg);
       rfbLog("rfbSetScale(%d)\n", msg.ssc.scale);
       rfbScalingSetup(cl,cl->screen->width/msg.ssc.scale, cl->screen->height/msg.ssc.scale);
@@ -2441,6 +2446,11 @@ rfbProcessClientNormalMessage(rfbClientPtr cl)
           sz_rfbSetScaleMsg - 1)) <= 0) {
           if (n != 0)
             rfbLogPerror("rfbProcessClientNormalMessage: read");
+          rfbCloseClient(cl);
+          return;
+      }
+      if (msg.ssc.scale == 0) {
+          rfbLogPerror("rfbProcessClientNormalMessage: will not accept a scale factor of zero");
           rfbCloseClient(cl);
           return;
       }
