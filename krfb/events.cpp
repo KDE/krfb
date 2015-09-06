@@ -24,9 +24,9 @@
 
 #include "events.h"
 
-#include <QtGui/QApplication>
-#include <QtGui/QX11Info>
-#include <QtGui/QDesktopWidget>
+#include <QApplication>
+#include <QX11Info>
+#include <QDesktopWidget>
 #include <KGlobal>
 
 #include <X11/Xutil.h>

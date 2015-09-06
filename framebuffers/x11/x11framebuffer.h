@@ -13,6 +13,7 @@
 #include <QWidget>
 
 class X11FrameBuffer;
+typedef union _XEvent XEvent;
 
 class EvWidget: public QWidget
 {

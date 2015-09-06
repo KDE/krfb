@@ -22,7 +22,7 @@
 #include <QtCore/QSocketNotifier>
 #include <QApplication>
 #include <QClipboard>
-#include <KDebug>
+#include <QDebug>
 
 struct RfbServer::Private
 {
@@ -122,14 +122,14 @@ bool RfbServer::start()
         d->screen->authPasswdData = (void *)0;
     }
 
-    kDebug() << "Starting server. Listen port:" << listeningPort()
+    qDebug() << "Starting server. Listen port:" << listeningPort()
              << "Listen Address:" << listeningAddress()
              << "Password enabled:" << passwordRequired();
 
     rfbInitServer(d->screen);
 
     if (!rfbIsActive(d->screen)) {
-        kDebug() << "Failed to start server";
+        //qDebug() << "Failed to start server";
         rfbShutdownServer(d->screen, false);
         return false;
     };
@@ -187,13 +187,13 @@ void krfb_rfbSetCursorPosition(rfbScreenInfoPtr screen, rfbClientPtr client, int
     /* Inform all clients about this cursor movement. */
     iterator = rfbGetClientIterator(screen);
     while ((cl = rfbClientIteratorNext(iterator)) != NULL) {
-        cl->cursorWasMoved = TRUE;
+        cl->cursorWasMoved = true;
     }
     rfbReleaseClientIterator(iterator);
 
     /* The cursor was moved by this client, so don't send CursorPos. */
     if (client) {
-        client->cursorWasMoved = FALSE;
+        client->cursorWasMoved = false;
     }
 }
 
@@ -220,7 +220,7 @@ void RfbServer::onListenSocketActivated()
 
 void RfbServer::pendingClientFinished(RfbClient *client)
 {
-    kDebug();
+    //qDebug();
     if (client) {
         RfbServerManager::instance()->addClient(client);
         client->getRfbClientPtr()->clientGoneHook = clientGoneHook;
@@ -230,7 +230,7 @@ void RfbServer::pendingClientFinished(RfbClient *client)
 //static
 rfbNewClientAction RfbServer::newClientHook(rfbClientPtr cl)
 {
-    kDebug() << "New client";
+    //qDebug() << "New client";
     RfbServer *server = static_cast<RfbServer*>(cl->screen->screenData);
 
     PendingRfbClient *pendingClient = server->newClient(cl);
@@ -243,7 +243,7 @@ rfbNewClientAction RfbServer::newClientHook(rfbClientPtr cl)
 //static
 void RfbServer::clientGoneHook(rfbClientPtr cl)
 {
-    kDebug() << "client gone";
+    //qDebug() << "client gone";
     RfbClient *client = static_cast<RfbClient*>(cl->clientData);
 
     RfbServerManager::instance()->removeClient(client);

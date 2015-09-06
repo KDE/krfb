@@ -2,6 +2,8 @@ configure_file (${CMAKE_CURRENT_SOURCE_DIR}/config-krfb.h.cmake
                 ${CMAKE_CURRENT_BINARY_DIR}/config-krfb.h
 )
 
+include(GenerateExportHeader)
+
 #####################################
 # First target: libkrfbprivate - a library
 # for linking plugins against.
@@ -11,21 +13,23 @@ set (krfbprivate_SRCS
      framebufferplugin.cpp
 )
 
-kde4_add_library (krfbprivate
+add_library (krfbprivate
                   SHARED
                   ${krfbprivate_SRCS}
 )
+generate_export_header(krfbprivate BASE_NAME krfbprivate)
 
 target_link_libraries (krfbprivate
-                       ${QT_QTCORE_LIBRARY}
-                       ${QT_QTGUI_LIBRARY}
+                       Qt5::Core
+                       Qt5::Widgets
+                       Qt5::X11Extras
                        ${X11_X11_LIB}
                        ${LIBVNCSERVER_LIBRARIES}
 )
 
 set_target_properties (krfbprivate PROPERTIES
-                       VERSION ${GENERIC_LIB_VERSION}
-                       SOVERSION ${GENERIC_LIB_VERSION}
+                       VERSION 5
+                       SOVERSION 5.0
 )
 
 install (TARGETS krfbprivate
@@ -75,11 +79,11 @@ if(TelepathyQt4_FOUND)
     )
 endif()
 
-kde4_add_kcfg_files (krfb_SRCS
+kconfig_add_kcfg_files (krfb_SRCS
                      krfbconfig.kcfgc
 )
 
-kde4_add_ui_files (krfb_SRCS
+ki18n_wrap_ui (krfb_SRCS
                    ui/configtcp.ui
                    ui/configsecurity.ui
                    ui/connectionwidget.ui
@@ -87,10 +91,10 @@ kde4_add_ui_files (krfb_SRCS
 )
 
 if(TelepathyQt4_FOUND)
-    kde4_add_ui_files(krfb_SRCS ui/tubesconnectionwidget.ui)
+    ki18n_wrap_ui(krfb_SRCS ui/tubesconnectionwidget.ui)
 endif()
 
-kde4_add_executable (krfb
+add_executable (krfb
                      ${krfb_SRCS}
 )
 
@@ -101,9 +105,11 @@ target_link_libraries (krfb
                        ${X11_Xext_LIB}
                        ${X11_X11_LIB}
                        ${X11_Xdamage_LIB}
-                       ${QT_QTNETWORK_LIBRARY}
-                       ${KDE4_KDNSSD_LIBS}
-                       ${KDE4_KDEUI_LIBS}
+                       Qt5::Network
+                       KF5::DNSSD
+                       KF5::KDELibs4Support
+                       KF5::Wallet
+                       KF5::WidgetsAddons
                        ${LIBVNCSERVER_LIBRARIES}
 )
 

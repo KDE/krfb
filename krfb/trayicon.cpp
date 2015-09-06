@@ -26,32 +26,32 @@
 #include <KActionCollection>
 #include <KDialog>
 #include <KGlobal>
+#include <KIcon>
 #include <KLocale>
-#include <KMenu>
+#include <QMenu>
 #include <KStandardAction>
-#include <KDebug>
-
+#include <KToggleAction>
 
 class ClientActions
 {
 public:
-    ClientActions(RfbClient *client, KMenu *menu, QAction *before);
+    ClientActions(RfbClient *client, QMenu *menu, QAction *before);
     virtual ~ClientActions();
 
 private:
-    KMenu *m_menu;
+    QMenu *m_menu;
     QAction *m_title;
     QAction *m_disconnectAction;
     QAction *m_enableControlAction;
     QAction *m_separator;
 };
 
-ClientActions::ClientActions(RfbClient* client, KMenu* menu, QAction* before)
+ClientActions::ClientActions(RfbClient* client, QMenu* menu, QAction* before)
     : m_menu(menu)
 {
-    m_title = m_menu->addTitle(client->name(), before);
+    m_title = m_menu->insertSection(before, client->name());
 
-    m_disconnectAction = new KAction(i18n("Disconnect"), m_menu);
+    m_disconnectAction = new QAction(i18n("Disconnect"), m_menu);
     m_menu->insertAction(before, m_disconnectAction);
 
     QObject::connect(m_disconnectAction, SIGNAL(triggered()), client, SLOT(closeConnection()));
@@ -74,8 +74,6 @@ ClientActions::ClientActions(RfbClient* client, KMenu* menu, QAction* before)
 
 ClientActions::~ClientActions()
 {
-    kDebug();
-
     m_menu->removeAction(m_title);
     delete m_title;
 
@@ -106,14 +104,12 @@ TrayIcon::TrayIcon(QWidget *mainWindow)
     connect(RfbServerManager::instance(), SIGNAL(clientDisconnected(RfbClient*)),
             this, SLOT(onClientDisconnected(RfbClient*)));
 
-    m_aboutAction = KStandardAction::aboutApp(this, SLOT(showAbout()), actionCollection());
+    m_aboutAction = KStandardAction::aboutApp(this, SLOT(showAbout()), this);
     contextMenu()->addAction(m_aboutAction);
 }
 
 void TrayIcon::onClientConnected(RfbClient* client)
 {
-    kDebug();
-
     if (m_clientActions.isEmpty()) { //first client connected
         setIconByName("krfb");
         setToolTipTitle(i18n("Desktop Sharing - connected with %1", client->name()));
@@ -127,8 +123,6 @@ void TrayIcon::onClientConnected(RfbClient* client)
 
 void TrayIcon::onClientDisconnected(RfbClient* client)
 {
-    kDebug();
-
     ClientActions *actions = m_clientActions.take(client);
     delete actions;
 
@@ -144,9 +138,10 @@ void TrayIcon::onClientDisconnected(RfbClient* client)
 
 void TrayIcon::showAbout()
 {
-    KDialog *dlg = new KAboutApplicationDialog(KGlobal::mainComponent().aboutData());
-    dlg->setAttribute(Qt::WA_DeleteOnClose, true);
-    dlg->show();
+//  TODO: Port to KF5 equivalent
+//     KDialog *dlg = new KAboutApplicationDialog(KGlobal::mainComponent().aboutData());
+//     dlg->setAttribute(Qt::WA_DeleteOnClose, true);
+//     dlg->show();
 }
 
 #include "trayicon.moc"

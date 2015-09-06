@@ -23,8 +23,7 @@
 #include "sockethelpers.h"
 #include "events.h"
 #include <QtCore/QSocketNotifier>
-#include <KDebug>
-#include <KNotification>
+#include <QDebug>
 #include <poll.h>
 #include <strings.h> //for bzero()
 
@@ -54,7 +53,7 @@ RfbClient::RfbClient(rfbClientPtr client, QObject* parent)
 
 RfbClient::~RfbClient()
 {
-    kDebug();
+    //qDebug();
     delete d;
 }
 
@@ -140,7 +139,7 @@ void RfbClient::onSocketActivated()
         //the clientGoneHook which in turn will remove this RfbClient instance
         //from the server manager and will call deleteLater() to delete it
         if (d->client->sock == -1) {
-            kDebug() << "disconnected from socket signal";
+            //qDebug() << "disconnected from socket signal";
             d->notifier->setEnabled(false);
             rfbClientConnectionGone(d->client);
             break;
@@ -159,7 +158,7 @@ void RfbClient::update()
     //the clientGoneHook which in turn will remove this RfbClient instance
     //from the server manager and will call deleteLater() to delete it
     if (d->client->sock == -1) {
-        kDebug() << "disconnected during update";
+        //qDebug() << "disconnected during update";
         d->notifier->setEnabled(false);
         rfbClientConnectionGone(d->client);
     }
@@ -178,7 +177,7 @@ PendingRfbClient::~PendingRfbClient()
 
 void PendingRfbClient::accept(RfbClient *newClient)
 {
-    kDebug() << "accepted connection";
+    //qDebug() << "accepted connection";
 
     m_rfbClient->clientData = newClient;
     newClient->setOnHold(false);
@@ -191,7 +190,7 @@ static void clientGoneHookNoop(rfbClientPtr cl) { Q_UNUSED(cl); }
 
 void PendingRfbClient::reject()
 {
-    kDebug() << "refused connection";
+    //qDebug() << "refused connection";
 
     //override the clientGoneHook that was previously set by RfbServer
     m_rfbClient->clientGoneHook = clientGoneHookNoop;

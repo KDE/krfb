@@ -21,15 +21,15 @@
 #ifndef LIB_KRFB_FRAMEBUFFERPLUGIN_H
 #define LIB_KRFB_FRAMEBUFFERPLUGIN_H
 
-#include <kdemacros.h>
+#include "krfbprivate_export.h"
 
 #include <QtCore/QVariantList>
+#include <QWidget>
 
-#include <QtGui/QWidget>
 
 class FrameBuffer;
 
-class KDE_EXPORT FrameBufferPlugin : public QObject
+class KRFBPRIVATE_EXPORT FrameBufferPlugin : public QObject
 {
     Q_OBJECT
 

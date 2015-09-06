@@ -7,14 +7,15 @@ set (krfb_framebuffer_qt_SRCS
      qtframebufferplugin.cpp
 )
 
-kde4_add_plugin (krfb_framebuffer_qt
+add_library(krfb_framebuffer_qt
+ MODULE 
                  ${krfb_framebuffer_qt_SRCS}
 )
 
 target_link_libraries (krfb_framebuffer_qt
-                       ${QT_QTCORE_LIBRARY}
-                       ${QT_QTGUI_LIBRARY}
-                       ${KDE4_KDEUI_LIBS}
+                       Qt5::Core
+                       Qt5::Gui
+                       KF5::KDELibs4Support
                        krfbprivate
 )
 

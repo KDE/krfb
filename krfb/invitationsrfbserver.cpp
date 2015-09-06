@@ -23,16 +23,18 @@
 #include "krfbconfig.h"
 #include "rfbservermanager.h"
 #include <QtCore/QTimer>
-#include <QtGui/QApplication>
+#include <QApplication>
 #include <QtNetwork/QHostInfo>
-#include <KNotification>
+#include <QDebug>
+
 #include <KLocale>
-#include <KMessageBox>
 #include <KUser>
 #include <KRandom>
 #include <KStringHandler>
 #include <KWallet/Wallet>
-#include <DNSSD/PublicService>
+#include <KGlobal>
+
+#include <dnssd/publicservice.h>
 using KWallet::Wallet;
 
 //static
@@ -42,7 +44,7 @@ InvitationsRfbServer *InvitationsRfbServer::instance;
 void InvitationsRfbServer::init()
 {
     instance = new InvitationsRfbServer;
-    instance->m_publicService = new DNSSD::PublicService(
+    instance->m_publicService = new KDNSSD::PublicService(
             i18n("%1@%2 (shared desktop)",
                 KUser().loginName(),
                 QHostInfo::localHostName()),
@@ -170,7 +172,7 @@ void InvitationsRfbServer::walletOpened(bool opened)
 
     } else {
 
-        kDebug() << "Could not open KWallet, Falling back to config file";
+        qDebug() << "Could not open KWallet, Falling back to config file";
         KSharedConfigPtr config = KGlobal::config();
         KConfigGroup krfbConfig(config,"Security");
 

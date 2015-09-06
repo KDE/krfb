@@ -23,19 +23,19 @@
 
 #include "framebuffer.h"
 
-#include <kdemacros.h>
+#include "krfbprivate_export.h"
 
 #include <QtCore/QMap>
 #include <QtCore/QObject>
 #include <QtCore/QSharedPointer>
 #include <QtCore/QWeakPointer>
 
-#include <QtGui/QWidget>
+#include <QWidget>
 
 class FrameBufferPlugin;
 class KPluginFactory;
 
-class KDE_EXPORT FrameBufferManager : public QObject
+class KRFBPRIVATE_EXPORT FrameBufferManager : public QObject
 {
     Q_OBJECT
     friend class FrameBufferManagerStatic;

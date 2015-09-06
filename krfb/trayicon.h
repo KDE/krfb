@@ -19,7 +19,6 @@
 #define TRAYICON_H
 
 #include <KStatusNotifierItem>
-#include <KToggleAction>
 
 class KDialog;
 class RfbClient;
@@ -42,7 +41,7 @@ public Q_SLOTS:
     void showAbout();
 
 private:
-    KAction *m_aboutAction;
+    QAction *m_aboutAction;
     QHash<RfbClient*, ClientActions*> m_clientActions;
 };
 

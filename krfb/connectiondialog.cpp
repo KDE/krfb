@@ -21,12 +21,11 @@
 
 #include "connectiondialog.h"
 
-#include <KIconLoader>
+#include <KIcon>
 #include <KLocale>
 #include <KStandardGuiItem>
 
-#include <QtGui/QCheckBox>
-#include <QtGui/QLabel>
+#include <QCheckBox>
 
 template <typename UI>
 ConnectionDialog<UI>::ConnectionDialog(QWidget *parent)

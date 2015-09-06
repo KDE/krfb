@@ -6,7 +6,7 @@
 # Redistribution and use is allowed according to the terms of the BSD license.
 # For details see the accompanying COPYING-CMAKE-SCRIPTS file.
 
-INCLUDE(CheckPointerMember)
+INCLUDE(CheckStructHasMember)
 
 IF (LIBVNCSERVER_INCLUDE_DIR AND LIBVNCSERVER_LIBRARIES)
     # Already in cache, be silent
@@ -25,7 +25,7 @@ FIND_LIBRARY(LIBVNCCLIENT_LIBRARIES NAMES vncclient libvncclient)
 
 IF (LIBVNCSERVER_INCLUDE_DIR AND LIBVNCSERVER_LIBRARIES)
    SET(CMAKE_REQUIRED_INCLUDES "${LIBVNCSERVER_INCLUDE_DIR}" "${CMAKE_REQUIRED_INCLUDES}")
-   CHECK_POINTER_MEMBER(rfbClient* GotXCutText rfb/rfbclient.h LIBVNCSERVER_FOUND)
+   CHECK_STRUCT_HAS_MEMBER("struct _rfbClient" GotXCutText rfb/rfbclient.h LIBVNCSERVER_FOUND)
 ENDIF (LIBVNCSERVER_INCLUDE_DIR AND LIBVNCSERVER_LIBRARIES)
 
 IF (LIBVNCSERVER_FOUND)

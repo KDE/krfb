@@ -26,7 +26,7 @@ namespace KWallet {
     class Wallet;
 }
 
-namespace DNSSD {
+namespace KDNSSD {
     class PublicService;
 }
 
@@ -60,7 +60,7 @@ private Q_SLOTS:
     void walletOpened(bool);
 
 private:
-    DNSSD::PublicService *m_publicService;
+    KDNSSD::PublicService *m_publicService;
     bool m_allowUnattendedAccess;
     QString m_desktopPassword;
     QString m_unattendedPassword;

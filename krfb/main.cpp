@@ -19,18 +19,16 @@
 #include "trayicon.h"
 #include "invitationsrfbserver.h"
 
-#include <KAboutApplicationDialog>
-#include <KAboutData>
-#include <KAction>
+#include <K4AboutData>
 #include <KUniqueApplication>
 #include <KCmdLineArgs>
-#include <KDebug>
+#include <QDebug>
 #include <KLocale>
 #include <KMessageBox>
-#include <KNotification>
 
-#include <QtGui/QPixmap>
-#include <QtGui/qwindowdefs.h>
+#include <QPixmap>
+#include <qwindowdefs.h>
+#include <QX11Info>
 
 #ifdef KRFB_WITH_TELEPATHY_TUBES
 # include "tubesrfbserver.h"
@@ -39,6 +37,7 @@
 #include <signal.h>
 #include <X11/extensions/XTest.h>
 
+static const char KRFB_VERSION[] = I18N_NOOP("5.0");
 static const char description[] = I18N_NOOP("VNC-compatible server to share "
                                   "KDE desktops");
 
@@ -61,8 +60,8 @@ static bool checkX11Capabilities()
 
 int main(int argc, char *argv[])
 {
-    KAboutData aboutData("krfb", 0, ki18n("Desktop Sharing"), KDE_VERSION_STRING,
-                         ki18n(description), KAboutData::License_GPL,
+    K4AboutData aboutData("krfb", 0, ki18n("Desktop Sharing"), KRFB_VERSION,
+                         ki18n(description), K4AboutData::License_GPL,
                          ki18n("(c) 2009-2010, Collabora Ltd.\n"
                                "(c) 2007, Alessandro Praduroux\n"
                                "(c) 2001-2003, Tim Jansen\n"

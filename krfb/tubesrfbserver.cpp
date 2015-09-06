@@ -20,7 +20,7 @@
 #include "tubesrfbclient.h"
 #include "sockethelpers.h"
 
-#include <KDebug>
+#include <QDebug>
 #include <KRandom>
 
 #include <TelepathyQt/Debug>
@@ -62,7 +62,7 @@ void TubesRfbServer::init()
 TubesRfbServer::TubesRfbServer(QObject *parent)
     : RfbServer(parent), d(new Private)
 {
-    kDebug() << "starting";
+    //qDebug() << "starting";
 
     Tp::enableDebug(true);
     Tp::enableWarnings(true);
@@ -156,7 +156,7 @@ TubesRfbServer::TubesRfbServer(QObject *parent)
 
 TubesRfbServer::~TubesRfbServer()
 {
-    kDebug();
+    //qDebug();
     stop();
     delete d;
 }
@@ -179,7 +179,7 @@ void TubesRfbServer::startAndCheck()
         }
 
         if (!ok) {
-            kError() << "Failed to start tubes rfb server";
+            qCritical() << "Failed to start tubes rfb server";
             return;
         }
     }
@@ -191,12 +191,12 @@ void TubesRfbServer::startAndCheck()
 
 void TubesRfbServer::onTubeRequested()
 {
-    kDebug() << "Got a tube";
+    //qDebug() << "Got a tube";
 }
 
 void TubesRfbServer::onTubeClosed()
 {
-    kDebug() << "tube closed";
+    //qDebug() << "tube closed";
 }
 
 void TubesRfbServer::onNewTcpConnection(const QHostAddress & sourceAddress,
@@ -208,11 +208,11 @@ void TubesRfbServer::onNewTcpConnection(const QHostAddress & sourceAddress,
     Q_UNUSED(account);
     Q_UNUSED(tube);
 
-    kDebug() << "CM signaled tube connection from" << sourceAddress << ":" << sourcePort;
+    //qDebug() << "CM signaled tube connection from" << sourceAddress << ":" << sourcePort;
 
     d->contactsPerPort[sourcePort] = contact;
     if (d->clientsPerPort.contains(sourcePort)) {
-        kDebug() << "client already exists";
+        //qDebug() << "client already exists";
         d->clientsPerPort[sourcePort]->setContact(contact);
     }
 }
@@ -229,7 +229,7 @@ void TubesRfbServer::onTcpConnectionClosed(const QHostAddress& sourceAddress,
     Q_UNUSED(contact);
     Q_UNUSED(tube);
 
-    kDebug() << "Connection from" << sourceAddress << ":" << sourcePort << "closed."
+    //qDebug() << "Connection from" << sourceAddress << ":" << sourcePort << "closed."
              << error << message;
 
     d->clientsPerPort.remove(sourcePort);
@@ -241,11 +241,11 @@ PendingRfbClient* TubesRfbServer::newClient(rfbClientPtr client)
     PendingTubesRfbClient *c = new PendingTubesRfbClient(client, this);
     quint16 port = peerPort(client->sock);
 
-    kDebug() << "new tube client on port" << port;
+    //qDebug() << "new tube client on port" << port;
 
     d->clientsPerPort[port] = c;
     if (d->contactsPerPort.contains(port)) {
-        kDebug() << "already have a contact";
+        //qDebug() << "already have a contact";
         c->setContact(d->contactsPerPort[port]);
     }
 

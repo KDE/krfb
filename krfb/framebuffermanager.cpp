@@ -23,7 +23,7 @@
 #include "framebufferplugin.h"
 #include "krfbconfig.h"
 
-#include <KDebug>
+#include <QDebug>
 #include <KGlobal>
 #include <KServiceTypeTrader>
 
@@ -39,26 +39,26 @@ K_GLOBAL_STATIC(FrameBufferManagerStatic, frameBufferManagerStatic)
 
 FrameBufferManager::FrameBufferManager()
 {
-    kDebug();
+    //qDebug();
 
     loadPlugins();
 }
 
 FrameBufferManager::~FrameBufferManager()
 {
-    kDebug();
+    //qDebug();
 }
 
 FrameBufferManager *FrameBufferManager::instance()
 {
-    kDebug();
+    //qDebug();
 
     return &frameBufferManagerStatic->instance;
 }
 
 void FrameBufferManager::loadPlugins()
 {
-    kDebug();
+    //qDebug();
 
     // Load the all the plugin factories here, for use later.
     KService::List offers = KServiceTypeTrader::self()->query("krfb/framebuffer");
@@ -72,34 +72,34 @@ void FrameBufferManager::loadPlugins()
         KPluginFactory *factory = KPluginLoader(service->library()).factory();
 
         if (!factory) {
-            kWarning() << "KPluginFactory could not load the plugin:" << service->library();
+            qWarning() << "KPluginFactory could not load the plugin:" << service->library();
             continue;
         }
 
         FrameBufferPlugin *plugin = factory->create<FrameBufferPlugin>(this);
 
         if (plugin) {
-            kDebug() << "Loaded plugin:" << service->name();
+            //qDebug() << "Loaded plugin:" << service->name();
             m_plugins.insert(service->library(), plugin);
         } else {
-            kDebug() << error;
+            //qDebug() << error;
         }
     }
 }
 
 QSharedPointer<FrameBuffer> FrameBufferManager::frameBuffer(WId id)
 {
-    kDebug();
+    //qDebug();
 
     // See if there is still an existing framebuffer to this WId.
     if (m_frameBuffers.contains(id)) {
         QWeakPointer<FrameBuffer> weakFrameBuffer = m_frameBuffers.value(id);
 
         if (weakFrameBuffer) {
-            kDebug() << "Found cached frame buffer.";
+            //qDebug() << "Found cached frame buffer.";
             return weakFrameBuffer.toStrongRef();
         } else {
-            kDebug() << "Found deleted cached frame buffer. Don't use.";
+            //qDebug() << "Found deleted cached frame buffer. Don't use.";
             m_frameBuffers.remove(id);
         }
     }
@@ -110,7 +110,7 @@ QSharedPointer<FrameBuffer> FrameBufferManager::frameBuffer(WId id)
     while (iter != m_plugins.constEnd()) {
 
         if (iter.key() == KrfbConfig::preferredFrameBufferPlugin()) {
-            kDebug() << "Using FrameBuffer:" << KrfbConfig::preferredFrameBufferPlugin();
+            //qDebug() << "Using FrameBuffer:" << KrfbConfig::preferredFrameBufferPlugin();
 
             QSharedPointer<FrameBuffer> frameBuffer(iter.value()->frameBuffer(id));
 
@@ -125,7 +125,7 @@ QSharedPointer<FrameBuffer> FrameBufferManager::frameBuffer(WId id)
     }
 
     // No valid framebuffer plugin found.
-    kDebug() << "No valid framebuffer found. returning null.";
+    //qDebug() << "No valid framebuffer found. returning null.";
     return QSharedPointer<FrameBuffer>();
 }
 

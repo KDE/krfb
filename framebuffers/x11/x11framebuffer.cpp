@@ -17,7 +17,7 @@
 #include <QDesktopWidget>
 
 #include <KApplication>
-#include <KDebug>
+#include <QDebug>
 
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
@@ -56,7 +56,7 @@ X11FrameBuffer::X11FrameBuffer(WId id, QObject *parent)
 {
 #ifdef HAVE_XSHM
     d->useShm = XShmQueryExtension(QX11Info::display());
-    kDebug() << "shm: " << d->useShm;
+    //qDebug() << "shm: " << d->useShm;
 #else
     d->useShm = false;
 #endif
@@ -94,7 +94,7 @@ X11FrameBuffer::X11FrameBuffer(WId id, QObject *parent)
         ;
     }
 
-    kDebug() << "Got image. bpp: " << d->framebufferImage->bits_per_pixel
+    qDebug() << "Got image. bpp: " << d->framebufferImage->bits_per_pixel
              << ", depth: " << d->framebufferImage->depth
              << ", padded width: " << d->framebufferImage->bytes_per_line
              << " (sent: " << d->framebufferImage->width * 4 << ")"
@@ -207,25 +207,25 @@ void X11FrameBuffer::cleanupRects()
     QList<QRect> cpy = tiles;
     bool inserted = false;
     tiles.clear();
-//     kDebug() << "before cleanup: " << cpy.size();
+//     //qDebug() << "before cleanup: " << cpy.size();
     foreach(const QRect & r, cpy) {
         if (tiles.size() > 0) {
             for (int i = 0; i < tiles.size(); i++) {
-                //             kDebug() << r << tiles[i];
+                //             //qDebug() << r << tiles[i];
                 if (r.intersects(tiles[i])) {
                     tiles[i] |= r;
                     inserted = true;
                     break;
-                    //                 kDebug() << "merged into " << tiles[i];
+                    //                 //qDebug() << "merged into " << tiles[i];
                 }
             }
 
             if (!inserted) {
                 tiles.append(r);
-                //             kDebug() << "appended " << r;
+                //             //qDebug() << "appended " << r;
             }
         } else {
-            //         kDebug() << "appended " << r;
+            //         //qDebug() << "appended " << r;
             tiles.append(r);
         }
     }
@@ -250,7 +250,7 @@ void X11FrameBuffer::cleanupRects()
         }
     }
 
-//     kDebug() << "after cleanup: " << tiles.size();
+//     //qDebug() << "after cleanup: " << tiles.size();
 }
 
 void X11FrameBuffer::acquireEvents()
@@ -258,11 +258,13 @@ void X11FrameBuffer::acquireEvents()
 
     XEvent ev;
 
+#ifdef HAVE_XDAMAGE
     while (XCheckTypedEvent(QX11Info::display(), d->xdamageBaseEvent + XDamageNotify, &ev)) {
         handleXDamage(&ev);
     }
 
     XDamageSubtract(QX11Info::display(), d->damage, None, None);
+#endif
 }
 
 QList< QRect > X11FrameBuffer::modifiedTiles()
@@ -283,7 +285,7 @@ QList< QRect > X11FrameBuffer::modifiedTiles()
 #ifdef HAVE_XSHM
 
             foreach(const QRect & r, tiles) {
-//                 kDebug() << r;
+//                 //qDebug() << r;
                 gl |= r;
                 int y = r.y();
                 int x = r.x();
@@ -298,7 +300,7 @@ QList< QRect > X11FrameBuffer::modifiedTiles()
                             x = d->framebufferImage->width - d->updateTile->width;
                         }
 
-//                         kDebug() << "x: " << x << " (" << r.x() << ") y: " << y << " (" << r.y() << ") " << r;
+//                         //qDebug() << "x: " << x << " (" << r.x() << ") y: " << y << " (" << r.y() << ") " << r;
                         XShmGetImage(QX11Info::display(), win, d->updateTile, x, y, AllPlanes);
                         int pxsize =  d->framebufferImage->bits_per_pixel / 8;
                         char *dest = fb + ((d->framebufferImage->bytes_per_line * y) + (x * pxsize));
@@ -336,8 +338,8 @@ QList< QRect > X11FrameBuffer::modifiedTiles()
         }
     }
 
-//     kDebug() << "tot: " << gl;
-//     kDebug() << tiles.size();
+//     //qDebug() << "tot: " << gl;
+//     //qDebug() << tiles.size();
     ret = tiles;
     tiles.clear();
     return ret;

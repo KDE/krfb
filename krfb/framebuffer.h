@@ -12,19 +12,19 @@
 
 #include "rfb.h"
 
-#include <kdemacros.h>
+#include "krfbprivate_export.h"
 
 #include <QtCore/QObject>
 #include <QtCore/QRect>
 #include <QtCore/QList>
+#include <QWidget>
 
-#include <QtGui/QWidget>
 
 class FrameBuffer;
 /**
     @author Alessandro Praduroux <pradu@pradu.it>
 */
-class KDE_EXPORT FrameBuffer : public QObject
+class KRFBPRIVATE_EXPORT FrameBuffer : public QObject
 {
     Q_OBJECT
 public:

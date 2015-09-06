@@ -25,11 +25,11 @@
 #include "sockethelpers.h"
 #include "krfbconfig.h"
 #include <QtCore/QTimer>
-#include <QtGui/QApplication>
-#include <QtGui/QDesktopWidget>
+#include <QApplication>
+#include <QDesktopWidget>
 #include <QtNetwork/QHostInfo>
 #include <KGlobal>
-#include <KDebug>
+#include <QDebug>
 #include <KLocale>
 #include <KUser>
 #include <KNotification>
@@ -114,7 +114,7 @@ RfbServerManager::~RfbServerManager()
 
 void RfbServerManager::init()
 {
-    kDebug();
+    //qDebug();
 
     d->fb = FrameBufferManager::instance()->frameBuffer(QApplication::desktop()->winId());
     d->myCursor = rfbMakeXCursor(19, 19, (char *) cur, (char *) mask);
@@ -147,7 +147,7 @@ void RfbServerManager::updateScreens()
 
 void RfbServerManager::cleanup()
 {
-    kDebug();
+    //qDebug();
 
     //copy because d->servers is going to be modified while we delete the servers
     QSet<RfbServer*> servers = d->servers;
@@ -187,7 +187,7 @@ rfbScreenInfoPtr RfbServerManager::newScreen()
             bpp = 4;
         }
 
-        kDebug() << "bpp: " << bpp;
+        //qDebug() << "bpp: " << bpp;
 
         rfbLogEnable(0);
 
@@ -206,7 +206,7 @@ rfbScreenInfoPtr RfbServerManager::newScreen()
 void RfbServerManager::addClient(RfbClient* cc)
 {
     if (d->clients.size() == 0) {
-        kDebug() << "Starting framebuffer monitor";
+        //qDebug() << "Starting framebuffer monitor";
         d->fb->startMonitor();
         d->rfbUpdateTimer.start(50);
     }
@@ -222,7 +222,7 @@ void RfbServerManager::removeClient(RfbClient* cc)
 {
     d->clients.remove(cc);
     if (d->clients.size() == 0) {
-        kDebug() << "Stopping framebuffer monitor";
+        //qDebug() << "Stopping framebuffer monitor";
         d->fb->stopMonitor();
         d->rfbUpdateTimer.stop();
     }
