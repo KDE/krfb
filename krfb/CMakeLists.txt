@@ -148,7 +148,7 @@ endif()
 
 ########### install files ###############
 
-install (PROGRAMS krfb.desktop
+install (PROGRAMS org.kde.krfb.desktop
          DESTINATION ${XDG_APPS_INSTALL_DIR}
 )
 
