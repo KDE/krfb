@@ -35,7 +35,6 @@ add_definitions(${QT_DEFINITIONS} ${QT_QTDBUS_DEFINITIONS})
 add_definitions(-DQT_USE_FAST_CONCATENATION -DQT_USE_FAST_OPERATOR_PLUS)
 include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} )
 
-# set(IS_KTP_INTERNAL_MODULE TRUE)
 set(CMAKE_MODULE_PATH
     "${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules"
     ${CMAKE_MODULE_PATH}
@@ -43,11 +42,15 @@ set(CMAKE_MODULE_PATH
 
 find_package(LibVNCServer REQUIRED)
 
-# macro_optional_find_package(TelepathyQt4)
-# macro_log_feature(TelepathyQt4_FOUND "telepathy-qt" "Telepathy Qt Bindings" "http://telepathy.freedesktop.org" FALSE "0.9" "Needed to build Telepathy Tubes support.")
+find_package(TelepathyQt5 0.9.3)
+set_package_properties(TelepathyQt5 PROPERTIES
+	PURPOSE "Needed to build Telepathy Tubes support."
+	URL "http://telepathy.freedesktop.org")
 
-# macro_optional_find_package(KTp)
-# macro_log_feature(KTP_FOUND "KTP" "KDE Telepathy" "https://projects.kde.org/projects/extragear/network/telepathy" FALSE "" "Needed to build KDE IM Contacts Display in KRFB.")
+find_package(KTp)
+set_package_properties(KTp PROPERTIES
+	PURPOSE "Needed to build KDE IM Contacts Display in KRFB."
+	URL "https://projects.kde.org/projects/extragear/network/telepathy")
 
 if (HAVE_XDAMAGE)
 set(X11_Xdamage_FOUND 1)
