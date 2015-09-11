@@ -27,10 +27,11 @@
 #include <QtCore/QTimer>
 #include <QApplication>
 #include <QDesktopWidget>
+#include <QGlobalStatic>
 #include <QtNetwork/QHostInfo>
-#include <KGlobal>
 #include <QDebug>
-#include <KLocale>
+
+#include <KLocalizedString>
 #include <KUser>
 #include <KNotification>
 
@@ -82,7 +83,7 @@ struct RfbServerManagerStatic
     RfbServerManager server;
 };
 
-K_GLOBAL_STATIC(RfbServerManagerStatic, s_instance)
+Q_GLOBAL_STATIC(RfbServerManagerStatic, s_instance)
 
 RfbServerManager* RfbServerManager::instance()
 {

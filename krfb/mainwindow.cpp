@@ -15,14 +15,14 @@
 #include "ui_configsecurity.h"
 
 #include <KConfigDialog>
-#include <QIcon>
-#include <KLocale>
+#include <KLocalizedString>
 #include <KMessageBox>
 #include <KStandardAction>
 #include <KActionCollection>
 #include <KLineEdit>
 #include <KNewPasswordDialog>
 
+#include <QIcon>
 #include <QWidget>
 #include <QSizePolicy>
 #include <QtNetwork/QNetworkInterface>

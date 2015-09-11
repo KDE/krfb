@@ -20,7 +20,7 @@
 #include "krfbconfig.h"
 #include "connectiondialog.h"
 #include <KNotification>
-#include <KLocale>
+#include <KLocalizedString>
 
 QString TubesRfbClient::name() const
 {

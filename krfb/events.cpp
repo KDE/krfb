@@ -27,7 +27,7 @@
 #include <QApplication>
 #include <QX11Info>
 #include <QDesktopWidget>
-#include <KGlobal>
+#include <QGlobalStatic>
 
 #include <X11/Xutil.h>
 #include <X11/keysym.h>
@@ -60,7 +60,7 @@ private:
     void init();
 };
 
-K_GLOBAL_STATIC(EventData, data)
+Q_GLOBAL_STATIC(EventData, data)
 
 EventData::EventData()
 {

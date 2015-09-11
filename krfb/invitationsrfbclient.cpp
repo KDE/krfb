@@ -24,10 +24,11 @@
 #include "krfbconfig.h"
 #include "sockethelpers.h"
 #include "connectiondialog.h"
-#include <KNotification>
-#include <KLocale>
-#include <QDebug>
 
+#include <KNotification>
+#include <KLocalizedString>
+
+#include <QDebug>
 #include <QtCore/QSocketNotifier>
 #include <poll.h>
 

@@ -27,12 +27,11 @@
 #include <QtNetwork/QHostInfo>
 #include <QDebug>
 
-#include <KLocale>
+#include <KLocalizedString>
 #include <KUser>
 #include <KRandom>
 #include <KStringHandler>
 #include <KWallet/Wallet>
-#include <KGlobal>
 
 #include <dnssd/publicservice.h>
 using KWallet::Wallet;
@@ -113,8 +112,7 @@ InvitationsRfbServer::InvitationsRfbServer()
 {
     m_desktopPassword = readableRandomString(4)+"-"+readableRandomString(3);
     m_unattendedPassword = readableRandomString(4)+"-"+readableRandomString(3);
-    KSharedConfigPtr config = KGlobal::config();
-    KConfigGroup krfbConfig(config,"Security");
+    KConfigGroup krfbConfig(KSharedConfig::openConfig(),"Security");
     m_allowUnattendedAccess = krfbConfig.readEntry(
             "allowUnattendedAccess", QVariant(false)).toBool();
 }
@@ -122,8 +120,7 @@ InvitationsRfbServer::InvitationsRfbServer()
 InvitationsRfbServer::~InvitationsRfbServer()
 {
     stop();
-    KSharedConfigPtr config = KGlobal::config();
-    KConfigGroup krfbConfig(config,"Security");
+    KConfigGroup krfbConfig(KSharedConfig::openConfig(),"Security");
     krfbConfig.writeEntry("allowUnattendedAccess",m_allowUnattendedAccess);
     if(m_wallet && m_wallet->isOpen()) {
 
@@ -173,8 +170,7 @@ void InvitationsRfbServer::walletOpened(bool opened)
     } else {
 
         qDebug() << "Could not open KWallet, Falling back to config file";
-        KSharedConfigPtr config = KGlobal::config();
-        KConfigGroup krfbConfig(config,"Security");
+        KConfigGroup krfbConfig(KSharedConfig::openConfig(),"Security");
 
         desktopPassword = KStringHandler::obscure(krfbConfig.readEntry(
                 "desktopPassword", QString()));

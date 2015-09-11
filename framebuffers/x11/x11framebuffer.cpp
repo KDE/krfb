@@ -16,7 +16,6 @@
 #include <QApplication>
 #include <QDesktopWidget>
 
-#include <KApplication>
 #include <QDebug>
 
 #include <X11/Xlib.h>
@@ -103,7 +102,7 @@ X11FrameBuffer::X11FrameBuffer(WId id, QObject *parent)
     fb = d->framebufferImage->data;
 #ifdef HAVE_XDAMAGE
     d->ev = new EvWidget(this);
-    kapp->installX11EventFilter(d->ev);
+    qApp->installX11EventFilter(d->ev);
 #endif
 }
 
@@ -112,7 +111,7 @@ X11FrameBuffer::~X11FrameBuffer()
 {
     XDestroyImage(d->framebufferImage);
 #ifdef HAVE_XDAMAGE
-    kapp->removeX11EventFilter(d->ev);
+    qApp->removeX11EventFilter(d->ev);
 #endif
 #ifdef HAVE_XSHM
     XShmDetach(QX11Info::display(), &d->shminfo);
@@ -275,7 +274,7 @@ QList< QRect > X11FrameBuffer::modifiedTiles()
         return ret;
     }
 
-    kapp->processEvents(); // try to make sure every damage event goes trough;
+    qApp->processEvents(); // try to make sure every damage event goes trough;
     cleanupRects();
     QRect gl;
 

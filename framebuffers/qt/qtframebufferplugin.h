@@ -23,8 +23,6 @@
 
 #include "framebufferplugin.h"
 
-#include <kdemacros.h>
-
 #include <QWidget>
 
 class FrameBuffer;

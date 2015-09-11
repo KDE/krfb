@@ -22,13 +22,13 @@
 #include "rfbservermanager.h"
 #include "rfbclient.h"
 
+#include <QIcon>
+#include <QMenu>
+
 #include <KAboutApplicationDialog>
 #include <KActionCollection>
 #include <KDialog>
-#include <KGlobal>
-#include <QIcon>
-#include <KLocale>
-#include <QMenu>
+#include <KLocalizedString>
 #include <KStandardAction>
 #include <KToggleAction>
 

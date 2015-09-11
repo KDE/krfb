@@ -23,7 +23,7 @@
 #include <KUniqueApplication>
 #include <KCmdLineArgs>
 #include <QDebug>
-#include <KLocale>
+#include <KLocalizedString>
 #include <KMessageBox>
 
 #include <QPixmap>

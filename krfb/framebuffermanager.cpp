@@ -24,7 +24,8 @@
 #include "krfbconfig.h"
 
 #include <QDebug>
-#include <KGlobal>
+#include <QGlobalStatic>
+
 #include <KServiceTypeTrader>
 
 #include <QtCore/QSharedPointer>
@@ -35,7 +36,7 @@ public:
     FrameBufferManager instance;
 };
 
-K_GLOBAL_STATIC(FrameBufferManagerStatic, frameBufferManagerStatic)
+Q_GLOBAL_STATIC(FrameBufferManagerStatic, frameBufferManagerStatic)
 
 FrameBufferManager::FrameBufferManager()
 {
