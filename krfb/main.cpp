@@ -19,13 +19,12 @@
 #include "trayicon.h"
 #include "invitationsrfbserver.h"
 
-#include <K4AboutData>
-#include <KUniqueApplication>
-#include <KCmdLineArgs>
-#include <QDebug>
+#include <KAboutData>
+#include <KDBusService>
 #include <KLocalizedString>
 #include <KMessageBox>
 
+#include <QDebug>
 #include <QPixmap>
 #include <qwindowdefs.h>
 #include <QX11Info>
@@ -36,6 +35,8 @@
 
 #include <signal.h>
 #include <X11/extensions/XTest.h>
+#include <QCommandLineParser>
+#include <QCommandLineOption>
 
 static const char KRFB_VERSION[] = I18N_NOOP("5.0");
 static const char description[] = I18N_NOOP("VNC-compatible server to share "
@@ -60,39 +61,48 @@ static bool checkX11Capabilities()
 
 int main(int argc, char *argv[])
 {
-    K4AboutData aboutData("krfb", 0, ki18n("Desktop Sharing"), KRFB_VERSION,
-                         ki18n(description), K4AboutData::License_GPL,
-                         ki18n("(c) 2009-2010, Collabora Ltd.\n"
+    KAboutData aboutData(I18N_NOOP("krfb"),
+			 i18n("Desktop Sharing"),
+			 I18N_NOOP(KRFB_VERSION),
+                         i18n(description),
+			 KAboutLicense::GPL,
+                         i18n("(c) 2009-2010, Collabora Ltd.\n"
                                "(c) 2007, Alessandro Praduroux\n"
                                "(c) 2001-2003, Tim Jansen\n"
                                "(c) 2001, Johannes E. Schindelin\n"
                                "(c) 2000-2001, Const Kaplinsky\n"
                                "(c) 2000, Tridia Corporation\n"
                                "(c) 1999, AT&T Laboratories Boston\n"));
-    aboutData.addAuthor(ki18n("George Goldberg"),
-                        ki18n("Telepathy tubes support"),
+    aboutData.addAuthor(i18n("George Goldberg"),
+                        i18n("Telepathy tubes support"),
                         "george.goldberg@collabora.co.uk");
-    aboutData.addAuthor(ki18n("George Kiagiadakis"),
-                        KLocalizedString(),
+    aboutData.addAuthor(i18n("George Kiagiadakis"),
+                        QString(),
                         "george.kiagiadakis@collabora.co.uk");
-    aboutData.addAuthor(ki18n("Alessandro Praduroux"), ki18n("KDE4 porting"), "pradu@pradu.it");
-    aboutData.addAuthor(ki18n("Tim Jansen"), ki18n("Original author"), "tim@tjansen.de");
-    aboutData.addCredit(ki18n("Johannes E. Schindelin"),
-                        ki18n("libvncserver"));
-    aboutData.addCredit(ki18n("Const Kaplinsky"),
-                        ki18n("TightVNC encoder"));
-    aboutData.addCredit(ki18n("Tridia Corporation"),
-                        ki18n("ZLib encoder"));
-    aboutData.addCredit(ki18n("AT&T Laboratories Boston"),
-                        ki18n("original VNC encoders and "
+    aboutData.addAuthor(i18n("Alessandro Praduroux"), i18n("KDE4 porting"), "pradu@pradu.it");
+    aboutData.addAuthor(i18n("Tim Jansen"), i18n("Original author"), "tim@tjansen.de");
+    aboutData.addCredit(i18n("Johannes E. Schindelin"),
+                        i18n("libvncserver"));
+    aboutData.addCredit(i18n("Const Kaplinsky"),
+                        i18n("TightVNC encoder"));
+    aboutData.addCredit(i18n("Tridia Corporation"),
+                        i18n("ZLib encoder"));
+    aboutData.addCredit(i18n("AT&T Laboratories Boston"),
+                        i18n("original VNC encoders and "
                               "protocol design"));
-    KCmdLineArgs::init(argc, argv, &aboutData);
+    QApplication app(argc, argv);
+    QCommandLineParser parser;
+    KAboutData::setApplicationData(aboutData);
+    parser.addVersionOption();
+    parser.addHelpOption();
+    aboutData.setupCommandLine(&parser);
+    parser.process(app);
+    aboutData.processCommandLine(&parser);
 
-    KCmdLineOptions options;
-    options.add("nodialog", ki18n("Do not show the invitations management dialog at startup"));
-    KCmdLineArgs::addCmdLineOptions(options);
+    KDBusService service(KDBusService::Unique, &app);
 
-    KUniqueApplication app;
+    parser.addOption(QCommandLineOption(QStringList() << QLatin1String("nodialog"), i18n("Do not show the invitations management dialog at startup")));
+
     app.setQuitOnLastWindowClosed(false);
 
     if (!checkX11Capabilities()) {
@@ -112,7 +122,7 @@ int main(int argc, char *argv[])
 
     if (app.isSessionRestored() && KMainWindow::canBeRestored(1)) {
         mainWindow.restore(1, false);
-    } else if (KCmdLineArgs::parsedArgs()->isSet("dialog")) {
+    } else if (!parser.isSet("nodialog")) {
         mainWindow.show();
     }
 

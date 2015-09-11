@@ -28,6 +28,7 @@
 #include <KAboutApplicationDialog>
 #include <KActionCollection>
 #include <QDialog>
+#include <KHelpMenu>
 #include <KLocalizedString>
 #include <KStandardAction>
 #include <KToggleAction>
@@ -139,10 +140,8 @@ void TrayIcon::onClientDisconnected(RfbClient* client)
 
 void TrayIcon::showAbout()
 {
-//  TODO: Port to KF5 equivalent
-//     QDialog *dlg = new KAboutApplicationDialog(KGlobal::mainComponent().aboutData());
-//     dlg->setAttribute(Qt::WA_DeleteOnClose, true);
-//     dlg->show();
+    KHelpMenu menu;
+    menu.aboutApplication();
 }
 
 #include "trayicon.moc"

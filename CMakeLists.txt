@@ -18,6 +18,7 @@ find_package(KF5 REQUIRED COMPONENTS
     I18n
     Crash
     CoreAddons
+    DBusAddons
     DNSSD
     DocTools
     KDELibs4Support
