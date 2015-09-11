@@ -240,8 +240,6 @@ void MainWindow::showConfiguration()
     KConfigDialog *dialog = new KConfigDialog(this, "settings", KrfbConfig::self());
     dialog->addPage(new TCP, i18n("Network"), "network-workgroup");
     dialog->addPage(new Security, i18n("Security"), "security-high");
-//     TODO: Fix for KF5 release
-//     dialog->setHelp(QString(), "krfb");
     dialog->show();
 }
 
