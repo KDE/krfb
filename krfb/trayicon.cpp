@@ -26,7 +26,7 @@
 #include <KActionCollection>
 #include <KDialog>
 #include <KGlobal>
-#include <KIcon>
+#include <QIcon>
 #include <KLocale>
 #include <QMenu>
 #include <KStandardAction>
@@ -94,7 +94,7 @@ ClientActions::~ClientActions()
 TrayIcon::TrayIcon(QWidget *mainWindow)
     : KStatusNotifierItem(mainWindow)
 {
-    setIconByPixmap(KIcon("krfb").pixmap(22, 22, KIcon::Disabled));
+    setIconByPixmap(QIcon::fromTheme("krfb").pixmap(22, 22, QIcon::Disabled));
 
     setToolTipTitle(i18n("Desktop Sharing - disconnected"));
     setCategory(KStatusNotifierItem::ApplicationStatus);
@@ -127,7 +127,7 @@ void TrayIcon::onClientDisconnected(RfbClient* client)
     delete actions;
 
     if (m_clientActions.isEmpty()) {
-        setIconByPixmap(KIcon("krfb").pixmap(22, 22, KIcon::Disabled));
+        setIconByPixmap(QIcon::fromTheme("krfb").pixmap(22, 22, QIcon::Disabled));
         setToolTipTitle(i18n("Desktop Sharing - disconnected"));
         setStatus(KStatusNotifierItem::Passive);
     } else if (m_clientActions.size() == 1) { //clients number dropped back to 1

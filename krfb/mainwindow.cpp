@@ -15,7 +15,7 @@
 #include "ui_configsecurity.h"
 
 #include <KConfigDialog>
-#include <KIcon>
+#include <QIcon>
 #include <KLocale>
 #include <KMessageBox>
 #include <KStandardAction>
@@ -66,7 +66,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     QWidget *mainWidget = new QWidget;
     m_ui.setupUi(mainWidget);
-    m_ui.krfbIconLabel->setPixmap(KIcon("krfb").pixmap(128));
+    m_ui.krfbIconLabel->setPixmap(QIcon::fromTheme("krfb").pixmap(128));
     m_ui.enableUnattendedCheckBox->setChecked(
             InvitationsRfbServer::instance->allowUnattendedAccess());
 
@@ -146,7 +146,7 @@ void MainWindow::editPassword()
 {
     if(m_passwordEditable) {
         m_passwordEditable = false;
-        m_ui.passwordEditButton->setIcon(KIcon("document-properties"));
+        m_ui.passwordEditButton->setIcon(QIcon::fromTheme("document-properties"));
         m_ui.passwordGridLayout->removeWidget(m_passwordLineEdit);
         InvitationsRfbServer::instance->setDesktopPassword(
                 m_passwordLineEdit->text());
@@ -155,7 +155,7 @@ void MainWindow::editPassword()
         m_passwordLineEdit->setVisible(false);
     } else {
         m_passwordEditable = true;
-        m_ui.passwordEditButton->setIcon(KIcon("document-save"));
+        m_ui.passwordEditButton->setIcon(QIcon::fromTheme("document-save"));
         m_ui.passwordGridLayout->addWidget(m_passwordLineEdit,0,0);
         m_passwordLineEdit->setText(
                 InvitationsRfbServer::instance->desktopPassword());
@@ -187,7 +187,7 @@ void MainWindow::toggleDesktopSharing(bool enable)
         if(m_passwordEditable) {
             m_passwordEditable = false;
             m_passwordLineEdit->setVisible(false);
-            m_ui.passwordEditButton->setIcon(KIcon("document-properties"));
+            m_ui.passwordEditButton->setIcon(QIcon::fromTheme("document-properties"));
         }
     }
 }
