@@ -26,14 +26,28 @@
 
 #include <KLocalizedString>
 #include <KStandardGuiItem>
+#include <KConfigGroup>
+#include <QDialogButtonBox>
+#include <QPushButton>
+#include <KGuiItem>
+#include <QVBoxLayout>
 
 template <typename UI>
 ConnectionDialog<UI>::ConnectionDialog(QWidget *parent)
-    : KDialog(parent)
+    : QDialog(parent)
 {
-    setCaption(i18n("New Connection"));
-    setButtons(Ok | Cancel);
-    setDefaultButton(Cancel);
+    setWindowTitle(i18n("New Connection"));
+    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel);
+    QWidget *mainWidget = new QWidget(this);
+    QVBoxLayout *mainLayout = new QVBoxLayout;
+    setLayout(mainLayout);
+    mainLayout->addWidget(mainWidget);
+    QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
+    okButton->setDefault(true);
+    okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
+    connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+    buttonBox->button(QDialogButtonBox::Cancel)->setDefault(true);
     setModal(true);
 
     setMinimumSize(500, 200);
@@ -45,13 +59,14 @@ ConnectionDialog<UI>::ConnectionDialog(QWidget *parent)
 
     KGuiItem accept = KStandardGuiItem::ok();
     accept.setText(i18n("Accept Connection"));
-    setButtonGuiItem(Ok, accept);
+    KGuiItem::assign(okButton, accept);
 
     KGuiItem refuse = KStandardGuiItem::cancel();
     refuse.setText(i18n("Refuse Connection"));
-    setButtonGuiItem(Cancel, refuse);
+    KGuiItem::assign(buttonBox->button(QDialogButtonBox::Cancel), refuse);
 
-    setMainWidget(m_connectWidget);
+    mainLayout->addWidget(m_connectWidget);
+    mainLayout->addWidget(buttonBox);
 }
 
 //**********

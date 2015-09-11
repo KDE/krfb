@@ -27,10 +27,11 @@
 
 #include <KAboutApplicationDialog>
 #include <KActionCollection>
-#include <KDialog>
+#include <QDialog>
 #include <KLocalizedString>
 #include <KStandardAction>
 #include <KToggleAction>
+#include <KConfigGroup>
 
 class ClientActions
 {
@@ -139,7 +140,7 @@ void TrayIcon::onClientDisconnected(RfbClient* client)
 void TrayIcon::showAbout()
 {
 //  TODO: Port to KF5 equivalent
-//     KDialog *dlg = new KAboutApplicationDialog(KGlobal::mainComponent().aboutData());
+//     QDialog *dlg = new KAboutApplicationDialog(KGlobal::mainComponent().aboutData());
 //     dlg->setAttribute(Qt::WA_DeleteOnClose, true);
 //     dlg->show();
 }

@@ -23,10 +23,10 @@
 #define CONNECTIONDIALOG_H
 
 #include "ui_connectionwidget.h"
-#include <KDialog>
+#include <QDialog>
 
 template <typename UI>
-class ConnectionDialog : public KDialog
+class ConnectionDialog : public QDialog
 {
 public:
     ConnectionDialog(QWidget *parent);

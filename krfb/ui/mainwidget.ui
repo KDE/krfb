@@ -442,7 +442,7 @@
            </widget>
           </item>
           <item>
-           <widget class="KPushButton" name="unattendedPasswordButton">
+           <widget class="QPushButton" name="unattendedPasswordButton">
             <property name="sizePolicy">
              <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
               <horstretch>0</horstretch>
@@ -486,11 +486,6 @@
   </layout>
  </widget>
  <customwidgets>
-  <customwidget>
-   <class>KPushButton</class>
-   <extends>QPushButton</extends>
-   <header>kpushbutton.h</header>
-  </customwidget>
  </customwidgets>
  <tabstops>
   <tabstop>enableSharingCheckBox</tabstop>

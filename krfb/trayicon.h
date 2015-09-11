@@ -20,7 +20,6 @@
 
 #include <KStatusNotifierItem>
 
-class KDialog;
 class RfbClient;
 class ClientActions;
 

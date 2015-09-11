@@ -31,6 +31,7 @@
 #include <QDebug>
 #include <QtCore/QSocketNotifier>
 #include <poll.h>
+#include <KConfigGroup>
 
 struct PendingInvitationsRfbClient::Private
 {
@@ -82,8 +83,8 @@ void PendingInvitationsRfbClient::processNewClient()
         dialog->setRemoteHost(host);
         dialog->setAllowRemoteControl(KrfbConfig::allowDesktopControl());
 
-        connect(dialog, SIGNAL(okClicked()), SLOT(dialogAccepted()));
-        connect(dialog, SIGNAL(cancelClicked()), SLOT(reject()));
+        connect(dialog, SIGNAL(clicked()), SLOT(dialogAccepted()));
+        connect(dialog, SIGNAL(clicked()), SLOT(reject()));
 
         dialog->show();
     }

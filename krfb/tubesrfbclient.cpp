@@ -21,6 +21,7 @@
 #include "connectiondialog.h"
 #include <KNotification>
 #include <KLocalizedString>
+#include <KConfigGroup>
 
 QString TubesRfbClient::name() const
 {
@@ -68,8 +69,8 @@ void PendingTubesRfbClient::showConfirmationDialog()
     dialog->setContactName(name);
     dialog->setAllowRemoteControl(KrfbConfig::allowDesktopControl());
 
-    connect(dialog, SIGNAL(okClicked()), SLOT(dialogAccepted()));
-    connect(dialog, SIGNAL(cancelClicked()), SLOT(reject()));
+    connect(dialog, SIGNAL(clicked()), SLOT(dialogAccepted()));
+    connect(dialog, SIGNAL(clicked()), SLOT(reject()));
 
     dialog->show();
 }
