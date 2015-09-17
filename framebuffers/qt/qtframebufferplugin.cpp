@@ -22,8 +22,10 @@
 
 #include "qtframebuffer.h"
 
-#include <KGenericFactory>
+#include <KPluginFactory>
 
+K_PLUGIN_FACTORY_WITH_JSON(QtFrameBufferPluginFactory, "krfb_framebuffer_qt.json",
+			   registerPlugin<QtFrameBufferPlugin>();)
 
 QtFrameBufferPlugin::QtFrameBufferPlugin(QObject *parent, const QVariantList &args)
     : FrameBufferPlugin(parent, args)
@@ -38,10 +40,6 @@ FrameBuffer *QtFrameBufferPlugin::frameBuffer(WId id)
 {
     return new QtFrameBuffer(id);
 }
-
-K_PLUGIN_FACTORY(factory, registerPlugin<QtFrameBufferPlugin>();) \
-K_EXPORT_PLUGIN(factory("krfb_framebuffer_qt"))
-
 
 #include "qtframebufferplugin.moc"
 

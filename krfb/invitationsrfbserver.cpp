@@ -31,7 +31,7 @@
 #include <KUser>
 #include <KRandom>
 #include <KStringHandler>
-#include <KWallet/Wallet>
+#include <KWallet/KWallet>
 
 #include <dnssd/publicservice.h>
 using KWallet::Wallet;

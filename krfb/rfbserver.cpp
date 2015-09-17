@@ -90,6 +90,7 @@ bool RfbServer::start()
     if (!d->screen) {
         d->screen = RfbServerManager::instance()->newScreen();
         if (!d->screen) {
+            qDebug() << "Unable to get rbfserver screen";
             return false;
         }
 
@@ -129,7 +130,7 @@ bool RfbServer::start()
     rfbInitServer(d->screen);
 
     if (!rfbIsActive(d->screen)) {
-        //qDebug() << "Failed to start server";
+        qDebug() << "Failed to start server";
         rfbShutdownServer(d->screen, false);
         return false;
     };

@@ -15,15 +15,10 @@ add_library(krfb_framebuffer_qt
 target_link_libraries (krfb_framebuffer_qt
                        Qt5::Core
                        Qt5::Gui
-                       KF5::KDELibs4Support
+                       KF5::CoreAddons
                        krfbprivate
 )
 
 install (TARGETS krfb_framebuffer_qt
-         DESTINATION ${PLUGIN_INSTALL_DIR}
+         DESTINATION ${PLUGIN_INSTALL_DIR}/krfb
 )
-
-install (FILES krfb_framebuffer_qt.desktop
-         DESTINATION ${SERVICES_INSTALL_DIR}
-)
-

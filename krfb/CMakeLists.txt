@@ -106,11 +106,15 @@ target_link_libraries (krfb
                        ${X11_X11_LIB}
                        ${X11_Xdamage_LIB}
                        Qt5::Network
+                       KF5::Completion
+                       KF5::CoreAddons
                        KF5::DBusAddons
                        KF5::DNSSD
-                       KF5::KDELibs4Support
+                       KF5::I18n
+                       KF5::Notifications
                        KF5::Wallet
                        KF5::WidgetsAddons
+                       KF5::XmlGui
                        ${LIBVNCSERVER_LIBRARIES}
 )
 

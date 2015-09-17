@@ -13,21 +13,15 @@ add_library(krfb_framebuffer_x11
 )
 
 target_link_libraries (krfb_framebuffer_x11
-                       
                        Qt5::Core
                        Qt5::Gui
                        ${X11_X11_LIB}
                        ${X11_Xdamage_LIB}
                        ${X11_Xext_LIB}
-                       KF5::KDELibs4Support
+                       KF5::CoreAddons
                        krfbprivate
 )
 
 install (TARGETS krfb_framebuffer_x11
-         DESTINATION ${PLUGIN_INSTALL_DIR}
+         DESTINATION ${PLUGIN_INSTALL_DIR}/krfb
 )
-
-install (FILES krfb_framebuffer_x11.desktop
-         DESTINATION ${SERVICES_INSTALL_DIR}
-)
-

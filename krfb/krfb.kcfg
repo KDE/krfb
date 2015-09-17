@@ -36,7 +36,7 @@
   <group name="FrameBuffer">
     <entry name="preferredFrameBufferPlugin" type="String">
       <label>Preferred Frame Buffer Plugin</label>
-      <default>krfb_framebuffer_x11</default>
+      <default>x11</default>
     </entry>
   </group>
 </kcfg>

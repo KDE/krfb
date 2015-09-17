@@ -22,8 +22,10 @@
 
 #include "x11framebuffer.h"
 
-#include <KGenericFactory>
+#include <KPluginFactory>
 
+K_PLUGIN_FACTORY_WITH_JSON(X11FrameBufferPluginFactory, "krfb_framebuffer_x11.json",
+			   registerPlugin<X11FrameBufferPlugin>();)
 
 X11FrameBufferPlugin::X11FrameBufferPlugin(QObject *parent, const QVariantList &args)
     : FrameBufferPlugin(parent, args)
@@ -38,10 +40,6 @@ FrameBuffer *X11FrameBufferPlugin::frameBuffer(WId id)
 {
     return new X11FrameBuffer(id);
 }
-
-K_PLUGIN_FACTORY(factory, registerPlugin<X11FrameBufferPlugin>();) \
-K_EXPORT_PLUGIN(factory("krfb_framebuffer_x11"))
-
 
 #include "x11framebufferplugin.moc"
 

@@ -22,7 +22,7 @@ QtFrameBuffer::QtFrameBuffer(WId id, QObject *parent)
     : FrameBuffer(id, parent)
 {
     fbImage = QPixmap::grabWindow(win).toImage();
-    fb = new char[fbImage.numBytes()];
+    fb = new char[fbImage.byteCount()];
     t = new QTimer(this);
     connect(t, SIGNAL(timeout()), SLOT(updateFrameBuffer()));
 }
@@ -94,7 +94,7 @@ void QtFrameBuffer::updateFrameBuffer()
     tiles.append(img.rect());
 #endif
 
-    memcpy(fb, (const char *)img.bits(), img.numBytes());
+    memcpy(fb, (const char *)img.bits(), img.byteCount());
     fbImage = img;
 
 }

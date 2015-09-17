@@ -40,6 +40,5 @@ public:
     virtual FrameBuffer *frameBuffer(WId id) = 0;
 };
 
-
 #endif  // Header guard
 

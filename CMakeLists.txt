@@ -16,14 +16,17 @@ include(ECMAddAppIcon)
 
 find_package(KF5 REQUIRED COMPONENTS
     I18n
-    Crash
+    Completion
+    Config
     CoreAddons
+    Crash
     DBusAddons
     DNSSD
     DocTools
-    KDELibs4Support
+    Notifications
     Wallet
     WidgetsAddons
+    XmlGui
 )
 
 find_package(X11 REQUIRED)
