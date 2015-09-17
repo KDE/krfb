@@ -29,10 +29,6 @@
 #include <qwindowdefs.h>
 #include <QX11Info>
 
-#ifdef KRFB_WITH_TELEPATHY_TUBES
-# include "tubesrfbserver.h"
-#endif
-
 #include <signal.h>
 #include <X11/extensions/XTest.h>
 #include <QCommandLineParser>
@@ -111,10 +107,6 @@ int main(int argc, char *argv[])
 
     //init the core
     InvitationsRfbServer::init();
-
-#ifdef KRFB_WITH_TELEPATHY_TUBES
-    TubesRfbServer::init();
-#endif
 
     //init the GUI
     MainWindow mainWindow;

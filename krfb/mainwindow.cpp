@@ -27,16 +27,6 @@
 #include <QSizePolicy>
 #include <QtNetwork/QNetworkInterface>
 
-#ifdef KRFB_WITH_KDE_TELEPATHY
-#include "tubesrfbserver.h"
-#include <TelepathyQt/PendingReady>
-#include <TelepathyQt/PendingChannelRequest>
-#include <KTp/actions.h>
-#include <KTp/Widgets/contact-view-widget.h>
-#include <KTp/Models/contacts-list-model.h>
-#include <KTp/Models/contacts-filter-model.h>
-#endif
-
 class TCP: public QWidget, public Ui::TCP
 {
 public:
@@ -104,31 +94,6 @@ MainWindow::MainWindow(QWidget *parent)
     //Figure out the password
     m_ui.passwordDisplayLabel->setText(
             InvitationsRfbServer::instance->desktopPassword());
-
-
-#ifdef KRFB_WITH_KDE_TELEPATHY
-
-    m_contactViewWidget = new KTp::ContactViewWidget(
-            TubesRfbServer::instance->contactsListModel(), this);
-
-    m_contactViewWidget->setEnabled(false);
-    connect(m_ui.enableSharingCheckBox, SIGNAL(toggled(bool)),
-            m_contactViewWidget, SLOT(setEnabled(bool)));
-    m_contactViewWidget->setIconSize(QSize(32,32));
-    m_contactViewWidget->setMinimumWidth(120);
-    m_contactViewWidget->setMaximumWidth(360);
-    m_contactViewWidget->setMinimumHeight(300);
-    m_contactViewWidget->contactFilterLineEdit()->setClickMessage(i18n("Search in Contacts..."));
-    m_contactViewWidget->filter()->setPresenceTypeFilterFlags(KTp::ContactsFilterModel::ShowOnlyConnected);
-    m_contactViewWidget->filter()->setTubesFilterStrings(QStringList("rfb"));
-    m_contactViewWidget->filter()->setCapabilityFilterFlags(KTp::ContactsFilterModel::FilterByTubes);
-
-    m_contactViewWidget->setSizePolicy(QSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding));
-    m_ui.tpContactsLayout->addWidget(m_contactViewWidget);
-    connect(m_contactViewWidget, SIGNAL(contactDoubleClicked(const Tp::AccountPtr &, const KTp::ContactPtr &)),
-        this, SLOT(onContactDoubleClicked(const Tp::AccountPtr &, const KTp::ContactPtr &)));
-#endif
-
 
     KStandardAction::quit(QCoreApplication::instance(), SLOT(quit()), actionCollection());
     KStandardAction::preferences(this, SLOT(showConfiguration()), actionCollection());
@@ -211,25 +176,6 @@ void MainWindow::aboutUnattendedMode()
             i18n("Any remote user with normal desktop sharing password will have to be authenticated.\n\nIf unattended access is on, and the remote user provides unattended mode password, desktop sharing access will be granted without explicit confirmation."),
             i18n("KDE Desktop Sharing"));
 }
-
-#ifdef KRFB_WITH_KDE_TELEPATHY
-
-void MainWindow::onContactDoubleClicked(const Tp::AccountPtr &account, const KTp::ContactPtr &contact)
-{
-    Tp::PendingOperation *op = KTp::Actions::startDesktopSharing(account, contact);
-    connect(op, SIGNAL(finished(Tp::PendingOperation*)),
-            this, SLOT(pendingDesktopShareFinished(Tp::PendingOperation*)));
-}
-
-void MainWindow::pendingDesktopShareFinished(Tp::PendingOperation *operation)
-{
-    if(operation->isError()) {
-        KMessageBox::error(this,
-                operation->errorName() + ": " + operation->errorMessage());
-    }
-}
-
-#endif
 
 void MainWindow::showConfiguration()
 {

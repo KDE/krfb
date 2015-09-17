@@ -83,20 +83,4 @@ void InvitationsConnectionDialog::setRemoteHost(const QString &host)
 
 //**********
 
-#ifdef KRFB_WITH_TELEPATHY_TUBES
-
-TubesConnectionDialog::TubesConnectionDialog(QWidget *parent)
-    : ConnectionDialog<Ui::TubesConnectionWidget>(parent)
-{
-}
-
-void TubesConnectionDialog::setContactName(const QString & name)
-{
-    QString txt = i18n("You have requested to share your desktop with %1. If you proceed, "
-                       "you will allow the remote user to watch your desktop.", name);
-    m_ui.mainTextLabel->setText(txt);
-}
-
-#endif // KRFB_WITH_TELEPATHY_TUBES
-
 #include "connectiondialog.moc"
