@@ -96,11 +96,11 @@ bool InvitationsRfbServer::start()
     return false;
 }
 
-void InvitationsRfbServer::stop(bool disconnectClients)
+void InvitationsRfbServer::stop()
 {
     if(m_publicService->isPublished())
         m_publicService->stop();
-    RfbServer::stop(disconnectClients);
+    RfbServer::stop();
 }
 
 void InvitationsRfbServer::toggleUnattendedAccess(bool allow)
@@ -119,7 +119,7 @@ InvitationsRfbServer::InvitationsRfbServer()
 
 InvitationsRfbServer::~InvitationsRfbServer()
 {
-    stop(true);
+    stop();
     KConfigGroup krfbConfig(KSharedConfig::openConfig(),"Security");
     krfbConfig.writeEntry("allowUnattendedAccess",m_allowUnattendedAccess);
     if(m_wallet && m_wallet->isOpen()) {

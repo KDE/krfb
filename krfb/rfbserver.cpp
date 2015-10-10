@@ -144,10 +144,10 @@ bool RfbServer::start()
     return true;
 }
 
-void RfbServer::stop(bool disconnectClients)
+void RfbServer::stop()
 {
     if (d->screen) {
-        rfbShutdownServer(d->screen, disconnectClients);
+        rfbShutdownServer(d->screen, true);
         if (d->notifier) {
             d->notifier->setEnabled(false);
             d->notifier->deleteLater();

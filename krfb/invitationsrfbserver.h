@@ -48,7 +48,7 @@ Q_SIGNALS:
 
 public Q_SLOTS:
     bool start();
-    void stop(bool disconnectClients);
+    void stop() override;
     void toggleUnattendedAccess(bool allow);
 
 protected:

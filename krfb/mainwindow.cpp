@@ -148,7 +148,7 @@ void MainWindow::toggleDesktopSharing(bool enable)
                         "and restart krfb."));
         }
     } else {
-        InvitationsRfbServer::instance->stop(true);
+        InvitationsRfbServer::instance->stop();
         if(m_passwordEditable) {
             m_passwordEditable = false;
             m_passwordLineEdit->setVisible(false);
