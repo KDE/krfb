@@ -83,8 +83,8 @@ void PendingInvitationsRfbClient::processNewClient()
         dialog->setRemoteHost(host);
         dialog->setAllowRemoteControl(KrfbConfig::allowDesktopControl());
 
-        connect(dialog, SIGNAL(clicked()), SLOT(dialogAccepted()));
-        connect(dialog, SIGNAL(clicked()), SLOT(reject()));
+        connect(dialog, SIGNAL(accepted()), SLOT(dialogAccepted()));
+        connect(dialog, SIGNAL(rejected()), SLOT(reject()));
 
         dialog->show();
     }
