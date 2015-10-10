@@ -41,14 +41,14 @@ public:
 
     ~X11FrameBuffer();
 
-    virtual QList<QRect> modifiedTiles();
-    virtual int depth();
-    virtual int height();
-    virtual int width();
-    virtual int paddedWidth();
-    virtual void getServerFormat(rfbPixelFormat &format);
-    virtual void startMonitor();
-    virtual void stopMonitor();
+    QList<QRect> modifiedTiles() override;
+    int depth() override;
+    int height() override;
+    int width() override;
+    int paddedWidth() override;
+    void getServerFormat(rfbPixelFormat &format) override;
+    void startMonitor() override;
+    void stopMonitor() override;
 
 
     void handleXDamage(XEvent *event);

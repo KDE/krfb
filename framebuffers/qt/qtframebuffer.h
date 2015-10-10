@@ -25,13 +25,13 @@ public:
 
     ~QtFrameBuffer();
 
-    virtual int depth();
-    virtual int height();
-    virtual int width();
-    virtual int paddedWidth();
-    virtual void getServerFormat(rfbPixelFormat &format);
-    virtual void startMonitor();
-    virtual void stopMonitor();
+    int depth() override;
+    int height() override;
+    int width() override;
+    int paddedWidth() override;
+    void getServerFormat(rfbPixelFormat &format) override;
+    void startMonitor() override;
+    void stopMonitor() override;
 
 public Q_SLOTS:
     void updateFrameBuffer();

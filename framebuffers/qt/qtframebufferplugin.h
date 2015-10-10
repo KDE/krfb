@@ -35,7 +35,7 @@ public:
     QtFrameBufferPlugin(QObject *parent, const QVariantList &args);
     virtual ~QtFrameBufferPlugin();
 
-    virtual FrameBuffer *frameBuffer(WId id);
+    FrameBuffer *frameBuffer(WId id) override;
 
 private:
     Q_DISABLE_COPY(QtFrameBufferPlugin)

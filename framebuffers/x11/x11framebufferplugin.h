@@ -35,7 +35,7 @@ public:
     X11FrameBufferPlugin(QObject *parent, const QVariantList &args);
     virtual ~X11FrameBufferPlugin();
 
-    virtual FrameBuffer *frameBuffer(WId id);
+    FrameBuffer *frameBuffer(WId id) override;
 
 private:
     Q_DISABLE_COPY(X11FrameBufferPlugin)

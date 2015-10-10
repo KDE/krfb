@@ -36,9 +36,9 @@ public:
     virtual ~PendingInvitationsRfbClient();
 
 protected Q_SLOTS:
-    virtual void processNewClient();
+    void processNewClient() override;
     virtual void onSocketActivated();
-    virtual bool checkPassword(const QByteArray & encryptedPassword);
+    bool checkPassword(const QByteArray & encryptedPassword) override;
 
 private Q_SLOTS:
     void dialogAccepted();

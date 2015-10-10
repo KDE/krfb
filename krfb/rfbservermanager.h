@@ -24,7 +24,7 @@
 #include <QtCore/QObject>
 
 class RfbClient;
-class RfbServerManagerStatic;
+struct RfbServerManagerStatic;
 class RfbServer;
 
 class RfbServerManager : public QObject
@@ -56,7 +56,7 @@ private:
     Q_DISABLE_COPY(RfbServerManager)
 
     friend class RfbServer;
-    friend class RfbServerManagerStatic;
+    friend struct RfbServerManagerStatic;
 
     struct Private;
     Private *const d;

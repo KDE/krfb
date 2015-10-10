@@ -29,8 +29,8 @@ class MainWindow : public KXmlGuiWindow
         void showConfiguration();
 
     protected:
-        virtual void readProperties(const KConfigGroup & group);
-        virtual void saveProperties(KConfigGroup & group);
+        void readProperties(const KConfigGroup & group) override;
+        void saveProperties(KConfigGroup & group) override;
 
     private Q_SLOTS:
         void editPassword();

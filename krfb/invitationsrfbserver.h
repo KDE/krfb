@@ -47,14 +47,14 @@ Q_SIGNALS:
     void passwordChanged(const QString&);
 
 public Q_SLOTS:
-    bool start();
+    bool start() override;
     void stop() override;
     void toggleUnattendedAccess(bool allow);
 
 protected:
     InvitationsRfbServer();
     virtual ~InvitationsRfbServer();
-    virtual PendingRfbClient* newClient(rfbClientPtr client);
+    PendingRfbClient* newClient(rfbClientPtr client) override;
 
 private Q_SLOTS:
     void walletOpened(bool);
