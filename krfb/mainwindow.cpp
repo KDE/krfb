@@ -62,20 +62,20 @@ MainWindow::MainWindow(QWidget *parent)
 
     setCentralWidget(mainWidget);
 
-    connect(m_ui.passwordEditButton,SIGNAL(clicked()),
-            this,SLOT(editPassword()));
-    connect(m_ui.enableSharingCheckBox,SIGNAL(toggled(bool)),
-            this, SLOT(toggleDesktopSharing(bool)));
-    connect(m_ui.enableUnattendedCheckBox, SIGNAL(toggled(bool)),
-            InvitationsRfbServer::instance, SLOT(toggleUnattendedAccess(bool)));
-    connect(m_ui.unattendedPasswordButton, SIGNAL(clicked()),
-            this, SLOT(editUnattendedPassword()));
-    connect(m_ui.addressAboutButton, SIGNAL(clicked()),
-            this, SLOT(aboutConnectionAddress()));
-    connect(m_ui.unattendedAboutButton, SIGNAL(clicked()),
-            this, SLOT(aboutUnattendedMode()));
-    connect(InvitationsRfbServer::instance, SIGNAL(passwordChanged(const QString&)),
-            this, SLOT(passwordChanged(const QString&)));
+    connect(m_ui.passwordEditButton, &QToolButton::clicked,
+            this, &MainWindow::editPassword);
+    connect(m_ui.enableSharingCheckBox, &QCheckBox::toggled,
+            this, &MainWindow::toggleDesktopSharing);
+    connect(m_ui.enableUnattendedCheckBox, &QCheckBox::toggled,
+            InvitationsRfbServer::instance, &InvitationsRfbServer::toggleUnattendedAccess);
+    connect(m_ui.unattendedPasswordButton, &QPushButton::clicked,
+            this, &MainWindow::editUnattendedPassword);
+    connect(m_ui.addressAboutButton, &QToolButton::clicked,
+            this, &MainWindow::aboutConnectionAddress);
+    connect(m_ui.unattendedAboutButton, &QToolButton::clicked,
+            this, &MainWindow::aboutUnattendedMode);
+    connect(InvitationsRfbServer::instance, &InvitationsRfbServer::passwordChanged,
+            this, &MainWindow::passwordChanged);
 
     // Figure out the address
     int port = KrfbConfig::port();
@@ -148,7 +148,7 @@ void MainWindow::toggleDesktopSharing(bool enable)
                         "and restart krfb."));
         }
     } else {
-        InvitationsRfbServer::instance->stop();
+        InvitationsRfbServer::instance->stop(true);
         if(m_passwordEditable) {
             m_passwordEditable = false;
             m_passwordLineEdit->setVisible(false);

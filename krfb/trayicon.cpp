@@ -56,17 +56,17 @@ ClientActions::ClientActions(RfbClient* client, QMenu* menu, QAction* before)
     m_disconnectAction = new QAction(i18n("Disconnect"), m_menu);
     m_menu->insertAction(before, m_disconnectAction);
 
-    QObject::connect(m_disconnectAction, SIGNAL(triggered()), client, SLOT(closeConnection()));
+    QObject::connect(m_disconnectAction, &QAction::triggered, client, &RfbClient::closeConnection);
 
     if (client->controlCanBeEnabled()) {
         m_enableControlAction = new KToggleAction(i18n("Enable Remote Control"), m_menu);
         m_enableControlAction->setChecked(client->controlEnabled());
         m_menu->insertAction(before, m_enableControlAction);
 
-        QObject::connect(m_enableControlAction, SIGNAL(triggered(bool)),
-                         client, SLOT(setControlEnabled(bool)));
-        QObject::connect(client, SIGNAL(controlEnabledChanged(bool)),
-                         m_enableControlAction, SLOT(setChecked(bool)));
+        QObject::connect(m_enableControlAction, &KToggleAction::triggered,
+                         client, &RfbClient::setControlEnabled);
+        QObject::connect(client, &RfbClient::controlEnabledChanged,
+                         m_enableControlAction, &KToggleAction::setChecked);
     } else {
         m_enableControlAction = NULL;
     }
@@ -101,10 +101,10 @@ TrayIcon::TrayIcon(QWidget *mainWindow)
     setToolTipTitle(i18n("Desktop Sharing - disconnected"));
     setCategory(KStatusNotifierItem::ApplicationStatus);
 
-    connect(RfbServerManager::instance(), SIGNAL(clientConnected(RfbClient*)),
-            this, SLOT(onClientConnected(RfbClient*)));
-    connect(RfbServerManager::instance(), SIGNAL(clientDisconnected(RfbClient*)),
-            this, SLOT(onClientDisconnected(RfbClient*)));
+    connect(RfbServerManager::instance(), &RfbServerManager::clientConnected,
+            this, &TrayIcon::onClientConnected);
+    connect(RfbServerManager::instance(), &RfbServerManager::clientDisconnected,
+            this, &TrayIcon::onClientDisconnected);
 
     m_aboutAction = KStandardAction::aboutApp(this, SLOT(showAbout()), this);
     contextMenu()->addAction(m_aboutAction);

@@ -24,7 +24,7 @@ QtFrameBuffer::QtFrameBuffer(WId id, QObject *parent)
     fbImage = QPixmap::grabWindow(win).toImage();
     fb = new char[fbImage.byteCount()];
     t = new QTimer(this);
-    connect(t, SIGNAL(timeout()), SLOT(updateFrameBuffer()));
+    connect(t, &QTimer::timeout, this, &QtFrameBuffer::updateFrameBuffer);
 }
 
 
@@ -67,14 +67,13 @@ void QtFrameBuffer::getServerFormat(rfbPixelFormat &format)
 void QtFrameBuffer::updateFrameBuffer()
 {
     QImage img = QPixmap::grabWindow(win).toImage();
+#if 0 // This is actually slower than updating the whole desktop...
     QSize imgSize = img.size();
 
 
     // verify what part of the image need to be marked as changed
     // fbImage is the previous version of the image,
     // img is the current one
-
-#if 0 // This is actually slower than updating the whole desktop...
 
     QImage map(imgSize, QImage::Format_Mono);
     map.fill(0);

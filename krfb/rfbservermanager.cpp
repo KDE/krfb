@@ -123,8 +123,8 @@ void RfbServerManager::init()
     d->desktopName = QString("%1@%2 (shared desktop)") //FIXME check if we can use utf8
                         .arg(KUser().loginName(),QHostInfo::localHostName()).toLatin1();
 
-    connect(&d->rfbUpdateTimer, SIGNAL(timeout()), SLOT(updateScreens()));
-    connect(qApp, SIGNAL(aboutToQuit()), SLOT(cleanup()));
+    connect(&d->rfbUpdateTimer, &QTimer::timeout, this, &RfbServerManager::updateScreens);
+    connect(qApp, &QApplication::aboutToQuit, this, &RfbServerManager::cleanup);
 }
 
 void RfbServerManager::updateScreens()

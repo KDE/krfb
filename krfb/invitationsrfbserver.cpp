@@ -56,8 +56,8 @@ void InvitationsRfbServer::init()
     instance->m_wallet = Wallet::openWallet(
             Wallet::NetworkWallet(), 0, Wallet::Asynchronous);
     if(instance->m_wallet) {
-        connect(instance->m_wallet, SIGNAL(walletOpened(bool)),
-                instance, SLOT(walletOpened(bool)));
+        connect(instance->m_wallet, &KWallet::Wallet::walletOpened,
+                instance, &InvitationsRfbServer::walletOpened);
     }
 }
 
@@ -119,7 +119,7 @@ InvitationsRfbServer::InvitationsRfbServer()
 
 InvitationsRfbServer::~InvitationsRfbServer()
 {
-    stop();
+    stop(true);
     KConfigGroup krfbConfig(KSharedConfig::openConfig(),"Security");
     krfbConfig.writeEntry("allowUnattendedAccess",m_allowUnattendedAccess);
     if(m_wallet && m_wallet->isOpen()) {

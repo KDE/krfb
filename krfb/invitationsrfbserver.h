@@ -48,8 +48,8 @@ Q_SIGNALS:
 
 public Q_SLOTS:
     bool start();
-    void stop(bool disconnectClients=true);
-    void toggleUnattendedAccess(bool allow=true);
+    void stop(bool disconnectClients);
+    void toggleUnattendedAccess(bool allow);
 
 protected:
     InvitationsRfbServer();

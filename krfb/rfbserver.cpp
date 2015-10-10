@@ -137,9 +137,9 @@ bool RfbServer::start()
 
     d->notifier = new QSocketNotifier(d->screen->listenSock, QSocketNotifier::Read, this);
     d->notifier->setEnabled(true);
-    connect(d->notifier, SIGNAL(activated(int)), this, SLOT(onListenSocketActivated()));
-    connect(QApplication::clipboard(), SIGNAL(dataChanged()),
-            this, SLOT(krfbSendServerCutText()));
+    connect(d->notifier, &QSocketNotifier::activated, this, &RfbServer::onListenSocketActivated);
+    connect(QApplication::clipboard(), &QClipboard::dataChanged,
+            this, &RfbServer::krfbSendServerCutText);
 
     return true;
 }
@@ -235,8 +235,8 @@ rfbNewClientAction RfbServer::newClientHook(rfbClientPtr cl)
     RfbServer *server = static_cast<RfbServer*>(cl->screen->screenData);
 
     PendingRfbClient *pendingClient = server->newClient(cl);
-    connect(pendingClient, SIGNAL(finished(RfbClient*)),
-            server, SLOT(pendingClientFinished(RfbClient*)));
+    connect(pendingClient, &PendingRfbClient::finished,
+            server, &RfbServer::pendingClientFinished);
 
     return RFB_CLIENT_ON_HOLD;
 }
@@ -274,7 +274,7 @@ void RfbServer::pointerHook(int bm, int x, int y, rfbClientPtr cl)
 }
 
 //static
-void RfbServer::clipboardHook(char *str, int len, rfbClientPtr cl)
+void RfbServer::clipboardHook(char *str, int len, rfbClientPtr /*cl*/)
 {
     QApplication::clipboard()->setText(QString::fromLocal8Bit(str,len));
 }

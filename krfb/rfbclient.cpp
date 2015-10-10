@@ -48,7 +48,7 @@ RfbClient::RfbClient(rfbClientPtr client, QObject* parent)
 
     d->notifier = new QSocketNotifier(client->sock, QSocketNotifier::Read, this);
     d->notifier->setEnabled(false);
-    connect(d->notifier, SIGNAL(activated(int)), this, SLOT(onSocketActivated()));
+    connect(d->notifier, &QSocketNotifier::activated, this, &RfbClient::onSocketActivated);
 }
 
 RfbClient::~RfbClient()

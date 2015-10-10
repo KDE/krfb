@@ -41,7 +41,7 @@ public:
 
 public Q_SLOTS:
     virtual bool start();
-    virtual void stop(bool disconnectClients = true);
+    virtual void stop(bool disconnectClients);
 
     void updateScreen(const QList<QRect> & modifiedTiles);
     void updateCursorPosition(const QPoint & position);

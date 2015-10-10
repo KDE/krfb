@@ -54,8 +54,8 @@ PendingInvitationsRfbClient::PendingInvitationsRfbClient(rfbClientPtr client, QO
     d->client->clientGoneHook = clientGoneHookNoop;
     d->notifier = new QSocketNotifier(client->sock, QSocketNotifier::Read, this);
     d->notifier->setEnabled(true);
-    connect(d->notifier, SIGNAL(activated(int)),
-            this, SLOT(onSocketActivated()));
+    connect(d->notifier, &QSocketNotifier::activated,
+            this, &PendingInvitationsRfbClient::onSocketActivated);
 }
 
 PendingInvitationsRfbClient::~PendingInvitationsRfbClient()
@@ -83,8 +83,8 @@ void PendingInvitationsRfbClient::processNewClient()
         dialog->setRemoteHost(host);
         dialog->setAllowRemoteControl(KrfbConfig::allowDesktopControl());
 
-        connect(dialog, SIGNAL(accepted()), SLOT(dialogAccepted()));
-        connect(dialog, SIGNAL(rejected()), SLOT(reject()));
+        connect(dialog, &InvitationsConnectionDialog::accepted, this, &PendingInvitationsRfbClient::dialogAccepted);
+        connect(dialog, &InvitationsConnectionDialog::rejected, this, &PendingInvitationsRfbClient::reject);
 
         dialog->show();
     }
