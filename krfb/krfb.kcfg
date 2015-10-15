@@ -3,6 +3,12 @@
     "http://www.kde.org/standards/kcfg/1.0/kcfg.xsd">
 <kcfg>
   <kcfgfile />
+  <group name="MainWindow">
+    <entry name="startMinimized" type="Bool">
+    <label>Start minimized</label>
+    <default>false</default>
+    </entry>
+  </group>
   <group name="TCP">
     <entry name="useDefaultPort" type="Bool">
       <label>Use the default port for VNC (5900)</label>
@@ -18,6 +24,10 @@
     </entry>
   </group>
   <group name="Security">
+   <entry name="noWallet" type="Bool">
+      <label>Do not store passwords in KWallet</label>
+      <default>false</default>
+    </entry>
     <entry name="allowDesktopControl" type="Bool">
       <label>Allow remote connections to manage the desktop.</label>
       <default>true</default>

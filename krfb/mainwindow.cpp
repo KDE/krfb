@@ -100,6 +100,10 @@ MainWindow::MainWindow(QWidget *parent)
 
     setupGUI();
 
+    if (KrfbConfig::allowDesktopControl()) {
+      m_ui.enableSharingCheckBox->setChecked(true);
+    }
+
     setAutoSaveSettings();
 }
 
