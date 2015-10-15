@@ -52,11 +52,16 @@ void InvitationsRfbServer::init()
     instance->setListeningPort(KrfbConfig::port());
     instance->setPasswordRequired(true);
 
-    instance->m_wallet = Wallet::openWallet(
-            Wallet::NetworkWallet(), 0, Wallet::Asynchronous);
-    if(instance->m_wallet) {
-        connect(instance->m_wallet, SIGNAL(walletOpened(bool)),
-                instance, SLOT(walletOpened(bool)));
+    if (KrfbConfig::noWallet()) {
+      instance->walletOpened(false);
+    }
+    else {
+      instance->m_wallet = Wallet::openWallet(
+              Wallet::NetworkWallet(), 0, Wallet::Asynchronous);
+      if(instance->m_wallet) {
+          connect(instance->m_wallet, SIGNAL(walletOpened(bool)),
+                  instance, SLOT(walletOpened(bool)));
+      }
     }
 }
 
@@ -123,8 +128,8 @@ InvitationsRfbServer::~InvitationsRfbServer()
     KSharedConfigPtr config = KGlobal::config();
     KConfigGroup krfbConfig(config,"Security");
     krfbConfig.writeEntry("allowUnattendedAccess",m_allowUnattendedAccess);
-    if(m_wallet && m_wallet->isOpen()) {
-
+    if(!KrfbConfig::noWallet()) {
+      if (m_wallet && m_wallet->isOpen()) {
          if( (m_wallet->currentFolder()=="krfb") ||
                  ((m_wallet->hasFolder("krfb") || m_wallet->createFolder("krfb")) &&
                     m_wallet->setFolder("krfb")) ) {
@@ -132,6 +137,7 @@ InvitationsRfbServer::~InvitationsRfbServer()
              m_wallet->writePassword("desktopSharingPassword",m_desktopPassword);
              m_wallet->writePassword("unattendedAccessPassword",m_unattendedPassword);
          }
+       }
 
     } else {
         krfbConfig.writeEntry("desktopPassword",

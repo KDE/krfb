@@ -18,6 +18,10 @@
     </entry>
   </group>
   <group name="Security">
+   <entry name="noWallet" type="Bool">
+      <label>Do not store passwords in KWallet</label>
+      <default>false</default>
+    </entry>
     <entry name="allowDesktopControl" type="Bool">
       <label>Allow remote connections to manage the desktop.</label>
       <default>true</default>
