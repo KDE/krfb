@@ -62,6 +62,7 @@ void InvitationsRfbServer::init()
       if(instance->m_wallet) {
           connect(instance->m_wallet, &KWallet::Wallet::walletOpened,
                   instance, &InvitationsRfbServer::walletOpened);
+      }
     }
 }
 
