@@ -18,6 +18,7 @@
 #include "mainwindow.h"
 #include "trayicon.h"
 #include "invitationsrfbserver.h"
+#include "krfbconfig.h"
 
 #include <KAboutApplicationDialog>
 #include <KAboutData>
@@ -111,7 +112,9 @@ int main(int argc, char *argv[])
     MainWindow mainWindow;
     TrayIcon trayicon(&mainWindow);
 
-    if (app.isSessionRestored() && KMainWindow::canBeRestored(1)) {
+    if (KrfbConfig::startMinimized()) {
+      mainWindow.hide();
+    } else if (app.isSessionRestored() && KMainWindow::canBeRestored(1)) {
         mainWindow.restore(1, false);
     } else if (KCmdLineArgs::parsedArgs()->isSet("dialog")) {
         mainWindow.show();
@@ -124,4 +127,3 @@ int main(int argc, char *argv[])
 
     return app.exec();
 }
-
