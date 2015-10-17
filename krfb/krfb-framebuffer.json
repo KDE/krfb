@@ -1,6 +1,16 @@
 {
     "KPlugin": {
-        "Description": "Frame Buffer plugins for KRfb"
+        "Description": "Frame Buffer plugins for KRfb", 
+        "Description[nl]": "Framebuffer-plugins voor KRfb", 
+        "Description[pt]": "'Plugins' do 'Framebuffer' para o KRfb", 
+        "Description[pt_BR]": "Plugins de framebuffers para o KRfb", 
+        "Description[sr@ijekavian]": "Прикључци кадробафера за КРФБ", 
+        "Description[sr@ijekavianlatin]": "Priključci kadrobafera za KRFB", 
+        "Description[sr@latin]": "Priključci kadrobafera za KRFB", 
+        "Description[sr]": "Прикључци кадробафера за КРФБ", 
+        "Description[sv]": "Insticksprogram med rambuffert för Krfb", 
+        "Description[uk]": "Додатки буфера кадрів для KRfb", 
+        "Description[x-test]": "xxFrame Buffer plugins for KRfbxx"
     }, 
     "X-KDE-ServiceType": "krfb/framebuffer"
 }
