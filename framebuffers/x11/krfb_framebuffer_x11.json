@@ -42,6 +42,7 @@
         "Name[sv]": "X11-rambuffert för Krfb", 
         "Name[uk]": "Буфер кадрів X11 для KRfb", 
         "Name[x-test]": "xxX11 Framebuffer for KRfbxx", 
+        "Name[zh_CN]": "XRfb 的 X11 帧缓冲", 
         "ServiceTypes": [
             "krfb/framebuffer"
         ], 

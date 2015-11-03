@@ -18,7 +18,8 @@
         "Description[sr]": "Прикључци кадробафера за КРФБ", 
         "Description[sv]": "Insticksprogram med rambuffert för Krfb", 
         "Description[uk]": "Додатки буфера кадрів для KRfb", 
-        "Description[x-test]": "xxFrame Buffer plugins for KRfbxx"
+        "Description[x-test]": "xxFrame Buffer plugins for KRfbxx", 
+        "Description[zh_CN]": "KRfb 的帧缓冲插件"
     }, 
     "X-KDE-ServiceType": "krfb/framebuffer"
 }
