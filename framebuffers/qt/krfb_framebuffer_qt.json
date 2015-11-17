@@ -27,6 +27,7 @@
         "Id": "qt", 
         "License": "GPL", 
         "Name": "Qt Framebuffer for KRfb", 
+        "Name[ast]": "Framebuffer Qt pa KRfb", 
         "Name[ca@valencia]": "«Framebuffer» Qt per al KRfb.", 
         "Name[ca]": "«Framebuffer» Qt per al KRfb.", 
         "Name[de]": "Qt-Framebuffer für KRfb", 
