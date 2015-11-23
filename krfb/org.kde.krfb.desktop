@@ -1,7 +1,7 @@
 # KDE Config File
 [Desktop Entry]
 Type=Application
-Exec=krfb -caption %c %i
+Exec=krfb -qwindowtitle %c %i
 Icon=krfb
 X-DBUS-StartupType=Unique
 X-DocPath=krfb/index.html
