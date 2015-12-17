@@ -24,6 +24,7 @@
         "Description[sv]": "X11-rambuffert för Krfb.", 
         "Description[uk]": "Заснований на Qt буфер кадрів для KRfb.", 
         "Description[x-test]": "xxQt based Framebuffer for KRfb.xx", 
+        "Description[zh_CN]": "KRfb 的基于 Qt 的帧缓冲。", 
         "EnabledByDefault": true, 
         "Id": "qt", 
         "License": "GPL", 
@@ -51,6 +52,7 @@
         "Name[sv]": "X11-rambuffert för Krfb", 
         "Name[uk]": "Буфер кадрів на Qt для KRfb", 
         "Name[x-test]": "xxQt Framebuffer for KRfbxx", 
+        "Name[zh_CN]": "KRfb 的 Qt 帧缓冲", 
         "ServiceTypes": [
             "krfb/framebuffer"
         ], 

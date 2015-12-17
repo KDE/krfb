@@ -24,6 +24,7 @@
         "Description[sv]": "X11 XDamage/XShm-baserad rambuffert för Krfb.", 
         "Description[uk]": "Заснований на XDamage/XShm X11 буфер кадрів для KRfb.", 
         "Description[x-test]": "xxX11 XDamage/XShm based Framebuffer for KRfb.xx", 
+        "Description[zh_CN]": "KRfb 的基于 X11 XDamage/XShm 的帧缓冲。", 
         "EnabledByDefault": true, 
         "Id": "x11", 
         "License": "GPL", 
