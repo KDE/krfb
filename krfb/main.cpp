@@ -35,7 +35,7 @@
 #include <QCommandLineParser>
 #include <QCommandLineOption>
 
-static const char KRFB_VERSION[] = I18N_NOOP("5.0");
+static const char KRFB_VERSION[] = "5.0";
 static const char description[] = I18N_NOOP("VNC-compatible server to share "
                                   "KDE desktops");
 
@@ -58,9 +58,13 @@ static bool checkX11Capabilities()
 
 int main(int argc, char *argv[])
 {
-    KAboutData aboutData(I18N_NOOP("krfb"),
+    QApplication app(argc, argv);
+
+    KLocalizedString::setApplicationDomain("krfb");
+
+    KAboutData aboutData("krfb",
 			 i18n("Desktop Sharing"),
-			 I18N_NOOP(KRFB_VERSION),
+			 KRFB_VERSION,
                          i18n(description),
 			 KAboutLicense::GPL,
                          i18n("(c) 2009-2010, Collabora Ltd.\n"
@@ -87,7 +91,6 @@ int main(int argc, char *argv[])
     aboutData.addCredit(i18n("AT&T Laboratories Boston"),
                         i18n("original VNC encoders and "
                               "protocol design"));
-    QApplication app(argc, argv);
     QCommandLineParser parser;
     KAboutData::setApplicationData(aboutData);
     parser.addVersionOption();
