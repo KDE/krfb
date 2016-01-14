@@ -7,6 +7,7 @@
         "Description[de]": "Framebuffer-Module für KRfb", 
         "Description[en_GB]": "Frame Buffer plugins for KRfb", 
         "Description[es]": "Complementos de framebuffer para KRfb", 
+        "Description[et]": "KRfb kaadripuhvri plugin", 
         "Description[fi]": "Kehyspuskuriliitännäinen kohteelle KRfb", 
         "Description[gl]": "Engadido de frame buffer para KRfb", 
         "Description[it]": "Estensioni del framebuffer per KRfb", 
