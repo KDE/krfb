@@ -6,7 +6,7 @@ include(FeatureSummary)
 find_package(Qt5 REQUIRED COMPONENTS Core DBus Widgets X11Extras)
 
 find_package(ECM 1.7.0 NO_MODULE REQUIRED)
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR})
+set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR})
 
 include(KDEInstallDirs)
 include(KDECMakeSettings)
@@ -28,6 +28,39 @@ find_package(KF5 REQUIRED COMPONENTS
     WidgetsAddons
     XmlGui
 )
+
+find_package(KF5Wayland CONFIG)
+set_package_properties(KF5Wayland PROPERTIES DESCRIPTION "KDE Frameworks Wayland integration package"
+                       URL "https://github.com/KDE/kwayland"
+                       TYPE OPTIONAL
+                       PURPOSE "Required for wayland integration with KWin server"
+                      )
+
+find_package(epoxy)
+set_package_properties(epoxy PROPERTIES DESCRIPTION "libepoxy"
+                       URL "http://github.com/anholt/libepoxy"
+                       TYPE OPTIONAL
+                       PURPOSE "OpenGL dispatch library for GBM backend"
+                      )
+
+find_package(Libdrm)
+set_package_properties(Libdrm PROPERTIES DESCRIPTION "Libdrm"
+                       TYPE OPTIONAL
+                       PURPOSE "Required for GBM access to compositor buffers on Wayland"
+                      )
+
+set(HAVE_DRM FALSE)
+if(KF5Wayland_FOUND AND Libdrm_FOUND AND epoxy_FOUND)
+    set(HAVE_DRM TRUE)
+endif()
+
+find_package(gbm)
+set_package_properties(gbm PROPERTIES TYPE OPTIONAL PURPOSE "Required for egl ouput of drm backend.")
+set(HAVE_GBM FALSE)
+if(HAVE_DRM AND gbm_FOUND)
+    set(HAVE_GBM TRUE)
+endif()
+
 
 find_package(X11 REQUIRED)
 

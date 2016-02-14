@@ -23,9 +23,10 @@
 #include "qtframebuffer.h"
 
 #include <KPluginFactory>
+#include <QX11Info>
 
 K_PLUGIN_FACTORY_WITH_JSON(QtFrameBufferPluginFactory, "krfb_framebuffer_qt.json",
-			   registerPlugin<QtFrameBufferPlugin>();)
+               registerPlugin<QtFrameBufferPlugin>();)
 
 QtFrameBufferPlugin::QtFrameBufferPlugin(QObject *parent, const QVariantList &args)
     : FrameBufferPlugin(parent, args)
@@ -38,6 +39,10 @@ QtFrameBufferPlugin::~QtFrameBufferPlugin()
 
 FrameBuffer *QtFrameBufferPlugin::frameBuffer(WId id)
 {
+    // works only under X11
+    if(!QX11Info::isPlatformX11())
+        return nullptr;
+
     return new QtFrameBuffer(id);
 }
 

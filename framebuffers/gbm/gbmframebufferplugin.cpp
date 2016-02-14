@@ -1,11 +1,10 @@
 /* This file is part of the KDE project
-   Copyright (C) 2009 Collabora Ltd <info@collabora.co.uk>
-    @author George Goldberg <george.goldberg@collabora.co.uk>
+   Copyright (C) 2016 Oleg Chernovskiy <adonai@xaker.ru>
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public
    License as published by the Free Software Foundation; either
-   version 2 of the License, or (at your option) any later version.
+   version 3 of the License, or (at your option) any later version.
 
    This program is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -18,33 +17,34 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include "x11framebufferplugin.h"
+#include "gbmframebufferplugin.h"
 
-#include "x11framebuffer.h"
+#include "gbmframebuffer.h"
 
 #include <KPluginFactory>
-#include <QX11Info>
 
-K_PLUGIN_FACTORY_WITH_JSON(X11FrameBufferPluginFactory, "krfb_framebuffer_x11.json",
-               registerPlugin<X11FrameBufferPlugin>();)
+K_PLUGIN_FACTORY_WITH_JSON(GbmFrameBufferPluginFactory, "krfb_framebuffer_gbm.json",
+               registerPlugin<GbmFrameBufferPlugin>();)
 
-X11FrameBufferPlugin::X11FrameBufferPlugin(QObject *parent, const QVariantList &args)
+GbmFrameBufferPlugin::GbmFrameBufferPlugin(QObject *parent, const QVariantList &args)
     : FrameBufferPlugin(parent, args)
 {
 }
 
-X11FrameBufferPlugin::~X11FrameBufferPlugin()
+GbmFrameBufferPlugin::~GbmFrameBufferPlugin()
 {
 }
 
-FrameBuffer *X11FrameBufferPlugin::frameBuffer(WId id)
+FrameBuffer *GbmFrameBufferPlugin::frameBuffer(WId id)
 {
-    // works only under X11
-    if(!QX11Info::isPlatformX11())
+    auto p = new GbmFrameBuffer(id);
+    if (!p->isValid()) {
+        delete p;
         return nullptr;
+    }
 
-    return new X11FrameBuffer(id);
+    return p;
 }
 
-#include "x11framebufferplugin.moc"
+#include "gbmframebufferplugin.moc"
 
