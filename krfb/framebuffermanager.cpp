@@ -71,25 +71,25 @@ void FrameBufferManager::loadPlugins()
     i.toBack();
     QSet<QString> unique;
     while (i.hasPrevious()) {
-	KPluginMetaData data = i.previous();
+    KPluginMetaData data = i.previous();
         // only load plugins once, even if found multiple times!
         if (unique.contains(data.name()))
             continue;
-	KPluginFactory *factory = KPluginLoader(data.fileName()).factory();
-	
-	if (!factory) {
-		qDebug() << "KPluginFactory could not load the plugin:" << data.fileName();
-	} else {
-		qDebug() << "found plugin at " << data.fileName();
-	}
-	
-	FrameBufferPlugin *plugin = factory->create<FrameBufferPlugin>(this);
-	if (plugin) {
-		m_plugins.insert(data.pluginId(), plugin);
-		qDebug() << "Loaded plugin with name " << data.pluginId();
-	} else {
-		qDebug() << "unable to load pluign for " << data.fileName();
-	}
+        KPluginFactory *factory = KPluginLoader(data.fileName()).factory();
+
+        if (!factory) {
+            qDebug() << "KPluginFactory could not load the plugin:" << data.fileName();
+        } else {
+            qDebug() << "found plugin at " << data.fileName();
+        }
+
+        FrameBufferPlugin *plugin = factory->create<FrameBufferPlugin>(this);
+        if (plugin) {
+            m_plugins.insert(data.pluginId(), plugin);
+            qDebug() << "Loaded plugin with name " << data.pluginId();
+        } else {
+            qDebug() << "unable to load plugin for " << data.fileName();
+        }
         unique.insert (data.name());
     }
 }
