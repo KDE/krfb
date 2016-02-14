@@ -41,6 +41,9 @@ static const char description[] = I18N_NOOP("VNC-compatible server to share "
 
 static bool checkX11Capabilities()
 {
+    if(!QX11Info::isPlatformX11())
+        return false;
+
     int bp1, bp2, majorv, minorv;
     Bool r = XTestQueryExtension(QX11Info::display(), &bp1, &bp2,
                                  &majorv, &minorv);
@@ -56,6 +59,15 @@ static bool checkX11Capabilities()
     return true;
 }
 
+static bool checkWaylandCapabilities()
+{
+    if (!QGuiApplication::platformName().contains(QStringLiteral("wayland"), Qt::CaseInsensitive)) {
+        return false;
+    }
+
+    return true;
+}
+
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
@@ -63,10 +75,10 @@ int main(int argc, char *argv[])
     KLocalizedString::setApplicationDomain("krfb");
 
     KAboutData aboutData("krfb",
-			 i18n("Desktop Sharing"),
-			 KRFB_VERSION,
+            i18n("Desktop Sharing"),
+             KRFB_VERSION,
                          i18n(description),
-			 KAboutLicense::GPL,
+             KAboutLicense::GPL,
                          i18n("(c) 2009-2010, Collabora Ltd.\n"
                                "(c) 2007, Alessandro Praduroux\n"
                                "(c) 2001-2003, Tim Jansen\n"
@@ -105,7 +117,10 @@ int main(int argc, char *argv[])
 
     app.setQuitOnLastWindowClosed(false);
 
-    if (!checkX11Capabilities()) {
+    bool supportsX11 = checkX11Capabilities();
+    bool supportsWayland = checkWaylandCapabilities();
+
+    if (!supportsWayland && !supportsX11) {
         return 1;
     }
 
