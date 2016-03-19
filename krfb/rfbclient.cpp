@@ -21,9 +21,12 @@
 #include "connectiondialog.h"
 #include "krfbconfig.h"
 #include "sockethelpers.h"
-#include "events.h"
+#include "eventsmanager.h"
+// Qt
 #include <QtCore/QSocketNotifier>
+#include <QSharedPointer>
 #include <QDebug>
+// system
 #include <poll.h>
 #include <strings.h> //for bzero()
 
@@ -37,6 +40,7 @@ struct RfbClient::Private
     bool controlEnabled;
     rfbClientPtr client;
     QSocketNotifier *notifier;
+    QSharedPointer<EventHandler> eventHandler;
     QString remoteAddressString;
 };
 
@@ -49,6 +53,8 @@ RfbClient::RfbClient(rfbClientPtr client, QObject* parent)
     d->notifier = new QSocketNotifier(client->sock, QSocketNotifier::Read, this);
     d->notifier->setEnabled(false);
     connect(d->notifier, &QSocketNotifier::activated, this, &RfbClient::onSocketActivated);
+
+    d->eventHandler = EventsManager::instance()->eventHandler();
 }
 
 RfbClient::~RfbClient()
@@ -110,14 +116,14 @@ rfbClientPtr RfbClient::getRfbClientPtr()
 void RfbClient::handleKeyboardEvent(bool down, rfbKeySym keySym)
 {
     if (d->controlEnabled) {
-        EventHandler::handleKeyboard(down, keySym);
+        d->eventHandler->handleKeyboard(down, keySym);
     }
 }
 
 void RfbClient::handleMouseEvent(int buttonMask, int x, int y)
 {
     if (d->controlEnabled) {
-        EventHandler::handlePointer(buttonMask, x, y);
+        d->eventHandler->handlePointer(buttonMask, x, y);
     }
 }
 

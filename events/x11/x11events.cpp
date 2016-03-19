@@ -1,10 +1,7 @@
 /*
    This file is part of the KDE project
 
-   Copyright (C) 2010 Collabora Ltd.
-     @author George Kiagiadakis <george.kiagiadakis@collabora.co.uk>
-   Copyright (C) 2007 Alessandro Praduroux <pradu@pradu.it>
-   Copyright (C) 2001-2003 by Tim Jansen <tim@tjansen.de>
+   Copyright (C) 2016 Oleg Chernovskiy <kanedias@xaker.ru>
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public
@@ -22,7 +19,7 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include "events.h"
+#include "x11events.h"
 
 #include <QApplication>
 #include <QX11Info>
@@ -141,7 +138,7 @@ static void tweakModifiers(signed char mod, bool down)
     }
 }
 
-void EventHandler::handleKeyboard(bool down, rfbKeySym keySym)
+void X11EventHandler::handleKeyboard(bool down, rfbKeySym keySym)
 {
 #define ADJUSTMOD(sym,state) \
     if(keySym==sym) { if(down) data->modifierState|=state; else data->modifierState&=~state; }
@@ -175,7 +172,7 @@ void EventHandler::handleKeyboard(bool down, rfbKeySym keySym)
     }
 }
 
-void EventHandler::handlePointer(int buttonMask, int x, int y)
+void X11EventHandler::handlePointer(int buttonMask, int x, int y)
 {
     QDesktopWidget *desktopWidget = QApplication::desktop();
 

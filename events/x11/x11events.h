@@ -1,10 +1,7 @@
 /*
    This file is part of the KDE project
 
-   Copyright (C) 2010 Collabora Ltd.
-     @author George Kiagiadakis <george.kiagiadakis@collabora.co.uk>
-   Copyright (C) 2007 Alessandro Praduroux <pradu@pradu.it>
-   Copyright (C) 2001-2003 by Tim Jansen <tim@tjansen.de>
+   Copyright (C) 2016 by Oleg Chernovskiy <kanedias@xaker.ru>
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public
@@ -22,17 +19,16 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef EVENTS_H
-#define EVENTS_H
+#ifndef EVENTS_X11EVENTS_H
+#define EVENTS_X11EVENTS_H
 
-#include "rfb.h"
+#include "../../krfb/events.h"
 
-class EventHandler
+class X11EventHandler : public EventHandler
 {
 public:
-    virtual void handleKeyboard(bool down, rfbKeySym key) = 0;
-    virtual void handlePointer(int buttonMask, int x, int y) = 0;
-    virtual ~EventHandler() = default;
+    virtual void handleKeyboard(bool down, rfbKeySym key);
+    virtual void handlePointer(int buttonMask, int x, int y);
 };
 
 #endif
