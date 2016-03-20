@@ -1,0 +1,17 @@
+[Desktop Entry]
+Encoding=UTF-8
+Comment=KWin FakeInput based event handler for KRfb
+Comment[ru]=Обработчик событий для KRfb на базе интерфейса FakeInput KWin
+Comment[x-test]=KWin FakeInput based event handler for KRfbxx
+Name=KWin FakeInput based event handler for KRfb
+Name[ru]=Обработчик событий для KRfb на базе интерфейса FakeInput KWin
+Name[x-test]=xxKWin FakeInput based event handler for KRfbxx
+Type=Service
+ServiceTypes=krfb/events
+
+X-KDE-Library=krfb_events_fakeinput
+X-KDE-PluginInfo-Name=fakeinput
+X-KDE-PluginInfo-Version=0.1
+X-KDE-PluginInfo-Website=http://www.kde.org
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true

@@ -1,0 +1,17 @@
+{
+    "Encoding": "UTF-8",
+    "KPlugin": {
+        "Description": "KWin FakeInput based event handler for KRfb",
+        "Description[x-test]": "xxKWin FakeInput based event handler for KRfbxx",
+        "EnabledByDefault": true,
+        "Id": "fakeinput",
+        "License": "GPL",
+        "Name": "KWin FakeInput Event handler for KRfb",
+        "Name[x-test]": "xxKWin FakeInput Event handler for KRfbxx",
+        "ServiceTypes": [
+            "krfb/events"
+        ],
+        "Version": "0.1",
+        "Website": "http://www.kde.org"
+    }
+}

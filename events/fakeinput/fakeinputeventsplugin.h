@@ -1,7 +1,6 @@
-/*
-   This file is part of the KDE project
+/* This file is part of the KDE project
 
-   Copyright (C) 2016 by Oleg Chernovskiy <kanedias@xaker.ru>
+   Copyright (C) 2016 Oleg Chernovskiy <kanedias@xaker.ru>
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public
@@ -19,22 +18,28 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef EVENTS_X11EVENTS_H
-#define EVENTS_X11EVENTS_H
+#ifndef KRFB_EVENTS_GBM_GBMEVENTSPLUGIN_H
+#define KRFB_EVENTS_GBM_GBMEVENTSPLUGIN_H
 
-#include "../../krfb/events.h"
+#include "eventsplugin.h"
 
-class X11EventHandler : public EventHandler
+#include <QWidget>
+
+class EventHandler;
+
+class FakeInputEventsPlugin : public EventsPlugin
 {
     Q_OBJECT
-public:
-    explicit X11EventHandler(QObject *parent = nullptr)
-        : EventHandler(parent)
-    {
-    };
 
-    virtual void handleKeyboard(bool down, rfbKeySym key);
-    virtual void handlePointer(int buttonMask, int x, int y);
+public:
+    FakeInputEventsPlugin(QObject *parent, const QVariantList &args);
+    virtual ~FakeInputEventsPlugin() = default;
+
+    EventHandler *eventHandler() override;
+
+private:
+    Q_DISABLE_COPY(FakeInputEventsPlugin)
 };
 
-#endif
+
+#endif  // Header guard

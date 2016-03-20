@@ -11,6 +11,7 @@ include(GenerateExportHeader)
 set (krfbprivate_SRCS
      framebuffer.cpp
      framebufferplugin.cpp
+     events.cpp
      eventsplugin.cpp
 )
 

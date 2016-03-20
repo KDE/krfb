@@ -1,7 +1,6 @@
-/*
-   This file is part of the KDE project
+/* This file is part of the KDE project
 
-   Copyright (C) 2016 by Oleg Chernovskiy <kanedias@xaker.ru>
+   Copyright (C) 2016 Oleg Chernovskiy <kanedias@xaker.ru>
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public
@@ -19,22 +18,24 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef EVENTS_X11EVENTS_H
-#define EVENTS_X11EVENTS_H
+#include "fakeinputeventsplugin.h"
 
-#include "../../krfb/events.h"
+#include "fakeinputevents.h"
 
-class X11EventHandler : public EventHandler
+#include <KPluginFactory>
+
+K_PLUGIN_FACTORY_WITH_JSON(FakeInputEventsPluginFactory, "krfb_events_fakeinput.json",
+               registerPlugin<FakeInputEventsPlugin>();)
+
+FakeInputEventsPlugin::FakeInputEventsPlugin(QObject *parent, const QVariantList &args)
+    : EventsPlugin(parent, args)
 {
-    Q_OBJECT
-public:
-    explicit X11EventHandler(QObject *parent = nullptr)
-        : EventHandler(parent)
-    {
-    };
+}
 
-    virtual void handleKeyboard(bool down, rfbKeySym key);
-    virtual void handlePointer(int buttonMask, int x, int y);
-};
+EventHandler *FakeInputEventsPlugin::eventHandler()
+{
+    // works only under Wayland
+    return new FakeInputEventHandler();
+}
 
-#endif
+#include "fakeinputeventsplugin.moc"

@@ -26,13 +26,18 @@
 #define EVENTS_H
 
 #include "rfb.h"
+#include "krfbprivate_export.h"
 
-class EventHandler
+#include <QObject>
+
+class KRFBPRIVATE_EXPORT EventHandler : public QObject
 {
+    Q_OBJECT
 public:
+    explicit EventHandler(QObject *parent = nullptr);
+    virtual ~EventHandler() = default;
     virtual void handleKeyboard(bool down, rfbKeySym key) = 0;
     virtual void handlePointer(int buttonMask, int x, int y) = 0;
-    virtual ~EventHandler() = default;
 };
 
 #endif

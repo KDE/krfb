@@ -19,22 +19,36 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef EVENTS_X11EVENTS_H
-#define EVENTS_X11EVENTS_H
+#ifndef EVENTS_GBMEVENTS_H
+#define EVENTS_GBMEVENTS_H
 
 #include "../../krfb/events.h"
 
-class X11EventHandler : public EventHandler
-{
-    Q_OBJECT
-public:
-    explicit X11EventHandler(QObject *parent = nullptr)
-        : EventHandler(parent)
-    {
-    };
+#include <QScopedPointer>
 
+namespace KWayland
+{
+namespace Client
+{
+class FakeInput;
+}
+}
+
+class EventData;
+
+class FakeInputEventHandler : public EventHandler
+{
+public:
+    FakeInputEventHandler();
     virtual void handleKeyboard(bool down, rfbKeySym key);
     virtual void handlePointer(int buttonMask, int x, int y);
+private:
+    void initWaylandConnection();
+    void authIfNeeded();
+
+    QScopedPointer<EventData> m_eventData;
+    KWayland::Client::FakeInput *m_interface = nullptr;
+    bool m_authRequested = false;
 };
 
 #endif

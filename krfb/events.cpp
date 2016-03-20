@@ -1,7 +1,10 @@
 /*
    This file is part of the KDE project
 
-   Copyright (C) 2016 by Oleg Chernovskiy <kanedias@xaker.ru>
+   Copyright (C) 2010 Collabora Ltd.
+     @author George Kiagiadakis <george.kiagiadakis@collabora.co.uk>
+   Copyright (C) 2007 Alessandro Praduroux <pradu@pradu.it>
+   Copyright (C) 2001-2003 by Tim Jansen <tim@tjansen.de>
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public
@@ -19,22 +22,11 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef EVENTS_X11EVENTS_H
-#define EVENTS_X11EVENTS_H
+#include "events.h"
 
-#include "../../krfb/events.h"
-
-class X11EventHandler : public EventHandler
+EventHandler::EventHandler(QObject *parent)
+    : QObject(parent)
 {
-    Q_OBJECT
-public:
-    explicit X11EventHandler(QObject *parent = nullptr)
-        : EventHandler(parent)
-    {
-    };
+}
 
-    virtual void handleKeyboard(bool down, rfbKeySym key);
-    virtual void handlePointer(int buttonMask, int x, int y);
-};
-
-#endif
+#include "events.moc"

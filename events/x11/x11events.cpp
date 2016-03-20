@@ -195,3 +195,6 @@ void X11EventHandler::handlePointer(int buttonMask, int x, int y)
 
     data->buttonMask = buttonMask;
 }
+
+#include "x11events.moc"
+
