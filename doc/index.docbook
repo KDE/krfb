@@ -163,14 +163,14 @@ The address is just a hint - you can use any address that can
 reach your computer. &krfb; tries to guess your address from your
 network configuration, but does not always succeed in doing so.
 If your computer is behind a firewall it may have a different
-address or be unreachable for other computers
+address or be unreachable for other computers.
 </para>
 <para>
 You can change the port on the <guilabel>Network</guilabel>
 page in the configuration dialog.
 </para>
 <para>
-The next field is prefilled with an automatical generated password.
+The next field is prefilled with an automatically generated password.
 Click in the icon at the right of the field to change the password.
 </para>
 </sect2>
@@ -296,7 +296,7 @@ the correct port.
 
 <para>
 The <guilabel>Security</guilabel> page allows you to configure whether the
-person connecting to the &krfb; servercan control the desktop, or only view.
+person connecting to the &krfb; server can control the desktop, or only view.
 </para>
 
 <para>
