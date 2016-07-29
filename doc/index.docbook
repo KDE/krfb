@@ -1,21 +1,10 @@
 <?xml version="1.0" ?>
 <!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
-  <!ENTITY kappname "&krfb;">
-  <!ENTITY package "kdenetwork">
   <!ENTITY % addindex "IGNORE">
-  <!ENTITY % English "INCLUDE"> <!-- ONLY If you are writing non-English 
-                                     original documentation, change 
-                                     the language here -->
-    
-  <!-- Do not define any other entities; instead, use the entities
-       from entities/general.entities and $LANG/user.entities. -->
+  <!ENTITY % English "INCLUDE">
 ]>
-<!-- Based on kdoctemplate v0.9 January 10 2003 -->
 
 <book id="krfb" lang="&language;">
-
-<!-- This header contains all of the meta-information for the document such
-as Authors, publish date, the abstract, and Keywords -->
 
 <bookinfo>
 <title>The &krfb; Handbook</title>
@@ -32,21 +21,11 @@ as Authors, publish date, the abstract, and Keywords -->
 <year>2003</year>
 <holder>&Brad.Hards;</holder>
 </copyright>
-<!-- Translators: put here the copyright notice of the translation -->
 
 <legalnotice>&FDLNotice;</legalnotice>
 
-<!-- Date and version information of the documentation
-Don't forget to include this last date and this last revision number, we
-need them for translation coordination !
-Please respect the format of the date (YYYY-MM-DD) and of the version
-(V.MM.LL), it could be used by automation scripts.
-Do NOT change these in the translation. -->
-
-<date>2013-06-19</date>
-<releaseinfo>&kde; 4.11</releaseinfo>
-
-<!-- Abstract about this handbook -->
+<date>2016-07-25</date>
+<releaseinfo>5.0 (Applications 16.08)</releaseinfo>
 
 <abstract>
 <para>
@@ -55,10 +34,6 @@ session with a user on another machine, who can use a <acronym>VNC</acronym> cli
 view or even control the desktop.
 </para>
 </abstract>
-
-<!-- This is a set of Keywords for indexing by search engines.
-Please at least include KDE, the KDE package it is in, the name
- of your application, and a few relevant keywords. -->
 
 <keywordset>
 <keyword>KDE</keyword>
@@ -75,22 +50,8 @@ Please at least include KDE, the KDE package it is in, the name
 
 </bookinfo>
 
-<!-- The contents of the documentation begin here.  Label
-each chapter so with the id attribute. This is necessary for two reasons: it
-allows you to easily reference the chapter from other chapters of your
-document, and if there is no ID, the name of the generated HTML files will vary
-from time to time making it hard to manage for maintainers and for the CVS
-system. Any chapter labelled (OPTIONAL) may be left out at the author's
-discretion. Other chapters should not be left out in order to maintain a
-consistent documentation style across all KDE apps. -->
-
 <chapter id="introduction">
 <title>Introduction</title>
-
-<!-- The introduction chapter contains a brief introduction for the
-application that explains what it does and where to report
-problems. Basically a long version of the abstract.  Don't include a
-revision history. (see installation appendix comment) -->
 
 <para>
 &krfb; is a server application that allows you to share your current
@@ -165,10 +126,8 @@ use &krfb; over other links, but performance is unlikely to be as good.
 <chapter id="using-krfb">
 <title>Using &krfb;</title>
 
-<!-- This chapter should tell the user how to use your app. You should use as
-many sections (Chapter, Sect1, Sect3, etc...) as is necessary to fully document
-your application. -->
-
+<sect1 id="main-windw">
+<title>&krfb; Main Window</title>
 <para>
 It is very easy to use &krfb; - it has a simple interface, as shown in
 the screenshot below.
@@ -189,64 +148,69 @@ the screenshot below.
 </para>
 
 <para>
-When you want to allow someone to access your desktop, you can create
-an personal invitation using the <guibutton>New Personal
-Invitation...</guibutton> button, which will bring up a window
-containing the information needed to access your desktop. An example
-is shown below.
+When you want to allow someone to access your desktop, you have to
+enable the checkbox <guilabel>Enable Desktop Sharing</guilabel>,
+which will start the server.
+</para>
+
+<sect2 id="connection-details">
+<title>Connection Details</title>
+
+<para>
+The <guilabel>Address</guilabel> contains the address of your
+computer and the port number, separated by a colon.
+The address is just a hint - you can use any address that can
+reach your computer. &krfb; tries to guess your address from your
+network configuration, but does not always succeed in doing so.
+If your computer is behind a firewall it may have a different
+address or be unreachable for other computers
+</para>
+<para>
+You can change the port on the <guilabel>Network</guilabel>
+page in the configuration dialog.
+</para>
+<para>
+The next field is prefilled with an automatical generated password.
+Click in the icon at the right of the field to change the password.
+</para>
+</sect2>
+
+<sect2 id="unattended-access">
+<title>Unattended Access</title>
+
+<para>
+Any remote user with the desktop sharing password will have to be authenticated.
+If unattended access is activated, and the remote user provides the password
+for unattended mode, desktop sharing access will be granted without explicit
+confirmation.
+</para>
+<para>
+By default the password for this mode is empty, to change that click on
+the button and enter a password.
+</para>
+<para>
+If unattended access is allowed, then you should probably specify a
+password.
 </para>
 
 <para>
-<screenshot>
-<screeninfo>Example &krfb; personal invitation</screeninfo>
-	<mediaobject>
-	  <imageobject>
-	    <imagedata fileref="personal_invitation.png" format="PNG"/>
-	  </imageobject>
-	  <textobject>
-	    <phrase>Example &krfb; personal invitation</phrase>
-	  </textobject>
-	</mediaobject>
-</screenshot>
+If the machine is a server and you are using &krfb; for remote
+administration, you probably want to use unattended access.
 </para>
 
-<para>
-To increase security, the invitation is only valid for an
-hour after it is created, and of course the person connecting has to
-have the correct password. 
-</para>
+</sect2>
+
+<sect2 id="transfer-login-information">
+<title>Transfer Login Information</title>
 
 <para>
-Since you may want to invite someone to access your desktop by email,
-&krfb; can create invitations as email messages. You can create such
-an invitation using the <guibutton>New Email Invitation...</guibutton>
-button on the &krfb; main window. This will usually bring up an email
-message that looks like the following, ready for you to type in the
-email address of the person you are sending the invitation to.
-</para>
-
-<para>
-<screenshot>
-<screeninfo>Example &krfb; email invitation</screeninfo>
-	<mediaobject>
-	  <imageobject>
-	    <imagedata fileref="email_invitation.png" format="PNG"/>
-	  </imageobject>
-	  <textobject>
-	    <phrase>Example &krfb; email invitation</phrase>
-	  </textobject>
-	</mediaobject>
-</screenshot>
-</para>
-
-<warning>
-<para>
-&krfb; will warn you about the security implications of sending this
-information across an insecure link. You must heed those warnings.
+&krfb; has no invitation feature any more as in previous versions.
+So you have to transfer the login information yourself using email
+or a personal invitation.
 </para>
 <para>
 If you cannot encrypt the email (or otherwise secure the link),
-sending invitations by email is a very serious security risk, since
+sending a password by email is a very serious security risk, since
 anyone can read the password and address from the email as it passes
 over the network. This means that they can potentially take control of
 your machine.
@@ -255,33 +219,32 @@ your machine.
 If you cannot encrypt the email message, it may be better to use a
 personal invitation, telephone the person you are giving access to,
 verify the identity of that person, and provide the required
-invitation information that way.
+information that way.
 </para>
-</warning>
 
-<sect1 id="krfb-managing-invitations">
-<title>Managing &krfb; invitations</title>
-
+<note>
 <para>
-Having created an invitation (either a personal invitation or one that
-was sent by email), &krfb; main window allows you to delete existing
-invitations. To just delete one of the invitations, select it with the
-mouse (it should become highlighted), and then select
-the <guibutton>Delete</guibutton>. To delete all invitations, just
-select the <guibutton>Delete All</guibutton> button.
+&krfb; uses the normal <acronym>RFB</acronym> password system, which does not transfer
+your password in the clear across the network. Instead, it uses a
+challenge-response system. This is reasonably secure, as long as the
+password is securely guarded.
 </para>
+</note>
 
-</sect1>
+</sect2>
 
-<sect1 id="krfb-qit">
+<sect2 id="krfb-qqit">
 <title>Quit &krfb;</title>
 
 <para>
-If you close the &krfb; main window the server keeps running, which is
-indicated by an icon in the system tray.
-To stop &krfb; right click on the  icon in the systems tray and select
+If you close the &krfb; main window by clicking on the window close icon or using the
+shortcut <keycombo action="simul">&Alt;<keycap>F4</keycap></keycombo> the server
+keeps running, which is indicated by an icon in the system tray.
+To stop &krfb; either use <menuchoice><guimenu>File</guimenu><guimenuitem>Quit</guimenuitem></menuchoice>
+in the main window or right click on the icon in the system tray and select
 <guimenuitem>Quit</guimenuitem>.
 </para>
+</sect2>
 
 </sect1>
 
@@ -290,7 +253,7 @@ To stop &krfb; right click on the  icon in the systems tray and select
 <para>
 In addition to the main &krfb; interface shown and described above, 
 you can also control &krfb;  using the
-<guibutton>Configure...</guibutton> on the &krfb; main window. The &krfb;
+<guimenuitem>Configure...</guimenuitem> on the &krfb; main window. The &krfb;
 configuration has two pages, as shown in the screenshot below: 
 </para>
 
@@ -314,8 +277,8 @@ The <guilabel>Network</guilabel> page allows control over the port that
 </para>
 
 <para>
-The <guilabel>Announce service on the network</guilabel> checkbox
-controls whether &krfb; announces invitations over the network using
+The <guilabel>Announce service on the local network</guilabel> checkbox
+controls whether &krfb; announces the service over the local network using
 Service Location Protocol. This is normally a good idea, but only
 works really well with a Service Location Protocol aware client, such
 as &krdc;.
@@ -323,8 +286,8 @@ as &krdc;.
 
 <para>
 If you select the <guilabel>Use default port</guilabel> checkbox, 
-then &krfb; will locate a suitable port, and invitations will match 
-this port. If you deselect this checkbox, you can specify a particular
+then &krfb; will locate a suitable port.
+If you deselect this checkbox, you can specify a particular
 port. Specifying a particular port may be useful if you are using
 port-forwarding on the firewall. Note that if Service Location
 Protocol is turned on, this will automatically deal with identifying
@@ -332,8 +295,8 @@ the correct port.
 </para>
 
 <para>
-The <guilabel>Security</guilabel> page allows you configure settings
-related to access to the &krfb; server.
+The <guilabel>Security</guilabel> page allows you to configure whether the
+person connecting to the &krfb; servercan control the desktop, or only view.
 </para>
 
 <para>
@@ -350,41 +313,15 @@ related to access to the &krfb; server.
 </screenshot>
 </para>
 
-<para>
-The <guilabel>Allow uninvited connections</guilabel> check box controls
-whether &krfb; allows connection without an invitation. If uninvited
-connections are allowed, then you should probably specify a
-password. You can also use the check boxes here to choose whether you
-have to confirm the connection before it proceeds, and whether the
-person connecting can control the desktop, or only view.
-</para>
-
-<para>
-If the machine is a workstation, and you choose to allow uninvited
-connections, you probably want to select the <guilabel>Ask 
-before accepting connections </guilabel>. Conversely, if the
-machine is a server and you are using &krfb; for remote
-administration, you probably want to deselect this option.
-</para>
-
-<note>
-<para>
-&krfb; uses the normal <acronym>RFB</acronym> password system, which does not transfer
-your password in the clear across the network. Instead, it uses a
-challenge-response system. This is reasonably secure, as long as the
-password is securely guarded.
-</para>
-</note>
-
 </sect1>
 
 <sect1 id="krfb-connection">
-<title>What happens when someone connects to &krfb;</title>
+<title>Connecting to &krfb;</title>
 
 <para>
 When someone connects to &krfb; on your machine, you will get a pop-up
 notification that looks like the following screenshot, unless you are
-accepting uninvited connections without warning.
+accepting unattended access without confirmation.
 </para>
 <para>
 <screenshot>
@@ -402,8 +339,8 @@ accepting uninvited connections without warning.
 
 <para>
 If you <guibutton>Accept Connection</guibutton>, the client can
-proceed to authenticate (which requires the correct password for a
-personal invitation or email invitation). If you <guibutton>Refuse
+proceed to authenticate, which requires the correct password for a
+login. If you <guibutton>Refuse
 Connection</guibutton>, then the attempt to connect will be terminated.
 </para>
 
@@ -413,22 +350,10 @@ mouse</guilabel> check box determines whether this client can only
 observe, or can take control of your machine. 
 </para>
 
-<para>
-If the client connection is successful, and used the password from a
-personal invitation or email invitation, then that invitation is
-deleted and cannot be used again. You will also get a small pop-up
-window in the dock, that shows that the connection has been made.
-</para>
-
 </sect1>
 </chapter>
 
 <chapter id="credits">
-
-<!-- Include credits for the programmers, documentation writers, and
-contributors here. The license for your software should then be included below
-the credits with a reference to the appropriate license file included in the KDE
-distribution. -->
 
 <title>Credits and License</title>
 
@@ -457,33 +382,6 @@ Documentation Copyright &copy; 2003 &Brad.Hards; &Brad.Hards.mail;
 &underGPL;        	 <!-- GPL License -->
 
 </chapter>
-
-<appendix id="installation">
-<title>Installation</title>
-
-<sect1 id="getting-krfb">
-<title>How to obtain &krfb;</title>
-
-<!-- This first entity contains boiler plate for applications that are
-part of KDE CVS.  You should remove it if you are releasing your
-application --> 
-
-&install.intro.documentation;
-
-</sect1>
-
-<sect1 id="compilation">
-<title>Compilation and Installation</title>
-
-<!-- This entity contains the boilerplate text for standard -->
-<!-- compilation instructions.  If your application requires any -->
-<!-- special handling, remove it, and replace with your own text. -->
-
-&install.compile.documentation;
-
-</sect1>
-
-</appendix>
 
 &documentation.index;
 </book>
