@@ -8,6 +8,10 @@
 
 #include "rfb/rfb.h"
 
+#ifdef max
+#undef max
+#endif
+
 #undef TRUE
 #undef FALSE
 
