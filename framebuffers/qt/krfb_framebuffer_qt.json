@@ -2,6 +2,7 @@
     "Encoding": "UTF-8", 
     "KPlugin": {
         "Description": "Qt based Framebuffer for KRfb.", 
+        "Description[ast]": "Framebuffer basáu en Qt pa KRfb", 
         "Description[ca@valencia]": "«Framebuffer» basat en les Qt per al KRfb.", 
         "Description[ca]": "«Framebuffer» basat en les Qt per al KRfb.", 
         "Description[cs]": "Framebuffer založený na Qt pro KRfb.", 
