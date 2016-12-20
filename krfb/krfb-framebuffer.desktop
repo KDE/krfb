@@ -3,7 +3,6 @@ Type=ServiceType
 X-KDE-ServiceType=krfb/framebuffer
 
 Comment=Frame Buffer plugins for KRfb
-Comment[ast]=Complementu de buffer pa KRfb
 Comment[bg]=Приставки за фреймбуфер за KRfb
 Comment[bs]=Priključci framebafera za KRfb
 Comment[ca]=Connectors de «framebuffer» per al KRfb.
