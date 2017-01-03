@@ -2,6 +2,7 @@
     "Encoding": "UTF-8", 
     "KPlugin": {
         "Description": "X11 XDamage/XShm based Framebuffer for KRfb.", 
+        "Description[ast]": "Búfer de cuadros basáu en XDamage/XShm de X11 pa KRfb.", 
         "Description[ca@valencia]": "«Framebuffer» basat en XDamage/XShmQt del X11 per al KRfb.", 
         "Description[ca]": "«Framebuffer» basat en XDamage/XShmQt del X11 per al KRfb.", 
         "Description[cs]": "Framebuffer založený na X11 XDamage/XShm pro KRfb.", 
@@ -36,6 +37,7 @@
         "Id": "x11", 
         "License": "GPL", 
         "Name": "X11 Framebuffer for KRfb", 
+        "Name[ast]": "Búfer de cuadros de X11 pa KRfb", 
         "Name[ca@valencia]": "«Framebuffer» del X11 per al KRfb.", 
         "Name[ca]": "«Framebuffer» del X11 per al KRfb.", 
         "Name[cs]": "X11 Framebuffer pro KRfb", 

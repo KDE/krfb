@@ -1,6 +1,7 @@
 [Desktop Entry]
 Encoding=UTF-8
 Comment=X11 XDamage/XShm based Framebuffer for KRfb.
+Comment[ast]=Búfer de cuadros basáu en XDamage/XShm de X11 pa KRfb.
 Comment[bg]=Основан на X11 XDamage/XShm фреймбуфер за KRfb.
 Comment[bs]=X11 XDamage/XShm baziran framebafer za KRfb.
 Comment[ca]=«Framebuffer» basat en XDamage/XShmQt del X11 per al KRfb.
@@ -48,6 +49,7 @@ Comment[x-test]=xxX11 XDamage/XShm based Framebuffer for KRfb.xx
 Comment[zh_CN]=基于 X11 XDamage/XShm 扩展的 KRfb 帧缓冲机制。
 Comment[zh_TW]=KRfb 的 X11 XDamage/XShm based Framebuffer
 Name=X11 Framebuffer for KRfb
+Name[ast]=Búfer de cuadros de X11 pa KRfb
 Name[bg]=X11 фреймбуфер за KRfb
 Name[bs]=X11 frame bafer za KRfb
 Name[ca]=«Framebuffer» del X11 per al KRfb.
