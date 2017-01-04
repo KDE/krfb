@@ -341,6 +341,7 @@ Action=Popup
 [Event/ConnectionClosed]
 Name=Connection Closed
 Name[ar]=الاتصال أغلق
+Name[ast]=Conexón zarrada
 Name[bg]=Връзката е прекъсната
 Name[bs]=Konekcija zatvorena
 Name[ca]=Connexió tancada
@@ -403,6 +404,7 @@ Name[zh_TW]=連線已關閉
 Comment=Connection closed
 Comment[af]=Verbinding gesluit
 Comment[ar]=تمّ غلق الاتصال
+Comment[ast]=Zarróse la conexón
 Comment[bg]=Връзката е прекъсната
 Comment[bn]=সংযোগ বন্ধ করা হল
 Comment[br]=Serret eo ar gevreadenn
