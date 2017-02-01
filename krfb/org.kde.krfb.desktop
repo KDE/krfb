@@ -144,5 +144,6 @@ GenericName[x-test]=xxDesktop Sharingxx
 GenericName[zh_CN]=桌面共享
 GenericName[zh_HK]=桌面分享
 GenericName[zh_TW]=桌面分享
+Comment=Desktop Sharing
 Categories=Qt;KDE;System;Network;RemoteAccess;
 X-DBUS-ServiceName=org.kde.krfb
