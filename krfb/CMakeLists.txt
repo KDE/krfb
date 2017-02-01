@@ -112,6 +112,10 @@ install (PROGRAMS org.kde.krfb.desktop
          DESTINATION ${XDG_APPS_INSTALL_DIR}
 )
 
+install(FILES org.kde.krfb.appdata.xml
+        DESTINATION ${KDE_INSTALL_METAINFODIR}
+)
+
 install (FILES krfb.notifyrc
          DESTINATION ${DATA_INSTALL_DIR}/krfb
 )
