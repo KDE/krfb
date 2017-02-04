@@ -37,7 +37,7 @@
 
 static const char KRFB_VERSION[] = "5.0";
 static const char description[] = I18N_NOOP("VNC-compatible server to share "
-                                  "KDE desktops");
+                                  "desktops");
 
 static bool checkX11Capabilities()
 {
