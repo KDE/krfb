@@ -9,6 +9,7 @@
   <name xml:lang="en-GB">Krfb</name>
   <name xml:lang="it">Krfb</name>
   <name xml:lang="nl">Krfb</name>
+  <name xml:lang="pl">Krfb</name>
   <name xml:lang="pt">Krfb</name>
   <name xml:lang="sk">Krfb</name>
   <name xml:lang="sl">Krfb</name>
@@ -26,6 +27,7 @@
   <summary xml:lang="en-GB">Desktop sharing</summary>
   <summary xml:lang="it">Condivisione del desktop</summary>
   <summary xml:lang="nl">Bureaublad delen</summary>
+  <summary xml:lang="pl">Współdzielenie pulpitu</summary>
   <summary xml:lang="pt">Partilha do ecrã</summary>
   <summary xml:lang="sk">Zdieľanie pracovnej plochy</summary>
   <summary xml:lang="sl">Souporaba namizja</summary>
@@ -44,6 +46,7 @@
     <p xml:lang="en-GB">Krfb Desktop Sharing is a server application that allows you to share your current session with a user on another machine, who can use a VNC client to view or even control the desktop.</p>
     <p xml:lang="it">Condivisione del desktop Krfb è un'applicazione server che permette di condividere la sessione attuale con un utente su un'altra macchina, che potrà usare un client VNC per visualizzare ed anche controllare il desktop.</p>
     <p xml:lang="nl">Bureaublad delen is een server-applicatie die u in staat stelt uw huidige sessie te delen met een gebruiker op een andere machine, die een VNC-client kan gebruiken om uw bureaublad te bekijken of zelfs te besturen.</p>
+    <p xml:lang="pl">Współdzielenie pulpitu Krfb jest aplikacją serwerową, która umożliwia współdzielenie twojej bieżącej sesji z użytkownikiem na innym komputerze, który może użyć klienta VNC do oglądania,a a nawet sterowania twoim pulpitem.</p>
     <p xml:lang="pt">A Partilha de Ecrã Krfb é uma aplicação de servidor que lhe permite partilhar a sua sessão actual com um utilizador noutra máquina, o qual poderá usar um cliente de VNC para ver ou mesmo controlar o ambiente de trabalho.</p>
     <p xml:lang="sk">Krfb je serverová aplikácia, ktorá vám umožní zdieľať vaše aktuálne sedenie s používateľom na inom stroji, ktorý môže používať VNC klienta na pripojenie alebo ovládanie stanice.</p>
     <p xml:lang="sl">Souporaba namizja Krfb je strežniški program, ki vam dovoli, da delite vašo trenutno sejo z uporabnikom na drugem računalniku, ki ima odjemalec VNC. Uporabnik lahko gleda ali celo nadzira namizje.</p>
