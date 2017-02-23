@@ -6,6 +6,7 @@
   <name>Krfb</name>
   <name xml:lang="ca">Krfb</name>
   <name xml:lang="ca-valencia">Krfb</name>
+  <name xml:lang="cs">Krfb</name>
   <name xml:lang="en-GB">Krfb</name>
   <name xml:lang="it">Krfb</name>
   <name xml:lang="nl">Krfb</name>
@@ -24,6 +25,7 @@
   <summary>Desktop sharing</summary>
   <summary xml:lang="ca">Compartició de l'escriptori</summary>
   <summary xml:lang="ca-valencia">Compartició de l'escriptori</summary>
+  <summary xml:lang="cs">Sdílení pracovní plochy</summary>
   <summary xml:lang="en-GB">Desktop sharing</summary>
   <summary xml:lang="it">Condivisione del desktop</summary>
   <summary xml:lang="nl">Bureaublad delen</summary>
