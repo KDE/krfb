@@ -78,7 +78,6 @@ add_executable (krfb
 
 target_link_libraries (krfb
                        krfbprivate
-                       vncserver
                        ${JPEG_LIBRARIES}
                        ${X11_Xext_LIB}
                        ${X11_X11_LIB}
