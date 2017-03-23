@@ -46,7 +46,7 @@
   <group name="FrameBuffer">
     <entry name="preferredFrameBufferPlugin" type="String">
       <label>Preferred Frame Buffer Plugin</label>
-      <default>x11</default>
+      <default>qt</default>
     </entry>
   </group>
 </kcfg>
