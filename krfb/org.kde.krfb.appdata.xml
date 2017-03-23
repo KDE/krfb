@@ -7,6 +7,7 @@
   <name xml:lang="ca">Krfb</name>
   <name xml:lang="ca-valencia">Krfb</name>
   <name xml:lang="cs">Krfb</name>
+  <name xml:lang="de">Krfb</name>
   <name xml:lang="en-GB">Krfb</name>
   <name xml:lang="it">Krfb</name>
   <name xml:lang="nl">Krfb</name>
@@ -26,6 +27,7 @@
   <summary xml:lang="ca">Compartició de l'escriptori</summary>
   <summary xml:lang="ca-valencia">Compartició de l'escriptori</summary>
   <summary xml:lang="cs">Sdílení pracovní plochy</summary>
+  <summary xml:lang="de">Freigabe der Arbeitsfläche</summary>
   <summary xml:lang="en-GB">Desktop sharing</summary>
   <summary xml:lang="it">Condivisione del desktop</summary>
   <summary xml:lang="nl">Bureaublad delen</summary>
@@ -45,6 +47,7 @@
     <p>Krfb Desktop Sharing is a server application that allows you to share your current session with a user on another machine, who can use a VNC client to view or even control the desktop.</p>
     <p xml:lang="ca">El Krfb és una aplicació de servidor que permet compartir la vostra sessió actual amb un usuari en una altra màquina, la qual pot emprar un client VNC per veure o controlar l'escriptori.</p>
     <p xml:lang="ca-valencia">El Krfb és una aplicació de servidor que permet compartir la vostra sessió actual amb un usuari en una altra màquina, la qual pot emprar un client VNC per veure o controlar l'escriptori.</p>
+    <p xml:lang="de">Krfb ist eine Serveranwendung, welche die gemeinsame Benutzung der aktuellen Sitzung mit einem Benutzer auf einem anderen Rechner ermöglicht, der mit Hilfe eines VNC-Programms den Bildschirminhalt sehen oder sogar die Arbeitsfläche bedienen kann.</p>
     <p xml:lang="en-GB">Krfb Desktop Sharing is a server application that allows you to share your current session with a user on another machine, who can use a VNC client to view or even control the desktop.</p>
     <p xml:lang="it">Condivisione del desktop Krfb è un'applicazione server che permette di condividere la sessione attuale con un utente su un'altra macchina, che potrà usare un client VNC per visualizzare ed anche controllare il desktop.</p>
     <p xml:lang="nl">Bureaublad delen is een server-applicatie die u in staat stelt uw huidige sessie te delen met een gebruiker op een andere machine, die een VNC-client kan gebruiken om uw bureaublad te bekijken of zelfs te besturen.</p>
