@@ -14,6 +14,8 @@
 #include <QRegion>
 #include <QPixmap>
 #include <QBitmap>
+#include <QGuiApplication>
+#include <QScreen>
 
 
 const int UPDATE_TIME = 500;
@@ -21,8 +23,16 @@ const int UPDATE_TIME = 500;
 QtFrameBuffer::QtFrameBuffer(WId id, QObject *parent)
     : FrameBuffer(id, parent)
 {
-    fbImage = QPixmap::grabWindow(win).toImage();
-    fb = new char[fbImage.byteCount()];
+    QScreen *screen = QGuiApplication::primaryScreen();
+    if (screen) {
+        primaryScreen = screen;
+        fbImage = screen->grabWindow(win).toImage();
+        fb = new char[fbImage.byteCount()];
+    } else {
+        fb = Q_NULLPTR;
+        primaryScreen = Q_NULLPTR;
+    }
+
     t = new QTimer(this);
     connect(t, &QTimer::timeout, this, &QtFrameBuffer::updateFrameBuffer);
 }
@@ -30,7 +40,8 @@ QtFrameBuffer::QtFrameBuffer(WId id, QObject *parent)
 
 QtFrameBuffer::~QtFrameBuffer()
 {
-    delete [] fb;
+    if (fb)
+        delete [] fb;
     fb = 0;
 }
 
@@ -66,7 +77,8 @@ void QtFrameBuffer::getServerFormat(rfbPixelFormat &format)
 
 void QtFrameBuffer::updateFrameBuffer()
 {
-    QImage img = QPixmap::grabWindow(win).toImage();
+    if (!fb || !primaryScreen) return;
+    QImage img = primaryScreen->grabWindow(win).toImage();
 #if 0 // This is actually slower than updating the whole desktop...
     QSize imgSize = img.size();
 
