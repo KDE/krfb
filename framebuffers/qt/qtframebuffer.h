@@ -14,6 +14,7 @@
 #include "framebuffer.h"
 
 class QTimer;
+class QScreen;
 /**
     @author Alessandro Praduroux <pradu@pradu.it>
 */
@@ -39,6 +40,7 @@ public Q_SLOTS:
 private:
     QImage fbImage;
     QTimer *t;
+    QScreen *primaryScreen;
 };
 
 #endif
