@@ -2,7 +2,7 @@
 <component type="desktop">
   <id>org.kde.krfb.desktop</id>
   <metadata_license>CC0-1.0</metadata_license>
-  <project_license>GPL-2+</project_license>
+  <project_license>GPL-2.0+</project_license>
   <name>Krfb</name>
   <name xml:lang="ca">Krfb</name>
   <name xml:lang="ca-valencia">Krfb</name>
