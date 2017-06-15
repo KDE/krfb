@@ -1,3 +1,5 @@
 add_subdirectory (qt)
-add_subdirectory (x11)
 
+if (${XCB_DAMAGE_FOUND} AND ${XCB_SHM_FOUND} AND ${XCB_IMAGE_FOUND})
+add_subdirectory (xcb)
+endif()

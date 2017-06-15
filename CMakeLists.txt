@@ -31,10 +31,21 @@ find_package(KF5 REQUIRED COMPONENTS
 
 find_package(X11 REQUIRED)
 
+find_package(XCB REQUIRED COMPONENTS
+    XCB
+    RENDER
+    SHAPE
+    XFIXES
+    DAMAGE
+    SHM
+    IMAGE
+)
+
 if(WIN32)
     set(CMAKE_REQUIRED_LIBRARIES ${KDEWIN32_LIBRARIES})
     set(CMAKE_REQUIRED_INCLUDES  ${KDEWIN32_INCLUDES})
 endif(WIN32)
+
 add_definitions(${QT_DEFINITIONS} ${QT_QTDBUS_DEFINITIONS})
 add_definitions(-DQT_USE_FAST_CONCATENATION -DQT_USE_FAST_OPERATOR_PLUS)
 include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} )
@@ -46,16 +57,6 @@ set(CMAKE_MODULE_PATH
 
 find_package(LibVNCServer REQUIRED)
 
-if (HAVE_XDAMAGE)
-set(X11_Xdamage_FOUND 1)
-else()
-set(X11_Xdamage_FOUND 0)
-endif()
-if (HAVE_XSHM)
-set(X11_XShm_FOUND 1)
-else()
-set(X11_XShm_FOUND 0)
-endif()
 
 include_directories ("${CMAKE_CURRENT_BINARY_DIR}/krfb"
                      "${CMAKE_CURRENT_SOURCE_DIR}/krfb"
