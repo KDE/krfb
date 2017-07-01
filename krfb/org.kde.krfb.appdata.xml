@@ -4,6 +4,7 @@
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-2.0+</project_license>
   <name>Krfb</name>
+  <name xml:lang="ast">Krfb</name>
   <name xml:lang="ca">Krfb</name>
   <name xml:lang="ca-valencia">Krfb</name>
   <name xml:lang="cs">Krfb</name>
@@ -27,6 +28,7 @@
   <name xml:lang="x-test">xxKrfbxx</name>
   <name xml:lang="zh-CN">Krfb</name>
   <summary>Desktop sharing</summary>
+  <summary xml:lang="ast">Compartición d'escritoriu</summary>
   <summary xml:lang="ca">Compartició de l'escriptori</summary>
   <summary xml:lang="ca-valencia">Compartició de l'escriptori</summary>
   <summary xml:lang="cs">Sdílení pracovní plochy</summary>
