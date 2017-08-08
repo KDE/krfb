@@ -68,6 +68,7 @@ kconfig_add_kcfg_files (krfb_SRCS
 ki18n_wrap_ui (krfb_SRCS
                    ui/configtcp.ui
                    ui/configsecurity.ui
+                   ui/configframebuffer.ui
                    ui/connectionwidget.ui
                    ui/mainwidget.ui
 )
