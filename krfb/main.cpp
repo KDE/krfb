@@ -56,6 +56,21 @@ static bool checkX11Capabilities()
     return true;
 }
 
+
+static void checkOldX11PluginConfig() {
+    if (KrfbConfig::preferredFrameBufferPlugin() == QStringLiteral("x11")) {
+        qDebug() << "Detected deprecated configuration: preferredFrameBufferPlugin = x11";
+        KConfigSkeletonItem *config_item = KrfbConfig::self()->findItem(
+                    QStringLiteral("preferredFrameBufferPlugin"));
+        if (config_item) {
+            config_item->setProperty(QStringLiteral("xcb"));
+            KrfbConfig::self()->save();
+            qDebug() << "  Fixed preferredFrameBufferPlugin from x11 to xcb.";
+        }
+    }
+}
+
+
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
@@ -108,6 +123,9 @@ int main(int argc, char *argv[])
     if (!checkX11Capabilities()) {
         return 1;
     }
+
+    // upgrade the configuration
+    checkOldX11PluginConfig();
 
     //init the core
     InvitationsRfbServer::init();

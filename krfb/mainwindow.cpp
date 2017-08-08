@@ -13,6 +13,7 @@
 #include "krfbconfig.h"
 #include "ui_configtcp.h"
 #include "ui_configsecurity.h"
+#include "ui_configframebuffer.h"
 
 #include <KConfigDialog>
 #include <KLocalizedString>
@@ -21,11 +22,18 @@
 #include <KActionCollection>
 #include <KLineEdit>
 #include <KNewPasswordDialog>
+#include <KPluginLoader>
+#include <KPluginMetaData>
 
 #include <QIcon>
 #include <QWidget>
+#include <QLineEdit>
+#include <QComboBox>
 #include <QSizePolicy>
+#include <QVector>
+#include <QSet>
 #include <QtNetwork/QNetworkInterface>
+
 
 class TCP: public QWidget, public Ui::TCP
 {
@@ -40,6 +48,40 @@ class Security: public QWidget, public Ui::Security
 public:
     Security(QWidget *parent = 0) : QWidget(parent) {
         setupUi(this);
+    }
+};
+
+class ConfigFramebuffer: public QWidget, public Ui::Framebuffer
+{
+public:
+    ConfigFramebuffer(QWidget *parent = 0) : QWidget(parent) {
+        setupUi(this);
+        // hide the line edit with framebuffer string
+        kcfg_preferredFrameBufferPlugin->hide();
+        // fill drop-down combo with a list of real existing plugins
+        this->fillFrameBuffersCombo();
+        // initialize combo with currently configured framebuffer plugin
+        cb_preferredFrameBufferPlugin->setCurrentText(KrfbConfig::preferredFrameBufferPlugin());
+        // connect signals between combo<->lineedit
+        // if we change selection in combo, lineedit is updated
+        QObject::connect(cb_preferredFrameBufferPlugin, &QComboBox::currentTextChanged,
+                         kcfg_preferredFrameBufferPlugin, &QLineEdit::setText);
+    }
+
+    void fillFrameBuffersCombo() {
+        const QVector<KPluginMetaData> plugins = KPluginLoader::findPlugins(
+                    QStringLiteral("krfb"), [](const KPluginMetaData & md) {
+            return md.serviceTypes().contains(QStringLiteral("krfb/framebuffer"));
+        });
+        QSet<QString> unique;
+        QVectorIterator<KPluginMetaData> i(plugins);
+        i.toBack();
+        while (i.hasPrevious()) {
+            const KPluginMetaData &metadata = i.previous();
+            if (unique.contains(metadata.pluginId())) continue;
+            cb_preferredFrameBufferPlugin->addItem(metadata.pluginId());
+            unique.insert(metadata.pluginId());
+        }
     }
 };
 
@@ -183,14 +225,28 @@ void MainWindow::aboutUnattendedMode()
 
 void MainWindow::showConfiguration()
 {
+    static QString s_prevFramebufferPlugin;
+    // ^^ needs to be static, because lambda will be called long time
+    //    after showConfiguration() ends, so auto variable would go out of scope
+    // save previously selected framebuffer plugin config
+    s_prevFramebufferPlugin = KrfbConfig::preferredFrameBufferPlugin();
+
     if (KConfigDialog::showDialog("settings")) {
         return;
     }
 
     KConfigDialog *dialog = new KConfigDialog(this, "settings", KrfbConfig::self());
-    dialog->addPage(new TCP, i18n("Network"), "network-workgroup");
+    dialog->addPage(new TCP, i18n("Network"), "network-wired");
     dialog->addPage(new Security, i18n("Security"), "security-high");
+    dialog->addPage(new ConfigFramebuffer, i18n("Screen capture"), "video-display");
     dialog->show();
+    connect(dialog, &KConfigDialog::settingsChanged, [this] () {
+        // check if framebuffer plugin config has changed
+        if (s_prevFramebufferPlugin != KrfbConfig::preferredFrameBufferPlugin()) {
+            KMessageBox::information(this, i18n("To apply framebuffer plugin setting, "
+                                                "you need to restart the program."));
+        }
+    });
 }
 
 void MainWindow::readProperties(const KConfigGroup& group)
