@@ -1,11 +1,19 @@
-cmake_minimum_required(VERSION 2.8.12)
+cmake_minimum_required(VERSION 3.0)
 
-project(krfb)
+# KDE Application Version, managed by release script
+set (KDE_APPLICATIONS_VERSION_MAJOR "17")
+set (KDE_APPLICATIONS_VERSION_MINOR "11")
+set (KDE_APPLICATIONS_VERSION_MICRO "70")
+set (KDE_APPLICATIONS_VERSION "${KDE_APPLICATIONS_VERSION_MAJOR}.${KDE_APPLICATIONS_VERSION_MINOR}.${KDE_APPLICATIONS_VERSION_MICRO}")
 
-include(FeatureSummary)
+project(krfb VERSION ${KDE_APPLICATIONS_VERSION})
+
+set(QT_MIN_VERSION 5.6.0)
+set(KF5_MIN_VERSION 5.31.0)
+
 find_package(Qt5 REQUIRED COMPONENTS Core DBus Widgets X11Extras)
 
-find_package(ECM 1.7.0 NO_MODULE REQUIRED)
+find_package(ECM ${KF5_MIN_VERSION} NO_MODULE REQUIRED)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR})
 
 include(KDEInstallDirs)
@@ -13,6 +21,12 @@ include(KDECMakeSettings)
 include(KDECompilerSettings NO_POLICY_SCOPE)
 include(ECMInstallIcons)
 include(ECMAddAppIcon)
+include(ECMSetupVersion)
+include(FeatureSummary)
+
+ecm_setup_version(PROJECT
+                  VARIABLE_PREFIX KRFB
+                  VERSION_HEADER "krfb_version.h")
 
 find_package(KF5 REQUIRED COMPONENTS
     I18n
