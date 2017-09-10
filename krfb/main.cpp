@@ -19,6 +19,7 @@
 #include "trayicon.h"
 #include "invitationsrfbserver.h"
 #include "krfbconfig.h"
+#include "krfb_version.h"
 
 #include <KAboutData>
 #include <KDBusService>
@@ -35,7 +36,7 @@
 #include <QCommandLineParser>
 #include <QCommandLineOption>
 
-static const char KRFB_VERSION[] = "5.0";
+
 static const char description[] = I18N_NOOP("VNC-compatible server to share "
                                   "desktops");
 
@@ -78,10 +79,10 @@ int main(int argc, char *argv[])
     KLocalizedString::setApplicationDomain("krfb");
 
     KAboutData aboutData("krfb",
-			 i18n("Desktop Sharing"),
-			 KRFB_VERSION,
+                         i18n("Desktop Sharing"),
+                         QStringLiteral(KRFB_VERSION_STRING),
                          i18n(description),
-			 KAboutLicense::GPL,
+                         KAboutLicense::GPL,
                          i18n("(c) 2009-2010, Collabora Ltd.\n"
                                "(c) 2007, Alessandro Praduroux\n"
                                "(c) 2001-2003, Tim Jansen\n"
