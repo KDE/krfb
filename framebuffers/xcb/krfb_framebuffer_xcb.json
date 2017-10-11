@@ -13,7 +13,7 @@
         "Description[et]": "KRfb X11 XDamage/XShm põhine kaadripuhver",
         "Description[fi]": "X11 XDamage/XShm-perustainen kehyspuskui KRfb:lle.",
         "Description[fr]": "Tampon d'images utilisant XDamage/XShm de X11 pour KRfb.",
-        "Description[gl]": "Framebuffer baseado en Xll XDamage/Xshm para XRfb.",
+        "Description[gl]": "Framebuffer baseado en X11 XDamage/Xshm para XRfb.",
         "Description[ia]": "Framebuffer basate sur X11 XDamage/XShm per KRfb.",
         "Description[it]": "Framebuffer basato su XDamage/XShm di X11 per KRfb.",
         "Description[ko]": "KRfb용 X11 XDamage/XShm 기반 프레임버퍼입니다.",
