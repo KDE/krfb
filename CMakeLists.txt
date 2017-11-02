@@ -86,5 +86,6 @@ endif(Q_WS_X11)
 add_subdirectory(krfb)
 add_subdirectory(framebuffers)
 add_subdirectory(doc)
+add_subdirectory(icons)
 
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
