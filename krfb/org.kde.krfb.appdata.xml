@@ -16,6 +16,7 @@
   <name xml:lang="fi">Krfb</name>
   <name xml:lang="fr">Krfb</name>
   <name xml:lang="gl">Krfb</name>
+  <name xml:lang="ia">Krfb</name>
   <name xml:lang="id">Krfb</name>
   <name xml:lang="it">Krfb</name>
   <name xml:lang="ko">Krfb</name>
@@ -48,6 +49,7 @@
   <summary xml:lang="fi">Työpöydän jako</summary>
   <summary xml:lang="fr">Partage de bureau</summary>
   <summary xml:lang="gl">Compartición do escritorio</summary>
+  <summary xml:lang="ia">Compartir de scriptorio</summary>
   <summary xml:lang="id">Desktop sharing</summary>
   <summary xml:lang="it">Condivisione del desktop</summary>
   <summary xml:lang="ko">데스크톱 공유</summary>
