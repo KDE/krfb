@@ -71,6 +71,18 @@ set(CMAKE_MODULE_PATH
 
 find_package(LibVNCServer REQUIRED)
 
+find_package(PipeWire)
+set_package_properties(PipeWire PROPERTIES
+    TYPE OPTIONAL
+    PURPOSE "Required for pipewire screencast plugin"
+)
+
+find_package(SPA)
+set_package_properties(SPA PROPERTIES
+    TYPE OPTIONAL
+    PURPOSE "Required for pipewire screencast plugin"
+)
+
 
 include_directories ("${CMAKE_CURRENT_BINARY_DIR}/krfb"
                      "${CMAKE_CURRENT_SOURCE_DIR}/krfb"

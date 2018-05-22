@@ -1,0 +1,33 @@
+include_directories (${CMAKE_CURRENT_SOURCE_DIR}
+                     ${CMAKE_CURRENT_BINARY_DIR}
+)
+
+set (krfb_framebuffer_pw_SRCS
+     pw_framebuffer.cpp
+     pw_framebufferplugin.cpp
+)
+
+qt5_add_dbus_interface(
+   krfb_framebuffer_pw_SRCS
+   xdp_dbus_interface.xml
+   xdp_dbus_interface
+)
+
+add_library(krfb_framebuffer_pw
+    MODULE
+    ${krfb_framebuffer_pw_SRCS}
+)
+
+target_link_libraries (krfb_framebuffer_pw
+                       Qt5::Core
+                       Qt5::Gui
+                       Qt5::DBus
+                       KF5::CoreAddons
+                       krfbprivate
+                       PipeWire::PipeWire
+                       SPA::SPA
+)
+
+install (TARGETS krfb_framebuffer_pw
+         DESTINATION ${PLUGIN_INSTALL_DIR}/krfb
+)

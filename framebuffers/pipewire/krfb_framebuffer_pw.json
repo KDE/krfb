@@ -1,0 +1,17 @@
+{
+    "Encoding": "UTF-8",
+    "KPlugin": {
+        "Description": "PipeWire based Framebuffer for KRfb.",
+        "Description[x-test]": "xxPipeWire based Framebuffer for KRfb.xx",
+        "EnabledByDefault": true,
+        "Id": "pw",
+        "License": "GPL3",
+        "Name": "PipeWire Framebuffer for KRfb",
+        "Name[x-test]": "xxPipeWire Framebuffer for KRfbxx",
+        "ServiceTypes": [
+            "krfb/framebuffer"
+        ],
+        "Version": "0.1",
+        "Website": "http://www.kde.org"
+    }
+}
