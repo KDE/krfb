@@ -22,6 +22,7 @@
 #include <QtCore/QSocketNotifier>
 #include <QApplication>
 #include <QClipboard>
+#include <QPointer>
 #include <QDebug>
 
 struct RfbServer::Private
@@ -30,7 +31,8 @@ struct RfbServer::Private
     int listeningPort;
     bool passwordRequired;
     rfbScreenInfoPtr screen;
-    QSocketNotifier *notifier;
+    QPointer<QSocketNotifier> ipv4notifier;
+    QPointer<QSocketNotifier> ipv6notifier;
 };
 
 RfbServer::RfbServer(QObject *parent)
@@ -40,7 +42,6 @@ RfbServer::RfbServer(QObject *parent)
     d->listeningPort = 0;
     d->passwordRequired = true;
     d->screen = NULL;
-    d->notifier = NULL;
 
     RfbServerManager::instance()->registerServer(this);
 }
@@ -135,9 +136,13 @@ bool RfbServer::start()
         return false;
     };
 
-    d->notifier = new QSocketNotifier(d->screen->listenSock, QSocketNotifier::Read, this);
-    d->notifier->setEnabled(true);
-    connect(d->notifier, &QSocketNotifier::activated, this, &RfbServer::onListenSocketActivated);
+    d->ipv4notifier = new QSocketNotifier(d->screen->listenSock, QSocketNotifier::Read, this);
+    connect(d->ipv4notifier, &QSocketNotifier::activated, this, &RfbServer::onListenSocketActivated);
+    if (d->screen->listen6Sock > 0) {
+        // we're also listening on additional IPv6 socket, get events from there
+        d->ipv6notifier = new QSocketNotifier(d->screen->listen6Sock, QSocketNotifier::Read, this);
+        connect(d->ipv6notifier, &QSocketNotifier::activated, this, &RfbServer::onListenSocketActivated);
+    }
     connect(QApplication::clipboard(), &QClipboard::dataChanged,
             this, &RfbServer::krfbSendServerCutText);
 
@@ -148,10 +153,11 @@ void RfbServer::stop()
 {
     if (d->screen) {
         rfbShutdownServer(d->screen, true);
-        if (d->notifier) {
-            d->notifier->setEnabled(false);
-            d->notifier->deleteLater();
-            d->notifier = NULL;
+        for (auto notifier : {d->ipv4notifier, d->ipv6notifier}) {
+            if (notifier) {
+                notifier->setEnabled(false);
+                notifier->deleteLater();
+            }
         }
     }
 }
