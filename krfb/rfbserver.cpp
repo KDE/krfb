@@ -22,6 +22,7 @@
 #include <QtCore/QSocketNotifier>
 #include <QApplication>
 #include <QClipboard>
+#include <QPointer>
 #include <QDebug>
 
 struct RfbServer::Private
@@ -30,8 +31,8 @@ struct RfbServer::Private
     int listeningPort;
     bool passwordRequired;
     rfbScreenInfoPtr screen;
-    QSocketNotifier *ipv4notifier;
-    QSocketNotifier *ipv6notifier;
+    QPointer<QSocketNotifier> ipv4notifier;
+    QPointer<QSocketNotifier> ipv6notifier;
 };
 
 RfbServer::RfbServer(QObject *parent)
@@ -41,8 +42,6 @@ RfbServer::RfbServer(QObject *parent)
     d->listeningPort = 0;
     d->passwordRequired = true;
     d->screen = NULL;
-    d->ipv4notifier = nullptr;
-    d->ipv6notifier = nullptr;
 
     RfbServerManager::instance()->registerServer(this);
 }
@@ -154,10 +153,11 @@ void RfbServer::stop()
 {
     if (d->screen) {
         rfbShutdownServer(d->screen, true);
-        for (auto notifier : {d->ipv4notifier, d->ipv6notifier})
-        if (notifier) {
-            notifier->setEnabled(false);
-            notifier->deleteLater();
+        for (auto notifier : {d->ipv4notifier, d->ipv6notifier}) {
+            if (notifier) {
+                notifier->setEnabled(false);
+                notifier->deleteLater();
+            }
         }
     }
 }
