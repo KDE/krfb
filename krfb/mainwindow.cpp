@@ -32,7 +32,7 @@
 #include <QSizePolicy>
 #include <QVector>
 #include <QSet>
-#include <QtNetwork/QNetworkInterface>
+#include <QNetworkInterface>
 
 
 class TCP: public QWidget, public Ui::TCP

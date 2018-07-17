@@ -22,7 +22,7 @@
 #include "krfbconfig.h"
 #include "sockethelpers.h"
 #include "events.h"
-#include <QtCore/QSocketNotifier>
+#include <QSocketNotifier>
 #include <QDebug>
 #include <poll.h>
 #include <strings.h> //for bzero()

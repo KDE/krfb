@@ -19,7 +19,7 @@
 */
 #include "rfbserver.h"
 #include "rfbservermanager.h"
-#include <QtCore/QSocketNotifier>
+#include <QSocketNotifier>
 #include <QApplication>
 #include <QClipboard>
 #include <QPointer>

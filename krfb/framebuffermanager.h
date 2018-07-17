@@ -25,10 +25,10 @@
 
 #include "krfbprivate_export.h"
 
-#include <QtCore/QMap>
-#include <QtCore/QObject>
-#include <QtCore/QSharedPointer>
-#include <QtCore/QWeakPointer>
+#include <QMap>
+#include <QObject>
+#include <QSharedPointer>
+#include <QWeakPointer>
 
 #include <QWidget>
 

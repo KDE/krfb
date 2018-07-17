@@ -24,11 +24,11 @@
 #include "framebuffermanager.h"
 #include "sockethelpers.h"
 #include "krfbconfig.h"
-#include <QtCore/QTimer>
+#include <QTimer>
 #include <QApplication>
 #include <QDesktopWidget>
 #include <QGlobalStatic>
-#include <QtNetwork/QHostInfo>
+#include <QHostInfo>
 #include <QDebug>
 
 #include <KLocalizedString>

@@ -22,7 +22,7 @@
 
 #include "rfb.h"
 #include "rfbclient.h"
-#include <QtCore/QRect>
+#include <QRect>
 
 class RfbServer : public QObject
 {

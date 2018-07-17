@@ -22,9 +22,9 @@
 #include "invitationsrfbclient.h"
 #include "krfbconfig.h"
 #include "rfbservermanager.h"
-#include <QtCore/QTimer>
+#include <QTimer>
 #include <QApplication>
-#include <QtNetwork/QHostInfo>
+#include <QHostInfo>
 #include <QDebug>
 
 #include <KLocalizedString>

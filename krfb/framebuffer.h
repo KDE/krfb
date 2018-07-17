@@ -14,9 +14,9 @@
 
 #include "krfbprivate_export.h"
 
-#include <QtCore/QObject>
-#include <QtCore/QRect>
-#include <QtCore/QList>
+#include <QObject>
+#include <QRect>
+#include <QList>
 #include <QWidget>
 
 

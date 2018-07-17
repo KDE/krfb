@@ -21,7 +21,7 @@
 #define RFBSERVERMANAGER_H
 
 #include "rfb.h"
-#include <QtCore/QObject>
+#include <QObject>
 
 class RfbClient;
 struct RfbServerManagerStatic;

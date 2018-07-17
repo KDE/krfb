@@ -30,7 +30,7 @@
 #include <KPluginLoader>
 #include <KPluginMetaData>
 
-#include <QtCore/QSharedPointer>
+#include <QSharedPointer>
 
 class FrameBufferManagerStatic
 {

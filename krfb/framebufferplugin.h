@@ -23,7 +23,7 @@
 
 #include "krfbprivate_export.h"
 
-#include <QtCore/QVariantList>
+#include <QVariantList>
 #include <QWidget>
 
 

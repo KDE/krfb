@@ -29,7 +29,7 @@
 #include <KLocalizedString>
 
 #include <QDebug>
-#include <QtCore/QSocketNotifier>
+#include <QSocketNotifier>
 #include <poll.h>
 #include <KConfigGroup>
 

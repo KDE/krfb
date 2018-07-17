@@ -20,7 +20,7 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include <QtCore/QString>
+#include <QString>
 
 QString peerAddress(int sock);
 unsigned short peerPort(int sock);

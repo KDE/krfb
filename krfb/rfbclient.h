@@ -21,7 +21,7 @@
 #define RFBCLIENT_H
 
 #include "rfb.h"
-#include <QtCore/QObject>
+#include <QObject>
 
 class RfbClient : public QObject
 {
