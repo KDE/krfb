@@ -1,5 +1,4 @@
 {
-    "Encoding": "UTF-8",
     "KPlugin": {
         "Description": "X11 XDamage/XShm based Framebuffer for KRfb.",
         "Description[ast]": "Búfer de cuadros basáu en XDamage/XShm de X11 pa KRfb.",

@@ -1,5 +1,4 @@
 {
-    "Encoding": "UTF-8",
     "KPlugin": {
         "Description": "Qt based Framebuffer for KRfb.",
         "Description[ast]": "Búfer de cuadros basáu en Qt pa KRfb.",
