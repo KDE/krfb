@@ -38,7 +38,7 @@
 class TCP: public QWidget, public Ui::TCP
 {
 public:
-    TCP(QWidget *parent = 0) : QWidget(parent) {
+    TCP(QWidget *parent = nullptr) : QWidget(parent) {
         setupUi(this);
     }
 };
@@ -46,7 +46,7 @@ public:
 class Security: public QWidget, public Ui::Security
 {
 public:
-    Security(QWidget *parent = 0) : QWidget(parent) {
+    Security(QWidget *parent = nullptr) : QWidget(parent) {
         setupUi(this);
     }
 };
@@ -54,7 +54,7 @@ public:
 class ConfigFramebuffer: public QWidget, public Ui::Framebuffer
 {
 public:
-    ConfigFramebuffer(QWidget *parent = 0) : QWidget(parent) {
+    ConfigFramebuffer(QWidget *parent = nullptr) : QWidget(parent) {
         setupUi(this);
         // hide the line edit with framebuffer string
         kcfg_preferredFrameBufferPlugin->hide();

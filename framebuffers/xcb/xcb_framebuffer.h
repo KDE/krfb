@@ -22,7 +22,7 @@ class XCBFrameBuffer: public FrameBuffer
 {
     Q_OBJECT
 public:
-    XCBFrameBuffer(WId winid, QObject *parent = 0);
+    XCBFrameBuffer(WId winid, QObject *parent = nullptr);
     ~XCBFrameBuffer();
 
 public:

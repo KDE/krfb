@@ -29,7 +29,7 @@ class RfbClient : public QObject
     Q_PROPERTY(bool controlEnabled READ controlEnabled WRITE setControlEnabled NOTIFY controlEnabledChanged)
     Q_PROPERTY(bool onHold READ isOnHold WRITE setOnHold NOTIFY holdStatusChanged)
 public:
-    RfbClient(rfbClientPtr client, QObject *parent = 0);
+    RfbClient(rfbClientPtr client, QObject *parent = nullptr);
     virtual ~RfbClient();
 
     /** Returns a name for the client, to be shown to the user */
@@ -73,7 +73,7 @@ class PendingRfbClient : public QObject
 {
     Q_OBJECT
 public:
-    PendingRfbClient(rfbClientPtr client, QObject *parent = 0);
+    PendingRfbClient(rfbClientPtr client, QObject *parent = nullptr);
     virtual ~PendingRfbClient();
 
 Q_SIGNALS:

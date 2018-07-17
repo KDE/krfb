@@ -197,7 +197,7 @@ void PendingRfbClient::reject()
     rfbCloseClient(m_rfbClient);
     rfbClientConnectionGone(m_rfbClient);
 
-    Q_EMIT finished(NULL);
+    Q_EMIT finished(nullptr);
     deleteLater();
 }
 
@@ -205,7 +205,7 @@ bool PendingRfbClient::checkPassword(const QByteArray & encryptedPassword)
 {
     Q_UNUSED(encryptedPassword);
 
-    return m_rfbClient->screen->authPasswdData == (void*)0;
+    return m_rfbClient->screen->authPasswdData == (void*)nullptr;
 }
 
 bool PendingRfbClient::vncAuthCheckPassword(const QByteArray& password, const QByteArray& encryptedPassword) const

@@ -176,7 +176,7 @@ void RfbServerManager::unregisterServer(RfbServer* server)
 
 rfbScreenInfoPtr RfbServerManager::newScreen()
 {
-    rfbScreenInfoPtr screen = NULL;
+    rfbScreenInfoPtr screen = nullptr;
 
     if (!d->fb.isNull()) {
         int w = d->fb->width();
@@ -192,7 +192,7 @@ rfbScreenInfoPtr RfbServerManager::newScreen()
 
         rfbLogEnable(0);
 
-        screen = rfbGetScreen(0, 0, w, h, 8, 3, bpp);
+        screen = rfbGetScreen(nullptr, nullptr, w, h, 8, 3, bpp);
         screen->paddedWidthInBytes = d->fb->paddedWidth();
         d->fb->getServerFormat(screen->serverFormat);
         screen->frameBuffer = d->fb->data();

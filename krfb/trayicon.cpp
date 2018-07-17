@@ -68,7 +68,7 @@ ClientActions::ClientActions(RfbClient* client, QMenu* menu, QAction* before)
         QObject::connect(client, &RfbClient::controlEnabledChanged,
                          m_enableControlAction, &KToggleAction::setChecked);
     } else {
-        m_enableControlAction = NULL;
+        m_enableControlAction = nullptr;
     }
 
     m_separator = m_menu->insertSeparator(before);

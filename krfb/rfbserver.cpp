@@ -41,7 +41,7 @@ RfbServer::RfbServer(QObject *parent)
     d->listeningAddress = "0.0.0.0";
     d->listeningPort = 0;
     d->passwordRequired = true;
-    d->screen = NULL;
+    d->screen = nullptr;
 
     RfbServerManager::instance()->registerServer(this);
 }
@@ -121,7 +121,7 @@ bool RfbServer::start()
     if (passwordRequired()) {
         d->screen->authPasswdData = (void *)1;
     } else {
-        d->screen->authPasswdData = (void *)0;
+        d->screen->authPasswdData = (void *)nullptr;
     }
 
     qDebug() << "Starting server. Listen port:" << listeningPort()
@@ -193,7 +193,7 @@ void krfb_rfbSetCursorPosition(rfbScreenInfoPtr screen, rfbClientPtr client, int
 
     /* Inform all clients about this cursor movement. */
     iterator = rfbGetClientIterator(screen);
-    while ((cl = rfbClientIteratorNext(iterator)) != NULL) {
+    while ((cl = rfbClientIteratorNext(iterator)) != nullptr) {
         cl->cursorWasMoved = true;
     }
     rfbReleaseClientIterator(iterator);
@@ -207,7 +207,7 @@ void krfb_rfbSetCursorPosition(rfbScreenInfoPtr screen, rfbClientPtr client, int
 void RfbServer::updateCursorPosition(const QPoint & position)
 {
     if (d->screen) {
-        krfb_rfbSetCursorPosition(d->screen, NULL, position.x(), position.y());
+        krfb_rfbSetCursorPosition(d->screen, nullptr, position.x(), position.y());
     }
 }
 

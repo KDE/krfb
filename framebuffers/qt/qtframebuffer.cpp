@@ -28,8 +28,8 @@ QtFrameBuffer::QtFrameBuffer(WId id, QObject *parent)
         fbImage = screen->grabWindow(win).toImage();
         fb = new char[fbImage.byteCount()];
     } else {
-        fb = Q_NULLPTR;
-        primaryScreen = Q_NULLPTR;
+        fb = nullptr;
+        primaryScreen = nullptr;
     }
 
     t = new QTimer(this);
@@ -41,7 +41,7 @@ QtFrameBuffer::~QtFrameBuffer()
 {
     if (fb)
         delete [] fb;
-    fb = 0;
+    fb = nullptr;
 }
 
 int QtFrameBuffer::depth()

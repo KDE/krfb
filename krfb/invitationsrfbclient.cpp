@@ -79,7 +79,7 @@ void PendingInvitationsRfbClient::processNewClient()
                             i18n("Received connection from %1, on hold (waiting for confirmation)",
                                 host));
 
-        InvitationsConnectionDialog *dialog = new InvitationsConnectionDialog(0);
+        InvitationsConnectionDialog *dialog = new InvitationsConnectionDialog(nullptr);
         dialog->setRemoteHost(host);
         dialog->setAllowRemoteControl(KrfbConfig::allowDesktopControl());
 

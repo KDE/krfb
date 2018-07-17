@@ -28,7 +28,7 @@ class KRFBPRIVATE_EXPORT FrameBuffer : public QObject
 {
     Q_OBJECT
 public:
-    explicit FrameBuffer(WId id, QObject *parent = 0);
+    explicit FrameBuffer(WId id, QObject *parent = nullptr);
 
     virtual ~FrameBuffer();
 

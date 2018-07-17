@@ -47,7 +47,7 @@ static bool checkX11Capabilities()
                                  &majorv, &minorv);
 
     if ((!r) || (((majorv * 1000) + minorv) < 2002)) {
-        KMessageBox::error(0,
+        KMessageBox::error(nullptr,
                            i18n("Your X11 Server does not support the required XTest extension "
                                 "version 2.2. Sharing your desktop is not possible."),
                            i18n("Desktop Sharing Error"));
@@ -146,7 +146,7 @@ int main(int argc, char *argv[])
     sigset_t sigs;
     sigemptyset(&sigs);
     sigaddset(&sigs, SIGPIPE);
-    sigprocmask(SIG_BLOCK, &sigs, 0);
+    sigprocmask(SIG_BLOCK, &sigs, nullptr);
 
     return app.exec();
 }

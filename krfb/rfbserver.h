@@ -28,7 +28,7 @@ class RfbServer : public QObject
 {
     Q_OBJECT
 public:
-    RfbServer(QObject *parent = 0);
+    RfbServer(QObject *parent = nullptr);
     virtual ~RfbServer();
 
     QByteArray listeningAddress() const;

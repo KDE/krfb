@@ -22,7 +22,7 @@ class MainWindow : public KXmlGuiWindow
     Q_OBJECT
 
     public:
-        MainWindow(QWidget *parent = 0);
+        MainWindow(QWidget *parent = nullptr);
         ~MainWindow();
 
     public Q_SLOTS:

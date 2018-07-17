@@ -61,7 +61,7 @@ KrfbXCBEventFilter::KrfbXCBEventFilter(XCBFrameBuffer *owner):
                         QX11Info::connection(),
                         XCB_DAMAGE_MAJOR_VERSION,
                         XCB_DAMAGE_MINOR_VERSION),
-                    NULL);
+                    nullptr);
         if (!xdamage_version) {
             qWarning() << "xcb framebuffer: ERROR: Failed to get XDamage extension version!\n";
             return;
@@ -135,7 +135,7 @@ public:
 
 
 static xcb_screen_t *get_xcb_screen(xcb_connection_t *conn, int screen_num) {
-    xcb_screen_t *screen = NULL;
+    xcb_screen_t *screen = nullptr;
     xcb_screen_iterator_t screens_iter = xcb_setup_roots_iterator(xcb_get_setup(conn));
     for (; screens_iter.rem; --screen_num, xcb_screen_next(&screens_iter))
         if (screen_num == 0)
@@ -150,16 +150,16 @@ XCBFrameBuffer::XCBFrameBuffer(WId winid, QObject *parent):
 {
     d->running = false;
     d->damage = XCB_NONE;
-    d->framebufferImage = Q_NULLPTR;
-    d->shminfo.shmaddr = Q_NULLPTR;
+    d->framebufferImage = nullptr;
+    d->shminfo.shmaddr = nullptr;
     d->shminfo.shmid = XCB_NONE;
     d->shminfo.shmseg = XCB_NONE;
-    d->updateTile = Q_NULLPTR;
+    d->updateTile = nullptr;
     d->area.setRect(0, 0, 0, 0);
     d->x11EvtFilter = new KrfbXCBEventFilter(this);
     d->rootScreen = get_xcb_screen(QX11Info::connection(), QX11Info::appScreen());
 
-    this->fb = Q_NULLPTR;
+    this->fb = nullptr;
 
     QScreen *primaryScreen = QGuiApplication::primaryScreen();
     if (primaryScreen) {
@@ -206,9 +206,9 @@ XCBFrameBuffer::XCBFrameBuffer(WId winid, QObject *parent):
                     d->area.height(),           // height
                     XCB_IMAGE_FORMAT_Z_PIXMAP,  // image format
                     d->rootScreen->root_depth,  // depth
-                    NULL,                       // base address = 0
+                    nullptr,                    // base address = 0
                     (uint32_t)~0,               // bytes = 0xffffffff
-                    NULL);                      // data = 0
+                    nullptr);                   // data = 0
         if (d->updateTile) {
 #ifdef _DEBUG
             qDebug() << "xcb framebuffer: Successfully created new empty image in native format";
@@ -227,7 +227,7 @@ XCBFrameBuffer::XCBFrameBuffer(WId winid, QObject *parent):
             // so, we get as many bytes as needed for image (updateTile->size)
             d->shminfo.shmid = shmget(IPC_PRIVATE, d->updateTile->size, IPC_CREAT | 0777);
             // attached shared memory address is stored both in shminfo structure and in xcb_image_t->data
-            d->shminfo.shmaddr = (uint8_t *)shmat(d->shminfo.shmid, NULL, 0);
+            d->shminfo.shmaddr = (uint8_t *)shmat(d->shminfo.shmid, nullptr, 0);
             d->updateTile->data = d->shminfo.shmaddr;
             // we keep updateTile->base == NULL here, so xcb_image_destroy() will not attempt
             // to free this block, just in case.
@@ -255,9 +255,9 @@ XCBFrameBuffer::XCBFrameBuffer(WId winid, QObject *parent):
                 // will not use shared mem! detach and cleanup
                 xcb_shm_detach(QX11Info::connection(), d->shminfo.shmseg);
                 shmdt(d->shminfo.shmaddr);
-                shmctl(d->shminfo.shmid, IPC_RMID, 0); // mark shm segment as removed
+                shmctl(d->shminfo.shmid, IPC_RMID, nullptr); // mark shm segment as removed
                 d->x11EvtFilter->xshmAvail = false;
-                d->shminfo.shmaddr = Q_NULLPTR;
+                d->shminfo.shmaddr = nullptr;
                 d->shminfo.shmid = XCB_NONE;
                 d->shminfo.shmseg = XCB_NONE;
                 qWarning() << "xcb framebuffer: ERROR: xcb_image_shm_get() result: " << shmget_res;
@@ -266,9 +266,9 @@ XCBFrameBuffer::XCBFrameBuffer(WId winid, QObject *parent):
             // image is freed, and recreated again for every new damage rectangle
             // data was allocated manually and points to shared mem;
             // tell xcb_image_destroy() do not free image data
-            d->updateTile->data = NULL;
+            d->updateTile->data = nullptr;
             xcb_image_destroy(d->updateTile);
-            d->updateTile = NULL;
+            d->updateTile = nullptr;
         }
     }
 
@@ -289,7 +289,7 @@ XCBFrameBuffer::~XCBFrameBuffer() {
     //
     if (d->framebufferImage) {
         xcb_image_destroy(d->framebufferImage);
-        fb = Q_NULLPTR;  // image data was already destroyed by above call
+        fb = nullptr;  // image data was already destroyed by above call
     }
     if (d->x11EvtFilter->xshmAvail) {
         // detach shared memory
@@ -298,12 +298,12 @@ XCBFrameBuffer::~XCBFrameBuffer() {
         if (d->shminfo.shmaddr)
             shmdt(d->shminfo.shmaddr); // detach addr from our address space
         if (d->shminfo.shmid != XCB_NONE)
-            shmctl(d->shminfo.shmid, IPC_RMID, 0); // mark shm segment as removed
+            shmctl(d->shminfo.shmid, IPC_RMID, nullptr); // mark shm segment as removed
     }
     // and delete image used for shared mem
     if (d->updateTile) {
-        d->updateTile->base = NULL;
-        d->updateTile->data = NULL;
+        d->updateTile->base = nullptr;
+        d->updateTile->data = nullptr;
         xcb_image_destroy(d->updateTile);
     }
     // we don't use d->x11EvtFilter anymore, can delete it now
@@ -349,7 +349,7 @@ void XCBFrameBuffer::getServerFormat(rfbPixelFormat &format) {
     if (!d->framebufferImage) return;
 
     // get information about XCB visual params
-    xcb_visualtype_t *root_visualtype = NULL;  // visual info
+    xcb_visualtype_t *root_visualtype = nullptr;  // visual info
     if (d->rootScreen) {
         xcb_visualid_t root_visual = d->rootScreen->root_visual;
         xcb_depth_iterator_t depth_iter;
@@ -559,7 +559,7 @@ QList<QRect> XCBFrameBuffer::modifiedTiles() {
                             0);
 
                 xcb_shm_get_image_reply_t *sgi_reply = xcb_shm_get_image_reply(
-                            QX11Info::connection(), sgi_cookie, NULL);
+                            QX11Info::connection(), sgi_cookie, nullptr);
                 if (sgi_reply) {
                     // create temporary image to get update rect contents into
                     d->updateTile = xcb_image_create_native(
@@ -568,9 +568,9 @@ QList<QRect> XCBFrameBuffer::modifiedTiles() {
                                 r.height(),
                                 XCB_IMAGE_FORMAT_Z_PIXMAP,
                                 d->rootScreen->root_depth,
-                                NULL,         // base == 0
+                                nullptr,      // base == 0
                                 (uint32_t)~0, // bytes == ~0
-                                NULL);
+                                nullptr);
 
                     if (d->updateTile) {
                         d->updateTile->data = d->shminfo.shmaddr;
@@ -587,9 +587,9 @@ QList<QRect> XCBFrameBuffer::modifiedTiles() {
                         }
 
                         // delete temporary image
-                        d->updateTile->data = NULL;
+                        d->updateTile->data = nullptr;
                         xcb_image_destroy(d->updateTile);
-                        d->updateTile = NULL;
+                        d->updateTile = nullptr;
                     }
 
                     free(sgi_reply);
