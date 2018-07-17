@@ -23,7 +23,7 @@
 class InvitationsRfbClient : public RfbClient
 {
 public:
-    InvitationsRfbClient(rfbClientPtr client, QObject* parent = nullptr)
+    explicit InvitationsRfbClient(rfbClientPtr client, QObject* parent = nullptr)
         : RfbClient(client, parent) {}
 };
 
@@ -32,7 +32,7 @@ class PendingInvitationsRfbClient : public PendingRfbClient
 {
     Q_OBJECT
 public:
-    PendingInvitationsRfbClient(rfbClientPtr client, QObject *parent = nullptr);
+    explicit PendingInvitationsRfbClient(rfbClientPtr client, QObject *parent = nullptr);
     ~PendingInvitationsRfbClient() override;
 
 protected Q_SLOTS:

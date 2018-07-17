@@ -22,7 +22,7 @@ class MainWindow : public KXmlGuiWindow
     Q_OBJECT
 
     public:
-        MainWindow(QWidget *parent = nullptr);
+        explicit MainWindow(QWidget *parent = nullptr);
         ~MainWindow() override;
 
     public Q_SLOTS:

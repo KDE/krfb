@@ -28,7 +28,7 @@ class RfbServer : public QObject
 {
     Q_OBJECT
 public:
-    RfbServer(QObject *parent = nullptr);
+    explicit RfbServer(QObject *parent = nullptr);
     ~RfbServer() override;
 
     QByteArray listeningAddress() const;

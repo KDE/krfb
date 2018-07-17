@@ -29,7 +29,7 @@ template <typename UI>
 class ConnectionDialog : public QDialog
 {
 public:
-    ConnectionDialog(QWidget *parent);
+    explicit ConnectionDialog(QWidget *parent);
     ~ConnectionDialog() override {};
 
     void setAllowRemoteControl(bool b);
