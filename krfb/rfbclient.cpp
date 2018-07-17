@@ -228,5 +228,3 @@ bool PendingRfbClient::vncAuthCheckPassword(const QByteArray& password, const QB
     rfbEncryptBytes(challenge, passwd);
     return memcmp(challenge, encryptedPassword, encryptedPassword.size()) == 0;
 }
-
-#include "rfbclient.moc"

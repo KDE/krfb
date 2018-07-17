@@ -80,7 +80,3 @@ void InvitationsConnectionDialog::setRemoteHost(const QString &host)
 {
     m_ui.remoteHost->setText(host);
 }
-
-//**********
-
-#include "connectiondialog.moc"

@@ -149,5 +149,3 @@ void PendingInvitationsRfbClient::dialogAccepted()
     client->setControlEnabled(dialog->allowRemoteControl());
     accept(client);
 }
-
-#include "invitationsrfbclient.moc"

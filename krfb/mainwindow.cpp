@@ -262,5 +262,3 @@ void MainWindow::saveProperties(KConfigGroup& group)
     group.writeEntry("Visible", isVisible());
     KMainWindow::saveProperties(group);
 }
-
-#include "mainwindow.moc"

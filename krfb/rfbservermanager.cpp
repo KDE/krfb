@@ -232,5 +232,3 @@ void RfbServerManager::removeClient(RfbClient* cc)
 
     Q_EMIT clientDisconnected(cc);
 }
-
-#include "rfbservermanager.moc"

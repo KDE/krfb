@@ -143,5 +143,3 @@ void TrayIcon::showAbout()
     KHelpMenu menu;
     menu.aboutApplication();
 }
-
-#include "trayicon.moc"

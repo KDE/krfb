@@ -223,5 +223,3 @@ QString InvitationsRfbServer::readableRandomString(int length)
     }
     return str;
 }
-
-#include "invitationsrfbserver.moc"

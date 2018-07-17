@@ -67,7 +67,3 @@ void FrameBuffer::startMonitor()
 void FrameBuffer::stopMonitor()
 {
 }
-
-
-#include "framebuffer.moc"
-

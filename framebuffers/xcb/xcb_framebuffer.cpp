@@ -8,7 +8,6 @@
 */
 
 #include "xcb_framebuffer.h"
-#include "xcb_framebuffer.moc"
 
 #include <xcb/xcb.h>
 #include <xcb/xproto.h>
