@@ -29,7 +29,7 @@ class RfbServer : public QObject
     Q_OBJECT
 public:
     RfbServer(QObject *parent = nullptr);
-    virtual ~RfbServer();
+    ~RfbServer() override;
 
     QByteArray listeningAddress() const;
     int listeningPort() const;

@@ -30,7 +30,7 @@ class ConnectionDialog : public QDialog
 {
 public:
     ConnectionDialog(QWidget *parent);
-    ~ConnectionDialog() {};
+    ~ConnectionDialog() override {};
 
     void setAllowRemoteControl(bool b);
     bool allowRemoteControl();

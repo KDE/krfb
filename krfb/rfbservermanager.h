@@ -52,7 +52,7 @@ private:
     void removeClient(RfbClient *cc);
 
     RfbServerManager();
-    virtual ~RfbServerManager();
+    ~RfbServerManager() override;
     Q_DISABLE_COPY(RfbServerManager)
 
     friend class RfbServer;

@@ -53,7 +53,7 @@ public Q_SLOTS:
 
 protected:
     InvitationsRfbServer();
-    virtual ~InvitationsRfbServer();
+    ~InvitationsRfbServer() override;
     PendingRfbClient* newClient(rfbClientPtr client) override;
 
 private Q_SLOTS:

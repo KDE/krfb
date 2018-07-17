@@ -23,7 +23,7 @@ class MainWindow : public KXmlGuiWindow
 
     public:
         MainWindow(QWidget *parent = nullptr);
-        ~MainWindow();
+        ~MainWindow() override;
 
     public Q_SLOTS:
         void showConfiguration();

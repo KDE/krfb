@@ -43,7 +43,7 @@ class KRFBPRIVATE_EXPORT FrameBufferManager : public QObject
 public:
     static FrameBufferManager *instance();
 
-    virtual ~FrameBufferManager();
+    ~FrameBufferManager() override;
 
     QSharedPointer<FrameBuffer> frameBuffer(WId id);
 

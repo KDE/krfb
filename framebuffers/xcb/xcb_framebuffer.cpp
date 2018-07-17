@@ -32,7 +32,7 @@ public:
     KrfbXCBEventFilter(XCBFrameBuffer *owner);
 
 public:
-    virtual bool nativeEventFilter(const QByteArray &eventType, void *message, long *result);
+    bool nativeEventFilter(const QByteArray &eventType, void *message, long *result) override;
 
 public:
     int xdamageBaseEvent;

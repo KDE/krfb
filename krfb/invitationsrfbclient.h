@@ -33,7 +33,7 @@ class PendingInvitationsRfbClient : public PendingRfbClient
     Q_OBJECT
 public:
     PendingInvitationsRfbClient(rfbClientPtr client, QObject *parent = nullptr);
-    virtual ~PendingInvitationsRfbClient();
+    ~PendingInvitationsRfbClient() override;
 
 protected Q_SLOTS:
     void processNewClient() override;
