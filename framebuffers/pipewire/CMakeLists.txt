@@ -25,7 +25,6 @@ target_link_libraries (krfb_framebuffer_pw
                        KF5::CoreAddons
                        krfbprivate
                        PipeWire::PipeWire
-                       SPA::SPA
 )
 
 install (TARGETS krfb_framebuffer_pw

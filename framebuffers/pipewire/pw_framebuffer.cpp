@@ -10,6 +10,7 @@
 // system
 #include <sys/mman.h>
 #include <cstring>
+
 // Qt
 #include <QX11Info>
 #include <QCoreApplication>
@@ -24,11 +25,20 @@
 #include <spa/param/video/format-utils.h>
 #include <spa/param/format-utils.h>
 #include <spa/param/props.h>
-#include <spa/lib/debug.h>
 #include <limits.h>
 
 #include "pw_framebuffer.h"
 #include "xdp_dbus_interface.h"
+
+#ifdef __has_include
+  #if __has_include(<pipewire/version.h>)
+    #include<pipewire/version.h>
+  #else
+    #define PW_API_PRE_0_2_0
+  #endif // __has_include(<pipewire/version.h>)
+#else
+  #define PW_API_PRE_0_2_0
+#endif // __has_include
 
 static const uint MIN_SUPPORTED_XDP_KDE_SC_VERSION = 1;
 
@@ -57,8 +67,13 @@ private:
 
     static void onStateChanged(void *data, pw_remote_state old, pw_remote_state state, const char *error);
     static void onStreamStateChanged(void *data, pw_stream_state old, pw_stream_state state, const char *error_message);
+#if defined(PW_API_PRE_0_2_0)
     static void onStreamFormatChanged(void *data, struct spa_pod *format);
     static void onNewBuffer(void *data, uint32_t id);
+#else
+    static void onStreamFormatChanged(void *data, const struct spa_pod *format);
+    static void onStreamProcess(void *data);
+#endif // defined(PW_API_PRE_0_2_0)
 
     void initWayland();
     void initDbus();
@@ -73,8 +88,11 @@ private:
     // pw handling
     void processPwEvents();
     void createReceivingStream();
-    void handleFrame(spa_buffer *buf);
-
+#if defined(PW_API_PRE_0_2_0)
+    void handleFrame(spa_buffer *spaBuffer);
+#else
+    void handleFrame(pw_buffer *pwBuffer);
+#endif // defined(PW_API_PRE_0_2_0)
     // link to public interface
     PWFrameBuffer *q;
 
@@ -138,7 +156,11 @@ PWFrameBuffer::Private::Private(PWFrameBuffer *q) : q(q)
     pwStreamEvents.version = PW_VERSION_STREAM_EVENTS;
     pwStreamEvents.state_changed = &onStreamStateChanged;
     pwStreamEvents.format_changed = &onStreamFormatChanged;
+#if defined(PW_API_PRE_0_2_0)
     pwStreamEvents.new_buffer = &onNewBuffer;
+#else
+    pwStreamEvents.process = &onStreamProcess;
+#endif // defined(PW_API_PRE_0_2_0)
 }
 
 /**
@@ -370,10 +392,6 @@ void PWFrameBuffer::Private::initializePwTypes()
     spa_type_media_subtype_map(map, &pwType->media_subtype);
     spa_type_format_video_map(map, &pwType->format_video);
     spa_type_video_format_map(map, &pwType->video_format);
-
-    // must be called after type system is mapped
-    // calling it before causes unpredictable memory corruption and errors
-    spa_debug_set_type_map(pwCoreType->map);
 }
 
 /**
@@ -431,7 +449,11 @@ void PWFrameBuffer::Private::onStreamStateChanged(void *data, pw_stream_state /*
  * @param data pointer that you have set in pw_stream_add_listener call's last argument
  * @param format format that's being proposed
  */
+#if defined(PW_API_PRE_0_2_0)
 void PWFrameBuffer::Private::onStreamFormatChanged(void *data, struct spa_pod *format)
+#else
+void PWFrameBuffer::Private::onStreamFormatChanged(void *data, const struct spa_pod *format)
+#endif // defined(PW_API_PRE_0_2_0)
 {
     qInfo() << "Stream format changed";
     auto *d = static_cast<PWFrameBuffer::Private *>(data);
@@ -455,7 +477,12 @@ void PWFrameBuffer::Private::onStreamFormatChanged(void *data, struct spa_pod *f
     auto builder = spa_pod_builder {buffer, sizeof(buffer)};
 
     // setup buffers and meta header for new format
+#if defined(PW_API_PRE_0_2_0)
     struct spa_pod *params[2];
+#else
+    const struct spa_pod *params[2];
+#endif // defined(PW_API_PRE_0_2_0)
+
     params[0] = reinterpret_cast<spa_pod *>(spa_pod_builder_object(&builder,
              d->pwCoreType->param.idBuffers, d->pwCoreType->param_buffers.Buffers,
         ":", d->pwCoreType->param_buffers.size, "i", size,
@@ -475,35 +502,54 @@ void PWFrameBuffer::Private::onStreamFormatChanged(void *data, struct spa_pod *f
  * @param data pointer that you have set in pw_stream_add_listener call's last argument
  * @param id
  */
+#if defined(PW_API_PRE_0_2_0)
 void PWFrameBuffer::Private::onNewBuffer(void *data, uint32_t id)
+#else
+void PWFrameBuffer::Private::onStreamProcess(void *data)
+#endif // defined(PW_API_PRE_0_2_0)
 {
-    qDebug() << "New buffer received" << id;
+    qDebug() << "New buffer received";
     auto *d = static_cast<PWFrameBuffer::Private *>(data);
 
+#if defined(PW_API_PRE_0_2_0)
     auto buf = pw_stream_peek_buffer(d->pwStream, id);
+#else
+    auto buf = pw_stream_dequeue_buffer(d->pwStream);
+#endif // defined(PW_API_PRE_0_2_0)
+
     d->handleFrame(buf);
 
+#if defined(PW_API_PRE_0_2_0)
     pw_stream_recycle_buffer(d->pwStream, id);
+#else
+    pw_stream_queue_buffer(d->pwStream, buf);
+#endif // defined(PW_API_PRE_0_2_0)
 }
 
-void PWFrameBuffer::Private::handleFrame(spa_buffer *buf)
+#if defined(PW_API_PRE_0_2_0)
+void PWFrameBuffer::Private::handleFrame(spa_buffer *spaBuffer)
 {
-    auto mapLength = buf->datas[0].maxsize + buf->datas[0].mapoffset;
+#else
+void PWFrameBuffer::Private::handleFrame(pw_buffer *pwBuffer)
+{
+    auto *spaBuffer = pwBuffer->buffer;
+#endif // defined(PW_API_PRE_0_2_0)
+    auto mapLength = spaBuffer->datas[0].maxsize + spaBuffer->datas[0].mapoffset;
 
     void *mapped; // full length of mapped data
     void *src; // real pixel data in this buffer
-    if (buf->datas[0].type == pwCoreType->data.MemFd || buf->datas[0].type == pwCoreType->data.DmaBuf) {
-        mapped = mmap(nullptr, mapLength, PROT_READ, MAP_PRIVATE, buf->datas[0].fd, 0);
-        src = SPA_MEMBER(mapped, buf->datas[0].mapoffset, void);
-    } else if (buf->datas[0].type == pwCoreType->data.MemPtr) {
+    if (spaBuffer->datas[0].type == pwCoreType->data.MemFd || spaBuffer->datas[0].type == pwCoreType->data.DmaBuf) {
+        mapped = mmap(nullptr, mapLength, PROT_READ, MAP_PRIVATE, spaBuffer->datas[0].fd, 0);
+        src = SPA_MEMBER(mapped, spaBuffer->datas[0].mapoffset, void);
+    } else if (spaBuffer->datas[0].type == pwCoreType->data.MemPtr) {
         mapped = nullptr;
-        src = buf->datas[0].data;
+        src = spaBuffer->datas[0].data;
     } else {
-        qWarning() << "Got unsupported buffer type" << buf->datas[0].type;
+        qWarning() << "Got unsupported buffer type" << spaBuffer->datas[0].type;
         return;
     }
 
-    qint32 srcStride = buf->datas[0].chunk->stride;
+    qint32 srcStride = spaBuffer->datas[0].chunk->stride;
     if (srcStride != q->paddedWidth()) {
         qWarning() << "Got buffer with stride different from screen stride" << srcStride << "!=" << q->paddedWidth();
         return;
@@ -511,7 +557,7 @@ void PWFrameBuffer::Private::handleFrame(spa_buffer *buf)
 
     fbImage.bits();
     q->tiles.append(fbImage.rect());
-    std::memcpy(fbImage.bits(), src, buf->datas[0].maxsize);
+    std::memcpy(fbImage.bits(), src, spaBuffer->datas[0].maxsize);
 
     if (mapped)
         munmap(mapped, mapLength);
@@ -557,7 +603,6 @@ void PWFrameBuffer::Private::createReceivingStream()
           ":", pwType->format_video.size, "R", &pwScreenBounds,
           ":", pwType->format_video.framerate, "F", &pwFramerateMin,
           ":", pwType->format_video.max_framerate, "Fr", &pwFramerate, 2, &pwFramerateMin, &pwFramerateMax));
-    spa_debug_pod(params[0], SPA_DEBUG_FLAG_FORMAT);
 
     pw_stream_add_listener(pwStream, &streamListener, &pwStreamEvents, this);
     auto flags = static_cast<pw_stream_flags>(PW_STREAM_FLAG_AUTOCONNECT | PW_STREAM_FLAG_INACTIVE);
