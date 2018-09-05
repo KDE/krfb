@@ -188,11 +188,6 @@ void PWFrameBuffer::Private::initDbus()
     dbusXdpService.reset(new OrgFreedesktopPortalScreenCastInterface(QLatin1String("org.freedesktop.portal.Desktop"),
                                                                      QLatin1String("/org/freedesktop/portal/desktop"),
                                                                      QDBusConnection::sessionBus()));
-    if (!dbusXdpService->isValid()) {
-        qWarning("Can't find XDG Portal screencast interface");
-        isValid = false;
-        return;
-    }
 
     auto version = dbusXdpService->version();
     if (version < MIN_SUPPORTED_XDP_KDE_SC_VERSION) {
