@@ -9,8 +9,14 @@ set (krfb_framebuffer_pw_SRCS
 
 qt5_add_dbus_interface(
    krfb_framebuffer_pw_SRCS
-   xdp_dbus_interface.xml
-   xdp_dbus_interface
+   xdp_dbus_screencast_interface.xml
+   xdp_dbus_screencast_interface
+)
+
+qt5_add_dbus_interface(
+   krfb_framebuffer_pw_SRCS
+   xdp_dbus_remotedesktop_interface.xml
+   xdp_dbus_remotedesktop_interface
 )
 
 add_library(krfb_framebuffer_pw

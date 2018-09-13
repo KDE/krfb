@@ -23,6 +23,12 @@ class PWFrameBuffer: public FrameBuffer
 {
     Q_OBJECT
 public:
+    typedef struct {
+        uint nodeId;
+        QVariantMap map;
+    } Stream;
+    typedef QList<Stream> Streams;
+
     PWFrameBuffer(WId winid, QObject *parent = nullptr);
     virtual ~PWFrameBuffer() override;
 
@@ -37,8 +43,9 @@ public:
 
 private slots:
     void handleXdpSessionCreated(quint32 code, QVariantMap results);
+    void handleXdpDevicesSelected(quint32 code, QVariantMap results);
     void handleXdpSourcesSelected(quint32 code, QVariantMap results);
-    void handleXdpScreenCastStarted(quint32 code, QVariantMap results);
+    void handleXdpRemoteDesktopStarted(quint32 code, QVariantMap results);
 
 private:
     void processPwEvents();
