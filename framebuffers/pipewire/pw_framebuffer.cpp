@@ -102,7 +102,6 @@ private:
     static void onStreamProcess(void *data);
 #endif // defined(PW_API_PRE_0_2_0)
 
-    void initWayland();
     void initDbus();
     void initPw();
     void initializePwTypes();
@@ -187,20 +186,6 @@ PWFrameBuffer::Private::Private(PWFrameBuffer *q) : q(q)
     pwStreamEvents.process = &onStreamProcess;
 #endif // defined(PW_API_PRE_0_2_0)
 }
-
-/**
- * @brief PWFrameBuffer::Private::initWayland - initializes screen info and Wayland connectivity.
- *        For now just grabs first available screen and uses its dimensions for framebuffer.
- */
-// void PWFrameBuffer::Private::initWayland()
-// {
-//     qInfo() << "Initializing screen info";
-//     auto screen = qApp->screens().at(0);
-//     auto screenSize = screen->geometry();
-//     screenGeometry.width = static_cast<quint32>(screenSize.width());
-//     screenGeometry.height = static_cast<quint32>(screenSize.height());
-//     fbImage = QImage(screenSize.width(), screenSize.height(), QImage::Format_ARGB32);
-// }
 
 /**
  * @brief PWFrameBuffer::Private::initDbus - initialize D-Bus connectivity with XDG Desktop Portal.
@@ -723,9 +708,6 @@ PWFrameBuffer::PWFrameBuffer(WId winid, QObject *parent)
     // D-Bus is most important in init chain, no toys for us if something is wrong with XDP
     // PipeWire connectivity is initialized after D-Bus session is started
     d->initDbus();
-
-    // connect to Wayland and PipeWire sockets
-//     d->initWayland();
 
     // framebuffer from public interface will point directly to image data
     fb = reinterpret_cast<char *>(d->fbImage.bits());
