@@ -605,16 +605,10 @@ void PWFrameBuffer::Private::handleFrame(pw_buffer *pwBuffer)
 #endif // defined(PW_API_PRE_0_2_0)
     auto mapLength = spaBuffer->datas[0].maxsize + spaBuffer->datas[0].mapoffset;
 
-    void *mapped; // full length of mapped data
-    void *src; // real pixel data in this buffer
-    if (spaBuffer->datas[0].type == pwCoreType->data.MemFd || spaBuffer->datas[0].type == pwCoreType->data.DmaBuf) {
-        mapped = mmap(nullptr, mapLength, PROT_READ, MAP_PRIVATE, spaBuffer->datas[0].fd, 0);
-        src = SPA_MEMBER(mapped, spaBuffer->datas[0].mapoffset, void);
-    } else if (spaBuffer->datas[0].type == pwCoreType->data.MemPtr) {
-        mapped = nullptr;
-        src = spaBuffer->datas[0].data;
-    } else {
-        qWarning() << "Got unsupported buffer type" << spaBuffer->datas[0].type;
+    void *src = nullptr;
+
+    src = spaBuffer->datas[0].data;
+    if (!src) {
         return;
     }
 
@@ -627,9 +621,6 @@ void PWFrameBuffer::Private::handleFrame(pw_buffer *pwBuffer)
     fbImage.bits();
     q->tiles.append(fbImage.rect());
     std::memcpy(fbImage.bits(), src, spaBuffer->datas[0].maxsize);
-
-    if (mapped)
-        munmap(mapped, mapLength);
 }
 
 /**
@@ -675,7 +666,7 @@ void PWFrameBuffer::Private::createReceivingStream()
           ":", pwType->format_video.max_framerate, "Fru", &pwFramerate, 2, &pwFramerateMin, &pwFramerateMax));
 
     pw_stream_add_listener(pwStream, &streamListener, &pwStreamEvents, this);
-    auto flags = static_cast<pw_stream_flags>(PW_STREAM_FLAG_AUTOCONNECT | PW_STREAM_FLAG_INACTIVE);
+    auto flags = static_cast<pw_stream_flags>(PW_STREAM_FLAG_AUTOCONNECT | PW_STREAM_FLAG_INACTIVE | PW_STREAM_FLAG_MAP_BUFFERS);
     if (pw_stream_connect(pwStream, PW_DIRECTION_INPUT, nullptr, flags, params, 1) != 0) {
         qWarning() << "Could not connect receiving stream";
         isValid = false;
