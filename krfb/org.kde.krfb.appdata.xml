@@ -4,7 +4,6 @@
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-2.0+</project_license>
   <name>Krfb</name>
-  <name xml:lang="ast">Krfb</name>
   <name xml:lang="ca">Krfb</name>
   <name xml:lang="ca-valencia">Krfb</name>
   <name xml:lang="cs">Krfb</name>
@@ -37,7 +36,6 @@
   <name xml:lang="x-test">xxKrfbxx</name>
   <name xml:lang="zh-CN">Krfb</name>
   <summary>Desktop sharing</summary>
-  <summary xml:lang="ast">Compartición d'escritoriu</summary>
   <summary xml:lang="ca">Compartició de l'escriptori</summary>
   <summary xml:lang="ca-valencia">Compartició de l'escriptori</summary>
   <summary xml:lang="cs">Sdílení pracovní plochy</summary>
@@ -71,7 +69,6 @@
   <summary xml:lang="zh-CN">桌面共享</summary>
   <description>
     <p>Krfb Desktop Sharing is a server application that allows you to share your current session with a user on another machine, who can use a VNC client to view or even control the desktop.</p>
-    <p xml:lang="ast">Krfb ye una aplicación sirvidora que te permite  compartir la to sesión actual con un usuariu n'otra máquina que puea usar un veceru VNC pa ver o controlar l'escritoriu.</p>
     <p xml:lang="ca">El Krfb és una aplicació de servidor que permet compartir la vostra sessió actual amb un usuari en una altra màquina, la qual pot emprar un client VNC per veure o controlar l'escriptori.</p>
     <p xml:lang="ca-valencia">El Krfb és una aplicació de servidor que permet compartir la vostra sessió actual amb un usuari en una altra màquina, la qual pot emprar un client VNC per veure o controlar l'escriptori.</p>
     <p xml:lang="da">Krfb-skrivebordsdeling er et serverprogram der giver dig mulighed for at dele din nuværende session med en bruger på en anden maskine som kan bruge en VNC-klient til at vise eller endda styrer skrivebordet.</p>
