@@ -43,7 +43,7 @@ struct RfbClient::Private
 RfbClient::RfbClient(rfbClientPtr client, QObject* parent)
     : QObject(parent), d(new Private(client))
 {
-    d->remoteAddressString = peerAddress(d->client->sock) + ":" +
+    d->remoteAddressString = peerAddress(d->client->sock) + ':' +
                              QString::number(peerPort(d->client->sock));
 
     d->notifier = new QSocketNotifier(client->sock, QSocketNotifier::Read, this);

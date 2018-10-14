@@ -97,7 +97,7 @@ protected:
     virtual bool checkPassword(const QByteArray & encryptedPassword);
 
     /** This method checks if the \a encryptedPassword that was sent from the remote
-     * user matches the \a password that you have specified localy to be the password
+     * user matches the \a password that you have specified locally to be the password
      * for this connection. This assumes that the standard VNC authentication mechanism
      * is used. Returns true if the password matches or false otherwise.
      */

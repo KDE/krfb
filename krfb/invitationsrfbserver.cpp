@@ -115,8 +115,8 @@ void InvitationsRfbServer::toggleUnattendedAccess(bool allow)
 
 InvitationsRfbServer::InvitationsRfbServer()
 {
-    m_desktopPassword = readableRandomString(4)+"-"+readableRandomString(3);
-    m_unattendedPassword = readableRandomString(4)+"-"+readableRandomString(3);
+    m_desktopPassword = readableRandomString(4)+'-'+readableRandomString(3);
+    m_unattendedPassword = readableRandomString(4)+'-'+readableRandomString(3);
     KConfigGroup krfbConfig(KSharedConfig::openConfig(),"Security");
     m_allowUnattendedAccess = krfbConfig.readEntry(
             "allowUnattendedAccess", QVariant(false)).toBool();

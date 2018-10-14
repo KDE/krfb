@@ -59,7 +59,7 @@ class InvitationsConnectionDialog : public ConnectionDialog<Ui::ConnectionWidget
 {
     Q_OBJECT
 public:
-    InvitationsConnectionDialog(QWidget *parent);
+    explicit InvitationsConnectionDialog(QWidget *parent);
     void setRemoteHost(const QString & host);
 };
 

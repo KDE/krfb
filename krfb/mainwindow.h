@@ -8,8 +8,8 @@
    version 2 of the License, or (at your option) any later version.
 */
 
-#ifndef MANAGEINVITATIONSDIALOG_H
-#define MANAGEINVITATIONSDIALOG_H
+#ifndef KRFB_MAINWINDOW_H
+#define KRFB_MAINWINDOW_H
 
 #include "ui_mainwidget.h"
 

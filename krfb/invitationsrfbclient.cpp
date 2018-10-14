@@ -65,7 +65,7 @@ PendingInvitationsRfbClient::~PendingInvitationsRfbClient()
 
 void PendingInvitationsRfbClient::processNewClient()
 {
-    QString host = peerAddress(m_rfbClient->sock) + ":" + QString::number(peerPort(m_rfbClient->sock));
+    QString host = peerAddress(m_rfbClient->sock) + ':' + QString::number(peerPort(m_rfbClient->sock));
 
     if (d->askOnConnect == false) {
 
@@ -126,7 +126,7 @@ void PendingInvitationsRfbClient::onSocketActivated()
 bool PendingInvitationsRfbClient::checkPassword(const QByteArray & encryptedPassword)
 {
     QByteArray password ;
-    qDebug() << "about to start autentication";
+    qDebug() << "about to start authentication";
 
     if(InvitationsRfbServer::instance->allowUnattendedAccess() && vncAuthCheckPassword(
             InvitationsRfbServer::instance->unattendedPassword().toLocal8Bit(),

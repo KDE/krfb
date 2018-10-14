@@ -20,6 +20,9 @@
    Boston, MA 02110-1301, USA.
 */
 
+#ifndef SOCKETHELPERS_H
+#define SOCKETHELPERS_H
+
 #include <QString>
 
 QString peerAddress(int sock);
@@ -28,3 +31,4 @@ unsigned short peerPort(int sock);
 QString localAddress(int sock);
 unsigned short localPort(int sock);
 
+#endif
