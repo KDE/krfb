@@ -39,6 +39,7 @@ Q_SIGNALS:
 
 private Q_SLOTS:
     void init();
+    void updateFrameBuffer();
     void updateScreens();
     void cleanup();
 

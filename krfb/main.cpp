@@ -39,7 +39,6 @@
 
 static const char description[] = I18N_NOOP("VNC-compatible server to share "
                                   "desktops");
-
 static bool checkX11Capabilities()
 {
     int bp1, bp2, majorv, minorv;
@@ -57,7 +56,6 @@ static bool checkX11Capabilities()
     return true;
 }
 
-
 static void checkOldX11PluginConfig() {
     if (KrfbConfig::preferredFrameBufferPlugin() == QStringLiteral("x11")) {
         qDebug() << "Detected deprecated configuration: preferredFrameBufferPlugin = x11";
@@ -70,7 +68,6 @@ static void checkOldX11PluginConfig() {
         }
     }
 }
-
 
 int main(int argc, char *argv[])
 {
@@ -121,12 +118,14 @@ int main(int argc, char *argv[])
 
     app.setQuitOnLastWindowClosed(false);
 
-    if (!checkX11Capabilities()) {
-        return 1;
-    }
+    if (QX11Info::isPlatformX11()) {
+        if (!checkX11Capabilities()) {
+            return 1;
+        }
 
-    // upgrade the configuration
-    checkOldX11PluginConfig();
+        // upgrade the configuration
+        checkOldX11PluginConfig();
+    }
 
     //init the core
     InvitationsRfbServer::init();

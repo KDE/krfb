@@ -156,6 +156,17 @@ void RfbServer::stop()
     }
 }
 
+void RfbServer::updateFrameBuffer(char *fb, int width, int height, int depth)
+{
+    int bpp = depth >> 3;
+
+    if (bpp != 1 && bpp != 2 && bpp != 4) {
+        bpp = 4;
+    }
+
+    rfbNewFramebuffer(d->screen, fb, width, height, 8, 3, bpp);
+}
+
 void RfbServer::updateScreen(const QList<QRect> & modifiedTiles)
 {
     if (d->screen) {

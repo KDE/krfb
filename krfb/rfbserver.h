@@ -43,6 +43,7 @@ public Q_SLOTS:
     virtual bool start();
     virtual void stop();
 
+    void updateFrameBuffer(char *fb, int width, int height, int depth);
     void updateScreen(const QList<QRect> & modifiedTiles);
     void updateCursorPosition(const QPoint & position);
 

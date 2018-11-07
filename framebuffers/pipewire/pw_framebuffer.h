@@ -1,5 +1,6 @@
 /* This file is part of the KDE project
    Copyright (C) 2018 Oleg Chernovskiy <kanedias@xaker.ru>
+   Copyright (C) 2018 Jan Grulich <jgrulich@redhat.com>
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public
@@ -35,6 +36,7 @@ public:
     int  depth() override;
     int  height() override;
     int  width() override;
+    int  paddedWidth() override;
     void getServerFormat(rfbPixelFormat &format) override;
     void startMonitor() override;
     void stopMonitor() override;
@@ -48,8 +50,6 @@ private slots:
     void handleXdpRemoteDesktopStarted(quint32 code, QVariantMap results);
 
 private:
-    void processPwEvents();
-
     class Private;
     const QScopedPointer<Private> d;
 };

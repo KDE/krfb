@@ -44,6 +44,9 @@ public:
 
     virtual void getServerFormat(rfbPixelFormat &format);
 
+Q_SIGNALS:
+    void frameBufferChanged();
+
 protected:
     WId win;
     char *fb;
