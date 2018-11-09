@@ -106,6 +106,12 @@
   <screenshots>
     <screenshot type="default">
       <caption>Sharing desktop with Krfb</caption>
+      <caption xml:lang="ca">Compartint l'escriptori amb el Krfb</caption>
+      <caption xml:lang="nl">Bureaublad delen met Krfb</caption>
+      <caption xml:lang="pt">Partilha do ecrã com o Krfb</caption>
+      <caption xml:lang="sv">Dela skrivbord med Krfb</caption>
+      <caption xml:lang="uk">Спільне використання стільниці за допомогою Krfb</caption>
+      <caption xml:lang="x-test">xxSharing desktop with Krfbxx</caption>
       <image>https://cdn.kde.org/screenshots/krfb/krfb.png</image>
     </screenshot>
   </screenshots>
