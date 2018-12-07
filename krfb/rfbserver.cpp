@@ -23,6 +23,7 @@
 #include <QApplication>
 #include <QClipboard>
 #include <QDebug>
+#include <QX11Info>
 
 struct RfbServer::Private
 {
@@ -138,8 +139,10 @@ bool RfbServer::start()
     d->notifier = new QSocketNotifier(d->screen->listenSock, QSocketNotifier::Read, this);
     d->notifier->setEnabled(true);
     connect(d->notifier, &QSocketNotifier::activated, this, &RfbServer::onListenSocketActivated);
-    connect(QApplication::clipboard(), &QClipboard::dataChanged,
-            this, &RfbServer::krfbSendServerCutText);
+    if (QX11Info::isPlatformX11()) {
+        connect(QApplication::clipboard(), &QClipboard::dataChanged,
+                this, &RfbServer::krfbSendServerCutText);
+    }
 
     return true;
 }
