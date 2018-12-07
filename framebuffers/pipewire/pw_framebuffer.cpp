@@ -601,7 +601,6 @@ void PWFrameBuffer::Private::onStreamFormatChanged(void *data, const struct spa_
  */
 void PWFrameBuffer::Private::onStreamProcess(void *data)
 {
-    qWarning() << "OnStreamProcess()";
     auto *d = static_cast<PWFrameBuffer::Private *>(data);
 
     pw_buffer *buf;
