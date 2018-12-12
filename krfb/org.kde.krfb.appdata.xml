@@ -120,6 +120,7 @@
       <caption xml:lang="sv">Dela skrivbord med Krfb</caption>
       <caption xml:lang="uk">Спільне використання стільниці за допомогою Krfb</caption>
       <caption xml:lang="x-test">xxSharing desktop with Krfbxx</caption>
+      <caption xml:lang="zh-CN">使用 Krfb 共享桌面</caption>
       <image>https://cdn.kde.org/screenshots/krfb/krfb.png</image>
     </screenshot>
   </screenshots>
