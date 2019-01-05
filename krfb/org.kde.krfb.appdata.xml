@@ -35,6 +35,7 @@
   <name xml:lang="uk">Krfb</name>
   <name xml:lang="x-test">xxKrfbxx</name>
   <name xml:lang="zh-CN">Krfb</name>
+  <name xml:lang="zh-TW">Krfb</name>
   <summary>Desktop sharing</summary>
   <summary xml:lang="ca">Compartició de l'escriptori</summary>
   <summary xml:lang="ca-valencia">Compartició de l'escriptori</summary>
@@ -67,6 +68,7 @@
   <summary xml:lang="uk">Спільне користування стільницею</summary>
   <summary xml:lang="x-test">xxDesktop sharingxx</summary>
   <summary xml:lang="zh-CN">桌面共享</summary>
+  <summary xml:lang="zh-TW">桌面分享</summary>
   <description>
     <p>Krfb Desktop Sharing is a server application that allows you to share your current session with a user on another machine, who can use a VNC client to view or even control the desktop.</p>
     <p xml:lang="ca">El Krfb és una aplicació de servidor que permet compartir la vostra sessió actual amb un usuari en una altra màquina, la qual pot emprar un client VNC per veure o controlar l'escriptori.</p>
@@ -123,6 +125,7 @@
       <caption xml:lang="uk">Спільне використання стільниці за допомогою Krfb</caption>
       <caption xml:lang="x-test">xxSharing desktop with Krfbxx</caption>
       <caption xml:lang="zh-CN">使用 Krfb 共享桌面</caption>
+      <caption xml:lang="zh-TW">使用 Krfb 分享桌面</caption>
       <image>https://cdn.kde.org/screenshots/krfb/krfb.png</image>
     </screenshot>
   </screenshots>
