@@ -41,6 +41,8 @@ public:
     void startMonitor() override;
     void stopMonitor() override;
 
+    QVariant customProperty(const QString &property) const override;
+
     bool isValid() const;
 
 private slots:

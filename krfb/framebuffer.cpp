@@ -50,6 +50,11 @@ void FrameBuffer::getServerFormat(rfbPixelFormat &)
 {
 }
 
+QVariant FrameBuffer::customProperty(const QString &property) const
+{
+    return QVariant();
+}
+
 int FrameBuffer::depth()
 {
     return 32;

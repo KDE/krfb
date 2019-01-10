@@ -23,6 +23,12 @@
 */
 
 #include "events.h"
+#include "krfbconfig.h"
+#include "rfbservermanager.h"
+
+#include "dbus/xdp_dbus_remotedesktop_interface.h"
+
+#include <linux/input.h>
 
 #include <QApplication>
 #include <QX11Info>
@@ -32,6 +38,8 @@
 #include <X11/Xutil.h>
 #include <X11/keysym.h>
 #include <X11/extensions/XTest.h>
+
+#include <QX11Info>
 
 enum {
     LEFTSHIFT = 1,
@@ -55,6 +63,10 @@ public:
 
     //mouse
     int buttonMask;
+    int x;
+    int y;
+
+    QScopedPointer<OrgFreedesktopPortalRemoteDesktopInterface> dbusXdpRemoteDesktopService;
 
 private:
     void init();
@@ -69,39 +81,44 @@ EventData::EventData()
 
 void EventData::init()
 {
-    dpy = QX11Info::display();
     buttonMask = 0;
 
-    //initialize keycodes
-    KeySym key, *keymap;
-    int i, j, minkey, maxkey, syms_per_keycode;
+    if (QX11Info::isPlatformX11()) {
+        dpy = QX11Info::display();
+        //initialize keycodes
+        KeySym key, *keymap;
+        int i, j, minkey, maxkey, syms_per_keycode;
 
-    memset(modifiers, -1, sizeof(modifiers));
+        memset(modifiers, -1, sizeof(modifiers));
 
-    XDisplayKeycodes(dpy, &minkey, &maxkey);
-    Q_ASSERT(minkey >= 8);
-    Q_ASSERT(maxkey < 256);
-    keymap = (KeySym *) XGetKeyboardMapping(dpy, minkey,
-                                            (maxkey - minkey + 1),
-                                            &syms_per_keycode);
-    Q_ASSERT(keymap);
+        XDisplayKeycodes(dpy, &minkey, &maxkey);
+        Q_ASSERT(minkey >= 8);
+        Q_ASSERT(maxkey < 256);
+        keymap = (KeySym *) XGetKeyboardMapping(dpy, minkey,
+                                                (maxkey - minkey + 1),
+                                                &syms_per_keycode);
+        Q_ASSERT(keymap);
 
-    for (i = minkey; i <= maxkey; i++) {
-        for (j = 0; j < syms_per_keycode; j++) {
-            key = keymap[(i-minkey)*syms_per_keycode+j];
+        for (i = minkey; i <= maxkey; i++) {
+            for (j = 0; j < syms_per_keycode; j++) {
+                key = keymap[(i-minkey)*syms_per_keycode+j];
 
-            if (key >= ' ' && key < 0x100 && i == XKeysymToKeycode(dpy, key)) {
-                keycodes[key] = i;
-                modifiers[key] = j;
+                if (key >= ' ' && key < 0x100 && i == XKeysymToKeycode(dpy, key)) {
+                    keycodes[key] = i;
+                    modifiers[key] = j;
+                }
             }
         }
+
+        leftShiftCode = XKeysymToKeycode(dpy, XK_Shift_L);
+        rightShiftCode = XKeysymToKeycode(dpy, XK_Shift_R);
+        altGrCode = XKeysymToKeycode(dpy, XK_Mode_switch);
+
+        XFree((char *)keymap);
     }
 
-    leftShiftCode = XKeysymToKeycode(dpy, XK_Shift_L);
-    rightShiftCode = XKeysymToKeycode(dpy, XK_Shift_R);
-    altGrCode = XKeysymToKeycode(dpy, XK_Mode_switch);
-
-    XFree((char *)keymap);
+    dbusXdpRemoteDesktopService.reset(new OrgFreedesktopPortalRemoteDesktopInterface(QLatin1String("org.freedesktop.portal.Desktop"),
+                                      QLatin1String("/org/freedesktop/portal/desktop"), QDBusConnection::sessionBus()));
 }
 
 /* this function adjusts the modifiers according to mod (as from modifiers) and data->modifierState */
@@ -146,55 +163,117 @@ void EventHandler::handleKeyboard(bool down, rfbKeySym keySym)
 #define ADJUSTMOD(sym,state) \
     if(keySym==sym) { if(down) data->modifierState|=state; else data->modifierState&=~state; }
 
-    ADJUSTMOD(XK_Shift_L, LEFTSHIFT);
-    ADJUSTMOD(XK_Shift_R, RIGHTSHIFT);
-    ADJUSTMOD(XK_Mode_switch, ALTGR);
+    if (QX11Info::isPlatformX11()) {
+        ADJUSTMOD(XK_Shift_L, LEFTSHIFT);
+        ADJUSTMOD(XK_Shift_R, RIGHTSHIFT);
+        ADJUSTMOD(XK_Mode_switch, ALTGR);
 
-    if (keySym >= ' ' && keySym < 0x100) {
-        KeyCode k;
+        if (keySym >= ' ' && keySym < 0x100) {
+            KeyCode k;
 
-        if (down) {
-            tweakModifiers(data->modifiers[keySym], True);
+            if (down) {
+                tweakModifiers(data->modifiers[keySym], True);
+            }
+
+            k = data->keycodes[keySym];
+
+            if (k != NoSymbol) {
+                XTestFakeKeyEvent(data->dpy, k, down, CurrentTime);
+            }
+
+            if (down) {
+                tweakModifiers(data->modifiers[keySym], False);
+            }
+        } else {
+            KeyCode k = XKeysymToKeycode(data->dpy, keySym);
+
+            if (k != NoSymbol) {
+                XTestFakeKeyEvent(data->dpy, k, down, CurrentTime);
+            }
         }
+    }
 
-        k = data->keycodes[keySym];
+    // Wayland platform and pipweire plugin in use
+    if (KrfbConfig::preferredFrameBufferPlugin() == QStringLiteral("pw")) {
 
-        if (k != NoSymbol) {
-            XTestFakeKeyEvent(data->dpy, k, down, CurrentTime);
-        }
-
-        if (down) {
-            tweakModifiers(data->modifiers[keySym], False);
-        }
-    } else {
-        KeyCode k = XKeysymToKeycode(data->dpy, keySym);
-
-        if (k != NoSymbol) {
-            XTestFakeKeyEvent(data->dpy, k, down, CurrentTime);
-        }
     }
 }
 
 void EventHandler::handlePointer(int buttonMask, int x, int y)
 {
-    QDesktopWidget *desktopWidget = QApplication::desktop();
+    if (QX11Info::isPlatformX11()) {
+        QDesktopWidget *desktopWidget = QApplication::desktop();
 
-    int screen = desktopWidget->screenNumber();
+        int screen = desktopWidget->screenNumber();
 
-    if (screen < 0) {
-        screen = 0;
+        if (screen < 0) {
+            screen = 0;
+        }
+
+        XTestFakeMotionEvent(data->dpy, screen, x, y, CurrentTime);
+
+        for (int i = 0; i < 5; i++) {
+            if ((data->buttonMask&(1 << i)) != (buttonMask&(1 << i))) {
+                XTestFakeButtonEvent(data->dpy,
+                                        i + 1,
+                                        (buttonMask&(1 << i)) ? True : False,
+                                        CurrentTime);
+            }
+        }
+
+        data->buttonMask = buttonMask;
     }
 
-    XTestFakeMotionEvent(data->dpy, screen, x, y, CurrentTime);
+    // Wayland platform and pipweire plugin in use
+    if (KrfbConfig::preferredFrameBufferPlugin() == QStringLiteral("pw")) {
+        QSharedPointer<FrameBuffer> fb = RfbServerManager::instance()->framebuffer();
+        const uint streamNodeId = fb->customProperty(QLatin1String("stream_node_id")).toUInt();
+        const QDBusObjectPath sessionHandle = fb->customProperty(QLatin1String("session_handle")).value<QDBusObjectPath>();
 
-    for (int i = 0; i < 5; i++) {
-        if ((data->buttonMask&(1 << i)) != (buttonMask&(1 << i))) {
-            XTestFakeButtonEvent(data->dpy,
-                                 i + 1,
-                                 (buttonMask&(1 << i)) ? True : False,
-                                 CurrentTime);
+        if (x != data->x || y != data->y) {
+            data->dbusXdpRemoteDesktopService->NotifyPointerMotionAbsolute(sessionHandle, QVariantMap(), streamNodeId, x, y);
+            data->x = x;
+            data->y = y;
+        }
+
+        if (buttonMask != data->buttonMask) {
+            int i = 0;
+            QVector<int> buttons = { BTN_LEFT, BTN_MIDDLE, BTN_RIGHT, 0, 0, 0, 0, BTN_SIDE, BTN_EXTRA };
+            for (auto it = buttons.constBegin(); it != buttons.constEnd(); ++it) {
+                int prevButtonState = (data->buttonMask >> i) & 0x01;
+                int currentButtonState = (buttonMask >> i) & 0x01;
+
+                if (prevButtonState != currentButtonState) {
+                    if (*it) {
+                        data->dbusXdpRemoteDesktopService->NotifyPointerButton(sessionHandle, QVariantMap(), *it, buttonMask);
+                    } else {
+                        int axis = 0;
+                        int steps = 0;
+                        switch (i) {
+                        case 3:
+                            axis = 0;   // Vertical
+                            steps = -1;
+                            break;
+                        case 4:
+                            axis = 0;   // Vertical
+                            steps = 1;
+                            break;
+                        case 5:
+                            axis = 1;   // Horizontal
+                            steps = -1;
+                            break;
+                        case 6:
+                            axis = 1;   // Horizontal
+                            steps = 1;
+                            break;
+                         }
+
+                        data->dbusXdpRemoteDesktopService->NotifyPointerAxisDiscrete(sessionHandle, QVariantMap(), axis, steps);
+                    }
+                }
+                ++i;
+            }
+            data->buttonMask = buttonMask;
         }
     }
-
-    data->buttonMask = buttonMask;
 }

@@ -7,15 +7,16 @@ set (krfb_framebuffer_pw_SRCS
      pw_framebufferplugin.cpp
 )
 
+
 qt5_add_dbus_interface(
    krfb_framebuffer_pw_SRCS
-   xdp_dbus_screencast_interface.xml
+   ${CMAKE_SOURCE_DIR}/krfb/dbus/xdp_dbus_screencast_interface.xml
    xdp_dbus_screencast_interface
 )
 
 qt5_add_dbus_interface(
    krfb_framebuffer_pw_SRCS
-   xdp_dbus_remotedesktop_interface.xml
+   ${CMAKE_SOURCE_DIR}/krfb/dbus/xdp_dbus_remotedesktop_interface.xml
    xdp_dbus_remotedesktop_interface
 )
 

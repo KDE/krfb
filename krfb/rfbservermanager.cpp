@@ -90,7 +90,6 @@ RfbServerManager* RfbServerManager::instance()
     return &s_instance->server;
 }
 
-
 struct RfbServerManager::Private
 {
     QSharedPointer<FrameBuffer> fb;
@@ -111,6 +110,11 @@ RfbServerManager::RfbServerManager()
 RfbServerManager::~RfbServerManager()
 {
     delete d;
+}
+
+QSharedPointer<FrameBuffer> RfbServerManager::framebuffer() const
+{
+    return d->fb;
 }
 
 void RfbServerManager::init()

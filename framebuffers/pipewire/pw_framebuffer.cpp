@@ -782,6 +782,17 @@ void PWFrameBuffer::stopMonitor()
 
 }
 
+QVariant PWFrameBuffer::customProperty(const QString &property) const
+{
+    if (property == QLatin1String("stream_node_id")) {
+        return QVariant::fromValue<uint>(d->pwStreamNodeId);
+    } if (property == QLatin1String("session_handle")) {
+        return QVariant::fromValue<QDBusObjectPath>(d->sessionPath);
+    }
+
+    return FrameBuffer::customProperty(property);
+}
+
 bool PWFrameBuffer::isValid() const
 {
     return d->isValid;

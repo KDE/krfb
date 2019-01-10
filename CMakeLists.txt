@@ -23,6 +23,9 @@ include(ECMInstallIcons)
 include(ECMAddAppIcon)
 include(ECMSetupVersion)
 include(FeatureSummary)
+include(CheckIncludeFile)
+
+check_include_file("linux/input.h" HAVE_LINUX_INPUT_H)
 
 ecm_setup_version(PROJECT
                   VARIABLE_PREFIX KRFB

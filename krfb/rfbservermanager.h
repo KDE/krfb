@@ -21,6 +21,7 @@
 #define RFBSERVERMANAGER_H
 
 #include "rfb.h"
+#include "framebuffer.h"
 #include <QtCore/QObject>
 
 class RfbClient;
@@ -33,6 +34,7 @@ class RfbServerManager : public QObject
 public:
     static RfbServerManager *instance();
 
+    QSharedPointer<FrameBuffer> framebuffer() const;
 Q_SIGNALS:
     void clientConnected(RfbClient *cc);
     void clientDisconnected(RfbClient *cc);

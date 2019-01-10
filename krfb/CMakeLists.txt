@@ -19,6 +19,7 @@ add_library (krfbprivate
 )
 generate_export_header(krfbprivate BASE_NAME krfbprivate)
 
+
 target_link_libraries (krfbprivate
                        Qt5::Core
                        Qt5::Widgets
@@ -73,6 +74,18 @@ ki18n_wrap_ui (krfb_SRCS
                    ui/mainwidget.ui
 )
 
+qt5_add_dbus_interface(
+   krfb_SRCS
+   dbus/xdp_dbus_screencast_interface.xml
+   dbus/xdp_dbus_screencast_interface
+)
+
+qt5_add_dbus_interface(
+   krfb_SRCS
+   dbus/xdp_dbus_remotedesktop_interface.xml
+   dbus/xdp_dbus_remotedesktop_interface
+)
+
 add_executable (krfb
                      ${krfb_SRCS}
 )
@@ -83,6 +96,7 @@ target_link_libraries (krfb
                        ${X11_Xext_LIB}
                        ${X11_X11_LIB}
                        ${X11_Xdamage_LIB}
+                       Qt5::DBus
                        Qt5::Network
                        KF5::Completion
                        KF5::CoreAddons

@@ -17,6 +17,7 @@
 #include <QtCore/QObject>
 #include <QtCore/QRect>
 #include <QtCore/QList>
+#include <QtCore/QVariant>
 #include <QWidget>
 
 
@@ -44,6 +45,7 @@ public:
 
     virtual void getServerFormat(rfbPixelFormat &format);
 
+    virtual QVariant customProperty(const QString &property) const;
 Q_SIGNALS:
     void frameBufferChanged();
 
