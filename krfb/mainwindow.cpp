@@ -18,6 +18,7 @@
 #include <KConfigDialog>
 #include <KLocalizedString>
 #include <KMessageBox>
+#include <KMessageWidget>
 #include <KStandardAction>
 #include <KActionCollection>
 #include <KLineEdit>
@@ -48,7 +49,20 @@ class Security: public QWidget, public Ui::Security
 public:
     Security(QWidget *parent = nullptr) : QWidget(parent) {
         setupUi(this);
+        walletWarning = new KMessageWidget(this);
+        walletWarning->setText(i18n("Storing passwords in config file is insecure!"));
+        walletWarning->setCloseButtonVisible(false);
+        walletWarning->setMessageType(KMessageWidget::Warning);
+        walletWarning->hide();
+        vboxLayout->addWidget(walletWarning);
+
+        // show warning when "noWallet" checkbox is unchecked
+        QObject::connect(kcfg_noWallet, &QCheckBox::toggled, [this](bool checked){
+            walletWarning->setVisible(!checked);
+        });
     }
+
+    KMessageWidget *walletWarning = nullptr;
 };
 
 class ConfigFramebuffer: public QWidget, public Ui::Framebuffer
@@ -226,10 +240,12 @@ void MainWindow::aboutUnattendedMode()
 void MainWindow::showConfiguration()
 {
     static QString s_prevFramebufferPlugin;
+    static bool s_prevNoWallet;
     // ^^ needs to be static, because lambda will be called long time
     //    after showConfiguration() ends, so auto variable would go out of scope
     // save previously selected framebuffer plugin config
     s_prevFramebufferPlugin = KrfbConfig::preferredFrameBufferPlugin();
+    s_prevNoWallet = KrfbConfig::noWallet();
 
     if (KConfigDialog::showDialog("settings")) {
         return;
@@ -245,6 +261,19 @@ void MainWindow::showConfiguration()
         if (s_prevFramebufferPlugin != KrfbConfig::preferredFrameBufferPlugin()) {
             KMessageBox::information(this, i18n("To apply framebuffer plugin setting, "
                                                 "you need to restart the program."));
+        }
+        // check if kwallet config has changed
+        if (s_prevNoWallet != KrfbConfig::noWallet()) {
+            // try to apply settings immediately
+            if (KrfbConfig::noWallet()) {
+                InvitationsRfbServer::instance->closeKWallet();
+            } else {
+                InvitationsRfbServer::instance->openKWallet();
+                // erase stored passwords from krfbconfig file
+                KConfigGroup securityConfigGroup(KSharedConfig::openConfig(), "Security");
+                securityConfigGroup.deleteEntry("desktopPassword");
+                securityConfigGroup.deleteEntry("unattendedPassword");
+            }
         }
     });
 }

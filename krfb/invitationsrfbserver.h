@@ -50,6 +50,8 @@ public Q_SLOTS:
     bool start() override;
     void stop() override;
     void toggleUnattendedAccess(bool allow);
+    void openKWallet();
+    void closeKWallet();
 
 protected:
     InvitationsRfbServer();
