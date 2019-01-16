@@ -56,9 +56,9 @@ public:
         walletWarning->hide();
         vboxLayout->addWidget(walletWarning);
 
-        // show warning when "noWallet" checkbox is unchecked
+        // show warning when "noWallet" checkbox is checked
         QObject::connect(kcfg_noWallet, &QCheckBox::toggled, [this](bool checked){
-            walletWarning->setVisible(!checked);
+            walletWarning->setVisible(checked);
         });
     }
 
