@@ -60,7 +60,6 @@ if(WIN32)
     set(CMAKE_REQUIRED_INCLUDES  ${KDEWIN32_INCLUDES})
 endif(WIN32)
 
-add_definitions(${QT_DEFINITIONS} ${QT_QTDBUS_DEFINITIONS})
 add_definitions(-DQT_USE_FAST_OPERATOR_PLUS)
 include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} )
 
