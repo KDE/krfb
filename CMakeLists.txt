@@ -73,7 +73,7 @@ include_directories ("${CMAKE_CURRENT_BINARY_DIR}/krfb"
 
 if(Q_WS_X11)
   if(NOT X11_XTest_FOUND)
-    message(FATAL_ERROR "krfb requires the libXtst (http://xorg.freedesktop.org) to be built")
+    message(FATAL_ERROR "krfb requires the libXtst (https://xorg.freedesktop.org) to be built")
   endif(NOT X11_XTest_FOUND)
 endif(Q_WS_X11)
 
