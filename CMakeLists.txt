@@ -14,7 +14,7 @@ set(KF5_MIN_VERSION 5.31.0)
 find_package(Qt5 ${QT_MIN_VERSION} REQUIRED COMPONENTS Core DBus Widgets X11Extras)
 
 find_package(ECM ${KF5_MIN_VERSION} NO_MODULE REQUIRED)
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR})
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules" ${ECM_MODULE_PATH})
 
 include(KDEInstallDirs)
 include(KDECMakeSettings)
@@ -63,11 +63,6 @@ endif(WIN32)
 add_definitions(${QT_DEFINITIONS} ${QT_QTDBUS_DEFINITIONS})
 add_definitions(-DQT_USE_FAST_OPERATOR_PLUS)
 include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} )
-
-set(CMAKE_MODULE_PATH
-    "${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules"
-    ${CMAKE_MODULE_PATH}
-)
 
 find_package(LibVNCServer REQUIRED)
 
