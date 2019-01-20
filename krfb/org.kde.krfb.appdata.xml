@@ -100,6 +100,7 @@
     <p xml:lang="uk">Програма для спільного використання стільниці Krfb — це серверна програма, яка надає вам змогу розділити ваш поточний сеанс роботи з користувачем, який працює на іншому комп’ютері, так, щоб цей користувач зміг скористатися клієнтом VNC для перегляду або навіть керування вашою стільницею.</p>
     <p xml:lang="x-test">xxKrfb Desktop Sharing is a server application that allows you to share your current session with a user on another machine, who can use a VNC client to view or even control the desktop.xx</p>
     <p xml:lang="zh-CN">Krfb 桌面共享是一个可以让您与另一个在其他机器上的用户共享当前会话的服务器程序，他可以使用 VNC 客户端来查看甚至控制桌面。</p>
+    <p xml:lang="zh-TW">Krfb 桌面分享是款伺服器應用程式，它可以將您目前的桌面階段分享給一位於其他主機上的使用者，以讓他能使用 VNC 客戶端檢視、甚至控制您的桌面。</p>
   </description>
   <url type="homepage">https://userbase.kde.org/Krfb</url>
   <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?format=guided&amp;product=krfb</url>
