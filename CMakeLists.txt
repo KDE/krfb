@@ -24,10 +24,6 @@ include(FeatureSummary)
 
 find_package(Qt5 ${QT_MIN_VERSION} REQUIRED COMPONENTS Core DBus Widgets X11Extras)
 
-ecm_setup_version(PROJECT
-                  VARIABLE_PREFIX KRFB
-                  VERSION_HEADER "krfb_version.h")
-
 find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
     I18n
     Completion
@@ -65,6 +61,9 @@ include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} )
 
 find_package(LibVNCServer REQUIRED)
 
+ecm_setup_version(PROJECT
+                  VARIABLE_PREFIX KRFB
+                  VERSION_HEADER "krfb_version.h")
 
 include_directories ("${CMAKE_CURRENT_BINARY_DIR}/krfb"
                      "${CMAKE_CURRENT_SOURCE_DIR}/krfb"
