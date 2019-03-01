@@ -221,10 +221,10 @@ bool PendingRfbClient::vncAuthCheckPassword(const QByteArray& password, const QB
     bzero(passwd, MAXPWLEN);
 
     if (!password.isEmpty()) {
-        strncpy(passwd, password,
+        strncpy(passwd, password.constData(),
                 (MAXPWLEN <= password.size()) ? MAXPWLEN : password.size());
     }
 
     rfbEncryptBytes(challenge, passwd);
-    return memcmp(challenge, encryptedPassword, encryptedPassword.size()) == 0;
+    return memcmp(challenge, encryptedPassword.constData(), encryptedPassword.size()) == 0;
 }
