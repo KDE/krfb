@@ -1,0 +1,7 @@
+<!DOCTYPE gui SYSTEM "kpartgui.dtd">
+<gui name="krfb" version="0">
+
+<MenuBar>
+</MenuBar>
+
+</gui>

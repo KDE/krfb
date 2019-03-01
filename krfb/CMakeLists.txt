@@ -73,6 +73,10 @@ ki18n_wrap_ui (krfb_SRCS
                    ui/mainwidget.ui
 )
 
+qt5_add_resources(krfb_SRCS
+    krfb.qrc
+)
+
 add_executable (krfb
                      ${krfb_SRCS}
 )
