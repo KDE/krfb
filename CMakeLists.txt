@@ -28,7 +28,7 @@ ecm_setup_version(PROJECT
                   VARIABLE_PREFIX KRFB
                   VERSION_HEADER "krfb_version.h")
 
-find_package(KF5 REQUIRED COMPONENTS
+find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
     I18n
     Completion
     Config
