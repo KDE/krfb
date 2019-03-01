@@ -107,10 +107,9 @@ int main(int argc, char *argv[])
     aboutData.addCredit(i18n("AT&T Laboratories Boston"),
                         i18n("original VNC encoders and "
                               "protocol design"));
-    QCommandLineParser parser;
     KAboutData::setApplicationData(aboutData);
-    parser.addVersionOption();
-    parser.addHelpOption();
+
+    QCommandLineParser parser;
     aboutData.setupCommandLine(&parser);
     parser.process(app);
     aboutData.processCommandLine(&parser);
