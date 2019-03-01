@@ -111,12 +111,13 @@ int main(int argc, char *argv[])
 
     QCommandLineParser parser;
     aboutData.setupCommandLine(&parser);
+    const QCommandLineOption nodialogOption(QStringList{ QStringLiteral("nodialog") }, i18n("Do not show the invitations management dialog at startup"));
+    parser.addOption(nodialogOption);
+
     parser.process(app);
     aboutData.processCommandLine(&parser);
 
     KDBusService service(KDBusService::Unique, &app);
-
-    parser.addOption(QCommandLineOption(QStringList() << QLatin1String("nodialog"), i18n("Do not show the invitations management dialog at startup")));
 
     app.setQuitOnLastWindowClosed(false);
 
@@ -138,7 +139,7 @@ int main(int argc, char *argv[])
       mainWindow.hide();
     } else if (app.isSessionRestored() && KMainWindow::canBeRestored(1)) {
         mainWindow.restore(1, false);
-    } else if (!parser.isSet("nodialog")) {
+    } else if (!parser.isSet(nodialogOption)) {
         mainWindow.show();
     }
 
