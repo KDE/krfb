@@ -135,8 +135,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     // Figure out the address
     int port = KrfbConfig::port();
-    QList<QNetworkInterface> interfaceList = QNetworkInterface::allInterfaces();
-    foreach(const QNetworkInterface & interface, interfaceList) {
+    const QList<QNetworkInterface> interfaceList = QNetworkInterface::allInterfaces();
+    for (const QNetworkInterface& interface : interfaceList) {
         if(interface.flags() & QNetworkInterface::IsLoopBack)
             continue;
 

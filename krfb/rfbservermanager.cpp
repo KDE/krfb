@@ -132,7 +132,7 @@ void RfbServerManager::updateScreens()
     QList<QRect> rects = d->fb->modifiedTiles();
     QPoint currentCursorPos = QCursor::pos();
 
-    Q_FOREACH(RfbServer *server, d->servers) {
+    for (RfbServer* server : qAsConst(d->servers)) {
         server->updateScreen(rects);
         server->updateCursorPosition(currentCursorPos);
     }
@@ -140,8 +140,8 @@ void RfbServerManager::updateScreens()
     //update() might disconnect some of the clients, which will synchronously
     //call the removeClient() method and will change d->clients, so we need
     //to copy the set here to avoid problems.
-    QSet<RfbClient*> clients = d->clients;
-    Q_FOREACH(RfbClient *client, clients) {
+    const QSet<RfbClient*> clients = d->clients;
+    for (RfbClient* client : clients) {
         client->update();
     }
 }
@@ -151,10 +151,8 @@ void RfbServerManager::cleanup()
     //qDebug();
 
     //copy because d->servers is going to be modified while we delete the servers
-    QSet<RfbServer*> servers = d->servers;
-    Q_FOREACH(RfbServer *server, servers) {
-        delete server;
-    }
+    const QSet<RfbServer*> servers = d->servers;
+    qDeleteAll(servers);
 
     Q_ASSERT(d->servers.isEmpty());
     Q_ASSERT(d->clients.isEmpty());
