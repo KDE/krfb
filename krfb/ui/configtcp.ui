@@ -10,12 +10,6 @@
    </rect>
   </property>
   <layout class="QVBoxLayout" >
-   <property name="margin" >
-    <number>9</number>
-   </property>
-   <property name="spacing" >
-    <number>6</number>
-   </property>
    <item>
     <widget class="QCheckBox" name="kcfg_publishService" >
      <property name="text" >
@@ -37,14 +31,20 @@
     </widget>
    </item>
    <item>
-    <layout class="QHBoxLayout" >
-     <property name="margin" >
+    <layout class="QFormLayout">
+     <property name="leftMargin">
       <number>0</number>
      </property>
-     <property name="spacing" >
-      <number>6</number>
+     <property name="topMargin">
+      <number>0</number>
      </property>
-     <item>
+     <property name="rightMargin">
+      <number>0</number>
+     </property>
+     <property name="bottomMargin">
+      <number>0</number>
+     </property>
+     <item row="0" column="0">
       <widget class="QLabel" name="label" >
        <property name="text" >
         <string>Listening port:</string>
@@ -54,7 +54,7 @@
        </property>
       </widget>
      </item>
-     <item>
+     <item row="0" column="1">
       <widget class="QSpinBox" name="kcfg_port" >
        <property name="enabled" >
         <bool>false</bool>
@@ -65,6 +65,19 @@
       </widget>
      </item>
     </layout>
+   </item>
+   <item>
+    <spacer>
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
    </item>
   </layout>
  </widget>
