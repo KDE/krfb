@@ -65,17 +65,17 @@ PendingInvitationsRfbClient::~PendingInvitationsRfbClient()
 
 void PendingInvitationsRfbClient::processNewClient()
 {
-    QString host = peerAddress(m_rfbClient->sock) + ':' + QString::number(peerPort(m_rfbClient->sock));
+    QString host = peerAddress(m_rfbClient->sock) + QLatin1Char(':') + QString::number(peerPort(m_rfbClient->sock));
 
     if (d->askOnConnect == false) {
 
-        KNotification::event("NewConnectionAutoAccepted",
+        KNotification::event(QStringLiteral("NewConnectionAutoAccepted"),
                              i18n("Accepted connection from %1", host));
         accept(new InvitationsRfbClient(m_rfbClient, parent()));
 
     } else {
 
-        KNotification::event("NewConnectionOnHold",
+        KNotification::event(QStringLiteral("NewConnectionOnHold"),
                             i18n("Received connection from %1, on hold (waiting for confirmation)",
                                 host));
 

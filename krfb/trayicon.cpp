@@ -96,7 +96,7 @@ ClientActions::~ClientActions()
 TrayIcon::TrayIcon(QWidget *mainWindow)
     : KStatusNotifierItem(mainWindow)
 {
-    setIconByPixmap(QIcon::fromTheme("krfb").pixmap(22, 22, QIcon::Disabled));
+    setIconByPixmap(QIcon::fromTheme(QStringLiteral("krfb")).pixmap(22, 22, QIcon::Disabled));
 
     setToolTipTitle(i18n("Desktop Sharing - disconnected"));
     setCategory(KStatusNotifierItem::ApplicationStatus);
@@ -113,7 +113,7 @@ TrayIcon::TrayIcon(QWidget *mainWindow)
 void TrayIcon::onClientConnected(RfbClient* client)
 {
     if (m_clientActions.isEmpty()) { //first client connected
-        setIconByName("krfb");
+        setIconByName(QStringLiteral("krfb"));
         setToolTipTitle(i18n("Desktop Sharing - connected with %1", client->name()));
         setStatus(KStatusNotifierItem::Active);
     } else { //Nth client connected, N != 1
@@ -129,7 +129,7 @@ void TrayIcon::onClientDisconnected(RfbClient* client)
     delete actions;
 
     if (m_clientActions.isEmpty()) {
-        setIconByPixmap(QIcon::fromTheme("krfb").pixmap(22, 22, QIcon::Disabled));
+        setIconByPixmap(QIcon::fromTheme(QStringLiteral("krfb")).pixmap(22, 22, QIcon::Disabled));
         setToolTipTitle(i18n("Desktop Sharing - disconnected"));
         setStatus(KStatusNotifierItem::Passive);
     } else if (m_clientActions.size() == 1) { //clients number dropped back to 1

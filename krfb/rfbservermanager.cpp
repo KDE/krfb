@@ -120,7 +120,7 @@ void RfbServerManager::init()
     d->fb = FrameBufferManager::instance()->frameBuffer(QApplication::desktop()->winId());
     d->myCursor = rfbMakeXCursor(19, 19, (char *) cur, (char *) mask);
     d->myCursor->cleanup = false;
-    d->desktopName = QString("%1@%2 (shared desktop)") //FIXME check if we can use utf8
+    d->desktopName = QStringLiteral("%1@%2 (shared desktop)") //FIXME check if we can use utf8
                         .arg(KUser().loginName(),QHostInfo::localHostName()).toLatin1();
 
     connect(&d->rfbUpdateTimer, &QTimer::timeout, this, &RfbServerManager::updateScreens);
@@ -213,7 +213,7 @@ void RfbServerManager::addClient(RfbClient* cc)
     }
     d->clients.insert(cc);
 
-    KNotification::event("UserAcceptsConnection",
+    KNotification::event(QStringLiteral("UserAcceptsConnection"),
                          i18n("The remote user %1 is now connected.", cc->name()));
 
     Q_EMIT clientConnected(cc);
@@ -228,7 +228,7 @@ void RfbServerManager::removeClient(RfbClient* cc)
         d->rfbUpdateTimer.stop();
     }
 
-    KNotification::event("ConnectionClosed", i18n("The remote user %1 disconnected.", cc->name()));
+    KNotification::event(QStringLiteral("ConnectionClosed"), i18n("The remote user %1 disconnected.", cc->name()));
 
     Q_EMIT clientDisconnected(cc);
 }

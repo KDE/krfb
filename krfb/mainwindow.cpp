@@ -112,7 +112,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     QWidget *mainWidget = new QWidget;
     m_ui.setupUi(mainWidget);
-    m_ui.krfbIconLabel->setPixmap(QIcon::fromTheme("krfb").pixmap(128));
+    m_ui.krfbIconLabel->setPixmap(QIcon::fromTheme(QStringLiteral("krfb")).pixmap(128));
     m_ui.enableUnattendedCheckBox->setChecked(
             InvitationsRfbServer::instance->allowUnattendedAccess());
 
@@ -142,7 +142,7 @@ MainWindow::MainWindow(QWidget *parent)
 
         if(interface.flags() & QNetworkInterface::IsRunning &&
                 !interface.addressEntries().isEmpty())
-            m_ui.addressDisplayLabel->setText(QString("%1 : %2")
+            m_ui.addressDisplayLabel->setText(QStringLiteral("%1 : %2")
                     .arg(interface.addressEntries().first().ip().toString())
                     .arg(port));
     }
@@ -171,7 +171,7 @@ void MainWindow::editPassword()
 {
     if(m_passwordEditable) {
         m_passwordEditable = false;
-        m_ui.passwordEditButton->setIcon(QIcon::fromTheme("document-properties"));
+        m_ui.passwordEditButton->setIcon(QIcon::fromTheme(QStringLiteral("document-properties")));
         m_ui.passwordGridLayout->removeWidget(m_passwordLineEdit);
         InvitationsRfbServer::instance->setDesktopPassword(
                 m_passwordLineEdit->text());
@@ -180,7 +180,7 @@ void MainWindow::editPassword()
         m_passwordLineEdit->setVisible(false);
     } else {
         m_passwordEditable = true;
-        m_ui.passwordEditButton->setIcon(QIcon::fromTheme("document-save"));
+        m_ui.passwordEditButton->setIcon(QIcon::fromTheme(QStringLiteral("document-save")));
         m_ui.passwordGridLayout->addWidget(m_passwordLineEdit,0,0);
         m_passwordLineEdit->setText(
                 InvitationsRfbServer::instance->desktopPassword());
@@ -212,7 +212,7 @@ void MainWindow::toggleDesktopSharing(bool enable)
         if(m_passwordEditable) {
             m_passwordEditable = false;
             m_passwordLineEdit->setVisible(false);
-            m_ui.passwordEditButton->setIcon(QIcon::fromTheme("document-properties"));
+            m_ui.passwordEditButton->setIcon(QIcon::fromTheme(QStringLiteral("document-properties")));
         }
     }
 }
@@ -247,14 +247,14 @@ void MainWindow::showConfiguration()
     s_prevFramebufferPlugin = KrfbConfig::preferredFrameBufferPlugin();
     s_prevNoWallet = KrfbConfig::noWallet();
 
-    if (KConfigDialog::showDialog("settings")) {
+    if (KConfigDialog::showDialog(QStringLiteral("settings"))) {
         return;
     }
 
-    KConfigDialog *dialog = new KConfigDialog(this, "settings", KrfbConfig::self());
-    dialog->addPage(new TCP, i18n("Network"), "network-wired");
-    dialog->addPage(new Security, i18n("Security"), "security-high");
-    dialog->addPage(new ConfigFramebuffer, i18n("Screen capture"), "video-display");
+    KConfigDialog *dialog = new KConfigDialog(this, QStringLiteral("settings"), KrfbConfig::self());
+    dialog->addPage(new TCP, i18n("Network"), QStringLiteral("network-wired"));
+    dialog->addPage(new Security, i18n("Security"), QStringLiteral("security-high"));
+    dialog->addPage(new ConfigFramebuffer, i18n("Screen capture"), QStringLiteral("video-display"));
     dialog->show();
     connect(dialog, &KConfigDialog::settingsChanged, [this] () {
         // check if framebuffer plugin config has changed

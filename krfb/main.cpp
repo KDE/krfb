@@ -78,7 +78,7 @@ int main(int argc, char *argv[])
 
     KLocalizedString::setApplicationDomain("krfb");
 
-    KAboutData aboutData("krfb",
+    KAboutData aboutData(QStringLiteral("krfb"),
                          i18n("Desktop Sharing"),
                          QStringLiteral(KRFB_VERSION_STRING),
                          i18n(description),
@@ -92,12 +92,12 @@ int main(int argc, char *argv[])
                                "(c) 1999, AT&T Laboratories Boston\n"));
     aboutData.addAuthor(i18n("George Goldberg"),
                         i18n("Telepathy tubes support"),
-                        "george.goldberg@collabora.co.uk");
+                        QStringLiteral("george.goldberg@collabora.co.uk"));
     aboutData.addAuthor(i18n("George Kiagiadakis"),
                         QString(),
-                        "george.kiagiadakis@collabora.co.uk");
-    aboutData.addAuthor(i18n("Alessandro Praduroux"), i18n("KDE4 porting"), "pradu@pradu.it");
-    aboutData.addAuthor(i18n("Tim Jansen"), i18n("Original author"), "tim@tjansen.de");
+                        QStringLiteral("george.kiagiadakis@collabora.co.uk"));
+    aboutData.addAuthor(i18n("Alessandro Praduroux"), i18n("KDE4 porting"), QStringLiteral("pradu@pradu.it"));
+    aboutData.addAuthor(i18n("Tim Jansen"), i18n("Original author"), QStringLiteral("tim@tjansen.de"));
     aboutData.addCredit(i18n("Johannes E. Schindelin"),
                         i18n("libvncserver"));
     aboutData.addCredit(i18n("Const Kaplinsky"),
