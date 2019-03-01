@@ -11,8 +11,6 @@ project(krfb VERSION ${KDE_APPLICATIONS_VERSION})
 set(QT_MIN_VERSION 5.6.0)
 set(KF5_MIN_VERSION 5.31.0)
 
-find_package(Qt5 ${QT_MIN_VERSION} REQUIRED COMPONENTS Core DBus Widgets X11Extras)
-
 find_package(ECM ${KF5_MIN_VERSION} NO_MODULE REQUIRED)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules" ${ECM_MODULE_PATH})
 
@@ -23,6 +21,8 @@ include(ECMInstallIcons)
 include(ECMAddAppIcon)
 include(ECMSetupVersion)
 include(FeatureSummary)
+
+find_package(Qt5 ${QT_MIN_VERSION} REQUIRED COMPONENTS Core DBus Widgets X11Extras)
 
 ecm_setup_version(PROJECT
                   VARIABLE_PREFIX KRFB
