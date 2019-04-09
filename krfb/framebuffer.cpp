@@ -9,7 +9,7 @@
 
 #include "framebuffer.h"
 
-#include "config-krfb.h"
+#include <config-krfb.h>
 
 #include <X11/Xutil.h>
 
@@ -72,7 +72,3 @@ void FrameBuffer::startMonitor()
 void FrameBuffer::stopMonitor()
 {
 }
-
-
-#include "framebuffer.moc"
-

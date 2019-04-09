@@ -25,10 +25,10 @@
 
 #include "krfbprivate_export.h"
 
-#include <QtCore/QMap>
-#include <QtCore/QObject>
-#include <QtCore/QSharedPointer>
-#include <QtCore/QWeakPointer>
+#include <QMap>
+#include <QObject>
+#include <QSharedPointer>
+#include <QWeakPointer>
 
 #include <QWidget>
 
@@ -43,7 +43,7 @@ class KRFBPRIVATE_EXPORT FrameBufferManager : public QObject
 public:
     static FrameBufferManager *instance();
 
-    virtual ~FrameBufferManager();
+    ~FrameBufferManager() override;
 
     QSharedPointer<FrameBuffer> frameBuffer(WId id);
 

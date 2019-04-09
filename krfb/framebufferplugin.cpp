@@ -30,7 +30,3 @@ FrameBufferPlugin::FrameBufferPlugin(QObject *parent, const QVariantList &)
 FrameBufferPlugin::~FrameBufferPlugin()
 {
 }
-
-
-#include "framebufferplugin.moc"
-

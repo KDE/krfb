@@ -14,10 +14,9 @@
 
 #include "krfbprivate_export.h"
 
-#include <QtCore/QObject>
-#include <QtCore/QRect>
-#include <QtCore/QList>
-#include <QtCore/QVariant>
+#include <QObject>
+#include <QRect>
+#include <QList>
 #include <QWidget>
 
 
@@ -29,9 +28,9 @@ class KRFBPRIVATE_EXPORT FrameBuffer : public QObject
 {
     Q_OBJECT
 public:
-    explicit FrameBuffer(WId id, QObject *parent = 0);
+    explicit FrameBuffer(WId id, QObject *parent = nullptr);
 
-    virtual ~FrameBuffer();
+    ~FrameBuffer() override;
 
     char *data();
 

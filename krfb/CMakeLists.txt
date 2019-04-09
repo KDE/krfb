@@ -84,6 +84,10 @@ qt5_add_dbus_interface(
    krfb_SRCS
    dbus/xdp_dbus_remotedesktop_interface.xml
    dbus/xdp_dbus_remotedesktop_interface
+
+qt5_add_resources(krfb_SRCS
+    krfb.qrc
+
 )
 
 add_executable (krfb

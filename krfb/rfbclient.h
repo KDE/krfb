@@ -21,7 +21,7 @@
 #define RFBCLIENT_H
 
 #include "rfb.h"
-#include <QtCore/QObject>
+#include <QObject>
 
 class RfbClient : public QObject
 {
@@ -29,8 +29,8 @@ class RfbClient : public QObject
     Q_PROPERTY(bool controlEnabled READ controlEnabled WRITE setControlEnabled NOTIFY controlEnabledChanged)
     Q_PROPERTY(bool onHold READ isOnHold WRITE setOnHold NOTIFY holdStatusChanged)
 public:
-    RfbClient(rfbClientPtr client, QObject *parent = 0);
-    virtual ~RfbClient();
+    explicit RfbClient(rfbClientPtr client, QObject *parent = nullptr);
+    ~RfbClient() override;
 
     /** Returns a name for the client, to be shown to the user */
     virtual QString name() const;
@@ -73,8 +73,8 @@ class PendingRfbClient : public QObject
 {
     Q_OBJECT
 public:
-    PendingRfbClient(rfbClientPtr client, QObject *parent = 0);
-    virtual ~PendingRfbClient();
+    explicit PendingRfbClient(rfbClientPtr client, QObject *parent = nullptr);
+    ~PendingRfbClient() override;
 
 Q_SIGNALS:
     void finished(RfbClient *client);
@@ -97,7 +97,7 @@ protected:
     virtual bool checkPassword(const QByteArray & encryptedPassword);
 
     /** This method checks if the \a encryptedPassword that was sent from the remote
-     * user matches the \a password that you have specified localy to be the password
+     * user matches the \a password that you have specified locally to be the password
      * for this connection. This assumes that the standard VNC authentication mechanism
      * is used. Returns true if the password matches or false otherwise.
      */

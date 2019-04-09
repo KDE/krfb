@@ -29,8 +29,8 @@ template <typename UI>
 class ConnectionDialog : public QDialog
 {
 public:
-    ConnectionDialog(QWidget *parent);
-    ~ConnectionDialog() {};
+    explicit ConnectionDialog(QWidget *parent);
+    ~ConnectionDialog() override {};
 
     void setAllowRemoteControl(bool b);
     bool allowRemoteControl();
@@ -59,7 +59,7 @@ class InvitationsConnectionDialog : public ConnectionDialog<Ui::ConnectionWidget
 {
     Q_OBJECT
 public:
-    InvitationsConnectionDialog(QWidget *parent);
+    explicit InvitationsConnectionDialog(QWidget *parent);
     void setRemoteHost(const QString & host);
 };
 

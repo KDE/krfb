@@ -22,7 +22,7 @@
 #include "krfbconfig.h"
 #include "sockethelpers.h"
 #include "events.h"
-#include <QtCore/QSocketNotifier>
+#include <QSocketNotifier>
 #include <QDebug>
 #include <poll.h>
 #include <strings.h> //for bzero()
@@ -43,7 +43,7 @@ struct RfbClient::Private
 RfbClient::RfbClient(rfbClientPtr client, QObject* parent)
     : QObject(parent), d(new Private(client))
 {
-    d->remoteAddressString = peerAddress(d->client->sock) + ":" +
+    d->remoteAddressString = peerAddress(d->client->sock) + QLatin1Char(':') +
                              QString::number(peerPort(d->client->sock));
 
     d->notifier = new QSocketNotifier(client->sock, QSocketNotifier::Read, this);
@@ -197,7 +197,7 @@ void PendingRfbClient::reject()
     rfbCloseClient(m_rfbClient);
     rfbClientConnectionGone(m_rfbClient);
 
-    Q_EMIT finished(NULL);
+    Q_EMIT finished(nullptr);
     deleteLater();
 }
 
@@ -205,7 +205,7 @@ bool PendingRfbClient::checkPassword(const QByteArray & encryptedPassword)
 {
     Q_UNUSED(encryptedPassword);
 
-    return m_rfbClient->screen->authPasswdData == (void*)0;
+    return m_rfbClient->screen->authPasswdData == (void*)nullptr;
 }
 
 bool PendingRfbClient::vncAuthCheckPassword(const QByteArray& password, const QByteArray& encryptedPassword) const
@@ -221,12 +221,10 @@ bool PendingRfbClient::vncAuthCheckPassword(const QByteArray& password, const QB
     bzero(passwd, MAXPWLEN);
 
     if (!password.isEmpty()) {
-        strncpy(passwd, password,
+        strncpy(passwd, password.constData(),
                 (MAXPWLEN <= password.size()) ? MAXPWLEN : password.size());
     }
 
     rfbEncryptBytes(challenge, passwd);
-    return memcmp(challenge, encryptedPassword, encryptedPassword.size()) == 0;
+    return memcmp(challenge, encryptedPassword.constData(), encryptedPassword.size()) == 0;
 }
-
-#include "rfbclient.moc"

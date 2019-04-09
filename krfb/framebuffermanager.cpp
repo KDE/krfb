@@ -30,7 +30,7 @@
 #include <KPluginLoader>
 #include <KPluginMetaData>
 
-#include <QtCore/QSharedPointer>
+#include <QSharedPointer>
 
 class FrameBufferManagerStatic
 {
@@ -135,7 +135,3 @@ QSharedPointer<FrameBuffer> FrameBufferManager::frameBuffer(WId id)
     qDebug() << "No valid framebuffer found. returning null.";
     return QSharedPointer<FrameBuffer>();
 }
-
-
-#include "framebuffermanager.moc"
-

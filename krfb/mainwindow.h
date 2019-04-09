@@ -8,8 +8,8 @@
    version 2 of the License, or (at your option) any later version.
 */
 
-#ifndef MANAGEINVITATIONSDIALOG_H
-#define MANAGEINVITATIONSDIALOG_H
+#ifndef KRFB_MAINWINDOW_H
+#define KRFB_MAINWINDOW_H
 
 #include "ui_mainwidget.h"
 
@@ -22,8 +22,8 @@ class MainWindow : public KXmlGuiWindow
     Q_OBJECT
 
     public:
-        MainWindow(QWidget *parent = 0);
-        ~MainWindow();
+        explicit MainWindow(QWidget *parent = nullptr);
+        ~MainWindow() override;
 
     public Q_SLOTS:
         void showConfiguration();

@@ -50,10 +50,12 @@ public Q_SLOTS:
     bool start() override;
     void stop() override;
     void toggleUnattendedAccess(bool allow);
+    void openKWallet();
+    void closeKWallet();
 
 protected:
     InvitationsRfbServer();
-    virtual ~InvitationsRfbServer();
+    ~InvitationsRfbServer() override;
     PendingRfbClient* newClient(rfbClientPtr client) override;
 
 private Q_SLOTS:

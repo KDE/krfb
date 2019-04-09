@@ -22,6 +22,13 @@
     </widget>
    </item>
    <item>
+    <widget class="QCheckBox" name="kcfg_noWallet">
+     <property name="text">
+      <string>Do not store passwords using KDE wallet</string>
+     </property>
+    </widget>
+   </item>
+   <item>
     <spacer>
      <property name="orientation">
       <enum>Qt::Vertical</enum>

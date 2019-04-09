@@ -18,6 +18,7 @@
 #include <KConfigDialog>
 #include <KLocalizedString>
 #include <KMessageBox>
+#include <KMessageWidget>
 #include <KStandardAction>
 #include <KActionCollection>
 #include <KLineEdit>
@@ -32,13 +33,13 @@
 #include <QSizePolicy>
 #include <QVector>
 #include <QSet>
-#include <QtNetwork/QNetworkInterface>
+#include <QNetworkInterface>
 
 
 class TCP: public QWidget, public Ui::TCP
 {
 public:
-    TCP(QWidget *parent = 0) : QWidget(parent) {
+    TCP(QWidget *parent = nullptr) : QWidget(parent) {
         setupUi(this);
     }
 };
@@ -46,15 +47,28 @@ public:
 class Security: public QWidget, public Ui::Security
 {
 public:
-    Security(QWidget *parent = 0) : QWidget(parent) {
+    Security(QWidget *parent = nullptr) : QWidget(parent) {
         setupUi(this);
+        walletWarning = new KMessageWidget(this);
+        walletWarning->setText(i18n("Storing passwords in config file is insecure!"));
+        walletWarning->setCloseButtonVisible(false);
+        walletWarning->setMessageType(KMessageWidget::Warning);
+        walletWarning->hide();
+        vboxLayout->addWidget(walletWarning);
+
+        // show warning when "noWallet" checkbox is checked
+        QObject::connect(kcfg_noWallet, &QCheckBox::toggled, [this](bool checked){
+            walletWarning->setVisible(checked);
+        });
     }
+
+    KMessageWidget *walletWarning = nullptr;
 };
 
 class ConfigFramebuffer: public QWidget, public Ui::Framebuffer
 {
 public:
-    ConfigFramebuffer(QWidget *parent = 0) : QWidget(parent) {
+    ConfigFramebuffer(QWidget *parent = nullptr) : QWidget(parent) {
         setupUi(this);
         // hide the line edit with framebuffer string
         kcfg_preferredFrameBufferPlugin->hide();
@@ -98,7 +112,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     QWidget *mainWidget = new QWidget;
     m_ui.setupUi(mainWidget);
-    m_ui.krfbIconLabel->setPixmap(QIcon::fromTheme("krfb").pixmap(128));
+    m_ui.krfbIconLabel->setPixmap(QIcon::fromTheme(QStringLiteral("krfb")).pixmap(128));
     m_ui.enableUnattendedCheckBox->setChecked(
             InvitationsRfbServer::instance->allowUnattendedAccess());
 
@@ -121,14 +135,14 @@ MainWindow::MainWindow(QWidget *parent)
 
     // Figure out the address
     int port = KrfbConfig::port();
-    QList<QNetworkInterface> interfaceList = QNetworkInterface::allInterfaces();
-    foreach(const QNetworkInterface & interface, interfaceList) {
+    const QList<QNetworkInterface> interfaceList = QNetworkInterface::allInterfaces();
+    for (const QNetworkInterface& interface : interfaceList) {
         if(interface.flags() & QNetworkInterface::IsLoopBack)
             continue;
 
         if(interface.flags() & QNetworkInterface::IsRunning &&
                 !interface.addressEntries().isEmpty())
-            m_ui.addressDisplayLabel->setText(QString("%1 : %2")
+            m_ui.addressDisplayLabel->setText(QStringLiteral("%1 : %2")
                     .arg(interface.addressEntries().first().ip().toString())
                     .arg(port));
     }
@@ -157,7 +171,7 @@ void MainWindow::editPassword()
 {
     if(m_passwordEditable) {
         m_passwordEditable = false;
-        m_ui.passwordEditButton->setIcon(QIcon::fromTheme("document-properties"));
+        m_ui.passwordEditButton->setIcon(QIcon::fromTheme(QStringLiteral("document-properties")));
         m_ui.passwordGridLayout->removeWidget(m_passwordLineEdit);
         InvitationsRfbServer::instance->setDesktopPassword(
                 m_passwordLineEdit->text());
@@ -166,7 +180,7 @@ void MainWindow::editPassword()
         m_passwordLineEdit->setVisible(false);
     } else {
         m_passwordEditable = true;
-        m_ui.passwordEditButton->setIcon(QIcon::fromTheme("document-save"));
+        m_ui.passwordEditButton->setIcon(QIcon::fromTheme(QStringLiteral("document-save")));
         m_ui.passwordGridLayout->addWidget(m_passwordLineEdit,0,0);
         m_passwordLineEdit->setText(
                 InvitationsRfbServer::instance->desktopPassword());
@@ -198,7 +212,7 @@ void MainWindow::toggleDesktopSharing(bool enable)
         if(m_passwordEditable) {
             m_passwordEditable = false;
             m_passwordLineEdit->setVisible(false);
-            m_ui.passwordEditButton->setIcon(QIcon::fromTheme("document-properties"));
+            m_ui.passwordEditButton->setIcon(QIcon::fromTheme(QStringLiteral("document-properties")));
         }
     }
 }
@@ -226,25 +240,40 @@ void MainWindow::aboutUnattendedMode()
 void MainWindow::showConfiguration()
 {
     static QString s_prevFramebufferPlugin;
+    static bool s_prevNoWallet;
     // ^^ needs to be static, because lambda will be called long time
     //    after showConfiguration() ends, so auto variable would go out of scope
     // save previously selected framebuffer plugin config
     s_prevFramebufferPlugin = KrfbConfig::preferredFrameBufferPlugin();
+    s_prevNoWallet = KrfbConfig::noWallet();
 
-    if (KConfigDialog::showDialog("settings")) {
+    if (KConfigDialog::showDialog(QStringLiteral("settings"))) {
         return;
     }
 
-    KConfigDialog *dialog = new KConfigDialog(this, "settings", KrfbConfig::self());
-    dialog->addPage(new TCP, i18n("Network"), "network-wired");
-    dialog->addPage(new Security, i18n("Security"), "security-high");
-    dialog->addPage(new ConfigFramebuffer, i18n("Screen capture"), "video-display");
+    KConfigDialog *dialog = new KConfigDialog(this, QStringLiteral("settings"), KrfbConfig::self());
+    dialog->addPage(new TCP, i18n("Network"), QStringLiteral("network-wired"));
+    dialog->addPage(new Security, i18n("Security"), QStringLiteral("security-high"));
+    dialog->addPage(new ConfigFramebuffer, i18n("Screen capture"), QStringLiteral("video-display"));
     dialog->show();
     connect(dialog, &KConfigDialog::settingsChanged, [this] () {
         // check if framebuffer plugin config has changed
         if (s_prevFramebufferPlugin != KrfbConfig::preferredFrameBufferPlugin()) {
             KMessageBox::information(this, i18n("To apply framebuffer plugin setting, "
                                                 "you need to restart the program."));
+        }
+        // check if kwallet config has changed
+        if (s_prevNoWallet != KrfbConfig::noWallet()) {
+            // try to apply settings immediately
+            if (KrfbConfig::noWallet()) {
+                InvitationsRfbServer::instance->closeKWallet();
+            } else {
+                InvitationsRfbServer::instance->openKWallet();
+                // erase stored passwords from krfbconfig file
+                KConfigGroup securityConfigGroup(KSharedConfig::openConfig(), "Security");
+                securityConfigGroup.deleteEntry("desktopPassword");
+                securityConfigGroup.deleteEntry("unattendedPassword");
+            }
         }
     });
 }
@@ -262,5 +291,3 @@ void MainWindow::saveProperties(KConfigGroup& group)
     group.writeEntry("Visible", isVisible());
     KMainWindow::saveProperties(group);
 }
-
-#include "mainwindow.moc"

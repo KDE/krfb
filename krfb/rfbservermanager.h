@@ -22,7 +22,7 @@
 
 #include "rfb.h"
 #include "framebuffer.h"
-#include <QtCore/QObject>
+#include <QObject>
 
 class RfbClient;
 struct RfbServerManagerStatic;
@@ -55,7 +55,7 @@ private:
     void removeClient(RfbClient *cc);
 
     RfbServerManager();
-    virtual ~RfbServerManager();
+    ~RfbServerManager() override;
     Q_DISABLE_COPY(RfbServerManager)
 
     friend class RfbServer;

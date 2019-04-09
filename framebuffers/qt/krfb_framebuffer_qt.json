@@ -1,14 +1,13 @@
 {
-    "Encoding": "UTF-8",
     "KPlugin": {
         "Description": "Qt based Framebuffer for KRfb.",
-        "Description[ast]": "Búfer de cuadros basáu en Qt pa KRfb.",
         "Description[ca@valencia]": "«Framebuffer» basat en les Qt per al KRfb.",
         "Description[ca]": "«Framebuffer» basat en les Qt per al KRfb.",
         "Description[cs]": "Framebuffer založený na Qt pro KRfb.",
         "Description[da]": "Qt-baseret framebuffer til KRfb.",
         "Description[de]": "Qt-basierter Framebuffer für KRfb",
         "Description[el]": "Μνήμη ανανέωσης βίντεο με βάση τhn Qt για το KRfb.",
+        "Description[en_GB]": "Qt based Framebuffer for KRfb.",
         "Description[es]": "Framebuffer basado en Qt para KRfb.",
         "Description[et]": "KRfb Qt põhine kaadripuhver",
         "Description[fi]": "QT-perustainen Kehyspuskuri KRfb:lle",
@@ -40,13 +39,13 @@
         "Id": "qt",
         "License": "GPL",
         "Name": "Qt Framebuffer for KRfb",
-        "Name[ast]": "Búfer de cuadros Qt pa KRfb",
         "Name[ca@valencia]": "«Framebuffer» de les Qt per al KRfb.",
         "Name[ca]": "«Framebuffer» de les Qt per al KRfb.",
         "Name[cs]": "Qt Framebuffer pro KRfb",
         "Name[da]": "Qt-framebuffer til KRfb",
         "Name[de]": "Qt-Framebuffer für KRfb",
         "Name[el]": "Μνήμη ανανέωσης βίντεο Qt για το KRfb",
+        "Name[en_GB]": "Qt Framebuffer for KRfb",
         "Name[es]": "Framebuffer de Qt para KRfb",
         "Name[et]": "KRfb Qt kaadripuhver",
         "Name[fi]": "QT-kehyspuskuri KRfb:lle",
@@ -78,6 +77,6 @@
             "krfb/framebuffer"
         ],
         "Version": "0.1",
-        "Website": "http://www.kde.org"
+        "Website": "https://www.kde.org"
     }
 }

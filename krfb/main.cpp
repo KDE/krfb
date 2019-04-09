@@ -46,7 +46,7 @@ static bool checkX11Capabilities()
                                  &majorv, &minorv);
 
     if ((!r) || (((majorv * 1000) + minorv) < 2002)) {
-        KMessageBox::error(0,
+        KMessageBox::error(nullptr,
                            i18n("Your X11 Server does not support the required XTest extension "
                                 "version 2.2. Sharing your desktop is not possible."),
                            i18n("Desktop Sharing Error"));
@@ -75,7 +75,7 @@ int main(int argc, char *argv[])
 
     KLocalizedString::setApplicationDomain("krfb");
 
-    KAboutData aboutData("krfb",
+    KAboutData aboutData(QStringLiteral("krfb"),
                          i18n("Desktop Sharing"),
                          QStringLiteral(KRFB_VERSION_STRING),
                          i18n(description),
@@ -89,12 +89,12 @@ int main(int argc, char *argv[])
                                "(c) 1999, AT&T Laboratories Boston\n"));
     aboutData.addAuthor(i18n("George Goldberg"),
                         i18n("Telepathy tubes support"),
-                        "george.goldberg@collabora.co.uk");
+                        QStringLiteral("george.goldberg@collabora.co.uk"));
     aboutData.addAuthor(i18n("George Kiagiadakis"),
                         QString(),
-                        "george.kiagiadakis@collabora.co.uk");
-    aboutData.addAuthor(i18n("Alessandro Praduroux"), i18n("KDE4 porting"), "pradu@pradu.it");
-    aboutData.addAuthor(i18n("Tim Jansen"), i18n("Original author"), "tim@tjansen.de");
+                        QStringLiteral("george.kiagiadakis@collabora.co.uk"));
+    aboutData.addAuthor(i18n("Alessandro Praduroux"), i18n("KDE4 porting"), QStringLiteral("pradu@pradu.it"));
+    aboutData.addAuthor(i18n("Tim Jansen"), i18n("Original author"), QStringLiteral("tim@tjansen.de"));
     aboutData.addCredit(i18n("Johannes E. Schindelin"),
                         i18n("libvncserver"));
     aboutData.addCredit(i18n("Const Kaplinsky"),
@@ -104,17 +104,17 @@ int main(int argc, char *argv[])
     aboutData.addCredit(i18n("AT&T Laboratories Boston"),
                         i18n("original VNC encoders and "
                               "protocol design"));
-    QCommandLineParser parser;
     KAboutData::setApplicationData(aboutData);
-    parser.addVersionOption();
-    parser.addHelpOption();
+
+    QCommandLineParser parser;
     aboutData.setupCommandLine(&parser);
+    const QCommandLineOption nodialogOption(QStringList{ QStringLiteral("nodialog") }, i18n("Do not show the invitations management dialog at startup"));
+    parser.addOption(nodialogOption);
+
     parser.process(app);
     aboutData.processCommandLine(&parser);
 
     KDBusService service(KDBusService::Unique, &app);
-
-    parser.addOption(QCommandLineOption(QStringList() << QLatin1String("nodialog"), i18n("Do not show the invitations management dialog at startup")));
 
     app.setQuitOnLastWindowClosed(false);
 
@@ -138,14 +138,14 @@ int main(int argc, char *argv[])
       mainWindow.hide();
     } else if (app.isSessionRestored() && KMainWindow::canBeRestored(1)) {
         mainWindow.restore(1, false);
-    } else if (!parser.isSet("nodialog")) {
+    } else if (!parser.isSet(nodialogOption)) {
         mainWindow.show();
     }
 
     sigset_t sigs;
     sigemptyset(&sigs);
     sigaddset(&sigs, SIGPIPE);
-    sigprocmask(SIG_BLOCK, &sigs, 0);
+    sigprocmask(SIG_BLOCK, &sigs, nullptr);
 
     return app.exec();
 }

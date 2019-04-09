@@ -22,14 +22,14 @@
 
 #include "rfb.h"
 #include "rfbclient.h"
-#include <QtCore/QRect>
+#include <QRect>
 
 class RfbServer : public QObject
 {
     Q_OBJECT
 public:
-    RfbServer(QObject *parent = 0);
-    virtual ~RfbServer();
+    explicit RfbServer(QObject *parent = nullptr);
+    ~RfbServer() override;
 
     QByteArray listeningAddress() const;
     int listeningPort() const;

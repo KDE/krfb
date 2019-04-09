@@ -22,18 +22,18 @@ class XCBFrameBuffer: public FrameBuffer
 {
     Q_OBJECT
 public:
-    XCBFrameBuffer(WId winid, QObject *parent = 0);
-    ~XCBFrameBuffer();
+    explicit XCBFrameBuffer(WId winid, QObject *parent = nullptr);
+    ~XCBFrameBuffer() override;
 
 public:
-    QList<QRect> modifiedTiles() Q_DECL_OVERRIDE;
-    int  depth() Q_DECL_OVERRIDE;
-    int  height() Q_DECL_OVERRIDE;
-    int  width() Q_DECL_OVERRIDE;
-    int  paddedWidth() Q_DECL_OVERRIDE;
-    void getServerFormat(rfbPixelFormat &format) Q_DECL_OVERRIDE;
-    void startMonitor() Q_DECL_OVERRIDE;
-    void stopMonitor() Q_DECL_OVERRIDE;
+    QList<QRect> modifiedTiles() override;
+    int  depth() override;
+    int  height() override;
+    int  width() override;
+    int  paddedWidth() override;
+    void getServerFormat(rfbPixelFormat &format) override;
+    void startMonitor() override;
+    void stopMonitor() override;
 
 public:
     void handleXDamageNotify(xcb_generic_event_t *xevent);

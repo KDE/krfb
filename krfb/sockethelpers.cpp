@@ -36,19 +36,19 @@ QString peerAddress(int sock)
     if (getpeername(sock, &sa, &salen) == 0) {
         if (sa.sa_family == AF_INET) {
             struct sockaddr_in *si = (struct sockaddr_in *)&sa;
-            return QString(inet_ntoa(si->sin_addr));
+            return QString::fromLatin1(inet_ntoa(si->sin_addr));
         }
 
         if (sa.sa_family == AF_INET6) {
             char inetbuf[ADDR_SIZE];
             inet_ntop(sa.sa_family, &sa, inetbuf, ADDR_SIZE);
-            return QString(inetbuf);
+            return QString::fromLatin1(inetbuf);
         }
 
-        return QString("not a network address");
+        return QStringLiteral("not a network address");
     }
 
-    return QString("unable to determine...");
+    return QStringLiteral("unable to determine...");
 }
 
 unsigned short peerPort(int sock)
@@ -75,19 +75,19 @@ QString localAddress(int sock)
     if (getsockname(sock, &sa, &salen) == 0) {
         if (sa.sa_family == AF_INET) {
             struct sockaddr_in *si = (struct sockaddr_in *)&sa;
-            return QString(inet_ntoa(si->sin_addr));
+            return QString::fromLatin1(inet_ntoa(si->sin_addr));
         }
 
         if (sa.sa_family == AF_INET6) {
             char inetbuf[ADDR_SIZE];
             inet_ntop(sa.sa_family, &sa, inetbuf, ADDR_SIZE);
-            return QString(inetbuf);
+            return QString::fromLatin1(inetbuf);
         }
 
-        return QString("not a network address");
+        return QStringLiteral("not a network address");
     }
 
-    return QString("unable to determine...");
+    return QStringLiteral("unable to determine...");
 }
 
 unsigned short localPort(int sock)

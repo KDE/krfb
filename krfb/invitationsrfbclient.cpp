@@ -29,7 +29,7 @@
 #include <KLocalizedString>
 
 #include <QDebug>
-#include <QtCore/QSocketNotifier>
+#include <QSocketNotifier>
 #include <poll.h>
 #include <KConfigGroup>
 
@@ -65,21 +65,21 @@ PendingInvitationsRfbClient::~PendingInvitationsRfbClient()
 
 void PendingInvitationsRfbClient::processNewClient()
 {
-    QString host = peerAddress(m_rfbClient->sock) + ":" + QString::number(peerPort(m_rfbClient->sock));
+    QString host = peerAddress(m_rfbClient->sock) + QLatin1Char(':') + QString::number(peerPort(m_rfbClient->sock));
 
     if (d->askOnConnect == false) {
 
-        KNotification::event("NewConnectionAutoAccepted",
+        KNotification::event(QStringLiteral("NewConnectionAutoAccepted"),
                              i18n("Accepted connection from %1", host));
         accept(new InvitationsRfbClient(m_rfbClient, parent()));
 
     } else {
 
-        KNotification::event("NewConnectionOnHold",
+        KNotification::event(QStringLiteral("NewConnectionOnHold"),
                             i18n("Received connection from %1, on hold (waiting for confirmation)",
                                 host));
 
-        InvitationsConnectionDialog *dialog = new InvitationsConnectionDialog(0);
+        InvitationsConnectionDialog *dialog = new InvitationsConnectionDialog(nullptr);
         dialog->setRemoteHost(host);
         dialog->setAllowRemoteControl(KrfbConfig::allowDesktopControl());
 
@@ -126,7 +126,7 @@ void PendingInvitationsRfbClient::onSocketActivated()
 bool PendingInvitationsRfbClient::checkPassword(const QByteArray & encryptedPassword)
 {
     QByteArray password ;
-    qDebug() << "about to start autentication";
+    qDebug() << "about to start authentication";
 
     if(InvitationsRfbServer::instance->allowUnattendedAccess() && vncAuthCheckPassword(
             InvitationsRfbServer::instance->unattendedPassword().toLocal8Bit(),
@@ -149,5 +149,3 @@ void PendingInvitationsRfbClient::dialogAccepted()
     client->setControlEnabled(dialog->allowRemoteControl());
     accept(client);
 }
-
-#include "invitationsrfbclient.moc"

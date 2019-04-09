@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
- @author Alexey Min <alexey.min@gmail.com>
+ Copyright (C) 2017 Alexey Min <alexey.min@gmail.com>
 
  This program is free software; you can redistribute it and/or
  modify it under the terms of the GNU General Public

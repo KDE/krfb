@@ -22,9 +22,9 @@
 #include "invitationsrfbclient.h"
 #include "krfbconfig.h"
 #include "rfbservermanager.h"
-#include <QtCore/QTimer>
+#include <QTimer>
 #include <QApplication>
-#include <QtNetwork/QHostInfo>
+#include <QHostInfo>
 #include <QDebug>
 
 #include <KLocalizedString>
@@ -47,22 +47,17 @@ void InvitationsRfbServer::init()
             i18n("%1@%2 (shared desktop)",
                 KUser().loginName(),
                 QHostInfo::localHostName()),
-            "_rfb._tcp",
+            QStringLiteral("_rfb._tcp"),
             KrfbConfig::port());
     instance->setListeningAddress("0.0.0.0");
     instance->setListeningPort(KrfbConfig::port());
     instance->setPasswordRequired(true);
 
+    instance->m_wallet = nullptr;
     if (KrfbConfig::noWallet()) {
-      instance->walletOpened(false);
-    }
-    else {
-      instance->m_wallet = Wallet::openWallet(
-              Wallet::NetworkWallet(), 0, Wallet::Asynchronous);
-      if(instance->m_wallet) {
-          connect(instance->m_wallet, &KWallet::Wallet::walletOpened,
-                  instance, &InvitationsRfbServer::walletOpened);
-      }
+        instance->walletOpened(false);
+    } else {
+        instance->openKWallet();
     }
 }
 
@@ -115,8 +110,8 @@ void InvitationsRfbServer::toggleUnattendedAccess(bool allow)
 
 InvitationsRfbServer::InvitationsRfbServer()
 {
-    m_desktopPassword = readableRandomString(4)+"-"+readableRandomString(3);
-    m_unattendedPassword = readableRandomString(4)+"-"+readableRandomString(3);
+    m_desktopPassword = readableRandomString(4) + QLatin1Char('-') + readableRandomString(3);
+    m_unattendedPassword = readableRandomString(4) + QLatin1Char('-') + readableRandomString(3);
     KConfigGroup krfbConfig(KSharedConfig::openConfig(),"Security");
     m_allowUnattendedAccess = krfbConfig.readEntry(
             "allowUnattendedAccess", QVariant(false)).toBool();
@@ -125,19 +120,12 @@ InvitationsRfbServer::InvitationsRfbServer()
 InvitationsRfbServer::~InvitationsRfbServer()
 {
     stop();
-    KConfigGroup krfbConfig(KSharedConfig::openConfig(),"Security");
-    krfbConfig.writeEntry("allowUnattendedAccess",m_allowUnattendedAccess);
-    if(!KrfbConfig::noWallet()) {
-      if (m_wallet && m_wallet->isOpen()) {
-         if( (m_wallet->currentFolder()=="krfb") ||
-                 ((m_wallet->hasFolder("krfb") || m_wallet->createFolder("krfb")) &&
-                    m_wallet->setFolder("krfb")) ) {
 
-             m_wallet->writePassword("desktopSharingPassword",m_desktopPassword);
-             m_wallet->writePassword("unattendedAccessPassword",m_unattendedPassword);
-         }
-       }
+    KConfigGroup krfbConfig(KSharedConfig::openConfig(), "Security");
+    krfbConfig.writeEntry("allowUnattendedAccess", m_allowUnattendedAccess);
 
+    if (!KrfbConfig::noWallet() && m_wallet) {
+        closeKWallet();
     } else {
         krfbConfig.writeEntry("desktopPassword",
                 KStringHandler::obscure(m_desktopPassword));
@@ -153,22 +141,47 @@ PendingRfbClient* InvitationsRfbServer::newClient(rfbClientPtr client)
     return new PendingInvitationsRfbClient(client, this);
 }
 
+void InvitationsRfbServer::openKWallet()
+{
+    m_wallet = Wallet::openWallet(Wallet::NetworkWallet(), 0, Wallet::Asynchronous);
+    if (m_wallet) {
+        connect(instance->m_wallet, &KWallet::Wallet::walletOpened,
+                this, &InvitationsRfbServer::walletOpened);
+    }
+}
+
+void InvitationsRfbServer::closeKWallet()
+{
+    if (m_wallet && m_wallet->isOpen()) {
+        const QString krfbFolderName = QStringLiteral("krfb");
+        if ((m_wallet->currentFolder() == krfbFolderName) ||
+                ((m_wallet->hasFolder(krfbFolderName) || m_wallet->createFolder(krfbFolderName)) &&
+                m_wallet->setFolder(krfbFolderName)) ) {
+            m_wallet->writePassword(QStringLiteral("desktopSharingPassword"), m_desktopPassword);
+            m_wallet->writePassword(QStringLiteral("unattendedAccessPassword"), m_unattendedPassword);
+        }
+        delete m_wallet; // closes the wallet
+        m_wallet = nullptr;
+    }
+}
+
 void InvitationsRfbServer::walletOpened(bool opened)
 {
     QString desktopPassword;
     QString unattendedPassword;
     Q_ASSERT(m_wallet);
+    const QString krfbFolderName = QStringLiteral("krfb");
     if( opened &&
-            ( m_wallet->hasFolder("krfb") || m_wallet->createFolder("krfb") ) &&
-            m_wallet->setFolder("krfb") ) {
+            ( m_wallet->hasFolder(krfbFolderName) || m_wallet->createFolder(krfbFolderName) ) &&
+            m_wallet->setFolder(krfbFolderName) ) {
 
-        if(m_wallet->readPassword("desktopSharingPassword", desktopPassword)==0 &&
+        if(m_wallet->readPassword(QStringLiteral("desktopSharingPassword"), desktopPassword)==0 &&
                 !desktopPassword.isEmpty()) {
             m_desktopPassword = desktopPassword;
             emit passwordChanged(m_desktopPassword);
         }
 
-        if(m_wallet->readPassword("unattendedAccessPassword", unattendedPassword)==0 &&
+        if(m_wallet->readPassword(QStringLiteral("unattendedAccessPassword"), unattendedPassword)==0 &&
                 !unattendedPassword.isEmpty()) {
             m_unattendedPassword = unattendedPassword;
         }
@@ -218,10 +231,8 @@ QString InvitationsRfbServer::readableRandomString(int length)
                 (c == '0')) {
             continue;
         }
-        str += c;
+        str += QLatin1Char(c);
         length--;
     }
     return str;
 }
-
-#include "invitationsrfbserver.moc"

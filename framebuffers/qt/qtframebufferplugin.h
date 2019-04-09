@@ -33,7 +33,7 @@ class QtFrameBufferPlugin : public FrameBufferPlugin
 
 public:
     QtFrameBufferPlugin(QObject *parent, const QVariantList &args);
-    virtual ~QtFrameBufferPlugin();
+    ~QtFrameBufferPlugin() override;
 
     FrameBuffer *frameBuffer(WId id) override;
 
