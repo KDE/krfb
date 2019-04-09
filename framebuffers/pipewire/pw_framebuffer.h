@@ -45,7 +45,7 @@ public:
 
     bool isValid() const;
 
-private slots:
+private Q_SLOTS:
     void handleXdpSessionCreated(quint32 code, QVariantMap results);
     void handleXdpDevicesSelected(quint32 code, QVariantMap results);
     void handleXdpSourcesSelected(quint32 code, QVariantMap results);

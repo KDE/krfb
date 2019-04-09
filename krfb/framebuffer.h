@@ -17,6 +17,7 @@
 #include <QObject>
 #include <QRect>
 #include <QList>
+#include <QVariant>
 #include <QWidget>
 
 
