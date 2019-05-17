@@ -26,7 +26,11 @@ QtFrameBuffer::QtFrameBuffer(WId id, QObject *parent)
     if (screen) {
         primaryScreen = screen;
         fbImage = screen->grabWindow(win).toImage();
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
+        fb = new char[fbImage.sizeInBytes()];
+#else
         fb = new char[fbImage.byteCount()];
+#endif
     } else {
         fb = nullptr;
         primaryScreen = nullptr;
@@ -104,7 +108,11 @@ void QtFrameBuffer::updateFrameBuffer()
     tiles.append(img.rect());
 #endif
 
-    memcpy(fb, (const char *)img.bits(), img.byteCount());
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
+    memcpy(fb, img.bits(), static_cast<size_t>(img.sizeInBytes()));
+#else
+    memcpy(fb, img.bits(), img.byteCount());
+#endif
     fbImage = img;
 
 }
