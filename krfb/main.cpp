@@ -121,12 +121,20 @@ int main(int argc, char *argv[])
 
     app.setQuitOnLastWindowClosed(false);
 
-    if (!checkX11Capabilities()) {
+    if (QX11Info::isPlatformX11()) {
+        if (!checkX11Capabilities()) {
+            return 1;
+        }
+
+        // upgrade the configuration
+        checkOldX11PluginConfig();
+    } else {
+        KMessageBox::error(nullptr,
+                           i18n("Desktop Sharing is not running under an X11 Server. "
+                                "Other display servers are currently not supported."),
+                           i18n("Desktop Sharing Error"));
         return 1;
     }
-
-    // upgrade the configuration
-    checkOldX11PluginConfig();
 
     //init the core
     InvitationsRfbServer::init();
