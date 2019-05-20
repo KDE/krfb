@@ -1,10 +1,6 @@
-/*
-   This file is part of the KDE project
 
-   Copyright (C) 2010 Collabora Ltd.
-     @author George Kiagiadakis <george.kiagiadakis@collabora.co.uk>
-   Copyright (C) 2007 Alessandro Praduroux <pradu@pradu.it>
-   Copyright (C) 2001-2003 by Tim Jansen <tim@tjansen.de>
+/* This file is part of the KDE project
+   Copyright (C) 2016 Oleg Chernovskiy <kanedias@xaker.ru>
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public
@@ -22,22 +18,17 @@
    Boston, MA 02110-1301, USA.
 */
 
+#include "eventsplugin.h"
+
 #include "events.h"
 
-EventHandler::EventHandler(QObject *parent)
+EventsPlugin::EventsPlugin(QObject *parent, const QVariantList &)
     : QObject(parent)
 {
 }
 
-void EventHandler::setFrameBufferPlugin(const QSharedPointer<FrameBuffer> &frameBuffer)
+EventsPlugin::~EventsPlugin()
 {
-    fb = frameBuffer;
 }
 
-QSharedPointer<FrameBuffer> EventHandler::frameBuffer()
-{
-    return fb;
-}
-
-#include "events.moc"
-
+#include "eventsplugin.moc"

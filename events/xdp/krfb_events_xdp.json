@@ -1,0 +1,16 @@
+{
+    "Encoding": "UTF-8",
+    "KPlugin": {
+        "Description": "Xdg-desktop-portal based event handler for KRfb",
+        "EnabledByDefault": true,
+        "Id": "xdp",
+        "License": "GPL",
+        "Name": "Xdg-desktop-portal Event handler for KRfb",
+        "ServiceTypes": [
+            "krfb/events"
+        ],
+        "Version": "0.1",
+        "Website": "http://www.kde.org"
+    }
+}
+

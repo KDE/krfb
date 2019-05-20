@@ -1,10 +1,5 @@
-/*
-   This file is part of the KDE project
-
-   Copyright (C) 2010 Collabora Ltd.
-     @author George Kiagiadakis <george.kiagiadakis@collabora.co.uk>
-   Copyright (C) 2007 Alessandro Praduroux <pradu@pradu.it>
-   Copyright (C) 2001-2003 by Tim Jansen <tim@tjansen.de>
+/* This file is part of the KDE project
+   Copyright (C) 2016 Oleg Chernovskiy <kanedias@xaker.ru>
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public
@@ -22,22 +17,27 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include "events.h"
+#ifndef KRFB_EVENTS_X11_X11EVENTSPLUGIN_H
+#define KRFB_EVENTS_X11_X11EVENTSPLUGIN_H
 
-EventHandler::EventHandler(QObject *parent)
-    : QObject(parent)
+#include "eventsplugin.h"
+
+#include <QWidget>
+
+class EventHandler;
+
+class X11EventsPlugin : public EventsPlugin
 {
-}
+    Q_OBJECT
+public:
+    X11EventsPlugin(QObject *parent, const QVariantList &args);
+    virtual ~X11EventsPlugin() = default;
 
-void EventHandler::setFrameBufferPlugin(const QSharedPointer<FrameBuffer> &frameBuffer)
-{
-    fb = frameBuffer;
-}
+    EventHandler *eventHandler() override;
 
-QSharedPointer<FrameBuffer> EventHandler::frameBuffer()
-{
-    return fb;
-}
+private:
+    Q_DISABLE_COPY(X11EventsPlugin)
+};
 
-#include "events.moc"
 
+#endif  // Header guard

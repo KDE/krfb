@@ -24,6 +24,7 @@
 #include <QClipboard>
 #include <QPointer>
 #include <QDebug>
+#include <QX11Info>
 
 struct RfbServer::Private
 {
@@ -143,8 +144,11 @@ bool RfbServer::start()
         d->ipv6notifier = new QSocketNotifier(d->screen->listen6Sock, QSocketNotifier::Read, this);
         connect(d->ipv6notifier, &QSocketNotifier::activated, this, &RfbServer::onListenSocketActivated);
     }
-    connect(QApplication::clipboard(), &QClipboard::dataChanged,
-            this, &RfbServer::krfbSendServerCutText);
+
+    if (QX11Info::isPlatformX11()) {
+        connect(QApplication::clipboard(), &QClipboard::dataChanged,
+                this, &RfbServer::krfbSendServerCutText);
+    }
 
     return true;
 }
@@ -160,6 +164,17 @@ void RfbServer::stop()
             }
         }
     }
+}
+
+void RfbServer::updateFrameBuffer(char *fb, int width, int height, int depth)
+{
+    int bpp = depth >> 3;
+
+    if (bpp != 1 && bpp != 2 && bpp != 4) {
+        bpp = 4;
+    }
+
+    rfbNewFramebuffer(d->screen, fb, width, height, 8, 3, bpp);
 }
 
 void RfbServer::updateScreen(const QList<QRect> & modifiedTiles)

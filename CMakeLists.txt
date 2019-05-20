@@ -21,6 +21,9 @@ include(ECMInstallIcons)
 include(ECMAddAppIcon)
 include(ECMSetupVersion)
 include(FeatureSummary)
+include(CheckIncludeFile)
+
+check_include_file("linux/input.h" HAVE_LINUX_INPUT_H)
 
 find_package(Qt5 ${QT_MIN_VERSION} REQUIRED COMPONENTS Core DBus Widgets X11Extras)
 
@@ -73,6 +76,12 @@ include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} )
 
 find_package(LibVNCServer REQUIRED)
 
+find_package(PipeWire)
+set_package_properties(PipeWire PROPERTIES
+    TYPE OPTIONAL
+    PURPOSE "Required for pipewire screencast plugin"
+)
+
 ecm_setup_version(PROJECT
                   VARIABLE_PREFIX KRFB
                   VERSION_HEADER "krfb_version.h")
@@ -88,6 +97,7 @@ if(Q_WS_X11)
   endif(NOT X11_XTest_FOUND)
 endif(Q_WS_X11)
 
+add_subdirectory(events)
 add_subdirectory(krfb)
 add_subdirectory(framebuffers)
 add_subdirectory(doc)

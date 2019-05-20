@@ -1,0 +1,13 @@
+[Desktop Entry]
+Encoding=UTF-8
+Comment=X11 XFakeInput based event handler for KRfb
+Name=X11 XFakeInput based event handler for KRfb
+Type=Service
+ServiceTypes=krfb/events
+
+X-KDE-Library=krfb_events_x11
+X-KDE-PluginInfo-Name=x11
+X-KDE-PluginInfo-Version=0.1
+X-KDE-PluginInfo-Website=http://www.kde.org
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true

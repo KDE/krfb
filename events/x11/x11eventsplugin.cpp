@@ -1,10 +1,5 @@
-/*
-   This file is part of the KDE project
-
-   Copyright (C) 2010 Collabora Ltd.
-     @author George Kiagiadakis <george.kiagiadakis@collabora.co.uk>
-   Copyright (C) 2007 Alessandro Praduroux <pradu@pradu.it>
-   Copyright (C) 2001-2003 by Tim Jansen <tim@tjansen.de>
+/* This file is part of the KDE project
+   Copyright (C) 2016 Oleg Chernovskiy <kanedias@xaker.ru>
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public
@@ -22,22 +17,29 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include "events.h"
+#include "x11eventsplugin.h"
 
-EventHandler::EventHandler(QObject *parent)
-    : QObject(parent)
+#include "x11events.h"
+
+#include <KPluginFactory>
+#include <QX11Info>
+
+K_PLUGIN_FACTORY_WITH_JSON(X11EventsPluginFactory, "krfb_events_x11.json",
+               registerPlugin<X11EventsPlugin>();)
+
+X11EventsPlugin::X11EventsPlugin(QObject *parent, const QVariantList &args)
+    : EventsPlugin(parent, args)
 {
 }
 
-void EventHandler::setFrameBufferPlugin(const QSharedPointer<FrameBuffer> &frameBuffer)
+EventHandler *X11EventsPlugin::eventHandler()
 {
-    fb = frameBuffer;
+    // works only under X11
+    if(!QX11Info::isPlatformX11())
+        return nullptr;
+
+    return new X11EventHandler();
 }
 
-QSharedPointer<FrameBuffer> EventHandler::frameBuffer()
-{
-    return fb;
-}
-
-#include "events.moc"
+#include "x11eventsplugin.moc"
 

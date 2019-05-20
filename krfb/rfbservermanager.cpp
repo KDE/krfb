@@ -90,7 +90,6 @@ RfbServerManager* RfbServerManager::instance()
     return &s_instance->server;
 }
 
-
 struct RfbServerManager::Private
 {
     QSharedPointer<FrameBuffer> fb;
@@ -113,6 +112,11 @@ RfbServerManager::~RfbServerManager()
     delete d;
 }
 
+QSharedPointer<FrameBuffer> RfbServerManager::framebuffer() const
+{
+    return d->fb;
+}
+
 void RfbServerManager::init()
 {
     //qDebug();
@@ -123,8 +127,16 @@ void RfbServerManager::init()
     d->desktopName = QStringLiteral("%1@%2 (shared desktop)") //FIXME check if we can use utf8
                         .arg(KUser().loginName(),QHostInfo::localHostName()).toLatin1();
 
+    connect(d->fb.data(), &FrameBuffer::frameBufferChanged, this, &RfbServerManager::updateFrameBuffer);
     connect(&d->rfbUpdateTimer, &QTimer::timeout, this, &RfbServerManager::updateScreens);
     connect(qApp, &QApplication::aboutToQuit, this, &RfbServerManager::cleanup);
+}
+
+void RfbServerManager::updateFrameBuffer()
+{
+    Q_FOREACH(RfbServer *server, d->servers) {
+        server->updateFrameBuffer(d->fb->data(), d->fb->width(), d->fb->height(), d->fb->depth());
+    }
 }
 
 void RfbServerManager::updateScreens()
@@ -194,7 +206,6 @@ rfbScreenInfoPtr RfbServerManager::newScreen()
         screen->paddedWidthInBytes = d->fb->paddedWidth();
         d->fb->getServerFormat(screen->serverFormat);
         screen->frameBuffer = d->fb->data();
-
         screen->desktopName = d->desktopName.constData();
         screen->cursor = d->myCursor;
     }

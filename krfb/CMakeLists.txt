@@ -11,6 +11,8 @@ include(GenerateExportHeader)
 set (krfbprivate_SRCS
      framebuffer.cpp
      framebufferplugin.cpp
+     events.cpp
+     eventsplugin.cpp
 )
 
 add_library (krfbprivate
@@ -18,6 +20,7 @@ add_library (krfbprivate
                   ${krfbprivate_SRCS}
 )
 generate_export_header(krfbprivate BASE_NAME krfbprivate)
+
 
 target_link_libraries (krfbprivate
                        Qt5::Core
@@ -39,6 +42,7 @@ install (TARGETS krfbprivate
 
 install (FILES
          krfb-framebuffer.desktop
+         krfb-events.desktop
          DESTINATION ${SERVICETYPES_INSTALL_DIR}
 )
 
@@ -48,8 +52,9 @@ install (FILES
 
 set (krfb_SRCS
      connectiondialog.cpp
-     events.cpp
      framebuffermanager.cpp
+     events.cpp
+     eventsmanager.cpp
      main.cpp
      mainwindow.cpp
      sockethelpers.cpp
@@ -123,4 +128,4 @@ install(FILES org.kde.krfb.appdata.xml
 install (FILES krfb.notifyrc
          DESTINATION ${DATA_INSTALL_DIR}/krfb
 )
- 
+

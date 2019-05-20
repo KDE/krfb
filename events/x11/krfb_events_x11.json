@@ -1,0 +1,15 @@
+{
+    "Encoding": "UTF-8",
+    "KPlugin": {
+        "Description": "X11 XFakeInput based event handler for KRfb",
+        "EnabledByDefault": true,
+        "Id": "x11",
+        "License": "GPL",
+        "Name": "X11 Event handler for KRfb",
+        "ServiceTypes": [
+            "krfb/events"
+        ],
+        "Version": "0.1",
+        "Website": "http://www.kde.org"
+    }
+}

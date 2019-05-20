@@ -1,10 +1,6 @@
-/*
-   This file is part of the KDE project
-
-   Copyright (C) 2010 Collabora Ltd.
-     @author George Kiagiadakis <george.kiagiadakis@collabora.co.uk>
-   Copyright (C) 2007 Alessandro Praduroux <pradu@pradu.it>
-   Copyright (C) 2001-2003 by Tim Jansen <tim@tjansen.de>
+/* This file is part of the KDE project
+   Copyright (C) 2009 Collabora Ltd <info@collabora.co.uk>
+    @author George Goldberg <george.goldberg@collabora.co.uk>
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public
@@ -22,22 +18,25 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include "events.h"
+#ifndef LIB_KRFB_EVENTSPLUGIN_H
+#define LIB_KRFB_EVENTSPLUGIN_H
 
-EventHandler::EventHandler(QObject *parent)
-    : QObject(parent)
+#include "krfbprivate_export.h"
+
+#include <QtCore/QVariantList>
+#include <QWidget>
+
+class EventHandler;
+
+class KRFBPRIVATE_EXPORT EventsPlugin : public QObject
 {
-}
+    Q_OBJECT
+public:
+    EventsPlugin(QObject *parent, const QVariantList &args);
+    virtual ~EventsPlugin();
 
-void EventHandler::setFrameBufferPlugin(const QSharedPointer<FrameBuffer> &frameBuffer)
-{
-    fb = frameBuffer;
-}
+    virtual EventHandler *eventHandler() = 0;
+};
 
-QSharedPointer<FrameBuffer> EventHandler::frameBuffer()
-{
-    return fb;
-}
-
-#include "events.moc"
+#endif  // Header guard
 

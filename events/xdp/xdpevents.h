@@ -1,10 +1,7 @@
 /*
    This file is part of the KDE project
 
-   Copyright (C) 2010 Collabora Ltd.
-     @author George Kiagiadakis <george.kiagiadakis@collabora.co.uk>
-   Copyright (C) 2007 Alessandro Praduroux <pradu@pradu.it>
-   Copyright (C) 2001-2003 by Tim Jansen <tim@tjansen.de>
+   Copyright (C) 2018-2019 Jan Grulich <jgrulich@redhat.com>
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public
@@ -22,22 +19,19 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include "events.h"
+#ifndef EVENTS_XDPEVENTS_H
+#define EVENTS_XDPEVENTS_H
 
-EventHandler::EventHandler(QObject *parent)
-    : QObject(parent)
+#include "../../krfb/events.h"
+
+class XdpEventHandler : public EventHandler
 {
-}
+    Q_OBJECT
+public:
+    void handleKeyboard(bool down, rfbKeySym key) override;
+    void handlePointer(int buttonMask, int x, int y) override;
+};
 
-void EventHandler::setFrameBufferPlugin(const QSharedPointer<FrameBuffer> &frameBuffer)
-{
-    fb = frameBuffer;
-}
+#endif
 
-QSharedPointer<FrameBuffer> EventHandler::frameBuffer()
-{
-    return fb;
-}
-
-#include "events.moc"
 

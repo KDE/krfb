@@ -1,10 +1,7 @@
 /*
    This file is part of the KDE project
 
-   Copyright (C) 2010 Collabora Ltd.
-     @author George Kiagiadakis <george.kiagiadakis@collabora.co.uk>
-   Copyright (C) 2007 Alessandro Praduroux <pradu@pradu.it>
-   Copyright (C) 2001-2003 by Tim Jansen <tim@tjansen.de>
+   Copyright (C) 2018-2019 Jan Grulich <jgrulich@redhat.com>
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public
@@ -22,22 +19,25 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include "events.h"
+#include "xdpeventsplugin.h"
 
-EventHandler::EventHandler(QObject *parent)
-    : QObject(parent)
+#include "xdpevents.h"
+
+#include <KPluginFactory>
+
+K_PLUGIN_FACTORY_WITH_JSON(XdpEventsPluginFactory, "krfb_events_xdp.json",
+               registerPlugin<XdpEventsPlugin>();)
+
+XdpEventsPlugin::XdpEventsPlugin(QObject *parent, const QVariantList &args)
+    : EventsPlugin(parent, args)
 {
 }
 
-void EventHandler::setFrameBufferPlugin(const QSharedPointer<FrameBuffer> &frameBuffer)
+EventHandler *XdpEventsPlugin::eventHandler()
 {
-    fb = frameBuffer;
+    // works only under Wayland
+    return new XdpEventHandler();
 }
 
-QSharedPointer<FrameBuffer> EventHandler::frameBuffer()
-{
-    return fb;
-}
-
-#include "events.moc"
+#include "xdpeventsplugin.moc"
 

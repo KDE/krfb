@@ -17,6 +17,7 @@
 #include <QObject>
 #include <QRect>
 #include <QList>
+#include <QVariant>
 #include <QWidget>
 
 
@@ -43,6 +44,10 @@ public:
     virtual void stopMonitor();
 
     virtual void getServerFormat(rfbPixelFormat &format);
+
+    virtual QVariant customProperty(const QString &property) const;
+Q_SIGNALS:
+    void frameBufferChanged();
 
 protected:
     WId win;
