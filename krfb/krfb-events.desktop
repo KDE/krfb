@@ -3,6 +3,4 @@ Type=ServiceType
 X-KDE-ServiceType=krfb/events
 
 Comment=Event plugins for KRfb
-Comment[ru]=Модули обработки событий для Krfb
-Comment[x-test]=xxEvent plugins for KRfbxx
 

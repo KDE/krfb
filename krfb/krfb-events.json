@@ -1,7 +1,6 @@
 {
     "KPlugin": {
-        "Description": "Events plugins for KRfb",
-        "Description[x-test]": "xxFrame Buffer plugins for KRfbxx"
+        "Description": "Events plugins for KRfb"
     },
     "X-KDE-ServiceType": "krfb/events"
 }
