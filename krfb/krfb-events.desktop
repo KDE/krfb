@@ -3,4 +3,10 @@ Type=ServiceType
 X-KDE-ServiceType=krfb/events
 
 Comment=Event plugins for KRfb
+Comment[ca]=Connectors d'esdeveniments per al KRfb.
+Comment[ca@valencia]=Connectors d'esdeveniments per al KRfb.
+Comment[pt]='Plugins' de eventos para o KRfb
+Comment[sv]=Händelseinsticksprogram för Krfb
+Comment[uk]=Додатки обробки подій для KRfb
+Comment[x-test]=xxEvent plugins for KRfbxx
 

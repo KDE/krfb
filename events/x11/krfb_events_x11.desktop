@@ -1,7 +1,19 @@
 [Desktop Entry]
 Encoding=UTF-8
 Comment=X11 XFakeInput based event handler for KRfb
+Comment[ca]=Gestor d'esdeveniments basat en el XFakeInput de l'X11 per al KRfb
+Comment[ca@valencia]=Gestor d'esdeveniments basat en el XFakeInput de l'X11 per al KRfb
+Comment[pt]=Tratamento de eventos baseado no XFakeInput do X11 para o KRfb
+Comment[sv]=Händelsehanterare för Krfb baserad på X11 XFakeInput
+Comment[uk]=Обробник подій для KRfb на основі XFakeInput X11
+Comment[x-test]=xxX11 XFakeInput based event handler for KRfbxx
 Name=X11 XFakeInput based event handler for KRfb
+Name[ca]=Gestor d'esdeveniments basat en el XFakeInput de l'X11 per al KRfb
+Name[ca@valencia]=Gestor d'esdeveniments basat en el XFakeInput de l'X11 per al KRfb
+Name[pt]=Tratamento de eventos baseado no XFakeInput do X11 para o KRfb
+Name[sv]=Händelsehanterare för Krfb baserad på X11 XFakeInput
+Name[uk]=Обробник подій для KRfb на основі XFakeInput X11
+Name[x-test]=xxX11 XFakeInput based event handler for KRfbxx
 Type=Service
 ServiceTypes=krfb/events
 

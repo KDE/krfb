@@ -1,7 +1,19 @@
 [Desktop Entry]
 Encoding=UTF-8
 Comment=Xdg-desktop-portal based event handler for KRfb
+Comment[ca]=Gestor d'esdeveniments basat en el Xdg-desktop-portal per al KRfb
+Comment[ca@valencia]=Gestor d'esdeveniments basat en el Xdg-desktop-portal per al KRfb
+Comment[pt]=Tratamento de eventos baseado no Xdg-desktop-portal para o KRfb
+Comment[sv]=Händelsehanterare för Krfb baserad på xdg-desktop-portal
+Comment[uk]=Обробник подій для KRfb на основі Xdg-desktop-portal
+Comment[x-test]=xxXdg-desktop-portal based event handler for KRfbxx
 Name=Xdg-desktop-portal based event handler for KRfb
+Name[ca]=Gestor d'esdeveniments basat en el Xdg-desktop-portal per al KRfb
+Name[ca@valencia]=Gestor d'esdeveniments basat en el Xdg-desktop-portal per al KRfb
+Name[pt]=Tratamento de eventos baseado no Xdg-desktop-portal para o KRfb
+Name[sv]=Händelsehanterare för Krfb baserad på xdg-desktop-portal
+Name[uk]=Обробник подій для KRfb на основі Xdg-desktop-portal
+Name[x-test]=xxXdg-desktop-portal based event handler for KRfbxx
 Type=Service
 ServiceTypes=krfb/events
 

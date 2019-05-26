@@ -1,8 +1,8 @@
 {
     "KPlugin": {
         "Description": "Frame Buffer plugins for KRfb",
-        "Description[ca@valencia]": "Connectors de «framebuffer» per al KRfb.",
-        "Description[ca]": "Connectors de «framebuffer» per al KRfb.",
+        "Description[ca@valencia]": "Connectors de «Frame Buffer» per al KRfb.",
+        "Description[ca]": "Connectors de «Frame Buffer» per al KRfb.",
         "Description[cs]": "Moduly Frame bufferu pro KRfb",
         "Description[da]": "Framebuffer-plugins til KRfb",
         "Description[de]": "Framebuffer-Module für KRfb",

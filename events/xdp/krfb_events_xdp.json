@@ -2,10 +2,22 @@
     "Encoding": "UTF-8",
     "KPlugin": {
         "Description": "Xdg-desktop-portal based event handler for KRfb",
+        "Description[ca@valencia]": "Gestor d'esdeveniments basat en el Xdg-desktop-portal per al KRfb",
+        "Description[ca]": "Gestor d'esdeveniments basat en el Xdg-desktop-portal per al KRfb",
+        "Description[pt]": "Tratamento de eventos baseado no Xdg-desktop-portal para o KRfb",
+        "Description[sv]": "Händelsehanterare för KRfb baserad på xdg-desktop-portal",
+        "Description[uk]": "Обробник подій для KRfb на основі Xdg-desktop-portal",
+        "Description[x-test]": "xxXdg-desktop-portal based event handler for KRfbxx",
         "EnabledByDefault": true,
         "Id": "xdp",
         "License": "GPL",
         "Name": "Xdg-desktop-portal Event handler for KRfb",
+        "Name[ca@valencia]": "Gestor d'esdeveniments Xdg-desktop-portal per al KRfb",
+        "Name[ca]": "Gestor d'esdeveniments Xdg-desktop-portal per al KRfb",
+        "Name[pt]": "Tratamento de eventos do Xdg-desktop-portal para o KRfb",
+        "Name[sv]": "Xdg-desktop-portal händelsehanterare för Krfb",
+        "Name[uk]": "Обробник подій для KRfb на основі Xdg-desktop-portal",
+        "Name[x-test]": "xxXdg-desktop-portal Event handler for KRfbxx",
         "ServiceTypes": [
             "krfb/events"
         ],

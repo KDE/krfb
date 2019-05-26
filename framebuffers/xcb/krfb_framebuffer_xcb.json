@@ -1,8 +1,8 @@
 {
     "KPlugin": {
         "Description": "X11 XDamage/XShm based Framebuffer for KRfb.",
-        "Description[ca@valencia]": "«Framebuffer» basat en XDamage/XShmQt del X11 per al KRfb.",
-        "Description[ca]": "«Framebuffer» basat en XDamage/XShmQt del X11 per al KRfb.",
+        "Description[ca@valencia]": "«Framebuffer» basat en XDamage/XShm de l'X11 per al KRfb.",
+        "Description[ca]": "«Framebuffer» basat en XDamage/XShm de l'X11 per al KRfb.",
         "Description[cs]": "Framebuffer založený na X11 XDamage/XShm pro KRfb.",
         "Description[da]": "X11 XDamage/XShm-baseret framebuffer til KRfb.",
         "Description[de]": "X11 XDamage/XShm-basierter Framebuffer für KRfb.",
@@ -39,8 +39,8 @@
         "Id": "xcb",
         "License": "GPL",
         "Name": "X11 Framebuffer for KRfb",
-        "Name[ca@valencia]": "«Framebuffer» del X11 per al KRfb.",
-        "Name[ca]": "«Framebuffer» del X11 per al KRfb.",
+        "Name[ca@valencia]": "«Framebuffer» de l'X11 per al KRfb.",
+        "Name[ca]": "«Framebuffer» de l'X11 per al KRfb.",
         "Name[cs]": "X11 Framebuffer pro KRfb",
         "Name[da]": "X11-framebuffer til KRfb",
         "Name[de]": "X11-Framebuffer für KRfb",
