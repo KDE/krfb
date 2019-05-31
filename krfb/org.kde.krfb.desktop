@@ -215,5 +215,5 @@ Comment[x-test]=xxDesktop Sharingxx
 Comment[zh_CN]=桌面共享
 Comment[zh_HK]=桌面分享
 Comment[zh_TW]=桌面分享
-Categories=Qt;KDE;System;Network;RemoteAccess;
+Categories=Qt;KDE;Network;RemoteAccess;
 X-DBUS-ServiceName=org.kde.krfb
