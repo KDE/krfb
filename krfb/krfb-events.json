@@ -5,12 +5,14 @@
         "Description[ca]": "Connectors d'esdeveniments per al KRfb.",
         "Description[en_GB]": "Events plugins for KRfb",
         "Description[es]": "Complementos de eventos para KRfb",
+        "Description[it]": "Estensioni degli eventi per KRfb",
         "Description[ko]": "KRfb 이벤트 플러그인",
         "Description[nl]": "Plug-ins voor gebeurtenis voor KRfb",
         "Description[pt]": "'Plugins' de eventos para o KRfb",
         "Description[sv]": "Händelseinsticksprogram för Krfb",
         "Description[uk]": "Додатки обробки подій для KRfb",
-        "Description[x-test]": "xxEvents plugins for KRfbxx"
+        "Description[x-test]": "xxEvents plugins for KRfbxx",
+        "Description[zh_TW]": "KRfb 的事件外掛程式"
     },
     "X-KDE-ServiceType": "krfb/events"
 }
