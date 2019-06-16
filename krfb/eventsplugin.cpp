@@ -30,5 +30,3 @@ EventsPlugin::EventsPlugin(QObject *parent, const QVariantList &)
 EventsPlugin::~EventsPlugin()
 {
 }
-
-#include "eventsplugin.moc"

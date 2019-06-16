@@ -115,6 +115,3 @@ QSharedPointer<EventHandler> EventsManager::eventHandler()
     qDebug() << "No valid event handlers found. returning null.";
     return QSharedPointer<EventHandler>();
 }
-
-
-#include "eventsmanager.moc"

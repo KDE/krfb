@@ -38,6 +38,3 @@ QSharedPointer<FrameBuffer> EventHandler::frameBuffer()
 {
     return fb;
 }
-
-#include "events.moc"
-
