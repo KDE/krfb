@@ -34,6 +34,7 @@
 #include <QVector>
 #include <QSet>
 #include <QNetworkInterface>
+#include <QHostInfo>
 
 
 class TCP: public QWidget, public Ui::TCP
@@ -141,10 +142,14 @@ MainWindow::MainWindow(QWidget *parent)
             continue;
 
         if(interface.flags() & QNetworkInterface::IsRunning &&
-                !interface.addressEntries().isEmpty())
-            m_ui.addressDisplayLabel->setText(QStringLiteral("%1 : %2")
-                    .arg(interface.addressEntries().first().ip().toString())
-                    .arg(port));
+                !interface.addressEntries().isEmpty()) {
+            const QString hostName = QHostInfo::localHostName();
+            const QString ipAddress = interface.addressEntries().first().ip().toString();
+            const QString addressLabelText = hostName.isEmpty()
+                ? QStringLiteral("%1 : %2").arg(ipAddress).arg(port)
+                : QStringLiteral("%1 (%2) : %3").arg(hostName, ipAddress).arg(port);
+            m_ui.addressDisplayLabel->setText(addressLabelText);
+        }
     }
 
     //Figure out the password
