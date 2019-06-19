@@ -119,7 +119,7 @@ InvitationsRfbServer::InvitationsRfbServer()
 
 InvitationsRfbServer::~InvitationsRfbServer()
 {
-    stop();
+    InvitationsRfbServer::stop();  // calling virtual funcs in destructor is bad
 
     KConfigGroup krfbConfig(KSharedConfig::openConfig(), "Security");
     krfbConfig.writeEntry("allowUnattendedAccess", m_allowUnattendedAccess);
