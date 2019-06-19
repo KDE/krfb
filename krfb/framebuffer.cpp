@@ -52,6 +52,7 @@ void FrameBuffer::getServerFormat(rfbPixelFormat &)
 
 QVariant FrameBuffer::customProperty(const QString &property) const
 {
+    Q_UNUSED(property)
     return QVariant();
 }
 
