@@ -79,6 +79,7 @@ void FrameBufferManager::loadPlugins()
 
         if (!factory) {
             qDebug() << "KPluginFactory could not load the plugin:" << data.fileName();
+            continue;
         } else {
             qDebug() << "found plugin at " << data.fileName();
         }
