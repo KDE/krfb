@@ -144,7 +144,7 @@ MainWindow::MainWindow(QWidget *parent)
         if(interface.flags() & QNetworkInterface::IsRunning &&
                 !interface.addressEntries().isEmpty()) {
             const QString hostName = QHostInfo::localHostName();
-            const QString ipAddress = interface.addressEntries().first().ip().toString();
+            const QString ipAddress = interface.addressEntries().constFirst().ip().toString();
             const QString addressLabelText = hostName.isEmpty()
                 ? QStringLiteral("%1 : %2").arg(ipAddress).arg(port)
                 : QStringLiteral("%1 (%2) : %3").arg(hostName, ipAddress).arg(port);
