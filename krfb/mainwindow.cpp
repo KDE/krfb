@@ -58,7 +58,7 @@ public:
         vboxLayout->addWidget(walletWarning);
 
         // show warning when "noWallet" checkbox is checked
-        QObject::connect(kcfg_noWallet, &QCheckBox::toggled, [this](bool checked){
+        QObject::connect(kcfg_noWallet, &QCheckBox::toggled, this, [this] (bool checked) {
             walletWarning->setVisible(checked);
         });
     }
@@ -261,7 +261,7 @@ void MainWindow::showConfiguration()
     dialog->addPage(new Security, i18n("Security"), QStringLiteral("security-high"));
     dialog->addPage(new ConfigFramebuffer, i18n("Screen capture"), QStringLiteral("video-display"));
     dialog->show();
-    connect(dialog, &KConfigDialog::settingsChanged, [this] () {
+    connect(dialog, &KConfigDialog::settingsChanged, this, [this] () {
         // check if framebuffer plugin config has changed
         if (s_prevFramebufferPlugin != KrfbConfig::preferredFrameBufferPlugin()) {
             KMessageBox::information(this, i18n("To apply framebuffer plugin setting, "
