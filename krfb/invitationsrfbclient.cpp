@@ -125,7 +125,6 @@ void PendingInvitationsRfbClient::onSocketActivated()
 
 bool PendingInvitationsRfbClient::checkPassword(const QByteArray & encryptedPassword)
 {
-    QByteArray password ;
     qDebug() << "about to start authentication";
 
     if(InvitationsRfbServer::instance->allowUnattendedAccess() && vncAuthCheckPassword(
