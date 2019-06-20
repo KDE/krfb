@@ -109,7 +109,7 @@ bool RfbServer::start()
     }
 
     if (listeningAddress() != "0.0.0.0") {
-        strncpy(d->screen->thisHost, listeningAddress().data(), 254);
+        strncpy(d->screen->thisHost, listeningAddress().constData(), 254);
     }
 
     if (listeningPort() == 0) {
