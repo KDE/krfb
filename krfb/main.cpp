@@ -25,6 +25,7 @@
 #include <KDBusService>
 #include <KLocalizedString>
 #include <KMessageBox>
+#include <KWindowSystem>
 
 #include <QDebug>
 #include <QPixmap>
@@ -65,6 +66,22 @@ static void checkOldX11PluginConfig() {
             config_item->setProperty(QStringLiteral("xcb"));
             KrfbConfig::self()->save();
             qDebug() << "  Fixed preferredFrameBufferPlugin from x11 to xcb.";
+        }
+    }
+}
+
+static void checkWaylandPluginConfig()
+{
+    if (KrfbConfig::preferredFrameBufferPlugin() != QStringLiteral("pw")) {
+        qWarning() << "Wayland: Detected invalid configuration: "
+                    "preferredFrameBufferPlugin is not pipewire: "
+                   << KrfbConfig::preferredFrameBufferPlugin();
+        KConfigSkeletonItem *config_item = KrfbConfig::self()->findItem(
+                    QStringLiteral("preferredFrameBufferPlugin"));
+        if (config_item) {
+            config_item->setProperty(QStringLiteral("pw"));
+            KrfbConfig::self()->save();
+            qDebug() << "Wayland: Fixed preferredFrameBufferPlugin to \"pw\".";
         }
     }
 }
@@ -118,16 +135,19 @@ int main(int argc, char *argv[])
 
     app.setQuitOnLastWindowClosed(false);
 
-    if (QX11Info::isPlatformX11()) {
+    if (KWindowSystem::isPlatformX11()) {
         if (!checkX11Capabilities()) {
             return 1;
         }
 
         // upgrade the configuration
         checkOldX11PluginConfig();
+    } else if (KWindowSystem::isPlatformWayland()) {
+        // check that default plugin in Wayland is PipeWire
+        checkWaylandPluginConfig();
     } else {
         KMessageBox::error(nullptr,
-                           i18n("Desktop Sharing is not running under an X11 Server. "
+                           i18n("Desktop Sharing is not running under an X11 Server or Wayland.\n"
                                 "Other display servers are currently not supported."),
                            i18n("Desktop Sharing Error"));
         return 1;

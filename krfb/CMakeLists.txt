@@ -101,6 +101,7 @@ target_link_libraries (krfb
                        KF5::Notifications
                        KF5::Wallet
                        KF5::WidgetsAddons
+                       KF5::WindowSystem
                        KF5::XmlGui
                        ${LIBVNCSERVER_LIBRARIES}
 )
