@@ -124,5 +124,3 @@ void XdpEventHandler::handlePointer(int buttonMask, int x, int y)
         data->buttonMask = buttonMask;
     }
 }
-
-#include "xdpevents.moc"
