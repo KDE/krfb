@@ -295,6 +295,7 @@ void PWFrameBuffer::handleXdpDevicesSelected(quint32 code, QVariantMap results)
  */
 void PWFrameBuffer::Private::handleDevicesSelected(quint32 &code, QVariantMap &results)
 {
+    Q_UNUSED(results)
     if (code != 0) {
         qWarning() << "Failed to select devices: " << code;
         isValid = false;
