@@ -18,6 +18,8 @@
 #ifndef TRAYICON_H
 #define TRAYICON_H
 
+#include <QHash>
+
 #include <KStatusNotifierItem>
 
 class RfbClient;
