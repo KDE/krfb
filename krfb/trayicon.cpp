@@ -22,7 +22,6 @@
 #include "rfbservermanager.h"
 #include "rfbclient.h"
 
-#include <QHash>
 #include <QIcon>
 #include <QMenu>
 
