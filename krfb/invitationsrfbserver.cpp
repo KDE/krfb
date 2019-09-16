@@ -110,7 +110,7 @@ void InvitationsRfbServer::toggleUnattendedAccess(bool allow)
 
 InvitationsRfbServer::InvitationsRfbServer()
 {
-    m_desktopPassword = readableRandomString(4) + QLatin1Char('-') + readableRandomString(3);
+    m_desktopPassword = readableRandomFourDigits();
     m_unattendedPassword = readableRandomString(4) + QLatin1Char('-') + readableRandomString(3);
     KConfigGroup krfbConfig(KSharedConfig::openConfig(),"Security");
     m_allowUnattendedAccess = krfbConfig.readEntry(
@@ -205,6 +205,19 @@ void InvitationsRfbServer::walletOpened(bool opened)
         }
 
     }
+}
+
+// a random string made up of numbers for easy readability
+// based on KRandom::random()
+QString InvitationsRfbServer::readableRandomFourDigits()
+{
+    int r = KRandom::random();
+    while (r < 1000) {
+        r = KRandom::random();
+    }
+    QString str = QString::number(r);
+    str.resize(4);
+    return str;
 }
 
 // a random string that doesn't contain i, I, o, O, 1, l, 0

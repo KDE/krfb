@@ -68,6 +68,7 @@ private:
     QString m_unattendedPassword;
     KWallet::Wallet *m_wallet;
 
+    QString readableRandomFourDigits();
     QString readableRandomString(int);
     Q_DISABLE_COPY(InvitationsRfbServer)
 };
