@@ -83,7 +83,7 @@
     <p xml:lang="eu">Krfb Mahaigaina Partekatzea zerbitzari aplikazio bat da zure uneko saioa beste makina batean dagoen erabiltzaile batekin partekatzen uzten dizuna. Beste makinan VNC bezeroa erabil dezake zure mahaigaina ikusi edo baita kontrolatzeko ere.</p>
     <p xml:lang="fi">Krfb-työpöytäjako on palvelinsovellus, jolla voit jakaa nykyisen istuntosi toisen koneen käyttäjälle, joka voi VNC-asiakkaalla nähdä tai jopa hallita työpöytääsi.</p>
     <p xml:lang="fr">Le partage de bureau Krfb est une application de serveur qui vous permet de partager votre session courante avec un utilisateur sur une autre machine, qui peut utiliser un client VNC pour afficher et même contrôler le bureau.</p>
-    <p xml:lang="gl">Krfb é un aplicativo de servidor que permite compartir a sesión actual cun usuario que está noutro equipo, que pode usar un cliente VNC para ver ou mesmo controlar o escritorio.</p>
+    <p xml:lang="gl">Krfb é unha aplicación de servidor que permite compartir a sesión actual cun usuario que está noutro equipo, que pode usar un cliente VNC para ver ou mesmo controlar o escritorio.</p>
     <p xml:lang="id">Krfb Desktop Sharing adalah aplikasi server yang memungkinkan kamu untuk berbagi sesimu saat ini dengan pengguna di mesin lain, yang bisa menggunakan klien VNC untuk menampilkan atau bahkan mengendalikan desktop.</p>
     <p xml:lang="it">Condivisione del desktop Krfb è un'applicazione server che permette di condividere la sessione attuale con un utente su un'altra macchina, che potrà usare un client VNC per visualizzare ed anche controllare il desktop.</p>
     <p xml:lang="ko">Krfb 데스크톱 공유는 현재 세션을 다른 머신의 사용자와 VNC를 통해서 공유하거나 원격 제어를 요청할 수 있는 서버 프로그램입니다.</p>
