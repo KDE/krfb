@@ -217,3 +217,4 @@ Comment[zh_HK]=桌面分享
 Comment[zh_TW]=桌面分享
 Categories=Qt;KDE;Network;RemoteAccess;
 X-DBUS-ServiceName=org.kde.krfb
+X-KDE-Wayland-Interfaces=org_kde_kwin_fake_input,org_kde_kwin_remote_access_manager
