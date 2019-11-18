@@ -104,6 +104,6 @@ mark_as_advanced(PipeWire_LIBRARIES PipeWire_INCLUDE_DIRS)
 
 include(FeatureSummary)
 set_package_properties(PipeWire PROPERTIES
-    URL "http://www.pipewire.org"
+    URL "https://pipewire.org"
     DESCRIPTION "PipeWire - multimedia processing"
 )

@@ -56,7 +56,7 @@ ServiceTypes=krfb/events
 X-KDE-Library=krfb_events_xdp
 X-KDE-PluginInfo-Name=xdp
 X-KDE-PluginInfo-Version=0.1
-X-KDE-PluginInfo-Website=http://www.kde.org
+X-KDE-PluginInfo-Website=https://www.kde.org
 X-KDE-PluginInfo-License=GPL
 X-KDE-PluginInfo-EnabledByDefault=true
 
