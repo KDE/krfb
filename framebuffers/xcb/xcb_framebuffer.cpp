@@ -381,49 +381,50 @@ void XCBFrameBuffer::getServerFormat(rfbPixelFormat &format) {
     // information about pixels layout
 
     if (root_visualtype) {
-        uint16_t pixelmaxValue = (1 << root_visualtype->bits_per_rgb_value) - 1;
-
 #ifdef _DEBUG
         qDebug("xcb framebuffer: Got info about root visual:\n"
                "    bits per rgb value: %d\n"
                "    red   mask: %08x\n"
                "    green mask: %08x\n"
-               "    blue  mask: %08x\n"
-               "    pixelMaxValue = %d\n",
+               "    blue  mask: %08x\n",
                (int)root_visualtype->bits_per_rgb_value,
                root_visualtype->red_mask,
                root_visualtype->green_mask,
-               root_visualtype->blue_mask,
-               (int)pixelmaxValue);
+               root_visualtype->blue_mask);
 #endif
 
         // calculate shifts
         format.redShift = 0;
-        format.redMax = pixelmaxValue;
         if (root_visualtype->red_mask) {
             while (!(root_visualtype->red_mask & (1 << format.redShift))) {
                 format.redShift++;
             }
         }
         format.greenShift = 0;
-        format.greenMax = pixelmaxValue;
         if (root_visualtype->green_mask) {
             while (!(root_visualtype->green_mask & (1 << format.greenShift))) {
                 format.greenShift++;
             }
         }
         format.blueShift = 0;
-        format.blueMax = pixelmaxValue;
         if (root_visualtype->blue_mask) {
             while (!(root_visualtype->blue_mask & (1 << format.blueShift))) {
                 format.blueShift++;
             }
         }
 
+        // calculate pixel max value.
+        // NOTE: bits_per_rgb_value is unreliable, thus should be avoided.
+        format.redMax   = root_visualtype->red_mask >> format.redShift;
+        format.greenMax = root_visualtype->green_mask >> format.greenShift;
+        format.blueMax  = root_visualtype->blue_mask >> format.blueShift;
+
 #ifdef _DEBUG
         qDebug() << "    Calculated redShift   =" << (int)format.redShift;
         qDebug() << "    Calculated greenShift =" << (int)format.greenShift;
         qDebug() << "    Calculated blueShift  =" << (int)format.blueShift;
+        qDebug(     "    Calculated max values: R%d G%d B%d",
+               format.redMax, format.greenMax, format.blueMax);
 #endif
     } else {
         // some kind of fallback (unlikely code execution will go this way)
