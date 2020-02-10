@@ -1,6 +1,6 @@
 /* This file is part of the KDE project
    Copyright (C) 2018 Oleg Chernovskiy <kanedias@xaker.ru>
-   Copyright (C) 2018 Jan Grulich <jgrulich@redhat.com>
+   Copyright (C) 2018-2020 Jan Grulich <jgrulich@redhat.com>
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public
