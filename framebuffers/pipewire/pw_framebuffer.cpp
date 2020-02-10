@@ -260,7 +260,7 @@ void PWFrameBuffer::Private::handleSessionCreated(quint32 &code, QVariantMap &re
     // select sources for the session
     auto selectionOptions = QVariantMap {
         // We have to specify it's an uint, otherwise xdg-desktop-portal will not forward it to backend implementation
-        { QLatin1String("types"),QVariant::fromValue<uint>(7) }, // request all (KeyBoard, Pointer, TouchScreen)
+        { QLatin1String("types"), QVariant::fromValue<uint>(7) }, // request all (KeyBoard, Pointer, TouchScreen)
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
         { QLatin1String("handle_token"), QStringLiteral("krfb%1").arg(QRandomGenerator::global()->generate()) }
 #else
@@ -304,7 +304,7 @@ void PWFrameBuffer::Private::handleDevicesSelected(quint32 &code, QVariantMap &r
 
     // select sources for the session
     auto selectionOptions = QVariantMap {
-        { QLatin1String("types"), 1 }, // only MONITOR is supported
+        { QLatin1String("types"), QVariant::fromValue<uint>(1) }, // only MONITOR is supported
         { QLatin1String("multiple"), false },
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
         { QLatin1String("handle_token"), QStringLiteral("krfb%1").arg(QRandomGenerator::global()->generate()) }
