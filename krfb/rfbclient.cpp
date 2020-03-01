@@ -217,11 +217,11 @@ bool PendingRfbClient::vncAuthCheckPassword(const QByteArray& password, const QB
         return true;
     }
 
-    char passwd[MAXPWLEN];
+    char passwd[MAXPWLEN+1]; // +1 to make sure there's a nullptr at the end
     unsigned char challenge[CHALLENGESIZE];
 
     memcpy(challenge, m_rfbClient->authChallenge, CHALLENGESIZE);
-    memset(passwd, 0, MAXPWLEN);
+    memset(passwd, 0, sizeof(passwd));
 
     if (!password.isEmpty()) {
         strncpy(passwd, password.constData(),
