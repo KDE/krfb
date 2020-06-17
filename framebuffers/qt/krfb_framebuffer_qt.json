@@ -33,7 +33,6 @@
         "Description[sv]": "X11-rambuffert för Krfb.",
         "Description[tr]": "KRfb için Qt tabanlı Çerçeve tamponu.",
         "Description[uk]": "Заснований на Qt буфер кадрів для KRfb.",
-        "Description[x-test]": "xxQt based Framebuffer for KRfb.xx",
         "Description[zh_CN]": "KRfb 的基于 Qt 的帧缓冲。",
         "Description[zh_TW]": "KRfb 的 Qt-based Framebuffer",
         "EnabledByDefault": true,
@@ -72,7 +71,6 @@
         "Name[sv]": "QT-rambuffert för Krfb",
         "Name[tr]": "KRfb için Qt Çerçeve tamponu",
         "Name[uk]": "Буфер кадрів на Qt для KRfb",
-        "Name[x-test]": "xxQt Framebuffer for KRfbxx",
         "Name[zh_CN]": "KRfb 的 Qt 帧缓冲",
         "Name[zh_TW]": "Krfb 的 Qt Framebuffer",
         "ServiceTypes": [

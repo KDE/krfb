@@ -33,7 +33,6 @@
         "Description[sv]": "X11 XDamage/XShm-baserad rambuffert för Krfb.",
         "Description[tr]": "KRfb için X11 XDamage/XShm tabanlı Çerçeve tamponu.",
         "Description[uk]": "Заснований на XDamage/XShm X11 буфер кадрів для KRfb.",
-        "Description[x-test]": "xxX11 XDamage/XShm based Framebuffer for KRfb.xx",
         "Description[zh_CN]": "KRfb 的基于 X11 XDamage/XShm 的帧缓冲。",
         "Description[zh_TW]": "KRfb 的 X11 XDamage/XShm based Framebuffer",
         "EnabledByDefault": true,
@@ -72,7 +71,6 @@
         "Name[sv]": "X11-rambuffert för Krfb",
         "Name[tr]": "KRfb için X11 Çerçeve tamponu",
         "Name[uk]": "Буфер кадрів X11 для KRfb",
-        "Name[x-test]": "xxX11 Framebuffer for KRfbxx",
         "Name[zh_CN]": "XRfb 的 X11 帧缓冲",
         "Name[zh_TW]": "KRfb 的 X11 Framebuffer",
         "ServiceTypes": [
