@@ -24,6 +24,7 @@
         "Description[sl]": "Upravljavec dogodkov, na osnovi portala Xdg-desktop za KRfb",
         "Description[sv]": "Händelsehanterare för KRfb baserad på xdg-desktop-portal",
         "Description[uk]": "Обробник подій для KRfb на основі Xdg-desktop-portal",
+        "Description[x-test]": "xxXdg-desktop-portal based event handler for KRfbxx",
         "Description[zh_CN]": "基于 xdg-desktop-portal 的 KRfb 事件处理器",
         "Description[zh_TW]": "KRfb 基於 Xdg-desktop-portal 的事件處理器",
         "EnabledByDefault": true,
@@ -52,6 +53,7 @@
         "Name[sl]": "Upravljavec dogodkov za KRfb na osnovi portala Xdg-desktop",
         "Name[sv]": "Xdg-desktop-portal händelsehanterare för Krfb",
         "Name[uk]": "Обробник подій для KRfb на основі Xdg-desktop-portal",
+        "Name[x-test]": "xxXdg-desktop-portal Event handler for KRfbxx",
         "Name[zh_CN]": "xdg-desktop-portal KRfb 事件处理器",
         "Name[zh_TW]": "KRfb 的 Xdg-desktop-portal 事件處理器",
         "ServiceTypes": [
