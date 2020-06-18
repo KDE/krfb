@@ -23,6 +23,7 @@
         "Description[sk]": "X11 Spracovateľ udalostí založený na XFakeInput pre KRfb",
         "Description[sv]": "Händelsehanterare för KRfb baserad på X11 XFakeInput",
         "Description[uk]": "Обробник подій для KRfb на основі XFakeInput X11",
+        "Description[x-test]": "xxX11 XFakeInput based event handler for KRfbxx",
         "Description[zh_CN]": "基于 X11 XFakeInput 的 KRfb 事件处理器",
         "Description[zh_TW]": "KRfb 基於 X11 XFakeInput 的事件處理器",
         "EnabledByDefault": true,
@@ -50,6 +51,7 @@
         "Name[sk]": "X11 Obsluha udalostí pre KRfb",
         "Name[sv]": "X11-händelsehanterare för Krfb",
         "Name[uk]": "Обробник подій для KRfb на основі X11",
+        "Name[x-test]": "xxX11 Event handler for KRfbxx",
         "Name[zh_CN]": "X11 KRfb 事件处理器",
         "Name[zh_TW]": "KRfb 的 X11 事件處理器",
         "ServiceTypes": [
