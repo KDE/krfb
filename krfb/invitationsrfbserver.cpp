@@ -26,10 +26,10 @@
 #include <QApplication>
 #include <QHostInfo>
 #include <QDebug>
+#include <QRandomGenerator>
 
 #include <KLocalizedString>
 #include <KUser>
-#include <KRandom>
 #include <KStringHandler>
 #include <KWallet/KWallet>
 
@@ -213,7 +213,7 @@ QString InvitationsRfbServer::readableRandomString(int length)
 {
     QString str;
     while (length) {
-        int r = KRandom::random() % 62;
+        int r = QRandomGenerator::global()->bounded(62);
         r += 48;
         if (r > 57) {
             r += 7;
