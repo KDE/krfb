@@ -1,7 +1,7 @@
 [Desktop Entry]
 Encoding=UTF-8
 Comment=Xdg-desktop-portal based event handler for KRfb
-Comment[ca]=Gestor d'esdeveniments basat en el Xdg-desktop-portal per al KRfb
+Comment[ca]=Gestor d'esdeveniments basat en «Xdg-desktop-portal» per al KRfb
 Comment[ca@valencia]=Gestor d'esdeveniments basat en el Xdg-desktop-portal per al KRfb
 Comment[da]=Xdg-desktop-portal baseret hændelseshåndtering til KRfb
 Comment[de]=Ereignis-Modul basierend auf Xdg-desktop-portal für KRfb
@@ -28,7 +28,7 @@ Comment[x-test]=xxXdg-desktop-portal based event handler for KRfbxx
 Comment[zh_CN]=基于 xdg-desktop-portal 的 KRfb 事件处理器
 Comment[zh_TW]=KRfb 基於 Xdg-desktop-portal 的事件處理器
 Name=Xdg-desktop-portal based event handler for KRfb
-Name[ca]=Gestor d'esdeveniments basat en el Xdg-desktop-portal per al KRfb
+Name[ca]=Gestor d'esdeveniments basat en «Xdg-desktop-portal» per al KRfb
 Name[ca@valencia]=Gestor d'esdeveniments basat en el Xdg-desktop-portal per al KRfb
 Name[da]=Xdg-desktop-portal baseret hændelseshåndtering til KRfb
 Name[de]=Ereignis-Modul basierend auf Xdg-desktop-portal für KRfb
