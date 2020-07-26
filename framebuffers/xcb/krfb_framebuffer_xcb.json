@@ -1,7 +1,7 @@
 {
     "KPlugin": {
         "Description": "X11 XDamage/XShm based Framebuffer for KRfb.",
-        "Description[ca@valencia]": "«Framebuffer» basat en XDamage/XShm de l'X11 per al KRfb.",
+        "Description[ca@valencia]": "«Framebuffer» basat en «XDamage/XShm» de l'X11 per al KRfb.",
         "Description[ca]": "«Framebuffer» basat en «XDamage/XShm» de l'X11 per al KRfb.",
         "Description[cs]": "Framebuffer založený na X11 XDamage/XShm pro KRfb.",
         "Description[da]": "X11 XDamage/XShm-baseret framebuffer til KRfb.",

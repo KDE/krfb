@@ -2,7 +2,7 @@
     "Encoding": "UTF-8",
     "KPlugin": {
         "Description": "PipeWire based Framebuffer for KRfb.",
-        "Description[ca@valencia]": "«Framebuffer» basat en el PipeWire per al KRfb.",
+        "Description[ca@valencia]": "«Framebuffer» basat en «PipeWire» per al KRfb.",
         "Description[ca]": "«Framebuffer» basat en «PipeWire» per al KRfb.",
         "Description[cs]": "Framebuffer založený na Pipe pro KRfb.",
         "Description[da]": "PipeWire baseret framebuffer til KRfb.",
@@ -34,7 +34,7 @@
         "Id": "pw",
         "License": "GPL3",
         "Name": "PipeWire Framebuffer for KRfb",
-        "Name[ca@valencia]": "«Framebuffer» del PipeWire per al KRfb",
+        "Name[ca@valencia]": "«Framebuffer» del «PipeWire» per al KRfb",
         "Name[ca]": "«Framebuffer» del «PipeWire» per al KRfb",
         "Name[cs]": "PipeWire Framebuffer pro KRfb",
         "Name[da]": "PipeWire framebuffer til KRfb",
