@@ -24,11 +24,11 @@
 #include "krfbconfig.h"
 #include "sockethelpers.h"
 #include "connectiondialog.h"
+#include "krfbdebug.h"
 
 #include <KNotification>
 #include <KLocalizedString>
 
-#include <QDebug>
 #include <QSocketNotifier>
 #include <poll.h>
 #include <KConfigGroup>
@@ -115,7 +115,7 @@ void PendingInvitationsRfbClient::onSocketActivated()
         //the clientGoneHook which in turn will remove this RfbClient instance
         //from the server manager and will call deleteLater() to delete it
         if (d->client->sock == -1) {
-            qDebug() << "disconnected from socket signal";
+            qCDebug(KRFB) << "disconnected from socket signal";
             d->notifier->setEnabled(false);
             rfbClientConnectionGone(d->client);
             break;
@@ -125,7 +125,7 @@ void PendingInvitationsRfbClient::onSocketActivated()
 
 bool PendingInvitationsRfbClient::checkPassword(const QByteArray & encryptedPassword)
 {
-    qDebug() << "about to start authentication";
+    qCDebug(KRFB) << "about to start authentication";
 
     if(InvitationsRfbServer::instance->allowUnattendedAccess() && vncAuthCheckPassword(
             InvitationsRfbServer::instance->unattendedPassword().toLocal8Bit(),

@@ -7,6 +7,14 @@ set (krfb_framebuffer_xcb_SRCS
       xcb_framebuffer.cpp
 )
 
+ecm_qt_declare_logging_category(krfb_framebuffer_xcb_SRCS
+    HEADER krfb_fb_xcb_debug.h
+    IDENTIFIER KRFB_FB_XCB
+    CATEGORY_NAME krfb.framebuffer.xcb
+    DESCRIPTION "KRFB XCB framebuffer plugin"
+    EXPORT KRFB
+)
+
 add_library(krfb_framebuffer_xcb MODULE ${krfb_framebuffer_xcb_SRCS})
 
 target_link_libraries (krfb_framebuffer_xcb

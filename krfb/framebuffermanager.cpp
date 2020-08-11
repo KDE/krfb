@@ -22,8 +22,8 @@
 
 #include "framebufferplugin.h"
 #include "krfbconfig.h"
+#include "krfbdebug.h"
 
-#include <QDebug>
 #include <QGlobalStatic>
 
 #include <KPluginFactory>
@@ -78,18 +78,18 @@ void FrameBufferManager::loadPlugins()
         KPluginFactory *factory = KPluginLoader(data.fileName()).factory();
 
         if (!factory) {
-            qDebug() << "KPluginFactory could not load the plugin:" << data.fileName();
+            qCDebug(KRFB) << "KPluginFactory could not load the plugin:" << data.fileName();
             continue;
         } else {
-            qDebug() << "found plugin at " << data.fileName();
+            qCDebug(KRFB) << "found plugin at " << data.fileName();
         }
 
         FrameBufferPlugin *plugin = factory->create<FrameBufferPlugin>(this);
         if (plugin) {
             m_plugins.insert(data.pluginId(), plugin);
-            qDebug() << "Loaded plugin with name " << data.pluginId();
+            qCDebug(KRFB) << "Loaded plugin with name " << data.pluginId();
         } else {
-            qDebug() << "unable to load pluign for " << data.fileName();
+            qCDebug(KRFB) << "unable to load pluign for " << data.fileName();
         }
         unique.insert (data.name());
     }
@@ -118,7 +118,7 @@ QSharedPointer<FrameBuffer> FrameBufferManager::frameBuffer(WId id)
     while (iter != m_plugins.constEnd()) {
 
         if (iter.key() == KrfbConfig::preferredFrameBufferPlugin()) {
-            qDebug() << "Using FrameBuffer:" << KrfbConfig::preferredFrameBufferPlugin();
+            qCDebug(KRFB) << "Using FrameBuffer:" << KrfbConfig::preferredFrameBufferPlugin();
 
             QSharedPointer<FrameBuffer> frameBuffer(iter.value()->frameBuffer(id));
 
@@ -133,6 +133,6 @@ QSharedPointer<FrameBuffer> FrameBufferManager::frameBuffer(WId id)
     }
 
     // No valid framebuffer plugin found.
-    qDebug() << "No valid framebuffer found. returning null.";
+    qCDebug(KRFB) << "No valid framebuffer found. returning null.";
     return QSharedPointer<FrameBuffer>();
 }

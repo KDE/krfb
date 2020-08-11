@@ -29,7 +29,6 @@
 #include <QDesktopWidget>
 #include <QGlobalStatic>
 #include <QHostInfo>
-#include <QDebug>
 
 #include <KLocalizedString>
 #include <KUser>

@@ -22,10 +22,10 @@
 #include "invitationsrfbclient.h"
 #include "krfbconfig.h"
 #include "rfbservermanager.h"
+#include "krfbdebug.h"
 #include <QTimer>
 #include <QApplication>
 #include <QHostInfo>
-#include <QDebug>
 #include <QRandomGenerator>
 
 #include <KLocalizedString>
@@ -188,7 +188,7 @@ void InvitationsRfbServer::walletOpened(bool opened)
 
     } else {
 
-        qDebug() << "Could not open KWallet, Falling back to config file";
+        qCDebug(KRFB) << "Could not open KWallet, Falling back to config file";
         KConfigGroup krfbConfig(KSharedConfig::openConfig(),"Security");
 
         desktopPassword = KStringHandler::obscure(krfbConfig.readEntry(

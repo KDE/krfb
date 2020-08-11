@@ -9,7 +9,7 @@ set (RELEASE_SERVICE_VERSION "${RELEASE_SERVICE_VERSION_MAJOR}.${RELEASE_SERVICE
 project(krfb VERSION ${RELEASE_SERVICE_VERSION})
 
 set(QT_MIN_VERSION 5.10.0)
-set(KF5_MIN_VERSION 5.31.0)
+set(KF5_MIN_VERSION 5.68.0)
 
 find_package(ECM ${KF5_MIN_VERSION} NO_MODULE REQUIRED)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules" ${ECM_MODULE_PATH})
@@ -20,6 +20,7 @@ include(KDECompilerSettings NO_POLICY_SCOPE)
 include(ECMInstallIcons)
 include(ECMAddAppIcon)
 include(ECMSetupVersion)
+include(ECMQtDeclareLoggingCategory)
 include(FeatureSummary)
 include(CheckIncludeFile)
 
@@ -102,5 +103,11 @@ add_subdirectory(krfb)
 add_subdirectory(framebuffers)
 add_subdirectory(doc)
 add_subdirectory(icons)
+
+ecm_qt_install_logging_categories(
+    EXPORT KRFB
+    FILE krfb.categories
+    DESTINATION ${KDE_INSTALL_LOGGINGCATEGORIESDIR}
+)
 
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)

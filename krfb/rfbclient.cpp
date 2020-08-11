@@ -23,7 +23,6 @@
 #include "sockethelpers.h"
 #include "eventsmanager.h"
 #include <QSocketNotifier>
-#include <QDebug>
 #include <poll.h>
 #include <strings.h> //for bzero()
 

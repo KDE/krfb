@@ -8,6 +8,7 @@
 */
 
 #include "xcb_framebuffer.h"
+#include "krfb_fb_xcb_debug.h"
 
 #include <xcb/xcb.h>
 #include <xcb/xproto.h>
@@ -23,7 +24,6 @@
 #include <QGuiApplication>
 #include <QScreen>
 #include <QAbstractNativeEventFilter>
-#include <QDebug>
 
 
 class KrfbXCBEventFilter: public QAbstractNativeEventFilter
@@ -68,7 +68,7 @@ KrfbXCBEventFilter::KrfbXCBEventFilter(XCBFrameBuffer *owner):
         }
 
 #ifdef _DEBUG
-        qDebug() << "xcb framebuffer: XDamage extension version:" <<
+        qCDebug(KRFB_FB_XCB) << "xcb framebuffer: XDamage extension version:" <<
                xdamage_version->major_version << "." << xdamage_version->minor_version;
 #endif
 
@@ -163,7 +163,7 @@ XCBFrameBuffer::XCBFrameBuffer(WId winid, QObject *parent):
 
     QScreen *primaryScreen = QGuiApplication::primaryScreen();
     if (primaryScreen) {
-        qDebug() << "xcb framebuffer: Primary screen: " << primaryScreen->name()
+        qCDebug(KRFB_FB_XCB) << "xcb framebuffer: Primary screen: " << primaryScreen->name()
                  << ", geometry: " << primaryScreen->geometry()
                  << ", depth: " << primaryScreen->depth();
         //
@@ -183,7 +183,7 @@ XCBFrameBuffer::XCBFrameBuffer(WId winid, QObject *parent):
                                         XCB_IMAGE_FORMAT_Z_PIXMAP);
     if (d->framebufferImage) {
 #ifdef _DEBUG
-        qDebug() << "xcb framebuffer: Got primary screen image. bpp: " << d->framebufferImage->bpp
+        qCDebug(KRFB_FB_XCB) << "xcb framebuffer: Got primary screen image. bpp: " << d->framebufferImage->bpp
                  << ", size (" << d->framebufferImage->width << d->framebufferImage->height << ")"
                  << ", depth: " << d->framebufferImage->depth
                  << ", padded width: " << d->framebufferImage->stride;
@@ -211,15 +211,15 @@ XCBFrameBuffer::XCBFrameBuffer(WId winid, QObject *parent):
                     nullptr);                   // data = 0
         if (d->updateTile) {
 #ifdef _DEBUG
-            qDebug() << "xcb framebuffer: Successfully created new empty image in native format";
-            qDebug() << "    size: " << d->updateTile->width << "x" << d->updateTile->height
-                     << "(stride: " << d->updateTile->stride << ")";
-            qDebug() << "    bpp, depth:  " << d->updateTile->bpp << d->updateTile->depth; // 32, 24
-            qDebug() << "    addr of base, data:  " << d->updateTile->base << (void *)d->updateTile->data;
-            qDebug() << "    size:  " << d->updateTile->size;
-            qDebug() << "    image byte order = " << d->updateTile->byte_order;  // == 0 .._LSB_FIRST
-            qDebug() << "    image bit order = " << d->updateTile->bit_order;    // == 1 .._MSB_FIRST
-            qDebug() << "    image plane_mask = " << d->updateTile->plane_mask;  // == 16777215 == 0x00FFFFFF
+            qCDebug(KRFB_FB_XCB) << "xcb framebuffer: Successfully created new empty image in native format"
+                << "\n    size: " << d->updateTile->width << "x" << d->updateTile->height
+                    << "(stride: " << d->updateTile->stride << ")"
+                << "\n    bpp, depth:  " << d->updateTile->bpp << d->updateTile->depth // 32, 24
+                << "\n    addr of base, data:  " << d->updateTile->base << (void *)d->updateTile->data
+                << "\n    size:  " << d->updateTile->size
+                << "\n    image byte order = " << d->updateTile->byte_order   // == 0 .._LSB_FIRST
+                << "\n    image bit order = " << d->updateTile->bit_order     // == 1 .._MSB_FIRST
+                << "\n    image plane_mask = " << d->updateTile->plane_mask;  // == 16777215 == 0x00FFFFFF
 #endif
 
             // allocate shared memory block only once, make its size large enough
@@ -237,7 +237,7 @@ XCBFrameBuffer::XCBFrameBuffer(WId winid, QObject *parent):
             xcb_shm_attach(QX11Info::connection(), d->shminfo.shmseg, d->shminfo.shmid, 0);
 
 #ifdef _DEBUG
-            qDebug() << "    shm id: " << d->shminfo.shmseg << ", addr: " << (void *)d->shminfo.shmaddr;
+            qCDebug(KRFB_FB_XCB) << "    shm id: " << d->shminfo.shmseg << ", addr: " << (void *)d->shminfo.shmaddr;
 #endif
 
             // will return 1 on success (yes!)
@@ -273,7 +273,7 @@ XCBFrameBuffer::XCBFrameBuffer(WId winid, QObject *parent):
     }
 
 #ifdef _DEBUG
-    qDebug() << "xcb framebuffer: XCBFrameBuffer(), xshm base event = " << d->x11EvtFilter->xshmBaseEvent
+    qCDebug(KRFB_FB_XCB) << "xcb framebuffer: XCBFrameBuffer(), xshm base event = " << d->x11EvtFilter->xshmBaseEvent
              << ", xshm base error = " << d->x11EvtFilter->xdamageBaseError
              << ", xdamage base event = " << d->x11EvtFilter->xdamageBaseEvent
              << ", xdamage base error = " << d->x11EvtFilter->xdamageBaseError;
@@ -420,10 +420,12 @@ void XCBFrameBuffer::getServerFormat(rfbPixelFormat &format) {
         format.blueMax  = root_visualtype->blue_mask >> format.blueShift;
 
 #ifdef _DEBUG
-        qDebug() << "    Calculated redShift   =" << (int)format.redShift;
-        qDebug() << "    Calculated greenShift =" << (int)format.greenShift;
-        qDebug() << "    Calculated blueShift  =" << (int)format.blueShift;
-        qDebug(     "    Calculated max values: R%d G%d B%d",
+        qCDebug(KRFB_FB_XCB,
+            "    Calculated redShift   = %d\n"
+            "    Calculated greenShift = %d\n"
+            "    Calculated blueShift  = %d\n"
+            "    Calculated max values: R%d G%d B%d",
+               format.redShift, format.greenShift, format.blueShift
                format.redMax, format.greenMax, format.blueMax);
 #endif
     } else {

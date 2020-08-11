@@ -7,6 +7,14 @@ set (krfb_framebuffer_qt_SRCS
      qtframebufferplugin.cpp
 )
 
+ecm_qt_declare_logging_category(krfb_framebuffer_qt_SRCS
+    HEADER krfb_fb_qt_debug.h
+    IDENTIFIER KRFB_FB_QT
+    CATEGORY_NAME krfb.framebuffer.qt
+    DESCRIPTION "KRFB Qt framebuffer plugin"
+    EXPORT KRFB
+)
+
 add_library(krfb_framebuffer_qt
  MODULE 
                  ${krfb_framebuffer_qt_SRCS}

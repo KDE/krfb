@@ -23,8 +23,8 @@
 #include "eventsplugin.h"
 #include "krfbconfig.h"
 #include "rfbservermanager.h"
+#include "krfbdebug.h"
 
-#include <QDebug>
 #include <QGlobalStatic>
 
 #include <KPluginFactory>
@@ -79,18 +79,18 @@ void EventsManager::loadPlugins()
         KPluginFactory *factory = KPluginLoader(data.fileName()).factory();
 
         if (!factory) {
-            qDebug() << "KPluginFactory could not load the plugin:" << data.fileName();
+            qCDebug(KRFB) << "KPluginFactory could not load the plugin:" << data.fileName();
             continue;
         } else {
-            qDebug() << "found plugin at " << data.fileName();
+            qCDebug(KRFB) << "found plugin at " << data.fileName();
         }
 
         EventsPlugin *plugin = factory->create<EventsPlugin>(this);
         if (plugin) {
             m_plugins.insert(data.pluginId(), plugin);
-            qDebug() << "Loaded plugin with name " << data.pluginId();
+            qCDebug(KRFB) << "Loaded plugin with name " << data.pluginId();
         } else {
-            qDebug() << "unable to load plugin for " << data.fileName();
+            qCDebug(KRFB) << "unable to load plugin for " << data.fileName();
         }
         unique.insert (data.name());
     }
@@ -113,6 +113,6 @@ QSharedPointer<EventHandler> EventsManager::eventHandler()
     }
 
     // No valid events plugin found.
-    qDebug() << "No valid event handlers found. returning null.";
+    qCDebug(KRFB) << "No valid event handlers found. returning null.";
     return QSharedPointer<EventHandler>();
 }

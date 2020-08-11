@@ -20,6 +20,7 @@
 #include "invitationsrfbserver.h"
 #include "krfbconfig.h"
 #include "krfb_version.h"
+#include "krfbdebug.h"
 
 #include <KAboutData>
 #include <KDBusService>
@@ -27,7 +28,6 @@
 #include <KMessageBox>
 #include <KWindowSystem>
 
-#include <QDebug>
 #include <QPixmap>
 #include <qwindowdefs.h>
 #include <QX11Info>
@@ -59,13 +59,13 @@ static bool checkX11Capabilities()
 
 static void checkOldX11PluginConfig() {
     if (KrfbConfig::preferredFrameBufferPlugin() == QStringLiteral("x11")) {
-        qDebug() << "Detected deprecated configuration: preferredFrameBufferPlugin = x11";
+        qCDebug(KRFB) << "Detected deprecated configuration: preferredFrameBufferPlugin = x11";
         KConfigSkeletonItem *config_item = KrfbConfig::self()->findItem(
                     QStringLiteral("preferredFrameBufferPlugin"));
         if (config_item) {
             config_item->setProperty(QStringLiteral("xcb"));
             KrfbConfig::self()->save();
-            qDebug() << "  Fixed preferredFrameBufferPlugin from x11 to xcb.";
+            qCDebug(KRFB) << "  Fixed preferredFrameBufferPlugin from x11 to xcb.";
         }
     }
 }
@@ -81,7 +81,7 @@ static void checkWaylandPluginConfig()
         if (config_item) {
             config_item->setProperty(QStringLiteral("pw"));
             KrfbConfig::self()->save();
-            qDebug() << "Wayland: Fixed preferredFrameBufferPlugin to \"pw\".";
+            qCDebug(KRFB) << "Wayland: Fixed preferredFrameBufferPlugin to \"pw\".";
         }
     }
 }

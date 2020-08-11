@@ -66,6 +66,14 @@ set (krfb_SRCS
      invitationsrfbclient.cpp
 )
 
+ecm_qt_declare_logging_category(krfb_SRCS
+    HEADER krfbdebug.h
+    IDENTIFIER KRFB
+    CATEGORY_NAME krfb.krfb
+    DESCRIPTION "KRFB Application"
+    EXPORT KRFB
+)
+
 kconfig_add_kcfg_files (krfb_SRCS
                      krfbconfig.kcfgc
 )
