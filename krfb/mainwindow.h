@@ -15,7 +15,7 @@
 
 #include <KXmlGuiWindow>
 
-class KLineEdit;
+class QLineEdit;
 
 class MainWindow : public KXmlGuiWindow
 {
@@ -43,7 +43,7 @@ class MainWindow : public KXmlGuiWindow
     private:
         Ui::MainWidget m_ui;
         bool m_passwordEditable;
-        KLineEdit *m_passwordLineEdit;
+        QLineEdit *m_passwordLineEdit;
 };
 
 #endif

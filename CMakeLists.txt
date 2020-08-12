@@ -29,7 +29,6 @@ find_package(Qt5 ${QT_MIN_VERSION} REQUIRED COMPONENTS Core DBus Widgets X11Extr
 
 find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
     I18n
-    Completion
     Config
     CoreAddons
     Crash

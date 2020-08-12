@@ -21,7 +21,6 @@
 #include <KMessageWidget>
 #include <KStandardAction>
 #include <KActionCollection>
-#include <KLineEdit>
 #include <KNewPasswordDialog>
 #include <KPluginLoader>
 #include <KPluginMetaData>
@@ -107,7 +106,7 @@ MainWindow::MainWindow(QWidget *parent)
     setAttribute(Qt::WA_DeleteOnClose, false);
 
     m_passwordEditable = false;
-    m_passwordLineEdit = new KLineEdit(this);
+    m_passwordLineEdit = new QLineEdit(this);
     m_passwordLineEdit->setVisible(false);
     m_passwordLineEdit->setAlignment(Qt::AlignHCenter);
 

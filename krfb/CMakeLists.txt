@@ -93,7 +93,6 @@ target_link_libraries (krfb
                        ${X11_X11_LIB}
                        ${X11_Xdamage_LIB}
                        Qt5::Network
-                       KF5::Completion
                        KF5::CoreAddons
                        KF5::DBusAddons
                        KF5::DNSSD
