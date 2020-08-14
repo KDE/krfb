@@ -28,6 +28,8 @@
 
 #if PW_CHECK_VERSION(0, 2, 90)
 #include <spa/utils/result.h>
+#include <linux/dma-buf.h>
+#include <sys/ioctl.h>
 #endif
 
 #include <spa/param/format-utils.h>
@@ -688,18 +690,73 @@ void PWFrameBuffer::Private::onStreamProcess(void *data)
     pw_stream_queue_buffer(d->pwStream, buf);
 }
 
+static void syncDmaBuf(int fd, uint64_t start_or_end)
+{
+    struct dma_buf_sync sync = { 0 };
+    sync.flags = start_or_end | DMA_BUF_SYNC_READ;
+
+    while(true) {
+        int ret;
+        ret = ioctl (fd, DMA_BUF_IOCTL_SYNC, &sync);
+        if (ret == -1 && errno == EINTR) {
+            continue;
+        } else if (ret == -1) {
+            qWarning() << "Failed to synchronize DMA buffer: " << strerror(errno);
+            break;
+        } else {
+            break;
+        }
+    }
+}
+
 void PWFrameBuffer::Private::handleFrame(pw_buffer *pwBuffer)
 {
     auto *spaBuffer = pwBuffer->buffer;
-    void *src = nullptr;
-
-    src = spaBuffer->datas[0].data;
-    if (!src) {
+    void *src = spaBuffer->datas[0].data;
+    if (!src && spaBuffer->datas->type != SPA_DATA_DmaBuf) {
+        qDebug() << "discarding null buffer";
         return;
     }
 
-    quint32 maxSize = spaBuffer->datas[0].maxsize;
-    qint32 srcStride = spaBuffer->datas[0].chunk->stride;
+    const quint32 maxSize = spaBuffer->datas[0].maxsize;
+
+    std::function<void()> cleanup;
+#if PW_CHECK_VERSION(0, 2, 90)
+    if (spaBuffer->datas->type == SPA_DATA_DmaBuf) {
+        const int fd = spaBuffer->datas[0].fd;
+        auto map = mmap(
+            nullptr, spaBuffer->datas[0].maxsize + spaBuffer->datas[0].mapoffset,
+            PROT_READ, MAP_PRIVATE, fd, 0);
+        if (map == MAP_FAILED) {
+            qWarning() << "Failed to mmap the dmabuf: " << strerror(errno);
+            return;
+        }
+
+        syncDmaBuf(fd, DMA_BUF_SYNC_START);
+        src = SPA_MEMBER(map, spaBuffer->datas[0].mapoffset, uint8_t);
+
+        cleanup = [map, spaBuffer, fd] {
+            syncDmaBuf(fd, DMA_BUF_SYNC_END);
+            munmap(map, spaBuffer->datas[0].maxsize + spaBuffer->datas[0].mapoffset);
+        };
+    } else if (spaBuffer->datas->type == SPA_DATA_MemFd) {
+        uint8_t *map = static_cast<uint8_t*>(mmap(
+            nullptr, spaBuffer->datas->maxsize + spaBuffer->datas->mapoffset,
+            PROT_READ, MAP_PRIVATE, spaBuffer->datas->fd, 0));
+
+        if (map == MAP_FAILED) {
+            qWarning() << "Failed to mmap the memory: " << strerror(errno);
+            return;
+        }
+        src = SPA_MEMBER(map, spaBuffer->datas[0].mapoffset, uint8_t);
+
+        cleanup = [map, spaBuffer] {
+            munmap(map, spaBuffer->datas->maxsize + spaBuffer->datas->mapoffset);
+        };
+    }
+#endif
+
+    const qint32 srcStride = spaBuffer->datas[0].chunk->stride;
     if (srcStride != q->paddedWidth()) {
         qWarning() << "Got buffer with stride different from screen stride" << srcStride << "!=" << q->paddedWidth();
         return;
@@ -707,6 +764,18 @@ void PWFrameBuffer::Private::handleFrame(pw_buffer *pwBuffer)
 
     q->tiles.append(QRect(0, 0, q->width(), q->height()));
     std::memcpy(q->fb, src, maxSize);
+    cleanup();
+
+#if PW_CHECK_VERSION(0, 2, 90)
+    if (videoFormat->format != SPA_VIDEO_FORMAT_RGB) {
+        const QImage::Format format = videoFormat->format == SPA_VIDEO_FORMAT_BGR  ? QImage::Format_BGR888
+                                    : videoFormat->format == SPA_VIDEO_FORMAT_RGBx ? QImage::Format_RGBX8888
+                                                                                   : QImage::Format_RGB32;
+
+        QImage img((uchar*) q->fb, videoFormat->size.width, videoFormat->size.height, spaBuffer->datas->chunk->stride, format);
+        img.convertTo(QImage::Format_RGB888);
+    }
+#endif
 }
 
 /**
@@ -743,7 +812,10 @@ pw_stream *PWFrameBuffer::Private::createReceivingStream()
                 SPA_TYPE_OBJECT_Format, SPA_PARAM_EnumFormat,
                 SPA_FORMAT_mediaType, SPA_POD_Id(SPA_MEDIA_TYPE_video),
                 SPA_FORMAT_mediaSubtype, SPA_POD_Id(SPA_MEDIA_SUBTYPE_raw),
-                SPA_FORMAT_VIDEO_format, SPA_POD_Id(SPA_VIDEO_FORMAT_RGBx),
+                SPA_FORMAT_VIDEO_format, SPA_POD_CHOICE_ENUM_Id(6,
+                                                    SPA_VIDEO_FORMAT_RGBx, SPA_VIDEO_FORMAT_RGBA,
+                                                    SPA_VIDEO_FORMAT_BGRx, SPA_VIDEO_FORMAT_BGRA,
+                                                    SPA_VIDEO_FORMAT_RGB, SPA_VIDEO_FORMAT_BGR),
                 SPA_FORMAT_VIDEO_size, SPA_POD_CHOICE_RANGE_Rectangle(&pwMaxScreenBounds, &pwMinScreenBounds, &pwMaxScreenBounds),
                 SPA_FORMAT_VIDEO_framerate, SPA_POD_Fraction(&pwFramerateMin),
                 SPA_FORMAT_VIDEO_maxFramerate, SPA_POD_CHOICE_RANGE_Fraction(&pwFramerateMax, &pwFramerateMin, &pwFramerateMax)));
