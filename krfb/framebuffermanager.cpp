@@ -89,7 +89,7 @@ void FrameBufferManager::loadPlugins()
             m_plugins.insert(data.pluginId(), plugin);
             qDebug() << "Loaded plugin with name " << data.pluginId();
         } else {
-            qDebug() << "unable to load pluign for " << data.fileName();
+            qDebug() << "unable to load plugin for " << data.fileName();
         }
         unique.insert (data.name());
     }
