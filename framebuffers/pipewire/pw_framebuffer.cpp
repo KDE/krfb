@@ -690,6 +690,7 @@ void PWFrameBuffer::Private::onStreamProcess(void *data)
     pw_stream_queue_buffer(d->pwStream, buf);
 }
 
+#if PW_CHECK_VERSION(0, 2, 90)
 static void syncDmaBuf(int fd, uint64_t start_or_end)
 {
     struct dma_buf_sync sync = { 0 };
@@ -708,15 +709,23 @@ static void syncDmaBuf(int fd, uint64_t start_or_end)
         }
     }
 }
+#endif
 
 void PWFrameBuffer::Private::handleFrame(pw_buffer *pwBuffer)
 {
     auto *spaBuffer = pwBuffer->buffer;
     void *src = spaBuffer->datas[0].data;
-    if (!src && spaBuffer->datas->type != SPA_DATA_DmaBuf) {
+    if (!src) {
         qDebug() << "discarding null buffer";
         return;
     }
+
+#if PW_CHECK_VERSION(0, 2, 90)
+    if (spaBuffer->datas->type != SPA_DATA_DmaBuf) {
+        qDebug() << "discarding null buffer";
+        return;
+    }
+#endif
 
     const quint32 maxSize = spaBuffer->datas[0].maxsize;
 
