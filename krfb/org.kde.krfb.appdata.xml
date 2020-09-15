@@ -39,40 +39,6 @@
   <name xml:lang="zh-CN">Krfb</name>
   <name xml:lang="zh-TW">Krfb</name>
   <summary>Share your desktop to another computer via VNC</summary>
-  <summary xml:lang="ca">Compartició de l'escriptori</summary>
-  <summary xml:lang="ca-valencia">Compartició de l'escriptori</summary>
-  <summary xml:lang="cs">Sdílení pracovní plochy</summary>
-  <summary xml:lang="da">Skrivebordsdeling</summary>
-  <summary xml:lang="de">Freigabe der Arbeitsfläche</summary>
-  <summary xml:lang="el">Κοινή χρήση επιφάνειας εργασίας</summary>
-  <summary xml:lang="en-GB">Desktop sharing</summary>
-  <summary xml:lang="es">Compartir el escritorio</summary>
-  <summary xml:lang="et">Töölaua jagamine</summary>
-  <summary xml:lang="eu">Mahaigaina partekatzea</summary>
-  <summary xml:lang="fi">Työpöydän jako</summary>
-  <summary xml:lang="fr">Partage de bureau</summary>
-  <summary xml:lang="gl">Compartición do escritorio</summary>
-  <summary xml:lang="ia">Compartir de scriptorio</summary>
-  <summary xml:lang="id">Desktop sharing</summary>
-  <summary xml:lang="it">Condivisione del desktop</summary>
-  <summary xml:lang="ko">데스크톱 공유</summary>
-  <summary xml:lang="nl">Bureaublad delen</summary>
-  <summary xml:lang="pl">Współdzielenie pulpitu</summary>
-  <summary xml:lang="pt">Partilha do ecrã</summary>
-  <summary xml:lang="pt-BR">Compartilhamento de tela</summary>
-  <summary xml:lang="ru">Общий рабочий стол</summary>
-  <summary xml:lang="sk">Zdieľanie pracovnej plochy</summary>
-  <summary xml:lang="sl">Souporaba namizja</summary>
-  <summary xml:lang="sr">Дељење површи</summary>
-  <summary xml:lang="sr-Latn">Deljenje površi</summary>
-  <summary xml:lang="sr-ijekavian">Дељење површи</summary>
-  <summary xml:lang="sr-ijekavianlatin">Deljenje površi</summary>
-  <summary xml:lang="sv">Skrivbordsdelning</summary>
-  <summary xml:lang="tr">Masaüstü paylaşımı</summary>
-  <summary xml:lang="uk">Спільне користування стільницею</summary>
-  <summary xml:lang="x-test">xxDesktop sharingxx</summary>
-  <summary xml:lang="zh-CN">桌面共享</summary>
-  <summary xml:lang="zh-TW">桌面分享</summary>
   <description>
     <p>Krfb Desktop Sharing is a server application that allows you to share your current session with a user on another machine, who can use a VNC client to view or even control the desktop.</p>
     <p xml:lang="ca">El Krfb és una aplicació de servidor que permet compartir la vostra sessió actual amb un usuari en una altra màquina, la qual pot emprar un client VNC per a veure o controlar l'escriptori.</p>
