@@ -7,6 +7,15 @@ set (krfb_framebuffer_pw_SRCS
      pw_framebufferplugin.cpp
 )
 
+
+ecm_qt_declare_logging_category(krfb_framebuffer_pw_SRCS
+    HEADER krfb_fb_pipewire_debug.h
+    IDENTIFIER KRFB_FB_PIPEWIRE
+    CATEGORY_NAME krfb.framebuffer.pipewire
+    DESCRIPTION "KRFB PipeWire framebuffer plugin"
+    EXPORT KRFB
+)
+
 qt5_add_dbus_interface(
    krfb_framebuffer_pw_SRCS
    ${CMAKE_SOURCE_DIR}/dbus/xdp_dbus_screencast_interface.xml

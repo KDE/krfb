@@ -43,6 +43,7 @@
 #include "pw_framebuffer.h"
 #include "xdp_dbus_screencast_interface.h"
 #include "xdp_dbus_remotedesktop_interface.h"
+#include "krfb_fb_pipewire_debug.h"
 
 static const uint MIN_SUPPORTED_XDP_KDE_SC_VERSION = 1;
 
@@ -221,7 +222,7 @@ void PWFrameBuffer::Private::initDbus()
                                                                      QDBusConnection::sessionBus()));
     auto version = dbusXdpScreenCastService->version();
     if (version < MIN_SUPPORTED_XDP_KDE_SC_VERSION) {
-        qWarning() << "Unsupported XDG Portal screencast interface version:" << version;
+        qCWarning(KRFB_FB_PIPEWIRE) << "Unsupported XDG Portal screencast interface version:" << version;
         isValid = false;
         return;
     }
@@ -268,7 +269,7 @@ void PWFrameBuffer::handleXdpSessionCreated(quint32 code, QVariantMap results)
 void PWFrameBuffer::Private::handleSessionCreated(quint32 &code, QVariantMap &results)
 {
     if (code != 0) {
-        qWarning() << "Failed to create session: " << code;
+        qCWarning(KRFB_FB_PIPEWIRE) << "Failed to create session: " << code;
         isValid = false;
         return;
     }
@@ -288,7 +289,7 @@ void PWFrameBuffer::Private::handleSessionCreated(quint32 &code, QVariantMap &re
     auto selectorReply = dbusXdpRemoteDesktopService->SelectDevices(sessionPath, selectionOptions);
     selectorReply.waitForFinished();
     if (!selectorReply.isValid()) {
-        qWarning() << "Couldn't select devices for the remote-desktop session";
+        qCWarning(KRFB_FB_PIPEWIRE) << "Couldn't select devices for the remote-desktop session";
         isValid = false;
         return;
     }
@@ -315,7 +316,7 @@ void PWFrameBuffer::Private::handleDevicesSelected(quint32 &code, QVariantMap &r
 {
     Q_UNUSED(results)
     if (code != 0) {
-        qWarning() << "Failed to select devices: " << code;
+        qCWarning(KRFB_FB_PIPEWIRE) << "Failed to select devices: " << code;
         isValid = false;
         return;
     }
@@ -333,7 +334,7 @@ void PWFrameBuffer::Private::handleDevicesSelected(quint32 &code, QVariantMap &r
     auto selectorReply = dbusXdpScreenCastService->SelectSources(sessionPath, selectionOptions);
     selectorReply.waitForFinished();
     if (!selectorReply.isValid()) {
-        qWarning() << "Couldn't select sources for the screen-casting session";
+        qCWarning(KRFB_FB_PIPEWIRE) << "Couldn't select sources for the screen-casting session";
         isValid = false;
         return;
     }
@@ -361,7 +362,7 @@ void PWFrameBuffer::handleXdpSourcesSelected(quint32 code, QVariantMap results)
 void PWFrameBuffer::Private::handleSourcesSelected(quint32 &code, QVariantMap &)
 {
     if (code != 0) {
-        qWarning() << "Failed to select sources: " << code;
+        qCWarning(KRFB_FB_PIPEWIRE) << "Failed to select sources: " << code;
         isValid = false;
         return;
     }
@@ -400,7 +401,7 @@ void PWFrameBuffer::handleXdpRemoteDesktopStarted(quint32 code, QVariantMap resu
 void PWFrameBuffer::Private::handleRemoteDesktopStarted(quint32 &code, QVariantMap &results)
 {
     if (code != 0) {
-        qWarning() << "Failed to start screencast: " << code;
+        qCWarning(KRFB_FB_PIPEWIRE) << "Failed to start screencast: " << code;
         isValid = false;
         return;
     }
@@ -409,7 +410,7 @@ void PWFrameBuffer::Private::handleRemoteDesktopStarted(quint32 &code, QVariantM
     Streams streams = qdbus_cast<Streams>(results.value(QLatin1String("streams")));
     if (streams.isEmpty()) {
         // maybe we should check deeper with qdbus_cast but this suffices for now
-        qWarning() << "Failed to get screencast streams";
+        qCWarning(KRFB_FB_PIPEWIRE) << "Failed to get screencast streams";
         isValid = false;
         return;
     }
@@ -417,14 +418,14 @@ void PWFrameBuffer::Private::handleRemoteDesktopStarted(quint32 &code, QVariantM
     auto streamReply = dbusXdpScreenCastService->OpenPipeWireRemote(sessionPath, QVariantMap());
     streamReply.waitForFinished();
     if (!streamReply.isValid()) {
-        qWarning() << "Couldn't open pipewire remote for the screen-casting session";
+        qCWarning(KRFB_FB_PIPEWIRE) << "Couldn't open pipewire remote for the screen-casting session";
         isValid = false;
         return;
     }
 
     pipewireFd = streamReply.value();
     if (!pipewireFd.isValid()) {
-        qWarning() << "Couldn't get pipewire connection file descriptor";
+        qCWarning(KRFB_FB_PIPEWIRE) << "Couldn't get pipewire connection file descriptor";
         isValid = false;
         return;
     }
@@ -441,7 +442,7 @@ void PWFrameBuffer::Private::handleRemoteDesktopStarted(quint32 &code, QVariantM
     q->fb = static_cast<char*>(malloc(screenGeometry.width * screenGeometry.height * 4));
 
     if (!q->fb) {
-        qWarning() << "Failed to allocate buffer";
+        qCWarning(KRFB_FB_PIPEWIRE) << "Failed to allocate buffer";
         isValid = false;
         return;
     }
@@ -465,13 +466,13 @@ void PWFrameBuffer::Private::initPw() {
     pwMainLoop = pw_thread_loop_new("pipewire-main-loop", nullptr);
     pwContext = pw_context_new(pw_thread_loop_get_loop(pwMainLoop), nullptr, 0);
     if (!pwContext) {
-        qWarning() << "Failed to create PipeWire context";
+        qCWarning(KRFB_FB_PIPEWIRE) << "Failed to create PipeWire context";
         return;
     }
 
     pwCore = pw_context_connect(pwContext, nullptr, 0);
     if (!pwCore) {
-        qWarning() << "Failed to connect PipeWire context";
+        qCWarning(KRFB_FB_PIPEWIRE) << "Failed to connect PipeWire context";
         return;
     }
 
@@ -479,7 +480,7 @@ void PWFrameBuffer::Private::initPw() {
 
     pwStream = createReceivingStream();
     if (!pwStream) {
-        qWarning() << "Failed to create PipeWire stream";
+        qCWarning(KRFB_FB_PIPEWIRE) << "Failed to create PipeWire stream";
         return;
     }
 #else
@@ -500,7 +501,7 @@ void PWFrameBuffer::Private::initPw() {
 #endif
 
     if (pw_thread_loop_start(pwMainLoop) < 0) {
-        qWarning() << "Failed to start main PipeWire loop";
+        qCWarning(KRFB_FB_PIPEWIRE) << "Failed to start main PipeWire loop";
         isValid = false;
     }
 }
@@ -549,7 +550,7 @@ void PWFrameBuffer::Private::onStateChanged(void *data, pw_remote_state /*old*/,
 
     switch (state) {
     case PW_REMOTE_STATE_ERROR:
-        qWarning() << "remote error: " << error;
+        qCWarning(KRFB_FB_PIPEWIRE) << "remote error: " << error;
         break;
     case PW_REMOTE_STATE_CONNECTED:
         d->pwStream = d->createReceivingStream();
@@ -576,7 +577,7 @@ void PWFrameBuffer::Private::onStreamStateChanged(void *data, pw_stream_state /*
 #if PW_CHECK_VERSION(0, 2, 90)
     switch (state) {
     case PW_STREAM_STATE_ERROR:
-        qWarning() << "pipewire stream error: " << error_message;
+        qCWarning(KRFB_FB_PIPEWIRE) << "pipewire stream error: " << error_message;
         break;
     case PW_STREAM_STATE_PAUSED:
             pw_stream_set_active(d->pwStream, true);
@@ -589,7 +590,7 @@ void PWFrameBuffer::Private::onStreamStateChanged(void *data, pw_stream_state /*
 #else
     switch (state) {
     case PW_STREAM_STATE_ERROR:
-        qWarning() << "pipewire stream error: " << error_message;
+        qCWarning(KRFB_FB_PIPEWIRE) << "pipewire stream error: " << error_message;
         break;
     case PW_STREAM_STATE_CONFIGURE:
         pw_stream_set_active(d->pwStream, true);
@@ -701,7 +702,7 @@ static void syncDmaBuf(int fd, uint64_t start_or_end)
         if (ret == -1 && errno == EINTR) {
             continue;
         } else if (ret == -1) {
-            qWarning() << "Failed to synchronize DMA buffer: " << strerror(errno);
+            qCWarning(KRFB_FB_PIPEWIRE) << "Failed to synchronize DMA buffer: " << strerror(errno);
             break;
         } else {
             break;
@@ -714,7 +715,7 @@ void PWFrameBuffer::Private::handleFrame(pw_buffer *pwBuffer)
     auto *spaBuffer = pwBuffer->buffer;
     void *src = spaBuffer->datas[0].data;
     if (!src && spaBuffer->datas->type != SPA_DATA_DmaBuf) {
-        qDebug() << "discarding null buffer";
+        qCDebug(KRFB_FB_PIPEWIRE) << "discarding null buffer";
         return;
     }
 
@@ -728,7 +729,7 @@ void PWFrameBuffer::Private::handleFrame(pw_buffer *pwBuffer)
             nullptr, spaBuffer->datas[0].maxsize + spaBuffer->datas[0].mapoffset,
             PROT_READ, MAP_PRIVATE, fd, 0);
         if (map == MAP_FAILED) {
-            qWarning() << "Failed to mmap the dmabuf: " << strerror(errno);
+            qCWarning(KRFB_FB_PIPEWIRE) << "Failed to mmap the dmabuf: " << strerror(errno);
             return;
         }
 
@@ -745,7 +746,7 @@ void PWFrameBuffer::Private::handleFrame(pw_buffer *pwBuffer)
             PROT_READ, MAP_PRIVATE, spaBuffer->datas->fd, 0));
 
         if (map == MAP_FAILED) {
-            qWarning() << "Failed to mmap the memory: " << strerror(errno);
+            qCWarning(KRFB_FB_PIPEWIRE) << "Failed to mmap the memory: " << strerror(errno);
             return;
         }
         src = SPA_MEMBER(map, spaBuffer->datas[0].mapoffset, uint8_t);
@@ -758,7 +759,7 @@ void PWFrameBuffer::Private::handleFrame(pw_buffer *pwBuffer)
 
     const qint32 srcStride = spaBuffer->datas[0].chunk->stride;
     if (srcStride != q->paddedWidth()) {
-        qWarning() << "Got buffer with stride different from screen stride" << srcStride << "!=" << q->paddedWidth();
+        qCWarning(KRFB_FB_PIPEWIRE) << "Got buffer with stride different from screen stride" << srcStride << "!=" << q->paddedWidth();
         return;
     }
 
@@ -837,7 +838,7 @@ pw_stream *PWFrameBuffer::Private::createReceivingStream()
 #else
     if (pw_stream_connect(stream, PW_DIRECTION_INPUT, nullptr, flags, params, 1) != 0) {
 #endif
-        qWarning() << "Could not connect receiving stream";
+        qCWarning(KRFB_FB_PIPEWIRE) << "Could not connect receiving stream";
         isValid = false;
     }
 
