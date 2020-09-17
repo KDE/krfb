@@ -76,6 +76,7 @@ Name[zh_HK]=Krfb
 Name[zh_TW]=桌面分享_Krfb
 GenericName=Desktop Sharing (VNC)
 GenericName[ca]=Compartició de l'escriptori (VNC)
+GenericName[el]=Κοινή χρήση επιφάνειας εργασίας (VNC)
 GenericName[es]=Escritorio compartido (VNC)
 GenericName[nl]=Bureaublad delen (VNC)
 GenericName[pt]=Partilha do Ecrã (VNC)
