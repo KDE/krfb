@@ -166,12 +166,12 @@ XCBFrameBuffer::XCBFrameBuffer(WId winid, QObject *parent):
         qreal scaleFactor = primaryScreen->devicePixelRatio();
         d->area = { primaryScreen->geometry().topLeft() * scaleFactor,
                     primaryScreen->geometry().bottomRight() * scaleFactor };
+
         qCDebug(KRFB_FB_XCB) << "xcb framebuffer: Primary screen: " << primaryScreen->name()
                  << ", geometry: " << primaryScreen->geometry()
                  << ", device scaling: " << scaleFactor
                  << ", native size: " << d->area
                  << ", depth: " << primaryScreen->depth();
-        //
     } else {
         qWarning() << "xcb framebuffer: ERROR: Failed to get application's primary screen info!";
         return;
