@@ -28,7 +28,9 @@
 
 #if PW_CHECK_VERSION(0, 2, 90)
 #include <spa/utils/result.h>
+#ifdef HAVE_LINUX_DMABUF_H
 #include <linux/dma-buf.h>
+#endif
 #include <sys/ioctl.h>
 #endif
 
@@ -691,6 +693,7 @@ void PWFrameBuffer::Private::onStreamProcess(void *data)
     pw_stream_queue_buffer(d->pwStream, buf);
 }
 
+#if PW_CHECK_VERSION(0, 2, 90) && defined(HAVE_LINUX_DMABUF_H)
 static void syncDmaBuf(int fd, uint64_t start_or_end)
 {
     struct dma_buf_sync sync = { 0 };
@@ -709,6 +712,7 @@ static void syncDmaBuf(int fd, uint64_t start_or_end)
         }
     }
 }
+#endif
 
 void PWFrameBuffer::Private::handleFrame(pw_buffer *pwBuffer)
 {
@@ -719,10 +723,18 @@ void PWFrameBuffer::Private::handleFrame(pw_buffer *pwBuffer)
         return;
     }
 
+#if PW_CHECK_VERSION(0, 2, 90)
+    if (spaBuffer->datas->type != SPA_DATA_DmaBuf) {
+        qDebug() << "discarding null buffer";
+        return;
+    }
+#endif
+
     const quint32 maxSize = spaBuffer->datas[0].maxsize;
 
     std::function<void()> cleanup;
 #if PW_CHECK_VERSION(0, 2, 90)
+#ifdef HAVE_LINUX_DMABUF_H
     if (spaBuffer->datas->type == SPA_DATA_DmaBuf) {
         const int fd = spaBuffer->datas[0].fd;
         auto map = mmap(
@@ -740,7 +752,9 @@ void PWFrameBuffer::Private::handleFrame(pw_buffer *pwBuffer)
             syncDmaBuf(fd, DMA_BUF_SYNC_END);
             munmap(map, spaBuffer->datas[0].maxsize + spaBuffer->datas[0].mapoffset);
         };
-    } else if (spaBuffer->datas->type == SPA_DATA_MemFd) {
+    } else
+#endif
+    if (spaBuffer->datas->type == SPA_DATA_MemFd) {
         uint8_t *map = static_cast<uint8_t*>(mmap(
             nullptr, spaBuffer->datas->maxsize + spaBuffer->datas->mapoffset,
             PROT_READ, MAP_PRIVATE, spaBuffer->datas->fd, 0));
