@@ -24,6 +24,12 @@ add_library(krfb_framebuffer_pw
     ${krfb_framebuffer_pw_SRCS}
 )
 
+
+check_include_file("linux/dma-buf.h" HAVE_LINUX_DMABUF_H)
+if (HAVE_LINUX_DMABUF_H)
+    target_compile_definitions(krfb_framebuffer_pw PRIVATE -DHAVE_LINUX_DMABUF_H)
+endif ()
+
 target_link_libraries (krfb_framebuffer_pw
                        Qt5::Core
                        Qt5::Gui
