@@ -718,14 +718,10 @@ void PWFrameBuffer::Private::handleFrame(pw_buffer *pwBuffer)
 {
     auto *spaBuffer = pwBuffer->buffer;
     void *src = spaBuffer->datas[0].data;
-    if (!src && spaBuffer->datas->type != SPA_DATA_DmaBuf) {
-        qCDebug(KRFB_FB_PIPEWIRE) << "discarding null buffer";
-        return;
-    }
 
 #if PW_CHECK_VERSION(0, 2, 90)
-    if (spaBuffer->datas->type != SPA_DATA_DmaBuf) {
-        qDebug() << "discarding null buffer";
+    if (!src && spaBuffer->datas->type != SPA_DATA_DmaBuf) {
+        qCDebug(KRFB_FB_PIPEWIRE)  << "discarding null buffer";
         return;
     }
 #endif
