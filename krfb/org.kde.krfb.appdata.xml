@@ -40,10 +40,13 @@
   <name xml:lang="zh-TW">Krfb</name>
   <summary>Share your desktop to another computer via VNC</summary>
   <summary xml:lang="ca">Comparteix l'escriptori amb un altre ordinador a través de VNC</summary>
+  <summary xml:lang="ca-valencia">Comparteix l'escriptori amb un altre ordinador a través de VNC</summary>
   <summary xml:lang="cs">Sdílejte své pracovní prostředí na jiný počítač pomocí VNC</summary>
   <summary xml:lang="el">Μοιραστείτε την επιφάνεια εργασίας σας με άλλον υπολογιστή μέσω VNC</summary>
+  <summary xml:lang="en-GB">Share your desktop to another computer via VNC</summary>
   <summary xml:lang="es">Compartir su escritorio con otro equipo usando VNC</summary>
   <summary xml:lang="fr">Partager votre bureau avec un autre ordinateur grâce à « VNC »</summary>
+  <summary xml:lang="it">Condividi il desktop con un altro computer tramite VNC</summary>
   <summary xml:lang="nl">Uw bureaublad delen naar een andere computer via VNC</summary>
   <summary xml:lang="pt">Partilhar o seu ecrã com outro computador por VNC</summary>
   <summary xml:lang="pt-BR">Compartilhar sua área de trabalho com outro computador via VNC</summary>
