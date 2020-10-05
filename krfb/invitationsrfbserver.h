@@ -52,6 +52,7 @@ public Q_SLOTS:
     void toggleUnattendedAccess(bool allow);
     void openKWallet();
     void closeKWallet();
+    void saveSecuritySettings();
 
 protected:
     InvitationsRfbServer();

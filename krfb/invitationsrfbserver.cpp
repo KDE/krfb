@@ -36,6 +36,9 @@
 #include <dnssd/publicservice.h>
 using KWallet::Wallet;
 
+// used for KWallet folder name
+static const QString s_krfbFolderName(QStringLiteral("krfb"));
+
 //static
 InvitationsRfbServer *InvitationsRfbServer::instance;
 
@@ -69,6 +72,9 @@ const QString& InvitationsRfbServer::desktopPassword() const
 void InvitationsRfbServer::setDesktopPassword(const QString& password)
 {
     m_desktopPassword = password;
+    // this is called from GUI every time desktop password is edited.
+    // make sure we save settings immediately each time
+    saveSecuritySettings();
 }
 
 const QString& InvitationsRfbServer::unattendedPassword() const
@@ -79,6 +85,9 @@ const QString& InvitationsRfbServer::unattendedPassword() const
 void InvitationsRfbServer::setUnattendedPassword(const QString& password)
 {
     m_unattendedPassword = password;
+    // this is called from GUI every time unattended password is edited.
+    // make sure we save settings immediately each time
+    saveSecuritySettings();
 }
 
 bool InvitationsRfbServer::allowUnattendedAccess() const
@@ -106,6 +115,9 @@ void InvitationsRfbServer::stop()
 void InvitationsRfbServer::toggleUnattendedAccess(bool allow)
 {
     m_allowUnattendedAccess = allow;
+    // this is called from GUI every time unattended access is toggled.
+    // make sure we save settings immediately each time
+    saveSecuritySettings();
 }
 
 InvitationsRfbServer::InvitationsRfbServer()
@@ -120,19 +132,11 @@ InvitationsRfbServer::InvitationsRfbServer()
 InvitationsRfbServer::~InvitationsRfbServer()
 {
     InvitationsRfbServer::stop();  // calling virtual funcs in destructor is bad
-
-    KConfigGroup krfbConfig(KSharedConfig::openConfig(), "Security");
-    krfbConfig.writeEntry("allowUnattendedAccess", m_allowUnattendedAccess);
-
+    saveSecuritySettings();
+    // ^^ also saves passwords in kwallet,
+    //    do it before closing kwallet
     if (!KrfbConfig::noWallet() && m_wallet) {
         closeKWallet();
-    } else {
-        krfbConfig.writeEntry("desktopPassword",
-                KStringHandler::obscure(m_desktopPassword));
-        krfbConfig.writeEntry("unattendedPassword",
-                KStringHandler::obscure(m_unattendedPassword));
-        krfbConfig.writeEntry("allowUnattendedAccess",
-                m_allowUnattendedAccess);
     }
 }
 
@@ -153,13 +157,6 @@ void InvitationsRfbServer::openKWallet()
 void InvitationsRfbServer::closeKWallet()
 {
     if (m_wallet && m_wallet->isOpen()) {
-        const QString krfbFolderName = QStringLiteral("krfb");
-        if ((m_wallet->currentFolder() == krfbFolderName) ||
-                ((m_wallet->hasFolder(krfbFolderName) || m_wallet->createFolder(krfbFolderName)) &&
-                m_wallet->setFolder(krfbFolderName)) ) {
-            m_wallet->writePassword(QStringLiteral("desktopSharingPassword"), m_desktopPassword);
-            m_wallet->writePassword(QStringLiteral("unattendedAccessPassword"), m_unattendedPassword);
-        }
         delete m_wallet; // closes the wallet
         m_wallet = nullptr;
     }
@@ -170,18 +167,15 @@ void InvitationsRfbServer::walletOpened(bool opened)
     QString desktopPassword;
     QString unattendedPassword;
     Q_ASSERT(m_wallet);
-    const QString krfbFolderName = QStringLiteral("krfb");
-    if( opened &&
-            ( m_wallet->hasFolder(krfbFolderName) || m_wallet->createFolder(krfbFolderName) ) &&
-            m_wallet->setFolder(krfbFolderName) ) {
 
-        if(m_wallet->readPassword(QStringLiteral("desktopSharingPassword"), desktopPassword)==0 &&
+    if (opened && m_wallet->hasFolder(s_krfbFolderName) && m_wallet->setFolder(s_krfbFolderName) ) {
+        if (m_wallet->readPassword(QStringLiteral("desktopSharingPassword"), desktopPassword) == 0 &&
                 !desktopPassword.isEmpty()) {
             m_desktopPassword = desktopPassword;
             emit passwordChanged(m_desktopPassword);
         }
 
-        if(m_wallet->readPassword(QStringLiteral("unattendedAccessPassword"), unattendedPassword)==0 &&
+        if(m_wallet->readPassword(QStringLiteral("unattendedAccessPassword"), unattendedPassword) == 0 &&
                 !unattendedPassword.isEmpty()) {
             m_unattendedPassword = unattendedPassword;
         }
@@ -235,4 +229,32 @@ QString InvitationsRfbServer::readableRandomString(int length)
         length--;
     }
     return str;
+}
+
+// one place to deal with all security configuration
+void InvitationsRfbServer::saveSecuritySettings()
+{
+    KConfigGroup secConfigGroup(KSharedConfig::openConfig(), "Security");
+    secConfigGroup.writeEntry("allowUnattendedAccess", m_allowUnattendedAccess);
+    if (KrfbConfig::noWallet()) {
+        // save passwords in config file only if not using kwallet integration
+        secConfigGroup.writeEntry("desktopPassword", KStringHandler::obscure(m_desktopPassword));
+        secConfigGroup.writeEntry("unattendedPassword", KStringHandler::obscure(m_unattendedPassword));
+    } else {
+        // using KWallet, erase possibly stored passwords from krfbrc file
+        secConfigGroup.deleteEntry("desktopPassword");
+        secConfigGroup.deleteEntry("unattendedPassword");
+        // update passwords in kwallet
+        if (m_wallet && m_wallet->isOpen()) {
+            if (!m_wallet->hasFolder(s_krfbFolderName)) {
+                m_wallet->createFolder(s_krfbFolderName);
+            }
+            if (m_wallet->currentFolder() != s_krfbFolderName) {
+                m_wallet->setFolder(s_krfbFolderName);
+            }
+            m_wallet->writePassword(QStringLiteral("desktopSharingPassword"), m_desktopPassword);
+            m_wallet->writePassword(QStringLiteral("unattendedAccessPassword"), m_unattendedPassword);
+        }
+    }
+    KrfbConfig::self()->save();
 }
