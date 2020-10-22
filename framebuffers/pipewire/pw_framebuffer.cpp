@@ -13,7 +13,6 @@
 #include <cstring>
 
 // Qt
-#include <QX11Info>
 #include <QCoreApplication>
 #include <QGuiApplication>
 #include <QScreen>
