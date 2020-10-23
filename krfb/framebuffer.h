@@ -51,7 +51,7 @@ Q_SIGNALS:
 
 protected:
     WId win;
-    char *fb;
+    char *fb = nullptr;
     QList<QRect> tiles;
 
 private:

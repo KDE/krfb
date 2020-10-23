@@ -44,18 +44,18 @@ public:
     EventData();
 
     //keyboard
-    Display *dpy;
-    signed char modifiers[0x100];
-    KeyCode keycodes[0x100];
-    KeyCode leftShiftCode;
-    KeyCode rightShiftCode;
-    KeyCode altGrCode;
-    char modifierState;
+    Display *dpy = nullptr;
+    signed char modifiers[0x100] = {};
+    KeyCode keycodes[0x100] = {};
+    KeyCode leftShiftCode = 0;
+    KeyCode rightShiftCode = 0;
+    KeyCode altGrCode = 0;
+    char modifierState = 0;
 
     //mouse
-    int buttonMask;
-    int x;
-    int y;
+    int buttonMask = 0;
+    int x = 0;
+    int y = 0;
 
 private:
     void init();

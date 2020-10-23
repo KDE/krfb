@@ -41,7 +41,7 @@ struct PendingInvitationsRfbClient::Private
     {}
 
     rfbClientPtr client;
-    QSocketNotifier *notifier;
+    QSocketNotifier *notifier = nullptr;
     bool askOnConnect;
 };
 

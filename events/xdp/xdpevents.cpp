@@ -36,9 +36,9 @@ public:
     EventData();
 
     //mouse
-    int buttonMask;
-    int x;
-    int y;
+    int buttonMask = 0;
+    int x = 0;
+    int y = 0;
 
     QScopedPointer<OrgFreedesktopPortalRemoteDesktopInterface> dbusXdpRemoteDesktopService;
 
@@ -55,8 +55,6 @@ EventData::EventData()
 
 void EventData::init()
 {
-    buttonMask = 0;
-
     dbusXdpRemoteDesktopService.reset(new OrgFreedesktopPortalRemoteDesktopInterface(QLatin1String("org.freedesktop.portal.Desktop"),
                                       QLatin1String("/org/freedesktop/portal/desktop"), QDBusConnection::sessionBus()));
 }

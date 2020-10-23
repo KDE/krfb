@@ -63,11 +63,11 @@ private Q_SLOTS:
     void walletOpened(bool);
 
 private:
-    KDNSSD::PublicService *m_publicService;
+    KDNSSD::PublicService *m_publicService = nullptr;
     bool m_allowUnattendedAccess;
     QString m_desktopPassword;
     QString m_unattendedPassword;
-    KWallet::Wallet *m_wallet;
+    KWallet::Wallet *m_wallet = nullptr;
 
     QString readableRandomString(int);
     Q_DISABLE_COPY(InvitationsRfbServer)

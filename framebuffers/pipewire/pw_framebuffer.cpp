@@ -176,10 +176,10 @@ private:
     struct {
         quint32 width;
         quint32 height;
-    } screenGeometry;
+    } screenGeometry = {};
 
     // Allowed devices
-    uint devices;
+    uint devices = 0;
 
     // sanity indicator
     bool isValid = true;
