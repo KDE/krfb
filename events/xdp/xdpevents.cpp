@@ -55,8 +55,8 @@ EventData::EventData()
 
 void EventData::init()
 {
-    dbusXdpRemoteDesktopService.reset(new OrgFreedesktopPortalRemoteDesktopInterface(QLatin1String("org.freedesktop.portal.Desktop"),
-                                      QLatin1String("/org/freedesktop/portal/desktop"), QDBusConnection::sessionBus()));
+    dbusXdpRemoteDesktopService.reset(new OrgFreedesktopPortalRemoteDesktopInterface(QStringLiteral("org.freedesktop.portal.Desktop"),
+                                      QStringLiteral("/org/freedesktop/portal/desktop"), QDBusConnection::sessionBus()));
 }
 
 void XdpEventHandler::handleKeyboard(bool down, rfbKeySym keySym)
@@ -69,8 +69,8 @@ void XdpEventHandler::handleKeyboard(bool down, rfbKeySym keySym)
 
 void XdpEventHandler::handlePointer(int buttonMask, int x, int y)
 {
-    const uint streamNodeId = frameBuffer()->customProperty(QLatin1String("stream_node_id")).toUInt();
-    const QDBusObjectPath sessionHandle = frameBuffer()->customProperty(QLatin1String("session_handle")).value<QDBusObjectPath>();
+    const uint streamNodeId = frameBuffer()->customProperty(QStringLiteral("stream_node_id")).toUInt();
+    const QDBusObjectPath sessionHandle = frameBuffer()->customProperty(QStringLiteral("session_handle")).value<QDBusObjectPath>();
 
     if (streamNodeId == 0 || sessionHandle.path().isEmpty()) {
         return;

@@ -215,11 +215,11 @@ PWFrameBuffer::Private::Private(PWFrameBuffer *q) : q(q)
 void PWFrameBuffer::Private::initDbus()
 {
     qInfo() << "Initializing D-Bus connectivity with XDG Desktop Portal";
-    dbusXdpScreenCastService.reset(new OrgFreedesktopPortalScreenCastInterface(QLatin1String("org.freedesktop.portal.Desktop"),
-                                                                     QLatin1String("/org/freedesktop/portal/desktop"),
+    dbusXdpScreenCastService.reset(new OrgFreedesktopPortalScreenCastInterface(QStringLiteral("org.freedesktop.portal.Desktop"),
+                                                                     QStringLiteral("/org/freedesktop/portal/desktop"),
                                                                      QDBusConnection::sessionBus()));
-    dbusXdpRemoteDesktopService.reset(new OrgFreedesktopPortalRemoteDesktopInterface(QLatin1String("org.freedesktop.portal.Desktop"),
-                                                                     QLatin1String("/org/freedesktop/portal/desktop"),
+    dbusXdpRemoteDesktopService.reset(new OrgFreedesktopPortalRemoteDesktopInterface(QStringLiteral("org.freedesktop.portal.Desktop"),
+                                                                     QStringLiteral("/org/freedesktop/portal/desktop"),
                                                                      QDBusConnection::sessionBus()));
     auto version = dbusXdpScreenCastService->version();
     if (version < MIN_SUPPORTED_XDP_KDE_SC_VERSION) {
@@ -231,11 +231,11 @@ void PWFrameBuffer::Private::initDbus()
     // create session
     auto sessionParameters = QVariantMap {
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
-        { QLatin1String("session_handle_token"), QStringLiteral("krfb%1").arg(QRandomGenerator::global()->generate()) },
-        { QLatin1String("handle_token"), QStringLiteral("krfb%1").arg(QRandomGenerator::global()->generate()) }
+        { QStringLiteral("session_handle_token"), QStringLiteral("krfb%1").arg(QRandomGenerator::global()->generate()) },
+        { QStringLiteral("handle_token"), QStringLiteral("krfb%1").arg(QRandomGenerator::global()->generate()) }
 #else
-        { QLatin1String("session_handle_token"), QStringLiteral("krfb%1").arg(qrand()) },
-        { QLatin1String("handle_token"), QStringLiteral("krfb%1").arg(qrand()) }
+        { QStringLiteral("session_handle_token"), QStringLiteral("krfb%1").arg(qrand()) },
+        { QStringLiteral("handle_token"), QStringLiteral("krfb%1").arg(qrand()) }
 #endif
     };
     auto sessionReply = dbusXdpRemoteDesktopService->CreateSession(sessionParameters);
@@ -249,8 +249,8 @@ void PWFrameBuffer::Private::initDbus()
     qInfo() << "DBus session created: " << sessionReply.value().path();
     QDBusConnection::sessionBus().connect(QString(),
                                           sessionReply.value().path(),
-                                          QLatin1String("org.freedesktop.portal.Request"),
-                                          QLatin1String("Response"),
+                                          QStringLiteral("org.freedesktop.portal.Request"),
+                                          QStringLiteral("Response"),
                                           this->q,
                                           SLOT(handleXdpSessionCreated(uint, QVariantMap)));
 }
@@ -275,16 +275,16 @@ void PWFrameBuffer::Private::handleSessionCreated(quint32 &code, QVariantMap &re
         return;
     }
 
-    sessionPath = QDBusObjectPath(results.value(QLatin1String("session_handle")).toString());
+    sessionPath = QDBusObjectPath(results.value(QStringLiteral("session_handle")).toString());
 
     // select sources for the session
     auto selectionOptions = QVariantMap {
         // We have to specify it's an uint, otherwise xdg-desktop-portal will not forward it to backend implementation
-        { QLatin1String("types"), QVariant::fromValue<uint>(7) }, // request all (KeyBoard, Pointer, TouchScreen)
+        { QStringLiteral("types"), QVariant::fromValue<uint>(7) }, // request all (KeyBoard, Pointer, TouchScreen)
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
-        { QLatin1String("handle_token"), QStringLiteral("krfb%1").arg(QRandomGenerator::global()->generate()) }
+        { QStringLiteral("handle_token"), QStringLiteral("krfb%1").arg(QRandomGenerator::global()->generate()) }
 #else
-        { QLatin1String("handle_token"), QStringLiteral("krfb%1").arg(qrand()) }
+        { QStringLiteral("handle_token"), QStringLiteral("krfb%1").arg(qrand()) }
 #endif
     };
     auto selectorReply = dbusXdpRemoteDesktopService->SelectDevices(sessionPath, selectionOptions);
@@ -296,8 +296,8 @@ void PWFrameBuffer::Private::handleSessionCreated(quint32 &code, QVariantMap &re
     }
     QDBusConnection::sessionBus().connect(QString(),
                                           selectorReply.value().path(),
-                                          QLatin1String("org.freedesktop.portal.Request"),
-                                          QLatin1String("Response"),
+                                          QStringLiteral("org.freedesktop.portal.Request"),
+                                          QStringLiteral("Response"),
                                           this->q,
                                           SLOT(handleXdpDevicesSelected(uint, QVariantMap)));
 }
@@ -324,12 +324,12 @@ void PWFrameBuffer::Private::handleDevicesSelected(quint32 &code, QVariantMap &r
 
     // select sources for the session
     auto selectionOptions = QVariantMap {
-        { QLatin1String("types"), QVariant::fromValue<uint>(1) }, // only MONITOR is supported
-        { QLatin1String("multiple"), false },
+        { QStringLiteral("types"), QVariant::fromValue<uint>(1) }, // only MONITOR is supported
+        { QStringLiteral("multiple"), false },
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
-        { QLatin1String("handle_token"), QStringLiteral("krfb%1").arg(QRandomGenerator::global()->generate()) }
+        { QStringLiteral("handle_token"), QStringLiteral("krfb%1").arg(QRandomGenerator::global()->generate()) }
 #else
-        { QLatin1String("handle_token"), QStringLiteral("krfb%1").arg(qrand()) }
+        { QStringLiteral("handle_token"), QStringLiteral("krfb%1").arg(qrand()) }
 #endif
     };
     auto selectorReply = dbusXdpScreenCastService->SelectSources(sessionPath, selectionOptions);
@@ -341,8 +341,8 @@ void PWFrameBuffer::Private::handleDevicesSelected(quint32 &code, QVariantMap &r
     }
     QDBusConnection::sessionBus().connect(QString(),
                                           selectorReply.value().path(),
-                                          QLatin1String("org.freedesktop.portal.Request"),
-                                          QLatin1String("Response"),
+                                          QStringLiteral("org.freedesktop.portal.Request"),
+                                          QStringLiteral("Response"),
                                           this->q,
                                           SLOT(handleXdpSourcesSelected(uint, QVariantMap)));
 }
@@ -371,17 +371,17 @@ void PWFrameBuffer::Private::handleSourcesSelected(quint32 &code, QVariantMap &)
     // start session
     auto startParameters = QVariantMap {
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
-        { QLatin1String("handle_token"), QStringLiteral("krfb%1").arg(QRandomGenerator::global()->generate()) }
+        { QStringLiteral("handle_token"), QStringLiteral("krfb%1").arg(QRandomGenerator::global()->generate()) }
 #else
-        { QLatin1String("handle_token"), QStringLiteral("krfb%1").arg(qrand()) }
+        { QStringLiteral("handle_token"), QStringLiteral("krfb%1").arg(qrand()) }
 #endif
     };
     auto startReply = dbusXdpRemoteDesktopService->Start(sessionPath, QString(), startParameters);
     startReply.waitForFinished();
     QDBusConnection::sessionBus().connect(QString(),
                                           startReply.value().path(),
-                                          QLatin1String("org.freedesktop.portal.Request"),
-                                          QLatin1String("Response"),
+                                          QStringLiteral("org.freedesktop.portal.Request"),
+                                          QStringLiteral("Response"),
                                           this->q,
                                           SLOT(handleXdpRemoteDesktopStarted(uint, QVariantMap)));
 }
@@ -408,7 +408,7 @@ void PWFrameBuffer::Private::handleRemoteDesktopStarted(quint32 &code, QVariantM
     }
 
     // there should be only one stream
-    Streams streams = qdbus_cast<Streams>(results.value(QLatin1String("streams")));
+    Streams streams = qdbus_cast<Streams>(results.value(QStringLiteral("streams")));
     if (streams.isEmpty()) {
         // maybe we should check deeper with qdbus_cast but this suffices for now
         qCWarning(KRFB_FB_PIPEWIRE) << "Failed to get screencast streams";
@@ -431,11 +431,11 @@ void PWFrameBuffer::Private::handleRemoteDesktopStarted(quint32 &code, QVariantM
         return;
     }
 
-    QSize streamResolution = qdbus_cast<QSize>(streams.first().map.value(QLatin1String("size")));
+    QSize streamResolution = qdbus_cast<QSize>(streams.first().map.value(QStringLiteral("size")));
     screenGeometry.width = streamResolution.width();
     screenGeometry.height = streamResolution.height();
 
-    devices = results.value(QLatin1String("types")).toUInt();
+    devices = results.value(QStringLiteral("types")).toUInt();
 
     pwStreamNodeId = streams.first().nodeId;
 
