@@ -84,7 +84,7 @@ void FrameBufferManager::loadPlugins()
             qCDebug(KRFB) << "found plugin at " << data.fileName();
         }
 
-        FrameBufferPlugin *plugin = factory->create<FrameBufferPlugin>(this);
+        auto plugin = factory->create<FrameBufferPlugin>(this);
         if (plugin) {
             m_plugins.insert(data.pluginId(), plugin);
             qCDebug(KRFB) << "Loaded plugin with name " << data.pluginId();

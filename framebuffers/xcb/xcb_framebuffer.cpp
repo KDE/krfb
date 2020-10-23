@@ -105,7 +105,7 @@ bool KrfbXCBEventFilter::nativeEventFilter(const QByteArray &eventType,
     if (xdamageBaseEvent == 0) return false;  // no xdamage extension
 
     if (eventType == "xcb_generic_event_t") {
-        xcb_generic_event_t* ev = static_cast<xcb_generic_event_t *>(message);
+        auto ev = static_cast<xcb_generic_event_t *>(message);
         if ((ev->response_type & 0x7F) == (xdamageBaseEvent + XCB_DAMAGE_NOTIFY)) {
             // this is xdamage notification
             this->fb_owner->handleXDamageNotify(ev);
@@ -682,7 +682,7 @@ void XCBFrameBuffer::stopMonitor() {
 
 
 void XCBFrameBuffer::handleXDamageNotify(xcb_generic_event_t *xevent) {
-    xcb_damage_notify_event_t *xdevt = (xcb_damage_notify_event_t *)xevent;
+    auto xdevt = (xcb_damage_notify_event_t *)xevent;
 
     QRect r((int)xdevt->area.x,     (int)xdevt->area.y,
             (int)xdevt->area.width, (int)xdevt->area.height);

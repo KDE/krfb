@@ -35,7 +35,7 @@ QString peerAddress(int sock)
 
     if (getpeername(sock, &sa, &salen) == 0) {
         if (sa.sa_family == AF_INET) {
-            struct sockaddr_in *si = (struct sockaddr_in *)&sa;
+            auto si = (struct sockaddr_in *)&sa;
             return QString::fromLatin1(inet_ntoa(si->sin_addr));
         }
 
@@ -58,7 +58,7 @@ unsigned short peerPort(int sock)
     socklen_t salen = sizeof(struct sockaddr);
 
     if (getpeername(sock, &sa, &salen) == 0) {
-        struct sockaddr_in *si = (struct sockaddr_in *)&sa;
+        auto si = (struct sockaddr_in *)&sa;
         return ntohs(si->sin_port);
     }
 
@@ -67,14 +67,13 @@ unsigned short peerPort(int sock)
 
 QString localAddress(int sock)
 {
-
     const int ADDR_SIZE = 50;
-    struct sockaddr sa;
+    struct sockaddr sa{};
     socklen_t salen = sizeof(struct sockaddr);
 
     if (getsockname(sock, &sa, &salen) == 0) {
         if (sa.sa_family == AF_INET) {
-            struct sockaddr_in *si = (struct sockaddr_in *)&sa;
+            auto si = (struct sockaddr_in *)&sa;
             return QString::fromLatin1(inet_ntoa(si->sin_addr));
         }
 
@@ -97,7 +96,7 @@ unsigned short localPort(int sock)
     socklen_t salen = sizeof(struct sockaddr);
 
     if (getsockname(sock, &sa, &salen) == 0) {
-        struct sockaddr_in *si = (struct sockaddr_in *)&sa;
+        auto si = (struct sockaddr_in *)&sa;
         return ntohs(si->sin_port);
     }
 

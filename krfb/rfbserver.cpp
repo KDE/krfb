@@ -253,7 +253,7 @@ void RfbServer::pendingClientFinished(RfbClient *client)
 rfbNewClientAction RfbServer::newClientHook(rfbClientPtr cl)
 {
     //qDebug() << "New client";
-    RfbServer *server = static_cast<RfbServer*>(cl->screen->screenData);
+    auto server = static_cast<RfbServer*>(cl->screen->screenData);
 
     PendingRfbClient *pendingClient = server->newClient(cl);
     connect(pendingClient, &PendingRfbClient::finished,
@@ -266,7 +266,7 @@ rfbNewClientAction RfbServer::newClientHook(rfbClientPtr cl)
 void RfbServer::clientGoneHook(rfbClientPtr cl)
 {
     //qDebug() << "client gone";
-    RfbClient *client = static_cast<RfbClient*>(cl->clientData);
+    auto client = static_cast<RfbClient*>(cl->clientData);
 
     RfbServerManager::instance()->removeClient(client);
     client->deleteLater();
@@ -275,7 +275,7 @@ void RfbServer::clientGoneHook(rfbClientPtr cl)
 //static
 rfbBool RfbServer::passwordCheck(rfbClientPtr cl, const char *encryptedPassword, int len)
 {
-    PendingRfbClient *client = static_cast<PendingRfbClient*>(cl->clientData);
+    auto client = static_cast<PendingRfbClient*>(cl->clientData);
     Q_ASSERT(client);
     return client->checkPassword(QByteArray::fromRawData(encryptedPassword, len));
 }
@@ -283,14 +283,14 @@ rfbBool RfbServer::passwordCheck(rfbClientPtr cl, const char *encryptedPassword,
 //static
 void RfbServer::keyboardHook(rfbBool down, rfbKeySym keySym, rfbClientPtr cl)
 {
-    RfbClient *client = static_cast<RfbClient*>(cl->clientData);
+    auto client = static_cast<RfbClient*>(cl->clientData);
     client->handleKeyboardEvent(down ? true : false, keySym);
 }
 
 //static
 void RfbServer::pointerHook(int bm, int x, int y, rfbClientPtr cl)
 {
-    RfbClient *client = static_cast<RfbClient*>(cl->clientData);
+    auto client = static_cast<RfbClient*>(cl->clientData);
     client->handleMouseEvent(bm, x, y);
 }
 

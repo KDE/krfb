@@ -85,7 +85,7 @@ void EventsManager::loadPlugins()
             qCDebug(KRFB) << "found plugin at " << data.fileName();
         }
 
-        EventsPlugin *plugin = factory->create<EventsPlugin>(this);
+        auto plugin = factory->create<EventsPlugin>(this);
         if (plugin) {
             m_plugins.insert(data.pluginId(), plugin);
             qCDebug(KRFB) << "Loaded plugin with name " << data.pluginId();

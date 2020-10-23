@@ -547,7 +547,7 @@ void PWFrameBuffer::Private::onStateChanged(void *data, pw_remote_state /*old*/,
 {
     qInfo() << "remote state: " << pw_remote_state_as_string(state);
 
-    PWFrameBuffer::Private *d = static_cast<PWFrameBuffer::Private*>(data);
+    auto d = static_cast<PWFrameBuffer::Private*>(data);
 
     switch (state) {
     case PW_REMOTE_STATE_ERROR:
