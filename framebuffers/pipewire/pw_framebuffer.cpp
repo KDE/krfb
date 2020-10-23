@@ -507,7 +507,7 @@ void PWFrameBuffer::Private::initPw() {
     }
 }
 
-#if !PW_CHECK_VERSION(0, 2, 9)
+#if !PW_CHECK_VERSION(0, 2, 90)
 /**
  * @brief PWFrameBuffer::Private::initializePwTypes - helper method to initialize and map all needed
  *        Pipewire types from core to type structure.
