@@ -32,7 +32,7 @@
 #include <qwindowdefs.h>
 #include <QX11Info>
 
-#include <signal.h>
+#include <csignal>
 #include <X11/extensions/XTest.h>
 #include <QCommandLineParser>
 #include <QCommandLineOption>

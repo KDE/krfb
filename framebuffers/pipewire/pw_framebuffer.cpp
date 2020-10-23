@@ -39,7 +39,7 @@
 
 #include <pipewire/pipewire.h>
 
-#include <limits.h>
+#include <climits>
 
 #include "pw_framebuffer.h"
 #include "xdp_dbus_screencast_interface.h"
