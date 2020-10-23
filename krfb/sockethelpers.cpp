@@ -28,9 +28,8 @@
 
 QString peerAddress(int sock)
 {
-
     const int ADDR_SIZE = 50;
-    struct sockaddr sa;
+    struct sockaddr sa = {};
     socklen_t salen = sizeof(struct sockaddr);
 
     if (getpeername(sock, &sa, &salen) == 0) {
@@ -53,8 +52,7 @@ QString peerAddress(int sock)
 
 unsigned short peerPort(int sock)
 {
-
-    struct sockaddr sa;
+    struct sockaddr sa = {};
     socklen_t salen = sizeof(struct sockaddr);
 
     if (getpeername(sock, &sa, &salen) == 0) {
@@ -68,7 +66,7 @@ unsigned short peerPort(int sock)
 QString localAddress(int sock)
 {
     const int ADDR_SIZE = 50;
-    struct sockaddr sa{};
+    struct sockaddr sa = {};
     socklen_t salen = sizeof(struct sockaddr);
 
     if (getsockname(sock, &sa, &salen) == 0) {
@@ -91,8 +89,7 @@ QString localAddress(int sock)
 
 unsigned short localPort(int sock)
 {
-
-    struct sockaddr sa;
+    struct sockaddr sa = {};
     socklen_t salen = sizeof(struct sockaddr);
 
     if (getsockname(sock, &sa, &salen) == 0) {
