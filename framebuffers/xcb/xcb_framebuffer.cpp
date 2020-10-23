@@ -483,10 +483,10 @@ void XCBFrameBuffer::cleanupRects() {
         QRect ri = r.intersected(d->area);
 
         if (tiles.size() > 0) {
-            for (int i = 0; i < tiles.size(); i++) {
-                // if current rect has intersection with tiles[i], unite them
-                if (ri.intersects(tiles[i])) {
-                    tiles[i] |= ri;
+            for (auto &tile : tiles) {
+                // if current rect has intersection with tile, unite them
+                if (ri.intersects(tile)) {
+                    tile |= ri;
                     inserted = true;
                     break;
                 }
@@ -504,25 +504,25 @@ void XCBFrameBuffer::cleanupRects() {
 
     // increase all rectangles size by 30 pixels each side.
     // limit coordinates to primary monitor boundaries.
-    for (int i = 0; i < tiles.size(); i++) {
-        tiles[i].adjust(-30, -30, 30, 30);
-        if (tiles[i].top() < d->area.top()) {
-            tiles[i].setTop(d->area.top());
+    for (auto &tile : tiles) {
+        tile.adjust(-30, -30, 30, 30);
+        if (tile.top() < d->area.top()) {
+            tile.setTop(d->area.top());
         }
-        if (tiles[i].bottom() > d->area.bottom()) {
-            tiles[i].setBottom(d->area.bottom());
+        if (tile.bottom() > d->area.bottom()) {
+            tile.setBottom(d->area.bottom());
         }
         //
-        if (tiles[i].left() < d->area.left()) {
-            tiles[i].setLeft(d->area.left());
+        if (tile.left() < d->area.left()) {
+            tile.setLeft(d->area.left());
         }
-        if (tiles[i].right() > d->area.right()) {
-            tiles[i].setRight(d->area.right());
+        if (tile.right() > d->area.right()) {
+            tile.setRight(d->area.right());
         }
         // move update rects so that they are positioned relative to
         //   framebuffer image, not whole screen
-        tiles[i].moveTo(tiles[i].left() - d->area.left(),
-                        tiles[i].top() - d->area.top());
+        tile.moveTo(tile.left() - d->area.left(),
+                    tile.top() - d->area.top());
     }
 }
 
