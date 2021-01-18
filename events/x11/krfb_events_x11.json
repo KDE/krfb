@@ -14,6 +14,7 @@
         "Description[fi]": "KRfb:n X11 XFakeInput -pohjainen tapahtumakäsittelijä",
         "Description[fr]": "Gestionnaire d'évènements utilisant XFakeInput de X11 pour KRfb",
         "Description[gl]": "Xestor de eventos para KRfb baseado no XFakeInput de X11",
+        "Description[ia]": "Maneator de evento de X11 basate sur XFakeInput per KRfb",
         "Description[it]": "Gestore eventi basato su XFakeInput di X11 per KRfb",
         "Description[ko]": "X11 XFakeInput 기반 KRfb 이벤트 핸들러",
         "Description[nl]": "Op X11 XFakeInput gebaseerde behandelaar van gebeurtenis voor KRfb",
