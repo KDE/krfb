@@ -49,5 +49,5 @@ target_link_libraries (krfb_framebuffer_pw
 )
 
 install (TARGETS krfb_framebuffer_pw
-         DESTINATION ${PLUGIN_INSTALL_DIR}/krfb
+         DESTINATION ${KDE_INSTALL_PLUGINDIR}/krfb
 )

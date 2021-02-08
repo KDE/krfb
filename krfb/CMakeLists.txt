@@ -36,14 +36,14 @@ set_target_properties (krfbprivate PROPERTIES
 )
 
 install (TARGETS krfbprivate
-         ${INSTALL_TARGETS_DEFAULT_ARGS}
+         ${KDE_INSTALL_TARGETS_DEFAULT_ARGS}
          LIBRARY NAMELINK_SKIP
 )
 
 install (FILES
          krfb-framebuffer.desktop
          krfb-events.desktop
-         DESTINATION ${SERVICETYPES_INSTALL_DIR}
+         DESTINATION ${KDE_INSTALL_KSERVICETYPES5DIR}
 )
 
 #####################################
@@ -120,13 +120,13 @@ if (X11_XTest_FOUND)
 endif (X11_XTest_FOUND)
 
 install (TARGETS krfb
-         ${INSTALL_TARGETS_DEFAULT_ARGS}
+         ${KDE_INSTALL_TARGETS_DEFAULT_ARGS}
 )
 
 ########### install files ###############
 
 install (PROGRAMS org.kde.krfb.desktop
-         DESTINATION ${XDG_APPS_INSTALL_DIR}
+         DESTINATION ${KDE_INSTALL_APPDIR}
 )
 
 install(FILES org.kde.krfb.appdata.xml
@@ -134,6 +134,6 @@ install(FILES org.kde.krfb.appdata.xml
 )
 
 install (FILES krfb.notifyrc
-         DESTINATION ${DATA_INSTALL_DIR}/krfb
+         DESTINATION ${KDE_INSTALL_DATADIR}/krfb
 )
 

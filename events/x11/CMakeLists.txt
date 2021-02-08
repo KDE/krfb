@@ -15,4 +15,4 @@ target_link_libraries (krfb_events_x11
                        krfbprivate
 )
 
-install (TARGETS krfb_events_x11 DESTINATION ${PLUGIN_INSTALL_DIR}/krfb)
+install (TARGETS krfb_events_x11 DESTINATION ${KDE_INSTALL_PLUGINDIR}/krfb)
