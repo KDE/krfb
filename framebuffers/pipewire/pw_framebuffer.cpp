@@ -777,7 +777,14 @@ void PWFrameBuffer::Private::handleFrame(pw_buffer *pwBuffer)
     cleanup();
 
 #if PW_CHECK_VERSION(0, 2, 90)
-    if (videoFormat->format != SPA_VIDEO_FORMAT_RGB) {
+    if (videoFormat->format == SPA_VIDEO_FORMAT_BGRA || videoFormat->format == SPA_VIDEO_FORMAT_BGRx) {
+        for (uint y = 0; y < videoFormat->size.height; y++) {
+            for (uint x = 0; x < videoFormat->size.width; x++) {
+                uint offset = y * spaBuffer->datas->chunk->stride + x * 4;
+                std::swap(q->fb[offset], q->fb[offset + 2]);
+            }
+        }
+    } else if (videoFormat->format != SPA_VIDEO_FORMAT_RGB) {
         const QImage::Format format = videoFormat->format == SPA_VIDEO_FORMAT_BGR  ? QImage::Format_BGR888
                                     : videoFormat->format == SPA_VIDEO_FORMAT_RGBx ? QImage::Format_RGBX8888
                                                                                    : QImage::Format_RGB32;
