@@ -75,9 +75,6 @@
         "Name[x-test]": "xxX11 Framebuffer for KRfbxx",
         "Name[zh_CN]": "XRfb 的 X11 帧缓冲",
         "Name[zh_TW]": "KRfb 的 X11 Framebuffer",
-        "ServiceTypes": [
-            "krfb/framebuffer"
-        ],
         "Version": "0.1",
         "Website": "https://www.kde.org"
     }

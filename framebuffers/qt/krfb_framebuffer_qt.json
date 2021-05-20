@@ -75,9 +75,6 @@
         "Name[x-test]": "xxQt Framebuffer for KRfbxx",
         "Name[zh_CN]": "KRfb 的 Qt 帧缓冲",
         "Name[zh_TW]": "Krfb 的 Qt Framebuffer",
-        "ServiceTypes": [
-            "krfb/framebuffer"
-        ],
         "Version": "0.1",
         "Website": "https://www.kde.org"
     }

@@ -60,9 +60,6 @@
         "Name[x-test]": "xxXdg-desktop-portal Event handler for KRfbxx",
         "Name[zh_CN]": "xdg-desktop-portal KRfb 事件处理器",
         "Name[zh_TW]": "KRfb 的 Xdg-desktop-portal 事件處理器",
-        "ServiceTypes": [
-            "krfb/events"
-        ],
         "Version": "0.1",
         "Website": "http://www.kde.org"
     }

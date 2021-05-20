@@ -60,9 +60,6 @@
         "Name[x-test]": "xxX11 Event handler for KRfbxx",
         "Name[zh_CN]": "X11 KRfb 事件处理器",
         "Name[zh_TW]": "KRfb 的 X11 事件處理器",
-        "ServiceTypes": [
-            "krfb/events"
-        ],
         "Version": "0.1",
         "Website": "http://www.kde.org"
     }

@@ -64,9 +64,6 @@
         "Name[x-test]": "xxPipeWire Framebuffer for KRfbxx",
         "Name[zh_CN]": "KRfb 的 PipeWire 帧缓冲机制",
         "Name[zh_TW]": "KRfb 的 PipeWire Framebuffer",
-        "ServiceTypes": [
-            "krfb/framebuffer"
-        ],
         "Version": "0.1",
         "Website": "http://www.kde.org"
     }
