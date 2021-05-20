@@ -63,9 +63,7 @@ void FrameBufferManager::loadPlugins()
 {
     //qDebug();
 
-    const QVector<KPluginMetaData> plugins = KPluginLoader::findPlugins(QStringLiteral("krfb"), [](const KPluginMetaData & md) {
-            return md.serviceTypes().contains(QStringLiteral("krfb/framebuffer"));
-        });
+    const QVector<KPluginMetaData> plugins = KPluginLoader::findPlugins(QStringLiteral("krfb/framebuffer"));
 
     QVectorIterator<KPluginMetaData> i(plugins);
     i.toBack();

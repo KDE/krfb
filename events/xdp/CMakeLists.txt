@@ -23,5 +23,5 @@ target_link_libraries (krfb_events_xdp
 )
 
 install (TARGETS krfb_events_xdp
-         DESTINATION ${KDE_INSTALL_PLUGINDIR}/krfb
+         DESTINATION ${KDE_INSTALL_PLUGINDIR}/krfb/events
 )
