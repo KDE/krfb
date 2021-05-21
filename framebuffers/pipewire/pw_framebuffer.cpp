@@ -1,6 +1,6 @@
 /* This file is part of the KDE project
-   Copyright (C) 2018-2021 Jan Grulich <jgrulich@redhat.com>
    Copyright (C) 2018 Oleg Chernovskiy <kanedias@xaker.ru>
+   Copyright (C) 2018 Jan Grulich <jgrulich@redhat.com>
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public
@@ -23,12 +23,19 @@
 #endif
 
 // pipewire
+#include <pipewire/version.h>
+
+#if PW_CHECK_VERSION(0, 2, 90)
+#include <spa/utils/result.h>
+#ifdef HAVE_LINUX_DMABUF_H
+#include <linux/dma-buf.h>
+#endif
 #include <sys/ioctl.h>
+#endif
 
 #include <spa/param/format-utils.h>
 #include <spa/param/video/format-utils.h>
 #include <spa/param/props.h>
-#include <spa/utils/result.h>
 
 #include <pipewire/pipewire.h>
 
@@ -39,18 +46,6 @@
 #include "xdp_dbus_remotedesktop_interface.h"
 #include "krfb_fb_pipewire_debug.h"
 
-// static
-struct dma_buf_sync {
-  uint64_t flags;
-};
-#define DMA_BUF_SYNC_READ (1 << 0)
-#define DMA_BUF_SYNC_START (0 << 2)
-#define DMA_BUF_SYNC_END (1 << 2)
-#define DMA_BUF_BASE 'b'
-#define DMA_BUF_IOCTL_SYNC _IOW(DMA_BUF_BASE, 0, struct dma_buf_sync)
-
-
-static const int BYTES_PER_PIXEL = 4;
 static const uint MIN_SUPPORTED_XDP_KDE_SC_VERSION = 1;
 
 Q_DECLARE_METATYPE(PWFrameBuffer::Stream);
@@ -76,6 +71,19 @@ const QDBusArgument &operator >> (const QDBusArgument &arg, PWFrameBuffer::Strea
     return arg;
 }
 
+#if !PW_CHECK_VERSION(0, 2, 90)
+/**
+ * @brief The PwType class - helper class to contain pointers to raw C pipewire media mappings
+ */
+class PwType {
+public:
+    spa_type_media_type media_type;
+    spa_type_media_subtype media_subtype;
+    spa_type_format_video format_video;
+    spa_type_video_format video_format;
+};
+#endif
+
 /**
  * @brief The PWFrameBuffer::Private class - private counterpart of PWFramebuffer class. This is the entity where
  *        whole logic resides, for more info search for "d-pointer pattern" information.
@@ -88,13 +96,21 @@ public:
 private:
     friend class PWFrameBuffer;
 
+#if PW_CHECK_VERSION(0, 2, 90)
     static void onCoreError(void *data, uint32_t id, int seq, int res, const char *message);
     static void onStreamParamChanged(void *data, uint32_t id, const struct spa_pod *format);
+#else
+    static void onStateChanged(void *data, pw_remote_state old, pw_remote_state state, const char *error);
+    static void onStreamFormatChanged(void *data, const struct spa_pod *format);
+#endif
     static void onStreamStateChanged(void *data, pw_stream_state old, pw_stream_state state, const char *error_message);
     static void onStreamProcess(void *data);
 
     void initDbus();
     void initPw();
+#if !PW_CHECK_VERSION(0, 2, 90)
+    void initializePwTypes();
+#endif
 
     // dbus handling
     void handleSessionCreated(quint32 &code, QVariantMap &results);
@@ -110,6 +126,7 @@ private:
     PWFrameBuffer *q;
 
     // pipewire stuff
+#if PW_CHECK_VERSION(0, 2, 90)
     struct pw_context *pwContext = nullptr;
     struct pw_core *pwCore = nullptr;
     struct pw_stream *pwStream = nullptr;
@@ -123,6 +140,22 @@ private:
     // event handlers
     pw_core_events pwCoreEvents = {};
     pw_stream_events pwStreamEvents = {};
+#else
+    pw_core *pwCore = nullptr;
+    pw_loop *pwLoop = nullptr;
+    pw_thread_loop *pwMainLoop = nullptr;
+    pw_stream *pwStream = nullptr;
+    pw_remote *pwRemote = nullptr;
+    pw_type *pwCoreType = nullptr;
+    PwType *pwType = nullptr;
+
+    spa_hook remoteListener = {};
+    spa_hook streamListener = {};
+
+    // event handlers
+    pw_remote_events pwRemoteEvents = {};
+    pw_stream_events pwStreamEvents = {};
+#endif
 
     uint pwStreamNodeId = 0;
 
@@ -140,8 +173,10 @@ private:
     QDBusUnixFileDescriptor pipewireFd;
 
     // screen geometry holder
-    QSize streamSize;
-    QSize videoSize;
+    struct {
+        quint32 width;
+        quint32 height;
+    } screenGeometry = {};
 
     // Allowed devices
     uint devices = 0;
@@ -152,6 +187,7 @@ private:
 
 PWFrameBuffer::Private::Private(PWFrameBuffer *q) : q(q)
 {
+#if PW_CHECK_VERSION(0, 2, 90)
     pwCoreEvents.version = PW_VERSION_CORE_EVENTS;
     pwCoreEvents.error = &onCoreError;
 
@@ -159,6 +195,16 @@ PWFrameBuffer::Private::Private(PWFrameBuffer *q) : q(q)
     pwStreamEvents.state_changed = &onStreamStateChanged;
     pwStreamEvents.param_changed = &onStreamParamChanged;
     pwStreamEvents.process = &onStreamProcess;
+#else
+    // initialize event handlers, remote end and stream-related
+    pwRemoteEvents.version = PW_VERSION_REMOTE_EVENTS;
+    pwRemoteEvents.state_changed = &onStateChanged;
+
+    pwStreamEvents.version = PW_VERSION_STREAM_EVENTS;
+    pwStreamEvents.state_changed = &onStreamStateChanged;
+    pwStreamEvents.format_changed = &onStreamFormatChanged;
+    pwStreamEvents.process = &onStreamProcess;
+#endif
 }
 
 /**
@@ -385,9 +431,24 @@ void PWFrameBuffer::Private::handleRemoteDesktopStarted(quint32 &code, QVariantM
         return;
     }
 
+    QSize streamResolution = qdbus_cast<QSize>(streams.first().map.value(QStringLiteral("size")));
+    screenGeometry.width = streamResolution.width();
+    screenGeometry.height = streamResolution.height();
+
     devices = results.value(QStringLiteral("types")).toUInt();
 
     pwStreamNodeId = streams.first().nodeId;
+
+    // Reallocate our buffer with actual needed size
+    q->fb = static_cast<char*>(malloc(screenGeometry.width * screenGeometry.height * 4));
+
+    if (!q->fb) {
+        qCWarning(KRFB_FB_PIPEWIRE) << "Failed to allocate buffer";
+        isValid = false;
+        return;
+    }
+
+    Q_EMIT q->frameBufferChanged();
 
     initPw();
 }
@@ -402,9 +463,8 @@ void PWFrameBuffer::Private::initPw() {
     // init pipewire (required)
     pw_init(nullptr, nullptr); // args are not used anyways
 
+#if PW_CHECK_VERSION(0, 2, 90)
     pwMainLoop = pw_thread_loop_new("pipewire-main-loop", nullptr);
-    pw_thread_loop_lock(pwMainLoop);
-
     pwContext = pw_context_new(pw_thread_loop_get_loop(pwMainLoop), nullptr, 0);
     if (!pwContext) {
         qCWarning(KRFB_FB_PIPEWIRE) << "Failed to create PipeWire context";
@@ -424,15 +484,49 @@ void PWFrameBuffer::Private::initPw() {
         qCWarning(KRFB_FB_PIPEWIRE) << "Failed to create PipeWire stream";
         return;
     }
+#else
+    // initialize our source
+    pwLoop = pw_loop_new(nullptr);
+    pwMainLoop = pw_thread_loop_new(pwLoop, "pipewire-main-loop");
+    // create PipeWire core object (required)
+    pwCore = pw_core_new(pwLoop, nullptr);
+    pwCoreType = pw_core_get_type(pwCore);
+
+    initializePwTypes();
+
+    // pw_remote should be initialized before type maps or connection error will happen
+    pwRemote = pw_remote_new(pwCore, nullptr, 0);
+    // init PipeWire remote, add listener to handle events
+    pw_remote_add_listener(pwRemote, &remoteListener, &pwRemoteEvents, this);
+    pw_remote_connect_fd(pwRemote, pipewireFd.fileDescriptor());
+#endif
 
     if (pw_thread_loop_start(pwMainLoop) < 0) {
         qCWarning(KRFB_FB_PIPEWIRE) << "Failed to start main PipeWire loop";
         isValid = false;
     }
-
-    pw_thread_loop_unlock(pwMainLoop);
 }
 
+#if !PW_CHECK_VERSION(0, 2, 90)
+/**
+ * @brief PWFrameBuffer::Private::initializePwTypes - helper method to initialize and map all needed
+ *        Pipewire types from core to type structure.
+ */
+void PWFrameBuffer::Private::initializePwTypes()
+{
+    // raw C-like PipeWire type map
+    spa_type_map *map = pwCoreType->map;
+    pwType = new PwType();
+
+    spa_type_media_type_map(map, &pwType->media_type);
+    spa_type_media_subtype_map(map, &pwType->media_subtype);
+    spa_type_format_video_map(map, &pwType->format_video);
+    spa_type_video_format_map(map, &pwType->video_format);
+}
+#endif
+
+
+#if PW_CHECK_VERSION(0, 2, 90)
 void PWFrameBuffer::Private::onCoreError(void *data, uint32_t id, int seq, int res, const char *message)
 {
     Q_UNUSED(data);
@@ -442,6 +536,32 @@ void PWFrameBuffer::Private::onCoreError(void *data, uint32_t id, int seq, int r
 
     qInfo() << "core error: " << message;
 }
+#else
+/**
+ * @brief PWFrameBuffer::Private::onStateChanged - global state tracking for pipewire connection
+ * @param data pointer that you have set in pw_remote_add_listener call's last argument
+ * @param state new state that connection has changed to
+ * @param error optional error message, is set to non-null if state is error
+ */
+void PWFrameBuffer::Private::onStateChanged(void *data, pw_remote_state /*old*/, pw_remote_state state, const char *error)
+{
+    qInfo() << "remote state: " << pw_remote_state_as_string(state);
+
+    auto d = static_cast<PWFrameBuffer::Private*>(data);
+
+    switch (state) {
+    case PW_REMOTE_STATE_ERROR:
+        qCWarning(KRFB_FB_PIPEWIRE) << "remote error: " << error;
+        break;
+    case PW_REMOTE_STATE_CONNECTED:
+        d->pwStream = d->createReceivingStream();
+        break;
+    default:
+        qInfo() << "remote state: " << pw_remote_state_as_string(state);
+        break;
+    }
+}
+#endif
 
 /**
  * @brief PWFrameBuffer::Private::onStreamStateChanged - called whenever stream state changes on pipewire server
@@ -451,20 +571,35 @@ void PWFrameBuffer::Private::onCoreError(void *data, uint32_t id, int seq, int r
  */
 void PWFrameBuffer::Private::onStreamStateChanged(void *data, pw_stream_state /*old*/, pw_stream_state state, const char *error_message)
 {
-    Q_UNUSED(data);
-
     qInfo() << "Stream state changed: " << pw_stream_state_as_string(state);
 
+    auto *d = static_cast<PWFrameBuffer::Private *>(data);
+
+#if PW_CHECK_VERSION(0, 2, 90)
     switch (state) {
     case PW_STREAM_STATE_ERROR:
         qCWarning(KRFB_FB_PIPEWIRE) << "pipewire stream error: " << error_message;
         break;
     case PW_STREAM_STATE_PAUSED:
+            pw_stream_set_active(d->pwStream, true);
+        break;
     case PW_STREAM_STATE_STREAMING:
     case PW_STREAM_STATE_UNCONNECTED:
     case PW_STREAM_STATE_CONNECTING:
         break;
     }
+#else
+    switch (state) {
+    case PW_STREAM_STATE_ERROR:
+        qCWarning(KRFB_FB_PIPEWIRE) << "pipewire stream error: " << error_message;
+        break;
+    case PW_STREAM_STATE_CONFIGURE:
+        pw_stream_set_active(d->pwStream, true);
+        break;
+    default:
+        break;
+    }
+#endif
 }
 
 /**
@@ -473,29 +608,44 @@ void PWFrameBuffer::Private::onStreamStateChanged(void *data, pw_stream_state /*
  * @param data pointer that you have set in pw_stream_add_listener call's last argument
  * @param format format that's being proposed
  */
+#if PW_CHECK_VERSION(0, 2, 90)
 void PWFrameBuffer::Private::onStreamParamChanged(void *data, uint32_t id, const struct spa_pod *format)
+#else
+void PWFrameBuffer::Private::onStreamFormatChanged(void *data, const struct spa_pod *format)
+#endif
 {
     qInfo() << "Stream format changed";
     auto *d = static_cast<PWFrameBuffer::Private *>(data);
 
+    const int bpp = 4;
+
+#if PW_CHECK_VERSION(0, 2, 90)
     if (!format || id != SPA_PARAM_Format) {
+#else
+    if (!format) {
+        pw_stream_finish_format(d->pwStream, 0, nullptr, 0);
+#endif
         return;
     }
 
     d->videoFormat = new spa_video_info_raw();
+#if PW_CHECK_VERSION(0, 2, 90)
     spa_format_video_raw_parse(format, d->videoFormat);
+#else
+    spa_format_video_raw_parse(format, d->videoFormat, &d->pwType->format_video);
+#endif
     auto width = d->videoFormat->size.width;
     auto height = d->videoFormat->size.height;
-    auto stride = SPA_ROUND_UP_N(width * BYTES_PER_PIXEL, 4);
+    auto stride = SPA_ROUND_UP_N(width * bpp, 4);
     auto size = height * stride;
-    d->streamSize = QSize(width, height);
 
     uint8_t buffer[1024];
     auto builder = SPA_POD_BUILDER_INIT(buffer, sizeof(buffer));
 
     // setup buffers and meta header for new format
-    const struct spa_pod *params[3];
+    const struct spa_pod *params[2];
 
+#if PW_CHECK_VERSION(0, 2, 90)
     params[0] = reinterpret_cast<spa_pod *>(spa_pod_builder_add_object(&builder,
                 SPA_TYPE_OBJECT_ParamBuffers, SPA_PARAM_Buffers,
                 SPA_PARAM_BUFFERS_size, SPA_POD_Int(size),
@@ -507,11 +657,20 @@ void PWFrameBuffer::Private::onStreamParamChanged(void *data, uint32_t id, const
                 SPA_TYPE_OBJECT_ParamMeta, SPA_PARAM_Meta,
                 SPA_PARAM_META_type, SPA_POD_Id(SPA_META_Header),
                 SPA_PARAM_META_size, SPA_POD_Int(sizeof(struct spa_meta_header))));
-    params[2] = reinterpret_cast<spa_pod*>(spa_pod_builder_add_object(&builder,
-                SPA_TYPE_OBJECT_ParamMeta, SPA_PARAM_Meta, SPA_PARAM_META_type,
-                SPA_POD_Id(SPA_META_VideoCrop), SPA_PARAM_META_size,
-                SPA_POD_Int(sizeof(struct spa_meta_region))));
-    pw_stream_update_params(d->pwStream, params, 3);
+    pw_stream_update_params(d->pwStream, params, 2);
+#else
+    params[0] = reinterpret_cast<spa_pod *>(spa_pod_builder_object(&builder,
+                d->pwCoreType->param.idBuffers, d->pwCoreType->param_buffers.Buffers,
+                ":", d->pwCoreType->param_buffers.size, "i", size,
+                ":", d->pwCoreType->param_buffers.stride, "i", stride,
+                ":", d->pwCoreType->param_buffers.buffers, "iru", 8, SPA_POD_PROP_MIN_MAX(1, 32),
+                ":", d->pwCoreType->param_buffers.align, "i", 16));
+    params[1] = reinterpret_cast<spa_pod *>(spa_pod_builder_object(&builder,
+                d->pwCoreType->param.idMeta, d->pwCoreType->param_meta.Meta,
+                ":", d->pwCoreType->param_meta.type, "I", d->pwCoreType->meta.Header,
+                ":", d->pwCoreType->param_meta.size, "i", sizeof(struct spa_meta_header)));
+    pw_stream_finish_format(d->pwStream, 0, params, 2);
+#endif
 }
 
 /**
@@ -523,28 +682,17 @@ void PWFrameBuffer::Private::onStreamProcess(void *data)
 {
     auto *d = static_cast<PWFrameBuffer::Private *>(data);
 
-    pw_buffer* next_buffer;
-    pw_buffer* buffer = nullptr;
-
-    next_buffer = pw_stream_dequeue_buffer(d->pwStream);
-    while (next_buffer) {
-        buffer = next_buffer;
-        next_buffer = pw_stream_dequeue_buffer(d->pwStream);
-
-        if (next_buffer) {
-            pw_stream_queue_buffer(d->pwStream, buffer);
-        }
-    }
-
-    if (!buffer) {
+    pw_buffer *buf;
+    if (!(buf = pw_stream_dequeue_buffer(d->pwStream))) {
         return;
     }
 
-    d->handleFrame(buffer);
+    d->handleFrame(buf);
 
-    pw_stream_queue_buffer(d->pwStream, buffer);
+    pw_stream_queue_buffer(d->pwStream, buf);
 }
 
+#if PW_CHECK_VERSION(0, 2, 90) && defined(HAVE_LINUX_DMABUF_H)
 static void syncDmaBuf(int fd, uint64_t start_or_end)
 {
     struct dma_buf_sync sync = { 0 };
@@ -563,18 +711,25 @@ static void syncDmaBuf(int fd, uint64_t start_or_end)
         }
     }
 }
+#endif
 
 void PWFrameBuffer::Private::handleFrame(pw_buffer *pwBuffer)
 {
     auto *spaBuffer = pwBuffer->buffer;
-    uint8_t *src = nullptr;
+    void *src = spaBuffer->datas[0].data;
 
-    if (spaBuffer->datas[0].chunk->size == 0) {
+#if PW_CHECK_VERSION(0, 2, 90)
+    if (!src && spaBuffer->datas->type != SPA_DATA_DmaBuf) {
         qCDebug(KRFB_FB_PIPEWIRE)  << "discarding null buffer";
         return;
     }
+#endif
+
+    const quint32 maxSize = spaBuffer->datas[0].maxsize;
 
     std::function<void()> cleanup;
+#if PW_CHECK_VERSION(0, 2, 90)
+#ifdef HAVE_LINUX_DMABUF_H
     if (spaBuffer->datas->type == SPA_DATA_DmaBuf) {
         const int fd = spaBuffer->datas[0].fd;
         auto map = mmap(
@@ -592,7 +747,9 @@ void PWFrameBuffer::Private::handleFrame(pw_buffer *pwBuffer)
             syncDmaBuf(fd, DMA_BUF_SYNC_END);
             munmap(map, spaBuffer->datas[0].maxsize + spaBuffer->datas[0].mapoffset);
         };
-    } else if (spaBuffer->datas->type == SPA_DATA_MemFd) {
+    } else
+#endif
+    if (spaBuffer->datas->type == SPA_DATA_MemFd) {
         uint8_t *map = static_cast<uint8_t*>(mmap(
             nullptr, spaBuffer->datas->maxsize + spaBuffer->datas->mapoffset,
             PROT_READ, MAP_PRIVATE, spaBuffer->datas->fd, 0));
@@ -606,80 +763,24 @@ void PWFrameBuffer::Private::handleFrame(pw_buffer *pwBuffer)
         cleanup = [map, spaBuffer] {
             munmap(map, spaBuffer->datas->maxsize + spaBuffer->datas->mapoffset);
         };
-    } else if (spaBuffer->datas[0].type == SPA_DATA_MemPtr) {
-        src = static_cast<uint8_t*>(spaBuffer->datas[0].data);
     }
+#endif
 
-    struct spa_meta_region* videoMetadata =
-    static_cast<struct spa_meta_region*>(spa_buffer_find_meta_data(
-        spaBuffer, SPA_META_VideoCrop, sizeof(*videoMetadata)));
-
-    if (videoMetadata && (videoMetadata->region.size.width > static_cast<uint32_t>(q->width()) ||
-                           videoMetadata->region.size.height > static_cast<uint32_t>(q->height()))) {
-        qCWarning(KRFB_FB_PIPEWIRE) << "Stream metadata sizes are wrong!";
+    const qint32 srcStride = spaBuffer->datas[0].chunk->stride;
+    if (srcStride != q->paddedWidth()) {
+        qCWarning(KRFB_FB_PIPEWIRE) << "Got buffer with stride different from screen stride" << srcStride << "!=" << q->paddedWidth();
         return;
     }
 
-    // Use video metadata when video size from metadata is set and smaller than
-    // video stream size, so we need to adjust it.
-    bool videoFullWidth = true;
-    bool videoFullHeight = true;
-    if (videoMetadata && videoMetadata->region.size.width != 0 &&
-        videoMetadata->region.size.height != 0) {
-        if (videoMetadata->region.size.width < static_cast<uint32_t>(q->width())) {
-            videoFullWidth = false;
-        } else if (videoMetadata->region.size.height < static_cast<uint32_t>(q->height())) {
-            videoFullHeight = false;
-        }
-    }
-
-    QSize prevVideoSize = videoSize;
-    if (!videoFullHeight || !videoFullWidth) {
-        videoSize = QSize(videoMetadata->region.size.width, videoMetadata->region.size.height);
-    } else {
-        videoSize = streamSize;
-    }
-
-    if (!q->fb || videoSize != prevVideoSize) {
-        if (q->fb) {
-            free(q->fb);
-        }
-        q->fb = static_cast<char*>(malloc(videoSize.width() * videoSize.height() * BYTES_PER_PIXEL));
-
-        if (!q->fb) {
-            qCWarning(KRFB_FB_PIPEWIRE) << "Failed to allocate buffer";
-            isValid = false;
-            return;
-        }
-
-        Q_EMIT q->frameBufferChanged();
-    }
-
-    const qint32 dstStride = videoSize.width() * BYTES_PER_PIXEL;
-    const qint32 srcStride = spaBuffer->datas[0].chunk->stride;
-
-    if (!videoFullHeight && (videoMetadata->region.position.y + videoSize.height() <=  streamSize.height())) {
-        src += srcStride * videoMetadata->region.position.y;
-    }
-
-    const int xOffset = !videoFullWidth && (videoMetadata->region.position.x + videoSize.width() <= streamSize.width())
-                            ? videoMetadata->region.position.x * BYTES_PER_PIXEL : 0;
-
-    char *dst = q->fb;
-    for (int i = 0; i < videoSize.height(); ++i) {
-        // Adjust source content based on crop video position if needed
-        src += xOffset;
-        std::memcpy(dst, src, dstStride);
-        src += srcStride - xOffset;
-        dst += dstStride;
-    }
-
+    q->tiles.append(QRect(0, 0, q->width(), q->height()));
+    std::memcpy(q->fb, src, maxSize);
     cleanup();
 
+#if PW_CHECK_VERSION(0, 2, 90)
     if (videoFormat->format == SPA_VIDEO_FORMAT_BGRA || videoFormat->format == SPA_VIDEO_FORMAT_BGRx) {
-        for (uint y = 0; y < videoSize.height(); y++) {
-            for (uint x = 0; x < videoSize.width(); x++) {
-                uint offset = y * dstStride + x * 4;
+        for (uint y = 0; y < videoFormat->size.height; y++) {
+            for (uint x = 0; x < videoFormat->size.width; x++) {
+                uint offset = y * spaBuffer->datas->chunk->stride + x * 4;
                 std::swap(q->fb[offset], q->fb[offset + 2]);
             }
         }
@@ -688,11 +789,10 @@ void PWFrameBuffer::Private::handleFrame(pw_buffer *pwBuffer)
                                     : videoFormat->format == SPA_VIDEO_FORMAT_RGBx ? QImage::Format_RGBX8888
                                                                                    : QImage::Format_RGB32;
 
-        QImage img((uchar*) q->fb, videoSize.width(), videoSize.height(), dstStride, format);
+        QImage img((uchar*) q->fb, videoFormat->size.width, videoFormat->size.height, spaBuffer->datas->chunk->stride, format);
         img.convertTo(QImage::Format_RGB888);
     }
-
-    q->tiles.append(QRect(0, 0, videoSize.width(), videoSize.height()));
+#endif
 }
 
 /**
@@ -703,19 +803,28 @@ void PWFrameBuffer::Private::handleFrame(pw_buffer *pwBuffer)
 pw_stream *PWFrameBuffer::Private::createReceivingStream()
 {
     spa_rectangle pwMinScreenBounds = SPA_RECTANGLE(1, 1);
-    spa_rectangle pwMaxScreenBounds = SPA_RECTANGLE(UINT32_MAX, UINT32_MAX);
+    spa_rectangle pwMaxScreenBounds = SPA_RECTANGLE(screenGeometry.width, screenGeometry.height);
 
     spa_fraction pwFramerateMin = SPA_FRACTION(0, 1);
     spa_fraction pwFramerateMax = SPA_FRACTION(60, 1);
 
-    pw_properties* reuseProps = pw_properties_new_string("pipewire.client.reuse=1");
+#if PW_CHECK_VERSION(0, 2, 90)
+    auto stream = pw_stream_new_simple(pw_thread_loop_get_loop(pwMainLoop), "krfb-fb-consume-stream",
+                                       pw_properties_new(PW_KEY_MEDIA_TYPE, "Video",
+                                                         PW_KEY_MEDIA_CATEGORY, "Capture",
+                                                         PW_KEY_MEDIA_ROLE, "Screen",
+                                                         nullptr),
+                                       &pwStreamEvents, this);
 
-    auto stream = pw_stream_new(pwCore, "krfb-fb-consume-stream", reuseProps);
-
+#else
+    auto reuseProps = pw_properties_new("pipewire.client.reuse", "1", nullptr); // null marks end of varargs
+    auto stream = pw_stream_new(pwRemote, "krfb-fb-consume-stream", reuseProps);
+#endif
     uint8_t buffer[1024] = {};
     const spa_pod *params[1];
     auto builder = SPA_POD_BUILDER_INIT(buffer, sizeof(buffer));
 
+#if PW_CHECK_VERSION(0, 2, 90)
     params[0] = reinterpret_cast<spa_pod *>(spa_pod_builder_add_object(&builder,
                 SPA_TYPE_OBJECT_Format, SPA_PARAM_EnumFormat,
                 SPA_FORMAT_mediaType, SPA_POD_Id(SPA_MEDIA_TYPE_video),
@@ -727,10 +836,25 @@ pw_stream *PWFrameBuffer::Private::createReceivingStream()
                 SPA_FORMAT_VIDEO_size, SPA_POD_CHOICE_RANGE_Rectangle(&pwMaxScreenBounds, &pwMinScreenBounds, &pwMaxScreenBounds),
                 SPA_FORMAT_VIDEO_framerate, SPA_POD_Fraction(&pwFramerateMin),
                 SPA_FORMAT_VIDEO_maxFramerate, SPA_POD_CHOICE_RANGE_Fraction(&pwFramerateMax, &pwFramerateMin, &pwFramerateMax)));
-
+#else
+    params[0] = reinterpret_cast<spa_pod *>(spa_pod_builder_object(&builder,
+                pwCoreType->param.idEnumFormat, pwCoreType->spa_format,
+                "I", pwType->media_type.video,
+                "I", pwType->media_subtype.raw,
+                ":", pwType->format_video.format, "I", pwType->video_format.RGBx,
+                ":", pwType->format_video.size, "Rru", &pwMaxScreenBounds, SPA_POD_PROP_MIN_MAX(&pwMinScreenBounds, &pwMaxScreenBounds),
+                ":", pwType->format_video.framerate, "F", &pwFramerateMin,
+                ":", pwType->format_video.max_framerate, "Fru", &pwFramerateMax, 2, &pwFramerateMin, &pwFramerateMax));
     pw_stream_add_listener(stream, &streamListener, &pwStreamEvents, this);
+#endif
 
-    if (pw_stream_connect(stream, PW_DIRECTION_INPUT, pwStreamNodeId, PW_STREAM_FLAG_AUTOCONNECT, params, 1) != 0) {
+    auto flags = static_cast<pw_stream_flags>(PW_STREAM_FLAG_AUTOCONNECT | PW_STREAM_FLAG_INACTIVE | PW_STREAM_FLAG_MAP_BUFFERS);
+#if PW_CHECK_VERSION(0, 2, 90)
+    if (pw_stream_connect(stream, PW_DIRECTION_INPUT, PW_ID_ANY, flags, params, 1) != 0) {
+#else
+    if (pw_stream_connect(stream, PW_DIRECTION_INPUT, nullptr, flags, params, 1) != 0) {
+#endif
+        qCWarning(KRFB_FB_PIPEWIRE) << "Could not connect receiving stream";
         isValid = false;
     }
 
@@ -743,10 +867,23 @@ PWFrameBuffer::Private::~Private()
         pw_thread_loop_stop(pwMainLoop);
     }
 
+#if !PW_CHECK_VERSION(0, 2, 9)
+    if (pwType) {
+        delete pwType;
+    }
+#endif
+
     if (pwStream) {
         pw_stream_destroy(pwStream);
     }
 
+#if !PW_CHECK_VERSION(0, 2, 90)
+    if (pwRemote) {
+        pw_remote_destroy(pwRemote);
+    }
+#endif
+
+#if PW_CHECK_VERSION(0, 2, 90)
     if (pwCore) {
         pw_core_disconnect(pwCore);
     }
@@ -754,10 +891,22 @@ PWFrameBuffer::Private::~Private()
     if (pwContext) {
         pw_context_destroy(pwContext);
     }
+#else
+    if (pwCore) {
+        pw_core_destroy(pwCore);
+    }
+#endif
 
     if (pwMainLoop) {
         pw_thread_loop_destroy(pwMainLoop);
     }
+
+#if !PW_CHECK_VERSION(0, 2, 90)
+    if (pwLoop) {
+        pw_loop_leave(pwLoop);
+        pw_loop_destroy(pwLoop);
+    }
+#endif
 }
 
 PWFrameBuffer::PWFrameBuffer(WId winid, QObject *parent)
@@ -768,6 +917,9 @@ PWFrameBuffer::PWFrameBuffer(WId winid, QObject *parent)
     // PipeWire connectivity is initialized after D-Bus session is started
     d->initDbus();
 
+    // FIXME: for now use some initial size, later on we will reallocate this with the actual size we get from portal
+    d->screenGeometry.width = 800;
+    d->screenGeometry.height = 600;
     fb = nullptr;
 }
 
@@ -784,12 +936,12 @@ int PWFrameBuffer::depth()
 
 int PWFrameBuffer::height()
 {
-    return d->videoSize.height();
+    return static_cast<qint32>(d->screenGeometry.height);
 }
 
 int PWFrameBuffer::width()
 {
-    return d->videoSize.width();
+    return static_cast<qint32>(d->screenGeometry.width);
 }
 
 int PWFrameBuffer::paddedWidth()
