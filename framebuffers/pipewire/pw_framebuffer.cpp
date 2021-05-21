@@ -50,6 +50,7 @@ struct dma_buf_sync {
 #define DMA_BUF_IOCTL_SYNC _IOW(DMA_BUF_BASE, 0, struct dma_buf_sync)
 
 
+static const int BYTES_PER_PIXEL = 4;
 static const uint MIN_SUPPORTED_XDP_KDE_SC_VERSION = 1;
 
 Q_DECLARE_METATYPE(PWFrameBuffer::Stream);
@@ -139,10 +140,8 @@ private:
     QDBusUnixFileDescriptor pipewireFd;
 
     // screen geometry holder
-    struct {
-        quint32 width;
-        quint32 height;
-    } screenGeometry = {};
+    QSize streamSize;
+    QSize videoSize;
 
     // Allowed devices
     uint devices = 0;
@@ -386,24 +385,9 @@ void PWFrameBuffer::Private::handleRemoteDesktopStarted(quint32 &code, QVariantM
         return;
     }
 
-    QSize streamResolution = qdbus_cast<QSize>(streams.first().map.value(QStringLiteral("size")));
-    screenGeometry.width = streamResolution.width();
-    screenGeometry.height = streamResolution.height();
-
     devices = results.value(QStringLiteral("types")).toUInt();
 
     pwStreamNodeId = streams.first().nodeId;
-
-    // Reallocate our buffer with actual needed size
-    q->fb = static_cast<char*>(malloc(screenGeometry.width * screenGeometry.height * 4));
-
-    if (!q->fb) {
-        qCWarning(KRFB_FB_PIPEWIRE) << "Failed to allocate buffer";
-        isValid = false;
-        return;
-    }
-
-    Q_EMIT q->frameBufferChanged();
 
     initPw();
 }
@@ -419,6 +403,8 @@ void PWFrameBuffer::Private::initPw() {
     pw_init(nullptr, nullptr); // args are not used anyways
 
     pwMainLoop = pw_thread_loop_new("pipewire-main-loop", nullptr);
+    pw_thread_loop_lock(pwMainLoop);
+
     pwContext = pw_context_new(pw_thread_loop_get_loop(pwMainLoop), nullptr, 0);
     if (!pwContext) {
         qCWarning(KRFB_FB_PIPEWIRE) << "Failed to create PipeWire context";
@@ -443,6 +429,8 @@ void PWFrameBuffer::Private::initPw() {
         qCWarning(KRFB_FB_PIPEWIRE) << "Failed to start main PipeWire loop";
         isValid = false;
     }
+
+    pw_thread_loop_unlock(pwMainLoop);
 }
 
 void PWFrameBuffer::Private::onCoreError(void *data, uint32_t id, int seq, int res, const char *message)
@@ -463,17 +451,15 @@ void PWFrameBuffer::Private::onCoreError(void *data, uint32_t id, int seq, int r
  */
 void PWFrameBuffer::Private::onStreamStateChanged(void *data, pw_stream_state /*old*/, pw_stream_state state, const char *error_message)
 {
-    qInfo() << "Stream state changed: " << pw_stream_state_as_string(state);
+    Q_UNUSED(data);
 
-    auto *d = static_cast<PWFrameBuffer::Private *>(data);
+    qInfo() << "Stream state changed: " << pw_stream_state_as_string(state);
 
     switch (state) {
     case PW_STREAM_STATE_ERROR:
         qCWarning(KRFB_FB_PIPEWIRE) << "pipewire stream error: " << error_message;
         break;
     case PW_STREAM_STATE_PAUSED:
-            pw_stream_set_active(d->pwStream, true);
-        break;
     case PW_STREAM_STATE_STREAMING:
     case PW_STREAM_STATE_UNCONNECTED:
     case PW_STREAM_STATE_CONNECTING:
@@ -492,8 +478,6 @@ void PWFrameBuffer::Private::onStreamParamChanged(void *data, uint32_t id, const
     qInfo() << "Stream format changed";
     auto *d = static_cast<PWFrameBuffer::Private *>(data);
 
-    const int bpp = 4;
-
     if (!format || id != SPA_PARAM_Format) {
         return;
     }
@@ -502,14 +486,15 @@ void PWFrameBuffer::Private::onStreamParamChanged(void *data, uint32_t id, const
     spa_format_video_raw_parse(format, d->videoFormat);
     auto width = d->videoFormat->size.width;
     auto height = d->videoFormat->size.height;
-    auto stride = SPA_ROUND_UP_N(width * bpp, 4);
+    auto stride = SPA_ROUND_UP_N(width * BYTES_PER_PIXEL, 4);
     auto size = height * stride;
+    d->streamSize = QSize(width, height);
 
     uint8_t buffer[1024];
     auto builder = SPA_POD_BUILDER_INIT(buffer, sizeof(buffer));
 
     // setup buffers and meta header for new format
-    const struct spa_pod *params[2];
+    const struct spa_pod *params[3];
 
     params[0] = reinterpret_cast<spa_pod *>(spa_pod_builder_add_object(&builder,
                 SPA_TYPE_OBJECT_ParamBuffers, SPA_PARAM_Buffers,
@@ -522,7 +507,11 @@ void PWFrameBuffer::Private::onStreamParamChanged(void *data, uint32_t id, const
                 SPA_TYPE_OBJECT_ParamMeta, SPA_PARAM_Meta,
                 SPA_PARAM_META_type, SPA_POD_Id(SPA_META_Header),
                 SPA_PARAM_META_size, SPA_POD_Int(sizeof(struct spa_meta_header))));
-    pw_stream_update_params(d->pwStream, params, 2);
+    params[2] = reinterpret_cast<spa_pod*>(spa_pod_builder_add_object(&builder,
+                SPA_TYPE_OBJECT_ParamMeta, SPA_PARAM_Meta, SPA_PARAM_META_type,
+                SPA_POD_Id(SPA_META_VideoCrop), SPA_PARAM_META_size,
+                SPA_POD_Int(sizeof(struct spa_meta_region))));
+    pw_stream_update_params(d->pwStream, params, 3);
 }
 
 /**
@@ -534,14 +523,26 @@ void PWFrameBuffer::Private::onStreamProcess(void *data)
 {
     auto *d = static_cast<PWFrameBuffer::Private *>(data);
 
-    pw_buffer *buf;
-    if (!(buf = pw_stream_dequeue_buffer(d->pwStream))) {
+    pw_buffer* next_buffer;
+    pw_buffer* buffer = nullptr;
+
+    next_buffer = pw_stream_dequeue_buffer(d->pwStream);
+    while (next_buffer) {
+        buffer = next_buffer;
+        next_buffer = pw_stream_dequeue_buffer(d->pwStream);
+
+        if (next_buffer) {
+            pw_stream_queue_buffer(d->pwStream, buffer);
+        }
+    }
+
+    if (!buffer) {
         return;
     }
 
-    d->handleFrame(buf);
+    d->handleFrame(buffer);
 
-    pw_stream_queue_buffer(d->pwStream, buf);
+    pw_stream_queue_buffer(d->pwStream, buffer);
 }
 
 static void syncDmaBuf(int fd, uint64_t start_or_end)
@@ -566,14 +567,12 @@ static void syncDmaBuf(int fd, uint64_t start_or_end)
 void PWFrameBuffer::Private::handleFrame(pw_buffer *pwBuffer)
 {
     auto *spaBuffer = pwBuffer->buffer;
-    void *src = spaBuffer->datas[0].data;
+    uint8_t *src = nullptr;
 
-    if (!src && spaBuffer->datas->type != SPA_DATA_DmaBuf) {
+    if (spaBuffer->datas[0].chunk->size == 0) {
         qCDebug(KRFB_FB_PIPEWIRE)  << "discarding null buffer";
         return;
     }
-
-    const quint32 maxSize = spaBuffer->datas[0].maxsize;
 
     std::function<void()> cleanup;
     if (spaBuffer->datas->type == SPA_DATA_DmaBuf) {
@@ -607,22 +606,80 @@ void PWFrameBuffer::Private::handleFrame(pw_buffer *pwBuffer)
         cleanup = [map, spaBuffer] {
             munmap(map, spaBuffer->datas->maxsize + spaBuffer->datas->mapoffset);
         };
+    } else if (spaBuffer->datas[0].type == SPA_DATA_MemPtr) {
+        src = static_cast<uint8_t*>(spaBuffer->datas[0].data);
     }
 
-    const qint32 srcStride = spaBuffer->datas[0].chunk->stride;
-    if (srcStride != q->paddedWidth()) {
-        qCWarning(KRFB_FB_PIPEWIRE) << "Got buffer with stride different from screen stride" << srcStride << "!=" << q->paddedWidth();
+    struct spa_meta_region* videoMetadata =
+    static_cast<struct spa_meta_region*>(spa_buffer_find_meta_data(
+        spaBuffer, SPA_META_VideoCrop, sizeof(*videoMetadata)));
+
+    if (videoMetadata && (videoMetadata->region.size.width > static_cast<uint32_t>(q->width()) ||
+                           videoMetadata->region.size.height > static_cast<uint32_t>(q->height()))) {
+        qCWarning(KRFB_FB_PIPEWIRE) << "Stream metadata sizes are wrong!";
         return;
     }
 
-    q->tiles.append(QRect(0, 0, q->width(), q->height()));
-    std::memcpy(q->fb, src, maxSize);
+    // Use video metadata when video size from metadata is set and smaller than
+    // video stream size, so we need to adjust it.
+    bool videoFullWidth = true;
+    bool videoFullHeight = true;
+    if (videoMetadata && videoMetadata->region.size.width != 0 &&
+        videoMetadata->region.size.height != 0) {
+        if (videoMetadata->region.size.width < static_cast<uint32_t>(q->width())) {
+            videoFullWidth = false;
+        } else if (videoMetadata->region.size.height < static_cast<uint32_t>(q->height())) {
+            videoFullHeight = false;
+        }
+    }
+
+    QSize prevVideoSize = videoSize;
+    if (!videoFullHeight || !videoFullWidth) {
+        videoSize = QSize(videoMetadata->region.size.width, videoMetadata->region.size.height);
+    } else {
+        videoSize = streamSize;
+    }
+
+    if (!q->fb || videoSize != prevVideoSize) {
+        if (q->fb) {
+            free(q->fb);
+        }
+        q->fb = static_cast<char*>(malloc(videoSize.width() * videoSize.height() * BYTES_PER_PIXEL));
+
+        if (!q->fb) {
+            qCWarning(KRFB_FB_PIPEWIRE) << "Failed to allocate buffer";
+            isValid = false;
+            return;
+        }
+
+        Q_EMIT q->frameBufferChanged();
+    }
+
+    const qint32 dstStride = videoSize.width() * BYTES_PER_PIXEL;
+    const qint32 srcStride = spaBuffer->datas[0].chunk->stride;
+
+    if (!videoFullHeight && (videoMetadata->region.position.y + videoSize.height() <=  streamSize.height())) {
+        src += srcStride * videoMetadata->region.position.y;
+    }
+
+    const int xOffset = !videoFullWidth && (videoMetadata->region.position.x + videoSize.width() <= streamSize.width())
+                            ? videoMetadata->region.position.x * BYTES_PER_PIXEL : 0;
+
+    char *dst = q->fb;
+    for (int i = 0; i < videoSize.height(); ++i) {
+        // Adjust source content based on crop video position if needed
+        src += xOffset;
+        std::memcpy(dst, src, dstStride);
+        src += srcStride - xOffset;
+        dst += dstStride;
+    }
+
     cleanup();
 
     if (videoFormat->format == SPA_VIDEO_FORMAT_BGRA || videoFormat->format == SPA_VIDEO_FORMAT_BGRx) {
-        for (uint y = 0; y < videoFormat->size.height; y++) {
-            for (uint x = 0; x < videoFormat->size.width; x++) {
-                uint offset = y * spaBuffer->datas->chunk->stride + x * 4;
+        for (uint y = 0; y < videoSize.height(); y++) {
+            for (uint x = 0; x < videoSize.width(); x++) {
+                uint offset = y * dstStride + x * 4;
                 std::swap(q->fb[offset], q->fb[offset + 2]);
             }
         }
@@ -631,9 +688,11 @@ void PWFrameBuffer::Private::handleFrame(pw_buffer *pwBuffer)
                                     : videoFormat->format == SPA_VIDEO_FORMAT_RGBx ? QImage::Format_RGBX8888
                                                                                    : QImage::Format_RGB32;
 
-        QImage img((uchar*) q->fb, videoFormat->size.width, videoFormat->size.height, spaBuffer->datas->chunk->stride, format);
+        QImage img((uchar*) q->fb, videoSize.width(), videoSize.height(), dstStride, format);
         img.convertTo(QImage::Format_RGB888);
     }
+
+    q->tiles.append(QRect(0, 0, videoSize.width(), videoSize.height()));
 }
 
 /**
@@ -644,17 +703,15 @@ void PWFrameBuffer::Private::handleFrame(pw_buffer *pwBuffer)
 pw_stream *PWFrameBuffer::Private::createReceivingStream()
 {
     spa_rectangle pwMinScreenBounds = SPA_RECTANGLE(1, 1);
-    spa_rectangle pwMaxScreenBounds = SPA_RECTANGLE(screenGeometry.width, screenGeometry.height);
+    spa_rectangle pwMaxScreenBounds = SPA_RECTANGLE(UINT32_MAX, UINT32_MAX);
 
     spa_fraction pwFramerateMin = SPA_FRACTION(0, 1);
     spa_fraction pwFramerateMax = SPA_FRACTION(60, 1);
 
-    auto stream = pw_stream_new_simple(pw_thread_loop_get_loop(pwMainLoop), "krfb-fb-consume-stream",
-                                       pw_properties_new(PW_KEY_MEDIA_TYPE, "Video",
-                                                         PW_KEY_MEDIA_CATEGORY, "Capture",
-                                                         PW_KEY_MEDIA_ROLE, "Screen",
-                                                         nullptr),
-                                       &pwStreamEvents, this);
+    pw_properties* reuseProps = pw_properties_new_string("pipewire.client.reuse=1");
+
+    auto stream = pw_stream_new(pwCore, "krfb-fb-consume-stream", reuseProps);
+
     uint8_t buffer[1024] = {};
     const spa_pod *params[1];
     auto builder = SPA_POD_BUILDER_INIT(buffer, sizeof(buffer));
@@ -671,9 +728,9 @@ pw_stream *PWFrameBuffer::Private::createReceivingStream()
                 SPA_FORMAT_VIDEO_framerate, SPA_POD_Fraction(&pwFramerateMin),
                 SPA_FORMAT_VIDEO_maxFramerate, SPA_POD_CHOICE_RANGE_Fraction(&pwFramerateMax, &pwFramerateMin, &pwFramerateMax)));
 
-    auto flags = static_cast<pw_stream_flags>(PW_STREAM_FLAG_AUTOCONNECT | PW_STREAM_FLAG_INACTIVE | PW_STREAM_FLAG_MAP_BUFFERS);
-    if (pw_stream_connect(stream, PW_DIRECTION_INPUT, PW_ID_ANY, flags, params, 1) != 0) {
-        qCWarning(KRFB_FB_PIPEWIRE) << "Could not connect receiving stream";
+    pw_stream_add_listener(stream, &streamListener, &pwStreamEvents, this);
+
+    if (pw_stream_connect(stream, PW_DIRECTION_INPUT, pwStreamNodeId, PW_STREAM_FLAG_AUTOCONNECT, params, 1) != 0) {
         isValid = false;
     }
 
@@ -711,9 +768,6 @@ PWFrameBuffer::PWFrameBuffer(WId winid, QObject *parent)
     // PipeWire connectivity is initialized after D-Bus session is started
     d->initDbus();
 
-    // FIXME: for now use some initial size, later on we will reallocate this with the actual size we get from portal
-    d->screenGeometry.width = 800;
-    d->screenGeometry.height = 600;
     fb = nullptr;
 }
 
@@ -730,12 +784,12 @@ int PWFrameBuffer::depth()
 
 int PWFrameBuffer::height()
 {
-    return static_cast<qint32>(d->screenGeometry.height);
+    return d->videoSize.height();
 }
 
 int PWFrameBuffer::width()
 {
-    return static_cast<qint32>(d->screenGeometry.width);
+    return d->videoSize.width();
 }
 
 int PWFrameBuffer::paddedWidth()
