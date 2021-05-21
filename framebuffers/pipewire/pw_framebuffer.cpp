@@ -23,9 +23,6 @@
 #endif
 
 // pipewire
-#ifdef HAVE_LINUX_DMABUF_H
-#include <linux/dma-buf.h>
-#endif
 #include <sys/ioctl.h>
 
 #include <spa/param/format-utils.h>
@@ -41,6 +38,17 @@
 #include "xdp_dbus_screencast_interface.h"
 #include "xdp_dbus_remotedesktop_interface.h"
 #include "krfb_fb_pipewire_debug.h"
+
+// static
+struct dma_buf_sync {
+  uint64_t flags;
+};
+#define DMA_BUF_SYNC_READ (1 << 0)
+#define DMA_BUF_SYNC_START (0 << 2)
+#define DMA_BUF_SYNC_END (1 << 2)
+#define DMA_BUF_BASE 'b'
+#define DMA_BUF_IOCTL_SYNC _IOW(DMA_BUF_BASE, 0, struct dma_buf_sync)
+
 
 static const uint MIN_SUPPORTED_XDP_KDE_SC_VERSION = 1;
 
@@ -536,7 +544,6 @@ void PWFrameBuffer::Private::onStreamProcess(void *data)
     pw_stream_queue_buffer(d->pwStream, buf);
 }
 
-#if defined(HAVE_LINUX_DMABUF_H)
 static void syncDmaBuf(int fd, uint64_t start_or_end)
 {
     struct dma_buf_sync sync = { 0 };
@@ -555,7 +562,6 @@ static void syncDmaBuf(int fd, uint64_t start_or_end)
         }
     }
 }
-#endif
 
 void PWFrameBuffer::Private::handleFrame(pw_buffer *pwBuffer)
 {
@@ -570,7 +576,6 @@ void PWFrameBuffer::Private::handleFrame(pw_buffer *pwBuffer)
     const quint32 maxSize = spaBuffer->datas[0].maxsize;
 
     std::function<void()> cleanup;
-#ifdef HAVE_LINUX_DMABUF_H
     if (spaBuffer->datas->type == SPA_DATA_DmaBuf) {
         const int fd = spaBuffer->datas[0].fd;
         auto map = mmap(
@@ -588,9 +593,7 @@ void PWFrameBuffer::Private::handleFrame(pw_buffer *pwBuffer)
             syncDmaBuf(fd, DMA_BUF_SYNC_END);
             munmap(map, spaBuffer->datas[0].maxsize + spaBuffer->datas[0].mapoffset);
         };
-    } else
-#endif
-    if (spaBuffer->datas->type == SPA_DATA_MemFd) {
+    } else if (spaBuffer->datas->type == SPA_DATA_MemFd) {
         uint8_t *map = static_cast<uint8_t*>(mmap(
             nullptr, spaBuffer->datas->maxsize + spaBuffer->datas->mapoffset,
             PROT_READ, MAP_PRIVATE, spaBuffer->datas->fd, 0));
