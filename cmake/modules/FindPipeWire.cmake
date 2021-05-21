@@ -62,8 +62,8 @@
 # in the FIND_PATH() and FIND_LIBRARY() calls
 find_package(PkgConfig QUIET)
 
-pkg_search_module(PKG_PipeWire QUIET libpipewire-0.3 libpipewire-0.2)
-pkg_search_module(PKG_Spa QUIET libspa-0.2 libspa-0.1)
+pkg_search_module(PKG_PipeWire QUIET libpipewire-0.3)
+pkg_search_module(PKG_Spa QUIET libspa-0.2)
 
 set(PipeWire_DEFINITIONS "${PKG_PipeWire_CFLAGS}" "${PKG_Spa_CFLAGS}")
 set(PipeWire_VERSION "${PKG_PipeWire_VERSION}")
@@ -76,20 +76,19 @@ find_path(PipeWire_INCLUDE_DIRS
         ${PKG_PipeWire_INCLUDE_DIRS}/pipewire-0.3
 )
 
+find_library(PipeWire_LIBRARIES
+    NAMES
+        pipewire-0.3
+    HINTS
+        ${PKG_PipeWire_LIBRARY_DIRS}
+)
+
 find_path(Spa_INCLUDE_DIRS
     NAMES
         spa/param/props.h
     HINTS
         ${PKG_Spa_INCLUDE_DIRS}
         ${PKG_Spa_INCLUDE_DIRS}/spa-0.2
-)
-
-find_library(PipeWire_LIBRARIES
-    NAMES
-        pipewire-0.3
-        pipewire-0.2
-    HINTS
-        ${PKG_PipeWire_LIBRARY_DIRS}
 )
 
 include(FindPackageHandleStandardArgs)
