@@ -33,20 +33,21 @@ add_library(krfb_framebuffer_pw
     ${krfb_framebuffer_pw_SRCS}
 )
 
-
-check_include_file("linux/dma-buf.h" HAVE_LINUX_DMABUF_H)
-if (HAVE_LINUX_DMABUF_H)
-    target_compile_definitions(krfb_framebuffer_pw PRIVATE -DHAVE_LINUX_DMABUF_H)
-endif ()
-
-target_link_libraries (krfb_framebuffer_pw
-                       Qt5::Core
-                       Qt5::Gui
-                       Qt5::DBus
-                       KF5::CoreAddons
-                       krfbprivate
-                       PipeWire::PipeWire
+target_link_libraries(krfb_framebuffer_pw
+                      Qt5::Core
+                      Qt5::Gui
+                      Qt5::DBus
+                      KF5::CoreAddons
+                      krfbprivate
+                      PkgConfig::PipeWire
 )
+
+if (HAVE_DMA_BUF)
+    target_link_libraries(krfb_framebuffer_pw
+                          ${epoxy_LIBRARIES}
+                          gbm::gbm
+    )
+endif()
 
 install (TARGETS krfb_framebuffer_pw
          DESTINATION ${KDE_INSTALL_PLUGINDIR}/krfb/framebuffer

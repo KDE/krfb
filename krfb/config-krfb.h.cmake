@@ -9,3 +9,6 @@
 
 /* Define if XShm is available */
 #cmakedefine HAVE_XSHM 1
+
+/* Define if DMA-BUF support is available */
+#cmakedefine HAVE_DMA_BUF 1

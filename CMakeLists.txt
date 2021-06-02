@@ -77,11 +77,30 @@ include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} )
 
 find_package(LibVNCServer REQUIRED)
 
-find_package(PipeWire)
-set_package_properties(PipeWire PROPERTIES
+
+pkg_check_modules(PipeWire IMPORTED_TARGET libpipewire-0.3)
+add_feature_info(PipeWire PipeWire_FOUND "Required for pipewire screencast plugin")
+
+find_package(gbm)
+set_package_properties(gbm PROPERTIES
     TYPE OPTIONAL
-    PURPOSE "Required for pipewire screencast plugin"
+    PURPOSE "Required for dma-buf support in pipewire screencast plugin."
 )
+
+find_package(EGL)
+set_package_properties(EGL PROPERTIES
+    TYPE OPTIONAL
+    PURPOSE "Required for dma-buf support in pipewire screencast plugin."
+)
+
+find_package(epoxy)
+set_package_properties(Epoxy PROPERTIES DESCRIPTION "libepoxy"
+    URL "https://github.com/anholt/libepoxy"
+    TYPE OPTIONAL
+    PURPOSE "Required for dma-buf support in pipewire screencast plugin."
+)
+
+set(HAVE_DMA_BUF ${EGL_FOUND} AND ${gbm_FOUND} AND ${Epoxy_FOUND})
 
 ecm_setup_version(PROJECT
                   VARIABLE_PREFIX KRFB
