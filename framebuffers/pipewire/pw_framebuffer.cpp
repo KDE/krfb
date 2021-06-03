@@ -74,6 +74,7 @@ const QDBusArgument &operator >> (const QDBusArgument &arg, PWFrameBuffer::Strea
     return arg;
 }
 
+#if HAVE_DMA_BUF
 const char * formatGLError(GLenum err)
 {
     switch(err) {
@@ -95,6 +96,7 @@ const char * formatGLError(GLenum err)
         return (QLatin1String("0x") + QString::number(err, 16)).toLocal8Bit().constData();
     }
 }
+#endif /* HAVE_DMA_BUF */
 
 /**
  * @brief The PWFrameBuffer::Private class - private counterpart of PWFramebuffer class. This is the entity where
