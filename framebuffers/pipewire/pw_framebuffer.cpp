@@ -39,7 +39,7 @@
 #include "xdp_dbus_remotedesktop_interface.h"
 #include "krfb_fb_pipewire_debug.h"
 
-#if HAVE_DMA_BUF
+#ifdef HAVE_DMA_BUF
 #include <fcntl.h>
 #include <unistd.h>
 

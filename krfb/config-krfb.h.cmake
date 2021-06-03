@@ -11,4 +11,4 @@
 #cmakedefine HAVE_XSHM 1
 
 /* Define if DMA-BUF support is available */
-#cmakedefine HAVE_DMA_BUF 1
+#cmakedefine01 HAVE_DMA_BUF
