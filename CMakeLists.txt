@@ -94,13 +94,13 @@ set_package_properties(EGL PROPERTIES
 )
 
 find_package(epoxy)
-set_package_properties(Epoxy PROPERTIES DESCRIPTION "libepoxy"
+set_package_properties(epoxy PROPERTIES DESCRIPTION "libepoxy"
     URL "https://github.com/anholt/libepoxy"
     TYPE OPTIONAL
     PURPOSE "Required for dma-buf support in pipewire screencast plugin."
 )
 
-if(EGL_FOUND AND gbm_FOUND AND Epoxy_FOUND)
+if(EGL_FOUND AND gbm_FOUND AND epoxy_FOUND)
   set (HAVE_DMA_BUF TRUE)
 else()
   set (HAVE_DMA_BUF FALSE)
