@@ -100,7 +100,11 @@ set_package_properties(Epoxy PROPERTIES DESCRIPTION "libepoxy"
     PURPOSE "Required for dma-buf support in pipewire screencast plugin."
 )
 
-set(HAVE_DMA_BUF ${EGL_FOUND} AND ${gbm_FOUND} AND ${Epoxy_FOUND})
+if(EGL_FOUND AND gbm_FOUND AND Epoxy_FOUND)
+  set (HAVE_DMA_BUF TRUE)
+else()
+  set (HAVE_DMA_BUF FALSE)
+endif()
 
 ecm_setup_version(PROJECT
                   VARIABLE_PREFIX KRFB
