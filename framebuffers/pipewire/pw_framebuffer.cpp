@@ -649,6 +649,7 @@ void PWFrameBuffer::Private::handleFrame(pw_buffer *pwBuffer)
     }
 
     std::function<void()> cleanup;
+    const qint64 srcStride = spaBuffer->datas[0].chunk->stride;
     if (spaBuffer->datas->type == SPA_DATA_MemFd) {
         uint8_t *map = static_cast<uint8_t*>(mmap(
             nullptr, spaBuffer->datas->maxsize + spaBuffer->datas->mapoffset,
@@ -704,7 +705,7 @@ void PWFrameBuffer::Private::handleFrame(pw_buffer *pwBuffer)
         glBindTexture(GL_TEXTURE_2D, texture);
         glEGLImageTargetTexture2DOES(GL_TEXTURE_2D, image);
 
-        src = static_cast<uint8_t*>(malloc(streamSize.width() * streamSize.height() * BYTES_PER_PIXEL));
+        src = static_cast<uint8_t*>(malloc(srcStride * streamSize.height()));
 
         GLenum glFormat = GL_BGRA;
         switch (videoFormat->format) {
@@ -792,7 +793,7 @@ void PWFrameBuffer::Private::handleFrame(pw_buffer *pwBuffer)
     }
 
     const qint32 dstStride = videoSize.width() * BYTES_PER_PIXEL;
-    const qint32 srcStride = spaBuffer->datas[0].chunk->stride;
+    Q_ASSERT(dstStride <= srcStride);
 
     if (!videoFullHeight && (videoMetadata->region.position.y + videoSize.height() <=  streamSize.height())) {
         src += srcStride * videoMetadata->region.position.y;
