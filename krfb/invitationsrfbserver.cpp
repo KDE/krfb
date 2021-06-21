@@ -33,7 +33,13 @@
 #include <KStringHandler>
 #include <KWallet/KWallet>
 
-#include <dnssd/publicservice.h>
+#include <kdnssd_version.h>
+#if KDNSSD_VERSION >= QT_VERSION_CHECK(5, 84, 0)
+#include <KDNSSD/PublicService>
+#else
+#include <DNSSD/PublicService>
+#endif
+
 using KWallet::Wallet;
 
 // used for KWallet folder name
