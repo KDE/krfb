@@ -107,7 +107,7 @@ MainWindow::MainWindow(QWidget *parent)
     m_passwordLineEdit->setVisible(false);
     m_passwordLineEdit->setAlignment(Qt::AlignHCenter);
 
-    QWidget *mainWidget = new QWidget;
+    auto mainWidget = new QWidget;
     m_ui.setupUi(mainWidget);
     m_ui.krfbIconLabel->setPixmap(QIcon::fromTheme(QStringLiteral("krfb")).pixmap(128));
     m_ui.enableUnattendedCheckBox->setChecked(
@@ -252,7 +252,7 @@ void MainWindow::showConfiguration()
         return;
     }
 
-    KConfigDialog *dialog = new KConfigDialog(this, QStringLiteral("settings"), KrfbConfig::self());
+    auto dialog = new KConfigDialog(this, QStringLiteral("settings"), KrfbConfig::self());
     dialog->addPage(new TCP, i18n("Network"), QStringLiteral("network-wired"));
     dialog->addPage(new Security, i18n("Security"), QStringLiteral("security-high"));
     dialog->addPage(new ConfigFramebuffer, i18n("Screen capture"), QStringLiteral("video-display"));

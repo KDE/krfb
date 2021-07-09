@@ -24,11 +24,11 @@ class PWFrameBuffer: public FrameBuffer
 {
     Q_OBJECT
 public:
-    typedef struct {
+    using Stream = struct {
         uint nodeId;
         QVariantMap map;
-    } Stream;
-    typedef QList<Stream> Streams;
+    };
+    using Streams = QList<Stream>;
 
     PWFrameBuffer(WId winid, QObject *parent = nullptr);
     virtual ~PWFrameBuffer() override;

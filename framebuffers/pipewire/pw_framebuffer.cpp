@@ -561,7 +561,7 @@ void PWFrameBuffer::Private::onStreamStateChanged(void *data, pw_stream_state /*
 void PWFrameBuffer::Private::onStreamParamChanged(void *data, uint32_t id, const struct spa_pod *format)
 {
     qInfo() << "Stream format changed";
-    auto *d = static_cast<PWFrameBuffer::Private *>(data);
+    auto d = static_cast<PWFrameBuffer::Private *>(data);
 
     if (!format || id != SPA_PARAM_Format) {
         return;
@@ -614,7 +614,7 @@ void PWFrameBuffer::Private::onStreamParamChanged(void *data, uint32_t id, const
  */
 void PWFrameBuffer::Private::onStreamProcess(void *data)
 {
-    auto *d = static_cast<PWFrameBuffer::Private *>(data);
+    auto d = static_cast<PWFrameBuffer::Private *>(data);
 
     pw_buffer* next_buffer;
     pw_buffer* buffer = nullptr;
@@ -640,7 +640,7 @@ void PWFrameBuffer::Private::onStreamProcess(void *data)
 
 void PWFrameBuffer::Private::handleFrame(pw_buffer *pwBuffer)
 {
-    auto *spaBuffer = pwBuffer->buffer;
+    auto spaBuffer = pwBuffer->buffer;
     uint8_t *src = nullptr;
 
     if (spaBuffer->datas[0].chunk->size == 0) {
