@@ -47,7 +47,7 @@ public:
 class Security: public QWidget, public Ui::Security
 {
 public:
-    Security(QWidget *parent = nullptr) : QWidget(parent) {
+    explicit Security(QWidget *parent = nullptr) : QWidget(parent) {
         setupUi(this);
         walletWarning = new KMessageWidget(this);
         walletWarning->setText(i18n("Storing passwords in config file is insecure!"));

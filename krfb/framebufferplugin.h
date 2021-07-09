@@ -34,7 +34,7 @@ class KRFBPRIVATE_EXPORT FrameBufferPlugin : public QObject
     Q_OBJECT
 
 public:
-    FrameBufferPlugin(QObject *parent, const QVariantList &args);
+    explicit FrameBufferPlugin(QObject *parent, const QVariantList &args);
     ~FrameBufferPlugin() override;
 
     virtual FrameBuffer *frameBuffer(WId id) = 0;

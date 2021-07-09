@@ -43,7 +43,7 @@ class MainWindow : public KXmlGuiWindow
     private:
         Ui::MainWidget m_ui;
         bool m_passwordEditable;
-        QLineEdit *m_passwordLineEdit;
+        QLineEdit *m_passwordLineEdit = nullptr;
 };
 
 #endif
