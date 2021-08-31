@@ -605,7 +605,7 @@ QList<QRect> XCBFrameBuffer::modifiedTiles() {
         } else {
             // not using shared memory
             // will use just xcb_image_get() and copy pixels
-            for (const QRect& r : qAsConst(tiles)) {
+            for (const QRect& r : std::as_const(tiles)) {
                 // I did not find XGetSubImage() analog in XCB!!
                 // need function that copies pixels from one image to another
                 xcb_image_t *damagedImage = xcb_image_get(

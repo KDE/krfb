@@ -133,7 +133,7 @@ void RfbServerManager::init()
 
 void RfbServerManager::updateFrameBuffer()
 {
-    for (RfbServer *server : qAsConst(d->servers)) {
+    for (RfbServer *server : std::as_const(d->servers)) {
         server->updateFrameBuffer(d->fb->data(), d->fb->width(), d->fb->height(), d->fb->depth());
     }
 }
@@ -143,7 +143,7 @@ void RfbServerManager::updateScreens()
     QList<QRect> rects = d->fb->modifiedTiles();
     QPoint currentCursorPos = QCursor::pos();
 
-    for (RfbServer* server : qAsConst(d->servers)) {
+    for (RfbServer* server : std::as_const(d->servers)) {
         server->updateScreen(rects);
         server->updateCursorPosition(currentCursorPos);
     }
