@@ -39,7 +39,7 @@
 class TCP: public QWidget, public Ui::TCP
 {
 public:
-    TCP(QWidget *parent = nullptr) : QWidget(parent) {
+    explicit TCP(QWidget *parent = nullptr) : QWidget(parent) {
         setupUi(this);
     }
 };

@@ -41,11 +41,11 @@ public:
     virtual ~ClientActions();
 
 private:
-    QMenu *m_menu;
-    QAction *m_title;
-    QAction *m_disconnectAction;
-    QAction *m_enableControlAction;
-    QAction *m_separator;
+    QMenu *m_menu = nullptr;
+    QAction *m_title = nullptr;
+    QAction *m_disconnectAction = nullptr;
+    QAction *m_enableControlAction = nullptr;
+    QAction *m_separator = nullptr;
 };
 
 ClientActions::ClientActions(RfbClient* client, QMenu* menu, QAction* before)
