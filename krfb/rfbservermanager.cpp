@@ -133,7 +133,7 @@ void RfbServerManager::init()
 
 void RfbServerManager::updateFrameBuffer()
 {
-    Q_FOREACH(RfbServer *server, d->servers) {
+    for (RfbServer *server : qAsConst(d->servers)) {
         server->updateFrameBuffer(d->fb->data(), d->fb->width(), d->fb->height(), d->fb->depth());
     }
 }
