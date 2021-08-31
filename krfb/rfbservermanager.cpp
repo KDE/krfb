@@ -33,6 +33,9 @@
 #include <KLocalizedString>
 #include <KUser>
 #include <KNotification>
+#include <chrono>
+
+using namespace std::chrono_literals;
 
 static const char *cur =
     "                   "
@@ -217,7 +220,7 @@ void RfbServerManager::addClient(RfbClient* cc)
     if (d->clients.size() == 0) {
         //qDebug() << "Starting framebuffer monitor";
         d->fb->startMonitor();
-        d->rfbUpdateTimer.start(50);
+        d->rfbUpdateTimer.start(50ms);
     }
     d->clients.insert(cc);
 
