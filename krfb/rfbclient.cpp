@@ -170,8 +170,13 @@ void RfbClient::update()
 
 PendingRfbClient::PendingRfbClient(rfbClientPtr client, QObject *parent)
     : QObject(parent), m_rfbClient(client)
+    , m_notifier(new QSocketNotifier(client->sock, QSocketNotifier::Read, this))
 {
     m_rfbClient->clientData = this;
+
+    m_notifier->setEnabled(true);
+    connect(m_notifier, &QSocketNotifier::activated,
+            this, &PendingRfbClient::onSocketActivated);
 }
 
 PendingRfbClient::~PendingRfbClient()
@@ -229,4 +234,36 @@ bool PendingRfbClient::vncAuthCheckPassword(const QByteArray& password, const QB
 
     rfbEncryptBytes(challenge, passwd);
     return memcmp(challenge, encryptedPassword.constData(), encryptedPassword.size()) == 0;
+}
+
+void PendingRfbClient::onSocketActivated()
+{
+    //Process not only one, but all pending messages.
+    //poll() idea/code copied from vino:
+    // Copyright (C) 2003 Sun Microsystems, Inc.
+    // License: GPL v2 or later
+    struct pollfd pollfd = { m_rfbClient->sock, POLLIN|POLLPRI, 0 };
+
+    while(poll(&pollfd, 1, 0) == 1) {
+        if(m_rfbClient->state == rfbClientRec::RFB_INITIALISATION) {
+            m_notifier->setEnabled(false);
+            //Client is Authenticated
+            processNewClient();
+            break;
+        }
+        rfbProcessClientMessage(m_rfbClient);
+
+        //This is how we handle disconnection.
+        //if rfbProcessClientMessage() finds out that it can't read the socket,
+        //it closes it and sets it to -1. So, we just have to check this here
+        //and call rfbClientConnectionGone() if necessary. This will call
+        //the clientGoneHook which in turn will remove this RfbClient instance
+        //from the server manager and will call deleteLater() to delete it
+        if (m_rfbClient->sock == -1) {
+            qCDebug(KRFB) << "disconnected from socket signal";
+            m_notifier->setEnabled(false);
+            rfbClientConnectionGone(m_rfbClient);
+            break;
+        }
+    }
 }

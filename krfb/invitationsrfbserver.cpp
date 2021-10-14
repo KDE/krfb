@@ -21,7 +21,6 @@
 #include "invitationsrfbserver.h"
 #include "invitationsrfbclient.h"
 #include "krfbconfig.h"
-#include "rfbservermanager.h"
 #include "krfbdebug.h"
 #include <QTimer>
 #include <QApplication>

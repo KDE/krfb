@@ -23,6 +23,8 @@
 #include "rfb.h"
 #include <QObject>
 
+class QSocketNotifier;
+
 class RfbClient : public QObject
 {
     Q_OBJECT
@@ -104,6 +106,11 @@ protected:
     bool vncAuthCheckPassword(const QByteArray & password, const QByteArray & encryptedPassword) const;
 
     rfbClientPtr m_rfbClient;
+
+private:
+    void onSocketActivated();
+
+    QSocketNotifier *const m_notifier;
 };
 
 #endif // RFBCLIENT_H

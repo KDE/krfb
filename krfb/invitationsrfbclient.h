@@ -37,7 +37,6 @@ public:
 
 protected Q_SLOTS:
     void processNewClient() override;
-    virtual void onSocketActivated();
     bool checkPassword(const QByteArray & encryptedPassword) override;
 
 private Q_SLOTS:

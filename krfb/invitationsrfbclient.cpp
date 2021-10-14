@@ -52,10 +52,6 @@ PendingInvitationsRfbClient::PendingInvitationsRfbClient(rfbClientPtr client, QO
     d(new Private(client))
 {
     d->client->clientGoneHook = clientGoneHookNoop;
-    d->notifier = new QSocketNotifier(client->sock, QSocketNotifier::Read, this);
-    d->notifier->setEnabled(true);
-    connect(d->notifier, &QSocketNotifier::activated,
-            this, &PendingInvitationsRfbClient::onSocketActivated);
 }
 
 PendingInvitationsRfbClient::~PendingInvitationsRfbClient()
@@ -87,39 +83,6 @@ void PendingInvitationsRfbClient::processNewClient()
         connect(dialog, &InvitationsConnectionDialog::rejected, this, &PendingInvitationsRfbClient::reject);
 
         dialog->show();
-    }
-}
-
-void PendingInvitationsRfbClient::onSocketActivated()
-{
-    //Process not only one, but all pending messages.
-    //poll() idea/code copied from vino:
-    // Copyright (C) 2003 Sun Microsystems, Inc.
-    // License: GPL v2 or later
-    struct pollfd pollfd = { d->client->sock, POLLIN|POLLPRI, 0 };
-
-    while(poll(&pollfd, 1, 0) == 1) {
-
-        if(d->client->state == rfbClientRec::RFB_INITIALISATION) {
-            d->notifier->setEnabled(false);
-            //Client is Authenticated
-            processNewClient();
-            break;
-        }
-        rfbProcessClientMessage(d->client);
-
-        //This is how we handle disconnection.
-        //if rfbProcessClientMessage() finds out that it can't read the socket,
-        //it closes it and sets it to -1. So, we just have to check this here
-        //and call rfbClientConnectionGone() if necessary. This will call
-        //the clientGoneHook which in turn will remove this RfbClient instance
-        //from the server manager and will call deleteLater() to delete it
-        if (d->client->sock == -1) {
-            qCDebug(KRFB) << "disconnected from socket signal";
-            d->notifier->setEnabled(false);
-            rfbClientConnectionGone(d->client);
-            break;
-        }
     }
 }
 
