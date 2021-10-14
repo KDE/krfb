@@ -117,6 +117,7 @@ bool RfbServer::start()
     }
 
     d->screen->port = listeningPort();
+    d->screen->ipv6port = listeningPort();
 
     // Disable/Enable password checking
     if (passwordRequired()) {
