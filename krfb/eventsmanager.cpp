@@ -64,7 +64,7 @@ void EventsManager::loadPlugins()
 {
     //qDebug();
 
-    const QVector<KPluginMetaData> plugins = KPluginLoader::findPlugins(QStringLiteral("krfb/events"));
+    const QVector<KPluginMetaData> plugins = KPluginMetaData::findPlugins(QStringLiteral("krfb/events"));
 
     QVectorIterator<KPluginMetaData> i(plugins);
     i.toBack();
