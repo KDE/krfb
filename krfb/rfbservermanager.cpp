@@ -24,6 +24,7 @@
 #include "framebuffermanager.h"
 #include "sockethelpers.h"
 #include "krfbconfig.h"
+#include "krfbdebug.h"
 #include <QTimer>
 #include <QApplication>
 #include <QDesktopWidget>

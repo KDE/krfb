@@ -25,6 +25,7 @@
 #include <QSocketNotifier>
 #include <poll.h>
 #include <strings.h> //for bzero()
+#include "krfbdebug.h"
 
 struct RfbClient::Private
 {
