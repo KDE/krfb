@@ -202,7 +202,7 @@ rfbScreenInfoPtr RfbServerManager::newScreen()
 
         //qDebug() << "bpp: " << bpp;
 
-        rfbLogEnable(0);
+        rfbLogEnable(KRFB().isDebugEnabled());
 
         screen = rfbGetScreen(nullptr, nullptr, w, h, 8, 3, bpp);
         screen->paddedWidthInBytes = d->fb->paddedWidth();
