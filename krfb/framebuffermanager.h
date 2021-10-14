@@ -45,7 +45,7 @@ public:
 
     ~FrameBufferManager() override;
 
-    QSharedPointer<FrameBuffer> frameBuffer(WId id);
+    QSharedPointer<FrameBuffer> frameBuffer(WId id, const QVariantMap &args);
 
 private:
     Q_DISABLE_COPY(FrameBufferManager)

@@ -36,9 +36,10 @@ PWFrameBufferPlugin::~PWFrameBufferPlugin()
 {
 }
 
-
-FrameBuffer *PWFrameBufferPlugin::frameBuffer(WId id)
+FrameBuffer *PWFrameBufferPlugin::frameBuffer(WId id, const QVariantMap &args)
 {
+    //NOTE WId is irrelevant in Wayland
+
     auto pwfb = new PWFrameBuffer(id);
 
     // sanity check for dbus/wayland/pipewire errors

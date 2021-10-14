@@ -23,6 +23,7 @@
 #include "rfb.h"
 #include "framebuffer.h"
 #include <QObject>
+#include <QVariantMap>
 
 class RfbClient;
 struct RfbServerManagerStatic;
@@ -35,6 +36,7 @@ public:
     static RfbServerManager *instance();
 
     QSharedPointer<FrameBuffer> framebuffer() const;
+    static QVariantMap s_pluginArgs;
 Q_SIGNALS:
     void clientConnected(RfbClient *cc);
     void clientDisconnected(RfbClient *cc);

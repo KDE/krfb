@@ -93,7 +93,7 @@ void FrameBufferManager::loadPlugins()
     }
 }
 
-QSharedPointer<FrameBuffer> FrameBufferManager::frameBuffer(WId id)
+QSharedPointer<FrameBuffer> FrameBufferManager::frameBuffer(WId id, const QVariantMap &args)
 {
     //qDebug();
 
@@ -118,7 +118,7 @@ QSharedPointer<FrameBuffer> FrameBufferManager::frameBuffer(WId id)
         if (iter.key() == KrfbConfig::preferredFrameBufferPlugin()) {
             qCDebug(KRFB) << "Using FrameBuffer:" << KrfbConfig::preferredFrameBufferPlugin();
 
-            QSharedPointer<FrameBuffer> frameBuffer(iter.value()->frameBuffer(id));
+            QSharedPointer<FrameBuffer> frameBuffer(iter.value()->frameBuffer(id, args));
 
             if (frameBuffer) {
                 m_frameBuffers.insert(id, frameBuffer.toWeakRef());

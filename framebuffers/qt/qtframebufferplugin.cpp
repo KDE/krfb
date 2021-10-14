@@ -36,8 +36,9 @@ QtFrameBufferPlugin::~QtFrameBufferPlugin()
 {
 }
 
-FrameBuffer *QtFrameBufferPlugin::frameBuffer(WId id)
+FrameBuffer *QtFrameBufferPlugin::frameBuffer(WId id, const QVariantMap &args)
 {
+    Q_UNUSED(args);
     return new QtFrameBuffer(id);
 }
 

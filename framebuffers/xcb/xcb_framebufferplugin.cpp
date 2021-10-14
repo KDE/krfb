@@ -37,8 +37,9 @@ XCBFrameBufferPlugin::~XCBFrameBufferPlugin()
 }
 
 
-FrameBuffer *XCBFrameBufferPlugin::frameBuffer(WId id)
+FrameBuffer *XCBFrameBufferPlugin::frameBuffer(WId id, const QVariantMap &args)
 {
+    Q_UNUSED(args);
     return new XCBFrameBuffer(id);
 }
 

@@ -120,11 +120,12 @@ QSharedPointer<FrameBuffer> RfbServerManager::framebuffer() const
     return d->fb;
 }
 
+QVariantMap RfbServerManager::s_pluginArgs;
+
 void RfbServerManager::init()
 {
     //qDebug();
-
-    d->fb = FrameBufferManager::instance()->frameBuffer(QApplication::desktop()->winId());
+    d->fb = FrameBufferManager::instance()->frameBuffer(QApplication::desktop()->winId(), s_pluginArgs);
     d->myCursor = rfbMakeXCursor(19, 19, (char *) cur, (char *) mask);
     d->myCursor->cleanup = false;
     d->desktopName = QStringLiteral("%1@%2 (shared desktop)") //FIXME check if we can use utf8
