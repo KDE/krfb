@@ -32,6 +32,7 @@ add_library(krfb_framebuffer_pw
     MODULE
     ${krfb_framebuffer_pw_SRCS}
 )
+set_property(TARGET krfb_framebuffer_pw PROPERTY C_STANDARD 99)
 
 target_link_libraries(krfb_framebuffer_pw
                       Qt5::Core
