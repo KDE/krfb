@@ -41,6 +41,13 @@ FrameBuffer *PWFrameBufferPlugin::frameBuffer(WId id, const QVariantMap &args)
     //NOTE WId is irrelevant in Wayland
 
     auto pwfb = new PWFrameBuffer(id);
+    if (args.contains(QLatin1String("name"))) {
+        pwfb->startVirtualMonitor(args[QStringLiteral("name")].toString(), args[QStringLiteral("resolution")].toSize(), args[QStringLiteral("scale")].toDouble());
+    } else {
+        // D-Bus is most important in XDG-Desktop-Portals init chain, no toys for us if something is wrong with XDP
+        // PipeWire connectivity is initialized after D-Bus session is started
+        pwfb->initDBus();
+    }
 
     // sanity check for dbus/wayland/pipewire errors
     if (!pwfb->isValid()) {

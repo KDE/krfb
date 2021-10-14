@@ -22,6 +22,9 @@
 #include <QDebug>
 #include <QRandomGenerator>
 
+#include <KWayland/Client/connection_thread.h>
+#include <KWayland/Client/registry.h>
+
 // pipewire
 #include <sys/ioctl.h>
 
@@ -38,6 +41,7 @@
 #include "xdp_dbus_screencast_interface.h"
 #include "xdp_dbus_remotedesktop_interface.h"
 #include "krfb_fb_pipewire_debug.h"
+#include "screencasting.h"
 
 #if HAVE_DMA_BUF
 #include <fcntl.h>
@@ -904,10 +908,6 @@ PWFrameBuffer::PWFrameBuffer(WId winid, QObject *parent)
     : FrameBuffer (winid, parent),
       d(new Private(this))
 {
-    // D-Bus is most important in init chain, no toys for us if something is wrong with XDP
-    // PipeWire connectivity is initialized after D-Bus session is started
-    d->initDbus();
-
     fb = nullptr;
 }
 
@@ -915,6 +915,38 @@ PWFrameBuffer::~PWFrameBuffer()
 {
     free(fb);
     fb = nullptr;
+}
+
+void PWFrameBuffer::initDBus()
+{
+    d->initDbus();
+}
+
+void PWFrameBuffer::startVirtualMonitor(const QString& name, const QSize& resolution, qreal dpr)
+{
+    d->videoSize = resolution * dpr;
+    using namespace KWayland::Client;
+    auto connection = ConnectionThread::fromApplication(this);
+    if (!connection) {
+        qWarning() << "Failed getting Wayland connection from QPA";
+        QCoreApplication::exit(1);
+        return;
+    }
+
+    auto registry = new Registry(this);
+    connect(registry, &KWayland::Client::Registry::interfaceAnnounced, this, [this, registry, name, dpr, resolution] (const QByteArray &interfaceName, quint32 wlname, quint32 version) {
+        if (interfaceName != "zkde_screencast_unstable_v1")
+            return;
+
+        auto screencasting = new Screencasting(registry, wlname, version, this);
+        auto r = screencasting->createVirtualMonitorStream(name, resolution, dpr, Screencasting::Metadata);
+        connect(r, &ScreencastingStream::created, this, [this] (quint32 nodeId) {
+            d->pwStreamNodeId = nodeId;
+            d->initPw();
+        });
+    });
+    registry->create(connection);
+    registry->setup();
 }
 
 int PWFrameBuffer::depth()

@@ -123,6 +123,41 @@ install (TARGETS krfb
          ${KDE_INSTALL_TARGETS_DEFAULT_ARGS}
 )
 
+#################################
+kconfig_add_kcfg_files (krfbvm_SRCS
+                     krfbconfig.kcfgc
+)
+
+ecm_qt_declare_logging_category(krfbvm_SRCS
+    HEADER krfbdebug.h
+    IDENTIFIER KRFB
+    CATEGORY_NAME krfb.krfb
+    DESCRIPTION "KRFB Application"
+    EXPORT KRFB
+)
+
+add_executable(krfb-virtualmonitor main-virtualmonitor.cpp ${krfbvm_SRCS}
+                                   rfbserver.cpp rfbclient.cpp rfbservermanager.cpp eventsmanager.cpp framebuffermanager.cpp sockethelpers.cpp)
+target_link_libraries(krfb-virtualmonitor
+                      krfbprivate
+                      Qt5::Gui
+                      Qt5::Network
+                      KF5::ConfigGui
+                      KF5::CoreAddons
+                      KF5::I18n
+                      KF5::Notifications
+                      KF5::WindowSystem
+)
+
+install (TARGETS krfb-virtualmonitor
+         ${KDE_INSTALL_TARGETS_DEFAULT_ARGS}
+)
+
+configure_file(org.kde.krfb.virtualmonitor.desktop.cmake ${CMAKE_CURRENT_BINARY_DIR}/org.kde.krfb.virtualmonitor.desktop @ONLY)
+install (PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/org.kde.krfb.virtualmonitor.desktop
+         DESTINATION ${KDE_INSTALL_APPDIR}
+)
+
 ########### install files ###############
 
 install (PROGRAMS org.kde.krfb.desktop

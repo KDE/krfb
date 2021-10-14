@@ -33,6 +33,9 @@ public:
     PWFrameBuffer(WId winid, QObject *parent = nullptr);
     virtual ~PWFrameBuffer() override;
 
+    void initDBus();
+    void startVirtualMonitor(const QString &name, const QSize &resolution, qreal dpr);
+
     int  depth() override;
     int  height() override;
     int  width() override;

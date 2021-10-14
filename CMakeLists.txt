@@ -38,6 +38,7 @@ find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
     DocTools
     Notifications
     Wallet
+    Wayland
     WidgetsAddons
     WindowSystem
     XmlGui
@@ -80,6 +81,14 @@ find_package(LibVNCServer REQUIRED)
 
 pkg_check_modules(PipeWire IMPORTED_TARGET libpipewire-0.3)
 add_feature_info(PipeWire PipeWire_FOUND "Required for pipewire screencast plugin")
+find_package(PlasmaWaylandProtocols 1.5.0)
+
+if(PipeWire_FOUND AND PlasmaWaylandProtocols_FOUND)
+    find_package(QtWaylandScanner REQUIRED)
+    find_package(Qt5WaylandClient)
+    find_package(Qt5XkbCommonSupport)
+    find_package(Wayland REQUIRED COMPONENTS Client)
+endif()
 
 find_package(gbm)
 set_package_properties(gbm PROPERTIES

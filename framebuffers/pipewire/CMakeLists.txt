@@ -5,8 +5,14 @@ include_directories (${CMAKE_CURRENT_SOURCE_DIR}
 set (krfb_framebuffer_pw_SRCS
      pw_framebuffer.cpp
      pw_framebufferplugin.cpp
+
+     screencasting.cpp
 )
 
+ecm_add_qtwayland_client_protocol(krfb_framebuffer_pw_SRCS
+    PROTOCOL ${PLASMA_WAYLAND_PROTOCOLS_DIR}/screencast.xml
+    BASENAME zkde-screencast-unstable-v1
+)
 
 ecm_qt_declare_logging_category(krfb_framebuffer_pw_SRCS
     HEADER krfb_fb_pipewire_debug.h
@@ -39,6 +45,8 @@ target_link_libraries(krfb_framebuffer_pw
                       Qt5::Gui
                       Qt5::DBus
                       KF5::CoreAddons
+                      KF5::WaylandClient
+                      Wayland::Client
                       krfbprivate
                       PkgConfig::PipeWire
 )
