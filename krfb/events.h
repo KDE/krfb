@@ -36,7 +36,7 @@ class KRFBPRIVATE_EXPORT EventHandler : public QObject
     Q_OBJECT
 public:
     explicit EventHandler(QObject *parent = nullptr);
-    virtual ~EventHandler() = default;
+    ~EventHandler() override = default;
     virtual void handleKeyboard(bool down, rfbKeySym key) = 0;
     virtual void handlePointer(int buttonMask, int x, int y) = 0;
 

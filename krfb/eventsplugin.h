@@ -33,7 +33,7 @@ class KRFBPRIVATE_EXPORT EventsPlugin : public QObject
     Q_OBJECT
 public:
     EventsPlugin(QObject *parent, const QVariantList &args);
-    virtual ~EventsPlugin();
+    ~EventsPlugin() override;
 
     virtual EventHandler *eventHandler() = 0;
 };

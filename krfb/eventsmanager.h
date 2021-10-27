@@ -43,7 +43,7 @@ class KRFBPRIVATE_EXPORT EventsManager : public QObject
 public:
     static EventsManager *instance();
 
-    virtual ~EventsManager();
+    ~EventsManager() override;
 
     QSharedPointer<EventHandler> eventHandler();
 
