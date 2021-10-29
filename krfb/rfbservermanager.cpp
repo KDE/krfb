@@ -146,7 +146,7 @@ void RfbServerManager::updateFrameBuffer()
 void RfbServerManager::updateScreens()
 {
     QList<QRect> rects = d->fb->modifiedTiles();
-    QPoint currentCursorPos = QCursor::pos();
+    const QPoint currentCursorPos = d->fb->cursorPosition();
 
     for (RfbServer* server : std::as_const(d->servers)) {
         server->updateScreen(rects);

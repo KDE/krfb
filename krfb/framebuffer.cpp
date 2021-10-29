@@ -10,8 +10,7 @@
 #include "framebuffer.h"
 
 #include <config-krfb.h>
-
-#include <X11/Xutil.h>
+#include <QCursor>
 
 
 FrameBuffer::FrameBuffer(WId id, QObject *parent)
@@ -72,4 +71,9 @@ void FrameBuffer::startMonitor()
 
 void FrameBuffer::stopMonitor()
 {
+}
+
+QPoint FrameBuffer::cursorPosition()
+{
+    return QCursor::pos();
 }

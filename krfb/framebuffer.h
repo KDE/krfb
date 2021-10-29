@@ -42,10 +42,12 @@ public:
     virtual int depth();
     virtual void startMonitor();
     virtual void stopMonitor();
+    virtual QPoint cursorPosition();
 
     virtual void getServerFormat(rfbPixelFormat &format);
 
     virtual QVariant customProperty(const QString &property) const;
+
 Q_SIGNALS:
     void frameBufferChanged();
 
