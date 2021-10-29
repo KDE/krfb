@@ -43,6 +43,7 @@ public:
     void getServerFormat(rfbPixelFormat &format) override;
     void startMonitor() override;
     void stopMonitor() override;
+    QPoint cursorPosition() override;
 
     QVariant customProperty(const QString &property) const override;
 
