@@ -622,6 +622,13 @@ void PWFrameBuffer::Private::onStreamParamChanged(void *data, uint32_t id, const
                 SPA_PARAM_META_size, SPA_POD_CHOICE_RANGE_Int (CURSOR_META_SIZE (64, 64),
                                                         CURSOR_META_SIZE (1, 1),
                                                         CURSOR_META_SIZE (1024, 1024)))),
+        reinterpret_cast<spa_pod*>(spa_pod_builder_add_object ( &builder,
+                SPA_TYPE_OBJECT_ParamMeta, SPA_PARAM_Meta,
+                SPA_PARAM_META_type, SPA_POD_Id(SPA_META_VideoDamage),
+                SPA_PARAM_META_size, SPA_POD_CHOICE_RANGE_Int(
+                            sizeof(struct spa_meta_region) * 16,
+                            sizeof(struct spa_meta_region) * 1,
+                            sizeof(struct spa_meta_region) * 16))),
     };
     pw_stream_update_params(d->pwStream, params.data(), params.size());
 }
@@ -876,7 +883,17 @@ void PWFrameBuffer::Private::handleFrame(pw_buffer *pwBuffer)
         img.convertTo(QImage::Format_RGB888);
     }
 
-    q->tiles.append(QRect(0, 0, videoSize.width(), videoSize.height()));
+    if (spa_meta* vdMeta = spa_buffer_find_meta(spaBuffer, SPA_META_VideoDamage)) {
+        struct spa_meta_region *r;
+        spa_meta_for_each(r, vdMeta) {
+            if (!spa_meta_region_is_valid(r))
+                break;
+
+            q->tiles.append(QRect(r->region.position.x, r->region.position.y, r->region.size.width, r->region.size.height));
+        }
+    } else {
+        q->tiles.append(QRect(0, 0, videoSize.width(), videoSize.height()));
+    }
 }
 
 /**
