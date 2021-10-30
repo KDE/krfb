@@ -46,7 +46,7 @@ protected:
         const QString host = peerAddress(m_rfbClient->sock) + QLatin1Char(':') + QString::number(peerPort(m_rfbClient->sock));
 
         KNotification::event(QStringLiteral("NewConnectionAutoAccepted"),
-                            i18n("Creating a Virtual Monitor from1 %1", host));
+                            i18n("Creating a Virtual Monitor from %1", host));
     }
     bool checkPassword(const QByteArray & encryptedPassword) override {
         bool b = vncAuthCheckPassword(password, encryptedPassword);
