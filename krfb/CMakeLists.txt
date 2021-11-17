@@ -78,7 +78,7 @@ kconfig_add_kcfg_files (krfb_SRCS
                      krfbconfig.kcfgc
 )
 
-ki18n_wrap_ui (krfb_SRCS
+ki18n_wrap_ui (krfb_UI_SRCS
                    ui/configtcp.ui
                    ui/configsecurity.ui
                    ui/configframebuffer.ui
@@ -92,6 +92,7 @@ qt5_add_resources(krfb_SRCS
 
 add_executable (krfb
                      ${krfb_SRCS}
+                     ${krfb_UI_SRCS}
 )
 
 target_link_libraries (krfb
@@ -136,7 +137,7 @@ ecm_qt_declare_logging_category(krfbvm_SRCS
     EXPORT KRFB
 )
 
-add_executable(krfb-virtualmonitor main-virtualmonitor.cpp ${krfbvm_SRCS}
+add_executable(krfb-virtualmonitor main-virtualmonitor.cpp ${krfbvm_SRCS} ${krfb_UI_SRCS}
                                    rfbserver.cpp rfbclient.cpp rfbservermanager.cpp eventsmanager.cpp framebuffermanager.cpp sockethelpers.cpp)
 target_link_libraries(krfb-virtualmonitor
                       krfbprivate
