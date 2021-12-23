@@ -64,7 +64,7 @@ QByteArray PendingVirtualMonitorRfbClient::password;
 class VirtualMonitorRfbServer : public RfbServer
 {
 public:
-    PendingRfbClient *newClient(rfbClientPtr client) {
+    PendingRfbClient *newClient(rfbClientPtr client) override {
         qDebug() << "new client request";
         return new PendingVirtualMonitorRfbClient(client, this);
     }
