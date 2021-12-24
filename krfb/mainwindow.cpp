@@ -22,7 +22,6 @@
 #include <KStandardAction>
 #include <KActionCollection>
 #include <KNewPasswordDialog>
-#include <KPluginLoader>
 #include <KPluginMetaData>
 
 #include <QIcon>
@@ -83,7 +82,7 @@ public:
     }
 
     void fillFrameBuffersCombo() {
-        const QVector<KPluginMetaData> plugins = KPluginLoader::findPlugins(QStringLiteral("krfb/framebuffer"));
+        const QVector<KPluginMetaData> plugins = KPluginMetaData::findPlugins(QStringLiteral("krfb/framebuffer"));
         QSet<QString> unique;
         QVectorIterator<KPluginMetaData> i(plugins);
         i.toBack();

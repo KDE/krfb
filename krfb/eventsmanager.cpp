@@ -28,7 +28,6 @@
 #include <QGlobalStatic>
 
 #include <KPluginFactory>
-#include <KPluginLoader>
 #include <KPluginMetaData>
 
 #include <QtCore/QSharedPointer>
@@ -70,22 +69,15 @@ void EventsManager::loadPlugins()
     i.toBack();
     QSet<QString> unique;
     while (i.hasPrevious()) {
-    KPluginMetaData data = i.previous();
+        KPluginMetaData data = i.previous();
         // only load plugins once, even if found multiple times!
-        if (unique.contains(data.name()))
+        if (unique.contains(data.name())) {
             continue;
-        KPluginFactory *factory = KPluginLoader(data.fileName()).factory();
-
-        if (!factory) {
-            qCDebug(KRFB) << "KPluginFactory could not load the plugin:" << data.fileName();
-            continue;
-        } else {
-            qCDebug(KRFB) << "found plugin at " << data.fileName();
         }
 
-        auto plugin = factory->create<EventsPlugin>(this);
-        if (plugin) {
-            m_plugins.insert(data.pluginId(), plugin);
+        const KPluginFactory::Result<EventsPlugin> result = KPluginFactory::instantiatePlugin<EventsPlugin>(data);
+        if (result.plugin) {
+            m_plugins.insert(data.pluginId(), result.plugin);
             qCDebug(KRFB) << "Loaded plugin with name " << data.pluginId();
         } else {
             qCDebug(KRFB) << "unable to load plugin for " << data.fileName();
