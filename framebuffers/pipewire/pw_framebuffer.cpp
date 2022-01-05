@@ -676,8 +676,30 @@ void PWFrameBuffer::Private::handleFrame(pw_buffer *pwBuffer)
     auto spaBuffer = pwBuffer->buffer;
     uint8_t *src = nullptr;
 
+    // process cursor
+    {
+        struct spa_meta_cursor *cursor = static_cast<struct spa_meta_cursor*>(spa_buffer_find_meta_data (spaBuffer, SPA_META_Cursor, sizeof (*cursor)));
+        if (spa_meta_cursor_is_valid (cursor)) {
+            struct spa_meta_bitmap *bitmap = nullptr;
+
+            if (cursor->bitmap_offset)
+                bitmap = SPA_MEMBER (cursor, cursor->bitmap_offset, struct spa_meta_bitmap);
+
+            if (bitmap && bitmap->size.width > 0 && bitmap->size.height > 0) {
+                const uint8_t *bitmap_data;
+
+                bitmap_data = SPA_MEMBER (bitmap, bitmap->offset, uint8_t);
+                cursorHotspot = { cursor->hotspot.x, cursor->hotspot.y };
+                cursorTexture = QImage(bitmap_data, bitmap->size.width, bitmap->size.height, bitmap->stride, spaToQImageFormat(bitmap->format));
+            }
+
+            cursorPosition = QPoint{ cursor->position.x, cursor->position.y };
+        }
+    }
+
     if (spaBuffer->datas[0].chunk->size == 0) {
-        qCDebug(KRFB_FB_PIPEWIRE)  << "discarding null buffer";
+        qCDebug(KRFB_FB_PIPEWIRE) << "Got empty buffer. The buffer possibly carried only "
+                                     "information about the mouse cursor.";
         return;
     }
 
@@ -779,28 +801,6 @@ void PWFrameBuffer::Private::handleFrame(pw_buffer *pwBuffer)
         gbm_bo_destroy(imported);
     }
 #endif /* HAVE_DMA_BUF */
-
-
-    // process cursor
-    {
-        struct spa_meta_cursor *cursor = static_cast<struct spa_meta_cursor*>(spa_buffer_find_meta_data (spaBuffer, SPA_META_Cursor, sizeof (*cursor)));
-        if (spa_meta_cursor_is_valid (cursor)) {
-            struct spa_meta_bitmap *bitmap = nullptr;
-
-            if (cursor->bitmap_offset)
-                bitmap = SPA_MEMBER (cursor, cursor->bitmap_offset, struct spa_meta_bitmap);
-
-            if (bitmap && bitmap->size.width > 0 && bitmap->size.height > 0) {
-                const uint8_t *bitmap_data;
-
-                bitmap_data = SPA_MEMBER (bitmap, bitmap->offset, uint8_t);
-                cursorHotspot = { cursor->hotspot.x, cursor->hotspot.y };
-                cursorTexture = QImage(bitmap_data, bitmap->size.width, bitmap->size.height, bitmap->stride, spaToQImageFormat(bitmap->format));
-            }
-
-            cursorPosition = QPoint{ cursor->position.x, cursor->position.y };
-        }
-    }
 
     struct spa_meta_region* videoMetadata =
     static_cast<struct spa_meta_region*>(spa_buffer_find_meta_data(
