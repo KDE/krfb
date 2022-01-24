@@ -79,7 +79,10 @@ include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} )
 find_package(LibVNCServer REQUIRED)
 
 
-pkg_check_modules(PipeWire IMPORTED_TARGET libpipewire-0.3)
+option(DISABLE_PIPEWIRE "Disable PipeWire support." OFF)
+if(NOT DISABLE_PIPEWIRE)
+    pkg_check_modules(PipeWire IMPORTED_TARGET libpipewire-0.3)
+endif()
 add_feature_info(PipeWire PipeWire_FOUND "Required for pipewire screencast plugin")
 find_package(PlasmaWaylandProtocols 1.5.0)
 
