@@ -26,6 +26,7 @@
   <name xml:lang="pl">Krfb</name>
   <name xml:lang="pt">Krfb</name>
   <name xml:lang="pt-BR">Krfb</name>
+  <name xml:lang="ro">Krfb</name>
   <name xml:lang="ru">Krfb</name>
   <name xml:lang="sk">Krfb</name>
   <name xml:lang="sl">Krfb</name>
@@ -61,6 +62,7 @@
   <summary xml:lang="pl">Udostępnij swój pulpit innemu komputerowi przez VNC</summary>
   <summary xml:lang="pt">Partilhar o seu ecrã com outro computador por VNC</summary>
   <summary xml:lang="pt-BR">Compartilhar sua área de trabalho com outro computador via VNC</summary>
+  <summary xml:lang="ro">Partajați-vă biroul cu alt calculator prin VNC</summary>
   <summary xml:lang="sl">Deli namizje z drugim računalnikom prek VNC</summary>
   <summary xml:lang="sv">Dela ditt skrivbord med en annan dator via VNC</summary>
   <summary xml:lang="uk">Надайте вашу стільницю у спільне користування з іншим комп'ютером за допомогою VNC</summary>
@@ -132,6 +134,7 @@
       <caption xml:lang="pl">Udostępnienie pulpitu przy użyciu Krfb</caption>
       <caption xml:lang="pt">Partilha do ecrã com o Krfb</caption>
       <caption xml:lang="pt-BR">Compartilhando a área de trabalho com o Krfb</caption>
+      <caption xml:lang="ro">Partajarea biroului cu Krfb</caption>
       <caption xml:lang="ru">Общий доступ к рабочему столу с использованием Krfb</caption>
       <caption xml:lang="sk">Zdieľanie pracovnej plochy s Krfb</caption>
       <caption xml:lang="sl">Deljenje namizij s Krfb</caption>
