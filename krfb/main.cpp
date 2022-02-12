@@ -38,8 +38,6 @@
 #include <QCommandLineOption>
 
 
-static const char description[] = I18N_NOOP("VNC-compatible server to share "
-                                  "desktops");
 static bool checkX11Capabilities()
 {
     int bp1, bp2, majorv, minorv;
@@ -95,7 +93,7 @@ int main(int argc, char *argv[])
     KAboutData aboutData(QStringLiteral("krfb"),
                          i18n("Desktop Sharing"),
                          QStringLiteral(KRFB_VERSION_STRING),
-                         i18n(description),
+                         i18n("VNC-compatible server to share desktops"),
                          KAboutLicense::GPL,
                          i18n("(c) 2009-2010, Collabora Ltd.\n"
                                "(c) 2007, Alessandro Praduroux\n"
