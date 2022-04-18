@@ -24,7 +24,7 @@
 #include <KPluginFactory>
 #include <QX11Info>
 
-K_PLUGIN_CLASS_WITH_JSON(X11EventsPlugin, "krfb_events_x11.json")
+K_PLUGIN_CLASS(X11EventsPlugin)
 
 X11EventsPlugin::X11EventsPlugin(QObject *parent, const QVariantList &args)
     : EventsPlugin(parent, args)

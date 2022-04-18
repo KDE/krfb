@@ -14,5 +14,6 @@ target_link_libraries (krfb_events_x11
                        KF5::CoreAddons
                        krfbprivate
 )
+set_target_properties(krfb_events_x11 PROPERTIES OUTPUT_NAME x11)
 
 install (TARGETS krfb_events_x11 DESTINATION ${KDE_INSTALL_PLUGINDIR}/krfb/events)

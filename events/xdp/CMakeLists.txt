@@ -21,6 +21,7 @@ target_link_libraries (krfb_events_xdp
                        Qt5::DBus
                        krfbprivate
 )
+set_target_properties(krfb_events_xdp PROPERTIES OUTPUT_NAME xdp)
 
 install (TARGETS krfb_events_xdp
          DESTINATION ${KDE_INSTALL_PLUGINDIR}/krfb/events

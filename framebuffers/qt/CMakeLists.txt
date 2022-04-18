@@ -27,6 +27,7 @@ target_link_libraries (krfb_framebuffer_qt
                        krfbprivate
 )
 
+set_target_properties(krfb_framebuffer_qt PROPERTIES OUTPUT_NAME qt)
 install (TARGETS krfb_framebuffer_qt
          DESTINATION ${KDE_INSTALL_PLUGINDIR}/krfb/framebuffer
 )

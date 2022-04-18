@@ -41,7 +41,7 @@ Q_GLOBAL_STATIC(FrameBufferManagerStatic, frameBufferManagerStatic)
 
 FrameBufferManager::FrameBufferManager()
 {
-    const QVector<KPluginMetaData> plugins = KPluginMetaData::findPlugins(QStringLiteral("krfb/framebuffer"));
+    const QVector<KPluginMetaData> plugins = KPluginMetaData::findPlugins(QStringLiteral("krfb/framebuffer"), {}, KPluginMetaData::AllowEmptyMetaData);
     for (const KPluginMetaData &data : plugins) {
         const KPluginFactory::Result<FrameBufferPlugin> result = KPluginFactory::instantiatePlugin<FrameBufferPlugin>(data);
         if (result.plugin) {

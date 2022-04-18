@@ -42,7 +42,7 @@ Q_GLOBAL_STATIC(EventsManagerStatic, eventsManagerStatic)
 
 EventsManager::EventsManager()
 {
-    const QVector<KPluginMetaData> plugins = KPluginMetaData::findPlugins(QStringLiteral("krfb/events"));
+    const QVector<KPluginMetaData> plugins = KPluginMetaData::findPlugins(QStringLiteral("krfb/events"), {}, KPluginMetaData::AllowEmptyMetaData);
     for (const KPluginMetaData &data : plugins) {
         const KPluginFactory::Result<EventsPlugin> result = KPluginFactory::instantiatePlugin<EventsPlugin>(data);
         if (result.plugin) {

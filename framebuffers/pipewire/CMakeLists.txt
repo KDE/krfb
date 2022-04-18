@@ -58,6 +58,7 @@ if (HAVE_DMA_BUF)
     )
 endif()
 
+set_target_properties(krfb_framebuffer_pw PROPERTIES OUTPUT_NAME pw)
 install (TARGETS krfb_framebuffer_pw
          DESTINATION ${KDE_INSTALL_PLUGINDIR}/krfb/framebuffer
 )
