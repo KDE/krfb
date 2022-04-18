@@ -40,12 +40,6 @@ install (TARGETS krfbprivate
          LIBRARY NAMELINK_SKIP
 )
 
-install (FILES
-         krfb-framebuffer.desktop
-         krfb-events.desktop
-         DESTINATION ${KDE_INSTALL_KSERVICETYPES5DIR}
-)
-
 #####################################
 # Second target: krfb - the app
 # itself.
