@@ -31,7 +31,6 @@ class X11EventsPlugin : public EventsPlugin
     Q_OBJECT
 public:
     X11EventsPlugin(QObject *parent, const QVariantList &args);
-    ~X11EventsPlugin() override = default;
 
     EventHandler *eventHandler() override;
 

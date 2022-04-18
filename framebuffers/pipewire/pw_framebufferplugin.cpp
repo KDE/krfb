@@ -30,10 +30,6 @@ PWFrameBufferPlugin::PWFrameBufferPlugin(QObject *parent, const QVariantList &ar
 }
 
 
-PWFrameBufferPlugin::~PWFrameBufferPlugin()
-{
-}
-
 FrameBuffer *PWFrameBufferPlugin::frameBuffer(WId id, const QVariantMap &args)
 {
     //NOTE WId is irrelevant in Wayland

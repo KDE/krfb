@@ -31,10 +31,6 @@ QtFrameBufferPlugin::QtFrameBufferPlugin(QObject *parent, const QVariantList &ar
 {
 }
 
-QtFrameBufferPlugin::~QtFrameBufferPlugin()
-{
-}
-
 FrameBuffer *QtFrameBufferPlugin::frameBuffer(WId id, const QVariantMap &args)
 {
     Q_UNUSED(args);

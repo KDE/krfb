@@ -33,7 +33,6 @@ class PWFrameBufferPlugin: public FrameBufferPlugin
 
 public:
    PWFrameBufferPlugin(QObject *parent, const QVariantList &args);
-   virtual ~PWFrameBufferPlugin() override;
 
    FrameBuffer *frameBuffer(WId id, const QVariantMap &args) override;
 
