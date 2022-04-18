@@ -63,18 +63,12 @@ EventsManager *EventsManager::instance()
 
 QSharedPointer<EventHandler> EventsManager::eventHandler()
 {
-    QMap<QString, EventsPlugin *>::const_iterator iter = m_plugins.constBegin();
-
-    while (iter != m_plugins.constEnd()) {
-
-        QSharedPointer<EventHandler> eventHandler(iter.value()->eventHandler());
-
+    for (auto it = m_plugins.cbegin(); it != m_plugins.constEnd(); it++) {
+        QSharedPointer<EventHandler> eventHandler(it.value()->eventHandler());
         if (eventHandler) {
             eventHandler->setFrameBufferPlugin(RfbServerManager::instance()->framebuffer());
             return eventHandler;
         }
-
-        ++iter;
     }
 
     // No valid events plugin found.
