@@ -22,9 +22,7 @@
 #include "pw_framebuffer.h"
 #include <KPluginFactory>
 
-
-K_PLUGIN_FACTORY_WITH_JSON(PWFrameBufferPluginFactory, "krfb_framebuffer_pw.json",
-               registerPlugin<PWFrameBufferPlugin>();)
+K_PLUGIN_CLASS_WITH_JSON(PWFrameBufferPlugin, "krfb_framebuffer_pw.json")
 
 PWFrameBufferPlugin::PWFrameBufferPlugin(QObject *parent, const QVariantList &args)
     : FrameBufferPlugin(parent, args)

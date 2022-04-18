@@ -25,8 +25,7 @@
 
 #include <KPluginFactory>
 
-K_PLUGIN_FACTORY_WITH_JSON(XdpEventsPluginFactory, "krfb_events_xdp.json",
-               registerPlugin<XdpEventsPlugin>();)
+K_PLUGIN_CLASS_WITH_JSON(XdpEventsPlugin, "krfb_events_xdp.json")
 
 XdpEventsPlugin::XdpEventsPlugin(QObject *parent, const QVariantList &args)
     : EventsPlugin(parent, args)
