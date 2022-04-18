@@ -42,48 +42,23 @@ Q_GLOBAL_STATIC(EventsManagerStatic, eventsManagerStatic)
 
 EventsManager::EventsManager()
 {
-    //qDebug();
-
-    loadPlugins();
-}
-
-EventsManager::~EventsManager()
-{
-    //qDebug();
-}
-
-EventsManager *EventsManager::instance()
-{
-    //qDebug();
-
-    return &eventsManagerStatic->instance;
-}
-
-void EventsManager::loadPlugins()
-{
-    //qDebug();
-
     const QVector<KPluginMetaData> plugins = KPluginMetaData::findPlugins(QStringLiteral("krfb/events"));
-
-    QVectorIterator<KPluginMetaData> i(plugins);
-    i.toBack();
-    QSet<QString> unique;
-    while (i.hasPrevious()) {
-        KPluginMetaData data = i.previous();
-        // only load plugins once, even if found multiple times!
-        if (unique.contains(data.name())) {
-            continue;
-        }
-
+    for (const KPluginMetaData &data : plugins) {
         const KPluginFactory::Result<EventsPlugin> result = KPluginFactory::instantiatePlugin<EventsPlugin>(data);
         if (result.plugin) {
             m_plugins.insert(data.pluginId(), result.plugin);
             qCDebug(KRFB) << "Loaded plugin with name " << data.pluginId();
         } else {
-            qCDebug(KRFB) << "unable to load plugin for " << data.fileName();
+            qCDebug(KRFB) << "unable to load plugin for " << data.fileName() << result.errorString;
         }
-        unique.insert (data.name());
     }
+}
+
+EventsManager::~EventsManager() = default;
+
+EventsManager *EventsManager::instance()
+{
+    return &eventsManagerStatic->instance;
 }
 
 QSharedPointer<EventHandler> EventsManager::eventHandler()

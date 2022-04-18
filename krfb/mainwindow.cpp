@@ -83,14 +83,8 @@ public:
 
     void fillFrameBuffersCombo() {
         const QVector<KPluginMetaData> plugins = KPluginMetaData::findPlugins(QStringLiteral("krfb/framebuffer"));
-        QSet<QString> unique;
-        QVectorIterator<KPluginMetaData> i(plugins);
-        i.toBack();
-        while (i.hasPrevious()) {
-            const KPluginMetaData &metadata = i.previous();
-            if (unique.contains(metadata.pluginId())) continue;
+        for (const KPluginMetaData &metadata : plugins) {
             cb_preferredFrameBufferPlugin->addItem(metadata.pluginId());
-            unique.insert(metadata.pluginId());
         }
     }
 };

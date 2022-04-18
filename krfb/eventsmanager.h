@@ -52,8 +52,6 @@ private:
 
     EventsManager();
 
-    void loadPlugins();
-
     QMap<QString, EventsPlugin *> m_plugins;
     QList<QWeakPointer<EventHandler> > m_eventHandlers;
 };
