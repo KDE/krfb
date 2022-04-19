@@ -1,7 +1,7 @@
 {
     "KPlugin": {
         "Description": "Qt based Framebuffer for KRfb.",
-        "Description[ca@valencia]": "«Framebuffer» basat en les Qt per al KRfb.",
+        "Description[ca@valencia]": "«Framebuffer» basat en les Qt per a KRfb.",
         "Description[ca]": "«Framebuffer» basat en les Qt per al KRfb.",
         "Description[cs]": "Framebuffer založený na Qt pro KRfb.",
         "Description[da]": "Qt-baseret framebuffer til KRfb.",
@@ -40,7 +40,7 @@
         "Id": "qt",
         "License": "GPL",
         "Name": "Qt Framebuffer for KRfb",
-        "Name[ca@valencia]": "«Framebuffer» de les Qt per al KRfb",
+        "Name[ca@valencia]": "«Framebuffer» de les Qt per a KRfb",
         "Name[ca]": "«Framebuffer» de les Qt per al KRfb",
         "Name[cs]": "Qt Framebuffer pro KRfb",
         "Name[da]": "Qt-framebuffer til KRfb",

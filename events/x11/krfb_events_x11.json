@@ -2,7 +2,7 @@
     "Encoding": "UTF-8",
     "KPlugin": {
         "Description": "X11 XFakeInput based event handler for KRfb",
-        "Description[ca@valencia]": "Gestor d'esdeveniments basat en «XFakeInput» de l'X11 per al KRfb",
+        "Description[ca@valencia]": "Gestor d'esdeveniments basat en «XFakeInput» de l'X11 per a KRfb",
         "Description[ca]": "Gestor d'esdeveniments basat en «XFakeInput» de l'X11 per al KRfb",
         "Description[da]": "X11 XFakeInput baseret hændelseshåndtering til KRfb",
         "Description[de]": "Ereignis-Modul basierend auf X11 XFakeInput für KRfb",
@@ -33,7 +33,7 @@
         "Id": "x11",
         "License": "GPL",
         "Name": "X11 Event handler for KRfb",
-        "Name[ca@valencia]": "Gestor d'esdeveniments de l'X11 per al KRfb",
+        "Name[ca@valencia]": "Gestor d'esdeveniments de l'X11 per a KRfb",
         "Name[ca]": "Gestor d'esdeveniments de l'X11 per al KRfb",
         "Name[da]": "X11 hændelseshåndtering til KRfb",
         "Name[de]": "Ereignis-Modul basierend auf X11 für KRfb",
