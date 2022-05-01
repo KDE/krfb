@@ -42,7 +42,7 @@
   <name xml:lang="zh-TW">Krfb</name>
   <summary>Share your desktop to another computer via VNC</summary>
   <summary xml:lang="ca">Comparteix l'escriptori amb un altre ordinador a través de VNC</summary>
-  <summary xml:lang="ca-valencia">Comparteix l'escriptori amb un altre ordinador a través de VNC</summary>
+  <summary xml:lang="ca-valencia">Comparteix l'escriptori amb un atre ordinador a través de VNC</summary>
   <summary xml:lang="cs">Sdílejte své pracovní prostředí na jiný počítač pomocí VNC</summary>
   <summary xml:lang="da">Del dit skrivebord til en anden computer via VNC</summary>
   <summary xml:lang="de">Verbindung Ihrer Arbeitsfläche zu anderen Rechnern über VNC</summary>
@@ -72,7 +72,7 @@
   <description>
     <p>Krfb Desktop Sharing is a server application that allows you to share your current session with a user on another machine, who can use a VNC client to view or even control the desktop.</p>
     <p xml:lang="ca">El Krfb és una aplicació de servidor que permet compartir la vostra sessió actual amb un usuari en una altra màquina, la qual pot emprar un client VNC per a veure o controlar l'escriptori.</p>
-    <p xml:lang="ca-valencia">Krfb és una aplicació de servidor que permet compartir la vostra sessió actual amb un usuari en una altra màquina, la qual pot emprar un client VNC per a vore o controlar l'escriptori.</p>
+    <p xml:lang="ca-valencia">Krfb és una aplicació de servidor que permet compartir la vostra sessió actual amb un usuari en una atra màquina, la qual pot emprar un client VNC per a vore o controlar l'escriptori.</p>
     <p xml:lang="da">Krfb-skrivebordsdeling er et serverprogram der giver dig mulighed for at dele din nuværende session med en bruger på en anden maskine som kan bruge en VNC-klient til at vise eller endda styrer skrivebordet.</p>
     <p xml:lang="de">Krfb ist eine Serveranwendung, welche die gemeinsame Benutzung der aktuellen Sitzung mit einem Benutzer auf einem anderen Rechner ermöglicht, der mit Hilfe eines VNC-Programms den Bildschirminhalt sehen oder sogar die Arbeitsfläche bedienen kann.</p>
     <p xml:lang="el">Η κοινή χρήση επιφάνειας εργασίας Krfb είναι μια εφαρμογή εξυπηρετητή που σας επιτρέπει να μοιράζεστε την τρέχουσα συνεδρία σας με έναν χρήστη σε άλλο μηχάνημα, ο οποίος μπορεί να χρησιμοποιεί έναν πελάτη VNC για να παρακολουθεί ή και να ελέγχει την επιφάνεια εργασίας σας.</p>
@@ -92,6 +92,7 @@
     <p xml:lang="pl">Współdzielenie pulpitu Krfb jest aplikacją serwerową, która umożliwia współdzielenie twojej bieżącej sesji z użytkownikiem na innym komputerze, który może użyć klienta VNC do oglądania,a a nawet sterowania twoim pulpitem.</p>
     <p xml:lang="pt">A Partilha de Ecrã Krfb é uma aplicação de servidor que lhe permite partilhar a sua sessão actual com um utilizador noutra máquina, o qual poderá usar um cliente de VNC para ver ou mesmo controlar o ambiente de trabalho.</p>
     <p xml:lang="pt-BR">Krfb Desktop Sharing é um aplicativo de servidor que lhe permite compartilhar a sua sessão atual com um usuário em outra máquina, que poderá usar um cliente de VNC para ver ou mesmo controlar a máquina.</p>
+    <p xml:lang="ro">Partajarea Biroului Krfb e o aplicație-server ce vă permite să partajați sesiunea actuală cu un utilizator de pe altă mașină, care poate folosi un client VNC pentru a vedea sau chiar controla biroul.</p>
     <p xml:lang="ru">Krfb является сервером, который позволяет вам предоставлять доступ к своему текущему сеансу пользователю на другом компьютере, который использует клиент VNC для просмотра или управления вашим рабочим столом.</p>
     <p xml:lang="sk">Krfb je serverová aplikácia, ktorá vám umožní zdieľať vaše aktuálne sedenie s používateľom na inom stroji, ktorý môže používať VNC klienta na pripojenie alebo ovládanie stanice.</p>
     <p xml:lang="sl">Souporaba namizja Krfb je strežniški program, ki vam dovoli, da delite vašo trenutno sejo z uporabnikom na drugem računalniku, ki ima odjemalec VNC. Uporabnik lahko gleda ali celo nadzira namizje.</p>
