@@ -30,7 +30,6 @@
 #include <KPluginFactory>
 #include <KPluginMetaData>
 
-#include <QtCore/QSharedPointer>
 
 class EventsManagerStatic
 {

@@ -20,7 +20,6 @@
 */
 #include "rfbservermanager.h"
 #include "rfbserver.h"
-#include "framebuffer.h"
 #include "framebuffermanager.h"
 #include "sockethelpers.h"
 #include "krfbconfig.h"

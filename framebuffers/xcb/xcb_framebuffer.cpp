@@ -10,7 +10,6 @@
 #include "xcb_framebuffer.h"
 #include "krfb_fb_xcb_debug.h"
 
-#include <xcb/xcb.h>
 #include <xcb/xproto.h>
 #include <xcb/damage.h>
 #include <xcb/shm.h>

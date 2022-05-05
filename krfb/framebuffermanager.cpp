@@ -29,7 +29,6 @@
 #include <KPluginFactory>
 #include <KPluginMetaData>
 
-#include <QSharedPointer>
 
 class FrameBufferManagerStatic
 {
