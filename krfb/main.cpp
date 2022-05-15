@@ -158,6 +158,15 @@ int main(int argc, char *argv[])
     MainWindow mainWindow;
     TrayIcon trayicon(&mainWindow);
 
+    QObject::connect(&service, &KDBusService::activateRequested, &mainWindow, [&mainWindow](const QStringList & /*arguments*/, const QString & /*workdir*/) {
+        if (!mainWindow.isVisible()) {
+            mainWindow.setVisible(true);
+        } else {
+            KWindowSystem::updateStartupId(mainWindow.windowHandle());
+            KWindowSystem::activateWindow(mainWindow.windowHandle());
+        }
+    });
+
     if (KrfbConfig::startMinimized()) {
       mainWindow.hide();
     } else if (app.isSessionRestored() && KMainWindow::canBeRestored(1)) {
