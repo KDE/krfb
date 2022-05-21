@@ -136,6 +136,9 @@ add_subdirectory(framebuffers)
 add_subdirectory(doc)
 add_subdirectory(icons)
 
+ki18n_install(po)
+kdoctools_install(po)
+
 ecm_qt_install_logging_categories(
     EXPORT KRFB
     FILE krfb.categories
