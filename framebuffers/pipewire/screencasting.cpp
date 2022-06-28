@@ -21,7 +21,7 @@ public:
         : q(q)
     {
     }
-    ~ScreencastingStreamPrivate()
+    ~ScreencastingStreamPrivate() override
     {
         close();
         q->deleteLater();
@@ -75,7 +75,7 @@ public:
     {
     }
 
-    ~ScreencastingPrivate()
+    ~ScreencastingPrivate() override
     {
         destroy();
     }
