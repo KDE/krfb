@@ -33,7 +33,7 @@
 #include <QSet>
 #include <QNetworkInterface>
 #include <QHostInfo>
-
+#include <QMessageBox>
 
 class TCP: public QWidget, public Ui::TCP
 {
@@ -219,16 +219,16 @@ void MainWindow::passwordChanged(const QString& password)
 
 void MainWindow::aboutConnectionAddress()
 {
-    KMessageBox::about(this,
-            i18n("This field contains the address of your computer and the port number, separated by a colon.\n\nThe address is just a hint - you can use any address that can reach your computer.\n\nDesktop Sharing tries to guess your address from your network configuration, but does not always succeed in doing so.\n\nIf your computer is behind a firewall it may have a different address or be unreachable for other computers."),
-            i18n("KDE Desktop Sharing"));
+    QMessageBox::about(this,
+            i18n("KDE Desktop Sharing"),
+            i18n("This field contains the address of your computer and the port number, separated by a colon.\n\nThe address is just a hint - you can use any address that can reach your computer.\n\nDesktop Sharing tries to guess your address from your network configuration, but does not always succeed in doing so.\n\nIf your computer is behind a firewall it may have a different address or be unreachable for other computers."));
 }
 
 void MainWindow::aboutUnattendedMode()
 {
-    KMessageBox::about(this,
-            i18n("Any remote user with normal desktop sharing password will have to be authenticated.\n\nIf unattended access is on, and the remote user provides unattended mode password, desktop sharing access will be granted without explicit confirmation."),
-            i18n("KDE Desktop Sharing"));
+    QMessageBox::about(this,
+            i18n("KDE Desktop Sharing"),
+            i18n("Any remote user with normal desktop sharing password will have to be authenticated.\n\nIf unattended access is on, and the remote user provides unattended mode password, desktop sharing access will be granted without explicit confirmation."));
 }
 
 void MainWindow::showConfiguration()
