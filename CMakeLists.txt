@@ -21,6 +21,7 @@ include(ECMInstallIcons)
 include(ECMAddAppIcon)
 include(ECMSetupVersion)
 include(ECMQtDeclareLoggingCategory)
+include(ECMDeprecationSettings)
 include(FeatureSummary)
 include(CheckIncludeFile)
 
@@ -60,9 +61,10 @@ if(WIN32)
     set(CMAKE_REQUIRED_INCLUDES  ${KDEWIN32_INCLUDES})
 endif(WIN32)
 
-add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0x050f02)
-add_definitions(-DKF_DISABLE_DEPRECATED_BEFORE_AND_AT=0x055A00)
-
+ecm_set_disabled_deprecation_versions(
+    QT 5.15.2
+    KF 5.91
+)
 
 include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} )
 
