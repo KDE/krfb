@@ -11,7 +11,7 @@ add_library (krfb_events_x11 MODULE ${krfb_events_x11_SRCS})
 
 target_link_libraries (krfb_events_x11
                        ${X11_XTest_LIB}
-                       KF5::CoreAddons
+                       KF6::CoreAddons
                        krfbprivate
 )
 set_target_properties(krfb_events_x11 PROPERTIES OUTPUT_NAME x11)

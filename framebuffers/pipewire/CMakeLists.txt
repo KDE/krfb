@@ -22,13 +22,13 @@ ecm_qt_declare_logging_category(krfb_framebuffer_pw_SRCS
     EXPORT KRFB
 )
 
-qt5_add_dbus_interface(
+qt_add_dbus_interface(
    krfb_framebuffer_pw_SRCS
    ${CMAKE_SOURCE_DIR}/dbus/xdp_dbus_screencast_interface.xml
    xdp_dbus_screencast_interface
 )
 
-qt5_add_dbus_interface(
+qt_add_dbus_interface(
    krfb_framebuffer_pw_SRCS
    ${CMAKE_SOURCE_DIR}/dbus/xdp_dbus_remotedesktop_interface.xml
    xdp_dbus_remotedesktop_interface
@@ -41,11 +41,11 @@ add_library(krfb_framebuffer_pw
 set_property(TARGET krfb_framebuffer_pw PROPERTY C_STANDARD 99)
 
 target_link_libraries(krfb_framebuffer_pw
-                      Qt5::Core
-                      Qt5::Gui
-                      Qt5::DBus
-                      KF5::CoreAddons
-                      KF5::WaylandClient
+                      Qt::Core
+                      Qt::Gui
+                      Qt::DBus
+                      KF6::CoreAddons
+                      Plasma::KWaylandClient
                       Wayland::Client
                       krfbprivate
                       K::KPipeWire

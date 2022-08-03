@@ -23,9 +23,9 @@ generate_export_header(krfbprivate BASE_NAME krfbprivate)
 
 
 target_link_libraries (krfbprivate
-                       Qt5::Core
-                       Qt5::Widgets
-                       Qt5::X11Extras
+                       Qt::Core
+                       Qt::Widgets
+                       Qt::GuiPrivate
                        ${X11_X11_LIB}
                        ${LIBVNCSERVER_LIBRARIES}
 )
@@ -80,7 +80,7 @@ ki18n_wrap_ui (krfb_UI_SRCS
                    ui/mainwidget.ui
 )
 
-qt5_add_resources(krfb_SRCS
+qt_add_resources(krfb_SRCS
     krfb.qrc
 )
 
@@ -95,16 +95,17 @@ target_link_libraries (krfb
                        ${X11_Xext_LIB}
                        ${X11_X11_LIB}
                        ${X11_Xdamage_LIB}
-                       Qt5::Network
-                       KF5::CoreAddons
-                       KF5::DBusAddons
-                       KF5::DNSSD
-                       KF5::I18n
-                       KF5::Notifications
-                       KF5::Wallet
-                       KF5::WidgetsAddons
-                       KF5::WindowSystem
-                       KF5::XmlGui
+                       Qt::Network
+                       KF6::CoreAddons
+                       KF6::DBusAddons
+                       KF6::DNSSD
+                       KF6::I18n
+                       KF6::Notifications
+                       KF6::Wallet
+                       KF6::WidgetsAddons
+                       KF6::WindowSystem
+                       KF6::XmlGui
+                       KF6::StatusNotifierItem
                        ${LIBVNCSERVER_LIBRARIES}
 )
 
@@ -135,13 +136,13 @@ add_executable(krfb-virtualmonitor main-virtualmonitor.cpp ${krfbvm_SRCS} ${krfb
                                    rfbserver.cpp rfbclient.cpp rfbservermanager.cpp eventsmanager.cpp framebuffermanager.cpp sockethelpers.cpp)
 target_link_libraries(krfb-virtualmonitor
                       krfbprivate
-                      Qt5::Gui
-                      Qt5::Network
-                      KF5::ConfigGui
-                      KF5::CoreAddons
-                      KF5::I18n
-                      KF5::Notifications
-                      KF5::WindowSystem
+                      Qt::Gui
+                      Qt::Network
+                      KF6::ConfigGui
+                      KF6::CoreAddons
+                      KF6::I18n
+                      KF6::Notifications
+                      KF6::WindowSystem
 )
 
 install (TARGETS krfb-virtualmonitor

@@ -27,9 +27,9 @@ include(CheckIncludeFile)
 
 check_include_file("linux/input.h" HAVE_LINUX_INPUT_H)
 
-find_package(Qt5 ${QT_MIN_VERSION} REQUIRED COMPONENTS Core DBus Widgets X11Extras)
+find_package(Qt6 ${QT_MIN_VERSION} REQUIRED COMPONENTS Core DBus Widgets)
 
-find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
+find_package(KF6 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
     I18n
     Config
     CoreAddons
@@ -42,6 +42,7 @@ find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
     WidgetsAddons
     WindowSystem
     XmlGui
+    StatusNotifierItem
 )
 
 find_package(X11 REQUIRED)
@@ -79,10 +80,10 @@ add_feature_info(PipeWire KPipeWire_FOUND "Required for pipewire screencast plug
 find_package(PlasmaWaylandProtocols 1.5.0)
 
 if(KPipeWire_FOUND AND PlasmaWaylandProtocols_FOUND)
-    find_package(KF5Wayland ${KF5_MIN_VERSION})
+    find_package(KWayland REQUIRED)
     find_package(QtWaylandScanner REQUIRED)
-    find_package(Qt5WaylandClient)
-    find_package(Qt5XkbCommonSupport)
+    find_package(Qt6WaylandClient)
+    find_package(Qt6XkbCommonSupport)
     find_package(Wayland REQUIRED COMPONENTS Client)
 endif()
 
