@@ -18,7 +18,6 @@
 #include <sys/ipc.h>
 #include <sys/shm.h>
 
-#include <QX11Info>
 #include <QApplication>
 #include <QGuiApplication>
 #include <QScreen>
