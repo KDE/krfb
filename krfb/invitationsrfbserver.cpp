@@ -30,7 +30,7 @@
 #include <KLocalizedString>
 #include <KUser>
 #include <KStringHandler>
-#include <KWallet/KWallet>
+#include <KWallet>
 
 #include <kdnssd_version.h>
 #if KDNSSD_VERSION >= QT_VERSION_CHECK(5, 84, 0)
