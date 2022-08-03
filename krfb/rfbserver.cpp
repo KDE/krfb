@@ -24,7 +24,7 @@
 #include <QApplication>
 #include <QClipboard>
 #include <QPointer>
-#include <QX11Info>
+#include <QtGui/private/qtx11extras_p.h>
 
 struct RfbServer::Private
 {

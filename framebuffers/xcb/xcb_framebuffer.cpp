@@ -23,7 +23,7 @@
 #include <QScreen>
 #include <QAbstractNativeEventFilter>
 #include <qpa/qplatformnativeinterface.h>
-
+#include <QtGui/private/qtx11extras_p.h>
 
 class KrfbXCBEventFilter: public QAbstractNativeEventFilter
 {

@@ -22,7 +22,8 @@
 #include "x11events.h"
 
 #include <KPluginFactory>
-#include <QX11Info>
+
+#include <QtGui/private/qtx11extras_p.h>
 
 K_PLUGIN_CLASS(X11EventsPlugin)
 

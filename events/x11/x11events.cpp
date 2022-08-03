@@ -22,15 +22,13 @@
 #include "x11events.h"
 
 #include <QApplication>
-#include <QX11Info>
 #include <QDesktopWidget>
 #include <QGlobalStatic>
+#include <QtGui/private/qtx11extras_p.h>
 
 #include <X11/Xutil.h>
 #include <X11/keysym.h>
 #include <X11/extensions/XTest.h>
-
-#include <QX11Info>
 
 enum {
     LEFTSHIFT = 1,

@@ -30,7 +30,7 @@
 
 #include <QPixmap>
 #include <qwindowdefs.h>
-#include <QX11Info>
+#include <QtGui/private/qtx11extras_p.h>
 
 #include <csignal>
 #include <X11/extensions/XTest.h>
