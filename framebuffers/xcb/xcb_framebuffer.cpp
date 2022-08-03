@@ -31,7 +31,7 @@ public:
     KrfbXCBEventFilter(XCBFrameBuffer *owner);
 
 public:
-    bool nativeEventFilter(const QByteArray &eventType, void *message, long *result) override;
+    bool nativeEventFilter(const QByteArray &eventType, void *message, qintptr *result) override;
 
 public:
     int xdamageBaseEvent;
@@ -98,7 +98,7 @@ KrfbXCBEventFilter::KrfbXCBEventFilter(XCBFrameBuffer *owner):
 
 
 bool KrfbXCBEventFilter::nativeEventFilter(const QByteArray &eventType,
-                                           void *message, long *result) {
+                                           void *message, qintptr *result) {
     Q_UNUSED(result);  // "result" is only used on windows
 
     if (xdamageBaseEvent == 0) return false;  // no xdamage extension
