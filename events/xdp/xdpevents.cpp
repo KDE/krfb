@@ -27,7 +27,6 @@
 #include <linux/input.h>
 
 #include <QApplication>
-#include <QDesktopWidget>
 #include <QGlobalStatic>
 
 class EventData
