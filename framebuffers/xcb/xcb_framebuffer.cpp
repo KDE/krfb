@@ -35,7 +35,11 @@ public:
     KrfbXCBEventFilter(XCBFrameBuffer *owner);
 
 public:
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     bool nativeEventFilter(const QByteArray &eventType, void *message, long *result) override;
+#else
+    bool nativeEventFilter(const QByteArray &eventType, void *message, qintptr *result) override;
+#endif
 
 public:
     int xdamageBaseEvent;
@@ -102,7 +106,11 @@ KrfbXCBEventFilter::KrfbXCBEventFilter(XCBFrameBuffer *owner):
 
 
 bool KrfbXCBEventFilter::nativeEventFilter(const QByteArray &eventType,
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
                                            void *message, long *result) {
+#else
+                                           void *message, qintptr *result) {
+#endif
     Q_UNUSED(result);  // "result" is only used on windows
 
     if (xdamageBaseEvent == 0) return false;  // no xdamage extension
