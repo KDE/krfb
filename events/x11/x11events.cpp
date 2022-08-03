@@ -22,7 +22,6 @@
 #include "x11events.h"
 
 #include <QApplication>
-#include <QX11Info>
 #include <QDesktopWidget>
 #include <QGlobalStatic>
 
@@ -30,7 +29,11 @@
 #include <X11/keysym.h>
 #include <X11/extensions/XTest.h>
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 #include <QX11Info>
+#else
+#include <QtGui/private/qtx11extras_p.h>
+#endif
 
 enum {
     LEFTSHIFT = 1,
