@@ -21,8 +21,8 @@ add_library(krfb_framebuffer_qt
 )
 
 target_link_libraries (krfb_framebuffer_qt
-                       Qt5::Core
-                       Qt5::Gui
+                       Qt::Core
+                       Qt::Gui
                        KF5::CoreAddons
                        krfbprivate
 )

@@ -27,7 +27,11 @@ include(CheckIncludeFile)
 
 check_include_file("linux/input.h" HAVE_LINUX_INPUT_H)
 
-find_package(Qt5 ${QT_MIN_VERSION} REQUIRED COMPONENTS Core DBus Widgets X11Extras)
+find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} REQUIRED COMPONENTS Core DBus Widgets)
+
+if(QT_MAJOR_VERSION EQUAL "5")
+    find_package(Qt5X11Extras REQUIRED)
+endif()
 
 find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
     I18n
@@ -81,8 +85,8 @@ find_package(PlasmaWaylandProtocols 1.5.0)
 if(PipeWire_FOUND AND PlasmaWaylandProtocols_FOUND)
     find_package(KF5Wayland ${KF5_MIN_VERSION})
     find_package(QtWaylandScanner REQUIRED)
-    find_package(Qt5WaylandClient)
-    find_package(Qt5XkbCommonSupport)
+    find_package(Qt${QT_MAJOR_VERSION}WaylandClient)
+    find_package(Qt${QT_MAJOR_VERSION}XkbCommonSupport)
     find_package(Wayland REQUIRED COMPONENTS Client)
 endif()
 

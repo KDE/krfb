@@ -18,8 +18,8 @@ ecm_qt_declare_logging_category(krfb_framebuffer_xcb_SRCS
 add_library(krfb_framebuffer_xcb MODULE ${krfb_framebuffer_xcb_SRCS})
 
 target_link_libraries (krfb_framebuffer_xcb
-                       Qt5::Core
-                       Qt5::Gui
+                       Qt::Core
+                       Qt::Gui
                        XCB::XCB
                        XCB::RENDER
                        XCB::SHAPE
