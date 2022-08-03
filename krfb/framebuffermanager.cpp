@@ -81,7 +81,7 @@ QSharedPointer<FrameBuffer> FrameBufferManager::frameBuffer(WId id, const QVaria
         if (it.key() == KrfbConfig::preferredFrameBufferPlugin()) {
             qCDebug(KRFB) << "Using FrameBuffer:" << KrfbConfig::preferredFrameBufferPlugin();
 
-            QSharedPointer<FrameBuffer> frameBuffer(it.value()->frameBuffer(id, args));
+            QSharedPointer<FrameBuffer> frameBuffer(it.value()->frameBuffer(args));
             if (frameBuffer) {
                 m_frameBuffers.insert(id, frameBuffer.toWeakRef());
 

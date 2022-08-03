@@ -22,7 +22,7 @@ class QtFrameBuffer : public FrameBuffer
 {
     Q_OBJECT
 public:
-    explicit QtFrameBuffer(WId id, QObject *parent = nullptr);
+    explicit QtFrameBuffer(QObject *parent = nullptr);
 
     ~QtFrameBuffer() override;
 

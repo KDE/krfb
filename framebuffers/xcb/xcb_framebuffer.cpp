@@ -19,7 +19,8 @@
 #include <sys/shm.h>
 
 #include <QX11Info>
-#include <QCoreApplication>
+#include <QApplication>
+#include <QDesktopWidget>
 #include <QGuiApplication>
 #include <QScreen>
 #include <QAbstractNativeEventFilter>
@@ -130,6 +131,7 @@ public:
     bool                    running;
 
     QRect                   area;  // capture area, primary monitor coordinates
+    WId                     win;
 };
 
 
@@ -144,8 +146,8 @@ static xcb_screen_t *get_xcb_screen(xcb_connection_t *conn, int screen_num) {
 
 
 
-XCBFrameBuffer::XCBFrameBuffer(WId winid, QObject *parent):
-    FrameBuffer(winid, parent), d(new XCBFrameBuffer::P)
+XCBFrameBuffer::XCBFrameBuffer(QObject *parent):
+    FrameBuffer(parent), d(new XCBFrameBuffer::P)
 {
     d->running = false;
     d->damage = XCB_NONE;
@@ -157,6 +159,7 @@ XCBFrameBuffer::XCBFrameBuffer(WId winid, QObject *parent):
     d->area.setRect(0, 0, 0, 0);
     d->x11EvtFilter = new KrfbXCBEventFilter(this);
     d->rootScreen = get_xcb_screen(QX11Info::connection(), QX11Info::appScreen());
+    d->win = QApplication::desktop()->winId();
 
     this->fb = nullptr;
 

@@ -961,8 +961,8 @@ PWFrameBuffer::Private::~Private()
     }
 }
 
-PWFrameBuffer::PWFrameBuffer(WId winid, QObject *parent)
-    : FrameBuffer (winid, parent),
+PWFrameBuffer::PWFrameBuffer(QObject *parent)
+    : FrameBuffer (parent),
       d(new Private(this))
 {
     fb = nullptr;

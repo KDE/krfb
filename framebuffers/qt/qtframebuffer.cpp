@@ -19,8 +19,8 @@
 
 const int UPDATE_TIME = 500;
 
-QtFrameBuffer::QtFrameBuffer(WId id, QObject *parent)
-    : FrameBuffer(id, parent)
+QtFrameBuffer::QtFrameBuffer(QObject *parent)
+    : FrameBuffer(parent)
 {
     QScreen *screen = QGuiApplication::primaryScreen();
     if (screen) {

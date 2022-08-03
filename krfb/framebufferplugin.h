@@ -37,7 +37,7 @@ public:
     explicit FrameBufferPlugin(QObject *parent, const QVariantList &args);
     ~FrameBufferPlugin() override;
 
-    virtual FrameBuffer *frameBuffer(WId id, const QVariantMap &args) = 0;
+    virtual FrameBuffer *frameBuffer(const QVariantMap &args) = 0;
 };
 
 #endif  // Header guard

@@ -29,10 +29,10 @@ XCBFrameBufferPlugin::XCBFrameBufferPlugin(QObject *parent, const QVariantList &
 {
 }
 
-FrameBuffer *XCBFrameBufferPlugin::frameBuffer(WId id, const QVariantMap &args)
+FrameBuffer *XCBFrameBufferPlugin::frameBuffer(const QVariantMap &args)
 {
     Q_UNUSED(args);
-    return new XCBFrameBuffer(id);
+    return new XCBFrameBuffer;
 }
 
 #include "xcb_framebufferplugin.moc"

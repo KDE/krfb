@@ -30,11 +30,9 @@ PWFrameBufferPlugin::PWFrameBufferPlugin(QObject *parent, const QVariantList &ar
 }
 
 
-FrameBuffer *PWFrameBufferPlugin::frameBuffer(WId id, const QVariantMap &args)
+FrameBuffer *PWFrameBufferPlugin::frameBuffer(const QVariantMap &args)
 {
-    //NOTE WId is irrelevant in Wayland
-
-    auto pwfb = new PWFrameBuffer(id);
+    auto pwfb = new PWFrameBuffer;
     if (args.contains(QLatin1String("name"))) {
         pwfb->startVirtualMonitor(args[QStringLiteral("name")].toString(), args[QStringLiteral("resolution")].toSize(), args[QStringLiteral("scale")].toDouble());
     } else {

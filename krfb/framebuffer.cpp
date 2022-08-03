@@ -13,8 +13,8 @@
 #include <QCursor>
 
 
-FrameBuffer::FrameBuffer(WId id, QObject *parent)
-    : QObject(parent), win(id)
+FrameBuffer::FrameBuffer(QObject *parent)
+    : QObject(parent)
 {
 }
 

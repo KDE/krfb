@@ -30,7 +30,7 @@ public:
     };
     using Streams = QList<Stream>;
 
-    PWFrameBuffer(WId winid, QObject *parent = nullptr);
+    PWFrameBuffer(QObject *parent = nullptr);
     virtual ~PWFrameBuffer() override;
 
     void initDBus();

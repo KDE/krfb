@@ -34,7 +34,7 @@ class QtFrameBufferPlugin : public FrameBufferPlugin
 public:
     QtFrameBufferPlugin(QObject *parent, const QVariantList &args);
 
-    FrameBuffer *frameBuffer(WId id, const QVariantMap &args) override;
+    FrameBuffer *frameBuffer(const QVariantMap &args) override;
 
 private:
     Q_DISABLE_COPY(QtFrameBufferPlugin)
