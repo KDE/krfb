@@ -14,18 +14,19 @@
 #include <QPixmap>
 #include <QBitmap>
 #include <QApplication>
-#include <QDesktopWidget>
 #include <QScreen>
-
+#include <qpa/qplatformnativeinterface.h>
 
 const int UPDATE_TIME = 500;
 
 QtFrameBuffer::QtFrameBuffer(QObject *parent)
     : FrameBuffer(parent)
 {
-    win = QApplication::desktop()->winId();
     QScreen *screen = QGuiApplication::primaryScreen();
+    QPlatformNativeInterface* native = qApp->platformNativeInterface();
+
     if (screen) {
+        win = reinterpret_cast<WId>(native->nativeResourceForScreen(QByteArrayLiteral("rootwindow"), screen));
         primaryScreen = screen;
         fbImage = screen->grabWindow(win).toImage();
         fb = new char[fbImage.sizeInBytes()];

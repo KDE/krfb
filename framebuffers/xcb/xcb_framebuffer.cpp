@@ -20,10 +20,10 @@
 
 #include <QX11Info>
 #include <QApplication>
-#include <QDesktopWidget>
 #include <QGuiApplication>
 #include <QScreen>
 #include <QAbstractNativeEventFilter>
+#include <qpa/qplatformnativeinterface.h>
 
 
 class KrfbXCBEventFilter: public QAbstractNativeEventFilter
@@ -159,12 +159,13 @@ XCBFrameBuffer::XCBFrameBuffer(QObject *parent):
     d->area.setRect(0, 0, 0, 0);
     d->x11EvtFilter = new KrfbXCBEventFilter(this);
     d->rootScreen = get_xcb_screen(QX11Info::connection(), QX11Info::appScreen());
-    d->win = QApplication::desktop()->winId();
 
     this->fb = nullptr;
 
     QScreen *primaryScreen = QGuiApplication::primaryScreen();
     if (primaryScreen) {
+        QPlatformNativeInterface* native = qApp->platformNativeInterface();
+        d->win = reinterpret_cast<WId>(native->nativeResourceForScreen(QByteArrayLiteral("rootwindow"), primaryScreen));
         qreal scaleFactor = primaryScreen->devicePixelRatio();
         d->area = { primaryScreen->geometry().topLeft() * scaleFactor,
                     primaryScreen->geometry().bottomRight() * scaleFactor };
