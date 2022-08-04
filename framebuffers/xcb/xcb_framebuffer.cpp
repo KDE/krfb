@@ -180,7 +180,7 @@ XCBFrameBuffer::XCBFrameBuffer(QObject *parent):
     }
 
     d->framebufferImage = xcb_image_get(QX11Info::connection(),
-                                        this->win,
+                                        d->win,
                                         d->area.left(),
                                         d->area.top(),
                                         d->area.width(),
@@ -249,7 +249,7 @@ XCBFrameBuffer::XCBFrameBuffer(QObject *parent):
             // will return 1 on success (yes!)
             int shmget_res = xcb_image_shm_get(
                         QX11Info::connection(),
-                        this->win,
+                        d->win,
                         d->updateTile,
                         d->shminfo,
                         d->area.left(), // x
@@ -557,7 +557,7 @@ QList<QRect> XCBFrameBuffer::modifiedTiles() {
                 // translate whe coordinates
                 xcb_shm_get_image_cookie_t sgi_cookie = xcb_shm_get_image(
                             QX11Info::connection(),
-                            this->win,
+                            d->win,
                             d->area.left() + r.left(),
                             d->area.top()  + r.top(),
                             r.width(),
@@ -612,7 +612,7 @@ QList<QRect> XCBFrameBuffer::modifiedTiles() {
                 // need function that copies pixels from one image to another
                 xcb_image_t *damagedImage = xcb_image_get(
                             QX11Info::connection(),
-                            this->win,
+                            d->win,
                             r.left(),
                             r.top(),
                             r.width(),
@@ -652,7 +652,7 @@ void XCBFrameBuffer::startMonitor() {
 
     d->running = true;
     d->damage = xcb_generate_id(QX11Info::connection());
-    xcb_damage_create(QX11Info::connection(), d->damage, this->win,
+    xcb_damage_create(QX11Info::connection(), d->damage, d->win,
             XCB_DAMAGE_REPORT_LEVEL_RAW_RECTANGLES);
 
     // (currently) we do not call xcb_damage_subtract() EVER, because

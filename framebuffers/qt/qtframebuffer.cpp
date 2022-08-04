@@ -13,7 +13,8 @@
 #include <QRegion>
 #include <QPixmap>
 #include <QBitmap>
-#include <QGuiApplication>
+#include <QApplication>
+#include <QDesktopWidget>
 #include <QScreen>
 
 
@@ -22,6 +23,7 @@ const int UPDATE_TIME = 500;
 QtFrameBuffer::QtFrameBuffer(QObject *parent)
     : FrameBuffer(parent)
 {
+    win = QApplication::desktop()->winId();
     QScreen *screen = QGuiApplication::primaryScreen();
     if (screen) {
         primaryScreen = screen;

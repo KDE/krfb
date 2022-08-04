@@ -52,7 +52,6 @@ Q_SIGNALS:
     void frameBufferChanged();
 
 protected:
-    WId win;
     char *fb = nullptr;
     QList<QRect> tiles;
 

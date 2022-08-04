@@ -38,6 +38,7 @@ public Q_SLOTS:
     void updateFrameBuffer();
 
 private:
+    WId win;
     QImage fbImage;
     QTimer *t;
     QScreen *primaryScreen;
