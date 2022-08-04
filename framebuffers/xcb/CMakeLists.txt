@@ -20,6 +20,7 @@ add_library(krfb_framebuffer_xcb MODULE ${krfb_framebuffer_xcb_SRCS})
 target_link_libraries (krfb_framebuffer_xcb
                        Qt5::Core
                        Qt5::Gui
+                       Qt::GuiPrivate
                        XCB::XCB
                        XCB::RENDER
                        XCB::SHAPE
