@@ -20,6 +20,7 @@
   <name xml:lang="ia">Krfb</name>
   <name xml:lang="id">Krfb</name>
   <name xml:lang="it">Krfb</name>
+  <name xml:lang="ka">Krfb</name>
   <name xml:lang="ko">Krfb</name>
   <name xml:lang="nl">Krfb</name>
   <name xml:lang="nn">Krfb</name>
@@ -56,6 +57,7 @@
   <summary xml:lang="ia">Compartir tu scriptorio a un altere computator via VNC</summary>
   <summary xml:lang="id">Bagikan desktopmu ke komputer lainnya via VNC</summary>
   <summary xml:lang="it">Condividi il desktop con un altro computer tramite VNC</summary>
+  <summary xml:lang="ka">სამუშაო მაგიდის გაზიარება Krfb-სთან ერთად VNC-სთან ერთად</summary>
   <summary xml:lang="ko">내 데스크톱을 VNC로 다른 컴퓨터와 공유</summary>
   <summary xml:lang="nl">Uw bureaublad delen naar een andere computer via VNC</summary>
   <summary xml:lang="nn">Del skrivebordet med ei anna maskin via VNC</summary>
@@ -132,6 +134,7 @@
       <caption xml:lang="ia">Compartir scriptorio con Krfb</caption>
       <caption xml:lang="id">Berbagi desktop dengan Krfb</caption>
       <caption xml:lang="it">Condivisone del desktop con Krfb</caption>
+      <caption xml:lang="ka">სამუშაო მაგიდის გაზიარება Krfb-სთან ერთად</caption>
       <caption xml:lang="ko">Krfb로 데스크톱 공유</caption>
       <caption xml:lang="nl">Bureaublad delen met Krfb</caption>
       <caption xml:lang="nn">Skrivebordsdeling med Krfb</caption>
