@@ -1,0 +1,458 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY kappname "&krfb;">
+  <!ENTITY package "kdenetwork">
+  <!ENTITY % addindex "IGNORE">
+  <!ENTITY % Polish "INCLUDE"
+> <!-- ONLY If you are writing non-English 
+                                     original documentation, change 
+                                     the language here -->
+    
+  <!-- Do not define any other entities; instead, use the entities
+       from entities/general.entities and $LANG/user.entities. -->
+]>
+<!-- Based on kdoctemplate v0.9 January 10 2003 -->
+
+<book lang="&language;">
+
+<!-- This header contains all of the meta-information for the document such
+as Authors, publish date, the abstract, and Keywords -->
+
+<bookinfo>
+<title
+>Podręcznik programu &krfb;</title>
+
+<authorgroup>
+<author
+>&Brad.Hards; &Brad.Hards.mail; </author>
+<othercredit role="translator"
+><firstname
+>Krzysztof</firstname
+><surname
+>Woźniak</surname
+><affiliation
+><address
+><email
+>wozniakk@ceti.pl</email
+></address
+></affiliation
+><contrib
+>Polskie tłumaczenie</contrib
+></othercredit
+> 
+</authorgroup>
+
+<copyright>
+<year
+>2003</year>
+<holder
+>&Brad.Hards;</holder>
+</copyright>
+<!-- Translators: put here the copyright notice of the translation -->
+
+<legalnotice
+>&FDLNotice;</legalnotice>
+
+<!-- Date and version information of the documentation
+Don't forget to include this last date and this last revision number, we
+need them for translation coordination !
+Please respect the format of the date (YYYY-MM-DD) and of the version
+(V.MM.LL), it could be used by automation scripts.
+Do NOT change these in the translation. -->
+
+<date
+>2010-02-09</date>
+<releaseinfo
+>&kde; 4.4</releaseinfo>
+
+<!-- Abstract about this handbook -->
+
+<abstract>
+<para
+>Program &krfb; umożliwia udostępnienie swojego pulpitu użytkownikowi pracującemu na innym komputerze, który za pomocą klienta <acronym
+>VNC</acronym
+> może go oglądać, a nawet go obsługiwać. </para>
+</abstract>
+
+<!-- This is a set of Keywords for indexing by search engines.
+Please at least include KDE, the KDE package it is in, the name
+ of your application, and a few relevant keywords. -->
+
+<keywordset>
+<keyword
+>KDE</keyword>
+<keyword
+>kdenetwork</keyword>
+<keyword
+>krfb</keyword>
+<keyword
+>VNC</keyword>
+<keyword
+>RFB</keyword>
+<keyword
+>krdc</keyword>
+<keyword
+>Współdzielenie pulpitu</keyword>
+<keyword
+>Zdalna kontrola</keyword>
+<keyword
+>Zdalna pomoc</keyword>
+<keyword
+>Zdalny pulpit</keyword>
+</keywordset>
+
+</bookinfo>
+
+<!-- The contents of the documentation begin here.  Label
+each chapter so with the id attribute. This is necessary for two reasons: it
+allows you to easily reference the chapter from other chapters of your
+document, and if there is no ID, the name of the generated HTML files will vary
+from time to time making it hard to manage for maintainers and for the CVS
+system. Any chapter labelled (OPTIONAL) may be left out at the author's
+discretion. Other chapters should not be left out in order to maintain a
+consistent documentation style across all KDE apps. -->
+
+<chapter id="introduction">
+<title
+>Wprowadzenie</title>
+
+<!-- The introduction chapter contains a brief introduction for the
+application that explains what it does and where to report
+problems. Basically a long version of the abstract.  Don't include a
+revision history. (see installation appendix comment) -->
+
+<para
+>Program &krfb; umożliwia udostępnienie swojego pulpitu użytkownikowi pracującemu na innym komputerze, który za pomocą klienta <acronym
+>VNC</acronym
+> może go oglądać, a nawet go obsługiwać. </para>
+
+<para
+>Programu &krfb; zwykle używa się jednocześnie z klientem <acronym
+>VNC</acronym
+> dla środowiska &kde;, którym jest &krdc;, ponieważ wykorzystuje on specyficzne funkcje &krfb;. </para>
+
+<para
+>Program &krfb; nie wymaga uruchamiania nowej sesji w systemie X Windows, może on udostępnić aktualnie użytkowaną sesję. Dzięki temu jest on szczególnie przydatny, gdy trzeba udzielić pomocy technicznej użytkownikowi komputera. </para>
+
+<para
+>Wszelkie problemy i propozycje rozwinięcia programu, powinny być zgłaszane na listy mailingowe &kde; lub poprzez system śledzenia błędów: <ulink url="http://bugs.kde.org"
+>http://www.bugs.kde.org</ulink
+>. </para>
+</chapter>
+
+<chapter id="what-is-RFB">
+<title
+>Wprowadzenie do protokołu RFB</title>
+
+<para
+>W tej części zamieszczono krótką charakterystykę protokołu RFB (Remote Frame Buffer) wykorzystywanego przed &krdc; jak też inne kompatybilne programy. Można opuścić ten rozdział, jeżeli zagadnienia związane z cechami tego protokołu są znane. </para>
+
+<para
+>Wysoki stopień implementacji protokołu RFB zapewnia system Virtual Network Computer, powszechnie znany jako <acronym
+>VNC</acronym
+>. </para>
+
+<para
+>Mechanizm "Remote Frame Buffer" (lub w skrócie <acronym
+>RFB</acronym
+>) jest prostym protokołem transmisji, wykorzystywanym do zdalnego dostępu do graficznego interfejsu użytkownika. Jego działanie odbywa się na poziomie bufora ramki, co jest tożsame z widocznym na ekranie obrazem. Pozwala to na wykorzystanie go w każdym okienkowym systemie (zarówno X11, jak też &MacOS; oraz &Microsoft; &Windows;). Programy wykorzystujące protokół RFB istnieją dla wielu platform systemowych i często mogą być swobodnie rozpowszechniane. </para>
+
+<para
+>Wykorzystanie protokołu RFB, wymaga programu zwanego klientem (uruchomionego na komputerze, przy którym siedzi użytkownik - z ekranem, klawiaturą i myszką). Program serwera uruchomiony jest na komputerze z buforem ramki (na którym pracuje system okienkowy i programy, które będą zdalnie obsługiwane). Program  &krdc; jest klientem RFB stworzonym dla środowiska &kde;, natomiast jako serwer może być wykorzystywany program &krfb;. </para>
+
+<para
+>Ponieważ przesłanie obrazu z bufora ramki generuje spory ruch w sieci, protokół ten najlepiej się sprawuje na łączach o dużej przepustowości, takich jak sieć lokalna. Można korzystać z programu &krdc; na łączach o niższej szybkości, jednak jakość takiego połączenia nie będzie najlepsza. </para>
+
+</chapter>
+
+<chapter id="using-krfb">
+<title
+>Korzystanie z programu &krfb;</title>
+
+<!-- This chapter should tell the user how to use your app. You should use as
+many sections (Chapter, Sect1, Sect3, etc...) as is necessary to fully document
+your application. -->
+
+<para
+>Korzystanie z &krfb; jest bardzo proste, na poniższym zrzucie ekranu przedstawiony jest interfejs użytkownika. </para>
+
+<para>
+<screenshot>
+<screeninfo
+>Poniżej widoczne jest okno programu &krfb;</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="screenshot.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Główne okno programu &krfb;.</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Jeżeli użytkownik chce udostępnić komuś swój pulpit, może utworzyć zaproszenie osobiste za pomocą przycisku <guibutton
+>Nowe zaproszenie osobiste...</guibutton
+>. Spowoduje to otwarcie okna zawierającego informacje niezbędne do połączenia się z jego pulpitem. Przykład takiego zaproszenia widoczny jest poniżej. </para>
+
+<para>
+<screenshot>
+<screeninfo
+>Przykładowe zaproszenie osobiste</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="personal_invitation.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Przykładowe zaproszenie osobiste</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>W celu zwiększenia bezpieczeństwa, zaproszenie jest ważne tylko przez godzinę od momentu jego utworzenia, a także konieczne jest wprowadzenie poprawnego hasła. </para>
+
+<para
+>W programie &krfb; można zaprosić innego użytkownika wysyłając do niego e-mail. W tym celu trzeba nacisnąć przycisk <guibutton
+>Nowe zaproszenie e-mailowe... </guibutton
+> w głównym oknie programu. Spowoduje to otwarcie okna nowej wiadomości w programie pocztowym, podobnego do przedstawionego poniżej, w którym wystarczy wpisać adres odbiorcy. </para>
+
+<para>
+<screenshot>
+<screeninfo
+>Przykładowe zaproszenie w formie emaila</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="email_invitation.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Przykładowe zaproszenie w formie emaila</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<warning>
+<para
+>Program &krfb; wyświetli ostrzeżenie o problemach bezpieczeństwa związanych z przesłaniem takich informacji poprzez niezabezpieczone łącze sieciowe. </para>
+<para
+>Jeżeli nie możesz zaszyfrować wiadomości email (lub w inny sposób zabezpieczyć swoje połączenie), wysyłanie zaproszeń przez email jest związane z poważnym ryzykiem, gdyż każdy może przeczytać hasło i adres serwera, gdy wiadomość jest przesyłana przez sieć. Oznacza to, że ktoś potencjalnie może przejąć kontrolę nad komputerem użytkownika. </para>
+<para
+>Jeżeli nie jest możliwe zaszyfrowanie wiadomości email, lepiej wykorzystać zaproszenie osobiste, i drogą telefoniczną poinformować drugą osobę (wcześniej weryfikując jej tożsamość) o zaproszeniu, oraz przekazać dane niezbędne do uzyskania połączenia. </para>
+</warning>
+
+<sect1 id="krfb-managing-invitations">
+<title
+>Zarządzanie zaproszeniami w programie &krfb;</title>
+
+<para
+>Po utworzeniu zaproszenia - zarówno osobistego, jak i mailowego, &krfb; umożliwia usunięcie zaproszeń. W celu usunięcia zaproszenia trzeba je wybrać na liście (zostanie podświetlone), a następnie użyć przycisku <guibutton
+>Usuń</guibutton
+>. W celu usunięcia wszystkich zaproszeń należy użyć przycisku <guibutton
+>Usuń wszystkie</guibutton
+>. </para>
+
+</sect1>
+
+<sect1 id="krfb-qit">
+<title
+>Zakończ &krfb;</title>
+
+<para
+>Po zamknięciu głównego okna programu &krfb; serwer nadal działa, co jest sygnalizowane przez ikonę na tacce systemowej. W celu zatrzymania programu należy kliknąć prawym przyciskiem myszy na ikonie w tacce systemowej, po czym z menu wybrać<guimenuitem
+>Zakończ</guimenuitem
+>. </para>
+
+</sect1>
+
+<sect1 id="krfb-configuration">
+<title
+>Konfiguracja programu &krfb;</title>
+<para
+>Oprócz opisanego powyżej głównego interfejsu użytkownika programu &krfb; programem można też sterować po naciśnięciu w głównym oknie przycisku <guibutton
+>Konfiguruj...</guibutton
+>. Jak pokazano na ilustracji poniżej, okno konfiguracji ma dwie strony: </para>
+
+<para
+>Karta <guilabel
+>Sieć</guilabel
+> pozwala na zdefiniowanie portu wykorzystywanego przez &krfb;, co widać poniżej. </para>
+
+<para>
+<screenshot>
+<screeninfo
+>Konfiguracja &krfb; (Karta: Sieć)</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="configuration_network.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Konfiguracja &krfb; (Karta: Sieć)</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Opcja <guilabel
+>Ogłoś usługę w sieci</guilabel
+> decyduje o tym, czy  &krfb; ma rozgłaszać zaproszenie do połączenia w sieci, z wykorzystaniem protokołu SLP. Jest to bardzo przydatna funkcja, jednak działa ona dobrze jedynie z programami klienta obsługującymi protokół SLP. Przykładem takiego programu jest program &krdc;. </para>
+
+<para
+>If you select the <guilabel
+>Use default port</guilabel
+> checkbox, then &krfb; will locate a suitable port, and invitations will match this port. If you deselect the this checkbox, you can specify a particular port. Specifying a particular port may be useful if you are using port-forwarding on the firewall. Note that if Service Location Protocol is turned on, this will automatically deal with identifying the correct port. </para>
+
+<para
+>Karta <guilabel
+>Bezpieczeństwo</guilabel
+> pozwala na konfigurację ustawień związanych z dostępem do serwera &krfb;. </para>
+
+<para>
+<screenshot>
+<screeninfo
+>Konfiguracja &krfb; (Karta: Bezpieczeństwo)</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="configuration_security.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Konfiguracja &krfb; (Karta: Bezpieczeństwo)</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Opcja <guilabel
+>Pozwól na połączenia bez zaproszenia</guilabel
+> decyduje o tym, czy &krfb; ma przyjmować połączenia, dla których nie zostało utworzone zaproszenie. W przypadku gdy opcja ta jest zaznaczone, należy pamiętać aby ustawić hasło dostępu do komputera. Pozostałe opcje pozwalają na włączenie/wyłączenie pojawiania się okna z pytaniem o akceptację połączenia, oraz na ustawienie czy zdalny użytkownik będzie miał pełną kontrolę nad pulpitem czy będzie go mógł jedynie oglądać. </para>
+
+<para
+>Jeżeli komputer pracuje jako stacja robocza i dozwolone są połączenia bez zaproszenia, najlepiej jednocześnie zaznaczyć opcję <guilabel
+>Pytaj przed zaakceptowaniem połączenia</guilabel
+>. Natomiast jeżeli komputer jest serwerem, a &krfb; stanowi narzędzie zdalnej administracji, należy tę opcję pozostawić niezaznaczoną. </para>
+
+<note>
+<para
+>Program &krfb; wykorzystuje standardowy mechanizm haseł <acronym
+>RFB</acronym
+>, który nie przesyła ich otwartym tekstem poprzez sieć. Zamiast tego wykorzystywany jest mechanizm pytanie-odpowiedź, co jest wystarczająco bezpieczne przy założeniu, że hasło jest odpowiednio strzeżone. </para>
+</note>
+
+</sect1>
+
+<sect1 id="krfb-connection">
+<title
+>Co dzieje się w momencie, gdy ktoś podłącza się do &krfb;</title>
+
+<para
+>Gdy ktoś z zewnątrz próbuje połączyć się z &krfb; na komputerze użytkownika, wyświetlone zostaje wyskakujące okienko z wiadomością o połączeniu, podobne do pokazanego poniżej. Ono to nie będzie się pojawiać, jeżeli została zaznaczona opcja: "Zatwierdź połączenia bez zaproszenia zanim zostaną zaakceptowane" w parametrach konfiguracyjnych programu &krfb;. </para>
+<para>
+<screenshot>
+<screeninfo
+>&krfb; - Okno połączenia</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="connection.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>&krfb; - Okno połączenia</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Jeżeli naciśnięty zostanie przycisk <guibutton
+>Zaakceptuj połączenie</guibutton
+>, zdalny klient może przejść do procedury uwierzytelniania (co wymaga podania właściwego hasła z zaproszenia osobistego lub e-mailowego). Jeżeli naciśnięty zostanie przycisk <guibutton
+>Odrzuć połączenie</guibutton
+>, to próba połączenia zostanie przerwana. </para>
+
+<para
+>Widoczna w oknie opcja <guilabel
+>Zezwól zdalnemu użytkownikowi na kontrolowanie klawiatury i myszy</guilabel
+> decyduje o tym, czy zdalny użytkownik może jedynie obserwować pulpit, czy ma pełną kontrolę nad komputerem. </para>
+
+<para
+>Jeżeli połączenie odbyło się poprawnie, przy wykorzystaniu hasła z wcześniej stworzonego zaproszenia osobistego bądź e-mailowego, to zaproszenie to jest usuwane i nie może zostać ponownie użyte. Pojawi się również małe okienko wyskakujące w obszarze dokowania na pasku zadań, z informacją iż połączenie zostało nawiązane. </para>
+
+</sect1>
+</chapter>
+
+<chapter id="credits">
+
+<!-- Include credits for the programmers, documentation writers, and
+contributors here. The license for your software should then be included below
+the credits with a reference to the appropriate license file included in the KDE
+distribution. -->
+
+<title
+>Zasługi i licencje</title>
+
+<para
+>&krfb; </para>
+<para
+>Prawa autorskie do programu (c) 2002 Tim Jansen <email
+>tim@tjansen.de</email
+> </para>
+<para
+>Współpraca: <itemizedlist
+> <listitem
+><para
+>Ian Reinhart Geiser <email
+>geiseri@kde.org</email
+></para>
+</listitem>
+</itemizedlist>
+</para>
+
+<para
+>Prawa autorskie do dokumentacji &copy; 2003 &Brad.Hards; &Brad.Hards.mail; </para>
+
+<para
+>Polskie tłumaczenie dokumentacji: <email
+>wozniakk@ceti.pl</email
+></para
+> 
+&underFDL; &underGPL; </chapter>
+
+<appendix id="installation">
+<title
+>Instalacja</title>
+
+<sect1 id="getting-krfb">
+<title
+>Gdzie zdobyć program &krfb;</title>
+&install.intro.documentation; </sect1>
+
+<sect1 id="compilation">
+<title
+>Kompilacja i instalacja</title>
+&install.compile.documentation; </sect1>
+
+</appendix>
+
+&documentation.index;
+</book>
+
+<!--
+Local Variables:
+mode: xml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-indent-step:0
+sgml-indent-data:nil
+End:
+
+vim:tabstop=2:shiftwidth=2:expandtab 
+-->

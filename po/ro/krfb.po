@@ -1,0 +1,1085 @@
+# Traducerea kcmcolors.po în Română
+# Claudiu Costin <claudiuc@kde.org>, 2003, 2004, 2005.
+# Sergiu Bivol <sergiu@cip.md>, 2008, 2009, 2014, 2020, 2022.
+# Laurenţiu Buzdugan <lbuz@rolix.org>, 2009.
+msgid ""
+msgstr ""
+"Project-Id-Version: krfb\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-07-18 00:45+0000\n"
+"PO-Revision-Date: 2022-04-30 11:39+0100\n"
+"Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
+"Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
+"Language: ro\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
+"20)) ? 1 : 2;\n"
+"X-Generator: Lokalize 21.12.3\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Sergiu Bivol"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "sergiu@cip.md"
+
+#: connectiondialog.cpp:39
+#, kde-format
+msgid "New Connection"
+msgstr "Conexiune nouă"
+
+#: connectiondialog.cpp:61
+#, kde-format
+msgid "Accept Connection"
+msgstr "Acceptă conexiunea"
+
+#: connectiondialog.cpp:65
+#, kde-format
+msgid "Refuse Connection"
+msgstr "Refuză conexiunea"
+
+#: invitationsrfbclient.cpp:69
+#, kde-format
+msgid "Accepted connection from %1"
+msgstr "Conexiune de la %1 acceptată"
+
+#: invitationsrfbclient.cpp:75
+#, kde-format
+msgid "Received connection from %1, on hold (waiting for confirmation)"
+msgstr "Conexiune recepționată de la %1, în așteptare (așteaptă confirmarea)"
+
+#: invitationsrfbserver.cpp:55
+#, kde-format
+msgid "%1@%2 (shared desktop)"
+msgstr "%1@%2 (birou partajat)"
+
+#. i18n: ectx: label, entry (startMinimized), group (MainWindow)
+#: krfb.kcfg:9
+#, kde-format
+msgid "Start minimized"
+msgstr "Pornește minimizat"
+
+#. i18n: ectx: label, entry (useDefaultPort), group (TCP)
+#: krfb.kcfg:15
+#, kde-format
+msgid "Use the default port for VNC (5900)"
+msgstr "Utilizează portul implicit pentru VNC (5900)"
+
+#. i18n: ectx: label, entry (port), group (TCP)
+#: krfb.kcfg:19
+#, kde-format
+msgid "This is the port on which krfb will listen."
+msgstr "Acesta este portul la care va asculta krfb."
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_publishService)
+#. i18n: ectx: label, entry (publishService), group (TCP)
+#: krfb.kcfg:23 ui/configtcp.ui:16
+#, kde-format
+msgid "Announce the service on the local network"
+msgstr "Anunță serviciul în rețea"
+
+#. i18n: ectx: label, entry (noWallet), group (Security)
+#: krfb.kcfg:29
+#, kde-format
+msgid "Do not store passwords in KWallet"
+msgstr "Nu stoca parolele în KWallet"
+
+#. i18n: ectx: label, entry (allowDesktopControl), group (Security)
+#: krfb.kcfg:33
+#, kde-format
+msgid "Allow remote connections to manage the desktop."
+msgstr "Permite conexiunilor distante să administreze biroul."
+
+#. i18n: ectx: label, entry (allowUnattendedAccess), group (Security)
+#: krfb.kcfg:37
+#, kde-format
+msgid "Allow connections without an invitation."
+msgstr "Permite conexiuni fără invitație."
+
+#. i18n: ectx: label, entry (unattendedAccessPassword), group (Security)
+#. i18n: ectx: label, entry (desktopSharingPassword), group (Security)
+#: krfb.kcfg:41 krfb.kcfg:44
+#, kde-format
+msgid "Password for uninvited connections."
+msgstr "Parola pentru conexiuni fără invitație."
+
+#. i18n: ectx: label, entry (preferredFrameBufferPlugin), group (FrameBuffer)
+#: krfb.kcfg:49
+#, kde-format
+msgid "Preferred Frame Buffer Plugin"
+msgstr "Extensia „frame buffer” preferată"
+
+#: main-virtualmonitor.cpp:49
+#, kde-format
+msgid "Creating a Virtual Monitor from %1"
+msgstr "Se creează un monitor virtual din %1"
+
+#: main-virtualmonitor.cpp:80
+#, kde-format
+msgid "Remote Virtual Monitor"
+msgstr "Monitor virtual distant"
+
+#: main-virtualmonitor.cpp:82
+#, kde-format
+msgid "Offer a Virtual Monitor that can be accessed remotely"
+msgstr "Oferă un monitor virtual ce poate fi accesat de la distanță"
+
+#: main-virtualmonitor.cpp:84 main.cpp:98
+#, kde-format
+msgid ""
+"(c) 2009-2010, Collabora Ltd.\n"
+"(c) 2007, Alessandro Praduroux\n"
+"(c) 2001-2003, Tim Jansen\n"
+"(c) 2001, Johannes E. Schindelin\n"
+"(c) 2000-2001, Const Kaplinsky\n"
+"(c) 2000, Tridia Corporation\n"
+"(c) 1999, AT&T Laboratories Boston\n"
+msgstr ""
+"(c) 2009-2010, Collabora Ltd.\n"
+"(c) 2007, Alessandro Praduroux\n"
+"(c) 2001-2003, Tim Jansen\n"
+"(c) 2001, Johannes E. Schindelin\n"
+"(c) 2000-2001, Const Kaplinsky\n"
+"(c) 2000, Tridia Corporation\n"
+"(c) 1999, AT&T Laboratories Boston\n"
+
+#: main-virtualmonitor.cpp:91
+#, kde-format
+msgid "Virtual Monitor implementation"
+msgstr "Implementare pentru monitor virtual"
+
+#: main-virtualmonitor.cpp:92 main.cpp:108
+#, kde-format
+msgid "George Kiagiadakis"
+msgstr "George Kiagiadakis"
+
+#: main-virtualmonitor.cpp:93 main.cpp:111
+#, kde-format
+msgid "Alessandro Praduroux"
+msgstr "Alessandro Praduroux"
+
+#: main-virtualmonitor.cpp:93 main.cpp:111
+#, kde-format
+msgid "KDE4 porting"
+msgstr "Portarea KDE4"
+
+#: main-virtualmonitor.cpp:94 main.cpp:112
+#, kde-format
+msgid "Tim Jansen"
+msgstr "Tim Jansen"
+
+#: main-virtualmonitor.cpp:94 main.cpp:112
+#, kde-format
+msgid "Original author"
+msgstr "Autor original"
+
+#: main-virtualmonitor.cpp:95 main.cpp:113
+#, kde-format
+msgid "Johannes E. Schindelin"
+msgstr "Johannes E. Schindelin"
+
+#: main-virtualmonitor.cpp:96 main.cpp:114
+#, kde-format
+msgid "libvncserver"
+msgstr "libvncserver"
+
+#: main-virtualmonitor.cpp:97 main.cpp:115
+#, kde-format
+msgid "Const Kaplinsky"
+msgstr "Const Kaplinsky"
+
+#: main-virtualmonitor.cpp:98 main.cpp:116
+#, kde-format
+msgid "TightVNC encoder"
+msgstr "Codor TightVNC"
+
+#: main-virtualmonitor.cpp:99 main.cpp:117
+#, kde-format
+msgid "Tridia Corporation"
+msgstr "Tridia Corporation"
+
+#: main-virtualmonitor.cpp:100 main.cpp:118
+#, kde-format
+msgid "ZLib encoder"
+msgstr "Codor ZLib"
+
+#: main-virtualmonitor.cpp:101 main.cpp:119
+#, kde-format
+msgid "AT&T Laboratories Boston"
+msgstr "Laboratoarele AT&T Boston"
+
+#: main-virtualmonitor.cpp:102 main.cpp:120
+#, kde-format
+msgid "original VNC encoders and protocol design"
+msgstr "codificatorii VNC inițiali și proiectarea protocolului"
+
+#: main-virtualmonitor.cpp:108
+#, kde-format
+msgid "Logical resolution of the new monitor"
+msgstr "Rezoluția logică pentru noul monitor"
+
+#: main-virtualmonitor.cpp:108
+#, kde-format
+msgid "resolution"
+msgstr "rezoluție"
+
+#: main-virtualmonitor.cpp:110
+#, kde-format
+msgid "Name of the monitor"
+msgstr "Denumirea monitorului"
+
+#: main-virtualmonitor.cpp:110
+#, kde-format
+msgid "name"
+msgstr "denumire"
+
+#: main-virtualmonitor.cpp:112
+#, kde-format
+msgid "Password for the client to connect to it"
+msgstr "Parola pentru ca clientul să se conecteze la el"
+
+#: main-virtualmonitor.cpp:112
+#, kde-format
+msgid "password"
+msgstr "parolă"
+
+#: main-virtualmonitor.cpp:114
+#, kde-format
+msgid "The device-pixel-ratio of the device, the scaling factor"
+msgstr "Raportul de pixeli real al dispozitivului, factorul de scalare"
+
+#: main-virtualmonitor.cpp:114
+#, kde-format
+msgid "dpr"
+msgstr "dpr"
+
+#: main-virtualmonitor.cpp:116
+#, kde-format
+msgid "The port we will be listening to"
+msgstr "Portul la care vom asculta"
+
+#: main-virtualmonitor.cpp:116
+#, kde-format
+msgid "number"
+msgstr "număr"
+
+#: main.cpp:49
+#, kde-format
+msgid ""
+"Your X11 Server does not support the required XTest extension version 2.2. "
+"Sharing your desktop is not possible."
+msgstr ""
+"Serverul dumneavoastră X11 nu susține extensia necesară XTest versiunea 2.2. "
+"Partajarea biroului nu e posibilă."
+
+#: main.cpp:51 main.cpp:150
+#, kde-format
+msgid "Desktop Sharing Error"
+msgstr "Eroare la partajarea biroului"
+
+#: main.cpp:94
+#, kde-format
+msgid "Desktop Sharing"
+msgstr "Partajare birou"
+
+#: main.cpp:96
+#, kde-format
+msgid "VNC-compatible server to share desktops"
+msgstr "Server compatibil cu VNC pentru partajarea birourilor"
+
+#: main.cpp:105
+#, kde-format
+msgid "George Goldberg"
+msgstr "George Goldberg"
+
+#: main.cpp:106
+#, kde-format
+msgid "Telepathy tubes support"
+msgstr "Suport pentru tuburi Telepathy"
+
+#: main.cpp:126
+#, kde-format
+msgid "Do not show the invitations management dialog at startup"
+msgstr "Nu arăta dialogul de gestiune a invitațiilor la pornire"
+
+#: main.cpp:148
+#, kde-format
+msgid ""
+"Desktop Sharing is not running under an X11 Server or Wayland.\n"
+"Other display servers are currently not supported."
+msgstr ""
+"Partajarea biroului nu rulează într-un server X11 sau Wayland.\n"
+"Alte servere de afișaj nu sunt susținute momentan."
+
+#: mainwindow.cpp:52
+#, kde-format
+msgid "Storing passwords in config file is insecure!"
+msgstr "Stocarea parolelor în fișierul de configurare nu e sigură!"
+
+#: mainwindow.cpp:189
+#, kde-format
+msgid "Enter a new password for Unattended Access"
+msgstr "Introduceți parola nouă pentru acces nesupravegheat"
+
+#: mainwindow.cpp:200
+#, kde-format
+msgid ""
+"Failed to start the krfb server. Desktop sharing will not work. Try setting "
+"another port in the settings and restart krfb."
+msgstr ""
+"Pornirea serverului krfb a eșuat. Partajarea biroului nu va funcționa. "
+"Încercați să indicați alt port în configurări și să reporniți krfb."
+
+#. i18n: ectx: property (whatsThis), widget (QLabel, titleLabel)
+#. i18n: ectx: property (text), widget (QLabel, titleLabel)
+#. i18n: ectx: property (whatsThis), widget (QLabel, aboutLabel)
+#: mainwindow.cpp:223 mainwindow.cpp:230 ui/mainwidget.ui:83
+#: ui/mainwidget.ui:86 ui/mainwidget.ui:114
+#, kde-format
+msgid "KDE Desktop Sharing"
+msgstr "Partajare birou KDE"
+
+#: mainwindow.cpp:224
+#, kde-format
+msgid ""
+"This field contains the address of your computer and the port number, "
+"separated by a colon.\n"
+"\n"
+"The address is just a hint - you can use any address that can reach your "
+"computer.\n"
+"\n"
+"Desktop Sharing tries to guess your address from your network configuration, "
+"but does not always succeed in doing so.\n"
+"\n"
+"If your computer is behind a firewall it may have a different address or be "
+"unreachable for other computers."
+msgstr ""
+"Acest câmp conține adresa calculatorului dumneavoastră și numărul portului, "
+"separat de două puncte.\n"
+"\n"
+"Adresa este doar un indiciu - puteți utiliza orice adresă ce duce la "
+"calculatorul dumneavoastră.\n"
+"\n"
+"Partajarea de birou încearcă să vă ghicească adresa din configurarea "
+"rețelei, dar nu reușește întotdeauna să facă asta.\n"
+"\n"
+"Dacă calculatorul se află în spatele unui firewall, ar putea avea o altă "
+"adresă sau poate fi inaccesibil celorlalte calculatoare."
+
+#: mainwindow.cpp:231
+#, kde-format
+msgid ""
+"Any remote user with normal desktop sharing password will have to be "
+"authenticated.\n"
+"\n"
+"If unattended access is on, and the remote user provides unattended mode "
+"password, desktop sharing access will be granted without explicit "
+"confirmation."
+msgstr ""
+"Orice utilizator distant ce deține parola normală pentru partajarea biroului "
+"va trebui să fie autentificat.\n"
+"\n"
+"Dacă e activat accesul nesupravegheat și utilizatorul distant furnizează "
+"parola regimului nesupravegheat, accesul la partajarea ecranului va fi "
+"acordat fără confirmare explicită."
+
+#: mainwindow.cpp:249
+#, kde-format
+msgid "Network"
+msgstr "Rețea"
+
+#: mainwindow.cpp:250
+#, kde-format
+msgid "Security"
+msgstr "Securitate"
+
+#: mainwindow.cpp:251
+#, kde-format
+msgid "Screen capture"
+msgstr "Captură de ecran"
+
+#: mainwindow.cpp:256
+#, kde-format
+msgid "To apply framebuffer plugin setting, you need to restart the program."
+msgstr ""
+"Trebuie să reporniți programul pentru a aplica configurarea extensiei de "
+"framebuffer."
+
+#: rfbservermanager.cpp:229
+#, kde-format
+msgid "The remote user %1 is now connected."
+msgstr "Utilizatorul distant %1 e conectat acum."
+
+#: rfbservermanager.cpp:243
+#, kde-format
+msgid "The remote user %1 disconnected."
+msgstr "Utilizatorul distant %1 s-a deconectat."
+
+#: trayicon.cpp:56
+#, kde-format
+msgid "Disconnect"
+msgstr "Deconectează"
+
+#: trayicon.cpp:62
+#, kde-format
+msgid "Enable Remote Control"
+msgstr "Activează controlul de la distanță"
+
+#: trayicon.cpp:101 trayicon.cpp:133
+#, kde-format
+msgid "Desktop Sharing - disconnected"
+msgstr "Partajare birou - deconectat"
+
+#: trayicon.cpp:117 trayicon.cpp:137
+#, kde-format
+msgid "Desktop Sharing - connected with %1"
+msgstr "Partajare birou - conectat cu %1"
+
+#: trayicon.cpp:120
+#, kde-format
+msgid "Desktop Sharing - connected"
+msgstr "Partajare birou - conectat"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, Framebuffer)
+#: ui/configframebuffer.ui:14
+#, kde-format
+msgid "Framebuffer"
+msgstr "Framebuffer"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: ui/configframebuffer.ui:22
+#, kde-format
+msgid "Preferred frameb&uffer plugin:"
+msgstr "Extensia de frame&buffer preferată:"
+
+#. i18n: ectx: property (text), widget (QLabel, helpText)
+#: ui/configframebuffer.ui:47
+#, kde-format
+msgid ""
+"<html><head/><body><p>When using x11, <span style=\" font-weight:600;\">xcb</"
+"span> plugin should be preferred, because it is more performant.<br/><span "
+"style=\" font-weight:600;\">qt</span> plugin is a safe fallback, if for some "
+"reason others don't work. But also it is very slow.</p></body></html>"
+msgstr ""
+"<html><head/><body><p>Când folosiți x11, extensia <span style=\" font-"
+"weight:600;\">xcb</span> ar trebui preferată deoarece e mai rapidă.<br/"
+">Extensia <span style=\" font-weight:600;\">qt</span> e o rezervă de "
+"siguranță, pentru cazul în care altele nu funcționează, dar e și foarte "
+"lentă.</p></body></html>"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_allowDesktopControl)
+#: ui/configsecurity.ui:17
+#, kde-format
+msgid "Allow remote connections to control your desktop"
+msgstr "Permite conexiunilor distante să controleze biroul"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_noWallet)
+#: ui/configsecurity.ui:27
+#, kde-format
+msgid "Do not store passwords using KDE wallet"
+msgstr "Nu stoca parolele folosind KWallet"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_useDefaultPort)
+#: ui/configtcp.ui:26
+#, kde-format
+msgid "Use default port"
+msgstr "Folosește portul implicit"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: ui/configtcp.ui:50
+#, kde-format
+msgid "Listening port:"
+msgstr "Port de ascultat:"
+
+#. i18n: ectx: property (text), widget (QLabel, TextLabel5)
+#: ui/connectionwidget.ui:47
+#, kde-format
+msgid "Attention"
+msgstr "Atenție"
+
+#. i18n: ectx: property (text), widget (QLabel, mainTextLabel)
+#: ui/connectionwidget.ui:72
+#, kde-format
+msgid ""
+"Somebody is requesting a connection to your computer. Granting this will "
+"allow the remote user to watch your desktop. "
+msgstr ""
+"Cineva cere o conexiune la calculatorul dumneavoastră. Permiterea acesteia "
+"va permite utilizatorului de la distanță să vă urmărească biroul."
+
+#. i18n: ectx: property (text), widget (QLabel, TextLabel1)
+#: ui/connectionwidget.ui:102
+#, kde-format
+msgid "Remote system:"
+msgstr "Sistem distant:"
+
+#. i18n: ectx: property (text), widget (QLabel, remoteHost)
+#: ui/connectionwidget.ui:118
+#, kde-format
+msgid "123.234.123.234"
+msgstr "123.234.123.234"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, cbAllowRemoteControl)
+#: ui/connectionwidget.ui:136
+#, kde-format
+msgid ""
+"If you turn this option on, the remote user can enter keystrokes and use "
+"your mouse pointer. This gives them full control over your computer, so be "
+"careful. When the option is disabled the remote user can only watch your "
+"screen."
+msgstr ""
+"Dacă activați această opțiune, utilizatorul aflat la distanță poate apăsa "
+"taste și utiliza cursorul mausului dumneavoastră. Aceasta le oferă control "
+"complet asupra calculatorului, așa că fiți precaut. Când această opțiune "
+"este dazactivată, utilizatorul distant poate doar să vă privească ecranul."
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbAllowRemoteControl)
+#: ui/connectionwidget.ui:139
+#, kde-format
+msgid "Allow remote user to &control keyboard and mouse"
+msgstr "Permite utilizatorului distant să &controleze tastatura și mausul"
+
+#. i18n: ectx: property (text), widget (QLabel, aboutLabel)
+#: ui/mainwidget.ui:117
+#, kde-format
+msgid ""
+"KDE Desktop Sharing allows you to grant permission to someone at a remote "
+"location for viewing and possibly controlling your desktop."
+msgstr ""
+"Partajarea biroului KDE vă permite să acordați permisiuni cuiva aflat la "
+"distanță să vă vizualizeze și posibil să vă controleze biroul."
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, enableSharingCheckBox)
+#: ui/mainwidget.ui:145
+#, kde-format
+msgid "Starts/Stops Remote Desktop Sharing"
+msgstr "Pornește / oprește partajarea biroului"
+
+#. i18n: ectx: property (text), widget (QCheckBox, enableSharingCheckBox)
+#: ui/mainwidget.ui:148
+#, kde-format
+msgid "&Enable Desktop Sharing"
+msgstr "Activ&ează partajarea biroului"
+
+#. i18n: ectx: property (title), widget (QGroupBox, detailsGroupBox)
+#: ui/mainwidget.ui:170
+#, kde-format
+msgid "Connection Details"
+msgstr "Detaliile conexiunii"
+
+#. i18n: ectx: property (text), widget (QLabel, addressLabel)
+#: ui/mainwidget.ui:193
+#, kde-format
+msgid "&Address"
+msgstr "&Adresă"
+
+#. i18n: ectx: property (whatsThis), widget (QToolButton, addressAboutButton)
+#: ui/mainwidget.ui:214
+#, kde-format
+msgid "More about this address"
+msgstr "Mai multe despre această adresă"
+
+#. i18n: ectx: property (text), widget (QToolButton, addressAboutButton)
+#. i18n: ectx: property (text), widget (QToolButton, unattendedAboutButton)
+#: ui/mainwidget.ui:217 ui/mainwidget.ui:397
+#, kde-format
+msgid "About"
+msgstr "Despre"
+
+#. i18n: ectx: property (whatsThis), widget (QLabel, addressDisplayLabel)
+#: ui/mainwidget.ui:235
+#, kde-format
+msgid ""
+"Address required by remote users to connect to your desktop. Click about "
+"button on the right for more info."
+msgstr ""
+"Adresa necesară utilizatorilor distanți pentru conectarea la biroul "
+"dumneavoastră. Apăsați butonul „Despre” din dreapta pentr informații "
+"suplimentare."
+
+#. i18n: ectx: property (text), widget (QLabel, addressDisplayLabel)
+#: ui/mainwidget.ui:238
+#, kde-format
+msgid "127.0.0.1 : 5900"
+msgstr "127.0.0.1 : 5900"
+
+#. i18n: ectx: property (text), widget (QLabel, passwordLabel)
+#: ui/mainwidget.ui:269
+#, kde-format
+msgid "&Password"
+msgstr "&Parolă"
+
+#. i18n: ectx: property (whatsThis), widget (QToolButton, passwordEditButton)
+#: ui/mainwidget.ui:290
+#, kde-format
+msgid "Edit/Save Desktop Sharing Password"
+msgstr "Modifică / salvează parola pentru partajarea ecranului"
+
+#. i18n: ectx: property (text), widget (QToolButton, passwordEditButton)
+#: ui/mainwidget.ui:293
+#, kde-format
+msgid "Edit"
+msgstr "Modifică"
+
+#. i18n: ectx: property (whatsThis), widget (QLabel, passwordDisplayLabel)
+#: ui/mainwidget.ui:311
+#, kde-format
+msgid ""
+"Password required by remote users to connect to your desktop. Click the edit "
+"button on the right to change password."
+msgstr ""
+"Parola necesară utilizatorilor distanți pentru conectarea la biroul "
+"dumneavoastră. Apăsați pe butonul de redactare din dreapta pentru a schimba "
+"parola."
+
+#. i18n: ectx: property (text), widget (QLabel, passwordDisplayLabel)
+#: ui/mainwidget.ui:314
+#, kde-format
+msgid "TemporaryPassword"
+msgstr "ParolăTemporară"
+
+#. i18n: ectx: property (whatsThis), widget (QGroupBox, unattendedGroupBox)
+#. i18n: ectx: property (text), widget (QLabel, unattendedAboutLabel)
+#: ui/mainwidget.ui:340 ui/mainwidget.ui:378
+#, kde-format
+msgid ""
+"Unattended Access allows a remote user with the password to gain control to "
+"your desktop without your explicit confirmation."
+msgstr ""
+"Accesul nesupravegheat le permite utilizatorilor distanți ce dețin parola să "
+"obțină controlul asupra biroului dumneavoastră fără confirmare explicită."
+
+#. i18n: ectx: property (title), widget (QGroupBox, unattendedGroupBox)
+#: ui/mainwidget.ui:343
+#, kde-format
+msgid "Unattended Access"
+msgstr "Acces nesupravegheat"
+
+#. i18n: ectx: property (whatsThis), widget (QLabel, unattendedAboutLabel)
+#: ui/mainwidget.ui:375
+#, kde-format
+msgid ""
+"Unattended Access allows a remote user with the password to gain control to "
+"your desktop without your explicit confirmation. Click \"About\" button on "
+"right to know more."
+msgstr ""
+"Accesul nesupravegheat le permite utilizatorilor distanți ce dețin parola să "
+"obțină controlul asupra biroului dumneavoastră fără confirmare explicită. "
+"Apăsați butonul „Despre” din dreapta pentru a afla mai multe."
+
+#. i18n: ectx: property (whatsThis), widget (QToolButton, unattendedAboutButton)
+#: ui/mainwidget.ui:394
+#, kde-format
+msgid "Know more about Unattended Access"
+msgstr "Aflați mai multe despre accesul nesupravegheat"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, enableUnattendedCheckBox)
+#: ui/mainwidget.ui:437
+#, kde-format
+msgid ""
+"Starts/Stops unattended access to your desktop. Click on button on right to "
+"change password, and \"About\" button to know more."
+msgstr ""
+"Pornește/oprește accesul nesupravegheat la biroul dumneavoastră. Apăsați "
+"butonul din dreapta pentru a schimba parola și butonul „Despre” pentru a "
+"afla mai multe."
+
+#. i18n: ectx: property (text), widget (QCheckBox, enableUnattendedCheckBox)
+#: ui/mainwidget.ui:440
+#, kde-format
+msgid "Enable &Unattended Access"
+msgstr "Activează acces&ul nesupravegheat"
+
+#. i18n: ectx: property (whatsThis), widget (QPushButton, unattendedPasswordButton)
+#: ui/mainwidget.ui:465
+#, kde-format
+msgid "Change password for Unattended Access"
+msgstr "Modifică parola pentru acces nesupravegheat"
+
+#. i18n: ectx: property (text), widget (QPushButton, unattendedPasswordButton)
+#: ui/mainwidget.ui:468
+#, kde-format
+msgid "&Change Unattended Password"
+msgstr "Modifi&că parola pentru acces nesupravegheat"
+
+#~ msgid "Welcome to KDE Desktop Sharing"
+#~ msgstr "Bun venit în Partajarea biroului KDE"
+
+#~ msgid ""
+#~ "KDE Desktop Sharing allows you to invite somebody at a remote location to "
+#~ "watch and possibly control your desktop. <a href=\"whatsthis\">More about "
+#~ "invitations...</a>"
+#~ msgstr ""
+#~ "Partajarea biroului KDE vă permite să invitați pe cineva dintr-un loc "
+#~ "aflat la distanță să vă urmărească sau să vă controleze biroul. <a href="
+#~ "\"whatsthis\">Mai multe despre invitații...</a>"
+
+#~ msgid ""
+#~ "Create a new invitation and display the connection data. Use this option "
+#~ "if you want to invite somebody personally, for example, to give the "
+#~ "connection data over the phone."
+#~ msgstr ""
+#~ "Creează o invitație nouă și afișează datele conexiunii. Utilizați această "
+#~ "opțiune dacă doriți să invitați personal pe cineva, de exemplu pentru a "
+#~ "oferi datele de conectare prin telefon."
+
+#~ msgid "Create &Personal Invitation..."
+#~ msgstr "Creare invitație &personală..."
+
+#~ msgid ""
+#~ "This button will start your email application with a pre-configured text "
+#~ "that explains to the recipient how to connect to your computer. "
+#~ msgstr ""
+#~ "Acest buton va porni aplicația de poștă cu un text preconfigurat ce "
+#~ "explică destinatarului cum să se conecteze la calculatorul dumneavoastră."
+
+#~ msgid "Invite via &Email..."
+#~ msgstr "Invită prin &email..."
+
+#~ msgid "&Manage Invitations (%1)..."
+#~ msgstr "&Gestionare invitații (%1)..."
+
+#~ msgid ""
+#~ "You have requested to share your desktop with %1. If you proceed, you "
+#~ "will allow the remote user to watch your desktop."
+#~ msgstr ""
+#~ "Ați cerut partajarea biroului cu %1. Dacă continuați, veți permite "
+#~ "utilizatorului distant să vă urmărească biroul."
+
+#~ msgid "Search in Contacts..."
+#~ msgstr "Căutare în contacte..."
+
+#~ msgid "Confirmation"
+#~ msgstr "Confirmare"
+
+#~ msgid "Failed login attempt from %1: wrong password"
+#~ msgstr "Încercare eșuată de autentificare de la %1: parolă greșită"
+
+#~ msgid "Refused uninvited connection attempt from %1"
+#~ msgstr "Tentativă de conexiune neinvitată de la %1 refuzată"
+
+#~ msgid "Invitation"
+#~ msgstr "Invitație"
+
+#~ msgid ""
+#~ "An invitation creates a one-time password that allows the receiver to "
+#~ "connect to your desktop.\n"
+#~ "It is valid for only one successful connection and will expire after an "
+#~ "hour if it has not been used. \n"
+#~ "When somebody connects to your computer a dialog will appear and ask you "
+#~ "for permission.\n"
+#~ " The connection will not be established before you accept it. In this "
+#~ "dialog you can also\n"
+#~ " restrict the other person to view your desktop only, without the ability "
+#~ "to move your\n"
+#~ " mouse pointer or press keys.\n"
+#~ "If you want to create a permanent password for Desktop Sharing, allow "
+#~ "'Uninvited Connections' \n"
+#~ "in the configuration."
+#~ msgstr ""
+#~ "O invitație creează o parolă de unică folosință ce permite destinatarului "
+#~ "să se conecteze la biroul dumneavoastră.\n"
+#~ "Aceasta este valabilă pentru o singură conexiune reușită și expiră după o "
+#~ "oră dacă nu este utilizată.\n"
+#~ "Când cineva se conectează la calculatorul dumneavoastră, va apare un "
+#~ "dialog și vă va cere permisiunea.\n"
+#~ "Conexiunea nu va fi stabilită până când nu o acceptați. În acest dialog "
+#~ "puteți de asemenea restricționa\n"
+#~ "cealaltă persoană să poată numai să vă vadă biroul, fără posibilitatea de "
+#~ "a vă mișca cursorul mausului\n"
+#~ "sau de a apăsa taste.\n"
+#~ "Dacă doriți să creați o parolă permanentă pentru Partajarea biroului, "
+#~ "permiteți „Conexiuni neinvitate”\n"
+#~ "în configurație."
+
+#~ msgid "Ask before allowing a remote connection."
+#~ msgstr "Întreabă înainte de a permite o conexiune distantă."
+
+#~ msgid ""
+#~ "An invitation creates a one-time password that allows the receiver to "
+#~ "connect to your desktop.\n"
+#~ "It is valid for only one successful connection and will expire after an "
+#~ "hour if it has not been used. \n"
+#~ "When somebody connects to your computer a dialog will appear and ask you "
+#~ "for permission.\n"
+#~ "The connection will not be established before you accept it. In this "
+#~ "dialog you can also\n"
+#~ "restrict the other person to view your desktop only, without the ability "
+#~ "to move your\n"
+#~ "mouse pointer or press keys.\n"
+#~ "If you want to create a permanent password for Desktop Sharing, allow "
+#~ "'Uninvited Connections' \n"
+#~ "in the configuration."
+#~ msgstr ""
+#~ "O invitație creează o parolă de unică folosință ce permite destinatarului "
+#~ "să se conecteze la biroul dumneavoastră.\n"
+#~ "Aceasta este valabilă pentru o singură conexiune reușită și expiră după o "
+#~ "oră dacă nu este utilizată.\n"
+#~ "Când cineva se conectează la calculatorul dumneavoastră, va apare un "
+#~ "dialog și vă va cere permisiunea.\n"
+#~ "Conexiunea nu va fi stabilită până când nu o acceptați. În acest dialog "
+#~ "puteți de asemenea restricționa\n"
+#~ "cealaltă persoană să poată numai să vă vadă biroul, fără posibilitatea de "
+#~ "a vă mișca cursorul mausului\n"
+#~ "sau de a apăsa taste.\n"
+#~ "Dacă doriți să creați o parolă permanentă pentru Partajarea biroului, "
+#~ "permiteți „Conexiuni neinvitate”\n"
+#~ "în configurație."
+
+#~ msgid ""
+#~ "When sending an invitation by email, note that everybody who reads this "
+#~ "email will be able to connect to your computer for one hour, or until the "
+#~ "first successful connection took place, whichever comes first. \n"
+#~ "You should either encrypt the email or at least send it only in a secure "
+#~ "network, but not over the Internet."
+#~ msgstr ""
+#~ "La trimiterea unei invitații prin poșta electronică, rețineți că oricine "
+#~ "citește această scrisoare poate să se conecteze la calculatorul "
+#~ "dumneavoastră timp de o oră, sau până are loc prima conexiune reușită, "
+#~ "oricare din aceste evenimente are loc primul. \n"
+#~ "Ar trebui să criptați scrisoarea sau cel puțin să o expediați doar printr-"
+#~ "o rețea securizată, însă nu prin Internet."
+
+#~ msgid "Send Invitation via Email"
+#~ msgstr "Trimite invitația prin email"
+
+#~ msgid "Desktop Sharing (VNC) invitation"
+#~ msgstr "Invitație la partajarea biroului (VNC)"
+
+#, fuzzy
+#~| msgid ""
+#~| "You have been invited to a VNC session. If you have the KDE Remote "
+#~| "Desktop Connection installed, just click on the link below.\n"
+#~| "\n"
+#~| "%1\n"
+#~| "\n"
+#~| "Otherwise you can use any VNC client with the following parameters:\n"
+#~| "\n"
+#~| "Host: %2:%3\n"
+#~| "Password: %4\n"
+#~| "\n"
+#~| "For security reasons this invitation will expire at %5."
+#~ msgid ""
+#~ "You have been invited to a VNC session. If you have the KDE Remote "
+#~ "Desktop Connection installed, just click on the link below.\n"
+#~ "\n"
+#~ "%1\n"
+#~ "\n"
+#~ "Otherwise you can use any VNC client with the following parameters:\n"
+#~ "\n"
+#~ "Host: %2:%3\n"
+#~ "Password: %4\n"
+#~ "\n"
+#~ "For security reasons this invitation will expire at %5 (%6)."
+#~ msgstr ""
+#~ "Ați fost invitat la o sesiune VNC. Dacă aveți instalată Partajarea de "
+#~ "birou KDE, apăsați pe legătura de mai jos.\n"
+#~ "\n"
+#~ "%1\n"
+#~ "\n"
+#~ "În caz contrar puteți utiliza orice client VNC cu următorii parametri:\n"
+#~ "\n"
+#~ "Gazdă: %2:%3\n"
+#~ "Parolă: %4\n"
+#~ "\n"
+#~ "Din motive de securitate, această invitație va expira la %5."
+
+#~ msgid "<qt>Are you sure you want to delete all invitations?</qt>"
+#~ msgstr "<qt>Sigur ștergeți toate invitațiile?</qt>"
+
+#~ msgid "Confirm delete Invitations"
+#~ msgstr "Confirmă ștergerea invitațiilor"
+
+#~ msgid "<qt>Are you sure you want to delete this invitation?</qt>"
+#~ msgstr "<qt>Sigur ștergeți această invitație?</qt>"
+
+#~ msgid "Personal Invitation"
+#~ msgstr "Invitație personală"
+
+#~ msgid ""
+#~ "Desktop Sharing uses the VNC protocol. You can use any VNC client to "
+#~ "connect. \n"
+#~ "In KDE the client is called 'Remote Desktop Connection'. Enter the host "
+#~ "information\n"
+#~ "into the client and it will connect.."
+#~ msgstr ""
+#~ "Partajarea biroului utilizează protocolul VNC. Puteți utiliza orice "
+#~ "client VNC pentru a vă conecta.\n"
+#~ "În KDE, clientul se numește „Conexiune birou la distanță”. Introduceți "
+#~ "informațiile despre gazdă\n"
+#~ "în client și acesta se va conecta..."
+
+#, fuzzy
+#~| msgid "Ask before accepting an uninvited connection"
+#~ msgid "Ask before accepting connections"
+#~ msgstr "Întreabă înainte de a accepta o conexiune neinvitată"
+
+#~ msgid "Allow uninvited connections"
+#~ msgstr "Permite conexiuni fără invitație"
+
+#~ msgid "Uninvited connections password:"
+#~ msgstr "Parola pentru conexiuni neinvitate:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">KDE Desktop Sharing "
+#~ "allows you to invite somebody at a remote location to watch and possibly "
+#~ "control your desktop. <a href=\"whatsthis\">More about invitations...</"
+#~ "a></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Partajarea biroului KDE "
+#~ "vă permite să invitați pe cineva dintr-o locație aflată la distanță să vă "
+#~ "urmărească sau să vă controleze biroul. <a href=\"whatsthis\">Mai multe "
+#~ "despre invitații...</a></p></body></html>"
+
+#~ msgid "Creation Time"
+#~ msgstr "Momentul creării"
+
+#~ msgid "Expire Time"
+#~ msgstr "Momentul expirării"
+
+#~ msgid "Create a new personal invitation..."
+#~ msgstr "Creare invitație personală nouă..."
+
+#~ msgid "Click this button to create a new personal invitation."
+#~ msgstr "Apăsați acest buton pentru a crea o invitație personală nouă."
+
+#~ msgid "New &Personal Invitation..."
+#~ msgstr "Invitație &personală nouă..."
+
+#~ msgid "Send a new invitation via email..."
+#~ msgstr "Trimite o nouă invitație prin email..."
+
+#~ msgid "Click this button to send a new invitation via email."
+#~ msgstr "Apăsați acest buton pentru a trimite o nouă invitație prin email."
+
+#~ msgid "&New Email Invitation..."
+#~ msgstr "Invitație prin &email nouă..."
+
+#~ msgid "Delete all invitations"
+#~ msgstr "Șterge toate invitațiile"
+
+#~ msgid "Deletes all open invitations."
+#~ msgstr "Șterge toate invitațiile deschise."
+
+#~ msgid "Delete All"
+#~ msgstr "Șterge toate"
+
+#~ msgid "Delete the selected invitation"
+#~ msgstr "Șterge invitația aleasă"
+
+#~ msgid ""
+#~ "Delete the selected invitation. The invited person will not be able to "
+#~ "connect using this invitation anymore."
+#~ msgstr ""
+#~ "Șterge invitația aleasă. Persoana invitată nu va putea să se conecteze "
+#~ "utilizând această invitație."
+
+#~ msgid "&Delete"
+#~ msgstr "Ș&terge"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Personal Invitation</span></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Give the information "
+#~ "below to the person that you want to invite (<a href=\"htc\">how to "
+#~ "connect</a>). Note that everybody who gets the password can connect, so "
+#~ "be careful.</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Invitație personală</span></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Oferiți informația de "
+#~ "mai jos persoanei pe care doriți să o invitați (<a href=\"htc\">cum să vă "
+#~ "conectați</a>). Rețineți că oricine obține parola se poate conecta, deci "
+#~ "fiți atent.</p></body></html>"
+
+#~ msgid "<b>Host:</b>"
+#~ msgstr "<b>Gazdă:</b>"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><a href=\"help\">Help</"
+#~ "a></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><a href=\"help"
+#~ "\">Ajutor</a></p></body></html>"
+
+#~ msgid "<b>Expiration time:</b>"
+#~ msgstr "<b>Momentul expirării:</b>"
+
+#~ msgid "Address already in use"
+#~ msgstr "Adresa este deja utilizată"
+
+#~ msgid "Ian Reinhart Geiser"
+#~ msgstr "Ian Reinhart Geiser"
+
+#~ msgid "DCOP interface"
+#~ msgstr "Interfață DCOP"
+
+#~ msgid "Jens Wagner (heXoNet Support GmbH)"
+#~ msgstr "Jens Wagner (heXoNet Support GmbH)"
+
+#~ msgid "X11 update scanner, original code base"
+#~ msgstr "Scanner de actualizare X11, codul original"
+
+#~ msgid "Jason Spisak"
+#~ msgstr "Jason Spisak"
+
+#~ msgid "Karl Vogel"
+#~ msgstr "Karl Vogel"
+
+#~ msgid "KDesktop background deactivation"
+#~ msgstr "Dezactivare fundal KDesktop"
+
+#~ msgid "Disable Remote Control"
+#~ msgstr "Dezactivează controlul de la distanță"
+
+#~ msgid "The remote user has closed the connection."
+#~ msgstr "Utilizatorul distant a închis conexiunea."
+
+#~ msgid "The remote user has been authenticated and is now connected."
+#~ msgstr "Utilizatorul distant a fost autentificat și este conectat acum."
+
+#~ msgid "Attepted uninvited connection from %1: connection refused"
+#~ msgstr "Conexiune neinvitată încercată de la %1: conexiune refuzată"

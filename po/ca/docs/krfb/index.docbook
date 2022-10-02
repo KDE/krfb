@@ -1,0 +1,360 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY % addindex "IGNORE">
+  <!ENTITY % Catalan  "INCLUDE">
+]>
+
+<book id="krfb" lang="&language;">
+
+<bookinfo>
+<title
+>El manual del &krfb;</title>
+
+<authorgroup>
+<author
+>&Brad.Hards; &Brad.Hards.mail; </author>
+&traductor.Antoni.Bella; 
+</authorgroup>
+
+<copyright>
+<year
+>2003</year>
+<holder
+>&Brad.Hards;</holder>
+</copyright>
+
+<legalnotice
+>&FDLNotice;</legalnotice>
+
+<date
+>25 de juliol de 2016</date>
+<releaseinfo
+>5.0 (Aplicacions 16.08)</releaseinfo>
+
+<abstract>
+<para
+>El &krfb; és una aplicació de servidor que permet compartir la vostra sessió actual amb un usuari en una altra màquina. Tot el que caldrà és que empreu un client <acronym
+>VNC</acronym
+> per a veure o controlar l'escriptori. </para>
+</abstract>
+
+<keywordset>
+<keyword
+>KDE</keyword>
+<keyword
+>kdenetwork</keyword>
+<keyword
+>krfb</keyword>
+<keyword
+>VNC</keyword>
+<keyword
+>RFB</keyword>
+<keyword
+>krdc</keyword>
+<keyword
+>Compartició de l'escriptori</keyword>
+<keyword
+>Control remot</keyword>
+<keyword
+>Assistència remota</keyword>
+<keyword
+>Escriptori remot</keyword>
+</keywordset>
+
+</bookinfo>
+
+<chapter id="introduction">
+<title
+>Introducció</title>
+
+<para
+>El &krfb; és una aplicació de servidor que permet compartir la vostra sessió actual amb un usuari en una altra màquina. Tot el que caldrà és que empreu un client <acronym
+>VNC</acronym
+> per a veure o controlar l'escriptori. </para>
+
+<para
+>Típicament emprareu el &krfb; junt amb el client <acronym
+>VNC</acronym
+> del &kde;, el qual és la &krdc;, atès que comparteix moltes de les característiques especials del &krfb;. </para>
+
+<para
+>El &krfb; no requereix que inicieu una nova sessió de X -podrà compartir la sessió actual-. Això fa que sigui realment útil quan algú vol ajudar-vos a realitzar alguna tasca. </para>
+
+<para
+>Si us plau, informeu de qualsevol problema o petició d'una nova característica a la llista de correu del &kde; o d'un error a <ulink url="https://bugs.kde.org"
+>https://www.bugs.kde.org</ulink
+>. </para>
+</chapter>
+
+<chapter id="what-is-RFB">
+<title
+>El protocol de Frame Buffer remot</title>
+
+<para
+>Aquest capítol proporciona una breu descripció del protocol de Frame Buffer remot utilitzat pel &krfb; i d'altres sistemes compatibles. Si ja esteu familiaritzat amb el Frame Buffer remot, segurament podreu ometre aquest capítol. </para>
+
+<para
+>La implementació a alt nivell d'un sistema utilitzant el protocol de Frame Buffer remot es coneix com a ordinador de xarxa virtual («Virtual Network Computer»), o més sovint conegut com a <acronym
+>VNC</acronym
+>. </para>
+
+<para
+>El Frame Buffer remot (o <acronym
+>RFB</acronym
+>) és un protocol simple per a l'accés remot a interfícies d'usuari gràfiques. Aquest treballa a escala del frame-buffer, el qual correspon asprament a la imatge renderitzada a la pantalla, el qual significa que es pot aplicar a tots els sistemes de finestres (incloent-hi X11, &MacOS; i &Microsoft; &Windows;). Les aplicacions de Frame Buffer remot existeixen per a moltes plataformes i sovint es poden redistribuir lliurement. </para>
+
+<para
+>En el protocol de Frame Buffer remot, l'aplicació que s'executa a la màquina a on l'usuari es troba assegut (que conté la pantalla, el teclat i el punter), s'anomena el client. L'aplicació que s'executa a la màquina a on està localitzat el frame-buffer (en la qual s'executa el sistema de finestres i les aplicacions que l'usuari està controlant en mode remot) s'anomena el servidor. El &krfb; és el servidor del &kde; per al protocol de Frame Buffer remot. La &krdc; és el client del &kde; per al protocol de Frame Buffer remot. </para>
+
+<para
+>Aquest ús comporta una raonable quantitat de trànsit en xarxa atès que s'envia una imatge del framebuffer, de manera que el Frame Buffer remot funciona millor sobre enllaços de banda ampla, així com una xarxa d'àrea local. Tot i això és possible utilitzar el &krfb; sobre d'altres enllaços, però el rendiment no serà tan bo. </para>
+
+</chapter>
+
+<chapter id="using-krfb">
+<title
+>Ús del &krfb;</title>
+
+<sect1 id="main-windw">
+<title
+>Finestra principal del &krfb;</title>
+<para
+>Utilitzar el &krfb; és realment fàcil -aquest disposa d'una interfície simple, com la que mostra la captura de pantalla de sota-. </para>
+
+<para>
+<screenshot>
+<screeninfo
+>Aquesta és una captura de pantalla del &krfb;</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="screenshot.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Finestra principal del &krfb;</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Quan vulgueu permetre que algú accedeixi al vostre escriptori, haureu d'activar la casella de selecció <guilabel
+>Activa la compartició de l'escriptori</guilabel
+>, el qual iniciarà el servidor. </para>
+
+<sect2 id="connection-details">
+<title
+>Detalls de la connexió</title>
+
+<para
+>L'<guilabel
+>Adreça</guilabel
+> conté l'adreça del vostre ordinador i el número de port, separats per dos punts. L'adreça només és una referència -podeu emprar qualsevol adreça que pugui abastar el vostre ordinador. El &krfb; intentarà endevinar l'adreça a partir de la vostra configuració de xarxa, però no sempre succeeix d'aquesta manera. Si el vostre ordinador es troba al darrere d'un tallafoc, aquest pot tenir una adreça diferent o estar refusant les connexions d'altres ordinadors. </para>
+<para
+>Podeu canviar el port a la pàgina <guilabel
+>Xarxa</guilabel
+> al diàleg de configuració. </para>
+<para
+>El següent camp està omplert amb una contrasenya generada automàticament. Feu clic sobre la icona a la dreta del camp per a canviar la contrasenya. </para>
+</sect2>
+
+<sect2 id="unattended-access">
+<title
+>Accés desatès</title>
+
+<para
+>Qualsevol usuari remot amb contrasenya de compartició d'escriptori caldrà que estigui autenticat. Si l'accés desatès està activat, i l'usuari remot proporciona una contrasenya en mode desatès, s'atorgarà l'accés de compartició d'escriptori sense cap confirmació explícita. </para>
+<para
+>Per omissió, la contrasenya per aquest mode està buida, per a canviar-ho feu clic al botó i introduïu una contrasenya. </para>
+<para
+>Si es permet l'accés desatès, llavors probablement hauríeu d'especificar una contrasenya. </para>
+
+<para
+>Si la màquina és un servidor i esteu utilitzant el &krfb; per a l'administració remota, és probable que vulgueu utilitzar l'accés desatès. </para>
+
+</sect2>
+
+<sect2 id="transfer-login-information">
+<title
+>Transferir informació per a l'inici de la sessió</title>
+
+<para
+>El &krfb; ja no disposa de cap funció d'invitació, com era normal en les versions anteriors. Així que cal transferir la informació per a l'inici de la sessió utilitzant el correu electrònic o una invitació personal. </para>
+<para
+>Si no podeu encriptar el correu (o una altra manera d'enllaç segur), enviar una contrasenya per correu electrònic és un risc seriós per a la seguretat, a causa que qualsevol pot llegir la contrasenya i l'adreça des del correu que esteu passant per la xarxa. Això vol dir que potencialment poden prendre el control de la vostra màquina. </para>
+<para
+>Si no podeu encriptar el correu, hi ha d'altres maneres més personals per a usar una invitació personal, donar-li l'accés per telèfon, verificar la identitat de la mateixa i entregar-li la informació requerida d'aquesta manera. </para>
+
+<note>
+<para
+>El &krfb; utilitza el sistema de contrasenyes <acronym
+>RFB</acronym
+> normal, el qual no transfereix la vostra contrasenya en clar a través de la xarxa. En comptes d'això, utilitza un sistema de desafiament-resposta. Aquest és raonablement segur, com més llarga sigui una contrasenya, aquesta mantindrà més seguretat. </para>
+</note>
+
+</sect2>
+
+<sect2 id="krfb-qqit">
+<title
+>Sortir del &krfb;</title>
+
+<para
+>Si tanqueu la finestra principal del &krfb; fent clic a la icona tanca de la finestra o utilitzant la drecera <keycombo action="simul"
+>&Alt;<keycap
+>F4</keycap
+></keycombo
+> el servidor continuarà funcionant, el qual és indicat per una icona a la safata del sistema. Per aturar-lo, utilitzeu <menuchoice
+><guimenu
+>Fitxer</guimenu
+><guimenuitem
+>Surt</guimenuitem
+></menuchoice
+> a la finestra principal o feu clic dret sobre la icona a la safata del sistema i seleccioneu <guimenuitem
+>Surt</guimenuitem
+>. </para>
+</sect2>
+
+</sect1>
+
+<sect1 id="krfb-configuration">
+<title
+>Configurar el &krfb;</title>
+<para
+>A més de la interfície principal del &krfb; que s'ha mostrat i descrit a dalt, també podeu controlar-lo emprant el botó <guimenuitem
+>Configura...</guimenuitem
+> a la finestra principal del &krfb;. La seva configuració és gestionada emprant una finestra amb dues pestanyes, com la que es mostra a la captura de pantalla de sota: </para>
+
+<para
+>La pàgina <guilabel
+>Xarxa</guilabel
+> permet controlar sobre quin port treballarà el &krfb;, tal com es mostra a sota. </para>
+
+<para>
+<screenshot>
+<screeninfo
+>Configuració del &krfb; (pàgina Xarxa)</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="configuration_network.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Configuració del &krfb; (pàgina Xarxa)</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>La casella de selecció <guilabel
+>Anuncia el servei a la xarxa</guilabel
+> controla quan el &krfb; anuncia el servei sobre la xarxa local utilitzant el Protocol per a la Localització de Serveis (Service Location Protocol). Això normalment és una bona idea, però tan sols funciona realment bé amb un client que ho suporti i alhora estigui atent (a l'espera), com ara el &krdc;. </para>
+
+<para
+>Si marqueu la casella de selecció <guilabel
+>Usa el port per omissió</guilabel
+>, aleshores el &krfb; s'encarregarà de localitzar un port adequat. Si la desmarqueu, podreu especificar un port en particular. Especificar-ne un pot ser útil si esteu emprant l'expedició de ports en un tallafoc. Tingueu en compte que si s'activa el Protocol per a la Localització de Serveis, això s'ocuparà automàticament d'identificar el port correcte. </para>
+
+<para
+>La pestanya <guilabel
+>Seguretat</guilabel
+> permet configurar quines persones connectaran amb el servidor &krfb; per a poder controlar l'escriptori, o només veure'l. </para>
+
+<para>
+<screenshot>
+<screeninfo
+>Configuració del &krfb; (pàgina Seguretat)</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="configuration_security.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Configuració del &krfb; (pàgina Seguretat)</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+</sect1>
+
+<sect1 id="krfb-connection">
+<title
+>Connectar amb el &krfb;</title>
+
+<para
+>Quan algú es connecta al &krfb; en la vostra màquina, obtindreu una notificació emergent tal com es mostra a la captura de pantalla de sota, a menys que estigueu acceptant accessos desatesos, sense confirmació. </para>
+<para>
+<screenshot>
+<screeninfo
+>Finestra de connexió del &krfb;</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="connection.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Finestra de connexió del &krfb;</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Si escolliu <guibutton
+>Accepta la connexió</guibutton
+>, el client podrà procedir a autenticar, el qual requereix la contrasenya correcta. Si la refuseu amb <guibutton
+>Refusa la connexió</guibutton
+>, aleshores l'intent de connexió haurà finalitzat. </para>
+
+<para
+>La casella de selecció <guilabel
+>Permet a l'usuari remot de controlar el teclat i el ratolí</guilabel
+> determina quan el client només podrà observar o quan podrà obtenir el control de la vostra màquina. </para>
+
+</sect1>
+</chapter>
+
+<chapter id="credits">
+
+<title
+>Crèdits i llicència</title>
+
+<para
+>&krfb; </para>
+<para
+>Copyright del programa 2002 Tim Jansen <email
+>tim@tjansen.de</email
+> </para>
+<para
+>Col·laboradors: <itemizedlist
+> <listitem
+><para
+>Ian Reinhart Geiser <email
+>geiseri@kde.org</email
+></para>
+</listitem>
+</itemizedlist>
+</para>
+
+<para
+>Copyright de la documentació &copy; 2003 &Brad.Hards; &Brad.Hards.mail; </para>
+
+<para
+>Traductor/Revisor de la documentació: &credits.Antoni.Bella;</para
+> &underFDL; &underGPL; </chapter>
+
+&documentation.index;
+</book>
+
+<!--
+Local Variables:
+mode: xml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-indent-step:0
+sgml-indent-data:nil
+End:
+
+vim:tabstop=2:shiftwidth=2:expandtab 
+-->

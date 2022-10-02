@@ -1,0 +1,718 @@
+# Translation of krfb into Japanese.
+# This file is distributed under the same license as the kdenetwork package.
+# Noboru Sinohara <shinobo@leo.bekkoame.ne.jp>, 2002.
+# Toyohiro Asukai <toyohiro@ksmplus.com>, 2004.
+# Taiki Komoda <kom@kde.gr.jp>, 2004.
+# Fumiaki Okushi <fumiaki@okushi.com>, 2006.
+# Yukiko Bando <ybando@k6.dion.ne.jp>, 2006, 2007, 2010.
+# Tomohiro Hyakutake <tomhioo@outlook.jp>, 2019.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: krfb\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-07-18 00:45+0000\n"
+"PO-Revision-Date: 2019-09-23 14:21+0900\n"
+"Last-Translator: Tomohiro Hyakutake <tomhioo@outlook.jp>\n"
+"Language-Team: Japanese <kde-i18n-doc@kde.org>\n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 19.08.1\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Accelerator-Marker: &\n"
+"X-Text-Markup: kde4\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Toyohiro Asukai,Tomohiro Hyakutake"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "toyohiro@ksmplus.com,tomhioo@outlook.jp"
+
+#: connectiondialog.cpp:39
+#, kde-format
+msgid "New Connection"
+msgstr "新しい接続"
+
+#: connectiondialog.cpp:61
+#, kde-format
+msgid "Accept Connection"
+msgstr "接続を許可"
+
+#: connectiondialog.cpp:65
+#, kde-format
+msgid "Refuse Connection"
+msgstr "接続を拒否"
+
+#: invitationsrfbclient.cpp:69
+#, fuzzy, kde-format
+#| msgid "Accepted uninvited connection from %1"
+msgid "Accepted connection from %1"
+msgstr "招待していない %1 からの接続を許可しました"
+
+#: invitationsrfbclient.cpp:75
+#, kde-format
+msgid "Received connection from %1, on hold (waiting for confirmation)"
+msgstr "%1 から接続要求を受け取りました。保留中です (確認待ち)"
+
+#: invitationsrfbserver.cpp:55
+#, kde-format
+msgid "%1@%2 (shared desktop)"
+msgstr "%1@%2 (共有されたデスクトップ)"
+
+#. i18n: ectx: label, entry (startMinimized), group (MainWindow)
+#: krfb.kcfg:9
+#, kde-format
+msgid "Start minimized"
+msgstr ""
+
+#. i18n: ectx: label, entry (useDefaultPort), group (TCP)
+#: krfb.kcfg:15
+#, kde-format
+msgid "Use the default port for VNC (5900)"
+msgstr "VNC の標準のポート (5900) を使う"
+
+#. i18n: ectx: label, entry (port), group (TCP)
+#: krfb.kcfg:19
+#, kde-format
+msgid "This is the port on which krfb will listen."
+msgstr "これは krfb が待ち受けするポートです。"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_publishService)
+#. i18n: ectx: label, entry (publishService), group (TCP)
+#: krfb.kcfg:23 ui/configtcp.ui:16
+#, kde-format
+msgid "Announce the service on the local network"
+msgstr "ローカルネットワークにサービスを通知する"
+
+#. i18n: ectx: label, entry (noWallet), group (Security)
+#: krfb.kcfg:29
+#, kde-format
+msgid "Do not store passwords in KWallet"
+msgstr ""
+
+#. i18n: ectx: label, entry (allowDesktopControl), group (Security)
+#: krfb.kcfg:33
+#, kde-format
+msgid "Allow remote connections to manage the desktop."
+msgstr "リモート接続にデスクトップの操作を許可する"
+
+#. i18n: ectx: label, entry (allowUnattendedAccess), group (Security)
+#: krfb.kcfg:37
+#, kde-format
+msgid "Allow connections without an invitation."
+msgstr "招待していない接続を許可する"
+
+#. i18n: ectx: label, entry (unattendedAccessPassword), group (Security)
+#. i18n: ectx: label, entry (desktopSharingPassword), group (Security)
+#: krfb.kcfg:41 krfb.kcfg:44
+#, kde-format
+msgid "Password for uninvited connections."
+msgstr "招待していない接続のパスワード"
+
+#. i18n: ectx: label, entry (preferredFrameBufferPlugin), group (FrameBuffer)
+#: krfb.kcfg:49
+#, kde-format
+msgid "Preferred Frame Buffer Plugin"
+msgstr ""
+
+#: main-virtualmonitor.cpp:49
+#, kde-format
+msgid "Creating a Virtual Monitor from %1"
+msgstr ""
+
+#: main-virtualmonitor.cpp:80
+#, kde-format
+msgid "Remote Virtual Monitor"
+msgstr ""
+
+#: main-virtualmonitor.cpp:82
+#, kde-format
+msgid "Offer a Virtual Monitor that can be accessed remotely"
+msgstr ""
+
+#: main-virtualmonitor.cpp:84 main.cpp:98
+#, fuzzy, kde-format
+#| msgid ""
+#| "(c) 2007, Alessandro Praduroux\n"
+#| "(c) 2001-2003, Tim Jansen\n"
+#| "(c) 2001, Johannes E. Schindelin\n"
+#| "(c) 2000, heXoNet Support GmbH, D-66424 Homburg\n"
+#| "(c) 2000-2001, Const Kaplinsky\n"
+#| "(c) 2000, Tridia Corporation\n"
+#| "(c) 1999, AT&T Laboratories Boston\n"
+msgid ""
+"(c) 2009-2010, Collabora Ltd.\n"
+"(c) 2007, Alessandro Praduroux\n"
+"(c) 2001-2003, Tim Jansen\n"
+"(c) 2001, Johannes E. Schindelin\n"
+"(c) 2000-2001, Const Kaplinsky\n"
+"(c) 2000, Tridia Corporation\n"
+"(c) 1999, AT&T Laboratories Boston\n"
+msgstr ""
+"(c) 2007, Alessandro Praduroux\n"
+"(c) 2001-2003, Tim Jansen\n"
+"(c) 2001, Johannes E. Schindelin\n"
+"(c) 2000, heXoNet Support GmbH, D-66424 Homburg\n"
+"(c) 2000-2001, Const Kaplinsky\n"
+"(c) 2000, Tridia Corporation\n"
+"(c) 1999, AT&T Laboratories Boston\n"
+
+#: main-virtualmonitor.cpp:91
+#, kde-format
+msgid "Virtual Monitor implementation"
+msgstr ""
+
+#: main-virtualmonitor.cpp:92 main.cpp:108
+#, kde-format
+msgid "George Kiagiadakis"
+msgstr ""
+
+#: main-virtualmonitor.cpp:93 main.cpp:111
+#, kde-format
+msgid "Alessandro Praduroux"
+msgstr "Alessandro Praduroux"
+
+#: main-virtualmonitor.cpp:93 main.cpp:111
+#, kde-format
+msgid "KDE4 porting"
+msgstr "KDE4 への移植"
+
+#: main-virtualmonitor.cpp:94 main.cpp:112
+#, kde-format
+msgid "Tim Jansen"
+msgstr "Tim Jansen"
+
+#: main-virtualmonitor.cpp:94 main.cpp:112
+#, kde-format
+msgid "Original author"
+msgstr ""
+
+#: main-virtualmonitor.cpp:95 main.cpp:113
+#, kde-format
+msgid "Johannes E. Schindelin"
+msgstr "Johannes E. Schindelin"
+
+#: main-virtualmonitor.cpp:96 main.cpp:114
+#, kde-format
+msgid "libvncserver"
+msgstr "libvncserver"
+
+#: main-virtualmonitor.cpp:97 main.cpp:115
+#, kde-format
+msgid "Const Kaplinsky"
+msgstr "Const Kaplinsky"
+
+#: main-virtualmonitor.cpp:98 main.cpp:116
+#, kde-format
+msgid "TightVNC encoder"
+msgstr "TightVNC エンコーダ"
+
+#: main-virtualmonitor.cpp:99 main.cpp:117
+#, kde-format
+msgid "Tridia Corporation"
+msgstr "Tridia Corporation"
+
+#: main-virtualmonitor.cpp:100 main.cpp:118
+#, kde-format
+msgid "ZLib encoder"
+msgstr "ZLib エンコーダ"
+
+#: main-virtualmonitor.cpp:101 main.cpp:119
+#, kde-format
+msgid "AT&T Laboratories Boston"
+msgstr "AT&T Laboratories Boston"
+
+#: main-virtualmonitor.cpp:102 main.cpp:120
+#, kde-format
+msgid "original VNC encoders and protocol design"
+msgstr "オリジナルの VNC エンコーダとプロトコル設計"
+
+#: main-virtualmonitor.cpp:108
+#, kde-format
+msgid "Logical resolution of the new monitor"
+msgstr ""
+
+#: main-virtualmonitor.cpp:108
+#, kde-format
+msgid "resolution"
+msgstr ""
+
+#: main-virtualmonitor.cpp:110
+#, kde-format
+msgid "Name of the monitor"
+msgstr ""
+
+#: main-virtualmonitor.cpp:110
+#, kde-format
+msgid "name"
+msgstr ""
+
+#: main-virtualmonitor.cpp:112
+#, fuzzy, kde-format
+#| msgid "Password for uninvited connections."
+msgid "Password for the client to connect to it"
+msgstr "招待していない接続のパスワード"
+
+#: main-virtualmonitor.cpp:112
+#, fuzzy, kde-format
+#| msgid "&Password"
+msgid "password"
+msgstr "パスワード(&P)"
+
+#: main-virtualmonitor.cpp:114
+#, kde-format
+msgid "The device-pixel-ratio of the device, the scaling factor"
+msgstr ""
+
+#: main-virtualmonitor.cpp:114
+#, kde-format
+msgid "dpr"
+msgstr ""
+
+#: main-virtualmonitor.cpp:116
+#, kde-format
+msgid "The port we will be listening to"
+msgstr ""
+
+#: main-virtualmonitor.cpp:116
+#, kde-format
+msgid "number"
+msgstr ""
+
+#: main.cpp:49
+#, kde-format
+msgid ""
+"Your X11 Server does not support the required XTest extension version 2.2. "
+"Sharing your desktop is not possible."
+msgstr ""
+"あなたの X11 サーバは必要な XTest 拡張バージョン 2.2 をサポートしていません。"
+"デスクトップの共有はできません。"
+
+#: main.cpp:51 main.cpp:150
+#, kde-format
+msgid "Desktop Sharing Error"
+msgstr "デスクトップ共有エラー"
+
+#: main.cpp:94
+#, kde-format
+msgid "Desktop Sharing"
+msgstr "デスクトップ共有"
+
+#: main.cpp:96
+#, fuzzy, kde-format
+#| msgid "VNC-compatible server to share KDE desktops"
+msgid "VNC-compatible server to share desktops"
+msgstr "KDE デスクトップの共有のための VNC 互換サーバ"
+
+#: main.cpp:105
+#, kde-format
+msgid "George Goldberg"
+msgstr ""
+
+#: main.cpp:106
+#, kde-format
+msgid "Telepathy tubes support"
+msgstr ""
+
+#: main.cpp:126
+#, kde-format
+msgid "Do not show the invitations management dialog at startup"
+msgstr "起動時に招待の管理ダイアログを表示しない"
+
+#: main.cpp:148
+#, kde-format
+msgid ""
+"Desktop Sharing is not running under an X11 Server or Wayland.\n"
+"Other display servers are currently not supported."
+msgstr ""
+"デスクトップ共有が X11 サーバもしくは Wayland 上で実行されていません。\n"
+"これらのディスプレイサーバ以外はサポートされていません。"
+
+#: mainwindow.cpp:52
+#, kde-format
+msgid "Storing passwords in config file is insecure!"
+msgstr "パスワードを設定ファイルに保存することは安全ではありません!"
+
+#: mainwindow.cpp:189
+#, kde-format
+msgid "Enter a new password for Unattended Access"
+msgstr "無人アクセスのための新しいパスワードを入力"
+
+#: mainwindow.cpp:200
+#, kde-format
+msgid ""
+"Failed to start the krfb server. Desktop sharing will not work. Try setting "
+"another port in the settings and restart krfb."
+msgstr ""
+"Krfb サーバの開始に失敗しました。デスクトップ共有は機能しません。他のポートに"
+"設定したうえで Krfb を再起動してください。"
+
+#. i18n: ectx: property (whatsThis), widget (QLabel, titleLabel)
+#. i18n: ectx: property (text), widget (QLabel, titleLabel)
+#. i18n: ectx: property (whatsThis), widget (QLabel, aboutLabel)
+#: mainwindow.cpp:223 mainwindow.cpp:230 ui/mainwidget.ui:83
+#: ui/mainwidget.ui:86 ui/mainwidget.ui:114
+#, kde-format
+msgid "KDE Desktop Sharing"
+msgstr "KDE デスクトップ共有"
+
+#: mainwindow.cpp:224
+#, kde-format
+msgid ""
+"This field contains the address of your computer and the port number, "
+"separated by a colon.\n"
+"\n"
+"The address is just a hint - you can use any address that can reach your "
+"computer.\n"
+"\n"
+"Desktop Sharing tries to guess your address from your network configuration, "
+"but does not always succeed in doing so.\n"
+"\n"
+"If your computer is behind a firewall it may have a different address or be "
+"unreachable for other computers."
+msgstr ""
+"このフィールドには、コロンで区切ってあなたのコンピュータのアドレスとポート番"
+"号が表示されます。\n"
+"\n"
+"アドレスはヒントにすぎません - あなたのコンピュータに接続できるすべてのアドレ"
+"スを使用できます。\n"
+"\n"
+"デスクトップ共有はあなたのネットワーク設定からあなたのアドレスを推測します"
+"が、必ずしも成功するとは限りません。\n"
+"\n"
+"あなたのコンピュータがファイアウォールの背後にある場合は、アドレスが異なって"
+"いたり、他のコンピュータから接続できないこともあります。"
+
+#: mainwindow.cpp:231
+#, kde-format
+msgid ""
+"Any remote user with normal desktop sharing password will have to be "
+"authenticated.\n"
+"\n"
+"If unattended access is on, and the remote user provides unattended mode "
+"password, desktop sharing access will be granted without explicit "
+"confirmation."
+msgstr ""
+"標準のパスワードでのデスクトップ共有を使用するすべてのリモートユーザは認証さ"
+"れる必要があります。\n"
+"\n"
+"しかし、無人アクセスが有効でリモートユーザが無人アクセス用のパスワードを使用"
+"した場合、デスクトップ共有は明示的な確認なく開始されます。"
+
+#: mainwindow.cpp:249
+#, kde-format
+msgid "Network"
+msgstr "ネットワーク"
+
+#: mainwindow.cpp:250
+#, kde-format
+msgid "Security"
+msgstr "セキュリティ"
+
+#: mainwindow.cpp:251
+#, kde-format
+msgid "Screen capture"
+msgstr "スクリーンキャプチャ"
+
+#: mainwindow.cpp:256
+#, kde-format
+msgid "To apply framebuffer plugin setting, you need to restart the program."
+msgstr ""
+"フレームバッファ プラグインの変更を適用するには、プログラムの再起動が必要で"
+"す。"
+
+#: rfbservermanager.cpp:229
+#, kde-format
+msgid "The remote user %1 is now connected."
+msgstr "リモートユーザ %1 が接続しました。"
+
+#: rfbservermanager.cpp:243
+#, fuzzy, kde-format
+#| msgid "The remote user %1 is now connected."
+msgid "The remote user %1 disconnected."
+msgstr "リモートユーザ %1 が接続しました。"
+
+#: trayicon.cpp:56
+#, kde-format
+msgid "Disconnect"
+msgstr "切断"
+
+#: trayicon.cpp:62
+#, kde-format
+msgid "Enable Remote Control"
+msgstr "リモートからの操作を許可する"
+
+#: trayicon.cpp:101 trayicon.cpp:133
+#, kde-format
+msgid "Desktop Sharing - disconnected"
+msgstr "デスクトップ共有 - 切断しました"
+
+#: trayicon.cpp:117 trayicon.cpp:137
+#, kde-format
+msgid "Desktop Sharing - connected with %1"
+msgstr "デスクトップ共有 - %1 と接続しました"
+
+#: trayicon.cpp:120
+#, fuzzy, kde-format
+#| msgid "Desktop Sharing - disconnected"
+msgid "Desktop Sharing - connected"
+msgstr "デスクトップ共有 - 切断しました"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, Framebuffer)
+#: ui/configframebuffer.ui:14
+#, kde-format
+msgid "Framebuffer"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: ui/configframebuffer.ui:22
+#, kde-format
+msgid "Preferred frameb&uffer plugin:"
+msgstr "優先するフレームバッファ プラグイン(&U):"
+
+#. i18n: ectx: property (text), widget (QLabel, helpText)
+#: ui/configframebuffer.ui:47
+#, kde-format
+msgid ""
+"<html><head/><body><p>When using x11, <span style=\" font-weight:600;\">xcb</"
+"span> plugin should be preferred, because it is more performant.<br/><span "
+"style=\" font-weight:600;\">qt</span> plugin is a safe fallback, if for some "
+"reason others don't work. But also it is very slow.</p></body></html>"
+msgstr ""
+"<html><head/><body><p>x11 を使用する場合、より高効率な <span style=\" font-"
+"weight:600;\">xcb</span> を利用するべきです<br/><span style=\" font-"
+"weight:600;\">qt</span> プラグインは何らかの理由で他のプラグインが機能しな"
+"かった場合のための安全なフォールバックです。ただしとても低速です。</p></"
+"body></html>"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_allowDesktopControl)
+#: ui/configsecurity.ui:17
+#, kde-format
+msgid "Allow remote connections to control your desktop"
+msgstr "リモート接続にデスクトップの操作を許可する"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_noWallet)
+#: ui/configsecurity.ui:27
+#, kde-format
+msgid "Do not store passwords using KDE wallet"
+msgstr "KDE Wallet にパスワードを保存しない"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_useDefaultPort)
+#: ui/configtcp.ui:26
+#, kde-format
+msgid "Use default port"
+msgstr "標準のポートを使う"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: ui/configtcp.ui:50
+#, kde-format
+msgid "Listening port:"
+msgstr "待ち受けポート:"
+
+#. i18n: ectx: property (text), widget (QLabel, TextLabel5)
+#: ui/connectionwidget.ui:47
+#, kde-format
+msgid "Attention"
+msgstr "注意"
+
+#. i18n: ectx: property (text), widget (QLabel, mainTextLabel)
+#: ui/connectionwidget.ui:72
+#, kde-format
+msgid ""
+"Somebody is requesting a connection to your computer. Granting this will "
+"allow the remote user to watch your desktop. "
+msgstr ""
+"誰かが、あなたのコンピュータへの接続を要求しています。接続を許可すると、リ"
+"モートのユーザがあなたのデスクトップを見ることができるようになります。"
+
+#. i18n: ectx: property (text), widget (QLabel, TextLabel1)
+#: ui/connectionwidget.ui:102
+#, kde-format
+msgid "Remote system:"
+msgstr "リモートシステム:"
+
+#. i18n: ectx: property (text), widget (QLabel, remoteHost)
+#: ui/connectionwidget.ui:118
+#, kde-format
+msgid "123.234.123.234"
+msgstr "123.234.123.234"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, cbAllowRemoteControl)
+#: ui/connectionwidget.ui:136
+#, kde-format
+msgid ""
+"If you turn this option on, the remote user can enter keystrokes and use "
+"your mouse pointer. This gives them full control over your computer, so be "
+"careful. When the option is disabled the remote user can only watch your "
+"screen."
+msgstr ""
+"このオプションを有効にすると、リモートのユーザはキー入力やマウスポインタの操"
+"作ができるようになります。これによって相手があなたのコンピュータを完全にコン"
+"トロールできるようになるので、注意して使ってください。このオプションを有効に"
+"しなければ、リモートのユーザは単にあなたのスクリーン上に表示されているものが"
+"見えるだけです。"
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbAllowRemoteControl)
+#: ui/connectionwidget.ui:139
+#, kde-format
+msgid "Allow remote user to &control keyboard and mouse"
+msgstr "リモートユーザにキーボードとマウスの操作を許可する(&C)"
+
+#. i18n: ectx: property (text), widget (QLabel, aboutLabel)
+#: ui/mainwidget.ui:117
+#, kde-format
+msgid ""
+"KDE Desktop Sharing allows you to grant permission to someone at a remote "
+"location for viewing and possibly controlling your desktop."
+msgstr ""
+"KDE デスクトップ共有は、遠隔地にいる人に、あなたのデスクトップを見たり操作し"
+"たりすることを可能にします。"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, enableSharingCheckBox)
+#: ui/mainwidget.ui:145
+#, fuzzy, kde-format
+#| msgid "Manage Invitations - Desktop Sharing"
+msgid "Starts/Stops Remote Desktop Sharing"
+msgstr "招待の管理 - デスクトップ共有"
+
+#. i18n: ectx: property (text), widget (QCheckBox, enableSharingCheckBox)
+#: ui/mainwidget.ui:148
+#, kde-format
+msgid "&Enable Desktop Sharing"
+msgstr "デスクトップ共有を有効化(&E)"
+
+#. i18n: ectx: property (title), widget (QGroupBox, detailsGroupBox)
+#: ui/mainwidget.ui:170
+#, kde-format
+msgid "Connection Details"
+msgstr "接続情報"
+
+#. i18n: ectx: property (text), widget (QLabel, addressLabel)
+#: ui/mainwidget.ui:193
+#, kde-format
+msgid "&Address"
+msgstr "アドレス(&A)"
+
+#. i18n: ectx: property (whatsThis), widget (QToolButton, addressAboutButton)
+#: ui/mainwidget.ui:214
+#, kde-format
+msgid "More about this address"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QToolButton, addressAboutButton)
+#. i18n: ectx: property (text), widget (QToolButton, unattendedAboutButton)
+#: ui/mainwidget.ui:217 ui/mainwidget.ui:397
+#, kde-format
+msgid "About"
+msgstr ""
+
+#. i18n: ectx: property (whatsThis), widget (QLabel, addressDisplayLabel)
+#: ui/mainwidget.ui:235
+#, kde-format
+msgid ""
+"Address required by remote users to connect to your desktop. Click about "
+"button on the right for more info."
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, addressDisplayLabel)
+#: ui/mainwidget.ui:238
+#, kde-format
+msgid "127.0.0.1 : 5900"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, passwordLabel)
+#: ui/mainwidget.ui:269
+#, kde-format
+msgid "&Password"
+msgstr "パスワード(&P)"
+
+#. i18n: ectx: property (whatsThis), widget (QToolButton, passwordEditButton)
+#: ui/mainwidget.ui:290
+#, fuzzy, kde-format
+#| msgid "Desktop Sharing Error"
+msgid "Edit/Save Desktop Sharing Password"
+msgstr "デスクトップ共有エラー"
+
+#. i18n: ectx: property (text), widget (QToolButton, passwordEditButton)
+#: ui/mainwidget.ui:293
+#, kde-format
+msgid "Edit"
+msgstr ""
+
+#. i18n: ectx: property (whatsThis), widget (QLabel, passwordDisplayLabel)
+#: ui/mainwidget.ui:311
+#, kde-format
+msgid ""
+"Password required by remote users to connect to your desktop. Click the edit "
+"button on the right to change password."
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, passwordDisplayLabel)
+#: ui/mainwidget.ui:314
+#, kde-format
+msgid "TemporaryPassword"
+msgstr ""
+
+#. i18n: ectx: property (whatsThis), widget (QGroupBox, unattendedGroupBox)
+#. i18n: ectx: property (text), widget (QLabel, unattendedAboutLabel)
+#: ui/mainwidget.ui:340 ui/mainwidget.ui:378
+#, kde-format
+msgid ""
+"Unattended Access allows a remote user with the password to gain control to "
+"your desktop without your explicit confirmation."
+msgstr ""
+"無人アクセスはリモートユーザに対し、パスワードのみで、あなたの明示的な確認な"
+"くコンピュータを操作することを可能にします。"
+
+#. i18n: ectx: property (title), widget (QGroupBox, unattendedGroupBox)
+#: ui/mainwidget.ui:343
+#, kde-format
+msgid "Unattended Access"
+msgstr "無人アクセス"
+
+#. i18n: ectx: property (whatsThis), widget (QLabel, unattendedAboutLabel)
+#: ui/mainwidget.ui:375
+#, kde-format
+msgid ""
+"Unattended Access allows a remote user with the password to gain control to "
+"your desktop without your explicit confirmation. Click \"About\" button on "
+"right to know more."
+msgstr ""
+
+#. i18n: ectx: property (whatsThis), widget (QToolButton, unattendedAboutButton)
+#: ui/mainwidget.ui:394
+#, kde-format
+msgid "Know more about Unattended Access"
+msgstr ""
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, enableUnattendedCheckBox)
+#: ui/mainwidget.ui:437
+#, kde-format
+msgid ""
+"Starts/Stops unattended access to your desktop. Click on button on right to "
+"change password, and \"About\" button to know more."
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, enableUnattendedCheckBox)
+#: ui/mainwidget.ui:440
+#, kde-format
+msgid "Enable &Unattended Access"
+msgstr "無人アクセスを有効化(&U)"
+
+#. i18n: ectx: property (whatsThis), widget (QPushButton, unattendedPasswordButton)
+#: ui/mainwidget.ui:465
+#, kde-format
+msgid "Change password for Unattended Access"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QPushButton, unattendedPasswordButton)
+#: ui/mainwidget.ui:468
+#, kde-format
+msgid "&Change Unattended Password"
+msgstr "無人アクセスパスワードを変更(&C)"

@@ -1,0 +1,681 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: kdeorg\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-07-18 00:45+0000\n"
+"PO-Revision-Date: 2022-09-20 01:56\n"
+"Last-Translator: \n"
+"Language-Team: Chinese Simplified\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Crowdin-Project: kdeorg\n"
+"X-Crowdin-Project-ID: 269464\n"
+"X-Crowdin-Language: zh-CN\n"
+"X-Crowdin-File: /kf5-trunk/messages/krfb/krfb.pot\n"
+"X-Crowdin-File-ID: 5437\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "KDE 中国"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "kde-china@kde.org"
+
+#: connectiondialog.cpp:39
+#, kde-format
+msgid "New Connection"
+msgstr "新建连接"
+
+#: connectiondialog.cpp:61
+#, kde-format
+msgid "Accept Connection"
+msgstr "接受连接"
+
+#: connectiondialog.cpp:65
+#, kde-format
+msgid "Refuse Connection"
+msgstr "拒绝连接"
+
+#: invitationsrfbclient.cpp:69
+#, kde-format
+msgid "Accepted connection from %1"
+msgstr "已接受来自 %1 的连接"
+
+#: invitationsrfbclient.cpp:75
+#, kde-format
+msgid "Received connection from %1, on hold (waiting for confirmation)"
+msgstr "收到来自 %1 的连接，正在等待(等候确认)"
+
+#: invitationsrfbserver.cpp:55
+#, kde-format
+msgid "%1@%2 (shared desktop)"
+msgstr "%1@%2 (共享的桌面)"
+
+#. i18n: ectx: label, entry (startMinimized), group (MainWindow)
+#: krfb.kcfg:9
+#, kde-format
+msgid "Start minimized"
+msgstr "最小化方式启动"
+
+#. i18n: ectx: label, entry (useDefaultPort), group (TCP)
+#: krfb.kcfg:15
+#, kde-format
+msgid "Use the default port for VNC (5900)"
+msgstr "使用 VNC 默认端口(5900)"
+
+#. i18n: ectx: label, entry (port), group (TCP)
+#: krfb.kcfg:19
+#, kde-format
+msgid "This is the port on which krfb will listen."
+msgstr "这是 krfb 会监听的端口。"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_publishService)
+#. i18n: ectx: label, entry (publishService), group (TCP)
+#: krfb.kcfg:23 ui/configtcp.ui:16
+#, kde-format
+msgid "Announce the service on the local network"
+msgstr "在本地网络上发布服务"
+
+#. i18n: ectx: label, entry (noWallet), group (Security)
+#: krfb.kcfg:29
+#, kde-format
+msgid "Do not store passwords in KWallet"
+msgstr "不在 KWallet 内存储密码"
+
+#. i18n: ectx: label, entry (allowDesktopControl), group (Security)
+#: krfb.kcfg:33
+#, kde-format
+msgid "Allow remote connections to manage the desktop."
+msgstr "允许远程连接接管桌面。"
+
+#. i18n: ectx: label, entry (allowUnattendedAccess), group (Security)
+#: krfb.kcfg:37
+#, kde-format
+msgid "Allow connections without an invitation."
+msgstr "允许未邀请的连接。"
+
+#. i18n: ectx: label, entry (unattendedAccessPassword), group (Security)
+#. i18n: ectx: label, entry (desktopSharingPassword), group (Security)
+#: krfb.kcfg:41 krfb.kcfg:44
+#, kde-format
+msgid "Password for uninvited connections."
+msgstr "未邀请连接的密码。"
+
+#. i18n: ectx: label, entry (preferredFrameBufferPlugin), group (FrameBuffer)
+#: krfb.kcfg:49
+#, kde-format
+msgid "Preferred Frame Buffer Plugin"
+msgstr "首选的帧缓冲插件"
+
+#: main-virtualmonitor.cpp:49
+#, kde-format
+msgid "Creating a Virtual Monitor from %1"
+msgstr "正在从 %1 创建虚拟监视器"
+
+#: main-virtualmonitor.cpp:80
+#, kde-format
+msgid "Remote Virtual Monitor"
+msgstr "远程虚拟监视器"
+
+#: main-virtualmonitor.cpp:82
+#, kde-format
+msgid "Offer a Virtual Monitor that can be accessed remotely"
+msgstr "提供一个可以远程访问的虚拟监视器"
+
+#: main-virtualmonitor.cpp:84 main.cpp:98
+#, kde-format
+msgid ""
+"(c) 2009-2010, Collabora Ltd.\n"
+"(c) 2007, Alessandro Praduroux\n"
+"(c) 2001-2003, Tim Jansen\n"
+"(c) 2001, Johannes E. Schindelin\n"
+"(c) 2000-2001, Const Kaplinsky\n"
+"(c) 2000, Tridia Corporation\n"
+"(c) 1999, AT&T Laboratories Boston\n"
+msgstr ""
+"(c) 2009-2010, Collabora Ltd.\n"
+"(c) 2007, Alessandro Praduroux\n"
+"(c) 2001-2003, Tim Jansen\n"
+"(c) 2001, Johannes E. Schindelin\n"
+"(c) 2000-2001, Const Kaplinsky\n"
+"(c) 2000, Tridia Corporation\n"
+"(c) 1999, AT&T Laboratories Boston\n"
+
+#: main-virtualmonitor.cpp:91
+#, kde-format
+msgid "Virtual Monitor implementation"
+msgstr "虚拟监视器实现"
+
+#: main-virtualmonitor.cpp:92 main.cpp:108
+#, kde-format
+msgid "George Kiagiadakis"
+msgstr "George Kiagiadakis"
+
+#: main-virtualmonitor.cpp:93 main.cpp:111
+#, kde-format
+msgid "Alessandro Praduroux"
+msgstr "Alessandro Praduroux"
+
+#: main-virtualmonitor.cpp:93 main.cpp:111
+#, kde-format
+msgid "KDE4 porting"
+msgstr "KDE4 移植"
+
+#: main-virtualmonitor.cpp:94 main.cpp:112
+#, kde-format
+msgid "Tim Jansen"
+msgstr "Tim Jansen"
+
+#: main-virtualmonitor.cpp:94 main.cpp:112
+#, kde-format
+msgid "Original author"
+msgstr "原作者"
+
+#: main-virtualmonitor.cpp:95 main.cpp:113
+#, kde-format
+msgid "Johannes E. Schindelin"
+msgstr "Johannes E. Schindelin"
+
+#: main-virtualmonitor.cpp:96 main.cpp:114
+#, kde-format
+msgid "libvncserver"
+msgstr "libvncserver"
+
+#: main-virtualmonitor.cpp:97 main.cpp:115
+#, kde-format
+msgid "Const Kaplinsky"
+msgstr "Const Kaplinsky"
+
+#: main-virtualmonitor.cpp:98 main.cpp:116
+#, kde-format
+msgid "TightVNC encoder"
+msgstr "TightVNC 编码器"
+
+#: main-virtualmonitor.cpp:99 main.cpp:117
+#, kde-format
+msgid "Tridia Corporation"
+msgstr "Tridia Corporation"
+
+#: main-virtualmonitor.cpp:100 main.cpp:118
+#, kde-format
+msgid "ZLib encoder"
+msgstr "Zlib 编码器"
+
+#: main-virtualmonitor.cpp:101 main.cpp:119
+#, kde-format
+msgid "AT&T Laboratories Boston"
+msgstr "波士顿 AT&T 实验室"
+
+#: main-virtualmonitor.cpp:102 main.cpp:120
+#, kde-format
+msgid "original VNC encoders and protocol design"
+msgstr "原始 VNC 编码器和协议设计"
+
+#: main-virtualmonitor.cpp:108
+#, kde-format
+msgid "Logical resolution of the new monitor"
+msgstr "新建监视器的逻辑分辨率"
+
+#: main-virtualmonitor.cpp:108
+#, kde-format
+msgid "resolution"
+msgstr "分辨率"
+
+#: main-virtualmonitor.cpp:110
+#, kde-format
+msgid "Name of the monitor"
+msgstr "监视器名称"
+
+#: main-virtualmonitor.cpp:110
+#, kde-format
+msgid "name"
+msgstr "名称"
+
+#: main-virtualmonitor.cpp:112
+#, kde-format
+msgid "Password for the client to connect to it"
+msgstr "客户端连接密码"
+
+#: main-virtualmonitor.cpp:112
+#, kde-format
+msgid "password"
+msgstr "密码"
+
+#: main-virtualmonitor.cpp:114
+#, kde-format
+msgid "The device-pixel-ratio of the device, the scaling factor"
+msgstr "设备的设备像素比 (device-pixel-ratio)，即缩放倍数"
+
+#: main-virtualmonitor.cpp:114
+#, kde-format
+msgid "dpr"
+msgstr "DPR"
+
+#: main-virtualmonitor.cpp:116
+#, kde-format
+msgid "The port we will be listening to"
+msgstr "要监听的端口"
+
+#: main-virtualmonitor.cpp:116
+#, kde-format
+msgid "number"
+msgstr "端口号"
+
+#: main.cpp:49
+#, kde-format
+msgid ""
+"Your X11 Server does not support the required XTest extension version 2.2. "
+"Sharing your desktop is not possible."
+msgstr "您的 X11 服务器不支持所需的 XTest 扩展 2.2 版。您的桌面不能被共享。"
+
+#: main.cpp:51 main.cpp:150
+#, kde-format
+msgid "Desktop Sharing Error"
+msgstr "桌面共享错误"
+
+#: main.cpp:94
+#, kde-format
+msgid "Desktop Sharing"
+msgstr "桌面共享"
+
+#: main.cpp:96
+#, kde-format
+msgid "VNC-compatible server to share desktops"
+msgstr "共享桌面所用的 VNC 兼容服务器"
+
+#: main.cpp:105
+#, kde-format
+msgid "George Goldberg"
+msgstr "George Goldberg"
+
+#: main.cpp:106
+#, kde-format
+msgid "Telepathy tubes support"
+msgstr "Telepathy tubes 支持"
+
+#: main.cpp:126
+#, kde-format
+msgid "Do not show the invitations management dialog at startup"
+msgstr "启动时不显示邀请管理对话框"
+
+#: main.cpp:148
+#, kde-format
+msgid ""
+"Desktop Sharing is not running under an X11 Server or Wayland.\n"
+"Other display servers are currently not supported."
+msgstr ""
+"桌面共享未在 X11 服务器或 Wayland 下运行。\n"
+"其他显示服务器尚未被支持。"
+
+#: mainwindow.cpp:52
+#, kde-format
+msgid "Storing passwords in config file is insecure!"
+msgstr "在配置文件中存储密码是不安全的！"
+
+#: mainwindow.cpp:189
+#, kde-format
+msgid "Enter a new password for Unattended Access"
+msgstr "输入无管控访问的密码"
+
+#: mainwindow.cpp:200
+#, kde-format
+msgid ""
+"Failed to start the krfb server. Desktop sharing will not work. Try setting "
+"another port in the settings and restart krfb."
+msgstr ""
+"启动 krfb 服务器失败。桌面共享无法工作。请尝试设置另一个端口并重启 krfb。"
+
+#. i18n: ectx: property (whatsThis), widget (QLabel, titleLabel)
+#. i18n: ectx: property (text), widget (QLabel, titleLabel)
+#. i18n: ectx: property (whatsThis), widget (QLabel, aboutLabel)
+#: mainwindow.cpp:223 mainwindow.cpp:230 ui/mainwidget.ui:83
+#: ui/mainwidget.ui:86 ui/mainwidget.ui:114
+#, kde-format
+msgid "KDE Desktop Sharing"
+msgstr "KDE 桌面共享"
+
+#: mainwindow.cpp:224
+#, kde-format
+msgid ""
+"This field contains the address of your computer and the port number, "
+"separated by a colon.\n"
+"\n"
+"The address is just a hint - you can use any address that can reach your "
+"computer.\n"
+"\n"
+"Desktop Sharing tries to guess your address from your network configuration, "
+"but does not always succeed in doing so.\n"
+"\n"
+"If your computer is behind a firewall it may have a different address or be "
+"unreachable for other computers."
+msgstr ""
+"此域包含了您计算机的地址和端口号码，中间用冒号分隔。\n"
+"\n"
+"此地址只是一个提示 - 您可以使用能代表您计算机的任何地址。\n"
+"\n"
+"桌面共享会试图从您的网络配置中猜测地址，但可能并不总是猜测成功。\n"
+"\n"
+"如果您的计算机位于防火墙后，可能地址与猜测到的并不相同，或者根本无法连接。"
+
+#: mainwindow.cpp:231
+#, kde-format
+msgid ""
+"Any remote user with normal desktop sharing password will have to be "
+"authenticated.\n"
+"\n"
+"If unattended access is on, and the remote user provides unattended mode "
+"password, desktop sharing access will be granted without explicit "
+"confirmation."
+msgstr ""
+"所有使用普通桌面共享密码访问的远程用户都需要验证。\n"
+"\n"
+"如果启用了无管控访问模式，且远程用户提供了相应的密码，则启动桌面共享时不会请"
+"求被访问用户确认。"
+
+#: mainwindow.cpp:249
+#, kde-format
+msgid "Network"
+msgstr "网络"
+
+#: mainwindow.cpp:250
+#, kde-format
+msgid "Security"
+msgstr "安全"
+
+#: mainwindow.cpp:251
+#, kde-format
+msgid "Screen capture"
+msgstr "捕获屏幕"
+
+#: mainwindow.cpp:256
+#, kde-format
+msgid "To apply framebuffer plugin setting, you need to restart the program."
+msgstr "要应用帧缓冲插件设置，您需要重新启动程序。"
+
+#: rfbservermanager.cpp:229
+#, kde-format
+msgid "The remote user %1 is now connected."
+msgstr "远程用户 %1 已经连接。"
+
+#: rfbservermanager.cpp:243
+#, kde-format
+msgid "The remote user %1 disconnected."
+msgstr "远程用户 %1 已经断开连接。"
+
+#: trayicon.cpp:56
+#, kde-format
+msgid "Disconnect"
+msgstr "断开"
+
+#: trayicon.cpp:62
+#, kde-format
+msgid "Enable Remote Control"
+msgstr "启用远程控制"
+
+#: trayicon.cpp:101 trayicon.cpp:133
+#, kde-format
+msgid "Desktop Sharing - disconnected"
+msgstr "桌面共享 - 已断开"
+
+#: trayicon.cpp:117 trayicon.cpp:137
+#, kde-format
+msgid "Desktop Sharing - connected with %1"
+msgstr "桌面共享 - 连接到 %1"
+
+#: trayicon.cpp:120
+#, kde-format
+msgid "Desktop Sharing - connected"
+msgstr "桌面共享 - 已连接"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, Framebuffer)
+#: ui/configframebuffer.ui:14
+#, kde-format
+msgid "Framebuffer"
+msgstr "帧缓冲"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: ui/configframebuffer.ui:22
+#, kde-format
+msgid "Preferred frameb&uffer plugin:"
+msgstr "首选的帧缓冲插件(&U)："
+
+#. i18n: ectx: property (text), widget (QLabel, helpText)
+#: ui/configframebuffer.ui:47
+#, kde-format
+msgid ""
+"<html><head/><body><p>When using x11, <span style=\" font-weight:600;\">xcb</"
+"span> plugin should be preferred, because it is more performant.<br/><span "
+"style=\" font-weight:600;\">qt</span> plugin is a safe fallback, if for some "
+"reason others don't work. But also it is very slow.</p></body></html>"
+msgstr ""
+"<html><head/><body><p>当使用 x11 时，<span style=\" font-weight:600;\">xcb</"
+"span> 插件应为首选，因为性能更好。<br/>如果因为某些原因其他插件不能工作，"
+"<span style=\" font-weight:600;\">qt</span> 插件是一个安全的备选。但它也很"
+"慢。</p></body></html>"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_allowDesktopControl)
+#: ui/configsecurity.ui:17
+#, kde-format
+msgid "Allow remote connections to control your desktop"
+msgstr "允许远程连接控制您的桌面"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_noWallet)
+#: ui/configsecurity.ui:27
+#, kde-format
+msgid "Do not store passwords using KDE wallet"
+msgstr "不使用 KDE 密码库保存密码"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_useDefaultPort)
+#: ui/configtcp.ui:26
+#, kde-format
+msgid "Use default port"
+msgstr "使用默认端口"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: ui/configtcp.ui:50
+#, kde-format
+msgid "Listening port:"
+msgstr "监听端口："
+
+#. i18n: ectx: property (text), widget (QLabel, TextLabel5)
+#: ui/connectionwidget.ui:47
+#, kde-format
+msgid "Attention"
+msgstr "注意"
+
+#. i18n: ectx: property (text), widget (QLabel, mainTextLabel)
+#: ui/connectionwidget.ui:72
+#, kde-format
+msgid ""
+"Somebody is requesting a connection to your computer. Granting this will "
+"allow the remote user to watch your desktop. "
+msgstr "有人正在请求连接到您的计算机。同意此连接将允许他观看您的桌面。"
+
+#. i18n: ectx: property (text), widget (QLabel, TextLabel1)
+#: ui/connectionwidget.ui:102
+#, kde-format
+msgid "Remote system:"
+msgstr "远程系统："
+
+#. i18n: ectx: property (text), widget (QLabel, remoteHost)
+#: ui/connectionwidget.ui:118
+#, kde-format
+msgid "123.234.123.234"
+msgstr "123.234.123.234"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, cbAllowRemoteControl)
+#: ui/connectionwidget.ui:136
+#, kde-format
+msgid ""
+"If you turn this option on, the remote user can enter keystrokes and use "
+"your mouse pointer. This gives them full control over your computer, so be "
+"careful. When the option is disabled the remote user can only watch your "
+"screen."
+msgstr ""
+"如果您打开此选项，远程用户就可以输入按键并使用您的鼠标光标。这意味着给予他们"
+"对您计算机的完全控制权，所以请格外小心。如果禁用此选项，远程用户将只能观看您"
+"的屏幕。"
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbAllowRemoteControl)
+#: ui/connectionwidget.ui:139
+#, kde-format
+msgid "Allow remote user to &control keyboard and mouse"
+msgstr "允许远程用户控制键盘和鼠标(&C)"
+
+#. i18n: ectx: property (text), widget (QLabel, aboutLabel)
+#: ui/mainwidget.ui:117
+#, kde-format
+msgid ""
+"KDE Desktop Sharing allows you to grant permission to someone at a remote "
+"location for viewing and possibly controlling your desktop."
+msgstr "KDE 桌面共享允许您授权别人远程查看并按需控制您的桌面。"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, enableSharingCheckBox)
+#: ui/mainwidget.ui:145
+#, kde-format
+msgid "Starts/Stops Remote Desktop Sharing"
+msgstr "启动/停止远程桌面共享"
+
+#. i18n: ectx: property (text), widget (QCheckBox, enableSharingCheckBox)
+#: ui/mainwidget.ui:148
+#, kde-format
+msgid "&Enable Desktop Sharing"
+msgstr "启用桌面共享(&E)"
+
+#. i18n: ectx: property (title), widget (QGroupBox, detailsGroupBox)
+#: ui/mainwidget.ui:170
+#, kde-format
+msgid "Connection Details"
+msgstr "连接详情"
+
+#. i18n: ectx: property (text), widget (QLabel, addressLabel)
+#: ui/mainwidget.ui:193
+#, kde-format
+msgid "&Address"
+msgstr "地址(&A)"
+
+#. i18n: ectx: property (whatsThis), widget (QToolButton, addressAboutButton)
+#: ui/mainwidget.ui:214
+#, kde-format
+msgid "More about this address"
+msgstr "更多相关信息"
+
+#. i18n: ectx: property (text), widget (QToolButton, addressAboutButton)
+#. i18n: ectx: property (text), widget (QToolButton, unattendedAboutButton)
+#: ui/mainwidget.ui:217 ui/mainwidget.ui:397
+#, kde-format
+msgid "About"
+msgstr "关闭"
+
+#. i18n: ectx: property (whatsThis), widget (QLabel, addressDisplayLabel)
+#: ui/mainwidget.ui:235
+#, kde-format
+msgid ""
+"Address required by remote users to connect to your desktop. Click about "
+"button on the right for more info."
+msgstr "这是远程用户连接到您的桌面时所用的地址，点击右边的按钮了解更多信息。"
+
+#. i18n: ectx: property (text), widget (QLabel, addressDisplayLabel)
+#: ui/mainwidget.ui:238
+#, kde-format
+msgid "127.0.0.1 : 5900"
+msgstr "127.0.0.1 : 5900"
+
+#. i18n: ectx: property (text), widget (QLabel, passwordLabel)
+#: ui/mainwidget.ui:269
+#, kde-format
+msgid "&Password"
+msgstr "密码(&P)"
+
+#. i18n: ectx: property (whatsThis), widget (QToolButton, passwordEditButton)
+#: ui/mainwidget.ui:290
+#, kde-format
+msgid "Edit/Save Desktop Sharing Password"
+msgstr "编辑/保存桌面共享密码"
+
+#. i18n: ectx: property (text), widget (QToolButton, passwordEditButton)
+#: ui/mainwidget.ui:293
+#, kde-format
+msgid "Edit"
+msgstr "编辑"
+
+#. i18n: ectx: property (whatsThis), widget (QLabel, passwordDisplayLabel)
+#: ui/mainwidget.ui:311
+#, kde-format
+msgid ""
+"Password required by remote users to connect to your desktop. Click the edit "
+"button on the right to change password."
+msgstr "远程用户连接到您的桌面时所需的密码。点击右侧的编辑按钮可更改密码。"
+
+#. i18n: ectx: property (text), widget (QLabel, passwordDisplayLabel)
+#: ui/mainwidget.ui:314
+#, kde-format
+msgid "TemporaryPassword"
+msgstr "临时密码"
+
+#. i18n: ectx: property (whatsThis), widget (QGroupBox, unattendedGroupBox)
+#. i18n: ectx: property (text), widget (QLabel, unattendedAboutLabel)
+#: ui/mainwidget.ui:340 ui/mainwidget.ui:378
+#, kde-format
+msgid ""
+"Unattended Access allows a remote user with the password to gain control to "
+"your desktop without your explicit confirmation."
+msgstr ""
+"无管控访问可允许远程用户仅通过密码，不经您确认就获得对您的桌面的控制权。"
+
+#. i18n: ectx: property (title), widget (QGroupBox, unattendedGroupBox)
+#: ui/mainwidget.ui:343
+#, kde-format
+msgid "Unattended Access"
+msgstr "无管控访问"
+
+#. i18n: ectx: property (whatsThis), widget (QLabel, unattendedAboutLabel)
+#: ui/mainwidget.ui:375
+#, kde-format
+msgid ""
+"Unattended Access allows a remote user with the password to gain control to "
+"your desktop without your explicit confirmation. Click \"About\" button on "
+"right to know more."
+msgstr ""
+"无管控访问可允许远程用户仅通过密码，不经您确认就获得对您的桌面的控制权。点击"
+"右边的“关于”按钮可知晓更多信息。"
+
+#. i18n: ectx: property (whatsThis), widget (QToolButton, unattendedAboutButton)
+#: ui/mainwidget.ui:394
+#, kde-format
+msgid "Know more about Unattended Access"
+msgstr "知晓更多关于无管控访问的信息"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, enableUnattendedCheckBox)
+#: ui/mainwidget.ui:437
+#, kde-format
+msgid ""
+"Starts/Stops unattended access to your desktop. Click on button on right to "
+"change password, and \"About\" button to know more."
+msgstr ""
+"启动/停止桌面无管控访问功能。点击右边的按钮可更改密码，点击“关于”按钮了解更多"
+"信息。"
+
+#. i18n: ectx: property (text), widget (QCheckBox, enableUnattendedCheckBox)
+#: ui/mainwidget.ui:440
+#, kde-format
+msgid "Enable &Unattended Access"
+msgstr "启用无管控访问(&U)"
+
+#. i18n: ectx: property (whatsThis), widget (QPushButton, unattendedPasswordButton)
+#: ui/mainwidget.ui:465
+#, kde-format
+msgid "Change password for Unattended Access"
+msgstr "更改无管控访问密码"
+
+#. i18n: ectx: property (text), widget (QPushButton, unattendedPasswordButton)
+#: ui/mainwidget.ui:468
+#, kde-format
+msgid "&Change Unattended Password"
+msgstr "更改无管控访问密码(&C)"

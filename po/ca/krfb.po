@@ -1,0 +1,714 @@
+# Translation of krfb.po to Catalan
+# Copyright (C) 2003-2021 This_file_is_part_of_KDE
+# This file is distributed under the license LGPL version 2.1 or
+# version 3 or later versions approved by the membership of KDE e.V.
+#
+# Antoni Bella Pérez <antonibella5@yahoo.com>, 2003, 2012, 2015, 2017, 2020, 2021.
+# Albert Astals Cid <aacid@kde.org>, 2004, 2005.
+# Josep M. Ferrer <txemaq@gmail.com>, 2007, 2008, 2009, 2010, 2011, 2013, 2014, 2015, 2016, 2019, 2020, 2021.
+msgid ""
+msgstr ""
+"Project-Id-Version: krfb\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-07-18 00:45+0000\n"
+"PO-Revision-Date: 2021-10-31 14:10+0100\n"
+"Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
+"Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 20.12.0\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Accelerator-Marker: &\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Antoni Bella"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "antonibella5@yahoo.com"
+
+#: connectiondialog.cpp:39
+#, kde-format
+msgid "New Connection"
+msgstr "Connexió nova"
+
+#: connectiondialog.cpp:61
+#, kde-format
+msgid "Accept Connection"
+msgstr "Accepta la connexió"
+
+#: connectiondialog.cpp:65
+#, kde-format
+msgid "Refuse Connection"
+msgstr "Refusa la connexió"
+
+#: invitationsrfbclient.cpp:69
+#, kde-format
+msgid "Accepted connection from %1"
+msgstr "Connexió acceptada des de %1"
+
+#: invitationsrfbclient.cpp:75
+#, kde-format
+msgid "Received connection from %1, on hold (waiting for confirmation)"
+msgstr "Rebuda connexió des de %1, en espera (de confirmació)"
+
+#: invitationsrfbserver.cpp:55
+#, kde-format
+msgid "%1@%2 (shared desktop)"
+msgstr "%1@%2 (escriptori compartit)"
+
+#. i18n: ectx: label, entry (startMinimized), group (MainWindow)
+#: krfb.kcfg:9
+#, kde-format
+msgid "Start minimized"
+msgstr "Inicia minimitzat"
+
+#. i18n: ectx: label, entry (useDefaultPort), group (TCP)
+#: krfb.kcfg:15
+#, kde-format
+msgid "Use the default port for VNC (5900)"
+msgstr "Usa el port predeterminat del VNC (5900)"
+
+#. i18n: ectx: label, entry (port), group (TCP)
+#: krfb.kcfg:19
+#, kde-format
+msgid "This is the port on which krfb will listen."
+msgstr "Aquest és el port que escoltarà el krfb."
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_publishService)
+#. i18n: ectx: label, entry (publishService), group (TCP)
+#: krfb.kcfg:23 ui/configtcp.ui:16
+#, kde-format
+msgid "Announce the service on the local network"
+msgstr "Anuncia el servei a la xarxa local"
+
+#. i18n: ectx: label, entry (noWallet), group (Security)
+#: krfb.kcfg:29
+#, kde-format
+msgid "Do not store passwords in KWallet"
+msgstr "No emmagatzemar les contrasenyes al KWallet"
+
+#. i18n: ectx: label, entry (allowDesktopControl), group (Security)
+#: krfb.kcfg:33
+#, kde-format
+msgid "Allow remote connections to manage the desktop."
+msgstr "Permet les connexions remotes per a gestionar l'escriptori."
+
+#. i18n: ectx: label, entry (allowUnattendedAccess), group (Security)
+#: krfb.kcfg:37
+#, kde-format
+msgid "Allow connections without an invitation."
+msgstr "Permet les connexions sense una invitació."
+
+#. i18n: ectx: label, entry (unattendedAccessPassword), group (Security)
+#. i18n: ectx: label, entry (desktopSharingPassword), group (Security)
+#: krfb.kcfg:41 krfb.kcfg:44
+#, kde-format
+msgid "Password for uninvited connections."
+msgstr "Contrasenya per a les connexions no invitades."
+
+#. i18n: ectx: label, entry (preferredFrameBufferPlugin), group (FrameBuffer)
+#: krfb.kcfg:49
+#, kde-format
+msgid "Preferred Frame Buffer Plugin"
+msgstr "Connector de «framebuffer» preferit"
+
+#: main-virtualmonitor.cpp:49
+#, kde-format
+msgid "Creating a Virtual Monitor from %1"
+msgstr "Es crea un monitor virtual des de %1"
+
+#: main-virtualmonitor.cpp:80
+#, kde-format
+msgid "Remote Virtual Monitor"
+msgstr "Monitor virtual remot"
+
+#: main-virtualmonitor.cpp:82
+#, kde-format
+msgid "Offer a Virtual Monitor that can be accessed remotely"
+msgstr "Ofereix un monitor virtual que es pot accedir remotament"
+
+#: main-virtualmonitor.cpp:84 main.cpp:98
+#, kde-format
+msgid ""
+"(c) 2009-2010, Collabora Ltd.\n"
+"(c) 2007, Alessandro Praduroux\n"
+"(c) 2001-2003, Tim Jansen\n"
+"(c) 2001, Johannes E. Schindelin\n"
+"(c) 2000-2001, Const Kaplinsky\n"
+"(c) 2000, Tridia Corporation\n"
+"(c) 1999, AT&T Laboratories Boston\n"
+msgstr ""
+"(c) 2009-2010, Collabora Ltd.\n"
+"(c) 2007, Alessandro Praduroux\n"
+"(c) 2001-2003, Tim Jansen\n"
+"(c) 2001, Johannes E. Schindelin\n"
+"(c) 2000-2001, Const Kaplinsky\n"
+"(c) 2000, Tridia Corporation\n"
+"(c) 1999, AT&T Laboratories Boston\n"
+
+#: main-virtualmonitor.cpp:91
+#, kde-format
+msgid "Virtual Monitor implementation"
+msgstr "Implementació del monitor virtual"
+
+#: main-virtualmonitor.cpp:92 main.cpp:108
+#, kde-format
+msgid "George Kiagiadakis"
+msgstr "George Kiagiadakis"
+
+#: main-virtualmonitor.cpp:93 main.cpp:111
+#, kde-format
+msgid "Alessandro Praduroux"
+msgstr "Alessandro Praduroux"
+
+#: main-virtualmonitor.cpp:93 main.cpp:111
+#, kde-format
+msgid "KDE4 porting"
+msgstr "Adaptació al KDE 4"
+
+#: main-virtualmonitor.cpp:94 main.cpp:112
+#, kde-format
+msgid "Tim Jansen"
+msgstr "Tim Jansen"
+
+#: main-virtualmonitor.cpp:94 main.cpp:112
+#, kde-format
+msgid "Original author"
+msgstr "Autor original"
+
+#: main-virtualmonitor.cpp:95 main.cpp:113
+#, kde-format
+msgid "Johannes E. Schindelin"
+msgstr "Johannes E. Schindelin"
+
+#: main-virtualmonitor.cpp:96 main.cpp:114
+#, kde-format
+msgid "libvncserver"
+msgstr "libvncserver"
+
+#: main-virtualmonitor.cpp:97 main.cpp:115
+#, kde-format
+msgid "Const Kaplinsky"
+msgstr "Const Kaplinsky"
+
+#: main-virtualmonitor.cpp:98 main.cpp:116
+#, kde-format
+msgid "TightVNC encoder"
+msgstr "Codificador TightVNC"
+
+#: main-virtualmonitor.cpp:99 main.cpp:117
+#, kde-format
+msgid "Tridia Corporation"
+msgstr "Tridia Corporation"
+
+#: main-virtualmonitor.cpp:100 main.cpp:118
+#, kde-format
+msgid "ZLib encoder"
+msgstr "Codificador ZLib"
+
+#: main-virtualmonitor.cpp:101 main.cpp:119
+#, kde-format
+msgid "AT&T Laboratories Boston"
+msgstr "AT&T Laboratories Boston"
+
+#: main-virtualmonitor.cpp:102 main.cpp:120
+#, kde-format
+msgid "original VNC encoders and protocol design"
+msgstr "codificadors VNC originals i disseny del protocol"
+
+#: main-virtualmonitor.cpp:108
+#, kde-format
+msgid "Logical resolution of the new monitor"
+msgstr "Resolució lògica del monitor nou"
+
+#: main-virtualmonitor.cpp:108
+#, kde-format
+msgid "resolution"
+msgstr "resolució"
+
+#: main-virtualmonitor.cpp:110
+#, kde-format
+msgid "Name of the monitor"
+msgstr "Nom del monitor"
+
+#: main-virtualmonitor.cpp:110
+#, kde-format
+msgid "name"
+msgstr "nom"
+
+#: main-virtualmonitor.cpp:112
+#, kde-format
+msgid "Password for the client to connect to it"
+msgstr "Contrasenya perquè es connecti el client"
+
+#: main-virtualmonitor.cpp:112
+#, kde-format
+msgid "password"
+msgstr "contrasenya"
+
+#: main-virtualmonitor.cpp:114
+#, kde-format
+msgid "The device-pixel-ratio of the device, the scaling factor"
+msgstr "La relació de píxels del dispositiu, el factor de canvi d'escala"
+
+#: main-virtualmonitor.cpp:114
+#, kde-format
+msgid "dpr"
+msgstr "dpr"
+
+#: main-virtualmonitor.cpp:116
+#, kde-format
+msgid "The port we will be listening to"
+msgstr "El port que s'escoltarà"
+
+#: main-virtualmonitor.cpp:116
+#, kde-format
+msgid "number"
+msgstr "número"
+
+#: main.cpp:49
+#, kde-format
+msgid ""
+"Your X11 Server does not support the required XTest extension version 2.2. "
+"Sharing your desktop is not possible."
+msgstr ""
+"El vostre servidor X11 no permet l'extensió XTest versió 2.2 requerida. No "
+"es pot compartir el vostre escriptori."
+
+#: main.cpp:51 main.cpp:150
+#, kde-format
+msgid "Desktop Sharing Error"
+msgstr "Error en compartir l'escriptori"
+
+#: main.cpp:94
+#, kde-format
+msgid "Desktop Sharing"
+msgstr "Compartir l'escriptori"
+
+#: main.cpp:96
+#, kde-format
+msgid "VNC-compatible server to share desktops"
+msgstr "Servidor VNC compatible per a compartir escriptoris"
+
+#: main.cpp:105
+#, kde-format
+msgid "George Goldberg"
+msgstr "George Goldberg"
+
+#: main.cpp:106
+#, kde-format
+msgid "Telepathy tubes support"
+msgstr "Implementació dels tubs del Telepathy"
+
+#: main.cpp:126
+#, kde-format
+msgid "Do not show the invitations management dialog at startup"
+msgstr "No mostris el diàleg de gestió d'invitacions a l'inici"
+
+#: main.cpp:148
+#, kde-format
+msgid ""
+"Desktop Sharing is not running under an X11 Server or Wayland.\n"
+"Other display servers are currently not supported."
+msgstr ""
+"La compartició d'escriptori no s'està executant sota un servidor X11 o el "
+"Wayland.\n"
+"Actualment no s'accepten altres servidors gràfics."
+
+#: mainwindow.cpp:52
+#, kde-format
+msgid "Storing passwords in config file is insecure!"
+msgstr "L'emmagatzematge de contrasenyes al fitxer de configuració és insegur!"
+
+#: mainwindow.cpp:189
+#, kde-format
+msgid "Enter a new password for Unattended Access"
+msgstr "Introduïu una contrasenya nova per a l'accés desatès"
+
+#: mainwindow.cpp:200
+#, kde-format
+msgid ""
+"Failed to start the krfb server. Desktop sharing will not work. Try setting "
+"another port in the settings and restart krfb."
+msgstr ""
+"Ha fallat en iniciar el servidor krfb. La compartició d'escriptori no "
+"funcionarà. Intenteu definir un altre port a l'arranjament i torneu a "
+"engegar el krfb."
+
+#. i18n: ectx: property (whatsThis), widget (QLabel, titleLabel)
+#. i18n: ectx: property (text), widget (QLabel, titleLabel)
+#. i18n: ectx: property (whatsThis), widget (QLabel, aboutLabel)
+#: mainwindow.cpp:223 mainwindow.cpp:230 ui/mainwidget.ui:83
+#: ui/mainwidget.ui:86 ui/mainwidget.ui:114
+#, kde-format
+msgid "KDE Desktop Sharing"
+msgstr "Compartir l'escriptori del KDE"
+
+#: mainwindow.cpp:224
+#, kde-format
+msgid ""
+"This field contains the address of your computer and the port number, "
+"separated by a colon.\n"
+"\n"
+"The address is just a hint - you can use any address that can reach your "
+"computer.\n"
+"\n"
+"Desktop Sharing tries to guess your address from your network configuration, "
+"but does not always succeed in doing so.\n"
+"\n"
+"If your computer is behind a firewall it may have a different address or be "
+"unreachable for other computers."
+msgstr ""
+"Aquest camp conté l'adreça del vostre ordinador i el número de port, "
+"separats per dos punts.\n"
+"\n"
+"L'adreça només és una referència - podeu emprar qualsevol adreça que pugui "
+"abastar el vostre ordinador.\n"
+"\n"
+"La compartició d'escriptori endevina l'adreça des de la vostra configuració "
+"de xarxa, però no sempre succeeix d'aquesta manera.\n"
+"\n"
+"Si el vostre ordinador està al darrere d'un tallafoc, aquest pot tenir una "
+"adreça diferent o estar refusant les connexions d'altres ordinadors."
+
+#: mainwindow.cpp:231
+#, kde-format
+msgid ""
+"Any remote user with normal desktop sharing password will have to be "
+"authenticated.\n"
+"\n"
+"If unattended access is on, and the remote user provides unattended mode "
+"password, desktop sharing access will be granted without explicit "
+"confirmation."
+msgstr ""
+"Qualsevol usuari remot amb contrasenya de compartició d'escriptori normal "
+"caldrà que estigui autenticat.\n"
+"\n"
+"Si l'accés desatès està activat, i l'usuari remot proporciona una "
+"contrasenya en mode desatès, s'atorgarà l'accés de compartició d'escriptori "
+"sense cap confirmació explícita."
+
+#: mainwindow.cpp:249
+#, kde-format
+msgid "Network"
+msgstr "Xarxa"
+
+#: mainwindow.cpp:250
+#, kde-format
+msgid "Security"
+msgstr "Seguretat"
+
+#: mainwindow.cpp:251
+#, kde-format
+msgid "Screen capture"
+msgstr "Captura de pantalla"
+
+#: mainwindow.cpp:256
+#, kde-format
+msgid "To apply framebuffer plugin setting, you need to restart the program."
+msgstr ""
+"Per a aplicar l'opció del connector de «framebuffer», cal reiniciar el "
+"programa."
+
+#: rfbservermanager.cpp:229
+#, kde-format
+msgid "The remote user %1 is now connected."
+msgstr "L'usuari remot %1 ara està connectat."
+
+#: rfbservermanager.cpp:243
+#, kde-format
+msgid "The remote user %1 disconnected."
+msgstr "L'usuari remot %1 ha desconnectat."
+
+#: trayicon.cpp:56
+#, kde-format
+msgid "Disconnect"
+msgstr "Desconnecta"
+
+#: trayicon.cpp:62
+#, kde-format
+msgid "Enable Remote Control"
+msgstr "Activa el control remot"
+
+#: trayicon.cpp:101 trayicon.cpp:133
+#, kde-format
+msgid "Desktop Sharing - disconnected"
+msgstr "Compartició de l'escriptori - desconnectat"
+
+#: trayicon.cpp:117 trayicon.cpp:137
+#, kde-format
+msgid "Desktop Sharing - connected with %1"
+msgstr "Compartició de l'escriptori - connectat amb %1"
+
+#: trayicon.cpp:120
+#, kde-format
+msgid "Desktop Sharing - connected"
+msgstr "Compartició de l'escriptori - connectat"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, Framebuffer)
+#: ui/configframebuffer.ui:14
+#, kde-format
+msgid "Framebuffer"
+msgstr "Framebuffer"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: ui/configframebuffer.ui:22
+#, kde-format
+msgid "Preferred frameb&uffer plugin:"
+msgstr "Connector de «frameb&uffer» preferit:"
+
+#. i18n: ectx: property (text), widget (QLabel, helpText)
+#: ui/configframebuffer.ui:47
+#, kde-format
+msgid ""
+"<html><head/><body><p>When using x11, <span style=\" font-weight:600;\">xcb</"
+"span> plugin should be preferred, because it is more performant.<br/><span "
+"style=\" font-weight:600;\">qt</span> plugin is a safe fallback, if for some "
+"reason others don't work. But also it is very slow.</p></body></html>"
+msgstr ""
+"<html><head/><body><p>En utilitzar x11, cal preferir el connector <span "
+"style=\"font-weight:600;\">xcb</span>, perquè és més actiu.<br/>El connector "
+"de les <span style=\"font-weight:600;\">Qt</span> és una solució segura, si "
+"per algun motiu els altres no funcionen. Però també és molt lent.</p></"
+"body></html>"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_allowDesktopControl)
+#: ui/configsecurity.ui:17
+#, kde-format
+msgid "Allow remote connections to control your desktop"
+msgstr "Permet que les connexions remotes controlin l'escriptori"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_noWallet)
+#: ui/configsecurity.ui:27
+#, kde-format
+msgid "Do not store passwords using KDE wallet"
+msgstr "No emmagatzemis les contrasenyes usant la cartera del KDE"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_useDefaultPort)
+#: ui/configtcp.ui:26
+#, kde-format
+msgid "Use default port"
+msgstr "Usa el port predeterminat"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: ui/configtcp.ui:50
+#, kde-format
+msgid "Listening port:"
+msgstr "Port que rep les connexions:"
+
+#. i18n: ectx: property (text), widget (QLabel, TextLabel5)
+#: ui/connectionwidget.ui:47
+#, kde-format
+msgid "Attention"
+msgstr "Atenció"
+
+#. i18n: ectx: property (text), widget (QLabel, mainTextLabel)
+#: ui/connectionwidget.ui:72
+#, kde-format
+msgid ""
+"Somebody is requesting a connection to your computer. Granting this will "
+"allow the remote user to watch your desktop. "
+msgstr ""
+"Algú està demanant una connexió al vostre ordinador. En concedir-li "
+"permetreu a l'usuari remot de veure el vostre escriptori. "
+
+#. i18n: ectx: property (text), widget (QLabel, TextLabel1)
+#: ui/connectionwidget.ui:102
+#, kde-format
+msgid "Remote system:"
+msgstr "Sistema remot:"
+
+#. i18n: ectx: property (text), widget (QLabel, remoteHost)
+#: ui/connectionwidget.ui:118
+#, kde-format
+msgid "123.234.123.234"
+msgstr "123.234.123.234"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, cbAllowRemoteControl)
+#: ui/connectionwidget.ui:136
+#, kde-format
+msgid ""
+"If you turn this option on, the remote user can enter keystrokes and use "
+"your mouse pointer. This gives them full control over your computer, so be "
+"careful. When the option is disabled the remote user can only watch your "
+"screen."
+msgstr ""
+"Si activeu aquesta opció, l'usuari remot podrà usar el teclat i el ratolí. "
+"Això li donarà el control absolut sobre el vostre ordinador, useu-ho amb "
+"cura. Quan aquesta opció està desactivada, l'usuari remot només podrà veure "
+"la vostra pantalla."
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbAllowRemoteControl)
+#: ui/connectionwidget.ui:139
+#, kde-format
+msgid "Allow remote user to &control keyboard and mouse"
+msgstr "Permet a l'usuari remot de &controlar el teclat i el ratolí"
+
+#. i18n: ectx: property (text), widget (QLabel, aboutLabel)
+#: ui/mainwidget.ui:117
+#, kde-format
+msgid ""
+"KDE Desktop Sharing allows you to grant permission to someone at a remote "
+"location for viewing and possibly controlling your desktop."
+msgstr ""
+"La compartició d'escriptori del KDE us permet atorgar permís a algú en una "
+"ubicació remota a mirar i possiblement controlar el vostre escriptori."
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, enableSharingCheckBox)
+#: ui/mainwidget.ui:145
+#, kde-format
+msgid "Starts/Stops Remote Desktop Sharing"
+msgstr "Inicia/Atura la compartició d'escriptori remot"
+
+#. i18n: ectx: property (text), widget (QCheckBox, enableSharingCheckBox)
+#: ui/mainwidget.ui:148
+#, kde-format
+msgid "&Enable Desktop Sharing"
+msgstr "&Activa la compartició d'escriptori"
+
+#. i18n: ectx: property (title), widget (QGroupBox, detailsGroupBox)
+#: ui/mainwidget.ui:170
+#, kde-format
+msgid "Connection Details"
+msgstr "Detalls de connexió"
+
+#. i18n: ectx: property (text), widget (QLabel, addressLabel)
+#: ui/mainwidget.ui:193
+#, kde-format
+msgid "&Address"
+msgstr "&Adreça"
+
+#. i18n: ectx: property (whatsThis), widget (QToolButton, addressAboutButton)
+#: ui/mainwidget.ui:214
+#, kde-format
+msgid "More about this address"
+msgstr "Més quant a aquesta adreça"
+
+#. i18n: ectx: property (text), widget (QToolButton, addressAboutButton)
+#. i18n: ectx: property (text), widget (QToolButton, unattendedAboutButton)
+#: ui/mainwidget.ui:217 ui/mainwidget.ui:397
+#, kde-format
+msgid "About"
+msgstr "Quant a"
+
+#. i18n: ectx: property (whatsThis), widget (QLabel, addressDisplayLabel)
+#: ui/mainwidget.ui:235
+#, kde-format
+msgid ""
+"Address required by remote users to connect to your desktop. Click about "
+"button on the right for more info."
+msgstr ""
+"L'adreça requerida pels usuaris remots per a connectar amb el vostre "
+"escriptori. Per a més informació, feu clic en el botó «Quant al» que hi ha a "
+"la dreta."
+
+#. i18n: ectx: property (text), widget (QLabel, addressDisplayLabel)
+#: ui/mainwidget.ui:238
+#, kde-format
+msgid "127.0.0.1 : 5900"
+msgstr "127.0.0.1 : 5900"
+
+#. i18n: ectx: property (text), widget (QLabel, passwordLabel)
+#: ui/mainwidget.ui:269
+#, kde-format
+msgid "&Password"
+msgstr "&Contrasenya"
+
+#. i18n: ectx: property (whatsThis), widget (QToolButton, passwordEditButton)
+#: ui/mainwidget.ui:290
+#, kde-format
+msgid "Edit/Save Desktop Sharing Password"
+msgstr "Edita/desa la contrasenya de compartició de l'escriptori"
+
+#. i18n: ectx: property (text), widget (QToolButton, passwordEditButton)
+#: ui/mainwidget.ui:293
+#, kde-format
+msgid "Edit"
+msgstr "Edita"
+
+#. i18n: ectx: property (whatsThis), widget (QLabel, passwordDisplayLabel)
+#: ui/mainwidget.ui:311
+#, kde-format
+msgid ""
+"Password required by remote users to connect to your desktop. Click the edit "
+"button on the right to change password."
+msgstr ""
+"La contrasenya requerida pels usuaris remots per a connectar amb el vostre "
+"escriptori. Feu clic en el botó «Edita» que hi ha a la dreta per a canviar "
+"la contrasenya."
+
+#. i18n: ectx: property (text), widget (QLabel, passwordDisplayLabel)
+#: ui/mainwidget.ui:314
+#, kde-format
+msgid "TemporaryPassword"
+msgstr "ContrasenyaTemporal"
+
+#. i18n: ectx: property (whatsThis), widget (QGroupBox, unattendedGroupBox)
+#. i18n: ectx: property (text), widget (QLabel, unattendedAboutLabel)
+#: ui/mainwidget.ui:340 ui/mainwidget.ui:378
+#, kde-format
+msgid ""
+"Unattended Access allows a remote user with the password to gain control to "
+"your desktop without your explicit confirmation."
+msgstr ""
+"L'accés desatès permet que un usuari remot amb contrasenya arribi a "
+"controlar el vostre escriptori sense cap confirmació explícita."
+
+#. i18n: ectx: property (title), widget (QGroupBox, unattendedGroupBox)
+#: ui/mainwidget.ui:343
+#, kde-format
+msgid "Unattended Access"
+msgstr "Accés desatès"
+
+#. i18n: ectx: property (whatsThis), widget (QLabel, unattendedAboutLabel)
+#: ui/mainwidget.ui:375
+#, kde-format
+msgid ""
+"Unattended Access allows a remote user with the password to gain control to "
+"your desktop without your explicit confirmation. Click \"About\" button on "
+"right to know more."
+msgstr ""
+"L'accés desatès permet que un usuari remot amb contrasenya arribi a "
+"controlar el vostre escriptori sense cap confirmació explícita. Per a "
+"conèixer més, feu clic en el botó «Quant al» que hi ha a la dreta."
+
+#. i18n: ectx: property (whatsThis), widget (QToolButton, unattendedAboutButton)
+#: ui/mainwidget.ui:394
+#, kde-format
+msgid "Know more about Unattended Access"
+msgstr "Conèixer més quant a l'accés desatès"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, enableUnattendedCheckBox)
+#: ui/mainwidget.ui:437
+#, kde-format
+msgid ""
+"Starts/Stops unattended access to your desktop. Click on button on right to "
+"change password, and \"About\" button to know more."
+msgstr ""
+"Inicieu/Atureu l'accés desatès al vostre escriptori. Feu clic en el botó que "
+"hi ha a la dreta per a canviar la contrasenya, i en el botó «Quant al» per a "
+"conèixer més."
+
+#. i18n: ectx: property (text), widget (QCheckBox, enableUnattendedCheckBox)
+#: ui/mainwidget.ui:440
+#, kde-format
+msgid "Enable &Unattended Access"
+msgstr "Activa l'accés &desatès"
+
+#. i18n: ectx: property (whatsThis), widget (QPushButton, unattendedPasswordButton)
+#: ui/mainwidget.ui:465
+#, kde-format
+msgid "Change password for Unattended Access"
+msgstr "Canvia la contrasenya per a l'accés desatès"
+
+#. i18n: ectx: property (text), widget (QPushButton, unattendedPasswordButton)
+#: ui/mainwidget.ui:468
+#, kde-format
+msgid "&Change Unattended Password"
+msgstr "&Canvia la contrasenya del desatès"

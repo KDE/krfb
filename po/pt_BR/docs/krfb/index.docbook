@@ -1,0 +1,458 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY kappname "&krfb;">
+  <!ENTITY package "kdenetwork">
+  <!ENTITY % addindex "IGNORE">
+  <!ENTITY % Brazilian-Portuguese "INCLUDE"
+> <!-- ONLY If you are writing non-English 
+                                     original documentation, change 
+                                     the language here -->
+    
+  <!-- Do not define any other entities; instead, use the entities
+       from entities/general.entities and $LANG/user.entities. -->
+]>
+<!-- Based on kdoctemplate v0.9 January 10 2003 -->
+
+<book id="krfb" lang="&language;">
+
+<!-- This header contains all of the meta-information for the document such
+as Authors, publish date, the abstract, and Keywords -->
+
+<bookinfo>
+<title
+>Manual do &krfb;</title>
+
+<authorgroup>
+<author
+>&Brad.Hards; &Brad.Hards.mail; </author>
+<othercredit role="translator"
+><firstname
+>Marcus</firstname
+><surname
+>Gama</surname
+><affiliation
+><address
+><email
+>marcus.gama@gmail.com</email
+></address
+></affiliation
+><contrib
+>Tradução</contrib
+></othercredit
+> 
+</authorgroup>
+
+<copyright>
+<year
+>2003</year>
+<holder
+>&Brad.Hards;</holder>
+</copyright>
+<!-- Translators: put here the copyright notice of the translation -->
+
+<legalnotice
+>&FDLNotice;</legalnotice>
+
+<!-- Date and version information of the documentation
+Don't forget to include this last date and this last revision number, we
+need them for translation coordination !
+Please respect the format of the date (YYYY-MM-DD) and of the version
+(V.MM.LL), it could be used by automation scripts.
+Do NOT change these in the translation. -->
+
+<date
+>19/06/2013</date>
+<releaseinfo
+>&kde; 4.11</releaseinfo>
+
+<!-- Abstract about this handbook -->
+
+<abstract>
+<para
+>O &krfb; é um aplicativo de servidor que lhe permite compartilhar a sua sessão atual com um usuário em outra máquina, que poderá usar um cliente de <acronym
+>VNC</acronym
+> para ver ou mesmo controlar a máquina. </para>
+</abstract>
+
+<!-- This is a set of Keywords for indexing by search engines.
+Please at least include KDE, the KDE package it is in, the name
+ of your application, and a few relevant keywords. -->
+
+<keywordset>
+<keyword
+>KDE</keyword>
+<keyword
+>kdenetwork</keyword>
+<keyword
+>krfb</keyword>
+<keyword
+>VNC</keyword>
+<keyword
+>RFB</keyword>
+<keyword
+>krdc</keyword>
+<keyword
+>Compartilhamento da Tela</keyword>
+<keyword
+>Controle Remoto</keyword>
+<keyword
+>Assistência Remota</keyword>
+<keyword
+>Tela Remota</keyword>
+</keywordset>
+
+</bookinfo>
+
+<!-- The contents of the documentation begin here.  Label
+each chapter so with the id attribute. This is necessary for two reasons: it
+allows you to easily reference the chapter from other chapters of your
+document, and if there is no ID, the name of the generated HTML files will vary
+from time to time making it hard to manage for maintainers and for the CVS
+system. Any chapter labelled (OPTIONAL) may be left out at the author's
+discretion. Other chapters should not be left out in order to maintain a
+consistent documentation style across all KDE apps. -->
+
+<chapter id="introduction">
+<title
+>Introdução</title>
+
+<!-- The introduction chapter contains a brief introduction for the
+application that explains what it does and where to report
+problems. Basically a long version of the abstract.  Don't include a
+revision history. (see installation appendix comment) -->
+
+<para
+>O &krfb; é um aplicativo de servidor que lhe permite compartilhar a sua sessão atual com um usuário em outra máquina, que poderá usar um cliente de <acronym
+>VNC</acronym
+> para ver ou mesmo controlar a máquina. </para>
+
+<para
+>Você, tipicamente, iria usar o &krfb; com o cliente de <acronym
+>VNC</acronym
+> do &kde;, o &krdc;, uma vez que corresponde mais aproximadamente às funcionalidades especiais do &krfb;. </para>
+
+<para
+>O &krfb; não necessita que você inicie uma nova sessão de X - ele pode compartilhar a atual. Isto torna-o muito útil quando você quiser que alguém o ajude a executar uma tarefa. </para>
+
+<para
+>Por favor comunique quaisquer problemas ou pedidos de funcionalidades para as listas de discussão do &kde; ou envie um erro para <ulink url="http://bugs.kde.org"
+>http://bugs.kde.org</ulink
+>. </para>
+</chapter>
+
+<chapter id="what-is-RFB">
+<title
+>O protocolo do 'Buffer de Quadro Remoto' (Buffer de Quadro Remoto)</title>
+
+<para
+>Este capítulo contém uma breve descrição do protocolo do Buffer de Quadro Remoto usado pelo &krfb; e pelos outros sistemas compatíveis. Se você já estiver familiarizado com o Buffer de Quadro Remoto, poderá ignorar este capítulo com segurança. </para>
+
+<para
+>A implementação de alto nível de um sistema que use o protocolo Buffer de Quadro Remoto é conhecido como Virtual Network Computer (Computador de Rede Virtual), ou mais frequentemente por <acronym
+>VNC</acronym
+>. </para>
+
+<para
+>O Buffer de Quadro Remoto (ou, do inglês, <acronym
+>RFB</acronym
+> para abreviar) é um protocolo simples para o acesso remoto às interfaces gráficas dos usuários. Funciona ao nível do buffer de quadro, o que corresponde grosseiramente à imagem desenhada na tela, o que significa que pode ser aplicado a todos os sistemas de janelas (incluindo o X11, &MacOS; e &Microsoft; &Windows;). Os aplicativos do Buffer de Quadro Remoto existem para várias plataformas e poderão ser redistribuídos livremente. </para>
+
+<para
+>No protocolo do Buffer de Quadro Remoto, o aplicativo que executa na máquina onde o usuário se encontra (que contém o tela, o teclado e o mouse) é chamado de cliente. O aplicativo que é executado na máquina onde se localiza o buffer de quadro (que está rodando o sistema de janelas e os aplicativos que o usuário se encontra controlando remotamente) é por sua vez chamado de servidor. O &krfb; é o servidor do &kde; para o protocolo do Buffer de Quadro Remoto. O &krdc; é o cliente do &kde; para o protocolo do Buffer de Quadro Remoto. </para>
+
+<para
+>Ocupa uma quantidade razoável de tráfego de rede enviar uma mensagem do buffer de quadro, como tal o Buffer de Quadro Remoto trabalha melhor com as conexões de alta largura de banda, como as das redes locais. É ainda possível usar o &krfb; sobre outras conexões, mas é improvável que a performance seja tão boa. </para>
+
+</chapter>
+
+<chapter id="using-krfb">
+<title
+>Usando o &krfb;</title>
+
+<!-- This chapter should tell the user how to use your app. You should use as
+many sections (Chapter, Sect1, Sect3, etc...) as is necessary to fully document
+your application. -->
+
+<para
+>É muito fácil usar o &krfb; - ele tem uma interface simples, tal como é mostrada na figura abaixo. </para>
+
+<para>
+<screenshot>
+<screeninfo
+>Aqui está uma captura de tela do &krfb;</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="screenshot.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Janela principal do &krfb;</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Quando você quiser permitir a alguém acessar a sua tela, você poderá criar um convite pessoal usando o botão <guibutton
+>Novo convite pessoal...</guibutton
+>, que fará aparecer uma janela que contém as informações necessária para acessar a sua tela. É mostrado um exemplo abaixo. </para>
+
+<para>
+<screenshot>
+<screeninfo
+>Exemplo de convite pessoal do &krfb;</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="personal_invitation.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Exemplo de convite pessoal do &krfb;</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Para aumentar a segurança, o convite só é válido por uma hora depois de ser criado, e obviamente a pessoa que se conecte terá que possuir a senha correta. </para>
+
+<para
+>Uma vez que você poderá querer convidar alguém para acessar a sua tela por e-mail, o &krfb; pode criar os convites como mensagens de e-mail. Você poderá criar um desses convites usando o botão <guibutton
+>Novo convite por e-mail...</guibutton
+> na janela principal do &krfb;. Isto fará aparecer frequentemente uma mensagem de e-mail parecida com a seguinte, pronta para você escrever o endereço de e-mail da pessoa para quem está enviando o convite. </para>
+
+<para>
+<screenshot>
+<screeninfo
+>Convite por e-mail de exemplo do &krfb;</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="email_invitation.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Convite por e-mail de exemplo do &krfb;</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<warning>
+<para
+>O &krfb; irá avisá-lo sobre as implicações de segurança ao enviar esta informação através de uma conexão insegura. Você tem que ter em mente estes avisos. </para>
+<para
+>Se você não conseguir criptografar o e-mail (ou tornar a conexão segura, em alternativa), o envio de convites por e-mail é um risco de segurança muito sério, uma vez que qualquer pessoa conseguirá ler a senha e o endereço do e-mail à medida que passa na rede. Isto significa que terceiros poderão tomar o controle da sua máquina. </para>
+<para
+>Se você não conseguir criptografar a mensagem de e-mail, talvez seja melhor usar um convite pessoal, telefonar à pessoa a quem vai dar o acesso, verificar a identidade dessa pessoa e fornecer a informação do convite dessa forma. </para>
+</warning>
+
+<sect1 id="krfb-managing-invitations">
+<title
+>Gerenciando convites do &krfb;</title>
+
+<para
+>Após criado um convite (seja um convite pessoal ou um enviado por e-mail), a janela principal do &krfb; lhe permite remover os convites existentes. Para apagar apenas um dos convites, selecione-o com o mouse (ele deverá ficar realçado), e selecione em seguida o botão <guibutton
+>Remover</guibutton
+>. Para apagar todos os convites, basta selecionar o botão <guibutton
+>Remover tudo</guibutton
+>. </para>
+
+</sect1>
+
+<sect1 id="krfb-qit">
+<title
+>Sair do &krfb;</title>
+
+<para
+>Se você fechar a janela principal do &krfb;, o servidor continua em execução, o que é indicado através de um ícone na área de notificação. Para parar o &krfb;, clique no ícone na área de notificação e selecione <guimenuitem
+>Sair</guimenuitem
+>. </para>
+
+</sect1>
+
+<sect1 id="krfb-configuration">
+<title
+>Configurando o &krfb;</title>
+<para
+>Além da interface principal do &krfb; mostrada e descrita abaixo, você também poderá controlar o &krfb; usando a opção <guibutton
+>Configurar...</guibutton
+> na janela principal do &krfb;. A configuração do &krfb; possui duas páginas, tal como mostrado abaixo: </para>
+
+<para
+>A página de <guilabel
+>Rede</guilabel
+> permite o controle do porta que o &krfb; usa, tal como mostrado abaixo. </para>
+
+<para>
+<screenshot>
+<screeninfo
+>Configuração do &krfb; (Página de Rede)</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="configuration_network.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Configuração do &krfb; (Página de Rede)</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>A opção de <guilabel
+>Anunciar o serviço na rede</guilabel
+> controla se o &krfb; notifica os convites na rede usando o SLP (sigla, do inglês, para Protocolo de Localização de Serviço). Esta é normalmente uma boa ideia, mas só funciona realmente bem com um cliente que entenda o Protocolo de Localização de Serviço como o &krdc;. </para>
+
+<para
+>Se você selecionar a opção <guilabel
+>Usar porta padrão</guilabel
+>, então o &krfb; irá localizar uma porta adequada, e os convites irão corresponder nessa porta. Se desmarcar esta opção, você poderá indicar uma porta em particular. Indicar uma porta personalizada poderá ser útil se você estiver fazendo redirecionamento de portas na 'firewall'. Observe que, se o Protocolo de Localização de Serviço estiver ativo, ele irá tratar automaticamente da identificação da porta correta. </para>
+
+<para
+>A página de <guilabel
+>Segurança</guilabel
+> permite-lhe configurar as opções relacionadas com o acesso ao servidor do &krfb;. </para>
+
+<para>
+<screenshot>
+<screeninfo
+>Configuração do &krfb; (Página de Segurança)</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="configuration_security.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Configuração do &krfb; (Página de Segurança)</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>A opção <guilabel
+>Permitir as ligações sem convite</guilabel
+> controla se o &krfb; irá permitir uma ligação sem convite. Se as ligações sem convite forem permitidas, você deverá indicar uma senha. Você também pode usar as opções aqui para escolher se terá que confirmar a ligação antes dela prosseguir, e se a pessoa que se liga poderá controlar a área de trabalho, ou apenas visualizá-la. </para>
+
+<para
+>Se a máquina for uma estação de trabalho, e se você optar por permitir as conexões sem convite, você poderá desejar selecionar a opção <guilabel
+>Perguntar antes de aceitar conexões</guilabel
+>. Da mesma forma, se a máquina for um servidor e se você estiver usando o &krfb; para a sua administração remota, você poderá desejar desligar a mesma opção. </para>
+
+<note>
+<para
+>O &krfb; usa o sistema de senhas normal do <acronym
+>RFB</acronym
+>, que não transfere a sua senha de forma legível pela rede. Em vez disso, usa um sistema de 'desafio e resposta'. Isto é razoavelmente seguro, desde que a senha seja guardada em segurança. </para>
+</note>
+
+</sect1>
+
+<sect1 id="krfb-connection">
+<title
+>O que acontece quando alguém se conecta ao &krfb;</title>
+
+<para
+>Sempre que alguém se conecta ao &krfb; na sua máquina, você irá receber uma notificação semelhante à da figura seguinte, a menos que você esteja aceitando conexões sem convite e sem aviso. </para>
+<para>
+<screenshot>
+<screeninfo
+>Janela de Conexão do &krfb;</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="connection.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Janela de Conexão do &krfb;</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Se você <guibutton
+>Aceitar a Conexão</guibutton
+>, o cliente poderá prosseguir com a autenticação (que necessita da senha correta para um convite pessoal ou por e-mail). Se você <guibutton
+>Recusar a Conexão</guibutton
+>, então a tentativa de conexão será terminada. </para>
+
+<para
+>A opção <guilabel
+>Permitir ao usuário remoto controlar o teclado e o mouse</guilabel
+> determina se este cliente só observa ou se pode tomar o controle da sua máquina. </para>
+
+<para
+>Se a conexão do cliente for bem sucedida, e se for usada a senha de um convite pessoal ou de um convite por e-mail, então esse convite será apagado e não poderá mais ser usado. Você também irá receber uma pequena janela acoplada na área de notificação, que mostra que a conexão foi feita. </para>
+
+</sect1>
+</chapter>
+
+<chapter id="credits">
+
+<!-- Include credits for the programmers, documentation writers, and
+contributors here. The license for your software should then be included below
+the credits with a reference to the appropriate license file included in the KDE
+distribution. -->
+
+<title
+>Créditos e licença</title>
+
+<para
+>&krfb; </para>
+<para
+>Direitos autorais do programa 2002 Tim Jansen <email
+>tim@tjansen.de</email
+> </para>
+<para
+>Contribuições: <itemizedlist
+> <listitem
+><para
+>Ian Reinhart Geiser <email
+>geiseri@kde.org</email
+></para>
+</listitem>
+</itemizedlist>
+</para>
+
+<para
+>Direitos autorais da documentação &copy; 2003 &Brad.Hards; &Brad.Hards.mail; </para>
+
+<para
+>Tradução de Marcus Gama <email
+>marcus.gama@gmail.com</email
+></para
+> 
+&underFDL; &underGPL; </chapter>
+
+<appendix id="installation">
+<title
+>Instalação</title>
+
+<sect1 id="getting-krfb">
+<title
+>Como obter o &krfb;</title>
+&install.intro.documentation; </sect1>
+
+<sect1 id="compilation">
+<title
+>Compilação e instalação</title>
+&install.compile.documentation; </sect1>
+
+</appendix>
+
+&documentation.index;
+</book>
+
+<!--
+Local Variables:
+mode: xml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-indent-step:0
+sgml-indent-data:nil
+End:
+
+vim:tabstop=2:shiftwidth=2:expandtab 
+-->

@@ -1,0 +1,1025 @@
+# Translation of krfb to Korean.
+# Copyright (C) 2007-2008 This_file_is_part_of_KDE
+# This file is distributed under the same license as the kdenetwork package.
+# Shinjo Park <kde@peremen.name>, 2007, 2008, 2009, 2011, 2013, 2014, 2015, 2017, 2019, 2020, 2021.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: krfb\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-07-18 00:45+0000\n"
+"PO-Revision-Date: 2021-11-12 00:42+0100\n"
+"Last-Translator: Shinjo Park <kde@peremen.name>\n"
+"Language-Team: Korean <kde-kr@kde.org>\n"
+"Language: ko\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Lokalize 21.08.1\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "박신조"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "kde@peremen.name"
+
+#: connectiondialog.cpp:39
+#, kde-format
+msgid "New Connection"
+msgstr "새 연결"
+
+#: connectiondialog.cpp:61
+#, kde-format
+msgid "Accept Connection"
+msgstr "연결 수락"
+
+#: connectiondialog.cpp:65
+#, kde-format
+msgid "Refuse Connection"
+msgstr "연결 거부"
+
+#: invitationsrfbclient.cpp:69
+#, kde-format
+msgid "Accepted connection from %1"
+msgstr "%1의 연결을 수락함"
+
+#: invitationsrfbclient.cpp:75
+#, kde-format
+msgid "Received connection from %1, on hold (waiting for confirmation)"
+msgstr "%1에서 연결 들어옴, 대기 중 (확인 기다리는 중)"
+
+#: invitationsrfbserver.cpp:55
+#, kde-format
+msgid "%1@%2 (shared desktop)"
+msgstr "%1@%2 (공유된 데스크톱)"
+
+#. i18n: ectx: label, entry (startMinimized), group (MainWindow)
+#: krfb.kcfg:9
+#, kde-format
+msgid "Start minimized"
+msgstr "최소화된 상태로 시작"
+
+#. i18n: ectx: label, entry (useDefaultPort), group (TCP)
+#: krfb.kcfg:15
+#, kde-format
+msgid "Use the default port for VNC (5900)"
+msgstr "VNC의 기본 포트 사용 (5900)"
+
+#. i18n: ectx: label, entry (port), group (TCP)
+#: krfb.kcfg:19
+#, kde-format
+msgid "This is the port on which krfb will listen."
+msgstr "krfb가 들을 포트입니다."
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_publishService)
+#. i18n: ectx: label, entry (publishService), group (TCP)
+#: krfb.kcfg:23 ui/configtcp.ui:16
+#, kde-format
+msgid "Announce the service on the local network"
+msgstr "서비스를 로컬 네트워크에 알리기"
+
+#. i18n: ectx: label, entry (noWallet), group (Security)
+#: krfb.kcfg:29
+#, kde-format
+msgid "Do not store passwords in KWallet"
+msgstr "KWallet에 암호 저장하지 않음"
+
+#. i18n: ectx: label, entry (allowDesktopControl), group (Security)
+#: krfb.kcfg:33
+#, kde-format
+msgid "Allow remote connections to manage the desktop."
+msgstr "원격 연결을 통해서 데스크톱을 관리할 수 있도록 합니다."
+
+#. i18n: ectx: label, entry (allowUnattendedAccess), group (Security)
+#: krfb.kcfg:37
+#, kde-format
+msgid "Allow connections without an invitation."
+msgstr "초대장 없는 연결을 허용합니다."
+
+#. i18n: ectx: label, entry (unattendedAccessPassword), group (Security)
+#. i18n: ectx: label, entry (desktopSharingPassword), group (Security)
+#: krfb.kcfg:41 krfb.kcfg:44
+#, kde-format
+msgid "Password for uninvited connections."
+msgstr "초대장 없는 연결에 사용할 암호입니다."
+
+#. i18n: ectx: label, entry (preferredFrameBufferPlugin), group (FrameBuffer)
+#: krfb.kcfg:49
+#, kde-format
+msgid "Preferred Frame Buffer Plugin"
+msgstr "선호하는 프레임버퍼 플러그인"
+
+#: main-virtualmonitor.cpp:49
+#, kde-format
+msgid "Creating a Virtual Monitor from %1"
+msgstr "%1에서 가상 모니터 만들기"
+
+#: main-virtualmonitor.cpp:80
+#, kde-format
+msgid "Remote Virtual Monitor"
+msgstr "원격 가상 모니터"
+
+#: main-virtualmonitor.cpp:82
+#, kde-format
+msgid "Offer a Virtual Monitor that can be accessed remotely"
+msgstr "원격에서 접근할 수 있는 가상 모니터 제공"
+
+#: main-virtualmonitor.cpp:84 main.cpp:98
+#, kde-format
+msgid ""
+"(c) 2009-2010, Collabora Ltd.\n"
+"(c) 2007, Alessandro Praduroux\n"
+"(c) 2001-2003, Tim Jansen\n"
+"(c) 2001, Johannes E. Schindelin\n"
+"(c) 2000-2001, Const Kaplinsky\n"
+"(c) 2000, Tridia Corporation\n"
+"(c) 1999, AT&T Laboratories Boston\n"
+msgstr ""
+"(c) 2009-2010, Collabora Ltd.\n"
+"(c) 2007, Alessandro Praduroux\n"
+"(c) 2001-2003, Tim Jansen\n"
+"(c) 2001, Johannes E. Schindelin\n"
+"(c) 2000-2001, Const Kaplinsky\n"
+"(c) 2000, Tridia Corporation\n"
+"(c) 1999, AT&T Laboratories Boston\n"
+
+#: main-virtualmonitor.cpp:91
+#, kde-format
+msgid "Virtual Monitor implementation"
+msgstr "가상 모니터 구현"
+
+#: main-virtualmonitor.cpp:92 main.cpp:108
+#, kde-format
+msgid "George Kiagiadakis"
+msgstr "George Kiagiadakis"
+
+#: main-virtualmonitor.cpp:93 main.cpp:111
+#, kde-format
+msgid "Alessandro Praduroux"
+msgstr "Alessandro Praduroux"
+
+#: main-virtualmonitor.cpp:93 main.cpp:111
+#, kde-format
+msgid "KDE4 porting"
+msgstr "KDE4 이식"
+
+#: main-virtualmonitor.cpp:94 main.cpp:112
+#, kde-format
+msgid "Tim Jansen"
+msgstr "Tim Jansen"
+
+#: main-virtualmonitor.cpp:94 main.cpp:112
+#, kde-format
+msgid "Original author"
+msgstr "원 작성자"
+
+#: main-virtualmonitor.cpp:95 main.cpp:113
+#, kde-format
+msgid "Johannes E. Schindelin"
+msgstr "Johannes E. Schindelin"
+
+#: main-virtualmonitor.cpp:96 main.cpp:114
+#, kde-format
+msgid "libvncserver"
+msgstr "libvncserver"
+
+#: main-virtualmonitor.cpp:97 main.cpp:115
+#, kde-format
+msgid "Const Kaplinsky"
+msgstr "Const Kaplinsky"
+
+#: main-virtualmonitor.cpp:98 main.cpp:116
+#, kde-format
+msgid "TightVNC encoder"
+msgstr "TightVNC 인코더"
+
+#: main-virtualmonitor.cpp:99 main.cpp:117
+#, kde-format
+msgid "Tridia Corporation"
+msgstr "Tridia Corporation"
+
+#: main-virtualmonitor.cpp:100 main.cpp:118
+#, kde-format
+msgid "ZLib encoder"
+msgstr "ZLib 인코더"
+
+#: main-virtualmonitor.cpp:101 main.cpp:119
+#, kde-format
+msgid "AT&T Laboratories Boston"
+msgstr "AT&T Laboratories Boston"
+
+#: main-virtualmonitor.cpp:102 main.cpp:120
+#, kde-format
+msgid "original VNC encoders and protocol design"
+msgstr "원본 VNC 인코더와 프로토콜 디자인"
+
+#: main-virtualmonitor.cpp:108
+#, kde-format
+msgid "Logical resolution of the new monitor"
+msgstr "새 모니터의 논리적 해상도"
+
+#: main-virtualmonitor.cpp:108
+#, kde-format
+msgid "resolution"
+msgstr "resolution"
+
+#: main-virtualmonitor.cpp:110
+#, kde-format
+msgid "Name of the monitor"
+msgstr "모니터 이름"
+
+#: main-virtualmonitor.cpp:110
+#, kde-format
+msgid "name"
+msgstr "name"
+
+#: main-virtualmonitor.cpp:112
+#, kde-format
+msgid "Password for the client to connect to it"
+msgstr "클라이언트에서 연결할 때 사용할 암호"
+
+#: main-virtualmonitor.cpp:112
+#, kde-format
+msgid "password"
+msgstr "password"
+
+#: main-virtualmonitor.cpp:114
+#, kde-format
+msgid "The device-pixel-ratio of the device, the scaling factor"
+msgstr "장치의 크기 조정 배율"
+
+#: main-virtualmonitor.cpp:114
+#, kde-format
+msgid "dpr"
+msgstr "dpr"
+
+#: main-virtualmonitor.cpp:116
+#, kde-format
+msgid "The port we will be listening to"
+msgstr "들을 포트"
+
+#: main-virtualmonitor.cpp:116
+#, kde-format
+msgid "number"
+msgstr "number"
+
+#: main.cpp:49
+#, kde-format
+msgid ""
+"Your X11 Server does not support the required XTest extension version 2.2. "
+"Sharing your desktop is not possible."
+msgstr ""
+"X11 서버에서 XTest 확장 2.2를 지원하지 않습니다. 데스크톱 공유를 사용할 수 없"
+"습니다."
+
+#: main.cpp:51 main.cpp:150
+#, kde-format
+msgid "Desktop Sharing Error"
+msgstr "데스크톱 공유 오류"
+
+#: main.cpp:94
+#, kde-format
+msgid "Desktop Sharing"
+msgstr "데스크톱 공유"
+
+#: main.cpp:96
+#, kde-format
+msgid "VNC-compatible server to share desktops"
+msgstr "데스크톱을 공유하는 VNC 호환 서버"
+
+#: main.cpp:105
+#, kde-format
+msgid "George Goldberg"
+msgstr "George Goldberg"
+
+#: main.cpp:106
+#, kde-format
+msgid "Telepathy tubes support"
+msgstr "Telepathy Tubes 지원"
+
+#: main.cpp:126
+#, kde-format
+msgid "Do not show the invitations management dialog at startup"
+msgstr "시작할 때 초대장 관리 대화 상자 보이지 않기"
+
+#: main.cpp:148
+#, kde-format
+msgid ""
+"Desktop Sharing is not running under an X11 Server or Wayland.\n"
+"Other display servers are currently not supported."
+msgstr ""
+"데스크톱 공유가 X11이나 Wayland 서버에서 실행 중이 아닙니다.\n"
+"다른 디스플레이 서버는 현재 지원하지 않습니다."
+
+#: mainwindow.cpp:52
+#, kde-format
+msgid "Storing passwords in config file is insecure!"
+msgstr "설정 파일에 암호를 저장하는 것은 안전하지 않습니다!"
+
+#: mainwindow.cpp:189
+#, kde-format
+msgid "Enter a new password for Unattended Access"
+msgstr "새 자동 접근 암호를 입력하십시오"
+
+#: mainwindow.cpp:200
+#, kde-format
+msgid ""
+"Failed to start the krfb server. Desktop sharing will not work. Try setting "
+"another port in the settings and restart krfb."
+msgstr ""
+"krfb 서버를 시작할 수 없습니다. 데스크톱 공유를 사용할 수 없습니다. 설정에서 "
+"포트 번호를 바꾸고 다시 시작해 보십시오."
+
+#. i18n: ectx: property (whatsThis), widget (QLabel, titleLabel)
+#. i18n: ectx: property (text), widget (QLabel, titleLabel)
+#. i18n: ectx: property (whatsThis), widget (QLabel, aboutLabel)
+#: mainwindow.cpp:223 mainwindow.cpp:230 ui/mainwidget.ui:83
+#: ui/mainwidget.ui:86 ui/mainwidget.ui:114
+#, kde-format
+msgid "KDE Desktop Sharing"
+msgstr "KDE 데스크톱 공유"
+
+#: mainwindow.cpp:224
+#, kde-format
+msgid ""
+"This field contains the address of your computer and the port number, "
+"separated by a colon.\n"
+"\n"
+"The address is just a hint - you can use any address that can reach your "
+"computer.\n"
+"\n"
+"Desktop Sharing tries to guess your address from your network configuration, "
+"but does not always succeed in doing so.\n"
+"\n"
+"If your computer is behind a firewall it may have a different address or be "
+"unreachable for other computers."
+msgstr ""
+"이 필드에는 쌍점(:)으로 구분된 이 컴퓨터의 주소와 디스플레이 번호가 들어 있습"
+"니다.\n"
+"\n"
+"주소는 참고 목적으로 나타나 있으며, 이 컴퓨터에 접근할 수 있는 임의의 주소를 "
+"사용할 수 있습니다.\n"
+"\n"
+"데스크톱 공유는 네트워크 설정에서 이 컴퓨터의 주소를 추측하지만 항상 성공하지"
+"는 않습니다.\n"
+"\n"
+"방화벽 뒤에 있는 경우라면 다른 주소를 가지고 있거나 다른 컴퓨터에서 접근하지 "
+"못할 수 있습니다."
+
+#: mainwindow.cpp:231
+#, kde-format
+msgid ""
+"Any remote user with normal desktop sharing password will have to be "
+"authenticated.\n"
+"\n"
+"If unattended access is on, and the remote user provides unattended mode "
+"password, desktop sharing access will be granted without explicit "
+"confirmation."
+msgstr ""
+"일반적인 데스크톱 공유 암호를 알고 있는 모든 원격 사용자가 인증됩니다.\n"
+"\n"
+"자동 모드가 켜져 있고 원격 사용자가 자동 모드 암호를 알고 있으면 확인 없이 데"
+"스크톱 접근이 허가됩니다."
+
+#: mainwindow.cpp:249
+#, kde-format
+msgid "Network"
+msgstr "네트워크"
+
+#: mainwindow.cpp:250
+#, kde-format
+msgid "Security"
+msgstr "보안"
+
+#: mainwindow.cpp:251
+#, kde-format
+msgid "Screen capture"
+msgstr "화면 캡처"
+
+#: mainwindow.cpp:256
+#, kde-format
+msgid "To apply framebuffer plugin setting, you need to restart the program."
+msgstr "프레임버퍼 플러그인 설정을 적용하려면 프로그램을 다시 시작해야 합니다."
+
+#: rfbservermanager.cpp:229
+#, kde-format
+msgid "The remote user %1 is now connected."
+msgstr "원격 사용자 %1이(가) 접속했습니다."
+
+#: rfbservermanager.cpp:243
+#, kde-format
+msgid "The remote user %1 disconnected."
+msgstr "원격 사용자 %1이(가) 연결을 끊었습니다."
+
+#: trayicon.cpp:56
+#, kde-format
+msgid "Disconnect"
+msgstr "연결 끊기"
+
+#: trayicon.cpp:62
+#, kde-format
+msgid "Enable Remote Control"
+msgstr "원격 제어 사용"
+
+#: trayicon.cpp:101 trayicon.cpp:133
+#, kde-format
+msgid "Desktop Sharing - disconnected"
+msgstr "데스크톱 공유 - 연결 끊김"
+
+#: trayicon.cpp:117 trayicon.cpp:137
+#, kde-format
+msgid "Desktop Sharing - connected with %1"
+msgstr "데스크톱 공유 - %1와(과) 연결됨"
+
+#: trayicon.cpp:120
+#, kde-format
+msgid "Desktop Sharing - connected"
+msgstr "데스크톱 공유 - 연결됨"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, Framebuffer)
+#: ui/configframebuffer.ui:14
+#, kde-format
+msgid "Framebuffer"
+msgstr "프레임버퍼"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: ui/configframebuffer.ui:22
+#, kde-format
+msgid "Preferred frameb&uffer plugin:"
+msgstr "선호하는 프레임버퍼 플러그인(&U):"
+
+#. i18n: ectx: property (text), widget (QLabel, helpText)
+#: ui/configframebuffer.ui:47
+#, kde-format
+msgid ""
+"<html><head/><body><p>When using x11, <span style=\" font-weight:600;\">xcb</"
+"span> plugin should be preferred, because it is more performant.<br/><span "
+"style=\" font-weight:600;\">qt</span> plugin is a safe fallback, if for some "
+"reason others don't work. But also it is very slow.</p></body></html>"
+msgstr ""
+"<html><head/><body><p>X11을 사용하고 있다면 성능상의 이유로 <span style=\" "
+"font-weight:600;\">xcb</span> 플러그인을 추천합니다.<br/>만약 플러그인이 작동"
+"하지 않는다면 <span style=\" font-weight:600;\">qt</span> 플러그인으로 대체"
+"할 수 있지만 매우 느리게 작동합니다.</p></body></html>"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_allowDesktopControl)
+#: ui/configsecurity.ui:17
+#, kde-format
+msgid "Allow remote connections to control your desktop"
+msgstr "원격 연로 데스크톱을 제어할 수 있도록 하기"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_noWallet)
+#: ui/configsecurity.ui:27
+#, kde-format
+msgid "Do not store passwords using KDE wallet"
+msgstr "KDE 지갑에 암호 저장하지 않음"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_useDefaultPort)
+#: ui/configtcp.ui:26
+#, kde-format
+msgid "Use default port"
+msgstr "기본 포트 사용하기"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: ui/configtcp.ui:50
+#, kde-format
+msgid "Listening port:"
+msgstr "듣는 포트:"
+
+#. i18n: ectx: property (text), widget (QLabel, TextLabel5)
+#: ui/connectionwidget.ui:47
+#, kde-format
+msgid "Attention"
+msgstr "주의"
+
+#. i18n: ectx: property (text), widget (QLabel, mainTextLabel)
+#: ui/connectionwidget.ui:72
+#, kde-format
+msgid ""
+"Somebody is requesting a connection to your computer. Granting this will "
+"allow the remote user to watch your desktop. "
+msgstr ""
+"누군가가 이 컴퓨터로의 연결을 요청하고 있습니다. 요청을 수락하면 원격 사용자"
+"가 데스크톱을 볼 수 있습니다."
+
+#. i18n: ectx: property (text), widget (QLabel, TextLabel1)
+#: ui/connectionwidget.ui:102
+#, kde-format
+msgid "Remote system:"
+msgstr "원격 시스템:"
+
+#. i18n: ectx: property (text), widget (QLabel, remoteHost)
+#: ui/connectionwidget.ui:118
+#, kde-format
+msgid "123.234.123.234"
+msgstr "123.234.123.234"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, cbAllowRemoteControl)
+#: ui/connectionwidget.ui:136
+#, kde-format
+msgid ""
+"If you turn this option on, the remote user can enter keystrokes and use "
+"your mouse pointer. This gives them full control over your computer, so be "
+"careful. When the option is disabled the remote user can only watch your "
+"screen."
+msgstr ""
+"이 설정을 사용하면 원격 사용자는 키를 입력할 수 있고 마우스 포인터를 제어할 "
+"수 있습니다. 이것은 컴퓨터에 대한 전체 제어권을 주는 것이며, 조심하십시오. "
+"이 설정을 사용하지 않으면 사용자는 화면을 볼 수만 있습니다."
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbAllowRemoteControl)
+#: ui/connectionwidget.ui:139
+#, kde-format
+msgid "Allow remote user to &control keyboard and mouse"
+msgstr "원격 사용자가 키보드와 마우스를 제어하도록 허용(&C)"
+
+#. i18n: ectx: property (text), widget (QLabel, aboutLabel)
+#: ui/mainwidget.ui:117
+#, kde-format
+msgid ""
+"KDE Desktop Sharing allows you to grant permission to someone at a remote "
+"location for viewing and possibly controlling your desktop."
+msgstr ""
+"KDE 데스크톱 공유를 통해서 멀리 있는 사람에게 데스크톱을 보여 줄 수 있거나 데"
+"스크톱을 제어하도록 할 수 있습니다."
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, enableSharingCheckBox)
+#: ui/mainwidget.ui:145
+#, kde-format
+msgid "Starts/Stops Remote Desktop Sharing"
+msgstr "원격 데스크톱 공유 사용/사용 안 함"
+
+#. i18n: ectx: property (text), widget (QCheckBox, enableSharingCheckBox)
+#: ui/mainwidget.ui:148
+#, kde-format
+msgid "&Enable Desktop Sharing"
+msgstr "데스크톱 공유 사용(&E)"
+
+#. i18n: ectx: property (title), widget (QGroupBox, detailsGroupBox)
+#: ui/mainwidget.ui:170
+#, kde-format
+msgid "Connection Details"
+msgstr "연결 정보"
+
+#. i18n: ectx: property (text), widget (QLabel, addressLabel)
+#: ui/mainwidget.ui:193
+#, kde-format
+msgid "&Address"
+msgstr "주소(&A)"
+
+#. i18n: ectx: property (whatsThis), widget (QToolButton, addressAboutButton)
+#: ui/mainwidget.ui:214
+#, kde-format
+msgid "More about this address"
+msgstr "이 주소 정보"
+
+#. i18n: ectx: property (text), widget (QToolButton, addressAboutButton)
+#. i18n: ectx: property (text), widget (QToolButton, unattendedAboutButton)
+#: ui/mainwidget.ui:217 ui/mainwidget.ui:397
+#, kde-format
+msgid "About"
+msgstr "정보"
+
+#. i18n: ectx: property (whatsThis), widget (QLabel, addressDisplayLabel)
+#: ui/mainwidget.ui:235
+#, kde-format
+msgid ""
+"Address required by remote users to connect to your desktop. Click about "
+"button on the right for more info."
+msgstr ""
+"데스크톱에 연결할 때 사용할 주소입니다. 오른쪽에 있는 단추를 클릭하면 자세한 "
+"정보를 볼 수 있습니다."
+
+#. i18n: ectx: property (text), widget (QLabel, addressDisplayLabel)
+#: ui/mainwidget.ui:238
+#, kde-format
+msgid "127.0.0.1 : 5900"
+msgstr "127.0.0.1 : 5900"
+
+#. i18n: ectx: property (text), widget (QLabel, passwordLabel)
+#: ui/mainwidget.ui:269
+#, kde-format
+msgid "&Password"
+msgstr "암호(&P)"
+
+#. i18n: ectx: property (whatsThis), widget (QToolButton, passwordEditButton)
+#: ui/mainwidget.ui:290
+#, kde-format
+msgid "Edit/Save Desktop Sharing Password"
+msgstr "데스크톱 공유 암호 편집/저장"
+
+#. i18n: ectx: property (text), widget (QToolButton, passwordEditButton)
+#: ui/mainwidget.ui:293
+#, kde-format
+msgid "Edit"
+msgstr "편집"
+
+#. i18n: ectx: property (whatsThis), widget (QLabel, passwordDisplayLabel)
+#: ui/mainwidget.ui:311
+#, kde-format
+msgid ""
+"Password required by remote users to connect to your desktop. Click the edit "
+"button on the right to change password."
+msgstr ""
+"원격 사용자가 데스크톱에 연결할 때 사용할 암호입니다. 오른쪽에 있는 편집 단추"
+"를 클릭해서 암호를 변경하십시오."
+
+#. i18n: ectx: property (text), widget (QLabel, passwordDisplayLabel)
+#: ui/mainwidget.ui:314
+#, kde-format
+msgid "TemporaryPassword"
+msgstr "TemporaryPassword"
+
+#. i18n: ectx: property (whatsThis), widget (QGroupBox, unattendedGroupBox)
+#. i18n: ectx: property (text), widget (QLabel, unattendedAboutLabel)
+#: ui/mainwidget.ui:340 ui/mainwidget.ui:378
+#, kde-format
+msgid ""
+"Unattended Access allows a remote user with the password to gain control to "
+"your desktop without your explicit confirmation."
+msgstr ""
+"자동 접근 모드를 사용하면 암호를 알고 있는 원격 사용자가 확인 없이 데스크톱"
+"에 접근할 수 있도록 합니다."
+
+#. i18n: ectx: property (title), widget (QGroupBox, unattendedGroupBox)
+#: ui/mainwidget.ui:343
+#, kde-format
+msgid "Unattended Access"
+msgstr "자동 접근 모드"
+
+#. i18n: ectx: property (whatsThis), widget (QLabel, unattendedAboutLabel)
+#: ui/mainwidget.ui:375
+#, kde-format
+msgid ""
+"Unattended Access allows a remote user with the password to gain control to "
+"your desktop without your explicit confirmation. Click \"About\" button on "
+"right to know more."
+msgstr ""
+"자동 접근 모드를 사용하면 암호를 알고 있는 원격 사용자가 확인 없이 데스크톱"
+"에 접근할 수 있도록 합니다. \"정보\" 단추를 클릭하면 더 많은 정보를 알아볼 "
+"수 있습니다."
+
+#. i18n: ectx: property (whatsThis), widget (QToolButton, unattendedAboutButton)
+#: ui/mainwidget.ui:394
+#, kde-format
+msgid "Know more about Unattended Access"
+msgstr "자동 접근 모드에 대하여 더 알아보기"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, enableUnattendedCheckBox)
+#: ui/mainwidget.ui:437
+#, kde-format
+msgid ""
+"Starts/Stops unattended access to your desktop. Click on button on right to "
+"change password, and \"About\" button to know more."
+msgstr ""
+"데스크톱 자동 접근을 활성화/비활성화합니다. 오른쪽에 있는 단추를 클릭해서 암"
+"호를 변경할 수 있으며, \"정보\" 단추를 클릭해서 더 많은 정보를 얻을 수 있습니"
+"다."
+
+#. i18n: ectx: property (text), widget (QCheckBox, enableUnattendedCheckBox)
+#: ui/mainwidget.ui:440
+#, kde-format
+msgid "Enable &Unattended Access"
+msgstr "자동 접근 모드 사용(&U)"
+
+#. i18n: ectx: property (whatsThis), widget (QPushButton, unattendedPasswordButton)
+#: ui/mainwidget.ui:465
+#, kde-format
+msgid "Change password for Unattended Access"
+msgstr "자동 접근 모드 암호 변경"
+
+#. i18n: ectx: property (text), widget (QPushButton, unattendedPasswordButton)
+#: ui/mainwidget.ui:468
+#, kde-format
+msgid "&Change Unattended Password"
+msgstr "자동 접근 암호 변경(&C)"
+
+#~ msgid "Welcome to KDE Desktop Sharing"
+#~ msgstr "KDE 데스크톱 공유에 오신 것을 환영합니다"
+
+#~ msgid ""
+#~ "KDE Desktop Sharing allows you to invite somebody at a remote location to "
+#~ "watch and possibly control your desktop. <a href=\"whatsthis\">More about "
+#~ "invitations...</a>"
+#~ msgstr ""
+#~ "KDE 데스크톱 공유를 통해서 멀리 있는 사람에게 데스크톱을 보여 줄 수 있거"
+#~ "나 데스크톱을 제어하도록 할 수 있습니다. <a href=\"whatsthis\">초대장에 대"
+#~ "해 더 알아보기...</a>"
+
+#~ msgid ""
+#~ "Create a new invitation and display the connection data. Use this option "
+#~ "if you want to invite somebody personally, for example, to give the "
+#~ "connection data over the phone."
+#~ msgstr ""
+#~ "새 초대장을 만들고 연결 데이터를 표시합니다. 누군가를 전화 등 개인적으로 "
+#~ "초대해야 할 때 이 설정을 사용하십시오."
+
+#~ msgid "Create &Personal Invitation..."
+#~ msgstr "개인 초대장 만들기(&P)..."
+
+#~ msgid ""
+#~ "This button will start your email application with a pre-configured text "
+#~ "that explains to the recipient how to connect to your computer. "
+#~ msgstr ""
+#~ "이 단추를 누르면 수신자에게 컴퓨터에 연결하는 방법을 설명하는 이메일 메시"
+#~ "지를 보낼 수 있도록 이메일 프로그램을 엽니다."
+
+#~ msgid "Invite via &Email..."
+#~ msgstr "이메일로 초대(&E)..."
+
+#~ msgid "&Manage Invitations (%1)..."
+#~ msgstr "초대장 관리 (%1)(&M)..."
+
+#~ msgid "5.0"
+#~ msgstr "5.0"
+
+#~ msgid "krfb"
+#~ msgstr "krfb"
+
+#~ msgid ""
+#~ "You have requested to share your desktop with %1. If you proceed, you "
+#~ "will allow the remote user to watch your desktop."
+#~ msgstr ""
+#~ "데스크톱은 %1와(과) 공유하기로 요청하였습니다. 계속 진행하면 원격 사용자"
+#~ "가 데스크톱을 볼 수 있습니다."
+
+#~ msgid "Search in Contacts..."
+#~ msgstr "대화 상대에서 찾기..."
+
+#~ msgid "Confirmation"
+#~ msgstr "확인"
+
+#~ msgid "Failed login attempt from %1: wrong password"
+#~ msgstr "%1에서의 로그인 시도 실패함: 잘못된 암호"
+
+#~ msgid "Refused uninvited connection attempt from %1"
+#~ msgstr "%1의 초대받지 않은 연결 시도 거부함"
+
+#~ msgid "Invitation"
+#~ msgstr "초대"
+
+#~ msgid ""
+#~ "An invitation creates a one-time password that allows the receiver to "
+#~ "connect to your desktop.\n"
+#~ "It is valid for only one successful connection and will expire after an "
+#~ "hour if it has not been used. \n"
+#~ "When somebody connects to your computer a dialog will appear and ask you "
+#~ "for permission.\n"
+#~ " The connection will not be established before you accept it. In this "
+#~ "dialog you can also\n"
+#~ " restrict the other person to view your desktop only, without the ability "
+#~ "to move your\n"
+#~ " mouse pointer or press keys.\n"
+#~ "If you want to create a permanent password for Desktop Sharing, allow "
+#~ "'Uninvited Connections' \n"
+#~ "in the configuration."
+#~ msgstr ""
+#~ "초대장은 받는 사람이 이 데스크톱에 연결하기 위한 일회용 암호를 생성합니"
+#~ "다.\n"
+#~ "한 번의 연결에 대해서만 유효하며 한 시간 동안 사용되지 않으면 무효가 됩니"
+#~ "다.\n"
+#~ "누군가가 컴퓨터에 연결하려고 하면 여러분에게 확인하는 대화 상자가 나타납니"
+#~ "다.\n"
+#~ "이 연결은 수락하지 않는 한 성립되지 않습니다. 이 대화 상자에서는 연결하는 "
+#~ "상대가\n"
+#~ "데스크톱을 단지 보기만 하거나, 포인터나 키 입력을 사용할 수 없도록 할 수 "
+#~ "있습니다.\n"
+#~ "데스크톱 공유의 영구적인 암호를 만들려면, 설정에서 '초대받지 않은 연"
+#~ "결'을\n"
+#~ "허용하십시오."
+
+#~ msgid "Ask before allowing a remote connection."
+#~ msgstr "원격 연결을 허락하기 전에 물어 봅니다."
+
+#~ msgid ""
+#~ "An invitation creates a one-time password that allows the receiver to "
+#~ "connect to your desktop.\n"
+#~ "It is valid for only one successful connection and will expire after an "
+#~ "hour if it has not been used. \n"
+#~ "When somebody connects to your computer a dialog will appear and ask you "
+#~ "for permission.\n"
+#~ "The connection will not be established before you accept it. In this "
+#~ "dialog you can also\n"
+#~ "restrict the other person to view your desktop only, without the ability "
+#~ "to move your\n"
+#~ "mouse pointer or press keys.\n"
+#~ "If you want to create a permanent password for Desktop Sharing, allow "
+#~ "'Uninvited Connections' \n"
+#~ "in the configuration."
+#~ msgstr ""
+#~ "초대장은 받는 사람이 이 데스크톱에 연결하기 위한 일회용 암호를 생성합니"
+#~ "다.\n"
+#~ "한 번의 연결에 대해서만 유효하며 한 시간 동안 사용되지 않으면 무효가 됩니"
+#~ "다.\n"
+#~ "누군가가 컴퓨터에 연결하려고 하면 여러분에게 확인하는 대화 상자가 나타납니"
+#~ "다.\n"
+#~ "이 연결은 수락하지 않는 한 성립되지 않습니다. 이 대화 상자에서는 연결하는 "
+#~ "상대가\n"
+#~ "데스크톱을 단지 보기만 하거나, 포인터나 키 입력을 사용할 수 없도록 할 수 "
+#~ "있습니다.\n"
+#~ "데스크톱 공유의 영구적인 암호를 만들려면, 설정에서 '초대받지 않은 연"
+#~ "결'을\n"
+#~ "허용하십시오."
+
+#~ msgid ""
+#~ "When sending an invitation by email, note that everybody who reads this "
+#~ "email will be able to connect to your computer for one hour, or until the "
+#~ "first successful connection took place, whichever comes first. \n"
+#~ "You should either encrypt the email or at least send it only in a secure "
+#~ "network, but not over the Internet."
+#~ msgstr ""
+#~ "초대장을 이메일로 보내면, 한 시간 동안이나 첫 번째 연결이 성립되기 전까지"
+#~ "는 이 이메일을 읽을 수 있는 모든 사람이 이 컴퓨터에 연결할 수 있다는 사실"
+#~ "을 기억해야 합니다.\n"
+#~ "인터넷이 아닌 보안된 네트워크를 통해서 보내거나 이메일을 암호화시키시기 바"
+#~ "랍니다."
+
+#~ msgid "Send Invitation via Email"
+#~ msgstr "이메일로 초대장 보내기"
+
+#~ msgid "Desktop Sharing (VNC) invitation"
+#~ msgstr "데스크톱 공유 (VNC) 초대장"
+
+#~ msgid ""
+#~ "You have been invited to a VNC session. If you have the KDE Remote "
+#~ "Desktop Connection installed, just click on the link below.\n"
+#~ "\n"
+#~ "%1\n"
+#~ "\n"
+#~ "Otherwise you can use any VNC client with the following parameters:\n"
+#~ "\n"
+#~ "Host: %2:%3\n"
+#~ "Password: %4\n"
+#~ "\n"
+#~ "For security reasons this invitation will expire at %5 (%6)."
+#~ msgstr ""
+#~ "VNC 세션에 초대받았습니다. KDE 원격 데스크톱 연결 프로그램이 설치되어 있다"
+#~ "면, 아래 링크를 클릭하십시오.\n"
+#~ "\n"
+#~ "%1\n"
+#~ "\n"
+#~ "또한 임의의 VNC 클라이언트에서 다음 인자를 사용해서 연결할 수 있습니다:\n"
+#~ "호스트: %2:%3\n"
+#~ "암호: %4\n"
+#~ "\n"
+#~ "보안상의 이유로 이 초대장은 %5(%6)에 만료될 것입니다."
+
+#~ msgid "<qt>Are you sure you want to delete all invitations?</qt>"
+#~ msgstr "<qt>모든 초대장을 삭제하시겠습니까?</qt>"
+
+#~ msgid "Confirm delete Invitations"
+#~ msgstr "초대장 삭제 확인"
+
+#~ msgid "<qt>Are you sure you want to delete this invitation?</qt>"
+#~ msgstr "<qt>이 초대장을 삭제하시겠습니까?</qt>"
+
+#~ msgid "Personal Invitation"
+#~ msgstr "개인 초대장"
+
+#~ msgid ""
+#~ "Desktop Sharing uses the VNC protocol. You can use any VNC client to "
+#~ "connect. \n"
+#~ "In KDE the client is called 'Remote Desktop Connection'. Enter the host "
+#~ "information\n"
+#~ "into the client and it will connect.."
+#~ msgstr ""
+#~ "데스크톱 공유는 VNC 프로토콜을 사용합니다. 임의의 VNC 클라이언트를 사용해"
+#~ "서 연결할 수 있습니다.\n"
+#~ "KDE에서는 '원격 데스크톱 연결' 클라이언트를 사용할 수 있습니다. 클라이언트"
+#~ "에 호스트 정보를\n"
+#~ " 입력하면 연결할 수 있습니다.."
+
+#~ msgid "Ask before accepting connections"
+#~ msgstr "연결을 수락하기 전 물어보기"
+
+#~ msgid "Allow uninvited connections"
+#~ msgstr "초대받지 않은 연결 허용하기"
+
+#~ msgid "Uninvited connections password:"
+#~ msgstr "초대받지 않은 연결 암호:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">KDE Desktop Sharing "
+#~ "allows you to invite somebody at a remote location to watch and possibly "
+#~ "control your desktop. <a href=\"whatsthis\">More about invitations...</"
+#~ "a></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">KDE 데스크톱 공유는 멀"
+#~ "리 있는 사람이 데스크톱을 보고 제어할 수 있도록 초대합니다. <a href="
+#~ "\"whatsthis\">초대장에 관해서 더 알아보기...</a></p></body></html>"
+
+#~ msgid "Creation Time"
+#~ msgstr "만든 시간"
+
+#~ msgid "Expire Time"
+#~ msgstr "만료 시간"
+
+#~ msgid "Create a new personal invitation..."
+#~ msgstr "새 개인 초대장 만들기..."
+
+#~ msgid "Click this button to create a new personal invitation."
+#~ msgstr "이 단추를 누르면 새 개인 초대장을 만듭니다."
+
+#~ msgid "New &Personal Invitation..."
+#~ msgstr "새 개인 초대장(&P)..."
+
+#~ msgid "Send a new invitation via email..."
+#~ msgstr "이메일로 새 초대장 보내기..."
+
+#~ msgid "Click this button to send a new invitation via email."
+#~ msgstr "이 단추를 누르면 새 초대장을 이메일로 보냅니다."
+
+#~ msgid "&New Email Invitation..."
+#~ msgstr "새 이메일 초대장(&N)..."
+
+#~ msgid "Delete all invitations"
+#~ msgstr "모든 초대장 삭제"
+
+#~ msgid "Deletes all open invitations."
+#~ msgstr "모든 열린 초대장을 삭제합니다."
+
+#~ msgid "Delete All"
+#~ msgstr "모두 삭제"
+
+#~ msgid "Delete the selected invitation"
+#~ msgstr "선택한 초대장을 삭제합니다"
+
+#~ msgid ""
+#~ "Delete the selected invitation. The invited person will not be able to "
+#~ "connect using this invitation anymore."
+#~ msgstr ""
+#~ "선택한 초대장을 삭제합니다. 초대받은 사람은 이 초대장으로 더 이상 연결할 "
+#~ "수 없습니다."
+
+#~ msgid "&Delete"
+#~ msgstr "삭제(&D)"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Personal Invitation</span></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Give the information "
+#~ "below to the person that you want to invite (<a href=\"htc\">how to "
+#~ "connect</a>). Note that everybody who gets the password can connect, so "
+#~ "be careful.</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">개인 초대장</span></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">초대하고 싶은 사람에게 "
+#~ "아래의 정보를 주십시오. (<a href=\"htc\">연결하는 방법</a>) 암호를 알고 있"
+#~ "는 사람이면 누구나 들어올 수 있으므로, 주의하십시오.</p></body></html>"
+
+#~ msgid "<b>Host:</b>"
+#~ msgstr "<b>호스트:</b>"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><a href=\"help\">Help</"
+#~ "a></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><a href=\"help\">도움말"
+#~ "</a></p></body></html>"
+
+#~ msgid "<b>Expiration time:</b>"
+#~ msgstr "<b>만료 시간:</b>"

@@ -1,0 +1,1077 @@
+# translation of krfb.po to 
+# Copyright (C) 2004 Free Software Foundation, Inc.
+# Ambalam <tamilpc@ambalam.com>, 2004.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: krfb\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-07-18 00:45+0000\n"
+"PO-Revision-Date: 2004-11-23 02:59-0800\n"
+"Last-Translator: Tamil PC <tamilpc@ambalam.com>\n"
+"Language-Team:  <tamilpc@ambalam.com>\n"
+"Language: ta\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "அ.அகஸ்டின் ராஜ்"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "augustin_raj@hotmail.com"
+
+#: connectiondialog.cpp:39
+#, kde-format
+msgid "New Connection"
+msgstr "புதிய இணைப்பு"
+
+#: connectiondialog.cpp:61
+#, kde-format
+msgid "Accept Connection"
+msgstr "இணைப்பை ஏற்றுக் கொள்"
+
+#: connectiondialog.cpp:65
+#, kde-format
+msgid "Refuse Connection"
+msgstr "இணைப்பை நிராகரி"
+
+#: invitationsrfbclient.cpp:69
+#, fuzzy, kde-format
+#| msgid "Accepted uninvited connection from %1"
+msgid "Accepted connection from %1"
+msgstr "%1லிருந்து ஏற்றுக்கொள்ளப்பட்ட அழைக்கப்படாத இணைப்பு"
+
+#: invitationsrfbclient.cpp:75
+#, kde-format
+msgid "Received connection from %1, on hold (waiting for confirmation)"
+msgstr "%1லிருந்து இணைப்பு கிடைத்துள்ளது, உறுதி செய்வதற்காக காத்திருக்கிறீர்கள்"
+
+#: invitationsrfbserver.cpp:55
+#, kde-format
+msgid "%1@%2 (shared desktop)"
+msgstr "%1@%2 (பணிமேடை பகிர்தல்)"
+
+#. i18n: ectx: label, entry (startMinimized), group (MainWindow)
+#: krfb.kcfg:9
+#, kde-format
+msgid "Start minimized"
+msgstr ""
+
+#. i18n: ectx: label, entry (useDefaultPort), group (TCP)
+#: krfb.kcfg:15
+#, kde-format
+msgid "Use the default port for VNC (5900)"
+msgstr ""
+
+#. i18n: ectx: label, entry (port), group (TCP)
+#: krfb.kcfg:19
+#, kde-format
+msgid "This is the port on which krfb will listen."
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_publishService)
+#. i18n: ectx: label, entry (publishService), group (TCP)
+#: krfb.kcfg:23 ui/configtcp.ui:16
+#, kde-format
+msgid "Announce the service on the local network"
+msgstr ""
+
+#. i18n: ectx: label, entry (noWallet), group (Security)
+#: krfb.kcfg:29
+#, kde-format
+msgid "Do not store passwords in KWallet"
+msgstr ""
+
+#. i18n: ectx: label, entry (allowDesktopControl), group (Security)
+#: krfb.kcfg:33
+#, fuzzy, kde-format
+#| msgid "Allow remote user to &control keyboard and mouse"
+msgid "Allow remote connections to manage the desktop."
+msgstr "விசைப்பலகை மற்றும் சுட்டியைப் கட்டுப்படுத்த தொலைதூர பயனரை அனுமதி"
+
+#. i18n: ectx: label, entry (allowUnattendedAccess), group (Security)
+#: krfb.kcfg:37
+#, kde-format
+msgid "Allow connections without an invitation."
+msgstr ""
+
+#. i18n: ectx: label, entry (unattendedAccessPassword), group (Security)
+#. i18n: ectx: label, entry (desktopSharingPassword), group (Security)
+#: krfb.kcfg:41 krfb.kcfg:44
+#, fuzzy, kde-format
+#| msgid "Accepted uninvited connection from %1"
+msgid "Password for uninvited connections."
+msgstr "%1லிருந்து ஏற்றுக்கொள்ளப்பட்ட அழைக்கப்படாத இணைப்பு"
+
+#. i18n: ectx: label, entry (preferredFrameBufferPlugin), group (FrameBuffer)
+#: krfb.kcfg:49
+#, kde-format
+msgid "Preferred Frame Buffer Plugin"
+msgstr ""
+
+#: main-virtualmonitor.cpp:49
+#, kde-format
+msgid "Creating a Virtual Monitor from %1"
+msgstr ""
+
+#: main-virtualmonitor.cpp:80
+#, kde-format
+msgid "Remote Virtual Monitor"
+msgstr ""
+
+#: main-virtualmonitor.cpp:82
+#, kde-format
+msgid "Offer a Virtual Monitor that can be accessed remotely"
+msgstr ""
+
+#: main-virtualmonitor.cpp:84 main.cpp:98
+#, kde-format
+msgid ""
+"(c) 2009-2010, Collabora Ltd.\n"
+"(c) 2007, Alessandro Praduroux\n"
+"(c) 2001-2003, Tim Jansen\n"
+"(c) 2001, Johannes E. Schindelin\n"
+"(c) 2000-2001, Const Kaplinsky\n"
+"(c) 2000, Tridia Corporation\n"
+"(c) 1999, AT&T Laboratories Boston\n"
+msgstr ""
+
+#: main-virtualmonitor.cpp:91
+#, kde-format
+msgid "Virtual Monitor implementation"
+msgstr ""
+
+#: main-virtualmonitor.cpp:92 main.cpp:108
+#, kde-format
+msgid "George Kiagiadakis"
+msgstr ""
+
+#: main-virtualmonitor.cpp:93 main.cpp:111
+#, kde-format
+msgid "Alessandro Praduroux"
+msgstr ""
+
+#: main-virtualmonitor.cpp:93 main.cpp:111
+#, kde-format
+msgid "KDE4 porting"
+msgstr ""
+
+#: main-virtualmonitor.cpp:94 main.cpp:112
+#, kde-format
+msgid "Tim Jansen"
+msgstr ""
+
+#: main-virtualmonitor.cpp:94 main.cpp:112
+#, kde-format
+msgid "Original author"
+msgstr ""
+
+#: main-virtualmonitor.cpp:95 main.cpp:113
+#, kde-format
+msgid "Johannes E. Schindelin"
+msgstr ""
+
+#: main-virtualmonitor.cpp:96 main.cpp:114
+#, kde-format
+msgid "libvncserver"
+msgstr "libvncserver"
+
+#: main-virtualmonitor.cpp:97 main.cpp:115
+#, kde-format
+msgid "Const Kaplinsky"
+msgstr ""
+
+#: main-virtualmonitor.cpp:98 main.cpp:116
+#, kde-format
+msgid "TightVNC encoder"
+msgstr "TightVNC குறியிடப்பட்டது"
+
+#: main-virtualmonitor.cpp:99 main.cpp:117
+#, kde-format
+msgid "Tridia Corporation"
+msgstr ""
+
+#: main-virtualmonitor.cpp:100 main.cpp:118
+#, kde-format
+msgid "ZLib encoder"
+msgstr "ZLib  குறியிடப்பட்டது"
+
+#: main-virtualmonitor.cpp:101 main.cpp:119
+#, kde-format
+msgid "AT&T Laboratories Boston"
+msgstr ""
+
+#: main-virtualmonitor.cpp:102 main.cpp:120
+#, kde-format
+msgid "original VNC encoders and protocol design"
+msgstr "மூல VNC குறியாக்கி மற்றும் நெறிமுறை வரி வடிவம்"
+
+#: main-virtualmonitor.cpp:108
+#, kde-format
+msgid "Logical resolution of the new monitor"
+msgstr ""
+
+#: main-virtualmonitor.cpp:108
+#, kde-format
+msgid "resolution"
+msgstr ""
+
+#: main-virtualmonitor.cpp:110
+#, kde-format
+msgid "Name of the monitor"
+msgstr ""
+
+#: main-virtualmonitor.cpp:110
+#, kde-format
+msgid "name"
+msgstr ""
+
+#: main-virtualmonitor.cpp:112
+#, fuzzy, kde-format
+#| msgid "Accepted uninvited connection from %1"
+msgid "Password for the client to connect to it"
+msgstr "%1லிருந்து ஏற்றுக்கொள்ளப்பட்ட அழைக்கப்படாத இணைப்பு"
+
+#: main-virtualmonitor.cpp:112
+#, fuzzy, kde-format
+#| msgid "<b>Password:</b>"
+msgid "password"
+msgstr "<b>கடவுச்சொல்:</b>"
+
+#: main-virtualmonitor.cpp:114
+#, kde-format
+msgid "The device-pixel-ratio of the device, the scaling factor"
+msgstr ""
+
+#: main-virtualmonitor.cpp:114
+#, kde-format
+msgid "dpr"
+msgstr ""
+
+#: main-virtualmonitor.cpp:116
+#, kde-format
+msgid "The port we will be listening to"
+msgstr ""
+
+#: main-virtualmonitor.cpp:116
+#, kde-format
+msgid "number"
+msgstr ""
+
+#: main.cpp:49
+#, kde-format
+msgid ""
+"Your X11 Server does not support the required XTest extension version 2.2. "
+"Sharing your desktop is not possible."
+msgstr ""
+"உங்கள் X11 சேவையகம் X சோதனையின் நீட்சி பதிப்பு 2.2  விற்கு ஆதரவு தரவில்லை. உங்கள் "
+"பணிமேடையை பகிர்ந்து கொள்ள இயலாது."
+
+#: main.cpp:51 main.cpp:150
+#, kde-format
+msgid "Desktop Sharing Error"
+msgstr "மேல்மேசை பகிர்தலில் தவறு"
+
+#: main.cpp:94
+#, kde-format
+msgid "Desktop Sharing"
+msgstr "பணிமேடை பகிர்ந்துக் கொள்ளப்படுகிறது"
+
+#: main.cpp:96
+#, fuzzy, kde-format
+#| msgid "VNC-compatible server to share KDE desktops"
+msgid "VNC-compatible server to share desktops"
+msgstr "கேடியீ பணிமேடையுடன் பகிர்ந்து கொள்ள VNC சேவையகம் பொருந்தும்"
+
+#: main.cpp:105
+#, kde-format
+msgid "George Goldberg"
+msgstr ""
+
+#: main.cpp:106
+#, kde-format
+msgid "Telepathy tubes support"
+msgstr ""
+
+#: main.cpp:126
+#, kde-format
+msgid "Do not show the invitations management dialog at startup"
+msgstr ""
+
+#: main.cpp:148
+#, kde-format
+msgid ""
+"Desktop Sharing is not running under an X11 Server or Wayland.\n"
+"Other display servers are currently not supported."
+msgstr ""
+
+#: mainwindow.cpp:52
+#, kde-format
+msgid "Storing passwords in config file is insecure!"
+msgstr ""
+
+#: mainwindow.cpp:189
+#, kde-format
+msgid "Enter a new password for Unattended Access"
+msgstr ""
+
+#: mainwindow.cpp:200
+#, kde-format
+msgid ""
+"Failed to start the krfb server. Desktop sharing will not work. Try setting "
+"another port in the settings and restart krfb."
+msgstr ""
+
+#. i18n: ectx: property (whatsThis), widget (QLabel, titleLabel)
+#. i18n: ectx: property (text), widget (QLabel, titleLabel)
+#. i18n: ectx: property (whatsThis), widget (QLabel, aboutLabel)
+#: mainwindow.cpp:223 mainwindow.cpp:230 ui/mainwidget.ui:83
+#: ui/mainwidget.ui:86 ui/mainwidget.ui:114
+#, fuzzy, kde-format
+#| msgid "Desktop Sharing"
+msgid "KDE Desktop Sharing"
+msgstr "பணிமேடை பகிர்ந்துக் கொள்ளப்படுகிறது"
+
+#: mainwindow.cpp:224
+#, fuzzy, kde-format
+msgid ""
+"This field contains the address of your computer and the port number, "
+"separated by a colon.\n"
+"\n"
+"The address is just a hint - you can use any address that can reach your "
+"computer.\n"
+"\n"
+"Desktop Sharing tries to guess your address from your network configuration, "
+"but does not always succeed in doing so.\n"
+"\n"
+"If your computer is behind a firewall it may have a different address or be "
+"unreachable for other computers."
+msgstr ""
+"(<a href=\"whatsthis: இந்த புலம் தங்களது கணினி முகவரி மற்றும் அதனது எண் வெளியீடுகள் "
+"அரைப்புள்ளிகளால் பிரிக்கப்பட்டுள்ளன. முகவரி ஒரு குறிப்பே - ஆகையால் ஏதேனும் ஒரு கணினி "
+"முகவரியைப் பயன்படுத்தவும். பணிமேடை தங்களது உள்ளமை பிணையத்திலிருந்து பகுத்துக் "
+"கொள்கிறது, ஆனாலும் எப்பொழுதும் இவைகள் வெற்றிப் பெறும் என்பதை அறுதியிட இயலாது. தங்களது "
+"கணினி தீச்சுவருக்கு பின்னால் அமைந்திருந்தால் வித்தியாசமான முகவரியைக் கொண்டிருக்கலாம் "
+"அல்லது கணினி சேர இயலாமலிருந்திருக்கலாம்.\">உதவி</a>)"
+
+#: mainwindow.cpp:231
+#, kde-format
+msgid ""
+"Any remote user with normal desktop sharing password will have to be "
+"authenticated.\n"
+"\n"
+"If unattended access is on, and the remote user provides unattended mode "
+"password, desktop sharing access will be granted without explicit "
+"confirmation."
+msgstr ""
+
+#: mainwindow.cpp:249
+#, kde-format
+msgid "Network"
+msgstr ""
+
+#: mainwindow.cpp:250
+#, kde-format
+msgid "Security"
+msgstr ""
+
+#: mainwindow.cpp:251
+#, kde-format
+msgid "Screen capture"
+msgstr ""
+
+#: mainwindow.cpp:256
+#, kde-format
+msgid "To apply framebuffer plugin setting, you need to restart the program."
+msgstr ""
+
+#: rfbservermanager.cpp:229
+#, fuzzy, kde-format
+#| msgid "The remote user has closed the connection."
+msgid "The remote user %1 is now connected."
+msgstr "தொலைதூர பயனர் இணைப்பை மூடிவிட்டார்"
+
+#: rfbservermanager.cpp:243
+#, fuzzy, kde-format
+#| msgid "The remote user has closed the connection."
+msgid "The remote user %1 disconnected."
+msgstr "தொலைதூர பயனர் இணைப்பை மூடிவிட்டார்"
+
+#: trayicon.cpp:56
+#, kde-format
+msgid "Disconnect"
+msgstr ""
+
+#: trayicon.cpp:62
+#, kde-format
+msgid "Enable Remote Control"
+msgstr "தொலைதூர கட்டுப்பாட்டை செயலாக்கவும்"
+
+#: trayicon.cpp:101 trayicon.cpp:133
+#, kde-format
+msgid "Desktop Sharing - disconnected"
+msgstr "பணிமேடை பகிர்தல் - இணைப்பு துண்டிக்கப்படுகிறது"
+
+#: trayicon.cpp:117 trayicon.cpp:137
+#, kde-format
+msgid "Desktop Sharing - connected with %1"
+msgstr "பணிமேடை பகிர்தல் - %1டன் இணைக்கப்படுகிறது"
+
+#: trayicon.cpp:120
+#, fuzzy, kde-format
+#| msgid "Desktop Sharing - disconnected"
+msgid "Desktop Sharing - connected"
+msgstr "பணிமேடை பகிர்தல் - இணைப்பு துண்டிக்கப்படுகிறது"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, Framebuffer)
+#: ui/configframebuffer.ui:14
+#, kde-format
+msgid "Framebuffer"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: ui/configframebuffer.ui:22
+#, kde-format
+msgid "Preferred frameb&uffer plugin:"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, helpText)
+#: ui/configframebuffer.ui:47
+#, kde-format
+msgid ""
+"<html><head/><body><p>When using x11, <span style=\" font-weight:600;\">xcb</"
+"span> plugin should be preferred, because it is more performant.<br/><span "
+"style=\" font-weight:600;\">qt</span> plugin is a safe fallback, if for some "
+"reason others don't work. But also it is very slow.</p></body></html>"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_allowDesktopControl)
+#: ui/configsecurity.ui:17
+#, fuzzy, kde-format
+#| msgid "Allow remote user to &control keyboard and mouse"
+msgid "Allow remote connections to control your desktop"
+msgstr "விசைப்பலகை மற்றும் சுட்டியைப் கட்டுப்படுத்த தொலைதூர பயனரை அனுமதி"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_noWallet)
+#: ui/configsecurity.ui:27
+#, kde-format
+msgid "Do not store passwords using KDE wallet"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_useDefaultPort)
+#: ui/configtcp.ui:26
+#, kde-format
+msgid "Use default port"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: ui/configtcp.ui:50
+#, kde-format
+msgid "Listening port:"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, TextLabel5)
+#: ui/connectionwidget.ui:47
+#, kde-format
+msgid "Attention"
+msgstr "கவனம்"
+
+#. i18n: ectx: property (text), widget (QLabel, mainTextLabel)
+#: ui/connectionwidget.ui:72
+#, kde-format
+msgid ""
+"Somebody is requesting a connection to your computer. Granting this will "
+"allow the remote user to watch your desktop. "
+msgstr ""
+"உங்கள் கணினியின் இணைப்பிற்கு யாரோ ஒருவர் வேண்டுகிறார். நீங்கள் அனுமதி தந்தால் அந்த "
+"ஒருவருக்கு உங்கள் பணிமேடை பார்க்க அனுமதி வழங்கப்படும்"
+
+#. i18n: ectx: property (text), widget (QLabel, TextLabel1)
+#: ui/connectionwidget.ui:102
+#, kde-format
+msgid "Remote system:"
+msgstr "தொலைதூர அமைப்பு:"
+
+#. i18n: ectx: property (text), widget (QLabel, remoteHost)
+#: ui/connectionwidget.ui:118
+#, kde-format
+msgid "123.234.123.234"
+msgstr "123.234.123.234"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, cbAllowRemoteControl)
+#: ui/connectionwidget.ui:136
+#, kde-format
+msgid ""
+"If you turn this option on, the remote user can enter keystrokes and use "
+"your mouse pointer. This gives them full control over your computer, so be "
+"careful. When the option is disabled the remote user can only watch your "
+"screen."
+msgstr ""
+"இந்த விருப்பத்தை தேர்வு செய்தால், தொலை பயன்படுத்தி உங்கள் விசை மற்றும் சுட்டி குறியை "
+"உபயோகப்படுத்தலாம். இது முழு அனுமதியையும் தந்துவிடும் ஆகையால் கவனம். அதை நீங்கள் தேர்வு "
+"செய்யவில்லை என்றால் தொலை பயனர் உங்கள் திரையை பார்க்க மட்டும் அனுமதி தரும்."
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbAllowRemoteControl)
+#: ui/connectionwidget.ui:139
+#, kde-format
+msgid "Allow remote user to &control keyboard and mouse"
+msgstr "விசைப்பலகை மற்றும் சுட்டியைப் கட்டுப்படுத்த தொலைதூர பயனரை அனுமதி"
+
+#. i18n: ectx: property (text), widget (QLabel, aboutLabel)
+#: ui/mainwidget.ui:117
+#, kde-format
+msgid ""
+"KDE Desktop Sharing allows you to grant permission to someone at a remote "
+"location for viewing and possibly controlling your desktop."
+msgstr ""
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, enableSharingCheckBox)
+#: ui/mainwidget.ui:145
+#, fuzzy, kde-format
+#| msgid "Manage Invitations - Desktop Sharing"
+msgid "Starts/Stops Remote Desktop Sharing"
+msgstr "அழைப்பிதழ்களைச் சமாளி - பணிமேடை பகிர்ந்துக் கொள்ளப்படுகிறது"
+
+#. i18n: ectx: property (text), widget (QCheckBox, enableSharingCheckBox)
+#: ui/mainwidget.ui:148
+#, fuzzy, kde-format
+#| msgid "Desktop Sharing"
+msgid "&Enable Desktop Sharing"
+msgstr "பணிமேடை பகிர்ந்துக் கொள்ளப்படுகிறது"
+
+#. i18n: ectx: property (title), widget (QGroupBox, detailsGroupBox)
+#: ui/mainwidget.ui:170
+#, fuzzy, kde-format
+#| msgid "Connection side image"
+msgid "Connection Details"
+msgstr "இணைப்பின் பக்க படம்"
+
+#. i18n: ectx: property (text), widget (QLabel, addressLabel)
+#: ui/mainwidget.ui:193
+#, kde-format
+msgid "&Address"
+msgstr ""
+
+#. i18n: ectx: property (whatsThis), widget (QToolButton, addressAboutButton)
+#: ui/mainwidget.ui:214
+#, kde-format
+msgid "More about this address"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QToolButton, addressAboutButton)
+#. i18n: ectx: property (text), widget (QToolButton, unattendedAboutButton)
+#: ui/mainwidget.ui:217 ui/mainwidget.ui:397
+#, kde-format
+msgid "About"
+msgstr ""
+
+#. i18n: ectx: property (whatsThis), widget (QLabel, addressDisplayLabel)
+#: ui/mainwidget.ui:235
+#, kde-format
+msgid ""
+"Address required by remote users to connect to your desktop. Click about "
+"button on the right for more info."
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, addressDisplayLabel)
+#: ui/mainwidget.ui:238
+#, kde-format
+msgid "127.0.0.1 : 5900"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, passwordLabel)
+#: ui/mainwidget.ui:269
+#, fuzzy, kde-format
+#| msgid "<b>Password:</b>"
+msgid "&Password"
+msgstr "<b>கடவுச்சொல்:</b>"
+
+#. i18n: ectx: property (whatsThis), widget (QToolButton, passwordEditButton)
+#: ui/mainwidget.ui:290
+#, fuzzy, kde-format
+#| msgid "Desktop Sharing Error"
+msgid "Edit/Save Desktop Sharing Password"
+msgstr "மேல்மேசை பகிர்தலில் தவறு"
+
+#. i18n: ectx: property (text), widget (QToolButton, passwordEditButton)
+#: ui/mainwidget.ui:293
+#, kde-format
+msgid "Edit"
+msgstr ""
+
+#. i18n: ectx: property (whatsThis), widget (QLabel, passwordDisplayLabel)
+#: ui/mainwidget.ui:311
+#, kde-format
+msgid ""
+"Password required by remote users to connect to your desktop. Click the edit "
+"button on the right to change password."
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, passwordDisplayLabel)
+#: ui/mainwidget.ui:314
+#, kde-format
+msgid "TemporaryPassword"
+msgstr ""
+
+#. i18n: ectx: property (whatsThis), widget (QGroupBox, unattendedGroupBox)
+#. i18n: ectx: property (text), widget (QLabel, unattendedAboutLabel)
+#: ui/mainwidget.ui:340 ui/mainwidget.ui:378
+#, kde-format
+msgid ""
+"Unattended Access allows a remote user with the password to gain control to "
+"your desktop without your explicit confirmation."
+msgstr ""
+
+#. i18n: ectx: property (title), widget (QGroupBox, unattendedGroupBox)
+#: ui/mainwidget.ui:343
+#, kde-format
+msgid "Unattended Access"
+msgstr ""
+
+#. i18n: ectx: property (whatsThis), widget (QLabel, unattendedAboutLabel)
+#: ui/mainwidget.ui:375
+#, kde-format
+msgid ""
+"Unattended Access allows a remote user with the password to gain control to "
+"your desktop without your explicit confirmation. Click \"About\" button on "
+"right to know more."
+msgstr ""
+
+#. i18n: ectx: property (whatsThis), widget (QToolButton, unattendedAboutButton)
+#: ui/mainwidget.ui:394
+#, kde-format
+msgid "Know more about Unattended Access"
+msgstr ""
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, enableUnattendedCheckBox)
+#: ui/mainwidget.ui:437
+#, kde-format
+msgid ""
+"Starts/Stops unattended access to your desktop. Click on button on right to "
+"change password, and \"About\" button to know more."
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, enableUnattendedCheckBox)
+#: ui/mainwidget.ui:440
+#, kde-format
+msgid "Enable &Unattended Access"
+msgstr ""
+
+#. i18n: ectx: property (whatsThis), widget (QPushButton, unattendedPasswordButton)
+#: ui/mainwidget.ui:465
+#, kde-format
+msgid "Change password for Unattended Access"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QPushButton, unattendedPasswordButton)
+#: ui/mainwidget.ui:468
+#, kde-format
+msgid "&Change Unattended Password"
+msgstr ""
+
+#~ msgid "Welcome to KDE Desktop Sharing"
+#~ msgstr "கேடியீ பணிமேடையை பகிர்ந்துக் கொள்ள வரவேற்கிறோம்"
+
+#~ msgid ""
+#~ "Create a new invitation and display the connection data. Use this option "
+#~ "if you want to invite somebody personally, for example, to give the "
+#~ "connection data over the phone."
+#~ msgstr ""
+#~ "ஒரு புதியத் தகவலை உருவாக்கி, தகவல் இணைப்பைக் காட்டவும். சிலரைத் தனிப்பட்ட முறையில் "
+#~ "அழைக்க வேண்டுமானால் இந்த தேர்வைப் பயன்படுத்தவும். உதாரணமாக தொலைபேசி மூலம் தகவலுக்கான "
+#~ "இணைப்புக் கொடுக்க வேண்டும்."
+
+#~ msgid "Create &Personal Invitation..."
+#~ msgstr "தனிப்பட்ட அழைப்பிதழை உருவாக்கவும்..."
+
+#~ msgid ""
+#~ "This button will start your email application with a pre-configured text "
+#~ "that explains to the recipient how to connect to your computer. "
+#~ msgstr ""
+#~ "இந்த பொத்தான் உங்கள் மின்னஞ்சல் உள்ள முன் அமைத்த உரையை துவக்கி விடும். இது பெறுபவருக்கு "
+#~ "எப்படி உங்கள் கணினியுடன் இணைப்பது என்று விவரங்களை தரும்."
+
+#~ msgid "Invite via &Email..."
+#~ msgstr "மின்னஞ்சல் வழியாக அழை"
+
+#~ msgid "&Manage Invitations (%1)..."
+#~ msgstr "அழைப்பிதழ்களை மேலாண்மை செய்(%1)..."
+
+#, fuzzy
+#~| msgid ""
+#~| "Somebody is requesting a connection to your computer. Granting this will "
+#~| "allow the remote user to watch your desktop. "
+#~ msgid ""
+#~ "You have requested to share your desktop with %1. If you proceed, you "
+#~ "will allow the remote user to watch your desktop."
+#~ msgstr ""
+#~ "உங்கள் கணினியின் இணைப்பிற்கு யாரோ ஒருவர் வேண்டுகிறார். நீங்கள் அனுமதி தந்தால் அந்த "
+#~ "ஒருவருக்கு உங்கள் பணிமேடை பார்க்க அனுமதி வழங்கப்படும்"
+
+#, fuzzy
+#~| msgid "Invitation"
+#~ msgid "Confirmation"
+#~ msgstr "அழைப்பிதழ்"
+
+#~ msgid "Failed login attempt from %1: wrong password"
+#~ msgstr "%1லிருந்து உள்நுழை முயற்சி தோல்வியுற்றது: தவறான கடவுச்சொல்"
+
+#, fuzzy
+#~| msgid "Accepted uninvited connection from %1"
+#~ msgid "Refused uninvited connection attempt from %1"
+#~ msgstr "%1லிருந்து ஏற்றுக்கொள்ளப்பட்ட அழைக்கப்படாத இணைப்பு"
+
+#~ msgid "Invitation"
+#~ msgstr "அழைப்பிதழ்"
+
+#, fuzzy
+#~ msgid ""
+#~ "An invitation creates a one-time password that allows the receiver to "
+#~ "connect to your desktop.\n"
+#~ "It is valid for only one successful connection and will expire after an "
+#~ "hour if it has not been used. \n"
+#~ "When somebody connects to your computer a dialog will appear and ask you "
+#~ "for permission.\n"
+#~ " The connection will not be established before you accept it. In this "
+#~ "dialog you can also\n"
+#~ " restrict the other person to view your desktop only, without the ability "
+#~ "to move your\n"
+#~ " mouse pointer or press keys.\n"
+#~ "If you want to create a permanent password for Desktop Sharing, allow "
+#~ "'Uninvited Connections' \n"
+#~ "in the configuration."
+#~ msgstr ""
+#~ "KDE மேல்மேசை பகிர்தல் இது தொலைதூரத்தில் உள்ளவரை அழைத்து உங்கள் பணிமேடையை பார்க்க "
+#~ "மற்றும் கட்டுப்படுத்த செய்கிறது.\n"
+#~ "<a href=\"whatsthis:<p>இந்த அழைப்பு பெறுபவருக்கு ஒரு அனுமதி கடவுச்சொல்லை தந்து "
+#~ "பணிமேடையுடன் இணைக்கிறது. இது ஒரு இணைப்புக்கு வெற்றிகரமாக செயல்படும், இதை யாரும் "
+#~ "உபயோகிக்கவில்லை என்றால் ஒரு மணி நேரத்திற்கு தானே அழிந்து விடும். யாராவது உங்கள் "
+#~ "கணினியுடன் இணைத்தால் உங்கள் அனுமதி கேட்டு ஒரு அறிவிப்பு தோன்றும். நீங்கள் ஒத்துகொள்ளும் "
+#~ "வரை இந்த இணைப்பு செல்லாது. அந்த உரையாடல் பெட்டியில் நீங்க்ள் அடுத்தவரை உங்கள் பணிமேடை "
+#~ "உள்ளதை பார்க்க மட்டும் அனுமதி கொடுக்கும் போல் மாற்றலாம், சுட்டியில் குறியை அல்லது விசை "
+#~ "அழுத்தமில்லாமல் இதை மாற்றலாம்.</p><p>உங்கள் பணிமேடை பகிர்வுக்கு நிரந்தர கடவுச்சொல் "
+#~ "வேண்டும் என்றால், 'Uninvited Connections' .\">மேலும் விவரங்கள்...</a>"
+
+#, fuzzy
+#~| msgid "Accepted uninvited connection from %1"
+#~ msgid "Ask before allowing a remote connection."
+#~ msgstr "%1லிருந்து ஏற்றுக்கொள்ளப்பட்ட அழைக்கப்படாத இணைப்பு"
+
+#, fuzzy
+#~ msgid ""
+#~ "An invitation creates a one-time password that allows the receiver to "
+#~ "connect to your desktop.\n"
+#~ "It is valid for only one successful connection and will expire after an "
+#~ "hour if it has not been used. \n"
+#~ "When somebody connects to your computer a dialog will appear and ask you "
+#~ "for permission.\n"
+#~ "The connection will not be established before you accept it. In this "
+#~ "dialog you can also\n"
+#~ "restrict the other person to view your desktop only, without the ability "
+#~ "to move your\n"
+#~ "mouse pointer or press keys.\n"
+#~ "If you want to create a permanent password for Desktop Sharing, allow "
+#~ "'Uninvited Connections' \n"
+#~ "in the configuration."
+#~ msgstr ""
+#~ "KDE மேல்மேசை பகிர்தல் இது தொலைதூரத்தில் உள்ளவரை அழைத்து உங்கள் பணிமேடையை பார்க்க "
+#~ "மற்றும் கட்டுப்படுத்த செய்கிறது.\n"
+#~ "<a href=\"whatsthis:<p>இந்த அழைப்பு பெறுபவருக்கு ஒரு அனுமதி கடவுச்சொல்லை தந்து "
+#~ "பணிமேடையுடன் இணைக்கிறது. இது ஒரு இணைப்புக்கு வெற்றிகரமாக செயல்படும், இதை யாரும் "
+#~ "உபயோகிக்கவில்லை என்றால் ஒரு மணி நேரத்திற்கு தானே அழிந்து விடும். யாராவது உங்கள் "
+#~ "கணினியுடன் இணைத்தால் உங்கள் அனுமதி கேட்டு ஒரு அறிவிப்பு தோன்றும். நீங்கள் ஒத்துகொள்ளும் "
+#~ "வரை இந்த இணைப்பு செல்லாது. அந்த உரையாடல் பெட்டியில் நீங்க்ள் அடுத்தவரை உங்கள் பணிமேடை "
+#~ "உள்ளதை பார்க்க மட்டும் அனுமதி கொடுக்கும் போல் மாற்றலாம், சுட்டியில் குறியை அல்லது விசை "
+#~ "அழுத்தமில்லாமல் இதை மாற்றலாம்.</p><p>உங்கள் பணிமேடை பகிர்வுக்கு நிரந்தர கடவுச்சொல் "
+#~ "வேண்டும் என்றால், 'Uninvited Connections' .\">மேலும் விவரங்கள்...</a>"
+
+#~ msgid ""
+#~ "When sending an invitation by email, note that everybody who reads this "
+#~ "email will be able to connect to your computer for one hour, or until the "
+#~ "first successful connection took place, whichever comes first. \n"
+#~ "You should either encrypt the email or at least send it only in a secure "
+#~ "network, but not over the Internet."
+#~ msgstr ""
+#~ "மின்னஞ்சல் மூலம் அழைப்பிதழ் அனுப்புகையில், அம்மின்னஞ்லோடு எவரேனும் உரையாடும் பொழுது "
+#~ "கணினியோடு ஒரு மணி நேரம் இணைக்கப்படலாம் அல்லது வேறேனும் இணைப்பு நிகழலாம்.\n"
+#~ "மின்னஞ்சலை மறையாக்கவேண்டும் அல்லது வலைத்தளத்தில் இல்லாமல் பாதுகாப்பு வலைமனையில் மட்டும் "
+#~ "அனுப்பவேண்டும்"
+
+#~ msgid "Send Invitation via Email"
+#~ msgstr "மின் அஞ்சல் வழியாக அழைப்பிதழை அனுப்பவும்"
+
+#~ msgid "Desktop Sharing (VNC) invitation"
+#~ msgstr "பணிமேடை பகிர்தல் (VNC)அழைப்பிதழ்"
+
+#, fuzzy
+#~| msgid ""
+#~| "You have been invited to a VNC session. If you have the KDE Remote "
+#~| "Desktop Connection installed, just click on the link below.\n"
+#~| "\n"
+#~| "vnc://invitation:%1@%2:%3\n"
+#~| "\n"
+#~| "Otherwise you can use any VNC client with the following parameters:\n"
+#~| "\n"
+#~| "Host: %4:%5\n"
+#~| "Password: %6\n"
+#~| "\n"
+#~| "Alternatively you can click on the link below to start the VNC session\n"
+#~| "within your web browser.\n"
+#~| "\n"
+#~| "\thttp://%7:%8/\n"
+#~| "\n"
+#~| "For security reasons this invitation will expire at %9."
+#~ msgid ""
+#~ "You have been invited to a VNC session. If you have the KDE Remote "
+#~ "Desktop Connection installed, just click on the link below.\n"
+#~ "\n"
+#~ "%1\n"
+#~ "\n"
+#~ "Otherwise you can use any VNC client with the following parameters:\n"
+#~ "\n"
+#~ "Host: %2:%3\n"
+#~ "Password: %4\n"
+#~ "\n"
+#~ "For security reasons this invitation will expire at %5 (%6)."
+#~ msgstr ""
+#~ " VNC தளத்திற்கு வரவேற்கப்படுகிறீர்கள். தானியங்கி KDE பணிமேடை இணைப்பு "
+#~ "நிறுவப்பட்டிருந்தால், கீழுள்ள தொகுப்பை சொடுக்கவும்.\n"
+#~ "\n"
+#~ "vnc://அழைப்பிதழ்:%1@%2:%3\n"
+#~ "\n"
+#~ "இல்லையேல் தாங்கள் பின்வரும் சொற்களை VNC கிளைஞன்களில் பயன்படுத்தவும்:\n"
+#~ "\n"
+#~ "புரவன்: %4:%5\n"
+#~ "கடவுச்சொல்: %6\n"
+#~ "\n"
+#~ "மாற்றி மாற்றி VNC தளத்தில் உள்ள பின்வருவனவற்றை சொடுக்கவும்\n"
+#~ "தங்களது இணைய உலாவிற்குள்.\n"
+#~ "\n"
+#~ "\thttp://%7:%8/\n"
+#~ "\n"
+#~ "அழைப்பிதழ் காப்புக் காரணத்தின் மறைவு %9."
+
+#, fuzzy
+#~| msgid "Delete all invitations"
+#~ msgid "Confirm delete Invitations"
+#~ msgstr "எல்லா அழைப்பிதழ்களையும் நீக்கவும்"
+
+#~ msgid "Personal Invitation"
+#~ msgstr "தனிப்பட்ட அழைப்பிதழ் "
+
+#, fuzzy
+#~ msgid ""
+#~ "Desktop Sharing uses the VNC protocol. You can use any VNC client to "
+#~ "connect. \n"
+#~ "In KDE the client is called 'Remote Desktop Connection'. Enter the host "
+#~ "information\n"
+#~ "into the client and it will connect.."
+#~ msgstr ""
+#~ "<h2>தனிப்பட்ட அழைப்பிதழ்</h2>\n"
+#~ "கீழேயுள்ள விவரங்களை அழைப்பிதழ் தருபவருக்கு அனுப்ப வேண்டும்(<a href=\"என்ன இது "
+#~ "பணிமேடை பகிர்வு VNC நெறிமுறை உபயோகிக்கிறது. நீங்கள் VNC கிளையன் உபயோகித்து "
+#~ "இணைத்து கொள்ளலாம். KDE கிளையன் 'தொலை பணிமேடை இணைப்பு' என்றும் அழைக்கலாம். "
+#~ "கிளையனுக்கு புரவலன் தகவலை அனுப்பினால் அதன் பின் இணைப்பு கிடைத்துவிடும்.\">எப்படி "
+#~ "இணைப்பது</a>). கவனம், இதனால் கடவுச்சொல் தெரிந்த அனைவரும் இணைக்கப்படலாம்."
+
+#, fuzzy
+#~| msgid "Accepted uninvited connection from %1"
+#~ msgid "Ask before accepting connections"
+#~ msgstr "%1லிருந்து ஏற்றுக்கொள்ளப்பட்ட அழைக்கப்படாத இணைப்பு"
+
+#, fuzzy
+#~| msgid "Accepted uninvited connection from %1"
+#~ msgid "Allow uninvited connections"
+#~ msgstr "%1லிருந்து ஏற்றுக்கொள்ளப்பட்ட அழைக்கப்படாத இணைப்பு"
+
+#, fuzzy
+#~| msgid "Accepted uninvited connection from %1"
+#~ msgid "Uninvited connections password:"
+#~ msgstr "%1லிருந்து ஏற்றுக்கொள்ளப்பட்ட அழைக்கப்படாத இணைப்பு"
+
+#, fuzzy
+#~| msgid "Created"
+#~ msgid "Creation Time"
+#~ msgstr "உருவாக்கப்பட்டது"
+
+#~ msgid "Create a new personal invitation..."
+#~ msgstr "புதிய தனிப்பட்ட அழைப்பிதழை உருவாக்கவும் "
+
+#~ msgid "Click this button to create a new personal invitation."
+#~ msgstr "ஒரு புதிய தனிப்பட்ட அழைப்பிதழை உருவாக்க இந்த பொத்தானை கிளிக் செய்யவும்"
+
+#~ msgid "New &Personal Invitation..."
+#~ msgstr "புதிய தனிப்பட்ட அழைப்பிதழ் "
+
+#~ msgid "Send a new invitation via email..."
+#~ msgstr "மின்னஞ்சல் வழியாக ஒரு புது அழைப்பிதழை அனுப்பவும்"
+
+#~ msgid "Click this button to send a new invitation via email."
+#~ msgstr "மின்னஞ்சல் வழியாக ஒரு புது அழைப்பிதழை அனுப்ப இந்த பொத்தானை கிளிக் செய்யவும்"
+
+#~ msgid "&New Email Invitation..."
+#~ msgstr "புதிய மின்னஞ்சல் அழைப்பிதழ் "
+
+#~ msgid "Delete all invitations"
+#~ msgstr "எல்லா அழைப்பிதழ்களையும் நீக்கவும்"
+
+#~ msgid "Deletes all open invitations."
+#~ msgstr "எல்லா திறந்த அழைப்பிதழ்களையும் நீக்கவும்"
+
+#~ msgid "Delete the selected invitation"
+#~ msgstr "தேர்ந்தெடுக்கப்பட்ட அழைப்பிதழ்களை நீக்கவும்"
+
+#~ msgid ""
+#~ "Delete the selected invitation. The invited person will not be able to "
+#~ "connect using this invitation anymore."
+#~ msgstr ""
+#~ "தேர்ந்தெடுக்கப்பட்ட அழைப்பிதழை நீக்கவும். அழைக்கப்பட்டவர் இதன் மூலம் தன்னை இணைத்துக் கொள்ள "
+#~ "முடியாது."
+
+#~ msgid "<b>Host:</b>"
+#~ msgstr "<b>புரவலன்t:</b>"
+
+#~ msgid "<b>Expiration time:</b>"
+#~ msgstr "<b>காலக்கெடு முடிதல்:</b>"
+
+#~ msgid "X11 update scanner, original code base"
+#~ msgstr "சரியான குறியீடு அடிப்படையில்  X11 வருடியை புதுப்பி"
+
+#~ msgid "KDesktop background deactivation"
+#~ msgstr "கேபணிமேடை பின்னணி செயல் இழப்பு"
+
+#~ msgid "Disable Remote Control"
+#~ msgstr "தொலைதூர கட்டுப்பாட்டை செயலாக்கவும்."
+
+#~ msgid "The remote user has closed the connection."
+#~ msgstr "தொலைதூர பயனர் இணைப்பை மூடிவிட்டார்"
+
+#~ msgid "The remote user has been authenticated and is now connected."
+#~ msgstr "தொலைதூர பயனர் உறுதி செய்யப்பட்டு இணைக்கப்பட்டுள்ளார்"
+
+#, fuzzy
+#~| msgid "Accepted uninvited connection from %1"
+#~ msgid "Attepted uninvited connection from %1: connection refused"
+#~ msgstr "%1லிருந்து ஏற்றுக்கொள்ளப்பட்ட அழைக்கப்படாத இணைப்பு"
+
+#~ msgid "User accepts connection from %1"
+#~ msgstr "%1லிருந்த இணைப்பை பயனர் ஏற்றுக்கொண்டார்"
+
+#~ msgid "User refuses connection from %1"
+#~ msgstr "%1லிருந்த இணைப்பை பயனர் நிராகரித்தார்"
+
+#~ msgid "Closed connection: %1."
+#~ msgstr "இணைப்பு மூடப்பட்டது:%1"
+
+#~ msgid "Connection refused from %1, already connected."
+#~ msgstr "ஏற்கனவே இணைக்கப்பட்ட %1னின் இணைப்பு மறுக்கப்பட்டது"
+
+#, fuzzy
+#~ msgid ""
+#~ "KDE Desktop Sharing allows you to invite somebody at a remote location to "
+#~ "watch and possibly control your desktop.\n"
+#~ "<a href=\"whatsthis:<p>An invitation creates a one-time password that "
+#~ "allows the receiver to connect to your desktop. It is valid for only one "
+#~ "successful connection and will expire after an hour if it has not been "
+#~ "used. When somebody connects to your computer a dialog will appear and "
+#~ "ask you for permission. The connection will not be established before you "
+#~ "accept it. In this dialog you can also restrict the other person to view "
+#~ "your desktop only, without the ability to move your mouse pointer or "
+#~ "press keys.</p><p>If you want to create a permanent password for Desktop "
+#~ "Sharing, allow 'Uninvited Connections' in the configuration.</p>\">More "
+#~ "about invitations...</a>"
+#~ msgstr ""
+#~ "KDE மேல்மேசை பகிர்தல் இது தொலைதூரத்தில் உள்ளவரை அழைத்து உங்கள் பணிமேடையை பார்க்க "
+#~ "மற்றும் கட்டுப்படுத்த செய்கிறது.\n"
+#~ "<a href=\"whatsthis:<p>இந்த அழைப்பு பெறுபவருக்கு ஒரு அனுமதி கடவுச்சொல்லை தந்து "
+#~ "பணிமேடையுடன் இணைக்கிறது. இது ஒரு இணைப்புக்கு வெற்றிகரமாக செயல்படும், இதை யாரும் "
+#~ "உபயோகிக்கவில்லை என்றால் ஒரு மணி நேரத்திற்கு தானே அழிந்து விடும். யாராவது உங்கள் "
+#~ "கணினியுடன் இணைத்தால் உங்கள் அனுமதி கேட்டு ஒரு அறிவிப்பு தோன்றும். நீங்கள் ஒத்துகொள்ளும் "
+#~ "வரை இந்த இணைப்பு செல்லாது. அந்த உரையாடல் பெட்டியில் நீங்க்ள் அடுத்தவரை உங்கள் பணிமேடை "
+#~ "உள்ளதை பார்க்க மட்டும் அனுமதி கொடுக்கும் போல் மாற்றலாம், சுட்டியில் குறியை அல்லது விசை "
+#~ "அழுத்தமில்லாமல் இதை மாற்றலாம்.</p><p>உங்கள் பணிமேடை பகிர்வுக்கு நிரந்தர கடவுச்சொல் "
+#~ "வேண்டும் என்றால், 'Uninvited Connections' .\">மேலும் விவரங்கள்...</a>"
+
+#~ msgid "Expiration"
+#~ msgstr "காலக்கெடு முடிதல்"
+
+#~ msgid ""
+#~ "Displays the open invitations. Use the buttons on the right to delete "
+#~ "them or create a new invitation."
+#~ msgstr ""
+#~ "புதிய அழைப்பிதழ்களைக் காட்டவும். இதை நீக்க அல்லது புதிய அழைப்பிதழ்களை உருவாக்க "
+#~ "வலப்புற பொத்தான்களைப் பயன்படுத்தவும்."
+
+#~ msgid "Closes this window."
+#~ msgstr "இந்த சாளரத்தை மூடும்"
+
+#~ msgid ""
+#~ "<h2>Personal Invitation</h2>\n"
+#~ "Give the information below to the person that you want to invite (<a href="
+#~ "\"whatsthis:Desktop Sharing uses the VNC protocol. You can use any VNC "
+#~ "client to connect. In KDE the client is called 'Remote Desktop "
+#~ "Connection'. Enter the host information into the client and it will "
+#~ "connect..\">how to connect</a>). Note that everybody who gets the "
+#~ "password can connect, so be careful."
+#~ msgstr ""
+#~ "<h2>தனிப்பட்ட அழைப்பிதழ்</h2>\n"
+#~ "கீழேயுள்ள விவரங்களை அழைப்பிதழ் தருபவருக்கு அனுப்ப வேண்டும்(<a href=\"என்ன இது "
+#~ "பணிமேடை பகிர்வு VNC நெறிமுறை உபயோகிக்கிறது. நீங்கள் VNC கிளையன் உபயோகித்து "
+#~ "இணைத்து கொள்ளலாம். KDE கிளையன் 'தொலை பணிமேடை இணைப்பு' என்றும் அழைக்கலாம். "
+#~ "கிளையனுக்கு புரவலன் தகவலை அனுப்பினால் அதன் பின் இணைப்பு கிடைத்துவிடும்.\">எப்படி "
+#~ "இணைப்பது</a>). கவனம், இதனால் கடவுச்சொல் தெரிந்த அனைவரும் இணைக்கப்படலாம்."
+
+#~ msgid "cookie.tjansen.de:0"
+#~ msgstr "தற்காலிக நினைவகம்.tjansen.de:0"
+
+#~ msgid "12345"
+#~ msgstr "12345"
+
+#~ msgid "17:12"
+#~ msgstr "17:12"
+
+#~ msgid ""
+#~ "(<a href=\"whatsthis:This field contains the address of your computer and "
+#~ "the display number, separated by a colon. The address is just a hint - "
+#~ "you can use any address that can reach your computer. Desktop Sharing "
+#~ "tries to guess your address from your network configuration, but does not "
+#~ "always succeed in doing so. If your computer is behind a firewall it may "
+#~ "have a different address or be unreachable for other computers.\">Help</"
+#~ "a>)"
+#~ msgstr ""
+#~ "(<a href=\"whatsthis: இந்த புலம் தங்களது கணினி முகவரி மற்றும் அதனது எண் "
+#~ "வெளியீடுகள் அரைப்புள்ளிகளால் பிரிக்கப்பட்டுள்ளன. முகவரி ஒரு குறிப்பே - ஆகையால் "
+#~ "ஏதேனும் ஒரு கணினி முகவரியைப் பயன்படுத்தவும். பணிமேடை தங்களது உள்ளமை "
+#~ "பிணையத்திலிருந்து பகுத்துக் கொள்கிறது, ஆனாலும் எப்பொழுதும் இவைகள் வெற்றிப் பெறும் "
+#~ "என்பதை அறுதியிட இயலாது. தங்களது கணினி தீச்சுவருக்கு பின்னால் அமைந்திருந்தால் "
+#~ "வித்தியாசமான முகவரியைக் கொண்டிருக்கலாம் அல்லது கணினி சேர இயலாமலிருந்திருக்கலாம்."
+#~ "\">உதவி</a>)"
+
+#~ msgid "Desktop Sharing - connecting"
+#~ msgstr "பணிமேடை பகிர்தல் -  இணைக்கப்படுகிறது"
+
+#~ msgid "Manage &Invitations"
+#~ msgstr "அழைப்பிதழ்களைச் சமாளி"
+
+#~ msgid "Used for calling from kinetd"
+#~ msgstr "kinetd லிருந்து அழைக்க பயன்படுத்தப்படுகிறது."
+
+#~ msgid ""
+#~ "Cannot find KInetD. The KDE daemon (kded) may have crashed or has not "
+#~ "been started at all, or the installation failed."
+#~ msgstr ""
+#~ "KInetD அடைய இயலவில்லை. KDE  டேமொன்(kded) உடைக்கப்பட்டிருக்கலாம் அல்லது "
+#~ "துவக்கப்படாமலே இருந்திருக்கலாம் அல்லது நிறுவல் தோல்வியுற்றிருக்கலாம்."
+
+#~ msgid ""
+#~ "Cannot find KInetD service for Desktop Sharing (krfb). The installation "
+#~ "is incomplete or failed."
+#~ msgstr ""
+#~ "பணிமேடை பகிர்தலுக்கு(krfb)  KInetD சேவையைக் கண்டுபிடிக்க முடியவில்லை. நிறுவல் "
+#~ "முடியவில்லை அல்லது தோல்வியுற்றது."

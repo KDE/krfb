@@ -1,0 +1,1099 @@
+# translation of krfb.po to Swedish
+# Översättning av krfb.po till Svenska
+# Översättning av krfb.po till svenska
+# Copyright (C).
+#
+# Mattias Newzella <newzella@linux.nu>, 2002,2003.
+# Stefan Asserhäll <stefan.asserhall@bredband.net>, 2004, 2005, 2007, 2008, 2009.
+# Stefan Asserhall <stefan.asserhall@bredband.net>, 2010, 2013, 2014, 2015, 2017, 2019, 2021.
+msgid ""
+msgstr ""
+"Project-Id-Version: krfb\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-07-18 00:45+0000\n"
+"PO-Revision-Date: 2021-10-31 09:18+0100\n"
+"Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
+"Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 20.08.1\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Stefan Asserhäll"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "stefan.asserhall@bredband.net"
+
+#: connectiondialog.cpp:39
+#, kde-format
+msgid "New Connection"
+msgstr "Ny anslutning"
+
+#: connectiondialog.cpp:61
+#, kde-format
+msgid "Accept Connection"
+msgstr "Acceptera anslutning"
+
+#: connectiondialog.cpp:65
+#, kde-format
+msgid "Refuse Connection"
+msgstr "Vägra anslutning"
+
+#: invitationsrfbclient.cpp:69
+#, kde-format
+msgid "Accepted connection from %1"
+msgstr "Accepterade anslutning från %1"
+
+#: invitationsrfbclient.cpp:75
+#, kde-format
+msgid "Received connection from %1, on hold (waiting for confirmation)"
+msgstr "Tog emot anslutning från %1, som vilar (i väntan på bekräftelse)"
+
+#: invitationsrfbserver.cpp:55
+#, kde-format
+msgid "%1@%2 (shared desktop)"
+msgstr "%1@%2 (delat skrivbord)"
+
+#. i18n: ectx: label, entry (startMinimized), group (MainWindow)
+#: krfb.kcfg:9
+#, kde-format
+msgid "Start minimized"
+msgstr "Starta minimerad"
+
+#. i18n: ectx: label, entry (useDefaultPort), group (TCP)
+#: krfb.kcfg:15
+#, kde-format
+msgid "Use the default port for VNC (5900)"
+msgstr "Använd standardport för VNC (5900)"
+
+#. i18n: ectx: label, entry (port), group (TCP)
+#: krfb.kcfg:19
+#, kde-format
+msgid "This is the port on which krfb will listen."
+msgstr "Det här är porten som krfb lyssnar på."
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_publishService)
+#. i18n: ectx: label, entry (publishService), group (TCP)
+#: krfb.kcfg:23 ui/configtcp.ui:16
+#, kde-format
+msgid "Announce the service on the local network"
+msgstr "Annonsera tjänsten på det lokala nätverket"
+
+#. i18n: ectx: label, entry (noWallet), group (Security)
+#: krfb.kcfg:29
+#, kde-format
+msgid "Do not store passwords in KWallet"
+msgstr "Lagra inte lösenord i plånboken"
+
+#. i18n: ectx: label, entry (allowDesktopControl), group (Security)
+#: krfb.kcfg:33
+#, kde-format
+msgid "Allow remote connections to manage the desktop."
+msgstr "Tillåt att fjärranslutningar styr skrivbordet."
+
+#. i18n: ectx: label, entry (allowUnattendedAccess), group (Security)
+#: krfb.kcfg:37
+#, kde-format
+msgid "Allow connections without an invitation."
+msgstr "Tillåt anslutningar som inte begärts."
+
+#. i18n: ectx: label, entry (unattendedAccessPassword), group (Security)
+#. i18n: ectx: label, entry (desktopSharingPassword), group (Security)
+#: krfb.kcfg:41 krfb.kcfg:44
+#, kde-format
+msgid "Password for uninvited connections."
+msgstr "Lösenord för anslutningar utan inbjudan."
+
+#. i18n: ectx: label, entry (preferredFrameBufferPlugin), group (FrameBuffer)
+#: krfb.kcfg:49
+#, kde-format
+msgid "Preferred Frame Buffer Plugin"
+msgstr "Föredraget insticksprogram med rambuffert"
+
+#: main-virtualmonitor.cpp:49
+#, kde-format
+msgid "Creating a Virtual Monitor from %1"
+msgstr "Skapar en virtuell bildskärm från %1"
+
+#: main-virtualmonitor.cpp:80
+#, kde-format
+msgid "Remote Virtual Monitor"
+msgstr "Virtuell fjärrbildskärm"
+
+#: main-virtualmonitor.cpp:82
+#, kde-format
+msgid "Offer a Virtual Monitor that can be accessed remotely"
+msgstr "Erbjud en virtuell bildskärm som kan kommas åt från andra datorer"
+
+#: main-virtualmonitor.cpp:84 main.cpp:98
+#, kde-format
+msgid ""
+"(c) 2009-2010, Collabora Ltd.\n"
+"(c) 2007, Alessandro Praduroux\n"
+"(c) 2001-2003, Tim Jansen\n"
+"(c) 2001, Johannes E. Schindelin\n"
+"(c) 2000-2001, Const Kaplinsky\n"
+"(c) 2000, Tridia Corporation\n"
+"(c) 1999, AT&T Laboratories Boston\n"
+msgstr ""
+"© 2009-2010, Collabora Ltd.\n"
+"© 2007, Alessandro Praduroux\n"
+"© 2001-2003, Tim Jansen\n"
+"© 2001, Johannes E. Schindelin\n"
+"© 2000, heXoNet-stöd GmbH, D-66424 Homburg\n"
+"© 2000-2001, Const Kaplinsky\n"
+"© 2000, Tridia-bolaget\n"
+"© 1999, AT&T-laboratorierna Boston\n"
+
+#: main-virtualmonitor.cpp:91
+#, kde-format
+msgid "Virtual Monitor implementation"
+msgstr "Implementering av virtuell bildskärm"
+
+#: main-virtualmonitor.cpp:92 main.cpp:108
+#, kde-format
+msgid "George Kiagiadakis"
+msgstr "George Kiagiadakis"
+
+#: main-virtualmonitor.cpp:93 main.cpp:111
+#, kde-format
+msgid "Alessandro Praduroux"
+msgstr "Alessandro Praduroux"
+
+#: main-virtualmonitor.cpp:93 main.cpp:111
+#, kde-format
+msgid "KDE4 porting"
+msgstr "Anpassning till KDE4"
+
+#: main-virtualmonitor.cpp:94 main.cpp:112
+#, kde-format
+msgid "Tim Jansen"
+msgstr "Tim Jansen"
+
+#: main-virtualmonitor.cpp:94 main.cpp:112
+#, kde-format
+msgid "Original author"
+msgstr "Ursprunglig upphovsman"
+
+#: main-virtualmonitor.cpp:95 main.cpp:113
+#, kde-format
+msgid "Johannes E. Schindelin"
+msgstr "Johannes E. Schindelin"
+
+#: main-virtualmonitor.cpp:96 main.cpp:114
+#, kde-format
+msgid "libvncserver"
+msgstr "libvncserver"
+
+#: main-virtualmonitor.cpp:97 main.cpp:115
+#, kde-format
+msgid "Const Kaplinsky"
+msgstr "Const Kaplinsky"
+
+#: main-virtualmonitor.cpp:98 main.cpp:116
+#, kde-format
+msgid "TightVNC encoder"
+msgstr "TightVNC-kodare"
+
+#: main-virtualmonitor.cpp:99 main.cpp:117
+#, kde-format
+msgid "Tridia Corporation"
+msgstr "Tridia-bolaget"
+
+#: main-virtualmonitor.cpp:100 main.cpp:118
+#, kde-format
+msgid "ZLib encoder"
+msgstr "Zlib-kodare"
+
+#: main-virtualmonitor.cpp:101 main.cpp:119
+#, kde-format
+msgid "AT&T Laboratories Boston"
+msgstr "AT&T-Laboratorierna Boston"
+
+#: main-virtualmonitor.cpp:102 main.cpp:120
+#, kde-format
+msgid "original VNC encoders and protocol design"
+msgstr "Ursprungliga VNC-kodare och protokollkonstruktion"
+
+#: main-virtualmonitor.cpp:108
+#, kde-format
+msgid "Logical resolution of the new monitor"
+msgstr "Den nya bildskärmens logiska upplösning"
+
+#: main-virtualmonitor.cpp:108
+#, kde-format
+msgid "resolution"
+msgstr "upplösning"
+
+#: main-virtualmonitor.cpp:110
+#, kde-format
+msgid "Name of the monitor"
+msgstr "Bildskärmens namn"
+
+#: main-virtualmonitor.cpp:110
+#, kde-format
+msgid "name"
+msgstr "namn"
+
+#: main-virtualmonitor.cpp:112
+#, kde-format
+msgid "Password for the client to connect to it"
+msgstr "Lösenord för klienten att ansluta till"
+
+#: main-virtualmonitor.cpp:112
+#, kde-format
+msgid "password"
+msgstr "lösenord"
+
+#: main-virtualmonitor.cpp:114
+#, kde-format
+msgid "The device-pixel-ratio of the device, the scaling factor"
+msgstr "Enhetsbildpunkstförhållande för enheten, skalfaktor"
+
+#: main-virtualmonitor.cpp:114
+#, kde-format
+msgid "dpr"
+msgstr "ebf"
+
+#: main-virtualmonitor.cpp:116
+#, kde-format
+msgid "The port we will be listening to"
+msgstr "Porten som lyssnas på"
+
+#: main-virtualmonitor.cpp:116
+#, kde-format
+msgid "number"
+msgstr "nummer"
+
+#: main.cpp:49
+#, kde-format
+msgid ""
+"Your X11 Server does not support the required XTest extension version 2.2. "
+"Sharing your desktop is not possible."
+msgstr ""
+"Din X11-server stöder inte Xtest-utökning version 2.2 som krävs. Det är inte "
+"möjligt att dela ditt skrivbord."
+
+#: main.cpp:51 main.cpp:150
+#, kde-format
+msgid "Desktop Sharing Error"
+msgstr "Fel när skrivbord skulle delas"
+
+#: main.cpp:94
+#, kde-format
+msgid "Desktop Sharing"
+msgstr "Dela ut skrivbord"
+
+#: main.cpp:96
+#, kde-format
+msgid "VNC-compatible server to share desktops"
+msgstr "VNC-kompatibel server för att dela skrivbord"
+
+#: main.cpp:105
+#, kde-format
+msgid "George Goldberg"
+msgstr "George Goldberg"
+
+#: main.cpp:106
+#, kde-format
+msgid "Telepathy tubes support"
+msgstr "Stöd för Telepathy-rör"
+
+#: main.cpp:126
+#, kde-format
+msgid "Do not show the invitations management dialog at startup"
+msgstr "Visa inte dialogrutan för hantering av inbjudningar vid start"
+
+#: main.cpp:148
+#, kde-format
+msgid ""
+"Desktop Sharing is not running under an X11 Server or Wayland.\n"
+"Other display servers are currently not supported."
+msgstr ""
+"Skrivbordsdelning kör inte i en X11-server eller Wayland.\n"
+"Andra skärmservrar stöds för närvarande inte."
+
+#: mainwindow.cpp:52
+#, kde-format
+msgid "Storing passwords in config file is insecure!"
+msgstr "Att lagra lösenord i inställningsfiler är inte säkert."
+
+#: mainwindow.cpp:189
+#, kde-format
+msgid "Enter a new password for Unattended Access"
+msgstr "Ange ett nytt lösenord för oövervakad åtkomst"
+
+#: mainwindow.cpp:200
+#, kde-format
+msgid ""
+"Failed to start the krfb server. Desktop sharing will not work. Try setting "
+"another port in the settings and restart krfb."
+msgstr ""
+"Misslyckades starta krfb-servern. Skrivbordsdelning kommer inte att fungera. "
+"Försök att ange en annan port i inställningarna och starta om krfb."
+
+#. i18n: ectx: property (whatsThis), widget (QLabel, titleLabel)
+#. i18n: ectx: property (text), widget (QLabel, titleLabel)
+#. i18n: ectx: property (whatsThis), widget (QLabel, aboutLabel)
+#: mainwindow.cpp:223 mainwindow.cpp:230 ui/mainwidget.ui:83
+#: ui/mainwidget.ui:86 ui/mainwidget.ui:114
+#, kde-format
+msgid "KDE Desktop Sharing"
+msgstr "KDE:s skrivbordsdelning"
+
+#: mainwindow.cpp:224
+#, kde-format
+msgid ""
+"This field contains the address of your computer and the port number, "
+"separated by a colon.\n"
+"\n"
+"The address is just a hint - you can use any address that can reach your "
+"computer.\n"
+"\n"
+"Desktop Sharing tries to guess your address from your network configuration, "
+"but does not always succeed in doing so.\n"
+"\n"
+"If your computer is behind a firewall it may have a different address or be "
+"unreachable for other computers."
+msgstr ""
+"Det här fältet innehåller adressen till datorn och portnumret, åtskilda med "
+"ett kolon.\n"
+"\n"
+"Adressen är bara ett förslag. Du kan använda vilken adress som helst som når "
+"datorn.\n"
+"\n"
+"Dela skrivbord försöker gissa adressen från nätverksinställningarna, men "
+"lyckas inte alltid göra det.\n"
+"\n"
+"Om datorn är bakom en brandvägg, kan den ha en annan adress, eller kan inte "
+"nås av andra datorer."
+
+#: mainwindow.cpp:231
+#, kde-format
+msgid ""
+"Any remote user with normal desktop sharing password will have to be "
+"authenticated.\n"
+"\n"
+"If unattended access is on, and the remote user provides unattended mode "
+"password, desktop sharing access will be granted without explicit "
+"confirmation."
+msgstr ""
+"Behörigheten för alla fjärranvändare med normala lösenord för "
+"skrivbordsdelning måste kontrolleras.\n"
+"\n"
+"Om oövervakad åtkomst är på och fjärranvändaren tillhandahåller lösenord för "
+"oövervakad åtkomst, tillåts åtkomst till skrivbordsdelning utan explicit "
+"bekräftelse."
+
+#: mainwindow.cpp:249
+#, kde-format
+msgid "Network"
+msgstr "Nätverk"
+
+#: mainwindow.cpp:250
+#, kde-format
+msgid "Security"
+msgstr "Säkerhet"
+
+#: mainwindow.cpp:251
+#, kde-format
+msgid "Screen capture"
+msgstr "Skärmdump"
+
+#: mainwindow.cpp:256
+#, kde-format
+msgid "To apply framebuffer plugin setting, you need to restart the program."
+msgstr ""
+"För att verkställa inställningar av insticksprogram med rambuffert, måste du "
+"måste starta om programmet."
+
+#: rfbservermanager.cpp:229
+#, kde-format
+msgid "The remote user %1 is now connected."
+msgstr "Fjärranvändaren %1 är nu ansluten."
+
+#: rfbservermanager.cpp:243
+#, kde-format
+msgid "The remote user %1 disconnected."
+msgstr "Fjärranvändaren %1 är nu nerkopplad."
+
+#: trayicon.cpp:56
+#, kde-format
+msgid "Disconnect"
+msgstr "Koppla ner"
+
+#: trayicon.cpp:62
+#, kde-format
+msgid "Enable Remote Control"
+msgstr "Aktivera fjärrstyrning"
+
+#: trayicon.cpp:101 trayicon.cpp:133
+#, kde-format
+msgid "Desktop Sharing - disconnected"
+msgstr "Dela skrivbord - nerkopplad"
+
+#: trayicon.cpp:117 trayicon.cpp:137
+#, kde-format
+msgid "Desktop Sharing - connected with %1"
+msgstr "Dela skrivbord - ansluten till %1"
+
+#: trayicon.cpp:120
+#, kde-format
+msgid "Desktop Sharing - connected"
+msgstr "Dela skrivbord - ansluten"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, Framebuffer)
+#: ui/configframebuffer.ui:14
+#, kde-format
+msgid "Framebuffer"
+msgstr "Rambuffert"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: ui/configframebuffer.ui:22
+#, kde-format
+msgid "Preferred frameb&uffer plugin:"
+msgstr "Föredraget insticksprogram med ramb&uffert:"
+
+#. i18n: ectx: property (text), widget (QLabel, helpText)
+#: ui/configframebuffer.ui:47
+#, kde-format
+msgid ""
+"<html><head/><body><p>When using x11, <span style=\" font-weight:600;\">xcb</"
+"span> plugin should be preferred, because it is more performant.<br/><span "
+"style=\" font-weight:600;\">qt</span> plugin is a safe fallback, if for some "
+"reason others don't work. But also it is very slow.</p></body></html>"
+msgstr ""
+"<html><head/><body><p>När X11 används, bör insticksprogrammet <span style=\" "
+"font-weight:600;\">xcb</span> föredras, eftersom det har bättre prestanda."
+"<br/>Insticksprogrammet <span style=\" font-weight:600;\">qt</span> är ett "
+"säkert reservalternativ, om övriga av någon anledning inte fungerar, men det "
+"är också mycket långsamt.</p></body></html>"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_allowDesktopControl)
+#: ui/configsecurity.ui:17
+#, kde-format
+msgid "Allow remote connections to control your desktop"
+msgstr "Tillåt fjärranslutningar att styra skrivbordet"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_noWallet)
+#: ui/configsecurity.ui:27
+#, kde-format
+msgid "Do not store passwords using KDE wallet"
+msgstr "Lagra inte lösenord med användning av KDE:s plånbok"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_useDefaultPort)
+#: ui/configtcp.ui:26
+#, kde-format
+msgid "Use default port"
+msgstr "Använd standardport"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: ui/configtcp.ui:50
+#, kde-format
+msgid "Listening port:"
+msgstr "Port att lyssna på:"
+
+#. i18n: ectx: property (text), widget (QLabel, TextLabel5)
+#: ui/connectionwidget.ui:47
+#, kde-format
+msgid "Attention"
+msgstr "Se upp"
+
+#. i18n: ectx: property (text), widget (QLabel, mainTextLabel)
+#: ui/connectionwidget.ui:72
+#, kde-format
+msgid ""
+"Somebody is requesting a connection to your computer. Granting this will "
+"allow the remote user to watch your desktop. "
+msgstr ""
+"Någon har begärt en anslutning till din dator. Att acceptera denna låter den "
+"andra användaren se allt på ditt skrivbord. "
+
+#. i18n: ectx: property (text), widget (QLabel, TextLabel1)
+#: ui/connectionwidget.ui:102
+#, kde-format
+msgid "Remote system:"
+msgstr "Fjärrsystem:"
+
+#. i18n: ectx: property (text), widget (QLabel, remoteHost)
+#: ui/connectionwidget.ui:118
+#, kde-format
+msgid "123.234.123.234"
+msgstr "123.234.123.234"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, cbAllowRemoteControl)
+#: ui/connectionwidget.ui:136
+#, kde-format
+msgid ""
+"If you turn this option on, the remote user can enter keystrokes and use "
+"your mouse pointer. This gives them full control over your computer, so be "
+"careful. When the option is disabled the remote user can only watch your "
+"screen."
+msgstr ""
+"Om du markerar det här alternativet kan fjärranvändaren trycka på tangenter "
+"och använda musmarkören. Det här ger dem fullständig kontroll över din "
+"dator, så var försiktig. När det här alternativet inte är markerat kan "
+"fjärranvändaren endast titta på din skärm."
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbAllowRemoteControl)
+#: ui/connectionwidget.ui:139
+#, kde-format
+msgid "Allow remote user to &control keyboard and mouse"
+msgstr "Tillåt &fjärranvändaren att styra tangentbord och mus"
+
+#. i18n: ectx: property (text), widget (QLabel, aboutLabel)
+#: ui/mainwidget.ui:117
+#, kde-format
+msgid ""
+"KDE Desktop Sharing allows you to grant permission to someone at a remote "
+"location for viewing and possibly controlling your desktop."
+msgstr ""
+"KDE:s skrivbordsdelning låter dig ge någon på en annan plats rättigheter att "
+"titta på och eventuellt styra ditt skrivbord."
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, enableSharingCheckBox)
+#: ui/mainwidget.ui:145
+#, kde-format
+msgid "Starts/Stops Remote Desktop Sharing"
+msgstr "Startar eller stoppar delning av fjärrskrivbord"
+
+#. i18n: ectx: property (text), widget (QCheckBox, enableSharingCheckBox)
+#: ui/mainwidget.ui:148
+#, kde-format
+msgid "&Enable Desktop Sharing"
+msgstr "Aktiv&era utdelning av skrivbord"
+
+#. i18n: ectx: property (title), widget (QGroupBox, detailsGroupBox)
+#: ui/mainwidget.ui:170
+#, kde-format
+msgid "Connection Details"
+msgstr "Anslutningsdetaljer"
+
+#. i18n: ectx: property (text), widget (QLabel, addressLabel)
+#: ui/mainwidget.ui:193
+#, kde-format
+msgid "&Address"
+msgstr "&Adress"
+
+#. i18n: ectx: property (whatsThis), widget (QToolButton, addressAboutButton)
+#: ui/mainwidget.ui:214
+#, kde-format
+msgid "More about this address"
+msgstr "Mer om adressen"
+
+#. i18n: ectx: property (text), widget (QToolButton, addressAboutButton)
+#. i18n: ectx: property (text), widget (QToolButton, unattendedAboutButton)
+#: ui/mainwidget.ui:217 ui/mainwidget.ui:397
+#, kde-format
+msgid "About"
+msgstr "Om"
+
+#. i18n: ectx: property (whatsThis), widget (QLabel, addressDisplayLabel)
+#: ui/mainwidget.ui:235
+#, kde-format
+msgid ""
+"Address required by remote users to connect to your desktop. Click about "
+"button on the right for more info."
+msgstr ""
+"Adress som krävs av fjärranvändare för att ansluta till ditt skrivbord. "
+"Klicka knappen \"Om\" till höger för mer information."
+
+#. i18n: ectx: property (text), widget (QLabel, addressDisplayLabel)
+#: ui/mainwidget.ui:238
+#, kde-format
+msgid "127.0.0.1 : 5900"
+msgstr "127.0.0.1 : 5900"
+
+#. i18n: ectx: property (text), widget (QLabel, passwordLabel)
+#: ui/mainwidget.ui:269
+#, kde-format
+msgid "&Password"
+msgstr "&Lösenord"
+
+#. i18n: ectx: property (whatsThis), widget (QToolButton, passwordEditButton)
+#: ui/mainwidget.ui:290
+#, kde-format
+msgid "Edit/Save Desktop Sharing Password"
+msgstr "Redigera eller spara lösenord för skrivbordsdelning"
+
+#. i18n: ectx: property (text), widget (QToolButton, passwordEditButton)
+#: ui/mainwidget.ui:293
+#, kde-format
+msgid "Edit"
+msgstr "Redigera"
+
+#. i18n: ectx: property (whatsThis), widget (QLabel, passwordDisplayLabel)
+#: ui/mainwidget.ui:311
+#, kde-format
+msgid ""
+"Password required by remote users to connect to your desktop. Click the edit "
+"button on the right to change password."
+msgstr ""
+"Lösenord som krävs av fjärranvändare för att ansluta till ditt skrivbord. "
+"Klicka redigeringsknappen till höger för att ändra lösenord."
+
+#. i18n: ectx: property (text), widget (QLabel, passwordDisplayLabel)
+#: ui/mainwidget.ui:314
+#, kde-format
+msgid "TemporaryPassword"
+msgstr "Tillfälligt lösenord"
+
+#. i18n: ectx: property (whatsThis), widget (QGroupBox, unattendedGroupBox)
+#. i18n: ectx: property (text), widget (QLabel, unattendedAboutLabel)
+#: ui/mainwidget.ui:340 ui/mainwidget.ui:378
+#, kde-format
+msgid ""
+"Unattended Access allows a remote user with the password to gain control to "
+"your desktop without your explicit confirmation."
+msgstr ""
+"Oövervakad åtkomst tillåter att en fjärranvändaren med lösenordet tar "
+"kontroll av ditt skrivbord utan att du explicit bekräftar det."
+
+#. i18n: ectx: property (title), widget (QGroupBox, unattendedGroupBox)
+#: ui/mainwidget.ui:343
+#, kde-format
+msgid "Unattended Access"
+msgstr "Oövervakad åtkomst"
+
+#. i18n: ectx: property (whatsThis), widget (QLabel, unattendedAboutLabel)
+#: ui/mainwidget.ui:375
+#, kde-format
+msgid ""
+"Unattended Access allows a remote user with the password to gain control to "
+"your desktop without your explicit confirmation. Click \"About\" button on "
+"right to know more."
+msgstr ""
+"Oövervakad åtkomst tillåter att en fjärranvändaren med lösenordet tar "
+"kontroll av ditt skrivbord utan att du explicit bekräftar det. Klicka på "
+"knappen \"Om\" till höger för att få reda på mer."
+
+#. i18n: ectx: property (whatsThis), widget (QToolButton, unattendedAboutButton)
+#: ui/mainwidget.ui:394
+#, kde-format
+msgid "Know more about Unattended Access"
+msgstr "Ta reda på mer om oövervakad åtkomst"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, enableUnattendedCheckBox)
+#: ui/mainwidget.ui:437
+#, kde-format
+msgid ""
+"Starts/Stops unattended access to your desktop. Click on button on right to "
+"change password, and \"About\" button to know more."
+msgstr ""
+"Startar eller stoppar oövervakad åtkomst till ditt skrivbord. Klicka på "
+"knappen till höger för att ändra lösenord, och knappen \"Om\" för att få "
+"veta mer."
+
+#. i18n: ectx: property (text), widget (QCheckBox, enableUnattendedCheckBox)
+#: ui/mainwidget.ui:440
+#, kde-format
+msgid "Enable &Unattended Access"
+msgstr "Aktivera &oövervakad åtkomst"
+
+#. i18n: ectx: property (whatsThis), widget (QPushButton, unattendedPasswordButton)
+#: ui/mainwidget.ui:465
+#, kde-format
+msgid "Change password for Unattended Access"
+msgstr "Ändra lösenord för oövervakad åtkomst"
+
+#. i18n: ectx: property (text), widget (QPushButton, unattendedPasswordButton)
+#: ui/mainwidget.ui:468
+#, kde-format
+msgid "&Change Unattended Password"
+msgstr "Ä&ndra lösenord för oövervakad åtkomst"
+
+#~ msgid "Welcome to KDE Desktop Sharing"
+#~ msgstr "Välkommen till KDE:s utdelning av skrivbord"
+
+#~ msgid ""
+#~ "KDE Desktop Sharing allows you to invite somebody at a remote location to "
+#~ "watch and possibly control your desktop. <a href=\"whatsthis\">More about "
+#~ "invitations...</a>"
+#~ msgstr ""
+#~ "KDE:s utdelning av skrivbord låter dig bjuda in någon på en annan plats "
+#~ "att titta på och eventuellt styra ditt skrivbord. <a href=\"whatsthis"
+#~ "\">Mer om inbjudningar...</a>"
+
+#~ msgid ""
+#~ "Create a new invitation and display the connection data. Use this option "
+#~ "if you want to invite somebody personally, for example, to give the "
+#~ "connection data over the phone."
+#~ msgstr ""
+#~ "Skapar en ny inbjudan och visar anslutningsdata. Använd det här "
+#~ "alternativet om du vill bjuda in någon personligen, till exempel genom "
+#~ "att tala om anslutningsinformationen via telefon."
+
+#~ msgid "Create &Personal Invitation..."
+#~ msgstr "S&kapa personlig inbjudan..."
+
+#~ msgid ""
+#~ "This button will start your email application with a pre-configured text "
+#~ "that explains to the recipient how to connect to your computer. "
+#~ msgstr ""
+#~ "Den här knappen startar din e-postklient med en förinställd text, som "
+#~ "förklarar för mottagaren hur man ansluter till din dator."
+
+#~ msgid "Invite via &Email..."
+#~ msgstr "Inbjud via &e-post..."
+
+#~ msgid "&Manage Invitations (%1)..."
+#~ msgstr "Hantera &inbjudningar (%1)..."
+
+#~ msgid "5.0"
+#~ msgstr "5.0"
+
+#~ msgid "krfb"
+#~ msgstr "Dela Skrivbord"
+
+#~ msgid ""
+#~ "You have requested to share your desktop with %1. If you proceed, you "
+#~ "will allow the remote user to watch your desktop."
+#~ msgstr ""
+#~ "Du har begärt att dela ditt skrivbord med %1. Om du går vidare, kommer du "
+#~ "att tillåta den andra användaren se på ditt skrivbord. "
+
+#~ msgid "Search in Contacts..."
+#~ msgstr "Sök i kontakter..."
+
+#~ msgid "Confirmation"
+#~ msgstr "Bekräftelse"
+
+#~ msgid "Form"
+#~ msgstr "Formulär"
+
+#~ msgid "Failed login attempt from %1: wrong password"
+#~ msgstr "Misslyckat inloggningsförsök av %1: fel lösenord"
+
+#~ msgid "Refused uninvited connection attempt from %1"
+#~ msgstr "Vägrade anslutningsförsök utan inbjudan från %1"
+
+#~ msgid "Invitation"
+#~ msgstr "Inbjudning"
+
+#~ msgid ""
+#~ "An invitation creates a one-time password that allows the receiver to "
+#~ "connect to your desktop.\n"
+#~ "It is valid for only one successful connection and will expire after an "
+#~ "hour if it has not been used. \n"
+#~ "When somebody connects to your computer a dialog will appear and ask you "
+#~ "for permission.\n"
+#~ " The connection will not be established before you accept it. In this "
+#~ "dialog you can also\n"
+#~ " restrict the other person to view your desktop only, without the ability "
+#~ "to move your\n"
+#~ " mouse pointer or press keys.\n"
+#~ "If you want to create a permanent password for Desktop Sharing, allow "
+#~ "'Uninvited Connections' \n"
+#~ "in the configuration."
+#~ msgstr ""
+#~ "En inbjudan skapar ett engångslösenord, som låter mottagaren ansluta till "
+#~ "ditt skrivbord.\n"
+#~ "Det är bara giltigt för en lyckad anslutning, och går ut efter en timme "
+#~ "om det inte har använts.\n"
+#~ "När någon ansluter till datorn, visas en dialogruta som ber dig om "
+#~ "tillåtelse.\n"
+#~ "Anslutningen upprättas inte innan du tillåter den. I dialogrutan kan du "
+#~ "också begränsa\n"
+#~ "den andra personen till att bara titta på skrivbordet, utan möjlighet att "
+#~ "flytta\n"
+#~ "muspekaren eller trycka på tangenter.\n"
+#~ "Om du vill skapa ett permanent lösenord för att dela skrivbord, tillåt "
+#~ "'anslutningar utan inbjudan'\n"
+#~ "i inställningen."
+
+#~ msgid "Ask before allowing a remote connection."
+#~ msgstr "Fråga innan en fjärranslutning tillåts."
+
+#~ msgid ""
+#~ "An invitation creates a one-time password that allows the receiver to "
+#~ "connect to your desktop.\n"
+#~ "It is valid for only one successful connection and will expire after an "
+#~ "hour if it has not been used. \n"
+#~ "When somebody connects to your computer a dialog will appear and ask you "
+#~ "for permission.\n"
+#~ "The connection will not be established before you accept it. In this "
+#~ "dialog you can also\n"
+#~ "restrict the other person to view your desktop only, without the ability "
+#~ "to move your\n"
+#~ "mouse pointer or press keys.\n"
+#~ "If you want to create a permanent password for Desktop Sharing, allow "
+#~ "'Uninvited Connections' \n"
+#~ "in the configuration."
+#~ msgstr ""
+#~ "En inbjudan skapar ett engångslösenord, som låter mottagaren ansluta till "
+#~ "ditt skrivbord.\n"
+#~ "Det är bara giltigt för en lyckad anslutning, och går ut efter en timme "
+#~ "om det inte har använts.\n"
+#~ "När någon ansluter till datorn, visas en dialogruta som ber dig om "
+#~ "tillåtelse.\n"
+#~ "Anslutningen upprättas inte innan du tillåter den. I dialogrutan kan du "
+#~ "också\n"
+#~ "begränsa den andra personen till att bara titta på skrivbordet, utan "
+#~ "möjlighet att flytta\n"
+#~ "muspekaren eller trycka på tangenter.\n"
+#~ "Om du vill skapa ett permanent lösenord för att dela skrivbord, tillåt "
+#~ "'anslutningar utan inbjudan'\n"
+#~ "i inställningen."
+
+#~ msgid ""
+#~ "When sending an invitation by email, note that everybody who reads this "
+#~ "email will be able to connect to your computer for one hour, or until the "
+#~ "first successful connection took place, whichever comes first. \n"
+#~ "You should either encrypt the email or at least send it only in a secure "
+#~ "network, but not over the Internet."
+#~ msgstr ""
+#~ "När du skickar en inbjudan med e-post, observera då att alla som läser "
+#~ "brevet kan ansluta till din dator under en timma, eller fram till den "
+#~ "första lyckade anslutningen skett, vad som än händer först.\n"
+#~ "Du bör antingen kryptera brevet eller åtminstone bara skicka det via ett "
+#~ "säkert nätverk, men inte via Internet."
+
+#~ msgid "Send Invitation via Email"
+#~ msgstr "Skicka inbjudan via e-post"
+
+#~ msgid "Desktop Sharing (VNC) invitation"
+#~ msgstr "Dela skrivbord (VNC) inbjudan"
+
+#~ msgid ""
+#~ "You have been invited to a VNC session. If you have the KDE Remote "
+#~ "Desktop Connection installed, just click on the link below.\n"
+#~ "\n"
+#~ "%1\n"
+#~ "\n"
+#~ "Otherwise you can use any VNC client with the following parameters:\n"
+#~ "\n"
+#~ "Host: %2:%3\n"
+#~ "Password: %4\n"
+#~ "\n"
+#~ "For security reasons this invitation will expire at %5 (%6)."
+#~ msgstr ""
+#~ "Du har blivit inbjuden till en VNC-session. Om du har installerat KDE:s "
+#~ "fjärrskrivbordsanslutning, klicka bara på länken nedan.\n"
+#~ "\n"
+#~ "%1\n"
+#~ "\n"
+#~ "Annars kan du använda vilken VNC-klient som helst med följande "
+#~ "parametrar:\n"
+#~ "\n"
+#~ "Värddator: %2:%3\n"
+#~ "Lösenord: %4\n"
+#~ "\n"
+#~ "Av säkerhetsskäl går inbjudan ut %5 (%6)."
+
+#~ msgid "<qt>Are you sure you want to delete all invitations?</qt>"
+#~ msgstr "<qt>Är du säker på att du vill ta bort alla inbjudningar?</qt>"
+
+#~ msgid "Confirm delete Invitations"
+#~ msgstr "Bekräfta borttagning av inbjudningar"
+
+#~ msgid "<qt>Are you sure you want to delete this invitation?</qt>"
+#~ msgstr "<qt>Är du säker på att du vill ta bort den här inbjudningen?</qt>"
+
+#~ msgid "Personal Invitation"
+#~ msgstr "Personlig inbjudning"
+
+#~ msgid ""
+#~ "Desktop Sharing uses the VNC protocol. You can use any VNC client to "
+#~ "connect. \n"
+#~ "In KDE the client is called 'Remote Desktop Connection'. Enter the host "
+#~ "information\n"
+#~ "into the client and it will connect.."
+#~ msgstr ""
+#~ "Dela skrivbord använder VNC-protokollet. Du kan använda vilken VNC-klient "
+#~ "som helst för att ansluta.\n"
+#~ "I KDE kallas klienten 'Remote Desktop Connection'. Ange "
+#~ "värddatorinformation\n"
+#~ "i klienten så ansluter den."
+
+#~ msgid "Ask before accepting connections"
+#~ msgstr "Fråga innan anslutningar accepteras"
+
+#~ msgid "Allow uninvited connections"
+#~ msgstr "Tillåt anslutningar utan inbjudan"
+
+#~ msgid "Uninvited connections password:"
+#~ msgstr "Lösenord för anslutningar utan inbjudan:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">KDE Desktop Sharing "
+#~ "allows you to invite somebody at a remote location to watch and possibly "
+#~ "control your desktop. <a href=\"whatsthis\">More about invitations...</"
+#~ "a></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">KDE:s utdelning av "
+#~ "skrivbord gör det möjligt att bjuda in någon på en annan plats att titta "
+#~ "på, och möjligen styra, ditt skrivbord. <a href=\"whatsthis\">Mer om "
+#~ "inbjudningar...</a></p></body></html>"
+
+#~ msgid "Creation Time"
+#~ msgstr "Skapad"
+
+#~ msgid "Expire Time"
+#~ msgstr "Utgångstid"
+
+#~ msgid "Create a new personal invitation..."
+#~ msgstr "Skapa en ny personlig inbjudan..."
+
+#~ msgid "Click this button to create a new personal invitation."
+#~ msgstr "Klicka på den här knappen för att skapa en ny personlig inbjudan."
+
+#~ msgid "New &Personal Invitation..."
+#~ msgstr "Ny &personlig inbjudan..."
+
+#~ msgid "Send a new invitation via email..."
+#~ msgstr "Skicka en ny inbjudan via e-post..."
+
+#~ msgid "Click this button to send a new invitation via email."
+#~ msgstr "Klicka på den här knappen för att skicka en ny inbjudan via e-post."
+
+#~ msgid "&New Email Invitation..."
+#~ msgstr "&Ny e-postinbjudan..."
+
+#~ msgid "Delete all invitations"
+#~ msgstr "Ta bort alla inbjudningar"
+
+#~ msgid "Deletes all open invitations."
+#~ msgstr "Tar bort alla öppnade inbjudningar."
+
+#~ msgid "Delete All"
+#~ msgstr "Ta bort alla"
+
+#~ msgid "Delete the selected invitation"
+#~ msgstr "Ta bort den markerade inbjudan"
+
+#~ msgid ""
+#~ "Delete the selected invitation. The invited person will not be able to "
+#~ "connect using this invitation anymore."
+#~ msgstr ""
+#~ "Tar bort den markerade inbjudan. Personen som inbjöds kommer inte att "
+#~ "kunna ansluta med den här inbjudan längre."
+
+#~ msgid "&Delete"
+#~ msgstr "&Ta bort"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Personal Invitation</span></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Give the information "
+#~ "below to the person that you want to invite (<a href=\"htc\">how to "
+#~ "connect</a>). Note that everybody who gets the password can connect, so "
+#~ "be careful.</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Personlig inbjudan</span></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Ge följande information "
+#~ "till personen som du vill bjuda in (<a href=\"htc\">hur man ansluter</"
+#~ "a>). Observera att alla som får lösenordet kan ansluta, så var försiktig."
+#~ "</p></body></html>"
+
+#~ msgid "<b>Host:</b>"
+#~ msgstr "<b>Värddator:</b>"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><a href=\"help\">Help</"
+#~ "a></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><a href=\"help\">Hjälp</"
+#~ "a></p></body></html>"
+
+#~ msgid "<b>Expiration time:</b>"
+#~ msgstr "<b>Utgångstid:</b>"
+
+#~ msgid "An error occurred sharing your desktop."
+#~ msgstr "Ett fel uppstod när ditt skrivbord skulle delas."
+
+#~ msgid "Error"
+#~ msgstr "Fel"
+
+#~ msgid "An unknown error occurred sharing your desktop."
+#~ msgstr "Ett okänt fel uppstod när ditt skrivbord skulle delas."
+
+#~ msgid "Failed to activate the rfb server."
+#~ msgstr "Misslyckades aktivera rfb-servern."
+
+#~ msgid ""
+#~ "An error occurred sharing your desktop. The person you are trying to "
+#~ "share your desktop with does not have the required software installed to "
+#~ "access it."
+#~ msgstr ""
+#~ "Ett fel uppstod när ditt skrivbord skulle delas. Personen du försöker "
+#~ "dela det med har inte nödvändig programvara installerad för att kunna "
+#~ "komma åt det."
+
+#~ msgid "Address already in use"
+#~ msgstr "Adressen används redan"
+
+#~ msgid "Ian Reinhart Geiser"
+#~ msgstr "Ian Reinhart Geiser"
+
+#~ msgid "DCOP interface"
+#~ msgstr "DCOP-gränssnitt"
+
+#~ msgid "Jens Wagner (heXoNet Support GmbH)"
+#~ msgstr "Jens Wagner (heXoNet-stöd GmbH)"
+
+#~ msgid "X11 update scanner, original code base"
+#~ msgstr "X11-uppdateringsavsökning, ursprunglig kodbas"
+
+#~ msgid "Jason Spisak"
+#~ msgstr "Jason Spisak"
+
+#~ msgid "Karl Vogel"
+#~ msgstr "Karl Vogel"
+
+#~ msgid "KDesktop background deactivation"
+#~ msgstr "Inaktivering av K-skrivbordets bakgrund"
+
+#~ msgid "Disable Remote Control"
+#~ msgstr "Inaktivera fjärrstyrning"
+
+#~ msgid "The remote user has closed the connection."
+#~ msgstr "Fjärranvändaren har stängt anslutningen."
+
+#~ msgid "The remote user has been authenticated and is now connected."
+#~ msgstr "Fjärranvändaren har autentiserats och är nu ansluten."

@@ -1,0 +1,485 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY % addindex "IGNORE">
+  <!ENTITY % Serbian-Latin "INCLUDE">
+]>
+
+<book id="krfb" lang="&language;">
+
+<bookinfo>
+<title
+>Priručnik za <application
+>KRFB</application
+></title>
+
+<authorgroup>
+<author
+><personname
+><firstname
+>Bred</firstname
+> <surname
+>Hards</surname
+></personname
+> &Brad.Hards.mail; </author>
+<othercredit role="translator"
+><firstname
+>Dragan</firstname
+><surname
+>Pantelić</surname
+><affiliation
+><address
+><email
+>falcon-10@gmx.de</email
+></address
+></affiliation
+><contrib
+>prevod</contrib
+></othercredit
+> 
+</authorgroup>
+
+<copyright>
+<year
+>2003</year>
+<holder
+>Bred Hards</holder>
+</copyright>
+
+<legalnotice
+>&FDLNotice;</legalnotice>
+
+<date
+>25. 7. 2016.</date>
+<releaseinfo
+>5.0 (Programi KDE‑a 16.08)</releaseinfo>
+
+<abstract>
+<para
+><application
+>KRFB</application
+> je serverski program koji omogućava deljenje tekuće sesije sa korisnikom na drugom računaru, koji pomoću VNC klijenta može da gleda ili čak upravlja vašom površi. </para>
+</abstract>
+
+<keywordset>
+<keyword
+>KDE</keyword>
+<keyword
+>kdenetwork</keyword>
+<keyword
+>KRFB</keyword>
+<keyword
+>VNC</keyword>
+<keyword
+>RFB</keyword>
+<keyword
+>KRDC</keyword>
+<keyword
+>deljenje površi</keyword>
+<keyword
+>udaljeno upravljanje</keyword>
+<keyword
+>udaljena pomoć</keyword>
+<keyword
+>udaljena površ</keyword>
+</keywordset>
+
+</bookinfo>
+
+<chapter id="introduction">
+<title
+>Uvod</title>
+
+<para
+><application
+>KRFB</application
+> je serverski program koji omogućava deljenje tekuće sesije sa korisnikom na drugom računaru, koji pomoću VNC klijenta može da gleda ili čak upravlja vašom površi. </para>
+
+<para
+><application
+>KRFB</application
+> ćete obično koristiti u paru sa KDE‑ovim VNC klijentom <application
+>KRDC‑om</application
+>, pošto temeljno podržava specijalne mogućnosti <application
+>KRFB‑a</application
+>. </para>
+
+<para
+><application
+>KRFB</application
+> ne zahteva pokretanje nove X sesije, već može da deli tekuću. Ovo ga čini veoma korisnim kada želite da vam neko pomogne da obavite neki zadatak. </para>
+
+<para
+>Bilo kakve probleme ili zahteve za mogućnostima prijavite na KDE‑ove poštanske liste, ili podnesite izveštaj o grešci na <ulink url="http://bugs.kde.org"
+>http://bugs.kde.org</ulink
+>. </para>
+</chapter>
+
+<chapter id="what-is-RFB">
+<title
+>Protokol udaljenog kadrobafera</title>
+
+<para
+>Ovo poglavlje daje kratak opis protokola udaljenog kadrobafera, koji koriste <application
+>KRDC</application
+> i drugi saglasni sistemi. Ako vam je udaljeni kadrobafer već poznat, slobodno možete preskočiti ovo poglavlje. </para>
+
+<para
+>Izvedba visokog nivoa sistema koji koristi protokol udaljenog kadrobafera naziva se „virtuelnim mrežnim računarom“, češće samo akronimom VNC. </para>
+
+<para
+>Udaljeni kadrobafer (skraćeno RFB) jednostavan je protokol za udaljeni pristup grafičkim korisničkim sučeljima. Radi na nivou kadrobafera, koji u grubim crtama odgovara renderovanoj slici na ekranu, što znači da se može primeniti na sve prozorske sisteme (uključujući X11, MacOS i Windows). Programi za udaljeni kadrobafer postoje za mnoge platforme i često se mogu besplatno distribuirati. </para>
+
+<para
+>U protokolu udaljenog kadrobafera, program koji se izvršava na računaru za kojim sedi korisnik (računar koji daje ekran, tastaturu i pokazivač) zove se klijent. Program koji se izvršava na računaru gde se nalazi kadrobafer (računar koji izvršava prozorski sistem i programe kojima korisnik daljinski upravlja) zove se server. <application
+>KRDC</application
+> je KDE‑ov klijent, a <application
+>KRFB</application
+> KDE‑ov server za protokol udaljenog kadrobafera. </para>
+
+<para
+>Za slanje slike iz kadrobafera neophodno je prilično mrežnog saobraćaja, te protokol udaljenog kadrobafera najbolje radi preko veza visoke propusnosti, poput lokalne mreže. Moguće je koristiti <application
+>KRFB</application
+> i preko drugih veza, ali je malo verovatno da će učinak biti jednako dobar. </para>
+
+</chapter>
+
+<chapter id="using-krfb">
+<title
+>Korišćenje <application
+>KRFB‑a</application
+></title>
+
+<sect1 id="main-windw">
+<title
+>Glavni prozor <application
+>KRFB‑a</application
+>.</title>
+<para
+><application
+>KRFB</application
+> je vrlo lak za upotrebu — ima jednostavno sučelje, prikazano na narednom snimku ekrana. </para>
+
+<para>
+<screenshot>
+<screeninfo
+>Snimak ekrana <application
+>KRFB‑a</application
+>.</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="screenshot.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Glavni prozor <application
+>KRFB‑a</application
+>.</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Ako želite da dozvolite nekom pristup svojoj površi morate da popunite kućicu <guilabel
+>Deljenje površi</guilabel
+>, što će pokrenuti server. </para>
+
+<sect2 id="connection-details">
+<title
+>Detalji o vezi</title>
+
+<para
+>Polje <guilabel
+>Adresa</guilabel
+> sadrži adresu vašeg računara i broj porta na njemu, razdvojene dvotačkom. Adresa je samo nagoveštaj — može se upotrebiti svaka adresa koja vodi ka vašem računaru. <application
+>KRFB</application
+> će pokušati da pogodi adresu na osnovu mrežne postave, ali ne mora uvek uspeti u tome. Ako vam je računar iza zaštitnog zida, može imati različitu adresu ili biti nedostupan sa drugih računara. </para>
+<para
+>Port možete promeniti na stranici <guilabel
+>Mreža</guilabel
+> u dijalogu za podešavanje. </para>
+<para
+>Naredno polje biva automatski popunjeno generisanom lozinkom. Kliknite na ikonicu desno od polja da izmenite lozinku. </para>
+</sect2>
+
+<sect2 id="unattended-access">
+<title
+>Nenadzirani pristup</title>
+
+<para
+>Svaki udaljeni korisnik sa lozinkom za deljenje površi moraće da bude autentifikovan. Ako se aktivira nenadzirani pristup, i udaljeni korisnik unese lozinku za nenadzirani režim, pristup deljenju površi biće dozvoljen bez izričite potvrde. </para>
+<para
+>Podrazumevano je lozinka za ovaj režim prazna. Ako želite da je izmenite, kliknite na dugme i unesite lozinku. </para>
+<para
+>Ako je nenadzirani pristup dozvoljen, verovatno bi trebalo da zadate lozinku. </para>
+
+<para
+>Ako je računar server i koristite <application
+>KRFB</application
+> za udaljeno administriranje, verovatno želite da koristite i nenadzirani pristup. </para>
+
+</sect2>
+
+<sect2 id="transfer-login-information">
+<title
+>Prenos podataka za prijavu</title>
+
+<para
+><application
+>KRFB</application
+> više ne poseduje mogućnost pozivnica, kao u ranijim izdanjima. Tako da ćete morati sami da prenesete podatke za prijavu, npr. preko e‑pošte ili uživo. </para>
+<para
+>Ako ne možete da šifrujete e‑poštu (ili drugačije obezbedite vezu), slanje lozinke e‑poštom je veoma ozbiljan bezbednosni rizik, pošto bilo ko može da pročita i lozinku i adresu e‑pošte dok poruka prolazi kroz mrežu. To znači da neko potencijalno može da preuzme kontrolu nad vašim računarom. </para>
+<para
+>Zato, ako poruka e‑pošte ne može da se šifruje, bolje upotrebite ličnu pozivnicu. Telefonom pozovite osobu kojoj želite da date pristup, uverite se u njen identitet, pa prosledite neophodne podatke. </para>
+
+<note>
+<para
+><application
+>KRFB</application
+> koristi uobičajeni RFB sistem lozinki, koji vašu lozinku ne prenosi kao čist tekst preko mreže. Umesto toga, koristi se sistem izazov—odziv. Ovo je razložno bezbedno sve dok je lozinka čuvana na sigurnom. </para>
+</note>
+
+</sect2>
+
+<sect2 id="krfb-qqit">
+<title
+>Napuštanje <application
+>KRFB‑a</application
+></title>
+
+<para
+>Pošto zatvorite prozor <application
+>KRFB‑a</application
+>, klikom na ikonicu za zatvaranje prozora ili prečicom <keycombo action="simul"
+><keycap
+>Alt</keycap
+><keycap
+>F4</keycap
+></keycombo
+>, server i dalje nastavlja da radi, na šta ukazuje ikonica u sistemskoj kaseti. <application
+>KRFB</application
+> zaustavljate ili tako što upotrebite <menuchoice
+><guimenu
+>Fajl</guimenu
+><guimenuitem
+>Napusti</guimenuitem
+></menuchoice
+> u glavnom prozoru, ili tako što kliknete desnim na ikonicu u sistemskoj kaseti i izaberete <guimenuitem
+>Napusti</guimenuitem
+>. </para>
+</sect2>
+
+</sect1>
+
+<sect1 id="krfb-configuration">
+<title
+>Podešavanje <application
+>KRFB‑a</application
+></title>
+<para
+>U dodatak glavnom sučelju <application
+>KRFB‑a</application
+>, prikazanom i opisanom u prethodnom, <application
+>KRFB‑om</application
+> možete upravljati i klikom na <guimenuitem
+>Podesi KRFB...</guimenuitem
+> u glavnom prozoru <application
+>KRFB‑a</application
+>. Postava <application
+>KRFB‑a</application
+> sastoji se od dve stranice, kao na donjem snimku ekrana: </para>
+
+<para
+>Kao što je prikazano ispod, stranica <guilabel
+>Mreža</guilabel
+> omogućava zadavanje porta koji <application
+>KRFB</application
+> koristi. </para>
+
+<para>
+<screenshot>
+<screeninfo
+>Postava <application
+>KRFB‑a</application
+>, stranica <guilabel
+>Mreža</guilabel
+>.</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="configuration_network.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Postava <application
+>KRFB‑a</application
+>, stranica <guilabel
+>Mreža</guilabel
+>.</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Kućica <guilabel
+>Objavi servis na lokalnoj mreži</guilabel
+> određuje da li <application
+>KRFB</application
+> objavljuje servis preko lokalne mreže koristeći protokol lokacije servisa. Ovo je obično dobra ideja, mada pravilno funkcioniše samo s klijentom svesnim ovog protokola, kao što je <application
+>KRDC</application
+>. </para>
+
+<para
+>Ako popunite kućicu <guilabel
+>Koristi podrazumevani port</guilabel
+>, <application
+>KRFB</application
+> će pronaći prikladan port. Ako ispraznite ovu kućicu, možete ručno zadati port. Ovo može biti korisno ako prosleđujete portove kroz zaštitni zid. Imajte u vidu da ako je uključen protokol lokacije servisa, automatski će se identifikovati pravi port. </para>
+
+<para
+>Na stranici <guilabel
+>Bezbednost</guilabel
+> podešava se da li osoba koja se poveže na server <application
+>KRFB‑a</application
+> može da upravlja na površi, ili samo da gleda. </para>
+
+<para>
+<screenshot>
+<screeninfo
+>Postava <application
+>KRFB‑a</application
+>, stranica <guilabel
+>Bezbednost</guilabel
+>.</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="configuration_security.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Postava <application
+>KRFB‑a</application
+>, stranica <guilabel
+>Bezbednost</guilabel
+>.</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+</sect1>
+
+<sect1 id="krfb-connection">
+<title
+>Povezivanje na <application
+>KRFB</application
+></title>
+
+<para
+>Kad se neko povezuje na <application
+>KRFB</application
+> na vašem računaru, dobićete iskačuće obaveštenje koje izgleda kao na sledećem snimku ekrana (osim ako ne prihvatate nenadzirani pristup bez potvrde). </para>
+<para>
+<screenshot>
+<screeninfo
+><application
+>KRFB‑ov</application
+> prozor o povezivanju.</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="connection.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+><application
+>KRFB‑ov</application
+> prozor o povezivanju.</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Ako kliknite na <guibutton
+>Prihvati vezu</guibutton
+>, klijent može preći na autentifikovanje, što zahteva ispravnu lozinku za prijavu. Ako kliknete na <guibutton
+>Odbij vezu</guibutton
+>, pokušaj povezivanja će biti prekinut. </para>
+
+<para
+>Kućica <guilabel
+>Dozvoli udaljenom korisniku da kontroliše tastaturu i miš</guilabel
+> određuje da li ovaj klijent može samo da posmatra, ili i da upravlja vašim računarom. </para>
+
+</sect1>
+</chapter>
+
+<chapter id="credits">
+
+<title
+>Zasluge i licenca</title>
+
+<para
+><application
+>KRFB</application
+> </para>
+<para
+>Program: © 2002, <personname
+><firstname
+>Tim</firstname
+> <surname
+>Jansen</surname
+></personname
+> <email
+>tim@tjansen.de</email
+> </para>
+<para
+>Doprinosioci: <itemizedlist
+> <listitem
+><para
+><personname
+><firstname
+>Jan</firstname
+> <othername
+>Rejnhart</othername
+> <surname
+>Gejzer</surname
+></personname
+> <email
+>geiseri@kde.org</email
+></para>
+</listitem>
+</itemizedlist>
+</para>
+
+<para
+>Dokumentacija: © 2003, <personname
+><firstname
+>Bred</firstname
+> <surname
+>Hards</surname
+></personname
+> &Brad.Hards.mail; </para>
+
+<para
+>Preveo Dragan Pantelić <email
+>falcon-10@gmx.de</email
+>.</para
+> 
+&underFDL; &underGPL; </chapter>
+
+&documentation.index;
+</book>
+
+<!--
+Local Variables:
+mode: xml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-indent-step:0
+sgml-indent-data:nil
+End:
+
+vim:tabstop=2:shiftwidth=2:expandtab 
+-->

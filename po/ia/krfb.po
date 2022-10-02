@@ -1,0 +1,1051 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# g.sora <g.sora@tiscali.it>, 2011, 2012, 2013, 2014, 2020, 2021.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-07-18 00:45+0000\n"
+"PO-Revision-Date: 2021-11-03 14:22+0100\n"
+"Last-Translator: giovanni <g.sora@tiscali.it>\n"
+"Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
+"Language: ia\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 20.04.2\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Giovanni Sora"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "g.sora@tiscali.it"
+
+#: connectiondialog.cpp:39
+#, kde-format
+msgid "New Connection"
+msgstr "Nove connexion"
+
+#: connectiondialog.cpp:61
+#, kde-format
+msgid "Accept Connection"
+msgstr "Da acceptation a connexion"
+
+#: connectiondialog.cpp:65
+#, kde-format
+msgid "Refuse Connection"
+msgstr "Refusa connexion"
+
+#: invitationsrfbclient.cpp:69
+#, kde-format
+msgid "Accepted connection from %1"
+msgstr "Connexion acceptate ex %1"
+
+#: invitationsrfbclient.cpp:75
+#, kde-format
+msgid "Received connection from %1, on hold (waiting for confirmation)"
+msgstr "Connexion recipite ex %1, occupate (pausante per confirmation)"
+
+#: invitationsrfbserver.cpp:55
+#, kde-format
+msgid "%1@%2 (shared desktop)"
+msgstr "%1@%2 (scriptorio compartite)"
+
+#. i18n: ectx: label, entry (startMinimized), group (MainWindow)
+#: krfb.kcfg:9
+#, kde-format
+msgid "Start minimized"
+msgstr "Starta minimisate"
+
+#. i18n: ectx: label, entry (useDefaultPort), group (TCP)
+#: krfb.kcfg:15
+#, kde-format
+msgid "Use the default port for VNC (5900)"
+msgstr "Usa le porto predefinite per VNC (5900)"
+
+#. i18n: ectx: label, entry (port), group (TCP)
+#: krfb.kcfg:19
+#, kde-format
+msgid "This is the port on which krfb will listen."
+msgstr "Isto es le porto sur le qual krfb ascoltara."
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_publishService)
+#. i18n: ectx: label, entry (publishService), group (TCP)
+#: krfb.kcfg:23 ui/configtcp.ui:16
+#, kde-format
+msgid "Announce the service on the local network"
+msgstr "Annuncia le servicio sur le rete local"
+
+#. i18n: ectx: label, entry (noWallet), group (Security)
+#: krfb.kcfg:29
+#, kde-format
+msgid "Do not store passwords in KWallet"
+msgstr "Non immagazina contrasignos in KWallet"
+
+#. i18n: ectx: label, entry (allowDesktopControl), group (Security)
+#: krfb.kcfg:33
+#, kde-format
+msgid "Allow remote connections to manage the desktop."
+msgstr "Permitte a connexiones remote de gerer le scriptorio."
+
+#. i18n: ectx: label, entry (allowUnattendedAccess), group (Security)
+#: krfb.kcfg:37
+#, kde-format
+msgid "Allow connections without an invitation."
+msgstr "Permitte connexiones sin un invitation."
+
+#. i18n: ectx: label, entry (unattendedAccessPassword), group (Security)
+#. i18n: ectx: label, entry (desktopSharingPassword), group (Security)
+#: krfb.kcfg:41 krfb.kcfg:44
+#, kde-format
+msgid "Password for uninvited connections."
+msgstr "Contrasigno per connexiones non invitate."
+
+#. i18n: ectx: label, entry (preferredFrameBufferPlugin), group (FrameBuffer)
+#: krfb.kcfg:49
+#, kde-format
+msgid "Preferred Frame Buffer Plugin"
+msgstr "Preferite Plugin Buffer de quadro"
+
+#: main-virtualmonitor.cpp:49
+#, kde-format
+msgid "Creating a Virtual Monitor from %1"
+msgstr "Creante un MOnitor Virtual ex %1"
+
+#: main-virtualmonitor.cpp:80
+#, kde-format
+msgid "Remote Virtual Monitor"
+msgstr "Monitor Virtual Remote"
+
+#: main-virtualmonitor.cpp:82
+#, kde-format
+msgid "Offer a Virtual Monitor that can be accessed remotely"
+msgstr "Offere un Monitor virtual que pote esser accessite remotemente"
+
+#: main-virtualmonitor.cpp:84 main.cpp:98
+#, kde-format
+msgid ""
+"(c) 2009-2010, Collabora Ltd.\n"
+"(c) 2007, Alessandro Praduroux\n"
+"(c) 2001-2003, Tim Jansen\n"
+"(c) 2001, Johannes E. Schindelin\n"
+"(c) 2000-2001, Const Kaplinsky\n"
+"(c) 2000, Tridia Corporation\n"
+"(c) 1999, AT&T Laboratories Boston\n"
+msgstr ""
+"(c) 2009-2010, Collabora Ltd.\n"
+"(c) 2007, Alessandro Praduroux\n"
+"(c) 2001-2003, Tim Jansen\n"
+"(c) 2001, Johannes E.Schindelin\n"
+"(c) 2000-2001, Const Kaplinsky\n"
+"(c) 2000, Tridia Corporation\n"
+"(c) 1999, AT&T Laboratories Boston\n"
+
+#: main-virtualmonitor.cpp:91
+#, kde-format
+msgid "Virtual Monitor implementation"
+msgstr "Implementation de Monitor Virtual"
+
+#: main-virtualmonitor.cpp:92 main.cpp:108
+#, kde-format
+msgid "George Kiagiadakis"
+msgstr "George Kiagiadakis"
+
+#: main-virtualmonitor.cpp:93 main.cpp:111
+#, kde-format
+msgid "Alessandro Praduroux"
+msgstr "Alessandro Praduroux"
+
+#: main-virtualmonitor.cpp:93 main.cpp:111
+#, kde-format
+msgid "KDE4 porting"
+msgstr "Portar a KDE4"
+
+#: main-virtualmonitor.cpp:94 main.cpp:112
+#, kde-format
+msgid "Tim Jansen"
+msgstr "Tim Jansen"
+
+#: main-virtualmonitor.cpp:94 main.cpp:112
+#, kde-format
+msgid "Original author"
+msgstr "Autor original"
+
+#: main-virtualmonitor.cpp:95 main.cpp:113
+#, kde-format
+msgid "Johannes E. Schindelin"
+msgstr "Johannes E.Schindelin"
+
+#: main-virtualmonitor.cpp:96 main.cpp:114
+#, kde-format
+msgid "libvncserver"
+msgstr "libvncserver"
+
+#: main-virtualmonitor.cpp:97 main.cpp:115
+#, kde-format
+msgid "Const Kaplinsky"
+msgstr "Const Kaplinsky"
+
+#: main-virtualmonitor.cpp:98 main.cpp:116
+#, kde-format
+msgid "TightVNC encoder"
+msgstr "Codificator TightVNC"
+
+#: main-virtualmonitor.cpp:99 main.cpp:117
+#, kde-format
+msgid "Tridia Corporation"
+msgstr "Tridia Corporation"
+
+#: main-virtualmonitor.cpp:100 main.cpp:118
+#, kde-format
+msgid "ZLib encoder"
+msgstr "Codificator ZLib"
+
+#: main-virtualmonitor.cpp:101 main.cpp:119
+#, kde-format
+msgid "AT&T Laboratories Boston"
+msgstr "AT&T Laboratories Boston"
+
+#: main-virtualmonitor.cpp:102 main.cpp:120
+#, kde-format
+msgid "original VNC encoders and protocol design"
+msgstr "codificatores original VNC e designo de protocollo "
+
+#: main-virtualmonitor.cpp:108
+#, kde-format
+msgid "Logical resolution of the new monitor"
+msgstr "Resolution logic del nove monitor"
+
+#: main-virtualmonitor.cpp:108
+#, kde-format
+msgid "resolution"
+msgstr "R resolution"
+
+#: main-virtualmonitor.cpp:110
+#, kde-format
+msgid "Name of the monitor"
+msgstr "Nomine del monitor"
+
+#: main-virtualmonitor.cpp:110
+#, kde-format
+msgid "name"
+msgstr "nomine"
+
+#: main-virtualmonitor.cpp:112
+#, kde-format
+msgid "Password for the client to connect to it"
+msgstr "Contrasigno per le cliente de connecter a illo"
+
+#: main-virtualmonitor.cpp:112
+#, kde-format
+msgid "password"
+msgstr "contrasigno"
+
+#: main-virtualmonitor.cpp:114
+#, kde-format
+msgid "The device-pixel-ratio of the device, the scaling factor"
+msgstr "Le ratio de pixel del dispositivo, le factor de scala"
+
+#: main-virtualmonitor.cpp:114
+#, kde-format
+msgid "dpr"
+msgstr "dpr"
+
+#: main-virtualmonitor.cpp:116
+#, kde-format
+msgid "The port we will be listening to"
+msgstr "Le porto ubi nos ascoltara"
+
+#: main-virtualmonitor.cpp:116
+#, kde-format
+msgid "number"
+msgstr "numero"
+
+#: main.cpp:49
+#, kde-format
+msgid ""
+"Your X11 Server does not support the required XTest extension version 2.2. "
+"Sharing your desktop is not possible."
+msgstr ""
+"Tu servitor X11 non supporta le requirite extension XTest version 2.2. Il "
+"non es possibile compartir tu scriptorio."
+
+#: main.cpp:51 main.cpp:150
+#, kde-format
+msgid "Desktop Sharing Error"
+msgstr "Error de compartir scriptorio"
+
+#: main.cpp:94
+#, kde-format
+msgid "Desktop Sharing"
+msgstr "Compartir de scriptorio"
+
+#: main.cpp:96
+#, kde-format
+msgid "VNC-compatible server to share desktops"
+msgstr "Servitor compatibile con VNC pro compartir scriptorios"
+
+#: main.cpp:105
+#, kde-format
+msgid "George Goldberg"
+msgstr "George Goldberg"
+
+#: main.cpp:106
+#, kde-format
+msgid "Telepathy tubes support"
+msgstr "Supporto de tubos de Telepathy"
+
+#: main.cpp:126
+#, kde-format
+msgid "Do not show the invitations management dialog at startup"
+msgstr "Non monstrar dialogo de gestion de invitationes al initio"
+
+#: main.cpp:148
+#, kde-format
+msgid ""
+"Desktop Sharing is not running under an X11 Server or Wayland.\n"
+"Other display servers are currently not supported."
+msgstr ""
+"Desktop Sharing non es executante sub un Servitor X11 o Waylans.\n"
+"altere servitores es currentemente non supportate."
+
+#: mainwindow.cpp:52
+#, kde-format
+msgid "Storing passwords in config file is insecure!"
+msgstr "Immgazinar contrasignos in file de config es insecure!"
+
+#: mainwindow.cpp:189
+#, kde-format
+msgid "Enter a new password for Unattended Access"
+msgstr "Inserta un nove contrasigno pro Accesso non assistite"
+
+#: mainwindow.cpp:200
+#, kde-format
+msgid ""
+"Failed to start the krfb server. Desktop sharing will not work. Try setting "
+"another port in the settings and restart krfb."
+msgstr ""
+"Il falleva a initiar servitor krfb. Compartir de scriptorio non functionara. "
+"Essaya fixar un altere porto in le preferentias e reinitia krfb."
+
+#. i18n: ectx: property (whatsThis), widget (QLabel, titleLabel)
+#. i18n: ectx: property (text), widget (QLabel, titleLabel)
+#. i18n: ectx: property (whatsThis), widget (QLabel, aboutLabel)
+#: mainwindow.cpp:223 mainwindow.cpp:230 ui/mainwidget.ui:83
+#: ui/mainwidget.ui:86 ui/mainwidget.ui:114
+#, kde-format
+msgid "KDE Desktop Sharing"
+msgstr "KDE DesktopSharing (Compartir de scriptorio de KDE)"
+
+#: mainwindow.cpp:224
+#, kde-format
+msgid ""
+"This field contains the address of your computer and the port number, "
+"separated by a colon.\n"
+"\n"
+"The address is just a hint - you can use any address that can reach your "
+"computer.\n"
+"\n"
+"Desktop Sharing tries to guess your address from your network configuration, "
+"but does not always succeed in doing so.\n"
+"\n"
+"If your computer is behind a firewall it may have a different address or be "
+"unreachable for other computers."
+msgstr ""
+"Iste campo contine le adresse de tu computator e le numero de  porto, "
+"separate per duo punctos.\n"
+"\n"
+"Le adresse es solmente un suggestion - tu pote usar ulle adresse que pote "
+"attinger tu computator\n"
+"\n"
+"Compartir de Scriptorio essaya conjecturar tu adresse ex tu configuration de "
+"rete, ma non sempre succede in facer assi.\n"
+"\n"
+" Si tu computator es retro de un  talia foco il pote haber unadresse "
+"differente o esser non accessibile per altere computatores. "
+
+#: mainwindow.cpp:231
+#, kde-format
+msgid ""
+"Any remote user with normal desktop sharing password will have to be "
+"authenticated.\n"
+"\n"
+"If unattended access is on, and the remote user provides unattended mode "
+"password, desktop sharing access will be granted without explicit "
+"confirmation."
+msgstr ""
+"Ulle usator remote con contrasigno normal de copratir de scriptorio debera "
+"esser authenticate:\n"
+"\n"
+"Si le accesso non assistite es active, e le usator forni un contrasigno de "
+"modo non assistite, le accesso de scriptorio compartite essera accordate sin "
+"confirmation expliicite."
+
+#: mainwindow.cpp:249
+#, kde-format
+msgid "Network"
+msgstr "Rete"
+
+#: mainwindow.cpp:250
+#, kde-format
+msgid "Security"
+msgstr "Securitate"
+
+#: mainwindow.cpp:251
+#, kde-format
+msgid "Screen capture"
+msgstr "Captura de schermo"
+
+#: mainwindow.cpp:256
+#, kde-format
+msgid "To apply framebuffer plugin setting, you need to restart the program."
+msgstr ""
+"Per applicar preferentia de plugin de framebuffer, tu necessita restartar le "
+"programma."
+
+#: rfbservermanager.cpp:229
+#, kde-format
+msgid "The remote user %1 is now connected."
+msgstr "Le usator remote %1 es hora connectite."
+
+#: rfbservermanager.cpp:243
+#, kde-format
+msgid "The remote user %1 disconnected."
+msgstr "Le usator remote %1 es disconnectite."
+
+#: trayicon.cpp:56
+#, kde-format
+msgid "Disconnect"
+msgstr "Disconnecte"
+
+#: trayicon.cpp:62
+#, kde-format
+msgid "Enable Remote Control"
+msgstr "Habilita controlo remote"
+
+#: trayicon.cpp:101 trayicon.cpp:133
+#, kde-format
+msgid "Desktop Sharing - disconnected"
+msgstr "Compartir de Scriptorio - disconnectite"
+
+#: trayicon.cpp:117 trayicon.cpp:137
+#, kde-format
+msgid "Desktop Sharing - connected with %1"
+msgstr "Compartir de Scriptorio - connectite con %1"
+
+#: trayicon.cpp:120
+#, kde-format
+msgid "Desktop Sharing - connected"
+msgstr "Compartir de Scriptorio - connectite"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, Framebuffer)
+#: ui/configframebuffer.ui:14
+#, kde-format
+msgid "Framebuffer"
+msgstr "Framebuffer"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: ui/configframebuffer.ui:22
+#, kde-format
+msgid "Preferred frameb&uffer plugin:"
+msgstr "Preferite Plugin Buffer de quadro (frameb&uffer):"
+
+#. i18n: ectx: property (text), widget (QLabel, helpText)
+#: ui/configframebuffer.ui:47
+#, kde-format
+msgid ""
+"<html><head/><body><p>When using x11, <span style=\" font-weight:600;\">xcb</"
+"span> plugin should be preferred, because it is more performant.<br/><span "
+"style=\" font-weight:600;\">qt</span> plugin is a safe fallback, if for some "
+"reason others don't work. But also it is very slow.</p></body></html>"
+msgstr ""
+"<html><head/><body><p>quando on usa x11, plugin <span style=\" font-"
+"weight:600;\">xcb</span> deberea esser preferite, proque illo es plus "
+"effective. Plugin <br/><span style=\" font-weight:600;\">qt</span> es  un "
+"secur recadita, si per alcun ration alteres non functiona. Ma tamben illo es "
+"multe lente.</p></body></html>"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_allowDesktopControl)
+#: ui/configsecurity.ui:17
+#, kde-format
+msgid "Allow remote connections to control your desktop"
+msgstr "Permitte a connexiones remote de controlar tu scriptorio"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_noWallet)
+#: ui/configsecurity.ui:27
+#, kde-format
+msgid "Do not store passwords using KDE wallet"
+msgstr "Non immagazina contrasignos usante portafolio (wallet) de KDE"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_useDefaultPort)
+#: ui/configtcp.ui:26
+#, kde-format
+msgid "Use default port"
+msgstr "Usa porto predefinite"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: ui/configtcp.ui:50
+#, kde-format
+msgid "Listening port:"
+msgstr "Porto ascoltante:"
+
+#. i18n: ectx: property (text), widget (QLabel, TextLabel5)
+#: ui/connectionwidget.ui:47
+#, kde-format
+msgid "Attention"
+msgstr "Attention"
+
+#. i18n: ectx: property (text), widget (QLabel, mainTextLabel)
+#: ui/connectionwidget.ui:72
+#, kde-format
+msgid ""
+"Somebody is requesting a connection to your computer. Granting this will "
+"allow the remote user to watch your desktop. "
+msgstr ""
+"Alcun es requirente un connexion a tu computator.  Accordar isto permittera "
+"al usator remote de observar tu scriptorio. "
+
+#. i18n: ectx: property (text), widget (QLabel, TextLabel1)
+#: ui/connectionwidget.ui:102
+#, kde-format
+msgid "Remote system:"
+msgstr "Systema remote:"
+
+#. i18n: ectx: property (text), widget (QLabel, remoteHost)
+#: ui/connectionwidget.ui:118
+#, kde-format
+msgid "123.234.123.234"
+msgstr "123.234.123.234"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, cbAllowRemoteControl)
+#: ui/connectionwidget.ui:136
+#, kde-format
+msgid ""
+"If you turn this option on, the remote user can enter keystrokes and use "
+"your mouse pointer. This gives them full control over your computer, so be "
+"careful. When the option is disabled the remote user can only watch your "
+"screen."
+msgstr ""
+"Si tu activa iste option, le usator remote  potera entrar claves e usar tu "
+"punctator de mus. Isto da a illos plen controlo supra tu computator, assi tu "
+"debe esser caute. Quando le option es dis-habilitate le usator remote potera "
+"observar tu schermo."
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbAllowRemoteControl)
+#: ui/connectionwidget.ui:139
+#, kde-format
+msgid "Allow remote user to &control keyboard and mouse"
+msgstr "Permitte a usator remote de &controlar claviero e mus"
+
+#. i18n: ectx: property (text), widget (QLabel, aboutLabel)
+#: ui/mainwidget.ui:117
+#, kde-format
+msgid ""
+"KDE Desktop Sharing allows you to grant permission to someone at a remote "
+"location for viewing and possibly controlling your desktop."
+msgstr ""
+"Compartir de Scriptorio de KDE permitte te accordar permission a alcun a un "
+"location remote pro observar e possibilemente  controlar tu scriptorio. "
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, enableSharingCheckBox)
+#: ui/mainwidget.ui:145
+#, kde-format
+msgid "Starts/Stops Remote Desktop Sharing"
+msgstr "Initia/Stoppa  Compartir de scriptorio remote"
+
+#. i18n: ectx: property (text), widget (QCheckBox, enableSharingCheckBox)
+#: ui/mainwidget.ui:148
+#, kde-format
+msgid "&Enable Desktop Sharing"
+msgstr "&Habilita Compartir de scriptorio"
+
+#. i18n: ectx: property (title), widget (QGroupBox, detailsGroupBox)
+#: ui/mainwidget.ui:170
+#, kde-format
+msgid "Connection Details"
+msgstr "Detalios de connexion"
+
+#. i18n: ectx: property (text), widget (QLabel, addressLabel)
+#: ui/mainwidget.ui:193
+#, kde-format
+msgid "&Address"
+msgstr "&Adresse"
+
+#. i18n: ectx: property (whatsThis), widget (QToolButton, addressAboutButton)
+#: ui/mainwidget.ui:214
+#, kde-format
+msgid "More about this address"
+msgstr "Altere cosas re iste adresse"
+
+#. i18n: ectx: property (text), widget (QToolButton, addressAboutButton)
+#. i18n: ectx: property (text), widget (QToolButton, unattendedAboutButton)
+#: ui/mainwidget.ui:217 ui/mainwidget.ui:397
+#, kde-format
+msgid "About"
+msgstr "Re"
+
+#. i18n: ectx: property (whatsThis), widget (QLabel, addressDisplayLabel)
+#: ui/mainwidget.ui:235
+#, kde-format
+msgid ""
+"Address required by remote users to connect to your desktop. Click about "
+"button on the right for more info."
+msgstr ""
+"Adresse requirite per usatores remote pro connecter a tu scriptorio. Pulsa "
+"le button de re sur le dextere pro ulterior informationes."
+
+#. i18n: ectx: property (text), widget (QLabel, addressDisplayLabel)
+#: ui/mainwidget.ui:238
+#, kde-format
+msgid "127.0.0.1 : 5900"
+msgstr "127.0.0.1 : 5900"
+
+#. i18n: ectx: property (text), widget (QLabel, passwordLabel)
+#: ui/mainwidget.ui:269
+#, kde-format
+msgid "&Password"
+msgstr "&Contrasigno"
+
+#. i18n: ectx: property (whatsThis), widget (QToolButton, passwordEditButton)
+#: ui/mainwidget.ui:290
+#, kde-format
+msgid "Edit/Save Desktop Sharing Password"
+msgstr "Modifica/Salveguarda contrasigno de  compartir scriptorio"
+
+#. i18n: ectx: property (text), widget (QToolButton, passwordEditButton)
+#: ui/mainwidget.ui:293
+#, kde-format
+msgid "Edit"
+msgstr "Modifica"
+
+#. i18n: ectx: property (whatsThis), widget (QLabel, passwordDisplayLabel)
+#: ui/mainwidget.ui:311
+#, kde-format
+msgid ""
+"Password required by remote users to connect to your desktop. Click the edit "
+"button on the right to change password."
+msgstr ""
+"Contrasigno requirite per usatores remote pro connecter a tu scriptorio. "
+"Pulsa le button de modifica sur le dextera pro modificar le contrasigno."
+
+#. i18n: ectx: property (text), widget (QLabel, passwordDisplayLabel)
+#: ui/mainwidget.ui:314
+#, kde-format
+msgid "TemporaryPassword"
+msgstr "Contrasigno provisori"
+
+#. i18n: ectx: property (whatsThis), widget (QGroupBox, unattendedGroupBox)
+#. i18n: ectx: property (text), widget (QLabel, unattendedAboutLabel)
+#: ui/mainwidget.ui:340 ui/mainwidget.ui:378
+#, kde-format
+msgid ""
+"Unattended Access allows a remote user with the password to gain control to "
+"your desktop without your explicit confirmation."
+msgstr ""
+"Accesso non assistite permitte que un usator remote con un contrasigno pote "
+"ganiar controlo de tu scriptorio sin tu explicite confirmation."
+
+#. i18n: ectx: property (title), widget (QGroupBox, unattendedGroupBox)
+#: ui/mainwidget.ui:343
+#, kde-format
+msgid "Unattended Access"
+msgstr "Accesso non assistite"
+
+#. i18n: ectx: property (whatsThis), widget (QLabel, unattendedAboutLabel)
+#: ui/mainwidget.ui:375
+#, kde-format
+msgid ""
+"Unattended Access allows a remote user with the password to gain control to "
+"your desktop without your explicit confirmation. Click \"About\" button on "
+"right to know more."
+msgstr ""
+"Accesso non assistite permitte que un usator remote con le contrasigno pote "
+"ganiar controlo de tu scriptorio sin tu confirmation explicite. Pulsa l;e "
+"button de \"Re\" sur le dextera pro saper altere cosas."
+
+#. i18n: ectx: property (whatsThis), widget (QToolButton, unattendedAboutButton)
+#: ui/mainwidget.ui:394
+#, kde-format
+msgid "Know more about Unattended Access"
+msgstr "Saper altere cosas re Accesso Non Assistite"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, enableUnattendedCheckBox)
+#: ui/mainwidget.ui:437
+#, kde-format
+msgid ""
+"Starts/Stops unattended access to your desktop. Click on button on right to "
+"change password, and \"About\" button to know more."
+msgstr ""
+"Initia/Stoppa accesso non assistite a tu scriptorio. Pulsa sur le button al "
+"dextera pro modificar le contrasigno, e le button de \"Re\" pro saper "
+"ulterior cosas."
+
+#. i18n: ectx: property (text), widget (QCheckBox, enableUnattendedCheckBox)
+#: ui/mainwidget.ui:440
+#, kde-format
+msgid "Enable &Unattended Access"
+msgstr "Habilita Accesso &Non Assistite"
+
+#. i18n: ectx: property (whatsThis), widget (QPushButton, unattendedPasswordButton)
+#: ui/mainwidget.ui:465
+#, kde-format
+msgid "Change password for Unattended Access"
+msgstr "Modifica contrasigno pro Accesso Non Assistite"
+
+#. i18n: ectx: property (text), widget (QPushButton, unattendedPasswordButton)
+#: ui/mainwidget.ui:468
+#, kde-format
+msgid "&Change Unattended Password"
+msgstr "&Modifica Contrasigno per Non Assistite"
+
+#~ msgid "Welcome to KDE Desktop Sharing"
+#~ msgstr "Benvenite al Compartir de scriptorio de KDE"
+
+#~ msgid ""
+#~ "KDE Desktop Sharing allows you to invite somebody at a remote location to "
+#~ "watch and possibly control your desktop. <a href=\"whatsthis\">More about "
+#~ "invitations...</a>"
+#~ msgstr ""
+#~ "Compartir de Scriptorio de KDE permitte te de invitar alcun a un location "
+#~ "remote a observar e possibilemente anque controlar tu scriptorio. <a href="
+#~ "\"queesisto\"> Altere info re invitationes...</a>"
+
+#~ msgid ""
+#~ "Create a new invitation and display the connection data. Use this option "
+#~ "if you want to invite somebody personally, for example, to give the "
+#~ "connection data over the phone."
+#~ msgstr ""
+#~ "Crea un nove invitation e monstra le datos de connexion. Usa iste option "
+#~ "si tu vole invitar alcun personalmente, pro exemplo, dar le datos de "
+#~ "connexion per telephono."
+
+#~ msgid "Create &Personal Invitation..."
+#~ msgstr "Crea Invitation &Personal..."
+
+#~ msgid ""
+#~ "This button will start your email application with a pre-configured text "
+#~ "that explains to the recipient how to connect to your computer. "
+#~ msgstr ""
+#~ "Iste button initiara tu application de e-posta con un texto pre-"
+#~ "configurate que explica al destinatario como connecter se a tu computator."
+
+#~ msgid "Invite via &Email..."
+#~ msgstr "Invita via &E-Posta..."
+
+#~ msgid "&Manage Invitations (%1)..."
+#~ msgstr "&Gere invitationes (%1)..."
+
+#~ msgid ""
+#~ "You have requested to share your desktop with %1. If you proceed, you "
+#~ "will allow the remote user to watch your desktop."
+#~ msgstr ""
+#~ "Tu ha requirite de compartir tu scriptorio con %1. Si tu procede, tu "
+#~ "permittera al usator remote de vider tu scriptorio."
+
+#~ msgid "Search in Contacts..."
+#~ msgstr "Cerca in contactos..."
+
+#~ msgid "Confirmation"
+#~ msgstr "Confirmation"
+
+#~ msgid "Failed login attempt from %1: wrong password"
+#~ msgstr "Tentativa de accesso ex %1 falleva: errate contrasigno"
+
+#~ msgid "Refused uninvited connection attempt from %1"
+#~ msgstr "Tentativa de connexion non invitate refusate ex %1"
+
+#~ msgid "Invitation"
+#~ msgstr "Invitation"
+
+#~ msgid ""
+#~ "An invitation creates a one-time password that allows the receiver to "
+#~ "connect to your desktop.\n"
+#~ "It is valid for only one successful connection and will expire after an "
+#~ "hour if it has not been used. \n"
+#~ "When somebody connects to your computer a dialog will appear and ask you "
+#~ "for permission.\n"
+#~ " The connection will not be established before you accept it. In this "
+#~ "dialog you can also\n"
+#~ " restrict the other person to view your desktop only, without the ability "
+#~ "to move your\n"
+#~ " mouse pointer or press keys.\n"
+#~ "If you want to create a permanent password for Desktop Sharing, allow "
+#~ "'Uninvited Connections' \n"
+#~ "in the configuration."
+#~ msgstr ""
+#~ "Un invitation crea un contrasigno de un vice que permitte le destinatario "
+#~ "de connecter se a tu scriptorio\n"
+#~ "Il es valide solmente per un connexion succedite e terminara postea un "
+#~ "hora que il non ha essite usate.\n"
+#~ "Quando alcun connecte a tu computator un dialogo apparera demandara te de "
+#~ "un permission.\n"
+#~ "Le connexion non essera stabilite ante que tu da su acceptation. In iste "
+#~ "dialogo tu anque pote\n"
+#~ "limitar le altere persona a vider solmente tu scriptorio, sin le "
+#~ "habilitate de mover tu\n"
+#~ "punctator de mus o pressar un clave.\n"
+#~ "Si tu vole crear un contrasigno permanente per Compartir Scriptorio, tu "
+#~ "permitte 'Connexiones non invitate'\n"
+#~ "in le configuration."
+
+#~ msgid "Ask before allowing a remote connection."
+#~ msgstr "Demanda ante permitte un connexion remote."
+
+#~ msgid ""
+#~ "An invitation creates a one-time password that allows the receiver to "
+#~ "connect to your desktop.\n"
+#~ "It is valid for only one successful connection and will expire after an "
+#~ "hour if it has not been used. \n"
+#~ "When somebody connects to your computer a dialog will appear and ask you "
+#~ "for permission.\n"
+#~ "The connection will not be established before you accept it. In this "
+#~ "dialog you can also\n"
+#~ "restrict the other person to view your desktop only, without the ability "
+#~ "to move your\n"
+#~ "mouse pointer or press keys.\n"
+#~ "If you want to create a permanent password for Desktop Sharing, allow "
+#~ "'Uninvited Connections' \n"
+#~ "in the configuration."
+#~ msgstr ""
+#~ "Un invitation crea un contrasigno de un vice que permitte le destinatario "
+#~ "de connecter se a tu scriptorio\n"
+#~ "Il es valide solmente per un connexion succedite e terminara postea un "
+#~ "hora que il non ha essite usate.\n"
+#~ "Quando alcun connecte a tu computator un dialogo apparera demandara te de "
+#~ "un permission.\n"
+#~ "Le connexion non essera stabilite ante que tu da su acceptation. In iste "
+#~ "dialogo tu anque pote\n"
+#~ "limitar le altere persona a vider solmente tu scriptorio, sin le "
+#~ "habilitate de mover tu\n"
+#~ "punctator de mus o pressar un clave.\n"
+#~ "Si tu vole crear un contrasigno permanente per Compartir Scriptorio, tu "
+#~ "permitte 'Connexiones non invitate'\n"
+#~ "in le configuration."
+
+#~ msgid ""
+#~ "When sending an invitation by email, note that everybody who reads this "
+#~ "email will be able to connect to your computer for one hour, or until the "
+#~ "first successful connection took place, whichever comes first. \n"
+#~ "You should either encrypt the email or at least send it only in a secure "
+#~ "network, but not over the Internet."
+#~ msgstr ""
+#~ "Quando on invia un invitation per e-posta, tu nota que totes qui lege "
+#~ "iste e-posta potera connecter se a tu computator per un hora, o usque le "
+#~ "prime connexion succedite habera loco,non importa qual veni prime.\n"
+#~ "Tu debera o cryptar le e-posta o al minus inviar lo solmente in un rete "
+#~ "secur, ma non in le Internet."
+
+#~ msgid "Send Invitation via Email"
+#~ msgstr "Invia invitation via E-posta"
+
+#~ msgid "Desktop Sharing (VNC) invitation"
+#~ msgstr "Invitation de compartir de scriptorio (VNC)"
+
+#~ msgid ""
+#~ "You have been invited to a VNC session. If you have the KDE Remote "
+#~ "Desktop Connection installed, just click on the link below.\n"
+#~ "\n"
+#~ "%1\n"
+#~ "\n"
+#~ "Otherwise you can use any VNC client with the following parameters:\n"
+#~ "\n"
+#~ "Host: %2:%3\n"
+#~ "Password: %4\n"
+#~ "\n"
+#~ "For security reasons this invitation will expire at %5 (%6)."
+#~ msgstr ""
+#~ "Tu ha essite invitate a un session de VNC. Si tu ha le Connexion remote "
+#~ "de Scriptorio de KDE installate, justo pressa sur le ligamine a basso.\n"
+#~ "\n"
+#~ "%1\n"
+#~ "\n"
+#~ "Alteremente tu pote usar ulle cliente VNC con le sequente parametros:\n"
+#~ "\n"
+#~ "Hospite: %2:%3\n"
+#~ "Contrasigno: %4 \n"
+#~ "Per motivationes de securitate iste invitation expirara a %5 (%6)."
+
+#~ msgid "<qt>Are you sure you want to delete all invitations?</qt>"
+#~ msgstr "<qt>Ty es secur que tu vole deler omne invitationes?</qt>"
+
+#~ msgid "Confirm delete Invitations"
+#~ msgstr "Confirma dele invitationes"
+
+#~ msgid "<qt>Are you sure you want to delete this invitation?</qt>"
+#~ msgstr "<qt>Tu es secur que tu vole deler iste invitation?</qt>"
+
+#~ msgid "Personal Invitation"
+#~ msgstr "Invitation personal"
+
+#~ msgid ""
+#~ "Desktop Sharing uses the VNC protocol. You can use any VNC client to "
+#~ "connect. \n"
+#~ "In KDE the client is called 'Remote Desktop Connection'. Enter the host "
+#~ "information\n"
+#~ "into the client and it will connect.."
+#~ msgstr ""
+#~ "Compartir de scriptorio usa le protocollo VNC. Tu pote usar ulle cliente "
+#~ "VNC pro connecter. \n"
+#~ "In KDE le cliente es appellate 'Connexion Remote de Scriptorio'. Entra le "
+#~ "information de hospite\n"
+#~ "in le cliente e illo connectera..."
+
+#~ msgid "Ask before accepting connections"
+#~ msgstr "Demanda ante dar acceptation a connexiones"
+
+#~ msgid "Allow uninvited connections"
+#~ msgstr "Permitte non invitate connexiones"
+
+#~ msgid "Uninvited connections password:"
+#~ msgstr "Contrasigno de connexiones non invitate:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">KDE Desktop Sharing "
+#~ "allows you to invite somebody at a remote location to watch and possibly "
+#~ "control your desktop. <a href=\"whatsthis\">More about invitations...</"
+#~ "a></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Compartir de Scriptorio "
+#~ "de KDE permitte te de invitar alcun a un location remote a observar e "
+#~ "possibilemente controlar tu scriptorio. <a href=\"whatsthis\">Altere info "
+#~ "a proposito de invitationes...</a></p></body></html>"
+
+#~ msgid "Creation Time"
+#~ msgstr "Tempore de creation"
+
+#~ msgid "Expire Time"
+#~ msgstr "Tempore de expirar"
+
+#~ msgid "Create a new personal invitation..."
+#~ msgstr "Crea un nove invitation personal..."
+
+#~ msgid "Click this button to create a new personal invitation."
+#~ msgstr "Pulsa iste button pro crear un nove invitation personal."
+
+#~ msgid "New &Personal Invitation..."
+#~ msgstr "Nove invitation &personal..."
+
+#~ msgid "Send a new invitation via email..."
+#~ msgstr "Invia un invitation via e-posta..."
+
+#~ msgid "Click this button to send a new invitation via email."
+#~ msgstr "Pulsa iste button pro inviar un nove invitation via e-posta."
+
+#~ msgid "&New Email Invitation..."
+#~ msgstr "&Nove invitation de E-posta..."
+
+#~ msgid "Delete all invitations"
+#~ msgstr "Dele omne invitationes"
+
+#~ msgid "Deletes all open invitations."
+#~ msgstr "Dele omne invitationes aperite."
+
+#~ msgid "Delete All"
+#~ msgstr "Dele toto"
+
+#~ msgid "Delete the selected invitation"
+#~ msgstr "Dele le invitation seligite"
+
+#~ msgid ""
+#~ "Delete the selected invitation. The invited person will not be able to "
+#~ "connect using this invitation anymore."
+#~ msgstr ""
+#~ "Dele le invitation seligite. Le persona invitate non potera plus "
+#~ "connecter se per usar iste invitation."
+
+#~ msgid "&Delete"
+#~ msgstr "&Dele"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Personal Invitation</span></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Give the information "
+#~ "below to the person that you want to invite (<a href=\"htc\">how to "
+#~ "connect</a>). Note that everybody who gets the password can connect, so "
+#~ "be careful.</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Invitation Personal </span></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Tu da le information a "
+#~ "basso al persona que tu vole invitar (<a href=\"htc\">como connecter</"
+#~ "a>). Nota que ulle qui obtene le contrasigno pote connecter, assi tu debe "
+#~ "esser caute.</p></body></html>"
+
+#~ msgid "<b>Host:</b>"
+#~ msgstr "<b>Hospite:</b>"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><a href=\"help\">Help</"
+#~ "a></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><a href=\"help"
+#~ "\">Adjuta</a></p></body></html>"
+
+#~ msgid "<b>Expiration time:</b>"
+#~ msgstr "<b>Tempore de expiration:</b>"
+
+#~ msgid "An error occurred sharing your desktop."
+#~ msgstr "Un error occurreva durante que on compartiva tu scriptorio."
+
+#~ msgid "Error"
+#~ msgstr "Error"
+
+#~ msgid "An unknown error occurred sharing your desktop."
+#~ msgstr ""
+#~ "Un error incognite occurreva durante que on compartiva tu scriptorio."
+
+#~ msgid "Failed to activate the rfb server."
+#~ msgstr "Il falleva a activar le servitor rfb."
+
+#~ msgid ""
+#~ "An error occurred sharing your desktop. The person you are trying to "
+#~ "share your desktop with does not have the required software installed to "
+#~ "access it."
+#~ msgstr ""
+#~ "Un error occurreva durante que tu compartiva tu scriptorio. Le persona "
+#~ "con le qual tu es tentante de compartir tu scriptorio non ha le requirite "
+#~ "software installate pro acceder lo."

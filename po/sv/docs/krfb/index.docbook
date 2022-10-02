@@ -1,0 +1,376 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY % addindex "IGNORE">
+  <!ENTITY % Swedish "INCLUDE">
+]>
+
+<book id="krfb" lang="&language;">
+
+<bookinfo>
+<title
+>Handbok Dela Skrivbord</title>
+
+<authorgroup>
+<author
+>&Brad.Hards; &Brad.Hards.mail; </author>
+<othercredit role="translator"
+> <firstname
+>Stefan</firstname
+> <surname
+>Asserhäll</surname
+> <affiliation
+><address
+><email
+>stefan.asserhall@bredband.net</email
+></address
+></affiliation
+> <contrib
+>Översättare</contrib
+></othercredit
+> 
+</authorgroup>
+
+<copyright>
+<year
+>2003</year>
+<holder
+>&Brad.Hards;</holder>
+</copyright>
+
+<legalnotice
+>&FDLNotice;</legalnotice>
+
+<date
+>2016-07-25</date>
+<releaseinfo
+>5.0 (Program 16.08)</releaseinfo>
+
+<abstract>
+<para
+>Dela Skrivbord är ett serverprogram som låter dig dela din nuvarande session med en användare på en annan dator, som kan använda en <acronym
+>VNC</acronym
+>-klient för att visa eller till och med styra skrivbordet. </para>
+</abstract>
+
+<keywordset>
+<keyword
+>KDE</keyword>
+<keyword
+>kdenetwork</keyword>
+<keyword
+>krfb</keyword>
+<keyword
+>VNC</keyword>
+<keyword
+>RFB</keyword>
+<keyword
+>krdc</keyword>
+<keyword
+>Dela ut skrivbordet</keyword>
+<keyword
+>Fjärrstyrning</keyword>
+<keyword
+>Fjärrassistans</keyword>
+<keyword
+>Fjärrskrivbord</keyword>
+</keywordset>
+
+</bookinfo>
+
+<chapter id="introduction">
+<title
+>Inledning</title>
+
+<para
+>Dela Skrivbord är ett serverprogram som låter dig dela din nuvarande session med en användare på en annan dator, som kan använda en <acronym
+>VNC</acronym
+>-klient för att visa eller till och med styra skrivbordet. </para>
+
+<para
+>Du använder typiskt Dela Skrivbord med &kde;:s <acronym
+>VNC</acronym
+>-klient, som heter Fjärranslutning till skrivbord, eftersom den stämmer väl ihop med Dela Skrivbords speciella funktioner. </para>
+
+<para
+>Dela Skrivbord kräver inte att du startar en ny X-session. Den kan dela ut den nuvarande sessionen. Det gör den mycket användbar när du vill att någon ska hjälpa dig att utföra en uppgift. </para>
+
+<para
+>Rapportera gärna eventuella problem eller önskemål till &kde;:s e-postlistor eller rapportera ett fel på <ulink url="https://bugs.kde.org"
+>https://bugs.kde.org</ulink
+>. </para>
+</chapter>
+
+<chapter id="what-is-RFB">
+<title
+>Protokollet Remote Frame Buffer</title>
+
+<para
+>Det här kapitlet tillhandahåller en kortfattad beskrivning av protokollet Remote Frame Buffer som används av Dela Skrivbord och andra motsvarande system. Om du redan känner till protokollet, kan du utan problem hoppa över kapitlet. </para>
+
+<para
+>Högnivåimplementeringen av ett system som använder protokollet Remote Frame Buffer kallas virtuell nätverksdator, Virtual Network Computer, eller oftast bara <acronym
+>VNC</acronym
+>. </para>
+
+<para
+>Remote Frame Buffer (förkortat <acronym
+>RFB</acronym
+>) är ett enkelt protokoll för fjärråtkomst av grafiska användargränssnitt. Det fungerar på rambuffernivå, som grovt sett motsvarar skärmbilden som ritas upp, vilket betyder att det kan användas för alla fönstersystem (inklusive X11, &MacOS; och &Microsoft; &Windows;). Program som använder Remote Frame Buffer finns för många datorer, och kan ofta distribueras fritt. </para>
+
+<para
+>I protokollet Remote Frame Buffer, kallas programmet som kör på datorn där användaren finns (med skärm, tangentbord och pekdon) för klienten. Programmet som kör på datorn där rambuffern finns (som kör fönstersystemet och programmen som användaren fjärrstyr) kallas för servern. Dela Skrivbord är &kde;:s server för protokollet Remote Frame Buffer. Fjärranslutning till skrivbord är &kde;:s klient för protokollet Remote Frame Buffer. </para>
+
+<para
+>Det går åt en viss mängd nätverkstrafik för att skicka en bild av rambuffern, så Remote Frame Buffer fungerar bäst via bredbandslänkar, som lokala nätverk. Det är ändå möjligt att använda Dela Skrivbord via andra länkar, men prestanda är troligen inte så bra. </para>
+
+</chapter>
+
+<chapter id="using-krfb">
+<title
+>Använda Dela Skrivbord</title>
+
+<sect1 id="main-windw">
+<title
+>Dela Skrivbords huvudfönster</title>
+<para
+>Det är mycket enkelt att använda Dela Skrivbord. Det har ett enkelt gränssnitt, som visas på skärmbilden nedan. </para>
+
+<para>
+<screenshot>
+<screeninfo
+>Här är en skärmbild av Dela Skrivbord</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="screenshot.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Dela Skrivbords huvudfönster</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>När du vill att någon ska komma åt ditt skrivbord måste kryssrutan <guilabel
+>Aktivera skrivbordsdelning</guilabel
+> markeras, vilket gör att servern startas. </para>
+
+<sect2 id="connection-details">
+<title
+>Anslutningsinformation</title>
+
+<para
+><guilabel
+>Adress</guilabel
+> innehåller adressen till datorn och portnumret, åtskilda med ett kolon. Adressen är bara ett förslag. Du kan använda vilken adress som helst som når datorn. Dela skrivbord försöker gissa adressen från nätverksinställningarna, men lyckas inte alltid göra det. Om datorn är bakom en brandvägg, kan den ha en annan adress, eller kan inte nås av andra datorer. </para>
+<para
+>Porten kan ändras på sidan <guilabel
+>Nätverk</guilabel
+> i inställningsdialogrutan. </para>
+<para
+>Nästa fält är ifyllt i förväg med ett automatiskt genererat lösenord. Klicka på ikonen till höger om fältet för att ändra lösenordet. </para>
+</sect2>
+
+<sect2 id="unattended-access">
+<title
+>Oövervakad åtkomst</title>
+
+<para
+>Behörigheten för alla fjärranvändare med normala lösenord för skrivbordsdelning måste kontrolleras. Om oövervakad åtkomst är på och fjärranvändaren tillhandahåller lösenord för oövervakad åtkomst, tillåts åtkomst till skrivbordsdelning utan explicit bekräftelse. </para>
+<para
+>Normalt är lösenordet tomt i detta fall. Klicka på knappen och skriv in ett lösenord för att ändra det. </para>
+<para
+>Om oövervakad åtkomst tillåts bör du antagligen ange ett lösenord. </para>
+
+<para
+>Om datorn är en server och du använder Dela skrivbord för fjärradministration, bör du antagligen använda oövervakad åtkomst. </para>
+
+</sect2>
+
+<sect2 id="transfer-login-information">
+<title
+>Överföra inloggningsinformation</title>
+
+<para
+>Dela skrivbord har ingen inbjudningsfunktion längre, i motsats till tidigare versioner. Du måste alltså själv överföra inloggningsinformation genom att använda e-post eller en personlig inbjudan. </para>
+<para
+>Om du inte kan kryptera e-post (eller på annat sätt göra länken säker), är det en mycket allvarlig säkerhetsrisk att skicka ett lösenord via e-post, eftersom vem som helst kan läsa lösenord och adress i brevet när det skickas via nätverket. Det betyder att de har möjlighet att överta kontrollen av din dator. </para>
+<para
+>Om du inte kan kryptera brevet, kan det vara bättre att använda en personlig inbjudan, ringa personen du låter få tillgång till skrivbordet, verifiera personens identitet, och tillhandahålla informationen som krävs på så sätt. </para>
+
+<note>
+<para
+>Dela Skrivbord använder det normala <acronym
+>RFB</acronym
+>-lösenordssystemet, som inte överför lösenordet i klartext via nätverket. Istället använder det ett system med utmaning och svar. Det är rimligt säkert, så länge lösenordet är säkert bevarat. </para>
+</note>
+
+</sect2>
+
+<sect2 id="krfb-qqit">
+<title
+>Avsluta Dela Skrivbord</title>
+
+<para
+>Om du stänger Dela skrivbords huvudfönster genom att klicka på fönstrets stängningsikon eller använda genvägen &krfb;<keycombo action="simul"
+>&Alt;<keycap
+>F4</keycap
+></keycombo
+> fortsätter servern köra, vilket anges med en ikon i systembrickan. Använd antingen <menuchoice
+><guimenu
+>Arkiv</guimenu
+> <guimenuitem
+>Avsluta</guimenuitem
+></menuchoice
+> i huvudfönstret eller högerklicka på ikonen i systembrickan och välj <guimenuitem
+>Avsluta</guimenuitem
+> för att stoppa Dela skrivbord. </para>
+</sect2>
+
+</sect1>
+
+<sect1 id="krfb-configuration">
+<title
+>Anpassa Dela Skrivbord</title>
+<para
+>Förutom det huvudsakliga gränssnittet till Dela Skrivbord, som visas och beskrivs ovan, kan du också styra Dela Skrivbord med <guimenuitem
+>Anpassa...</guimenuitem
+> i Dela Skrivbords huvudfönster. Inställningarna i Dela Skrivbord har två sidor, som visas på skärmbilden nedan: </para>
+
+<para
+>Sidan <guilabel
+>Nätverk</guilabel
+> gör det möjligt att styra port som Dela Skrivbord använder, som visas nedan. </para>
+
+<para>
+<screenshot>
+<screeninfo
+>Anpassa Dela Skrivbord (nätverkssidan)</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="configuration_network.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Anpassa Dela Skrivbord (nätverkssidan)</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Kryssrutan <guilabel
+>Annonsera tjänsten på det lokala nätverket</guilabel
+> styr om Dela Skrivbord annonserar tjänsten via det lokala nätverket med protokollet för tjänstlokalisering. Det är normalt en god idé, men fungerar bara riktigt bra med en klient som känner till protokollet för tjänstlokalisering, som Fjärranslutning till skrivbord. </para>
+
+<para
+>Om du markerar kryssrutan <guilabel
+>Använd standardport</guilabel
+>, lokaliserar Dela Skrivbord en lämplig port. Om du avmarkerar kryssrutan, kan du ange en särskild port. Att ange en särskild port kan vara användbart om du använder vidarebefordran av port i brandväggen. Observera att om protokollet för tjänstlokalisering är aktivt, hanterar det automatiskt identifikation av riktig port. </para>
+
+<para
+>Sidan <guilabel
+>Säkerhet</guilabel
+> låter dig anpassa om personen som ansluter till Dela skrivbords server kan kontrollera skrivbordet, eller bara visa det. </para>
+
+<para>
+<screenshot>
+<screeninfo
+>Anpassa Dela Skrivbord (säkerhetssidan)</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="configuration_security.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Anpassa Dela Skrivbord (säkerhetssidan)</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+</sect1>
+
+<sect1 id="krfb-connection">
+<title
+>Ansluta till Dela Skrivbord</title>
+
+<para
+>När någon ansluter till Dela Skrivbord på din dator, ser du ett meddelande dyka upp, som ser ut som följande skärmbild, om du inte accepterar oövervakad åtkomst utan bekräftelse. </para>
+<para>
+<screenshot>
+<screeninfo
+>Anslutningsfönstret i Dela Skrivbord</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="connection.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Anslutningsfönstret i Dela Skrivbord</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Om du trycker på <guibutton
+>Acceptera anslutning</guibutton
+>, kan klienten fortsätta med behörighetskontrollen (som kräver rätt lösenord för en inloggning). Om du trycker på <guibutton
+>Vägra anslutning</guibutton
+>, avbryts anslutningsförsöket. </para>
+
+<para
+>Kryssrutan <guilabel
+>Tillåt fjärranvändaren att styra tangentbord och mus</guilabel
+> avgör om klienten bara kan observera, eller kan ta över styrningen av din dator. </para>
+
+</sect1>
+</chapter>
+
+<chapter id="credits">
+
+<title
+>Tack till och licens</title>
+
+<para
+>&krfb; </para>
+<para
+>Program copyright 2002 Tim Jansen <email
+>tim@tjansen.de</email
+> </para>
+<para
+>Bidragsgivare: <itemizedlist
+> <listitem
+><para
+>Ian Reinhart Geiser <email
+>geiseri@kde.org</email
+></para>
+</listitem>
+</itemizedlist>
+</para>
+
+<para
+>Dokumentation Copyright &copy; 2003 &Brad.Hards; &Brad.Hards.mail; </para>
+
+<para
+>Översättning Stefan Asserhäll <email
+>stefan.asserhall@bredband.net</email
+></para
+> &underFDL; &underGPL; </chapter>
+
+&documentation.index;
+</book>
+
+<!--
+Local Variables:
+mode: xml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-indent-step:0
+sgml-indent-data:nil
+End:
+
+vim:tabstop=2:shiftwidth=2:expandtab 
+-->

@@ -1,0 +1,1099 @@
+# translation of krfb.po to Polish
+# translation of krfb.po to
+# Version: $Revision: 1629487 $
+# Copyright (C) 2002, 2004, 2005, 2008, 2009 Free Software Foundation, Inc.
+#
+# Krzysztof Lichota <lichota@mimuw.edu.pl>, 2002, 2005.
+# Michal Rudolf <mrudolf@kdewebdev.org>, 2004, 2005.
+# Marta Rybczyńska <kde-i18n@rybczynska.net>, 2008, 2009.
+# Marta Rybczynska <kde-i18n@rybczynska.net>, 2009.
+# Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>, 2012, 2013, 2014, 2015, 2016, 2017, 2019, 2020, 2021.
+msgid ""
+msgstr ""
+"Project-Id-Version: krfb\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-07-18 00:45+0000\n"
+"PO-Revision-Date: 2021-11-13 08:57+0100\n"
+"Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
+"Language-Team: Polish <kde-i18n-doc@kde.org>\n"
+"Language: pl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 20.12.1\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2);\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Krzysztof Lichota, Łukasz Wojniłowicz"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "lichota@mimuw.edu.pl, lukasz.wojnilowicz@gmail.com"
+
+#: connectiondialog.cpp:39
+#, kde-format
+msgid "New Connection"
+msgstr "Nowe połączenie"
+
+#: connectiondialog.cpp:61
+#, kde-format
+msgid "Accept Connection"
+msgstr "Zaakceptuj połączenie"
+
+#: connectiondialog.cpp:65
+#, kde-format
+msgid "Refuse Connection"
+msgstr "Odrzuć połączenie"
+
+#: invitationsrfbclient.cpp:69
+#, kde-format
+msgid "Accepted connection from %1"
+msgstr "Zaakceptowano połączenie od %1"
+
+#: invitationsrfbclient.cpp:75
+#, kde-format
+msgid "Received connection from %1, on hold (waiting for confirmation)"
+msgstr "Otrzymano połączenie z %1, jest wstrzymane (czeka na zatwierdzenie)"
+
+#: invitationsrfbserver.cpp:55
+#, kde-format
+msgid "%1@%2 (shared desktop)"
+msgstr "%1@%2 (współdzielony pulpit)"
+
+#. i18n: ectx: label, entry (startMinimized), group (MainWindow)
+#: krfb.kcfg:9
+#, kde-format
+msgid "Start minimized"
+msgstr "Uruchom zminimalizowany"
+
+#. i18n: ectx: label, entry (useDefaultPort), group (TCP)
+#: krfb.kcfg:15
+#, kde-format
+msgid "Use the default port for VNC (5900)"
+msgstr "Użyj domyślnego portu VNC (5900)"
+
+#. i18n: ectx: label, entry (port), group (TCP)
+#: krfb.kcfg:19
+#, kde-format
+msgid "This is the port on which krfb will listen."
+msgstr "Jest to port, na którym będzie nasłuchiwać krfb."
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_publishService)
+#. i18n: ectx: label, entry (publishService), group (TCP)
+#: krfb.kcfg:23 ui/configtcp.ui:16
+#, kde-format
+msgid "Announce the service on the local network"
+msgstr "Rozgłoś usługę w sieci lokalnej"
+
+#. i18n: ectx: label, entry (noWallet), group (Security)
+#: krfb.kcfg:29
+#, kde-format
+msgid "Do not store passwords in KWallet"
+msgstr "Nie przechowuj haseł w Portfelu"
+
+#. i18n: ectx: label, entry (allowDesktopControl), group (Security)
+#: krfb.kcfg:33
+#, kde-format
+msgid "Allow remote connections to manage the desktop."
+msgstr "Zezwalaj zdalnym użytkownikom na zarządzanie pulpitem."
+
+#. i18n: ectx: label, entry (allowUnattendedAccess), group (Security)
+#: krfb.kcfg:37
+#, kde-format
+msgid "Allow connections without an invitation."
+msgstr "Zezwalaj na połączenia bez zaproszenia."
+
+#. i18n: ectx: label, entry (unattendedAccessPassword), group (Security)
+#. i18n: ectx: label, entry (desktopSharingPassword), group (Security)
+#: krfb.kcfg:41 krfb.kcfg:44
+#, kde-format
+msgid "Password for uninvited connections."
+msgstr "Hasło dla połączeń bez zaproszenia."
+
+#. i18n: ectx: label, entry (preferredFrameBufferPlugin), group (FrameBuffer)
+#: krfb.kcfg:49
+#, kde-format
+msgid "Preferred Frame Buffer Plugin"
+msgstr "Preferowana wtyczka bufora ramki"
+
+#: main-virtualmonitor.cpp:49
+#, kde-format
+msgid "Creating a Virtual Monitor from %1"
+msgstr "Tworzenie monitora wirtualnego z %1"
+
+#: main-virtualmonitor.cpp:80
+#, kde-format
+msgid "Remote Virtual Monitor"
+msgstr "Zdalny monitor wirtualny"
+
+#: main-virtualmonitor.cpp:82
+#, kde-format
+msgid "Offer a Virtual Monitor that can be accessed remotely"
+msgstr "Doradź monitor wirtualny z dostępem zdalnym"
+
+#: main-virtualmonitor.cpp:84 main.cpp:98
+#, kde-format
+msgid ""
+"(c) 2009-2010, Collabora Ltd.\n"
+"(c) 2007, Alessandro Praduroux\n"
+"(c) 2001-2003, Tim Jansen\n"
+"(c) 2001, Johannes E. Schindelin\n"
+"(c) 2000-2001, Const Kaplinsky\n"
+"(c) 2000, Tridia Corporation\n"
+"(c) 1999, AT&T Laboratories Boston\n"
+msgstr ""
+"(c) 2009-2010, Collabora Ltd.\n"
+"(c) 2007, Alessandro Praduroux\n"
+"(c) 2001-2003, Tim Jansen\n"
+"(c) 2001, Johannes E. Schindelin\n"
+"(c) 2000-2001, Const Kaplinsky\n"
+"(c) 2000, Korporacja Tridia\n"
+"(c) 1999, Laboratoria AT&T w Boston\n"
+
+#: main-virtualmonitor.cpp:91
+#, kde-format
+msgid "Virtual Monitor implementation"
+msgstr "Implementacja monitora wirtualnego"
+
+#: main-virtualmonitor.cpp:92 main.cpp:108
+#, kde-format
+msgid "George Kiagiadakis"
+msgstr "George Kiagiadakis"
+
+#: main-virtualmonitor.cpp:93 main.cpp:111
+#, kde-format
+msgid "Alessandro Praduroux"
+msgstr "Alessandro Praduroux"
+
+#: main-virtualmonitor.cpp:93 main.cpp:111
+#, kde-format
+msgid "KDE4 porting"
+msgstr "Portowanie do KDE4"
+
+#: main-virtualmonitor.cpp:94 main.cpp:112
+#, kde-format
+msgid "Tim Jansen"
+msgstr "Tim Jansen"
+
+#: main-virtualmonitor.cpp:94 main.cpp:112
+#, kde-format
+msgid "Original author"
+msgstr "Autor pierwszej wersji"
+
+#: main-virtualmonitor.cpp:95 main.cpp:113
+#, kde-format
+msgid "Johannes E. Schindelin"
+msgstr "Johannes E. Schindelin"
+
+#: main-virtualmonitor.cpp:96 main.cpp:114
+#, kde-format
+msgid "libvncserver"
+msgstr "libvncserver"
+
+#: main-virtualmonitor.cpp:97 main.cpp:115
+#, kde-format
+msgid "Const Kaplinsky"
+msgstr "Const Kaplinsky"
+
+#: main-virtualmonitor.cpp:98 main.cpp:116
+#, kde-format
+msgid "TightVNC encoder"
+msgstr "Moduł kodujący TightVNC"
+
+#: main-virtualmonitor.cpp:99 main.cpp:117
+#, kde-format
+msgid "Tridia Corporation"
+msgstr "Tridia Corporation"
+
+#: main-virtualmonitor.cpp:100 main.cpp:118
+#, kde-format
+msgid "ZLib encoder"
+msgstr "Moduł kodujący ZLib"
+
+#: main-virtualmonitor.cpp:101 main.cpp:119
+#, kde-format
+msgid "AT&T Laboratories Boston"
+msgstr "AT&T Laboratories Boston"
+
+#: main-virtualmonitor.cpp:102 main.cpp:120
+#, kde-format
+msgid "original VNC encoders and protocol design"
+msgstr "oryginalne moduły kodujące VNC i projekt protokołu"
+
+#: main-virtualmonitor.cpp:108
+#, kde-format
+msgid "Logical resolution of the new monitor"
+msgstr "Rozdzielczość logiczna nowego monitora"
+
+#: main-virtualmonitor.cpp:108
+#, kde-format
+msgid "resolution"
+msgstr "rozdzielczość"
+
+#: main-virtualmonitor.cpp:110
+#, kde-format
+msgid "Name of the monitor"
+msgstr "Nazwa monitora"
+
+#: main-virtualmonitor.cpp:110
+#, kde-format
+msgid "name"
+msgstr "nazwa"
+
+#: main-virtualmonitor.cpp:112
+#, kde-format
+msgid "Password for the client to connect to it"
+msgstr "Hasło do połączenia do klienta"
+
+#: main-virtualmonitor.cpp:112
+#, kde-format
+msgid "password"
+msgstr "hasło"
+
+#: main-virtualmonitor.cpp:114
+#, kde-format
+msgid "The device-pixel-ratio of the device, the scaling factor"
+msgstr "Stosunek-piksela-urządzenia, współczynnik skalowania"
+
+#: main-virtualmonitor.cpp:114
+#, kde-format
+msgid "dpr"
+msgstr "dpr"
+
+#: main-virtualmonitor.cpp:116
+#, kde-format
+msgid "The port we will be listening to"
+msgstr "Port, na którym będziemy nasłuchiwali"
+
+#: main-virtualmonitor.cpp:116
+#, kde-format
+msgid "number"
+msgstr "liczba"
+
+#: main.cpp:49
+#, kde-format
+msgid ""
+"Your X11 Server does not support the required XTest extension version 2.2. "
+"Sharing your desktop is not possible."
+msgstr ""
+"Twój serwer X11 nie zawiera wymaganego rozszerzenia XTest w wersji 2.2. "
+"Współdzielenie Twojego pulpitu jest niemożliwe."
+
+#: main.cpp:51 main.cpp:150
+#, kde-format
+msgid "Desktop Sharing Error"
+msgstr "Błąd współdzielenia pulpitu"
+
+#: main.cpp:94
+#, kde-format
+msgid "Desktop Sharing"
+msgstr "Współdzielenie pulpitu"
+
+#: main.cpp:96
+#, kde-format
+msgid "VNC-compatible server to share desktops"
+msgstr "Serwer współdzielenia pulpitu zgodny z VNC"
+
+#: main.cpp:105
+#, kde-format
+msgid "George Goldberg"
+msgstr "George Goldberg"
+
+#: main.cpp:106
+#, kde-format
+msgid "Telepathy tubes support"
+msgstr "Obsługa Telepathy tubes"
+
+#: main.cpp:126
+#, kde-format
+msgid "Do not show the invitations management dialog at startup"
+msgstr "Nie pokazuj na starcie okna zarządzania zaproszeniami"
+
+#: main.cpp:148
+#, kde-format
+msgid ""
+"Desktop Sharing is not running under an X11 Server or Wayland.\n"
+"Other display servers are currently not supported."
+msgstr ""
+"Współdzielenie pulpitu nie jest uruchomione na serwerze X11 lub Wayland.\n"
+"Inne serwery wyświetlania nie są obecnie obsługiwane."
+
+#: mainwindow.cpp:52
+#, kde-format
+msgid "Storing passwords in config file is insecure!"
+msgstr "Przechowywanie haseł w pliku ustawień jest niebezpieczne!"
+
+#: mainwindow.cpp:189
+#, kde-format
+msgid "Enter a new password for Unattended Access"
+msgstr "Podaj nowe hasło dla nienadzorowanego dostępu"
+
+#: mainwindow.cpp:200
+#, kde-format
+msgid ""
+"Failed to start the krfb server. Desktop sharing will not work. Try setting "
+"another port in the settings and restart krfb."
+msgstr ""
+"Nieudane uruchamianie serwera krfb. Udostępnianie pulpitu nie zadziała. "
+"Spróbuj ustawić inny port w ustawieniach i uruchom ponownie krfb."
+
+#. i18n: ectx: property (whatsThis), widget (QLabel, titleLabel)
+#. i18n: ectx: property (text), widget (QLabel, titleLabel)
+#. i18n: ectx: property (whatsThis), widget (QLabel, aboutLabel)
+#: mainwindow.cpp:223 mainwindow.cpp:230 ui/mainwidget.ui:83
+#: ui/mainwidget.ui:86 ui/mainwidget.ui:114
+#, kde-format
+msgid "KDE Desktop Sharing"
+msgstr "Współdzielenie pulpitu KDE"
+
+#: mainwindow.cpp:224
+#, kde-format
+msgid ""
+"This field contains the address of your computer and the port number, "
+"separated by a colon.\n"
+"\n"
+"The address is just a hint - you can use any address that can reach your "
+"computer.\n"
+"\n"
+"Desktop Sharing tries to guess your address from your network configuration, "
+"but does not always succeed in doing so.\n"
+"\n"
+"If your computer is behind a firewall it may have a different address or be "
+"unreachable for other computers."
+msgstr ""
+"To pole zawiera adres twojego komputera i numer portu, oddzielone "
+"dwukropkiem.\n"
+"\n"
+"Adres to tylko podpowiedź - można użyć dowolnego adresu, pod którym twój "
+"komputer jest osiągalny.\n"
+"\n"
+"Program Współdzielenie pulpitu spróbuje zgadnąć twój adres na podstawie "
+"konfiguracji sieci, ale nie zawsze się to udaje.\n"
+"\n"
+"Jeśli twój komputer znajduje się za zaporą ogniową może mieć inny adres lub "
+"może nie być osiągalny dla innych komputerów."
+
+#: mainwindow.cpp:231
+#, kde-format
+msgid ""
+"Any remote user with normal desktop sharing password will have to be "
+"authenticated.\n"
+"\n"
+"If unattended access is on, and the remote user provides unattended mode "
+"password, desktop sharing access will be granted without explicit "
+"confirmation."
+msgstr ""
+"Dowolny zdalny użytkownik z normalnym hasłem do współdzielenia pulpitu "
+"będzie musiał się uwierzytelnić.\n"
+"\n"
+"Jeśli włączono nienadzorowany dostęp i użytkownik poda hasło dla trybu "
+"nienadzorowanego, to pulpit zostanie mu udostępniony bez wyraźnego "
+"potwierdzenia."
+
+#: mainwindow.cpp:249
+#, kde-format
+msgid "Network"
+msgstr "Sieć"
+
+#: mainwindow.cpp:250
+#, kde-format
+msgid "Security"
+msgstr "Bezpieczeństwo"
+
+#: mainwindow.cpp:251
+#, kde-format
+msgid "Screen capture"
+msgstr "Przechwytywanie ekranu"
+
+#: mainwindow.cpp:256
+#, kde-format
+msgid "To apply framebuffer plugin setting, you need to restart the program."
+msgstr ""
+"Aby zastosować ustawienia wtyczki bufora klatek, musisz ponownie uruchomić "
+"program."
+
+#: rfbservermanager.cpp:229
+#, kde-format
+msgid "The remote user %1 is now connected."
+msgstr "Od teraz użytkownik zdalny użytkownik %1 jest podłączony."
+
+#: rfbservermanager.cpp:243
+#, kde-format
+msgid "The remote user %1 disconnected."
+msgstr "Zdalny użytkownik %1 jest rozłączony."
+
+#: trayicon.cpp:56
+#, kde-format
+msgid "Disconnect"
+msgstr "Rozłącz"
+
+#: trayicon.cpp:62
+#, kde-format
+msgid "Enable Remote Control"
+msgstr "Włącz zdalne sterowanie"
+
+#: trayicon.cpp:101 trayicon.cpp:133
+#, kde-format
+msgid "Desktop Sharing - disconnected"
+msgstr "Współdzielenie pulpitu - rozłączony"
+
+#: trayicon.cpp:117 trayicon.cpp:137
+#, kde-format
+msgid "Desktop Sharing - connected with %1"
+msgstr "Współdzielenie pulpitu - połączony z %1"
+
+#: trayicon.cpp:120
+#, kde-format
+msgid "Desktop Sharing - connected"
+msgstr "Współdzielenie pulpitu - podłączony"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, Framebuffer)
+#: ui/configframebuffer.ui:14
+#, kde-format
+msgid "Framebuffer"
+msgstr "Bufor klatek"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: ui/configframebuffer.ui:22
+#, kde-format
+msgid "Preferred frameb&uffer plugin:"
+msgstr "Wtyczka b&ufora klatek z pierszeństwem:"
+
+#. i18n: ectx: property (text), widget (QLabel, helpText)
+#: ui/configframebuffer.ui:47
+#, kde-format
+msgid ""
+"<html><head/><body><p>When using x11, <span style=\" font-weight:600;\">xcb</"
+"span> plugin should be preferred, because it is more performant.<br/><span "
+"style=\" font-weight:600;\">qt</span> plugin is a safe fallback, if for some "
+"reason others don't work. But also it is very slow.</p></body></html>"
+msgstr ""
+"<html><head/><body><p>Przy używaniu x11, zalecana jest wtyczka<span style=\" "
+"font-weight:600;\">xcb</span> , bo jest bardziej wydajna.<br/>Wtyczka <span "
+"style=\" font-weight:600;\">qt</span> jest bezpieczną wtyczką zapasową, "
+"jeśli z jakichś powodów inne nie chcą zadziałać. Wadą jest jej powolność.</"
+"p></body></html>"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_allowDesktopControl)
+#: ui/configsecurity.ui:17
+#, kde-format
+msgid "Allow remote connections to control your desktop"
+msgstr "Zezwól zdalnemu użytkownikowi na sterowanie pulpitem"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_noWallet)
+#: ui/configsecurity.ui:27
+#, kde-format
+msgid "Do not store passwords using KDE wallet"
+msgstr "Nie przechowuj haseł w Portfelu"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_useDefaultPort)
+#: ui/configtcp.ui:26
+#, kde-format
+msgid "Use default port"
+msgstr "Użyj domyślnego portu"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: ui/configtcp.ui:50
+#, kde-format
+msgid "Listening port:"
+msgstr "Port nasłuchujący:"
+
+#. i18n: ectx: property (text), widget (QLabel, TextLabel5)
+#: ui/connectionwidget.ui:47
+#, kde-format
+msgid "Attention"
+msgstr "Uwaga"
+
+#. i18n: ectx: property (text), widget (QLabel, mainTextLabel)
+#: ui/connectionwidget.ui:72
+#, kde-format
+msgid ""
+"Somebody is requesting a connection to your computer. Granting this will "
+"allow the remote user to watch your desktop. "
+msgstr ""
+"Ktoś żąda połączenia z Twoim komputerem. Udzielenie zezwolenia spowoduje, że "
+"ta osoba będzie mogła oglądać Twój pulpit."
+
+#. i18n: ectx: property (text), widget (QLabel, TextLabel1)
+#: ui/connectionwidget.ui:102
+#, kde-format
+msgid "Remote system:"
+msgstr "Zdalny system:"
+
+#. i18n: ectx: property (text), widget (QLabel, remoteHost)
+#: ui/connectionwidget.ui:118
+#, kde-format
+msgid "123.234.123.234"
+msgstr "123.234.123.234"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, cbAllowRemoteControl)
+#: ui/connectionwidget.ui:136
+#, kde-format
+msgid ""
+"If you turn this option on, the remote user can enter keystrokes and use "
+"your mouse pointer. This gives them full control over your computer, so be "
+"careful. When the option is disabled the remote user can only watch your "
+"screen."
+msgstr ""
+"Jeśli ta opcja jest włączona, zdalny użytkownik może wprowadzać dane z "
+"klawiatury i sterować Twoim wskaźnikiem myszki. To umożliwia mu pełną "
+"kontrolę nad Twoim komputerem, więc bądź ostrożny. Kiedy ta opcja jest "
+"wyłączona zdalny użytkownik może tylko obserwować Twój ekran."
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbAllowRemoteControl)
+#: ui/connectionwidget.ui:139
+#, kde-format
+msgid "Allow remote user to &control keyboard and mouse"
+msgstr "Zezwól zdalnemu użytkownikowi na &kontrolowanie klawiatury i myszki"
+
+#. i18n: ectx: property (text), widget (QLabel, aboutLabel)
+#: ui/mainwidget.ui:117
+#, kde-format
+msgid ""
+"KDE Desktop Sharing allows you to grant permission to someone at a remote "
+"location for viewing and possibly controlling your desktop."
+msgstr ""
+"Współdzielenie pulpitu KDE pozwala komuś z odległego miejsca  na oglądanie i "
+"sterowanie twoim pulpitem."
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, enableSharingCheckBox)
+#: ui/mainwidget.ui:145
+#, kde-format
+msgid "Starts/Stops Remote Desktop Sharing"
+msgstr "Rozpoczyna/Zatrzymuje zdalne współdzielenie pulpitu"
+
+#. i18n: ectx: property (text), widget (QCheckBox, enableSharingCheckBox)
+#: ui/mainwidget.ui:148
+#, kde-format
+msgid "&Enable Desktop Sharing"
+msgstr "Włącz współdzi&elenie pulpitu"
+
+#. i18n: ectx: property (title), widget (QGroupBox, detailsGroupBox)
+#: ui/mainwidget.ui:170
+#, kde-format
+msgid "Connection Details"
+msgstr "Szczegóły połączenia"
+
+#. i18n: ectx: property (text), widget (QLabel, addressLabel)
+#: ui/mainwidget.ui:193
+#, kde-format
+msgid "&Address"
+msgstr "&Adres"
+
+#. i18n: ectx: property (whatsThis), widget (QToolButton, addressAboutButton)
+#: ui/mainwidget.ui:214
+#, kde-format
+msgid "More about this address"
+msgstr "Więcej o tym adresie"
+
+#. i18n: ectx: property (text), widget (QToolButton, addressAboutButton)
+#. i18n: ectx: property (text), widget (QToolButton, unattendedAboutButton)
+#: ui/mainwidget.ui:217 ui/mainwidget.ui:397
+#, kde-format
+msgid "About"
+msgstr "O"
+
+#. i18n: ectx: property (whatsThis), widget (QLabel, addressDisplayLabel)
+#: ui/mainwidget.ui:235
+#, kde-format
+msgid ""
+"Address required by remote users to connect to your desktop. Click about "
+"button on the right for more info."
+msgstr ""
+"Adres potrzebny zdalnym użytkownikom na podłączenie się do twojego pulpitu. "
+"Naciśnij przycisk \"O\" po prawej, aby dowiedzieć się więcej."
+
+#. i18n: ectx: property (text), widget (QLabel, addressDisplayLabel)
+#: ui/mainwidget.ui:238
+#, kde-format
+msgid "127.0.0.1 : 5900"
+msgstr "127.0.0.1 : 5900"
+
+#. i18n: ectx: property (text), widget (QLabel, passwordLabel)
+#: ui/mainwidget.ui:269
+#, kde-format
+msgid "&Password"
+msgstr "&Hasło"
+
+#. i18n: ectx: property (whatsThis), widget (QToolButton, passwordEditButton)
+#: ui/mainwidget.ui:290
+#, kde-format
+msgid "Edit/Save Desktop Sharing Password"
+msgstr "Zmień/Zachowaj hasło współdzielenia pulpitu"
+
+#. i18n: ectx: property (text), widget (QToolButton, passwordEditButton)
+#: ui/mainwidget.ui:293
+#, kde-format
+msgid "Edit"
+msgstr "Edytuj"
+
+#. i18n: ectx: property (whatsThis), widget (QLabel, passwordDisplayLabel)
+#: ui/mainwidget.ui:311
+#, kde-format
+msgid ""
+"Password required by remote users to connect to your desktop. Click the edit "
+"button on the right to change password."
+msgstr ""
+"Hasło potrzebne zdalnym użytkownikom na podłączenie się do twojego pulpitu. "
+"Naciśnij przycisk edycji po prawej, aby zmienić hasło."
+
+#. i18n: ectx: property (text), widget (QLabel, passwordDisplayLabel)
+#: ui/mainwidget.ui:314
+#, kde-format
+msgid "TemporaryPassword"
+msgstr "HasłoTymczasowe"
+
+#. i18n: ectx: property (whatsThis), widget (QGroupBox, unattendedGroupBox)
+#. i18n: ectx: property (text), widget (QLabel, unattendedAboutLabel)
+#: ui/mainwidget.ui:340 ui/mainwidget.ui:378
+#, kde-format
+msgid ""
+"Unattended Access allows a remote user with the password to gain control to "
+"your desktop without your explicit confirmation."
+msgstr ""
+"Nienadzorowany dostęp pozwala zdalnemu użytkownikowi na uzyskanie władzy nad "
+"twoim pulpitem bez wyraźnego potwierdzenia."
+
+#. i18n: ectx: property (title), widget (QGroupBox, unattendedGroupBox)
+#: ui/mainwidget.ui:343
+#, kde-format
+msgid "Unattended Access"
+msgstr "Nienadzorowany dostęp"
+
+#. i18n: ectx: property (whatsThis), widget (QLabel, unattendedAboutLabel)
+#: ui/mainwidget.ui:375
+#, kde-format
+msgid ""
+"Unattended Access allows a remote user with the password to gain control to "
+"your desktop without your explicit confirmation. Click \"About\" button on "
+"right to know more."
+msgstr ""
+"Nienadzorowany dostęp pozwala zdalnemu użytkownikowi na uzyskanie władzy nad "
+"twoim pulpitem bez wyraźnego potwierdzenia. Naciśnij przycisk \"O\" po "
+"prawej, aby dowiedzieć się więcej."
+
+#. i18n: ectx: property (whatsThis), widget (QToolButton, unattendedAboutButton)
+#: ui/mainwidget.ui:394
+#, kde-format
+msgid "Know more about Unattended Access"
+msgstr "Dowiedz się więcej o nienadzorowanym dostępie"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, enableUnattendedCheckBox)
+#: ui/mainwidget.ui:437
+#, kde-format
+msgid ""
+"Starts/Stops unattended access to your desktop. Click on button on right to "
+"change password, and \"About\" button to know more."
+msgstr ""
+"Rozpoczyna/Zatrzymuje nienadzorowany dostęp do twojego pulpitu. Naciśnij na "
+"przycisk po prawej, aby zmienić hasło lub przycisk \"O\" aby dowiedzieć się "
+"więcej."
+
+#. i18n: ectx: property (text), widget (QCheckBox, enableUnattendedCheckBox)
+#: ui/mainwidget.ui:440
+#, kde-format
+msgid "Enable &Unattended Access"
+msgstr "Włącz &nienadzorowany dostęp"
+
+#. i18n: ectx: property (whatsThis), widget (QPushButton, unattendedPasswordButton)
+#: ui/mainwidget.ui:465
+#, kde-format
+msgid "Change password for Unattended Access"
+msgstr "Zmień hasło dla nienadzorowanego dostępu"
+
+#. i18n: ectx: property (text), widget (QPushButton, unattendedPasswordButton)
+#: ui/mainwidget.ui:468
+#, kde-format
+msgid "&Change Unattended Password"
+msgstr "&Zmień nienadzorowane hasło"
+
+#~ msgid "Welcome to KDE Desktop Sharing"
+#~ msgstr "Witamy w programie do współdzielenia pulpitu KDE"
+
+#~ msgid ""
+#~ "KDE Desktop Sharing allows you to invite somebody at a remote location to "
+#~ "watch and possibly control your desktop. <a href=\"whatsthis\">More about "
+#~ "invitations...</a>"
+#~ msgstr ""
+#~ "Współdzielenie pulpitu KDE pozwala na zaproszenie kogoś znajdującego się "
+#~ "w innym miejscu do oglądania, a także kontroli pulpitu. <a href="
+#~ "\"whatsthis\">Więcej o zaproszeniach...</a>"
+
+#~ msgid ""
+#~ "Create a new invitation and display the connection data. Use this option "
+#~ "if you want to invite somebody personally, for example, to give the "
+#~ "connection data over the phone."
+#~ msgstr ""
+#~ "Tworzy nowe połączenie i wyświetla dane połączenia. Użyj tej opcji, jeśli "
+#~ "chcesz zaprosić kogoś osobiście, na przykład jeśli chcesz podać dane "
+#~ "połączenia przez telefon."
+
+#~ msgid "Create &Personal Invitation..."
+#~ msgstr "Stwórz &osobiste zaproszenie..."
+
+#~ msgid ""
+#~ "This button will start your email application with a pre-configured text "
+#~ "that explains to the recipient how to connect to your computer. "
+#~ msgstr ""
+#~ "Ten przycisk wywoła Twój program pocztowy z przygotowanym tekstem "
+#~ "wyjaśniającym odbiorcy jak połączyć się z Twoim komputerem."
+
+#~ msgid "Invite via &Email..."
+#~ msgstr "Zaproś przez &e-mail..."
+
+#~ msgid "&Manage Invitations (%1)..."
+#~ msgstr "&Zarządzaj zaproszeniami (%1)..."
+
+#~ msgid "5.0"
+#~ msgstr "5.0"
+
+#~ msgid "krfb"
+#~ msgstr "krfb"
+
+#~ msgid ""
+#~ "You have requested to share your desktop with %1. If you proceed, you "
+#~ "will allow the remote user to watch your desktop."
+#~ msgstr ""
+#~ "Zażądano współdzielenia twojego pulpitu z %1. W przypadku kontynuowania, "
+#~ "pozwolisz zdalnemu użytkownikowi na obserwację twojego pulpitu."
+
+#~ msgid "Search in Contacts..."
+#~ msgstr "Znajdź w kontaktach..."
+
+#~ msgid "Confirmation"
+#~ msgstr "Potwierdzenie"
+
+#~ msgid "Form"
+#~ msgstr "Formularz"
+
+#~ msgid "Failed login attempt from %1: wrong password"
+#~ msgstr "Niepomyślna próba połączenia z %1: złe hasło"
+
+#~ msgid "Refused uninvited connection attempt from %1"
+#~ msgstr "Odrzucono połączenie bez zaproszenia z %1"
+
+#~ msgid "Invitation"
+#~ msgstr "Zaproszenie"
+
+#~ msgid ""
+#~ "An invitation creates a one-time password that allows the receiver to "
+#~ "connect to your desktop.\n"
+#~ "It is valid for only one successful connection and will expire after an "
+#~ "hour if it has not been used. \n"
+#~ "When somebody connects to your computer a dialog will appear and ask you "
+#~ "for permission.\n"
+#~ " The connection will not be established before you accept it. In this "
+#~ "dialog you can also\n"
+#~ " restrict the other person to view your desktop only, without the ability "
+#~ "to move your\n"
+#~ " mouse pointer or press keys.\n"
+#~ "If you want to create a permanent password for Desktop Sharing, allow "
+#~ "'Uninvited Connections' \n"
+#~ "in the configuration."
+#~ msgstr ""
+#~ "Współdzielenie pulpitu KDE pozwala zaprosić osoby przebywające gdzie "
+#~ "indziej do oglądania\n"
+#~ "i ewentualnie kontrolowania twojego pulpitu.\n"
+#~ "Zaproszenie osoby powoduje utworzenie jednorazowego hasła pozwalającego "
+#~ "jego posiadaczowi na połączenie z Twoim pulpitem.\n"
+#~ "Pozwala ono na jednokrotne pomyślne połączenie i jego ważność wygasa po "
+#~ "godzinie, jeśli nie zostało użyte.\n"
+#~ "Kiedy ktoś próbuje podłączyć się do Twojego pulpitu, pokaże się okienko "
+#~ "dialogowe z pytaniem o zezwolenie.\n"
+#~ "Połączenie nie zostanie ustanowione dopóki go nie zaakceptujesz.\n"
+#~ "W tym okienku możesz również ograniczyć prawo osoby łączącej się "
+#~ "wyłącznie do oglądania twojego pulpitu,\n"
+#~ "bez możliwości przesuwania wskaźnika myszy lub wciskania klawiszy.\n"
+#~ "Jeśli chcesz utworzyć trwałe hasło do współdzielenia pulpitu, musisz "
+#~ "zezwolić na połączenia\n"
+#~ "bez zaproszenia w ustawieniach."
+
+#~ msgid "Ask before allowing a remote connection."
+#~ msgstr "Pytaj przed zezwoleniem na połaczenie."
+
+#~ msgid ""
+#~ "An invitation creates a one-time password that allows the receiver to "
+#~ "connect to your desktop.\n"
+#~ "It is valid for only one successful connection and will expire after an "
+#~ "hour if it has not been used. \n"
+#~ "When somebody connects to your computer a dialog will appear and ask you "
+#~ "for permission.\n"
+#~ "The connection will not be established before you accept it. In this "
+#~ "dialog you can also\n"
+#~ "restrict the other person to view your desktop only, without the ability "
+#~ "to move your\n"
+#~ "mouse pointer or press keys.\n"
+#~ "If you want to create a permanent password for Desktop Sharing, allow "
+#~ "'Uninvited Connections' \n"
+#~ "in the configuration."
+#~ msgstr ""
+#~ "Zaproszenie osoby powoduje utworzenie jednorazowego hasła pozwalającego "
+#~ "jego posiadaczowi na połączenie z Twoim pulpitem.\n"
+#~ "Pozwala ono na jednokrotne pomyślne połączenie i jego ważność wygasa po "
+#~ "godzinie, jeśli nie zostało użyte.\n"
+#~ "Kiedy ktoś próbuje podłączyć się do Twojego pulpitu, pokaże się okienko "
+#~ "dialogowe z pytaniem o zezwolenie.\n"
+#~ "Połączenie nie zostanie ustanowione dopóki go nie zaakceptujesz. \n"
+#~ "W tym okienku możesz również ograniczyć prawo osoby łączącej się "
+#~ "wyłącznie do oglądania twojego pulpitu, bez możliwości przesuwania "
+#~ "wskaźnika myszy lub wciskania klawiszy.\n"
+#~ "Jeśli chcesz utworzyć trwałe hasło do współdzielenia pulpitu, musisz "
+#~ "zezwolić na połączenia bez zaproszenia w ustawieniach."
+
+#~ msgid ""
+#~ "When sending an invitation by email, note that everybody who reads this "
+#~ "email will be able to connect to your computer for one hour, or until the "
+#~ "first successful connection took place, whichever comes first. \n"
+#~ "You should either encrypt the email or at least send it only in a secure "
+#~ "network, but not over the Internet."
+#~ msgstr ""
+#~ "Wysyłając zaproszenie przez e-mail pamiętaj, że każdy kto przeczyta ten e-"
+#~ "mail będzie mógł się połączyć z Twoim komputerem przez godzinę lub do "
+#~ "czasu pierwszego pomyślnego połączenia, cokolwiek wystąpi pierwsze. \n"
+#~ "Powinieneś zaszyfrować ten e-mail lub przynajmniej wysyłać go tylko w "
+#~ "zaufanej sieci, nie przez Internet."
+
+#~ msgid "Send Invitation via Email"
+#~ msgstr "Wyślij zaproszenie przez e-mail"
+
+#~ msgid "Desktop Sharing (VNC) invitation"
+#~ msgstr "Zaproszenie współdzielenia pulpitu (VNC)"
+
+#~ msgid ""
+#~ "You have been invited to a VNC session. If you have the KDE Remote "
+#~ "Desktop Connection installed, just click on the link below.\n"
+#~ "\n"
+#~ "%1\n"
+#~ "\n"
+#~ "Otherwise you can use any VNC client with the following parameters:\n"
+#~ "\n"
+#~ "Host: %2:%3\n"
+#~ "Password: %4\n"
+#~ "\n"
+#~ "For security reasons this invitation will expire at %5 (%6)."
+#~ msgstr ""
+#~ "Zostałeś zaproszony do połączenia VNC. Jeśli masz zainstalowane program "
+#~ "Połączenia ze zdalnym pulpitem KDE, wystarczy że klikniesz na poniższy "
+#~ "odnośnik.\n"
+#~ "\n"
+#~ "%1\n"
+#~ "\n"
+#~ "W przeciwnym wypadku możesz użyć jakiegokolwiek klienta VNC z "
+#~ "następującymi parametrami:\n"
+#~ "\n"
+#~ "Serwer: %2:%3\n"
+#~ "Hasło: %4\n"
+#~ "\n"
+#~ "Ze względów bezpieczeństwa to zaproszenie wygasa o %5 (%6)."
+
+#~ msgid "<qt>Are you sure you want to delete all invitations?</qt>"
+#~ msgstr "<qt>Czy na pewno chcesz usunąć wszystkie zaproszenia?</qt>"
+
+#~ msgid "Confirm delete Invitations"
+#~ msgstr "Usuń wszystkie zaproszenia"
+
+#~ msgid "<qt>Are you sure you want to delete this invitation?</qt>"
+#~ msgstr "<qt>Czy na pewno chcesz usunąć to zaproszenie?</qt>"
+
+#~ msgid "Personal Invitation"
+#~ msgstr "Zaproszenie osobiste"
+
+#~ msgid ""
+#~ "Desktop Sharing uses the VNC protocol. You can use any VNC client to "
+#~ "connect. \n"
+#~ "In KDE the client is called 'Remote Desktop Connection'. Enter the host "
+#~ "information\n"
+#~ "into the client and it will connect.."
+#~ msgstr ""
+#~ "Program Współdzielenie Pulpitu używa protokołu VNC. Aby się połączyć "
+#~ "możesz użyć jakiegokolwiek programu klienta VNC.\n"
+#~ "W KDE program klienta nazywa się 'Zdalne połączenie z pulpitem'. Wprowadź "
+#~ "dane serwerado programu klienta i wówczas nawiąże on połączenie."
+
+#~ msgid "Ask before accepting connections"
+#~ msgstr "Pytaj przed zaakceptowaniem połączenia"
+
+#~ msgid "Allow uninvited connections"
+#~ msgstr "Zezwól na połączenia bez zaproszenia"
+
+#~ msgid "Uninvited connections password:"
+#~ msgstr "Hasło połączenia bez zaproszenia:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">KDE Desktop Sharing "
+#~ "allows you to invite somebody at a remote location to watch and possibly "
+#~ "control your desktop. <a href=\"whatsthis\">More about invitations...</"
+#~ "a></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Współdzielenie pulpitu "
+#~ "KDE pozwala na zaproszenie kogoś używającego innego komputera do "
+#~ "oglądania i kontroli Twojego pulpitu. <a href=\"whatsthis\">Więcej o "
+#~ "zaproszeniach...</a></p></body></html>"
+
+#~ msgid "Creation Time"
+#~ msgstr "Utworzone"
+
+#~ msgid "Expire Time"
+#~ msgstr "Czas wygaśnięcia"
+
+#~ msgid "Create a new personal invitation..."
+#~ msgstr "Stwórz nowe zaproszenie osobiste..."
+
+#~ msgid "Click this button to create a new personal invitation."
+#~ msgstr "Naciśnij ten przycisk aby stworzyć nowe zaproszenie osobiste."
+
+#~ msgid "New &Personal Invitation..."
+#~ msgstr "Nowe za&proszenie osobiste..."
+
+#~ msgid "Send a new invitation via email..."
+#~ msgstr "Wyślij zaproszenie przez e-mail..."
+
+#~ msgid "Click this button to send a new invitation via email."
+#~ msgstr "Naciśnij ten przycisk żeby wysłać nowe zaproszenie przez e-mail."
+
+#~ msgid "&New Email Invitation..."
+#~ msgstr "&Nowe zaproszenie e-mailowe..."
+
+#~ msgid "Delete all invitations"
+#~ msgstr "Usuń wszystkie zaproszenia"
+
+#~ msgid "Deletes all open invitations."
+#~ msgstr "Usuwa wszystkie aktywne zaproszenia."
+
+#~ msgid "Delete All"
+#~ msgstr "Usuń wszystkie"
+
+#~ msgid "Delete the selected invitation"
+#~ msgstr "Usuwa zaznaczone zaproszenie"
+
+#~ msgid ""
+#~ "Delete the selected invitation. The invited person will not be able to "
+#~ "connect using this invitation anymore."
+#~ msgstr ""
+#~ "Usuwa zaznaczone zaproszenie. Zaproszona osoba nie będzie mogła więcej "
+#~ "się połączyć używając tego zaproszenia."
+
+#~ msgid "&Delete"
+#~ msgstr "&Usuń"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Personal Invitation</span></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Give the information "
+#~ "below to the person that you want to invite (<a href=\"htc\">how to "
+#~ "connect</a>). Note that everybody who gets the password can connect, so "
+#~ "be careful.</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Informacje osobiste</span></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Podaj tutaj informacje "
+#~ "dla osoby, którą chcesz zaprosić (<a href=\"htc\">jak zapraszać</a>). "
+#~ "Każdy kto pozna hasło może się połączyć, więc trzeba uważać.</p></body></"
+#~ "html>"
+
+#~ msgid "<b>Host:</b>"
+#~ msgstr "<b>Serwer:</b>"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><a href=\"help\">Help</"
+#~ "a></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><a href=\"help\">Pomoc</"
+#~ "a></p></body></html>"
+
+#~ msgid "<b>Expiration time:</b>"
+#~ msgstr "<b>Termin wygaśnięcia:</b>"
+
+#~ msgid "An error occurred sharing your desktop."
+#~ msgstr "Wystąpił błąd, podczas współdzielenia twojego pulpitu."
+
+#~ msgid "Error"
+#~ msgstr "Błąd"
+
+#~ msgid "An unknown error occurred sharing your desktop."
+#~ msgstr ""
+#~ "Wystąpił nieoczekiwany błąd, podczas współdzielenia twojego pulpitu."
+
+#~ msgid "Failed to activate the rfb server."
+#~ msgstr "Nieudana aktywacja serwera rfb."
+
+#~ msgid ""
+#~ "An error occurred sharing your desktop. The person you are trying to "
+#~ "share your desktop with does not have the required software installed to "
+#~ "access it."
+#~ msgstr ""
+#~ "Wystąpił błąd, podczas współdzielenia twojego pulpitu. Osoba, z którą "
+#~ "próbujesz współdzielić swój pulpit nie ma zainstalowanego wymaganego "
+#~ "oprogramowania, aby uzyskać dostęp do pulpitu."
+
+#~ msgid "Address already in use"
+#~ msgstr "Adres jest już używany"
+
+#~ msgid "Ian Reinhart Geiser"
+#~ msgstr "Ian Reinhart Geiser"
+
+#~ msgid "DCOP interface"
+#~ msgstr "Interfejs DCOP"
+
+#~ msgid "Jens Wagner (heXoNet Support GmbH)"
+#~ msgstr "Jens Wagner (heXoNet Support GmbH)"
+
+#~ msgid "X11 update scanner, original code base"
+#~ msgstr "skaner zmian X11, oryginalny kod"
+
+#~ msgid "Jason Spisak"
+#~ msgstr "Jason Spisak"
+
+#~ msgid "Karl Vogel"
+#~ msgstr "Karl Vogel"
+
+#~ msgid "KDesktop background deactivation"
+#~ msgstr "Wyłączenie tapety w KDesktop"
+
+#~ msgid "Disable Remote Control"
+#~ msgstr "Wyłącz zdalną kontrolę"
+
+#~ msgid "The remote user has closed the connection."
+#~ msgstr "Zdalny użytkownik zakończył połączenie."

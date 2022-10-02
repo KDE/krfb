@@ -1,0 +1,1043 @@
+# Translation of krfb.po to Slovenian
+# Copyright (C) 2002, 2003, 2004, 2005 Free Software Foundation, Inc.
+# $Id: krfb.po 1629487 2022-07-18 01:31:06Z scripty $
+# $Source$
+#
+# Andrej Vernekar <andrej.vernekar@moj.net>, 2002, 2008.
+# Gregor Rakar <gregor.rakar@kiss.si>, 2003, 2004, 2005.
+# Jure Repinc <jlp@holodeck1.com>, 2008, 2009, 2010, 2011.
+# Andrej Mernik <andrejm@ubuntu.si>, 2013, 2014, 2015, 2017, 2018.
+# Matjaž Jeran <matjaz.jeran@amis.net>, 2020, 2021.
+msgid ""
+msgstr ""
+"Project-Id-Version: krfb\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-07-18 00:45+0000\n"
+"PO-Revision-Date: 2021-10-31 20:21+0100\n"
+"Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
+"Language-Team: Slovenian <lugos-slo@lugos.si>\n"
+"Language: sl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 20.12.2\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
+"%100==4 ? 3 : 0);\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Andrej Vernekar,Gregor Rakar,Matjaž Horvat,Andrej Mernik"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr ""
+"andrej.vernekar@moj.net,gregor.rakar@kiss.si,matjaz@owca.info,andrejm@ubuntu."
+"si"
+
+#: connectiondialog.cpp:39
+#, kde-format
+msgid "New Connection"
+msgstr "Nova povezava"
+
+#: connectiondialog.cpp:61
+#, kde-format
+msgid "Accept Connection"
+msgstr "Sprejmi povezavo"
+
+#: connectiondialog.cpp:65
+#, kde-format
+msgid "Refuse Connection"
+msgstr "Zavrni povezavo"
+
+#: invitationsrfbclient.cpp:69
+#, kde-format
+msgid "Accepted connection from %1"
+msgstr "Sprejeta povezava od %1"
+
+#: invitationsrfbclient.cpp:75
+#, kde-format
+msgid "Received connection from %1, on hold (waiting for confirmation)"
+msgstr "Prejeta povezava iz %1, na čakanju (čakanje potrditve)"
+
+#: invitationsrfbserver.cpp:55
+#, kde-format
+msgid "%1@%2 (shared desktop)"
+msgstr "%1@%2 (namizje v souporabi)"
+
+#. i18n: ectx: label, entry (startMinimized), group (MainWindow)
+#: krfb.kcfg:9
+#, kde-format
+msgid "Start minimized"
+msgstr "Zaženi skrčeno"
+
+#. i18n: ectx: label, entry (useDefaultPort), group (TCP)
+#: krfb.kcfg:15
+#, kde-format
+msgid "Use the default port for VNC (5900)"
+msgstr "Uporabi privzeta vrata za VNC (5900)"
+
+#. i18n: ectx: label, entry (port), group (TCP)
+#: krfb.kcfg:19
+#, kde-format
+msgid "This is the port on which krfb will listen."
+msgstr "Vrata, na katerih bo poslušal krfb."
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_publishService)
+#. i18n: ectx: label, entry (publishService), group (TCP)
+#: krfb.kcfg:23 ui/configtcp.ui:16
+#, kde-format
+msgid "Announce the service on the local network"
+msgstr "Naznani storitev na krajevnem omrežju"
+
+#. i18n: ectx: label, entry (noWallet), group (Security)
+#: krfb.kcfg:29
+#, kde-format
+msgid "Do not store passwords in KWallet"
+msgstr "Ne shranjuj gesel v KWallet"
+
+#. i18n: ectx: label, entry (allowDesktopControl), group (Security)
+#: krfb.kcfg:33
+#, kde-format
+msgid "Allow remote connections to manage the desktop."
+msgstr "Dovoli oddaljenim povezavam, da upravljajo namizje."
+
+#. i18n: ectx: label, entry (allowUnattendedAccess), group (Security)
+#: krfb.kcfg:37
+#, kde-format
+msgid "Allow connections without an invitation."
+msgstr "Dovoli povezave brez povabila."
+
+#. i18n: ectx: label, entry (unattendedAccessPassword), group (Security)
+#. i18n: ectx: label, entry (desktopSharingPassword), group (Security)
+#: krfb.kcfg:41 krfb.kcfg:44
+#, kde-format
+msgid "Password for uninvited connections."
+msgstr "Geslo za nepovabljene povezave."
+
+#. i18n: ectx: label, entry (preferredFrameBufferPlugin), group (FrameBuffer)
+#: krfb.kcfg:49
+#, kde-format
+msgid "Preferred Frame Buffer Plugin"
+msgstr "Prednostni vstavek za slikovni medpomnilnik"
+
+#: main-virtualmonitor.cpp:49
+#, kde-format
+msgid "Creating a Virtual Monitor from %1"
+msgstr "Ustvarjanje navideznega monitorja iz %1"
+
+#: main-virtualmonitor.cpp:80
+#, kde-format
+msgid "Remote Virtual Monitor"
+msgstr "Oddaljeni navidezni monitor"
+
+#: main-virtualmonitor.cpp:82
+#, kde-format
+msgid "Offer a Virtual Monitor that can be accessed remotely"
+msgstr "Ponudi navidezni monitor, ki je lahko oddaljeno dostopen"
+
+#: main-virtualmonitor.cpp:84 main.cpp:98
+#, kde-format
+msgid ""
+"(c) 2009-2010, Collabora Ltd.\n"
+"(c) 2007, Alessandro Praduroux\n"
+"(c) 2001-2003, Tim Jansen\n"
+"(c) 2001, Johannes E. Schindelin\n"
+"(c) 2000-2001, Const Kaplinsky\n"
+"(c) 2000, Tridia Corporation\n"
+"(c) 1999, AT&T Laboratories Boston\n"
+msgstr ""
+"© 2009-2010, Collabora Ltd.\n"
+"© 2007, Alessandro Praduroux\n"
+"© 2001-2003, Tim Jansen\n"
+"© 2001, Johannes E. Schindelin\n"
+"© 2000-2001, Const Kaplinsky\n"
+"© 2000, Tridia Corporation\n"
+"© 1999, AT&T Laboratories Boston\n"
+
+#: main-virtualmonitor.cpp:91
+#, kde-format
+msgid "Virtual Monitor implementation"
+msgstr "Implementacija navideznega monitorja"
+
+#: main-virtualmonitor.cpp:92 main.cpp:108
+#, kde-format
+msgid "George Kiagiadakis"
+msgstr "George Kiagiadakis"
+
+#: main-virtualmonitor.cpp:93 main.cpp:111
+#, kde-format
+msgid "Alessandro Praduroux"
+msgstr "Alessandro Praduroux"
+
+#: main-virtualmonitor.cpp:93 main.cpp:111
+#, kde-format
+msgid "KDE4 porting"
+msgstr "Predelava za KDE 4"
+
+#: main-virtualmonitor.cpp:94 main.cpp:112
+#, kde-format
+msgid "Tim Jansen"
+msgstr "Tim Jansen"
+
+#: main-virtualmonitor.cpp:94 main.cpp:112
+#, kde-format
+msgid "Original author"
+msgstr "Prvotni avtor"
+
+#: main-virtualmonitor.cpp:95 main.cpp:113
+#, kde-format
+msgid "Johannes E. Schindelin"
+msgstr "Johannes E. Schindelin"
+
+#: main-virtualmonitor.cpp:96 main.cpp:114
+#, kde-format
+msgid "libvncserver"
+msgstr "libvncserver"
+
+#: main-virtualmonitor.cpp:97 main.cpp:115
+#, kde-format
+msgid "Const Kaplinsky"
+msgstr "Const Kaplinsky"
+
+#: main-virtualmonitor.cpp:98 main.cpp:116
+#, kde-format
+msgid "TightVNC encoder"
+msgstr "Kodirnik TightVNC"
+
+#: main-virtualmonitor.cpp:99 main.cpp:117
+#, kde-format
+msgid "Tridia Corporation"
+msgstr "Tridia Corporation"
+
+#: main-virtualmonitor.cpp:100 main.cpp:118
+#, kde-format
+msgid "ZLib encoder"
+msgstr "Kodirnik ZLib"
+
+#: main-virtualmonitor.cpp:101 main.cpp:119
+#, kde-format
+msgid "AT&T Laboratories Boston"
+msgstr "Laboratoriji AT&T v Bostonu"
+
+#: main-virtualmonitor.cpp:102 main.cpp:120
+#, kde-format
+msgid "original VNC encoders and protocol design"
+msgstr "prvotni kodirniki VNC in zasnova protokola"
+
+#: main-virtualmonitor.cpp:108
+#, kde-format
+msgid "Logical resolution of the new monitor"
+msgstr "Logična resolucija novega monitorja"
+
+#: main-virtualmonitor.cpp:108
+#, kde-format
+msgid "resolution"
+msgstr "resolucija"
+
+#: main-virtualmonitor.cpp:110
+#, kde-format
+msgid "Name of the monitor"
+msgstr "Ime monitorja"
+
+#: main-virtualmonitor.cpp:110
+#, kde-format
+msgid "name"
+msgstr "ime"
+
+#: main-virtualmonitor.cpp:112
+#, kde-format
+msgid "Password for the client to connect to it"
+msgstr "Geslo za odjemalca za povezavo nanj"
+
+#: main-virtualmonitor.cpp:112
+#, kde-format
+msgid "password"
+msgstr "geslo"
+
+#: main-virtualmonitor.cpp:114
+#, kde-format
+msgid "The device-pixel-ratio of the device, the scaling factor"
+msgstr "Merilo razmerja pikslov naprave, merilo povečanja"
+
+#: main-virtualmonitor.cpp:114
+#, kde-format
+msgid "dpr"
+msgstr "dpr"
+
+#: main-virtualmonitor.cpp:116
+#, kde-format
+msgid "The port we will be listening to"
+msgstr "Vrata za poslušanje"
+
+#: main-virtualmonitor.cpp:116
+#, kde-format
+msgid "number"
+msgstr "število"
+
+#: main.cpp:49
+#, kde-format
+msgid ""
+"Your X11 Server does not support the required XTest extension version 2.2. "
+"Sharing your desktop is not possible."
+msgstr ""
+"Vaš strežnik X11 ne podpira potrebne razširitve XTest različice 2.2. "
+"Souporaba vašega namizja ni mogoča."
+
+#: main.cpp:51 main.cpp:150
+#, kde-format
+msgid "Desktop Sharing Error"
+msgstr "Napaka med souporabo namizja"
+
+#: main.cpp:94
+#, kde-format
+msgid "Desktop Sharing"
+msgstr "Souporaba namizja"
+
+#: main.cpp:96
+#, kde-format
+msgid "VNC-compatible server to share desktops"
+msgstr "Združljiv strežnik VNC za souporabo namizij"
+
+#: main.cpp:105
+#, kde-format
+msgid "George Goldberg"
+msgstr "George Goldberg"
+
+#: main.cpp:106
+#, kde-format
+msgid "Telepathy tubes support"
+msgstr "Podpora za cevi Telepathy"
+
+#: main.cpp:126
+#, kde-format
+msgid "Do not show the invitations management dialog at startup"
+msgstr "Ob zagonu ne prikaži okna za upravljanje povabil"
+
+#: main.cpp:148
+#, kde-format
+msgid ""
+"Desktop Sharing is not running under an X11 Server or Wayland.\n"
+"Other display servers are currently not supported."
+msgstr ""
+"Skupna raba namizja se ne izvaja na strežniku X11 ali Wayland.\n"
+"Drugi prikazni strežniki trenutno niso podprti."
+
+#: mainwindow.cpp:52
+#, kde-format
+msgid "Storing passwords in config file is insecure!"
+msgstr "Shranjevanje gesel v datoteko config ni varno!"
+
+#: mainwindow.cpp:189
+#, kde-format
+msgid "Enter a new password for Unattended Access"
+msgstr "Vnesite novo geslo za dostop brez potrditve"
+
+#: mainwindow.cpp:200
+#, kde-format
+msgid ""
+"Failed to start the krfb server. Desktop sharing will not work. Try setting "
+"another port in the settings and restart krfb."
+msgstr ""
+"Zagon strežnika KRFB ni uspel. Souporaba namizja ne bo delovala. Poskusite "
+"nastaviti druga vrata in znova zagnati KRFB."
+
+#. i18n: ectx: property (whatsThis), widget (QLabel, titleLabel)
+#. i18n: ectx: property (text), widget (QLabel, titleLabel)
+#. i18n: ectx: property (whatsThis), widget (QLabel, aboutLabel)
+#: mainwindow.cpp:223 mainwindow.cpp:230 ui/mainwidget.ui:83
+#: ui/mainwidget.ui:86 ui/mainwidget.ui:114
+#, kde-format
+msgid "KDE Desktop Sharing"
+msgstr "Souporaba namizja KDE"
+
+#: mainwindow.cpp:224
+#, kde-format
+msgid ""
+"This field contains the address of your computer and the port number, "
+"separated by a colon.\n"
+"\n"
+"The address is just a hint - you can use any address that can reach your "
+"computer.\n"
+"\n"
+"Desktop Sharing tries to guess your address from your network configuration, "
+"but does not always succeed in doing so.\n"
+"\n"
+"If your computer is behind a firewall it may have a different address or be "
+"unreachable for other computers."
+msgstr ""
+"To polje vsebuje naslov vašega računalnika in številko vrat, ločeno s "
+"podpičjem.\n"
+"\n"
+"Naslov je samo namig - uporabite lahko katerikoli naslov, ki lahko doseže "
+"vaš računalnik.\n"
+"\n"
+"Souporaba namizja poskuša uganiti vaš naslov iz vaših omrežnih nastavitev, "
+"vendar ji ne uspe vedno.\n"
+"\n"
+"Če je vaš računalnik za požarnim zidom, ima lahko drugačen naslov ali pa je "
+"nedosegljiv za druge računalnike."
+
+#: mainwindow.cpp:231
+#, kde-format
+msgid ""
+"Any remote user with normal desktop sharing password will have to be "
+"authenticated.\n"
+"\n"
+"If unattended access is on, and the remote user provides unattended mode "
+"password, desktop sharing access will be granted without explicit "
+"confirmation."
+msgstr ""
+"Katerikoli oddaljeni uporabnik z običajnim geslom za souporabo namizja se bo "
+"moral overiti.\n"
+"\n"
+"Če je vklopljen dostop brez potrditve in oddaljeni uporabnik ponudi geslo za "
+"ta dostop, potem bo dostop dovoljen brez zahteve po potrditvi."
+
+#: mainwindow.cpp:249
+#, kde-format
+msgid "Network"
+msgstr "Omrežje"
+
+#: mainwindow.cpp:250
+#, kde-format
+msgid "Security"
+msgstr "Varnost"
+
+#: mainwindow.cpp:251
+#, kde-format
+msgid "Screen capture"
+msgstr "Zajem zaslona"
+
+#: mainwindow.cpp:256
+#, kde-format
+msgid "To apply framebuffer plugin setting, you need to restart the program."
+msgstr ""
+"Da uveljavite nastavitve vstavka medpomnilnika sličic, morate znova zagnati "
+"program."
+
+#: rfbservermanager.cpp:229
+#, kde-format
+msgid "The remote user %1 is now connected."
+msgstr "Oddaljeni uporabnik %1 je sedaj povezan."
+
+#: rfbservermanager.cpp:243
+#, kde-format
+msgid "The remote user %1 disconnected."
+msgstr "Oddaljeni uporabnik %1 je prekinil povezavo."
+
+#: trayicon.cpp:56
+#, kde-format
+msgid "Disconnect"
+msgstr "Prekini povezavo"
+
+#: trayicon.cpp:62
+#, kde-format
+msgid "Enable Remote Control"
+msgstr "Omogoči oddaljeni nadzor"
+
+#: trayicon.cpp:101 trayicon.cpp:133
+#, kde-format
+msgid "Desktop Sharing - disconnected"
+msgstr "Souporaba namizja – povezava prekinjena"
+
+#: trayicon.cpp:117 trayicon.cpp:137
+#, kde-format
+msgid "Desktop Sharing - connected with %1"
+msgstr "Souporaba namizja – povezan z %1"
+
+#: trayicon.cpp:120
+#, kde-format
+msgid "Desktop Sharing - connected"
+msgstr "Souporaba namizja – povezan"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, Framebuffer)
+#: ui/configframebuffer.ui:14
+#, kde-format
+msgid "Framebuffer"
+msgstr "Medpomnilnik sličic"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: ui/configframebuffer.ui:22
+#, kde-format
+msgid "Preferred frameb&uffer plugin:"
+msgstr "Prednostni vstavek za medpomnilnik sličic:"
+
+#. i18n: ectx: property (text), widget (QLabel, helpText)
+#: ui/configframebuffer.ui:47
+#, kde-format
+msgid ""
+"<html><head/><body><p>When using x11, <span style=\" font-weight:600;\">xcb</"
+"span> plugin should be preferred, because it is more performant.<br/><span "
+"style=\" font-weight:600;\">qt</span> plugin is a safe fallback, if for some "
+"reason others don't work. But also it is very slow.</p></body></html>"
+msgstr ""
+"<html><head/><body><p>Ob uporabi x11 bi morali dati prednost vstavku <span "
+"style=\" font-weight:600;\">xcb</span>, saj je bolj zmogljiv.<br/>Vstavek "
+"<span style=\" font-weight:600;\">qt</span> je zasilna rešitev, če drugi ne "
+"delujejo, je pa zelo počasen.</p></body></html>"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_allowDesktopControl)
+#: ui/configsecurity.ui:17
+#, kde-format
+msgid "Allow remote connections to control your desktop"
+msgstr "Dovoli oddaljenim povezavam, da nadzorujejo namizje"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_noWallet)
+#: ui/configsecurity.ui:27
+#, kde-format
+msgid "Do not store passwords using KDE wallet"
+msgstr "Ne shranjujte gesel v listnico KDE KWallet"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_useDefaultPort)
+#: ui/configtcp.ui:26
+#, kde-format
+msgid "Use default port"
+msgstr "Uporabi privzeta vrata"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: ui/configtcp.ui:50
+#, kde-format
+msgid "Listening port:"
+msgstr "Vrata na katerih se posluša:"
+
+#. i18n: ectx: property (text), widget (QLabel, TextLabel5)
+#: ui/connectionwidget.ui:47
+#, kde-format
+msgid "Attention"
+msgstr "Pozor"
+
+#. i18n: ectx: property (text), widget (QLabel, mainTextLabel)
+#: ui/connectionwidget.ui:72
+#, kde-format
+msgid ""
+"Somebody is requesting a connection to your computer. Granting this will "
+"allow the remote user to watch your desktop. "
+msgstr ""
+"Nekdo je zaprosil povezavo do vašega računalnika. Odobritev tega bo dovolila "
+"oddaljenemu uporabniku ogled vašega namizja. "
+
+#. i18n: ectx: property (text), widget (QLabel, TextLabel1)
+#: ui/connectionwidget.ui:102
+#, kde-format
+msgid "Remote system:"
+msgstr "Oddaljeni sistem:"
+
+#. i18n: ectx: property (text), widget (QLabel, remoteHost)
+#: ui/connectionwidget.ui:118
+#, kde-format
+msgid "123.234.123.234"
+msgstr "123.234.123.234"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, cbAllowRemoteControl)
+#: ui/connectionwidget.ui:136
+#, kde-format
+msgid ""
+"If you turn this option on, the remote user can enter keystrokes and use "
+"your mouse pointer. This gives them full control over your computer, so be "
+"careful. When the option is disabled the remote user can only watch your "
+"screen."
+msgstr ""
+"Če to možnost vključite, lahko oddaljeni uporabnik vnese pritiske na tipke "
+"ali uporablja vašo miškino kazalko. To mu da popoln nadzor nad vašim "
+"računalnikom, zato bodite previdni. Ko je ta možnost onemogočena, lahko "
+"oddaljeni uporabnik le gleda vaš zaslon."
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbAllowRemoteControl)
+#: ui/connectionwidget.ui:139
+#, kde-format
+msgid "Allow remote user to &control keyboard and mouse"
+msgstr "Dovoli zunanjemu uporabniku nadzor miške in tipkovnice"
+
+#. i18n: ectx: property (text), widget (QLabel, aboutLabel)
+#: ui/mainwidget.ui:117
+#, kde-format
+msgid ""
+"KDE Desktop Sharing allows you to grant permission to someone at a remote "
+"location for viewing and possibly controlling your desktop."
+msgstr ""
+"Souporaba namizja KDE vam omogoča, da nekomu z oddaljenega mesta dovolite, "
+"da opazuje in po možnosti nadzoruje vaše namizje."
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, enableSharingCheckBox)
+#: ui/mainwidget.ui:145
+#, kde-format
+msgid "Starts/Stops Remote Desktop Sharing"
+msgstr "Začne/zaustavi souporabo oddaljenega namizja"
+
+#. i18n: ectx: property (text), widget (QCheckBox, enableSharingCheckBox)
+#: ui/mainwidget.ui:148
+#, kde-format
+msgid "&Enable Desktop Sharing"
+msgstr "Omogoči souporabo namizja"
+
+#. i18n: ectx: property (title), widget (QGroupBox, detailsGroupBox)
+#: ui/mainwidget.ui:170
+#, kde-format
+msgid "Connection Details"
+msgstr "Podrobnosti povezave"
+
+#. i18n: ectx: property (text), widget (QLabel, addressLabel)
+#: ui/mainwidget.ui:193
+#, kde-format
+msgid "&Address"
+msgstr "N&aslov"
+
+#. i18n: ectx: property (whatsThis), widget (QToolButton, addressAboutButton)
+#: ui/mainwidget.ui:214
+#, kde-format
+msgid "More about this address"
+msgstr "Več o tem naslovu"
+
+#. i18n: ectx: property (text), widget (QToolButton, addressAboutButton)
+#. i18n: ectx: property (text), widget (QToolButton, unattendedAboutButton)
+#: ui/mainwidget.ui:217 ui/mainwidget.ui:397
+#, kde-format
+msgid "About"
+msgstr "O"
+
+#. i18n: ectx: property (whatsThis), widget (QLabel, addressDisplayLabel)
+#: ui/mainwidget.ui:235
+#, kde-format
+msgid ""
+"Address required by remote users to connect to your desktop. Click about "
+"button on the right for more info."
+msgstr ""
+"Naslov, ki ga morajo oddaljeni uporabniki poznati za povezavo z vašim "
+"namizjem. Kliknite na gumb \"O\" na desni za več podrobnosti."
+
+#. i18n: ectx: property (text), widget (QLabel, addressDisplayLabel)
+#: ui/mainwidget.ui:238
+#, kde-format
+msgid "127.0.0.1 : 5900"
+msgstr "127.0.0.1 : 5900"
+
+#. i18n: ectx: property (text), widget (QLabel, passwordLabel)
+#: ui/mainwidget.ui:269
+#, kde-format
+msgid "&Password"
+msgstr "Geslo"
+
+#. i18n: ectx: property (whatsThis), widget (QToolButton, passwordEditButton)
+#: ui/mainwidget.ui:290
+#, kde-format
+msgid "Edit/Save Desktop Sharing Password"
+msgstr "Uredi/shrani geslo za souporabo namizja"
+
+#. i18n: ectx: property (text), widget (QToolButton, passwordEditButton)
+#: ui/mainwidget.ui:293
+#, kde-format
+msgid "Edit"
+msgstr "Uredi"
+
+#. i18n: ectx: property (whatsThis), widget (QLabel, passwordDisplayLabel)
+#: ui/mainwidget.ui:311
+#, kde-format
+msgid ""
+"Password required by remote users to connect to your desktop. Click the edit "
+"button on the right to change password."
+msgstr ""
+"Geslo, ki ga morajo oddaljeni uporabniki poznati za povezavo z vašim "
+"namizjem. Kliknite na gumb \"Uredi\" na desni za spremembo gesla."
+
+#. i18n: ectx: property (text), widget (QLabel, passwordDisplayLabel)
+#: ui/mainwidget.ui:314
+#, kde-format
+msgid "TemporaryPassword"
+msgstr "ZačasnoGeslo"
+
+#. i18n: ectx: property (whatsThis), widget (QGroupBox, unattendedGroupBox)
+#. i18n: ectx: property (text), widget (QLabel, unattendedAboutLabel)
+#: ui/mainwidget.ui:340 ui/mainwidget.ui:378
+#, kde-format
+msgid ""
+"Unattended Access allows a remote user with the password to gain control to "
+"your desktop without your explicit confirmation."
+msgstr ""
+"Dostop brez potrditve dovoljuje oddaljenemu uporabniku, ki ima geslo, da "
+"lahko nadzira vaše namizje brez vaše potrditve."
+
+#. i18n: ectx: property (title), widget (QGroupBox, unattendedGroupBox)
+#: ui/mainwidget.ui:343
+#, kde-format
+msgid "Unattended Access"
+msgstr "Dostop brez potrditve"
+
+#. i18n: ectx: property (whatsThis), widget (QLabel, unattendedAboutLabel)
+#: ui/mainwidget.ui:375
+#, kde-format
+msgid ""
+"Unattended Access allows a remote user with the password to gain control to "
+"your desktop without your explicit confirmation. Click \"About\" button on "
+"right to know more."
+msgstr ""
+"Dostop brez potrditve dovoljuje oddaljenemu uporabniku, ki ima geslo, da "
+"lahko nadzira vaše namizje brez vaše potrditve. Kliknite gumb \"O\" na desni "
+"za več podrobnosti."
+
+#. i18n: ectx: property (whatsThis), widget (QToolButton, unattendedAboutButton)
+#: ui/mainwidget.ui:394
+#, kde-format
+msgid "Know more about Unattended Access"
+msgstr "Več podrobnosti o dostopu brez potrditve"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, enableUnattendedCheckBox)
+#: ui/mainwidget.ui:437
+#, kde-format
+msgid ""
+"Starts/Stops unattended access to your desktop. Click on button on right to "
+"change password, and \"About\" button to know more."
+msgstr ""
+"Začne/zaustavi dostop brez potrditve za vaše namizje. Kliknite na gumb na "
+"desni za spremembo gesla in gumb \"O\" za več podrobnosti."
+
+#. i18n: ectx: property (text), widget (QCheckBox, enableUnattendedCheckBox)
+#: ui/mainwidget.ui:440
+#, kde-format
+msgid "Enable &Unattended Access"
+msgstr "Omogoči dostop brez potrditve"
+
+#. i18n: ectx: property (whatsThis), widget (QPushButton, unattendedPasswordButton)
+#: ui/mainwidget.ui:465
+#, kde-format
+msgid "Change password for Unattended Access"
+msgstr "Spremeni geslo za dostop brez potrditve"
+
+#. i18n: ectx: property (text), widget (QPushButton, unattendedPasswordButton)
+#: ui/mainwidget.ui:468
+#, kde-format
+msgid "&Change Unattended Password"
+msgstr "Spremeni geslo za dostop brez potrditve"
+
+#~ msgid "Welcome to KDE Desktop Sharing"
+#~ msgstr "Dobrodošli v souporabo namizja KDE"
+
+#~ msgid ""
+#~ "KDE Desktop Sharing allows you to invite somebody at a remote location to "
+#~ "watch and possibly control your desktop. <a href=\"whatsthis\">More about "
+#~ "invitations...</a>"
+#~ msgstr ""
+#~ "Souporaba namizja KDE vam omogoča, da povabite nekoga z oddaljenega "
+#~ "mesta, da opazuje in po možnosti nadzoruje vaše namizje.<a href="
+#~ "\"whatsthis\">Več o povabilih ...</a>"
+
+#~ msgid ""
+#~ "Create a new invitation and display the connection data. Use this option "
+#~ "if you want to invite somebody personally, for example, to give the "
+#~ "connection data over the phone."
+#~ msgstr ""
+#~ "Ustvari novo povabilo in prikaži podatke o povezavi. Uporabite to "
+#~ "možnost, če bi radi koga povabili osebno, npr. da bi dali podatke o "
+#~ "povezavi preko telefona."
+
+#~ msgid "Create &Personal Invitation..."
+#~ msgstr "Ustvari &osebno povabilo ..."
+
+#~ msgid ""
+#~ "This button will start your email application with a pre-configured text "
+#~ "that explains to the recipient how to connect to your computer. "
+#~ msgstr ""
+#~ "Ta gumb bo zagnal vaš e-poštni program s prednastavljenim besedilom za "
+#~ "prejemnika, ki razloži, kako se povezati na vaš računalnik."
+
+#~ msgid "Invite via &Email..."
+#~ msgstr "Povabi preko &e-pošte ..."
+
+#~ msgid "&Manage Invitations (%1)..."
+#~ msgstr "&Upravljaj povabila (%1) ..."
+
+#~ msgid "5.0"
+#~ msgstr "5.0"
+
+#~ msgid "krfb"
+#~ msgstr "krfb"
+
+#~ msgid ""
+#~ "You have requested to share your desktop with %1. If you proceed, you "
+#~ "will allow the remote user to watch your desktop."
+#~ msgstr ""
+#~ "Zahtevali ste souporabo vašega namizja z %1. Če nadaljujete, boste "
+#~ "oddaljenemu uporabniku dovolili opazovanje vašega namizja."
+
+#~ msgid "Search in Contacts..."
+#~ msgstr "Poišči v stikih ..."
+
+#~ msgid "Confirmation"
+#~ msgstr "Potrditev"
+
+#~ msgid "Failed login attempt from %1: wrong password"
+#~ msgstr "Neuspešen poskus prijave iz %1: napačno geslo"
+
+#~ msgid "Refused uninvited connection attempt from %1"
+#~ msgstr "Zavrnjen poskus nepovabljene povezave iz %1"
+
+#~ msgid "Invitation"
+#~ msgstr "Povabilo"
+
+#~ msgid ""
+#~ "An invitation creates a one-time password that allows the receiver to "
+#~ "connect to your desktop.\n"
+#~ "It is valid for only one successful connection and will expire after an "
+#~ "hour if it has not been used. \n"
+#~ "When somebody connects to your computer a dialog will appear and ask you "
+#~ "for permission.\n"
+#~ " The connection will not be established before you accept it. In this "
+#~ "dialog you can also\n"
+#~ " restrict the other person to view your desktop only, without the ability "
+#~ "to move your\n"
+#~ " mouse pointer or press keys.\n"
+#~ "If you want to create a permanent password for Desktop Sharing, allow "
+#~ "'Uninvited Connections' \n"
+#~ "in the configuration."
+#~ msgstr ""
+#~ "Povabilo ustvari enkratno geslo, ki dovoljuje prejemniku, da se poveže na "
+#~ "vaše namizje.\n"
+#~ "Veljavno je samo za eno uspešno povezavo, preteče pa po eni uri, če ni "
+#~ "uporabljeno.\n"
+#~ "Če se kdo poveže na vaš računalnik, se prikaže pogovorno okno in vas "
+#~ "vpraša za dovoljenje.\n"
+#~ "Povezava ne bo vzpostavljena, dokler je ne sprejmete. V tem pogovornem "
+#~ "oknu lahko tudi\n"
+#~ "omejite druge osebe, da lahko samo gledajo vaše namizje, ne da bi "
+#~ "premikali vašo miškino \n"
+#~ "kazalko ali pa pritiskali tipke.\n"
+#~ "Če bi radi ustvarili trajno geslo za Souporabo namizja, potem dovolite "
+#~ "»Nepovabljene\n"
+#~ "povezave« v nastavitvah."
+
+#~ msgid "Ask before allowing a remote connection."
+#~ msgstr "Vprašaj, preden dovoliš oddaljeno povezavo."
+
+#~ msgid ""
+#~ "An invitation creates a one-time password that allows the receiver to "
+#~ "connect to your desktop.\n"
+#~ "It is valid for only one successful connection and will expire after an "
+#~ "hour if it has not been used. \n"
+#~ "When somebody connects to your computer a dialog will appear and ask you "
+#~ "for permission.\n"
+#~ "The connection will not be established before you accept it. In this "
+#~ "dialog you can also\n"
+#~ "restrict the other person to view your desktop only, without the ability "
+#~ "to move your\n"
+#~ "mouse pointer or press keys.\n"
+#~ "If you want to create a permanent password for Desktop Sharing, allow "
+#~ "'Uninvited Connections' \n"
+#~ "in the configuration."
+#~ msgstr ""
+#~ "Povabilo ustvari enkratno geslo, ki dovoljuje prejemniku, da se poveže na "
+#~ "vaše namizje.\n"
+#~ "Veljavno je samo za eno uspešno povezavo, preteče pa po eni uri, če ni "
+#~ "uporabljeno.\n"
+#~ "Če se kdo poveže na vaš računalnik, se prikaže pogovorno okno in vas "
+#~ "vpraša za dovoljenje.\n"
+#~ "Povezava ne bo vzpostavljena, dokler je ne sprejmete. V tem pogovornem "
+#~ "oknu lahko tudi\n"
+#~ "omejite druge osebe, da lahko samo gledajo vaše namizje, ne da bi "
+#~ "premikali vašo miškino \n"
+#~ "kazalko ali pa pritiskali tipke.\n"
+#~ "Če bi radi ustvarili trajno geslo za Souporabo namizja, potem dovolite "
+#~ "»Nepovabljene\n"
+#~ "povezave« v nastavitvah."
+
+#~ msgid ""
+#~ "When sending an invitation by email, note that everybody who reads this "
+#~ "email will be able to connect to your computer for one hour, or until the "
+#~ "first successful connection took place, whichever comes first. \n"
+#~ "You should either encrypt the email or at least send it only in a secure "
+#~ "network, but not over the Internet."
+#~ msgstr ""
+#~ "Če pošiljate povabilo prek e-pošte, potem se bo lahko vsak, ki bere to e-"
+#~ "pošto, lahko povezal na vaš računalnik za eno uro ali do prve uspešne "
+#~ "povezave, kar pride prej. \n"
+#~ "Najbolje je, da e-pošto šifrirate ali pa jo pošljete samo v varnem "
+#~ "omrežju, ne pa preko interneta."
+
+#~ msgid "Send Invitation via Email"
+#~ msgstr "Pošlji povabilo preko e-pošte"
+
+#~ msgid "Desktop Sharing (VNC) invitation"
+#~ msgstr "Povabilo za souporabo namizja (VNC)"
+
+#~ msgid ""
+#~ "You have been invited to a VNC session. If you have the KDE Remote "
+#~ "Desktop Connection installed, just click on the link below.\n"
+#~ "\n"
+#~ "%1\n"
+#~ "\n"
+#~ "Otherwise you can use any VNC client with the following parameters:\n"
+#~ "\n"
+#~ "Host: %2:%3\n"
+#~ "Password: %4\n"
+#~ "\n"
+#~ "For security reasons this invitation will expire at %5 (%6)."
+#~ msgstr ""
+#~ "Povabljeni ste bili v sejo VNC. Če imate nameščeno Povezavo na oddaljeno "
+#~ "namizje KDE, potem kliknite na spodnjo povezavo,\n"
+#~ "\n"
+#~ "%1\n"
+#~ "\n"
+#~ "Drugače pa lahko uporabite katerikoli odjemalec VNC z naslednjimi "
+#~ "parametri:\n"
+#~ "\n"
+#~ "Gostitelj: %2:%3\n"
+#~ "Geslo: %4\n"
+#~ "\n"
+#~ "Zaradi varnostnih razlogov bo to povabilo preteklo ob %5 (%6)."
+
+#~ msgid "<qt>Are you sure you want to delete all invitations?</qt>"
+#~ msgstr "<qt>Ali ste prepričani, da želite izbrisati vsa povabila?</qt>"
+
+#~ msgid "Confirm delete Invitations"
+#~ msgstr "Potrdite izbris povabil"
+
+#~ msgid "<qt>Are you sure you want to delete this invitation?</qt>"
+#~ msgstr "<qt>Ali ste prepričani, da želite izbrisati to povabilo?</qt>"
+
+#~ msgid "Personal Invitation"
+#~ msgstr "Osebno povabilo"
+
+#~ msgid ""
+#~ "Desktop Sharing uses the VNC protocol. You can use any VNC client to "
+#~ "connect. \n"
+#~ "In KDE the client is called 'Remote Desktop Connection'. Enter the host "
+#~ "information\n"
+#~ "into the client and it will connect.."
+#~ msgstr ""
+#~ "Souporaba namizja uporablja protokol VNC. Uporabite lahko katerikoli "
+#~ "odjemalec VNC.\n"
+#~ "V KDE je odjemalec imenovan »Povezava z oddaljenim namizjem«. Vnesite "
+#~ "podatke\n"
+#~ "o gostitelju v odjemalec in ta se bo povezal."
+
+#~ msgid "Ask before accepting connections"
+#~ msgstr "Vprašaj preden sprejemom povezave"
+
+#~ msgid "Allow uninvited connections"
+#~ msgstr "Dovoli nepovabljene povezave"
+
+#~ msgid "Uninvited connections password:"
+#~ msgstr "Geslo za nepovabljene povezave:"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">KDE Desktop Sharing "
+#~ "allows you to invite somebody at a remote location to watch and possibly "
+#~ "control your desktop. <a href=\"whatsthis\">More about invitations...</"
+#~ "a></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Souporaba namizja KDE "
+#~ "vam omogoča, da povabite nekoga z oddaljenega mesta, da opazuje in po "
+#~ "možnosti nadzoruje vaše namizje.\n"
+#~ "<a href=\"whatsthis\">Več o povabilih ...</a></p></body></html>"
+
+#~ msgid "Creation Time"
+#~ msgstr "Čas ustvaritve"
+
+#~ msgid "Expire Time"
+#~ msgstr "Čas preteka"
+
+#~ msgid "Create a new personal invitation..."
+#~ msgstr "Ustvari novo osebno povabilo ..."
+
+#~ msgid "Click this button to create a new personal invitation."
+#~ msgstr "Kliknite na ta gumb, da ustvarite novo osebno povabilo."
+
+#~ msgid "New &Personal Invitation..."
+#~ msgstr "Novo &osebno povabilo"
+
+#~ msgid "Send a new invitation via email..."
+#~ msgstr "Pošlji novo povabilo preko e-pošte ..."
+
+#~ msgid "Click this button to send a new invitation via email."
+#~ msgstr "Kliknite na ta gumb, da pošljete novo povabilo preko e-pošte."
+
+#~ msgid "&New Email Invitation..."
+#~ msgstr "&Novo e-poštno povabilo ..."
+
+#~ msgid "Delete all invitations"
+#~ msgstr "Izbriši vsa povabila"
+
+#~ msgid "Deletes all open invitations."
+#~ msgstr "Izbriše vsa odprta povabila."
+
+#~ msgid "Delete All"
+#~ msgstr "Izbriši vse"
+
+#~ msgid "Delete the selected invitation"
+#~ msgstr "Izbriši izbrano povabilo"
+
+#~ msgid ""
+#~ "Delete the selected invitation. The invited person will not be able to "
+#~ "connect using this invitation anymore."
+#~ msgstr ""
+#~ "Izbriše izbrano povabilo. Povabljena oseba se ne bo mogla več povezati z "
+#~ "uporabo tega vabila."
+
+#~ msgid "&Delete"
+#~ msgstr "&Izbriši"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Personal Invitation</span></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Give the information "
+#~ "below to the person that you want to invite (<a href=\"htc\">how to "
+#~ "connect</a>). Note that everybody who gets the password can connect, so "
+#~ "be careful.</p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+#~ "weight:600;\">Osebno povabilo</span></p>\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Posredujte spodnje "
+#~ "podatke osebi, ki jo želite povabiti (<a href=\"htc\">kako se povezati</"
+#~ "a>). Upoštevajte, da se lahko poveže vsakdo, ki dobi geslo, zato bodite "
+#~ "previdni.</p></body></html>"
+
+#~ msgid "<b>Host:</b>"
+#~ msgstr "<b>Gostitelj:</b>"
+
+#~ msgid ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><a href=\"help\">Help</"
+#~ "a></p></body></html>"
+#~ msgstr ""
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
+#~ "p, li { white-space: pre-wrap; }\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
+#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><a href=\"help\">Pomoč</"
+#~ "a></p></body></html>"
+
+#~ msgid "<b>Expiration time:</b>"
+#~ msgstr "<b>Čas preteka:</b>"

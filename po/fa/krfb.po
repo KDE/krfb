@@ -1,0 +1,922 @@
+# translation of krfb.po to Persian
+# Nasim Daniarzadeh <daniarzadeh@itland.ir>, 2006.
+# Nazanin Kazemi <kazemi@itland.ir>, 2006, 2007.
+# Tahereh Dadkhahfar <dadkhahfar@itland.ir>, 2006.
+msgid ""
+msgstr ""
+"Project-Id-Version: krfb\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-07-18 00:45+0000\n"
+"PO-Revision-Date: 2007-08-19 12:41+0330\n"
+"Last-Translator: Nazanin Kazemi <kazemi@itland.ir>\n"
+"Language-Team: Persian <kde-i18n-fa@kde.org>\n"
+"Language: fa\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "نسیم دانیارزاده"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "daniarzadeh@itland.ir"
+
+#: connectiondialog.cpp:39
+#, kde-format
+msgid "New Connection"
+msgstr "اتصال جدید"
+
+#: connectiondialog.cpp:61
+#, kde-format
+msgid "Accept Connection"
+msgstr "پذیرفتن اتصال"
+
+#: connectiondialog.cpp:65
+#, kde-format
+msgid "Refuse Connection"
+msgstr "رد کردن اتصال"
+
+#: invitationsrfbclient.cpp:69
+#, fuzzy, kde-format
+#| msgid "Accepted uninvited connection from %1"
+msgid "Accepted connection from %1"
+msgstr "اتصال ناخوانده از %1 پذیرفته شد."
+
+#: invitationsrfbclient.cpp:75
+#, kde-format
+msgid "Received connection from %1, on hold (waiting for confirmation)"
+msgstr "اتصال از %1 دریافت شد، منتظر بمانید )در حال انتظار برای تأیید("
+
+#: invitationsrfbserver.cpp:55
+#, kde-format
+msgid "%1@%2 (shared desktop)"
+msgstr "%1@%2 ) رومیزی مشترک("
+
+#. i18n: ectx: label, entry (startMinimized), group (MainWindow)
+#: krfb.kcfg:9
+#, kde-format
+msgid "Start minimized"
+msgstr ""
+
+#. i18n: ectx: label, entry (useDefaultPort), group (TCP)
+#: krfb.kcfg:15
+#, kde-format
+msgid "Use the default port for VNC (5900)"
+msgstr ""
+
+#. i18n: ectx: label, entry (port), group (TCP)
+#: krfb.kcfg:19
+#, kde-format
+msgid "This is the port on which krfb will listen."
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_publishService)
+#. i18n: ectx: label, entry (publishService), group (TCP)
+#: krfb.kcfg:23 ui/configtcp.ui:16
+#, kde-format
+msgid "Announce the service on the local network"
+msgstr ""
+
+#. i18n: ectx: label, entry (noWallet), group (Security)
+#: krfb.kcfg:29
+#, kde-format
+msgid "Do not store passwords in KWallet"
+msgstr ""
+
+#. i18n: ectx: label, entry (allowDesktopControl), group (Security)
+#: krfb.kcfg:33
+#, kde-format
+msgid "Allow remote connections to manage the desktop."
+msgstr "اجازه به اتصالهای دور برای مدیریت رومیزی."
+
+#. i18n: ectx: label, entry (allowUnattendedAccess), group (Security)
+#: krfb.kcfg:37
+#, kde-format
+msgid "Allow connections without an invitation."
+msgstr "به اتصالهای بدون دعوت‌نامه اجازه داده شود."
+
+#. i18n: ectx: label, entry (unattendedAccessPassword), group (Security)
+#. i18n: ectx: label, entry (desktopSharingPassword), group (Security)
+#: krfb.kcfg:41 krfb.kcfg:44
+#, kde-format
+msgid "Password for uninvited connections."
+msgstr "اسم رمز برای اتصالهای ناخوانده."
+
+#. i18n: ectx: label, entry (preferredFrameBufferPlugin), group (FrameBuffer)
+#: krfb.kcfg:49
+#, kde-format
+msgid "Preferred Frame Buffer Plugin"
+msgstr ""
+
+#: main-virtualmonitor.cpp:49
+#, kde-format
+msgid "Creating a Virtual Monitor from %1"
+msgstr ""
+
+#: main-virtualmonitor.cpp:80
+#, kde-format
+msgid "Remote Virtual Monitor"
+msgstr ""
+
+#: main-virtualmonitor.cpp:82
+#, kde-format
+msgid "Offer a Virtual Monitor that can be accessed remotely"
+msgstr ""
+
+#: main-virtualmonitor.cpp:84 main.cpp:98
+#, kde-format
+msgid ""
+"(c) 2009-2010, Collabora Ltd.\n"
+"(c) 2007, Alessandro Praduroux\n"
+"(c) 2001-2003, Tim Jansen\n"
+"(c) 2001, Johannes E. Schindelin\n"
+"(c) 2000-2001, Const Kaplinsky\n"
+"(c) 2000, Tridia Corporation\n"
+"(c) 1999, AT&T Laboratories Boston\n"
+msgstr ""
+
+#: main-virtualmonitor.cpp:91
+#, kde-format
+msgid "Virtual Monitor implementation"
+msgstr ""
+
+#: main-virtualmonitor.cpp:92 main.cpp:108
+#, kde-format
+msgid "George Kiagiadakis"
+msgstr ""
+
+#: main-virtualmonitor.cpp:93 main.cpp:111
+#, kde-format
+msgid "Alessandro Praduroux"
+msgstr ""
+
+#: main-virtualmonitor.cpp:93 main.cpp:111
+#, kde-format
+msgid "KDE4 porting"
+msgstr ""
+
+#: main-virtualmonitor.cpp:94 main.cpp:112
+#, kde-format
+msgid "Tim Jansen"
+msgstr ""
+
+#: main-virtualmonitor.cpp:94 main.cpp:112
+#, kde-format
+msgid "Original author"
+msgstr ""
+
+#: main-virtualmonitor.cpp:95 main.cpp:113
+#, kde-format
+msgid "Johannes E. Schindelin"
+msgstr ""
+
+#: main-virtualmonitor.cpp:96 main.cpp:114
+#, kde-format
+msgid "libvncserver"
+msgstr ""
+
+#: main-virtualmonitor.cpp:97 main.cpp:115
+#, kde-format
+msgid "Const Kaplinsky"
+msgstr ""
+
+#: main-virtualmonitor.cpp:98 main.cpp:116
+#, kde-format
+msgid "TightVNC encoder"
+msgstr "کدبند TightVNC"
+
+#: main-virtualmonitor.cpp:99 main.cpp:117
+#, kde-format
+msgid "Tridia Corporation"
+msgstr ""
+
+#: main-virtualmonitor.cpp:100 main.cpp:118
+#, kde-format
+msgid "ZLib encoder"
+msgstr "کدبند ZLib"
+
+#: main-virtualmonitor.cpp:101 main.cpp:119
+#, kde-format
+msgid "AT&T Laboratories Boston"
+msgstr ""
+
+#: main-virtualmonitor.cpp:102 main.cpp:120
+#, kde-format
+msgid "original VNC encoders and protocol design"
+msgstr "کدبندهای اصلی  VNC و طرح قرارداد"
+
+#: main-virtualmonitor.cpp:108
+#, kde-format
+msgid "Logical resolution of the new monitor"
+msgstr ""
+
+#: main-virtualmonitor.cpp:108
+#, kde-format
+msgid "resolution"
+msgstr ""
+
+#: main-virtualmonitor.cpp:110
+#, kde-format
+msgid "Name of the monitor"
+msgstr ""
+
+#: main-virtualmonitor.cpp:110
+#, kde-format
+msgid "name"
+msgstr ""
+
+#: main-virtualmonitor.cpp:112
+#, fuzzy, kde-format
+#| msgid "Password for uninvited connections."
+msgid "Password for the client to connect to it"
+msgstr "اسم رمز برای اتصالهای ناخوانده."
+
+#: main-virtualmonitor.cpp:112
+#, fuzzy, kde-format
+#| msgid "<b>Password:</b>"
+msgid "password"
+msgstr "<b>اسم رمز:</b>"
+
+#: main-virtualmonitor.cpp:114
+#, kde-format
+msgid "The device-pixel-ratio of the device, the scaling factor"
+msgstr ""
+
+#: main-virtualmonitor.cpp:114
+#, kde-format
+msgid "dpr"
+msgstr ""
+
+#: main-virtualmonitor.cpp:116
+#, kde-format
+msgid "The port we will be listening to"
+msgstr ""
+
+#: main-virtualmonitor.cpp:116
+#, kde-format
+msgid "number"
+msgstr ""
+
+#: main.cpp:49
+#, kde-format
+msgid ""
+"Your X11 Server does not support the required XTest extension version 2.2. "
+"Sharing your desktop is not possible."
+msgstr ""
+"کارساز  X11 از نسخه ۲/۲ پسوند XTest مورد نیاز پشتیبانی نمی‌‌‌کند. امکان اشتراک "
+"رومیزیتان نیست."
+
+#: main.cpp:51 main.cpp:150
+#, kde-format
+msgid "Desktop Sharing Error"
+msgstr "خطای اشتراک رومیزی"
+
+#: main.cpp:94
+#, kde-format
+msgid "Desktop Sharing"
+msgstr "اشتراک رومیزی"
+
+#: main.cpp:96
+#, fuzzy, kde-format
+#| msgid "VNC-compatible server to share KDE desktops"
+msgid "VNC-compatible server to share desktops"
+msgstr "کارساز همساز VNC برای اشتراک رومیزیهای KDE"
+
+#: main.cpp:105
+#, kde-format
+msgid "George Goldberg"
+msgstr ""
+
+#: main.cpp:106
+#, kde-format
+msgid "Telepathy tubes support"
+msgstr ""
+
+#: main.cpp:126
+#, kde-format
+msgid "Do not show the invitations management dialog at startup"
+msgstr ""
+
+#: main.cpp:148
+#, kde-format
+msgid ""
+"Desktop Sharing is not running under an X11 Server or Wayland.\n"
+"Other display servers are currently not supported."
+msgstr ""
+
+#: mainwindow.cpp:52
+#, kde-format
+msgid "Storing passwords in config file is insecure!"
+msgstr ""
+
+#: mainwindow.cpp:189
+#, kde-format
+msgid "Enter a new password for Unattended Access"
+msgstr ""
+
+#: mainwindow.cpp:200
+#, kde-format
+msgid ""
+"Failed to start the krfb server. Desktop sharing will not work. Try setting "
+"another port in the settings and restart krfb."
+msgstr ""
+
+#. i18n: ectx: property (whatsThis), widget (QLabel, titleLabel)
+#. i18n: ectx: property (text), widget (QLabel, titleLabel)
+#. i18n: ectx: property (whatsThis), widget (QLabel, aboutLabel)
+#: mainwindow.cpp:223 mainwindow.cpp:230 ui/mainwidget.ui:83
+#: ui/mainwidget.ui:86 ui/mainwidget.ui:114
+#, fuzzy, kde-format
+#| msgid "Desktop Sharing"
+msgid "KDE Desktop Sharing"
+msgstr "اشتراک رومیزی"
+
+#: mainwindow.cpp:224
+#, fuzzy, kde-format
+#| msgid ""
+#| "This field contains the address of your computer and the display number, "
+#| "separated by a colon.\n"
+#| "The address is just a hint - you can use any address that can reach your "
+#| "computer. \n"
+#| "Desktop Sharing tries to guess your address from your network "
+#| "configuration, but does\n"
+#| "not always succeed in doing so. If your computer is behind a firewall it "
+#| "may have a\n"
+#| "different address or be unreachable for other computers."
+msgid ""
+"This field contains the address of your computer and the port number, "
+"separated by a colon.\n"
+"\n"
+"The address is just a hint - you can use any address that can reach your "
+"computer.\n"
+"\n"
+"Desktop Sharing tries to guess your address from your network configuration, "
+"but does not always succeed in doing so.\n"
+"\n"
+"If your computer is behind a firewall it may have a different address or be "
+"unreachable for other computers."
+msgstr ""
+"این حوزه شامل نشانی رایانه شما و شماره نمایش است که توسط دو نقطه از هم جدا "
+"می‌‌‌‌شوند.\n"
+"نشانی، فقط یک راهنمایی است - می‌توانید از هر نشانی که به رایانه شما می‌‌‌‌رسد "
+"استفاده کنید. \n"
+"اشتراک رومیزی سعی در حدس زدن نشانیتان از پیکربندی شبکه‌تان دارد، اما همیشه\n"
+"در چنین کاری موفق نمی‌‌‌‌باشد. اگر رایانه شما پشت یک بارو باشد، ممکن است\n"
+"نشانی متفاوتی داشته باشد، یا برای رایانه‌های دیگر غیرقابل دسترس باشد."
+
+#: mainwindow.cpp:231
+#, kde-format
+msgid ""
+"Any remote user with normal desktop sharing password will have to be "
+"authenticated.\n"
+"\n"
+"If unattended access is on, and the remote user provides unattended mode "
+"password, desktop sharing access will be granted without explicit "
+"confirmation."
+msgstr ""
+
+#: mainwindow.cpp:249
+#, kde-format
+msgid "Network"
+msgstr "شیکه"
+
+#: mainwindow.cpp:250
+#, kde-format
+msgid "Security"
+msgstr "امنیت"
+
+#: mainwindow.cpp:251
+#, kde-format
+msgid "Screen capture"
+msgstr ""
+
+#: mainwindow.cpp:256
+#, kde-format
+msgid "To apply framebuffer plugin setting, you need to restart the program."
+msgstr ""
+
+#: rfbservermanager.cpp:229
+#, fuzzy, kde-format
+#| msgid "The remote user has closed the connection."
+msgid "The remote user %1 is now connected."
+msgstr "کاربر دور، اتصال را بسته است."
+
+#: rfbservermanager.cpp:243
+#, fuzzy, kde-format
+#| msgid "The remote user has closed the connection."
+msgid "The remote user %1 disconnected."
+msgstr "کاربر دور، اتصال را بسته است."
+
+#: trayicon.cpp:56
+#, kde-format
+msgid "Disconnect"
+msgstr ""
+
+#: trayicon.cpp:62
+#, kde-format
+msgid "Enable Remote Control"
+msgstr "فعال‌‌‌‌‌‌‌‌سازی کنترل دور"
+
+#: trayicon.cpp:101 trayicon.cpp:133
+#, kde-format
+msgid "Desktop Sharing - disconnected"
+msgstr "اشتراک رومیزی - قطع ارتباط"
+
+#: trayicon.cpp:117 trayicon.cpp:137
+#, kde-format
+msgid "Desktop Sharing - connected with %1"
+msgstr "اشتراک رومیزی - اتصال به وسیله %1"
+
+#: trayicon.cpp:120
+#, fuzzy, kde-format
+#| msgid "Desktop Sharing - disconnected"
+msgid "Desktop Sharing - connected"
+msgstr "اشتراک رومیزی - قطع ارتباط"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, Framebuffer)
+#: ui/configframebuffer.ui:14
+#, kde-format
+msgid "Framebuffer"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: ui/configframebuffer.ui:22
+#, kde-format
+msgid "Preferred frameb&uffer plugin:"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, helpText)
+#: ui/configframebuffer.ui:47
+#, kde-format
+msgid ""
+"<html><head/><body><p>When using x11, <span style=\" font-weight:600;\">xcb</"
+"span> plugin should be preferred, because it is more performant.<br/><span "
+"style=\" font-weight:600;\">qt</span> plugin is a safe fallback, if for some "
+"reason others don't work. But also it is very slow.</p></body></html>"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_allowDesktopControl)
+#: ui/configsecurity.ui:17
+#, kde-format
+msgid "Allow remote connections to control your desktop"
+msgstr "اجازه دادن به اتصالهای دور برای کنترل رومیزی خود"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_noWallet)
+#: ui/configsecurity.ui:27
+#, kde-format
+msgid "Do not store passwords using KDE wallet"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_useDefaultPort)
+#: ui/configtcp.ui:26
+#, kde-format
+msgid "Use default port"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: ui/configtcp.ui:50
+#, kde-format
+msgid "Listening port:"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, TextLabel5)
+#: ui/connectionwidget.ui:47
+#, kde-format
+msgid "Attention"
+msgstr "توجه"
+
+#. i18n: ectx: property (text), widget (QLabel, mainTextLabel)
+#: ui/connectionwidget.ui:72
+#, kde-format
+msgid ""
+"Somebody is requesting a connection to your computer. Granting this will "
+"allow the remote user to watch your desktop. "
+msgstr ""
+"شخصی در حال درخواست اتصال به رایانه شما است. موافقت با آن، به کاربر دور "
+"اجازه می‌دهد رومیزی شما را تماشا کند."
+
+#. i18n: ectx: property (text), widget (QLabel, TextLabel1)
+#: ui/connectionwidget.ui:102
+#, kde-format
+msgid "Remote system:"
+msgstr "سیستم دور:"
+
+#. i18n: ectx: property (text), widget (QLabel, remoteHost)
+#: ui/connectionwidget.ui:118
+#, kde-format
+msgid "123.234.123.234"
+msgstr "۱۲۳.۲۳۴.۱۲۳.۲۳۴"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, cbAllowRemoteControl)
+#: ui/connectionwidget.ui:136
+#, kde-format
+msgid ""
+"If you turn this option on, the remote user can enter keystrokes and use "
+"your mouse pointer. This gives them full control over your computer, so be "
+"careful. When the option is disabled the remote user can only watch your "
+"screen."
+msgstr ""
+"اگر این گزینه فعال شود، کاربر دور می‌تواند ضربه‌های کلید را وارد کند، و از "
+"اشاره‌‌گر موشیتان استفاده نماید. این کار اختیار کامل کنترل بر رایانه شما را به "
+"آنها می‌دهد، پس مراقب باشید. هنگامی که گزینه غیرفعال می‌شود، کاربر دور فقط "
+"می‌تواند پرده‌ شما را تماشا کند."
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbAllowRemoteControl)
+#: ui/connectionwidget.ui:139
+#, kde-format
+msgid "Allow remote user to &control keyboard and mouse"
+msgstr "اجازه دادن به کاربر دور برای &کنترل صفحه کلید و موشی‌"
+
+#. i18n: ectx: property (text), widget (QLabel, aboutLabel)
+#: ui/mainwidget.ui:117
+#, kde-format
+msgid ""
+"KDE Desktop Sharing allows you to grant permission to someone at a remote "
+"location for viewing and possibly controlling your desktop."
+msgstr ""
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, enableSharingCheckBox)
+#: ui/mainwidget.ui:145
+#, fuzzy, kde-format
+#| msgid "Manage Invitations - Desktop Sharing"
+msgid "Starts/Stops Remote Desktop Sharing"
+msgstr "مدیریت دعوت‌نامه‌ها -  اشتراک رومیزی"
+
+#. i18n: ectx: property (text), widget (QCheckBox, enableSharingCheckBox)
+#: ui/mainwidget.ui:148
+#, fuzzy, kde-format
+#| msgid "Desktop Sharing"
+msgid "&Enable Desktop Sharing"
+msgstr "اشتراک رومیزی"
+
+#. i18n: ectx: property (title), widget (QGroupBox, detailsGroupBox)
+#: ui/mainwidget.ui:170
+#, fuzzy, kde-format
+#| msgid "Connection side image"
+msgid "Connection Details"
+msgstr "تصویر سمت اتصال"
+
+#. i18n: ectx: property (text), widget (QLabel, addressLabel)
+#: ui/mainwidget.ui:193
+#, kde-format
+msgid "&Address"
+msgstr ""
+
+#. i18n: ectx: property (whatsThis), widget (QToolButton, addressAboutButton)
+#: ui/mainwidget.ui:214
+#, kde-format
+msgid "More about this address"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QToolButton, addressAboutButton)
+#. i18n: ectx: property (text), widget (QToolButton, unattendedAboutButton)
+#: ui/mainwidget.ui:217 ui/mainwidget.ui:397
+#, kde-format
+msgid "About"
+msgstr ""
+
+#. i18n: ectx: property (whatsThis), widget (QLabel, addressDisplayLabel)
+#: ui/mainwidget.ui:235
+#, kde-format
+msgid ""
+"Address required by remote users to connect to your desktop. Click about "
+"button on the right for more info."
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, addressDisplayLabel)
+#: ui/mainwidget.ui:238
+#, kde-format
+msgid "127.0.0.1 : 5900"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, passwordLabel)
+#: ui/mainwidget.ui:269
+#, fuzzy, kde-format
+#| msgid "<b>Password:</b>"
+msgid "&Password"
+msgstr "<b>اسم رمز:</b>"
+
+#. i18n: ectx: property (whatsThis), widget (QToolButton, passwordEditButton)
+#: ui/mainwidget.ui:290
+#, fuzzy, kde-format
+#| msgid "Desktop Sharing Error"
+msgid "Edit/Save Desktop Sharing Password"
+msgstr "خطای اشتراک رومیزی"
+
+#. i18n: ectx: property (text), widget (QToolButton, passwordEditButton)
+#: ui/mainwidget.ui:293
+#, kde-format
+msgid "Edit"
+msgstr ""
+
+#. i18n: ectx: property (whatsThis), widget (QLabel, passwordDisplayLabel)
+#: ui/mainwidget.ui:311
+#, kde-format
+msgid ""
+"Password required by remote users to connect to your desktop. Click the edit "
+"button on the right to change password."
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, passwordDisplayLabel)
+#: ui/mainwidget.ui:314
+#, kde-format
+msgid "TemporaryPassword"
+msgstr ""
+
+#. i18n: ectx: property (whatsThis), widget (QGroupBox, unattendedGroupBox)
+#. i18n: ectx: property (text), widget (QLabel, unattendedAboutLabel)
+#: ui/mainwidget.ui:340 ui/mainwidget.ui:378
+#, kde-format
+msgid ""
+"Unattended Access allows a remote user with the password to gain control to "
+"your desktop without your explicit confirmation."
+msgstr ""
+
+#. i18n: ectx: property (title), widget (QGroupBox, unattendedGroupBox)
+#: ui/mainwidget.ui:343
+#, kde-format
+msgid "Unattended Access"
+msgstr ""
+
+#. i18n: ectx: property (whatsThis), widget (QLabel, unattendedAboutLabel)
+#: ui/mainwidget.ui:375
+#, kde-format
+msgid ""
+"Unattended Access allows a remote user with the password to gain control to "
+"your desktop without your explicit confirmation. Click \"About\" button on "
+"right to know more."
+msgstr ""
+
+#. i18n: ectx: property (whatsThis), widget (QToolButton, unattendedAboutButton)
+#: ui/mainwidget.ui:394
+#, kde-format
+msgid "Know more about Unattended Access"
+msgstr ""
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, enableUnattendedCheckBox)
+#: ui/mainwidget.ui:437
+#, kde-format
+msgid ""
+"Starts/Stops unattended access to your desktop. Click on button on right to "
+"change password, and \"About\" button to know more."
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, enableUnattendedCheckBox)
+#: ui/mainwidget.ui:440
+#, kde-format
+msgid "Enable &Unattended Access"
+msgstr ""
+
+#. i18n: ectx: property (whatsThis), widget (QPushButton, unattendedPasswordButton)
+#: ui/mainwidget.ui:465
+#, kde-format
+msgid "Change password for Unattended Access"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QPushButton, unattendedPasswordButton)
+#: ui/mainwidget.ui:468
+#, kde-format
+msgid "&Change Unattended Password"
+msgstr ""
+
+#~ msgid "Welcome to KDE Desktop Sharing"
+#~ msgstr "به اشتراک رومیزی KDE خوش آمدید"
+
+#~ msgid ""
+#~ "Create a new invitation and display the connection data. Use this option "
+#~ "if you want to invite somebody personally, for example, to give the "
+#~ "connection data over the phone."
+#~ msgstr ""
+#~ "ایجاد دعوت‌نامه جدید و نمایش داده اتصال. اگر می‌خواهید شخصی را به طور خصوصی "
+#~ "دعوت کنید، برای مثال، داده اتصال را از طریق تلفن بدهید، از این گزینه "
+#~ "استفاده کنید."
+
+#~ msgid "Create &Personal Invitation..."
+#~ msgstr "ایجاد دعوت‌نامه &خصوصی...‌"
+
+#~ msgid ""
+#~ "This button will start your email application with a pre-configured text "
+#~ "that explains to the recipient how to connect to your computer. "
+#~ msgstr ""
+#~ "این دکمه، کاربرد رایانامه شما را با متنی از پیش پیکربندی‌شده آغاز می‌کند، "
+#~ "که برای گیرنده توضیح می‌دهد که چطور به رایانه شما متصل شود."
+
+#~ msgid "Invite via &Email..."
+#~ msgstr "دعوت از طریق &رایانامه‌...‌"
+
+#~ msgid "&Manage Invitations (%1)..."
+#~ msgstr "&مدیریت دعوت‌نامه‌‌‌ها )%1(...‌"
+
+#, fuzzy
+#~| msgid ""
+#~| "Somebody is requesting a connection to your computer. Granting this will "
+#~| "allow the remote user to watch your desktop. "
+#~ msgid ""
+#~ "You have requested to share your desktop with %1. If you proceed, you "
+#~ "will allow the remote user to watch your desktop."
+#~ msgstr ""
+#~ "شخصی در حال درخواست اتصال به رایانه شما است. موافقت با آن، به کاربر دور "
+#~ "اجازه می‌دهد رومیزی شما را تماشا کند."
+
+#, fuzzy
+#~| msgid "Invitation"
+#~ msgid "Confirmation"
+#~ msgstr "دعوت‌نامه"
+
+#~ msgid "Failed login attempt from %1: wrong password"
+#~ msgstr "تلاش خراب‌شده ورود از %1: اسم رمز اشتباه"
+
+#, fuzzy
+#~| msgid "Accepted uninvited connection from %1"
+#~ msgid "Refused uninvited connection attempt from %1"
+#~ msgstr "اتصال ناخوانده از %1 پذیرفته شد."
+
+#~ msgid "Invitation"
+#~ msgstr "دعوت‌نامه"
+
+#~ msgid "Ask before allowing a remote connection."
+#~ msgstr "قبل از اجازه دادن به اتصال دور سوال شود."
+
+#~ msgid ""
+#~ "An invitation creates a one-time password that allows the receiver to "
+#~ "connect to your desktop.\n"
+#~ "It is valid for only one successful connection and will expire after an "
+#~ "hour if it has not been used. \n"
+#~ "When somebody connects to your computer a dialog will appear and ask you "
+#~ "for permission.\n"
+#~ "The connection will not be established before you accept it. In this "
+#~ "dialog you can also\n"
+#~ "restrict the other person to view your desktop only, without the ability "
+#~ "to move your\n"
+#~ "mouse pointer or press keys.\n"
+#~ "If you want to create a permanent password for Desktop Sharing, allow "
+#~ "'Uninvited Connections' \n"
+#~ "in the configuration."
+#~ msgstr ""
+#~ "دعوت‌نامه اسم رمز پیشین را ایجاد می‌کند، که به گیرنده اجازه می‌دهد به "
+#~ "رومیزیتان متصل شود.\n"
+#~ "فقط برای یک اتصال موفق معتبر است و اگر از آن استفاده نشود، بعد از یک ساعت "
+#~ "به پایان می‌رسد.\n"
+#~ "هنگامی که شخصی به رایانه شما متصل می‌شود، محاوره‌ای ظاهر می‌‌شود و از شما "
+#~ "مجوز می‌‌خواهد.\n"
+#~ "اتصال قبل از این که آن را بپذیرید برقرار نمی‌شود. همچنین،\n"
+#~ "در این محاوره می‌توانید بدون توانایی برای حرکت اشاره‌گر موشی یا فشار "
+#~ "کلیدها، فقط شخص دیگری را\n"
+#~ "برای مشاهده رومیزیتان محدود کنید.\n"
+#~ "اگر می‌خواهید برای اشتراک رومیزی، اسم رمزی دائمی ایجاد کنید، به »اتصالهای "
+#~ "ناخوانده«\n"
+#~ "در پیکربندی اجازه بدهید."
+
+#~ msgid ""
+#~ "When sending an invitation by email, note that everybody who reads this "
+#~ "email will be able to connect to your computer for one hour, or until the "
+#~ "first successful connection took place, whichever comes first. \n"
+#~ "You should either encrypt the email or at least send it only in a secure "
+#~ "network, but not over the Internet."
+#~ msgstr ""
+#~ "هنگامی که دعوت‌نامه‌ای را به وسیله رایانامه ارسال می‌کنید، توجه داشته باشید "
+#~ "که هر کسی که این رایانامه را می‌خواند، به مدت یک ساعت یا تا زمانی که اولین "
+#~ "اتصال موفق رخ دهد، هر کدام که اول بیاید قادر به اتصال به رایانه شما "
+#~ "می‌باشد.\n"
+#~ "یا باید رایانامه را رمزبندی کنید، یا حداقل آن را به شبکه‌ای امن اما نه "
+#~ "سرتاسر اینترنت ارسال کنید."
+
+#~ msgid "Send Invitation via Email"
+#~ msgstr "ارسال دعوت‌نامه از طریق رایانامه"
+
+#~ msgid "Desktop Sharing (VNC) invitation"
+#~ msgstr "دعوت‌نامه اشتراک رومیزی ) VNC ("
+
+#, fuzzy
+#~ msgid ""
+#~ "You have been invited to a VNC session. If you have the KDE Remote "
+#~ "Desktop Connection installed, just click on the link below.\n"
+#~ "\n"
+#~ "%1\n"
+#~ "\n"
+#~ "Otherwise you can use any VNC client with the following parameters:\n"
+#~ "\n"
+#~ "Host: %2:%3\n"
+#~ "Password: %4\n"
+#~ "\n"
+#~ "For security reasons this invitation will expire at %5 (%6)."
+#~ msgstr ""
+#~ "به نشست VNC دعوت شده‌‌‌اید. اگر اتصال رومیزی دور KDE را نصب کرده‌‌‌اید، فقط روی "
+#~ "پیوند زیر فشار دهید.\n"
+#~ "\n"
+#~ "vnc://invitation:%1@%2:%3\n"
+#~ "\n"
+#~ "در غیر این صورت، می‌توانید از هر کارخواه VNC به وسیله پارامترهای زیر "
+#~ "استفاده کنید:\n"
+#~ "\n"
+#~ "میزبان: %4:%5\n"
+#~ "اسم رمز: %6\n"
+#~ "\n"
+#~ "ببه دلایل امنیتی، این دعوت‌نامه در%7 انقضا می‌یابد.."
+
+#~ msgid "Confirm delete Invitations"
+#~ msgstr "تأیید حذف دعوت‌نامه‌‌‌‌ها"
+
+#~ msgid "Personal Invitation"
+#~ msgstr "دعوت‌نامه خصوصی"
+
+#~ msgid ""
+#~ "Desktop Sharing uses the VNC protocol. You can use any VNC client to "
+#~ "connect. \n"
+#~ "In KDE the client is called 'Remote Desktop Connection'. Enter the host "
+#~ "information\n"
+#~ "into the client and it will connect.."
+#~ msgstr ""
+#~ "اشتراک رومیزی از قرارداد VNC استفاده می‌کند. می‌توانید از هر کارخواه VNC "
+#~ "برای اتصال استفاده کنید.\n"
+#~ "در KDE، کارخواه »اتصال رومیزی دور« نامیده می‌‌‌‌شود. اطلاعات میزبان را\n"
+#~ "در کارخواه وارد کنید و متصل می‌شود.."
+
+#, fuzzy
+#~| msgid "Ask before accepting an uninvited connection"
+#~ msgid "Ask before accepting connections"
+#~ msgstr "قبل از پذیرش یک اتصال ناخوانده سوال شود"
+
+#~ msgid "Allow uninvited connections"
+#~ msgstr "اجازه به اتصالهای ناخوانده"
+
+#~ msgid "Uninvited connections password:"
+#~ msgstr "اسم رمز اتصالهای ناخوانده:"
+
+#, fuzzy
+#~ msgid "Creation Time"
+#~ msgstr "ایجادشده"
+
+#~ msgid "Expire Time"
+#~ msgstr "زمان انقضا"
+
+#~ msgid "Create a new personal invitation..."
+#~ msgstr "ایجاد دعوت‌نامه خصوصی جدید..."
+
+#~ msgid "Click this button to create a new personal invitation."
+#~ msgstr "فشار این دکمه برای ایجاد دعوت‌نامه خصوصی جدید."
+
+#~ msgid "New &Personal Invitation..."
+#~ msgstr "دعوت‌نامه &خصوصی جدید...‌"
+
+#~ msgid "Send a new invitation via email..."
+#~ msgstr "ارسال دعوت‌نامه‌ای جدید از طریق رایانامه..."
+
+#~ msgid "Click this button to send a new invitation via email."
+#~ msgstr "فشار این دکمه برای ارسال دعوت‌نامه‌ای جدید از طریق رایانامه."
+
+#~ msgid "&New Email Invitation..."
+#~ msgstr "دعوت‌نامه رایانامه‌ای &جدید...‌"
+
+#~ msgid "Delete all invitations"
+#~ msgstr "حذف تمام دعوت‌نامه‌‌‌‌ها"
+
+#~ msgid "Deletes all open invitations."
+#~ msgstr "تمام دعوت‌نامه‌های باز را حذف می‌کند."
+
+#~ msgid "Delete All"
+#~ msgstr "حذف همه"
+
+#~ msgid "Delete the selected invitation"
+#~ msgstr "حذف دعوت‌نامه برگزیده"
+
+#~ msgid ""
+#~ "Delete the selected invitation. The invited person will not be able to "
+#~ "connect using this invitation anymore."
+#~ msgstr ""
+#~ "حذف دعوت‌نامه برگزیده. شخص دعوت‌شده با استفاده از این دعوت‌نامه، دیگر قادر "
+#~ "به اتصال نمی‌باشد."
+
+#~ msgid "&Delete"
+#~ msgstr "&حذف‌"
+
+# (<a href=#. i18n: file personalinvitewidget.ui line 218
+#~ msgid "<b>Host:</b>"
+#~ msgstr "<b> میزبان:</b>"
+
+#~ msgid "<b>Expiration time:</b>"
+#~ msgstr "<b>زمان خاتمه:</b>"
+
+#~ msgid "X11 update scanner, original code base"
+#~ msgstr "  پویشگر به‌‌‌روزرسانی X11، پایه کد اصلی"
+
+#~ msgid "KDesktop background deactivation"
+#~ msgstr "بی‌اثرسازی زمینه KDesktop"
+
+#~ msgid "Disable Remote Control"
+#~ msgstr "غیرفعال کردن کنترل دور"
+
+#~ msgid "The remote user has closed the connection."
+#~ msgstr "کاربر دور، اتصال را بسته است."
+
+#~ msgid "The remote user has been authenticated and is now connected."
+#~ msgstr "کاربر دور احراز هویت شده است و الان متصل می‌‌‌‌شود."
+
+#~ msgid "Created"
+#~ msgstr "ایجادشده"

@@ -1,0 +1,1112 @@
+# translation of krfb.po to Tajik
+# translation of krfb.po to Тоҷикӣ
+# Copyright (C) 2004 Free Software Foundation, Inc.
+# 2004, infoDev, a World Bank organization
+# 2004, Khujand Computer Technologies, Inc.
+# 2004, KCT1, NGO
+#
+# Dilshod Marupov <dma165@hotmail.com>, 2004.
+# Victor Ibragimov <victor.ibragimov@gmail.com>, 2019.
+msgid ""
+msgstr ""
+"Project-Id-Version: krfb\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-07-18 00:45+0000\n"
+"PO-Revision-Date: 2019-09-29 12:26+0500\n"
+"Last-Translator: Victor Ibragimov <victor.ibragimov@gmail.com>\n"
+"Language-Team: English <kde-i18n-doc@kde.org>\n"
+"Language: tg\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 19.04.3\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Hiromon"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "H_Abrorova@rambler.ru"
+
+#: connectiondialog.cpp:39
+#, fuzzy, kde-format
+msgid "New Connection"
+msgstr "&Қабули Пайвастшавӣ"
+
+#: connectiondialog.cpp:61
+#, fuzzy, kde-format
+msgid "Accept Connection"
+msgstr "&Қабули Пайвастшавӣ"
+
+#: connectiondialog.cpp:65
+#, fuzzy, kde-format
+msgid "Refuse Connection"
+msgstr "&Радкунии Пайвастшавӣ"
+
+#: invitationsrfbclient.cpp:69
+#, fuzzy, kde-format
+#| msgid "Accepted uninvited connection from %1"
+msgid "Accepted connection from %1"
+msgstr "Пайвастшавӣ бе таклифот аз %1 қабул гардид"
+
+#: invitationsrfbclient.cpp:75
+#, kde-format
+msgid "Received connection from %1, on hold (waiting for confirmation)"
+msgstr "Дархости пайвастшавӣ аз %1қабул гардид, ҳолати (интизории тасдиқот)"
+
+#: invitationsrfbserver.cpp:55
+#, kde-format
+msgid "%1@%2 (shared desktop)"
+msgstr "%1@%2 (компютер, ки пайвастшавиро интизор аст)"
+
+#. i18n: ectx: label, entry (startMinimized), group (MainWindow)
+#: krfb.kcfg:9
+#, kde-format
+msgid "Start minimized"
+msgstr ""
+
+#. i18n: ectx: label, entry (useDefaultPort), group (TCP)
+#: krfb.kcfg:15
+#, kde-format
+msgid "Use the default port for VNC (5900)"
+msgstr ""
+
+#. i18n: ectx: label, entry (port), group (TCP)
+#: krfb.kcfg:19
+#, kde-format
+msgid "This is the port on which krfb will listen."
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_publishService)
+#. i18n: ectx: label, entry (publishService), group (TCP)
+#: krfb.kcfg:23 ui/configtcp.ui:16
+#, kde-format
+msgid "Announce the service on the local network"
+msgstr ""
+
+#. i18n: ectx: label, entry (noWallet), group (Security)
+#: krfb.kcfg:29
+#, kde-format
+msgid "Do not store passwords in KWallet"
+msgstr ""
+
+#. i18n: ectx: label, entry (allowDesktopControl), group (Security)
+#: krfb.kcfg:33
+#, fuzzy, kde-format
+#| msgid "Allow remote user to &control keyboard and mouse"
+msgid "Allow remote connections to manage the desktop."
+msgstr "Иҷозатдиҳи ба корванди дурдаст барои &идоракунӣ бо забонак ва муш"
+
+#. i18n: ectx: label, entry (allowUnattendedAccess), group (Security)
+#: krfb.kcfg:37
+#, kde-format
+msgid "Allow connections without an invitation."
+msgstr ""
+
+#. i18n: ectx: label, entry (unattendedAccessPassword), group (Security)
+#. i18n: ectx: label, entry (desktopSharingPassword), group (Security)
+#: krfb.kcfg:41 krfb.kcfg:44
+#, fuzzy, kde-format
+#| msgid "Accepted uninvited connection from %1"
+msgid "Password for uninvited connections."
+msgstr "Пайвастшавӣ бе таклифот аз %1 қабул гардид"
+
+#. i18n: ectx: label, entry (preferredFrameBufferPlugin), group (FrameBuffer)
+#: krfb.kcfg:49
+#, kde-format
+msgid "Preferred Frame Buffer Plugin"
+msgstr ""
+
+#: main-virtualmonitor.cpp:49
+#, kde-format
+msgid "Creating a Virtual Monitor from %1"
+msgstr ""
+
+#: main-virtualmonitor.cpp:80
+#, kde-format
+msgid "Remote Virtual Monitor"
+msgstr ""
+
+#: main-virtualmonitor.cpp:82
+#, kde-format
+msgid "Offer a Virtual Monitor that can be accessed remotely"
+msgstr ""
+
+#: main-virtualmonitor.cpp:84 main.cpp:98
+#, kde-format
+msgid ""
+"(c) 2009-2010, Collabora Ltd.\n"
+"(c) 2007, Alessandro Praduroux\n"
+"(c) 2001-2003, Tim Jansen\n"
+"(c) 2001, Johannes E. Schindelin\n"
+"(c) 2000-2001, Const Kaplinsky\n"
+"(c) 2000, Tridia Corporation\n"
+"(c) 1999, AT&T Laboratories Boston\n"
+msgstr ""
+
+#: main-virtualmonitor.cpp:91
+#, kde-format
+msgid "Virtual Monitor implementation"
+msgstr ""
+
+#: main-virtualmonitor.cpp:92 main.cpp:108
+#, kde-format
+msgid "George Kiagiadakis"
+msgstr ""
+
+#: main-virtualmonitor.cpp:93 main.cpp:111
+#, kde-format
+msgid "Alessandro Praduroux"
+msgstr ""
+
+#: main-virtualmonitor.cpp:93 main.cpp:111
+#, kde-format
+msgid "KDE4 porting"
+msgstr ""
+
+#: main-virtualmonitor.cpp:94 main.cpp:112
+#, kde-format
+msgid "Tim Jansen"
+msgstr ""
+
+#: main-virtualmonitor.cpp:94 main.cpp:112
+#, kde-format
+msgid "Original author"
+msgstr ""
+
+#: main-virtualmonitor.cpp:95 main.cpp:113
+#, kde-format
+msgid "Johannes E. Schindelin"
+msgstr ""
+
+#: main-virtualmonitor.cpp:96 main.cpp:114
+#, kde-format
+msgid "libvncserver"
+msgstr "libvncserver"
+
+#: main-virtualmonitor.cpp:97 main.cpp:115
+#, kde-format
+msgid "Const Kaplinsky"
+msgstr ""
+
+#: main-virtualmonitor.cpp:98 main.cpp:116
+#, kde-format
+msgid "TightVNC encoder"
+msgstr "Рамзнамоии TightVNC"
+
+#: main-virtualmonitor.cpp:99 main.cpp:117
+#, kde-format
+msgid "Tridia Corporation"
+msgstr ""
+
+#: main-virtualmonitor.cpp:100 main.cpp:118
+#, kde-format
+msgid "ZLib encoder"
+msgstr "Рамзнамоии ZLib"
+
+#: main-virtualmonitor.cpp:101 main.cpp:119
+#, kde-format
+msgid "AT&T Laboratories Boston"
+msgstr ""
+
+#: main-virtualmonitor.cpp:102 main.cpp:120
+#, kde-format
+msgid "original VNC encoders and protocol design"
+msgstr "рамзгузориҳои ибтидоии VNC ва тарроҳии қарордод"
+
+#: main-virtualmonitor.cpp:108
+#, kde-format
+msgid "Logical resolution of the new monitor"
+msgstr ""
+
+#: main-virtualmonitor.cpp:108
+#, kde-format
+msgid "resolution"
+msgstr ""
+
+#: main-virtualmonitor.cpp:110
+#, kde-format
+msgid "Name of the monitor"
+msgstr ""
+
+#: main-virtualmonitor.cpp:110
+#, kde-format
+msgid "name"
+msgstr ""
+
+#: main-virtualmonitor.cpp:112
+#, fuzzy, kde-format
+#| msgid "Accepted uninvited connection from %1"
+msgid "Password for the client to connect to it"
+msgstr "Пайвастшавӣ бе таклифот аз %1 қабул гардид"
+
+#: main-virtualmonitor.cpp:112
+#, fuzzy, kde-format
+#| msgid "<b>Password:</b>"
+msgid "password"
+msgstr "<b>Гузарвожа:</b>"
+
+#: main-virtualmonitor.cpp:114
+#, kde-format
+msgid "The device-pixel-ratio of the device, the scaling factor"
+msgstr ""
+
+#: main-virtualmonitor.cpp:114
+#, kde-format
+msgid "dpr"
+msgstr ""
+
+#: main-virtualmonitor.cpp:116
+#, kde-format
+msgid "The port we will be listening to"
+msgstr ""
+
+#: main-virtualmonitor.cpp:116
+#, kde-format
+msgid "number"
+msgstr ""
+
+#: main.cpp:49
+#, kde-format
+msgid ""
+"Your X11 Server does not support the required XTest extension version 2.2. "
+"Sharing your desktop is not possible."
+msgstr ""
+"Хидматрасони X11 шумо вусъати XTest-и нусхаи 2.2-ро пуштибонӣ намекунад. "
+"Дастрасии муштараки мизи кории шумо ғайри имкон аст."
+
+#: main.cpp:51 main.cpp:150
+#, kde-format
+msgid "Desktop Sharing Error"
+msgstr "Хатогии Дастрасии муштарак ба Мизи Корӣ"
+
+#: main.cpp:94
+#, kde-format
+msgid "Desktop Sharing"
+msgstr "Дастрасии муштарак ба Мизи Корӣ"
+
+#: main.cpp:96
+#, fuzzy, kde-format
+#| msgid "VNC-compatible server to share KDE desktops"
+msgid "VNC-compatible server to share desktops"
+msgstr "VNC-хидматрасони ҳамсоз барои истифодаи муштараки мизҳои кории KDE"
+
+#: main.cpp:105
+#, kde-format
+msgid "George Goldberg"
+msgstr ""
+
+#: main.cpp:106
+#, kde-format
+msgid "Telepathy tubes support"
+msgstr ""
+
+#: main.cpp:126
+#, kde-format
+msgid "Do not show the invitations management dialog at startup"
+msgstr ""
+
+#: main.cpp:148
+#, kde-format
+msgid ""
+"Desktop Sharing is not running under an X11 Server or Wayland.\n"
+"Other display servers are currently not supported."
+msgstr ""
+
+#: mainwindow.cpp:52
+#, kde-format
+msgid "Storing passwords in config file is insecure!"
+msgstr ""
+
+#: mainwindow.cpp:189
+#, kde-format
+msgid "Enter a new password for Unattended Access"
+msgstr ""
+
+#: mainwindow.cpp:200
+#, kde-format
+msgid ""
+"Failed to start the krfb server. Desktop sharing will not work. Try setting "
+"another port in the settings and restart krfb."
+msgstr ""
+
+#. i18n: ectx: property (whatsThis), widget (QLabel, titleLabel)
+#. i18n: ectx: property (text), widget (QLabel, titleLabel)
+#. i18n: ectx: property (whatsThis), widget (QLabel, aboutLabel)
+#: mainwindow.cpp:223 mainwindow.cpp:230 ui/mainwidget.ui:83
+#: ui/mainwidget.ui:86 ui/mainwidget.ui:114
+#, fuzzy, kde-format
+#| msgid "Desktop Sharing"
+msgid "KDE Desktop Sharing"
+msgstr "Дастрасии муштарак ба Мизи Корӣ"
+
+#: mainwindow.cpp:224
+#, fuzzy, kde-format
+msgid ""
+"This field contains the address of your computer and the port number, "
+"separated by a colon.\n"
+"\n"
+"The address is just a hint - you can use any address that can reach your "
+"computer.\n"
+"\n"
+"Desktop Sharing tries to guess your address from your network configuration, "
+"but does not always succeed in doing so.\n"
+"\n"
+"If your computer is behind a firewall it may have a different address or be "
+"unreachable for other computers."
+msgstr ""
+"(<a href=\"whatsthis:Ин майдон суроға ва рақами дидабони компютери шуморо, "
+"ки бо ҳам бо ду нуқта ҷудоанд, дар бар мегирад. Суроға ин танҳо ишора аст - "
+"шумо дилхоҳ суроғаи компютери худро истифода бурда метавонед. Барномаи "
+"дастрасии Муштараки Мизи Корӣ кӯшиши пайдо кардани суроғаи шуморо аз "
+"танзимоти шабакавӣ мекунад, лекин на дар ҳамаи ҳолат он самарабахш аст. Агар "
+"компютери шумо дар паси экрани байни шабакавӣ бошад, он дигар суроғаро дошта "
+"метавонад ё ни, ки барои дигар компютерҳо дастнорас мегардад.\">Ёрӣ</a>)"
+
+#: mainwindow.cpp:231
+#, kde-format
+msgid ""
+"Any remote user with normal desktop sharing password will have to be "
+"authenticated.\n"
+"\n"
+"If unattended access is on, and the remote user provides unattended mode "
+"password, desktop sharing access will be granted without explicit "
+"confirmation."
+msgstr ""
+
+#: mainwindow.cpp:249
+#, kde-format
+msgid "Network"
+msgstr ""
+
+#: mainwindow.cpp:250
+#, kde-format
+msgid "Security"
+msgstr ""
+
+#: mainwindow.cpp:251
+#, kde-format
+msgid "Screen capture"
+msgstr ""
+
+#: mainwindow.cpp:256
+#, kde-format
+msgid "To apply framebuffer plugin setting, you need to restart the program."
+msgstr ""
+
+#: rfbservermanager.cpp:229
+#, fuzzy, kde-format
+#| msgid "The remote user has closed the connection."
+msgid "The remote user %1 is now connected."
+msgstr "Корванди дурдаст пайвастагиро хомӯш сохт."
+
+#: rfbservermanager.cpp:243
+#, fuzzy, kde-format
+#| msgid "The remote user has closed the connection."
+msgid "The remote user %1 disconnected."
+msgstr "Корванди дурдаст пайвастагиро хомӯш сохт."
+
+#: trayicon.cpp:56
+#, kde-format
+msgid "Disconnect"
+msgstr ""
+
+#: trayicon.cpp:62
+#, kde-format
+msgid "Enable Remote Control"
+msgstr "Даргиронидани Идоракунии Дурдаст"
+
+#: trayicon.cpp:101 trayicon.cpp:133
+#, kde-format
+msgid "Desktop Sharing - disconnected"
+msgstr "Дастрасии муштарак ба Мизи Корӣ - канда шудааст"
+
+#: trayicon.cpp:117 trayicon.cpp:137
+#, kde-format
+msgid "Desktop Sharing - connected with %1"
+msgstr "Дастрасии муштарак ба Мизи Корӣ - бо %1 пайваст аст"
+
+#: trayicon.cpp:120
+#, fuzzy, kde-format
+#| msgid "Desktop Sharing - disconnected"
+msgid "Desktop Sharing - connected"
+msgstr "Дастрасии муштарак ба Мизи Корӣ - канда шудааст"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, Framebuffer)
+#: ui/configframebuffer.ui:14
+#, kde-format
+msgid "Framebuffer"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: ui/configframebuffer.ui:22
+#, kde-format
+msgid "Preferred frameb&uffer plugin:"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, helpText)
+#: ui/configframebuffer.ui:47
+#, kde-format
+msgid ""
+"<html><head/><body><p>When using x11, <span style=\" font-weight:600;\">xcb</"
+"span> plugin should be preferred, because it is more performant.<br/><span "
+"style=\" font-weight:600;\">qt</span> plugin is a safe fallback, if for some "
+"reason others don't work. But also it is very slow.</p></body></html>"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_allowDesktopControl)
+#: ui/configsecurity.ui:17
+#, fuzzy, kde-format
+#| msgid "Allow remote user to &control keyboard and mouse"
+msgid "Allow remote connections to control your desktop"
+msgstr "Иҷозатдиҳи ба корванди дурдаст барои &идоракунӣ бо забонак ва муш"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_noWallet)
+#: ui/configsecurity.ui:27
+#, kde-format
+msgid "Do not store passwords using KDE wallet"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_useDefaultPort)
+#: ui/configtcp.ui:26
+#, kde-format
+msgid "Use default port"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: ui/configtcp.ui:50
+#, kde-format
+msgid "Listening port:"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, TextLabel5)
+#: ui/connectionwidget.ui:47
+#, kde-format
+msgid "Attention"
+msgstr "Диққат"
+
+#. i18n: ectx: property (text), widget (QLabel, mainTextLabel)
+#: ui/connectionwidget.ui:72
+#, kde-format
+msgid ""
+"Somebody is requesting a connection to your computer. Granting this will "
+"allow the remote user to watch your desktop. "
+msgstr ""
+"Касе дархости пайвастшавиро ба компютери шумо дорад. Тасдиқоти он ба "
+"корванди дурдаст имконияти назорати мизи кории шуморо медиҳад. "
+
+#. i18n: ectx: property (text), widget (QLabel, TextLabel1)
+#: ui/connectionwidget.ui:102
+#, kde-format
+msgid "Remote system:"
+msgstr "Системаи дурдаст:"
+
+#. i18n: ectx: property (text), widget (QLabel, remoteHost)
+#: ui/connectionwidget.ui:118
+#, kde-format
+msgid "123.234.123.234"
+msgstr "123.234.123.234"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, cbAllowRemoteControl)
+#: ui/connectionwidget.ui:136
+#, kde-format
+msgid ""
+"If you turn this option on, the remote user can enter keystrokes and use "
+"your mouse pointer. This gives them full control over your computer, so be "
+"careful. When the option is disabled the remote user can only watch your "
+"screen."
+msgstr ""
+"Агар ин хосиятро фаъол созед, корванди дурдаст аз забонак аломатҳоро ворид "
+"карда метавонад ва бо нишонагари муш идора карда метавонад. Ин ба онҳо "
+"идораи пурраро аз болои компютери шумо медиҳад, бинобар ин эҳтиёт бошед. Бе "
+"ин хосият корванди дурдаст танҳо экрани шуморо дида метавонад."
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbAllowRemoteControl)
+#: ui/connectionwidget.ui:139
+#, kde-format
+msgid "Allow remote user to &control keyboard and mouse"
+msgstr "Иҷозатдиҳи ба корванди дурдаст барои &идоракунӣ бо забонак ва муш"
+
+#. i18n: ectx: property (text), widget (QLabel, aboutLabel)
+#: ui/mainwidget.ui:117
+#, kde-format
+msgid ""
+"KDE Desktop Sharing allows you to grant permission to someone at a remote "
+"location for viewing and possibly controlling your desktop."
+msgstr ""
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, enableSharingCheckBox)
+#: ui/mainwidget.ui:145
+#, fuzzy, kde-format
+#| msgid "Manage Invitations - Desktop Sharing"
+msgid "Starts/Stops Remote Desktop Sharing"
+msgstr "Идоракунии Таклифотҳо - Дастрасии муштарак ба Мизи Корӣ"
+
+#. i18n: ectx: property (text), widget (QCheckBox, enableSharingCheckBox)
+#: ui/mainwidget.ui:148
+#, fuzzy, kde-format
+#| msgid "Desktop Sharing"
+msgid "&Enable Desktop Sharing"
+msgstr "Дастрасии муштарак ба Мизи Корӣ"
+
+#. i18n: ectx: property (title), widget (QGroupBox, detailsGroupBox)
+#: ui/mainwidget.ui:170
+#, fuzzy, kde-format
+#| msgid "Connection side image"
+msgid "Connection Details"
+msgstr "Симои пайвастшавӣ"
+
+#. i18n: ectx: property (text), widget (QLabel, addressLabel)
+#: ui/mainwidget.ui:193
+#, kde-format
+msgid "&Address"
+msgstr ""
+
+#. i18n: ectx: property (whatsThis), widget (QToolButton, addressAboutButton)
+#: ui/mainwidget.ui:214
+#, kde-format
+msgid "More about this address"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QToolButton, addressAboutButton)
+#. i18n: ectx: property (text), widget (QToolButton, unattendedAboutButton)
+#: ui/mainwidget.ui:217 ui/mainwidget.ui:397
+#, kde-format
+msgid "About"
+msgstr ""
+
+#. i18n: ectx: property (whatsThis), widget (QLabel, addressDisplayLabel)
+#: ui/mainwidget.ui:235
+#, kde-format
+msgid ""
+"Address required by remote users to connect to your desktop. Click about "
+"button on the right for more info."
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, addressDisplayLabel)
+#: ui/mainwidget.ui:238
+#, kde-format
+msgid "127.0.0.1 : 5900"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, passwordLabel)
+#: ui/mainwidget.ui:269
+#, fuzzy, kde-format
+#| msgid "<b>Password:</b>"
+msgid "&Password"
+msgstr "<b>Гузарвожа:</b>"
+
+#. i18n: ectx: property (whatsThis), widget (QToolButton, passwordEditButton)
+#: ui/mainwidget.ui:290
+#, fuzzy, kde-format
+#| msgid "Desktop Sharing Error"
+msgid "Edit/Save Desktop Sharing Password"
+msgstr "Хатогии Дастрасии муштарак ба Мизи Корӣ"
+
+#. i18n: ectx: property (text), widget (QToolButton, passwordEditButton)
+#: ui/mainwidget.ui:293
+#, kde-format
+msgid "Edit"
+msgstr ""
+
+#. i18n: ectx: property (whatsThis), widget (QLabel, passwordDisplayLabel)
+#: ui/mainwidget.ui:311
+#, kde-format
+msgid ""
+"Password required by remote users to connect to your desktop. Click the edit "
+"button on the right to change password."
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, passwordDisplayLabel)
+#: ui/mainwidget.ui:314
+#, kde-format
+msgid "TemporaryPassword"
+msgstr ""
+
+#. i18n: ectx: property (whatsThis), widget (QGroupBox, unattendedGroupBox)
+#. i18n: ectx: property (text), widget (QLabel, unattendedAboutLabel)
+#: ui/mainwidget.ui:340 ui/mainwidget.ui:378
+#, kde-format
+msgid ""
+"Unattended Access allows a remote user with the password to gain control to "
+"your desktop without your explicit confirmation."
+msgstr ""
+
+#. i18n: ectx: property (title), widget (QGroupBox, unattendedGroupBox)
+#: ui/mainwidget.ui:343
+#, kde-format
+msgid "Unattended Access"
+msgstr ""
+
+#. i18n: ectx: property (whatsThis), widget (QLabel, unattendedAboutLabel)
+#: ui/mainwidget.ui:375
+#, kde-format
+msgid ""
+"Unattended Access allows a remote user with the password to gain control to "
+"your desktop without your explicit confirmation. Click \"About\" button on "
+"right to know more."
+msgstr ""
+
+#. i18n: ectx: property (whatsThis), widget (QToolButton, unattendedAboutButton)
+#: ui/mainwidget.ui:394
+#, kde-format
+msgid "Know more about Unattended Access"
+msgstr ""
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, enableUnattendedCheckBox)
+#: ui/mainwidget.ui:437
+#, kde-format
+msgid ""
+"Starts/Stops unattended access to your desktop. Click on button on right to "
+"change password, and \"About\" button to know more."
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, enableUnattendedCheckBox)
+#: ui/mainwidget.ui:440
+#, kde-format
+msgid "Enable &Unattended Access"
+msgstr ""
+
+#. i18n: ectx: property (whatsThis), widget (QPushButton, unattendedPasswordButton)
+#: ui/mainwidget.ui:465
+#, kde-format
+msgid "Change password for Unattended Access"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QPushButton, unattendedPasswordButton)
+#: ui/mainwidget.ui:468
+#, kde-format
+msgid "&Change Unattended Password"
+msgstr ""
+
+#~ msgid "Welcome to KDE Desktop Sharing"
+#~ msgstr "Марҳамат ба KDE Дастрасии муштарак ба Мизи Корӣ"
+
+#~ msgid ""
+#~ "Create a new invitation and display the connection data. Use this option "
+#~ "if you want to invite somebody personally, for example, to give the "
+#~ "connection data over the phone."
+#~ msgstr ""
+#~ "Офаридаи таклифоти нав ва намоиш додани додаҳо оиди пайвастшавӣ. Агар "
+#~ "хоҳед, ки касеро шахсан таклиф намоед, ин хосиятро истифода баред. "
+#~ "Масалан, фиристодани додаҳо оиди пайвастшавӣ бо телефон."
+
+#~ msgid "Create &Personal Invitation..."
+#~ msgstr "Офаридани Таклифоти &Шахсӣ"
+
+#~ msgid ""
+#~ "This button will start your email application with a pre-configured text "
+#~ "that explains to the recipient how to connect to your computer. "
+#~ msgstr ""
+#~ "Ин тугма замимаи пости электронии шуморо бо матни пешакӣ таъиншудае, ки "
+#~ "тарзи пайвастшавиро ба компютери шумо мефаҳмонад, сар медиҳад. "
+
+#~ msgid "Invite via &Email..."
+#~ msgstr "Таклифот бо ёрии &Пости электронӣ..."
+
+#~ msgid "&Manage Invitations (%1)..."
+#~ msgstr "&Идоракунии Таклифотҳо (%1)..."
+
+#, fuzzy
+#~| msgid ""
+#~| "Somebody is requesting a connection to your computer. Granting this will "
+#~| "allow the remote user to watch your desktop. "
+#~ msgid ""
+#~ "You have requested to share your desktop with %1. If you proceed, you "
+#~ "will allow the remote user to watch your desktop."
+#~ msgstr ""
+#~ "Касе дархости пайвастшавиро ба компютери шумо дорад. Тасдиқоти он ба "
+#~ "корванди дурдаст имконияти назорати мизи кории шуморо медиҳад. "
+
+#, fuzzy
+#~ msgid "Confirmation"
+#~ msgstr "Идоракунии &Таклифотҳо"
+
+#~ msgid "Failed login attempt from %1: wrong password"
+#~ msgstr "Хатогии ворид ба система аз %1: гузарвожаи нодуруст"
+
+#, fuzzy
+#~| msgid "Accepted uninvited connection from %1"
+#~ msgid "Refused uninvited connection attempt from %1"
+#~ msgstr "Пайвастшавӣ бе таклифот аз %1 қабул гардид"
+
+#, fuzzy
+#~ msgid "Invitation"
+#~ msgstr "Идоракунии &Таклифотҳо"
+
+#, fuzzy
+#~ msgid ""
+#~ "An invitation creates a one-time password that allows the receiver to "
+#~ "connect to your desktop.\n"
+#~ "It is valid for only one successful connection and will expire after an "
+#~ "hour if it has not been used. \n"
+#~ "When somebody connects to your computer a dialog will appear and ask you "
+#~ "for permission.\n"
+#~ " The connection will not be established before you accept it. In this "
+#~ "dialog you can also\n"
+#~ " restrict the other person to view your desktop only, without the ability "
+#~ "to move your\n"
+#~ " mouse pointer or press keys.\n"
+#~ "If you want to create a permanent password for Desktop Sharing, allow "
+#~ "'Uninvited Connections' \n"
+#~ "in the configuration."
+#~ msgstr ""
+#~ "Мизи Кории Муштараки KDE ба шумо имконияти даъвати касе барои назорат "
+#~ "кардан ва эҳтимолан идора кардани мази кории шумо, медиҳад.\n"
+#~ "<a href=\"whatsthis:<p>Таклифот гузарвожаи якбор истифодашавандаро "
+#~ "меофарад, ки ба шахси гирандаи он имконияти пайвастшвиро ба мизи кории "
+#~ "шумо медиҳад. Он танҳо барои як пайвастшавӣ дуруст аст ва  баъди "
+#~ "гузаштани зиёда аз як соат он бекор мегардад. Вақте, ки касе кӯшиши "
+#~ "пайвастшавиро ба компютери шумо мекунад, мокалома пайдо мешавад, ки аз "
+#~ "ушмо имтиёзҳоро пурсон мешавад. То он даме, ки онро қабул накунед, "
+#~ "пайвастшавӣ барқарор намегардад. Дар ин муколама инчунин шумо дигар "
+#~ "шухсонро барои азназаргузаронии Мизи Кории худ маҳдуд карда метавонед бе "
+#~ "имконияти ҳаракатдиҳии нишонагари муш ё пахши калид.</p><p>Агар хоҳед, ки "
+#~ "гузарвожаи доимиро барои Мизи Кории Муштарак офаред, дар танзимот "
+#~ "'Пайвастшавиҳо бе Таклифот'-ро фаъол созед.\">Муфассалтар дар бораи "
+#~ "таклифот...</a>"
+
+#, fuzzy
+#~| msgid "Accepted uninvited connection from %1"
+#~ msgid "Ask before allowing a remote connection."
+#~ msgstr "Пайвастшавӣ бе таклифот аз %1 қабул гардид"
+
+#, fuzzy
+#~ msgid ""
+#~ "An invitation creates a one-time password that allows the receiver to "
+#~ "connect to your desktop.\n"
+#~ "It is valid for only one successful connection and will expire after an "
+#~ "hour if it has not been used. \n"
+#~ "When somebody connects to your computer a dialog will appear and ask you "
+#~ "for permission.\n"
+#~ "The connection will not be established before you accept it. In this "
+#~ "dialog you can also\n"
+#~ "restrict the other person to view your desktop only, without the ability "
+#~ "to move your\n"
+#~ "mouse pointer or press keys.\n"
+#~ "If you want to create a permanent password for Desktop Sharing, allow "
+#~ "'Uninvited Connections' \n"
+#~ "in the configuration."
+#~ msgstr ""
+#~ "Мизи Кории Муштараки KDE ба шумо имконияти даъвати касе барои назорат "
+#~ "кардан ва эҳтимолан идора кардани мази кории шумо, медиҳад.\n"
+#~ "<a href=\"whatsthis:<p>Таклифот гузарвожаи якбор истифодашавандаро "
+#~ "меофарад, ки ба шахси гирандаи он имконияти пайвастшвиро ба мизи кории "
+#~ "шумо медиҳад. Он танҳо барои як пайвастшавӣ дуруст аст ва  баъди "
+#~ "гузаштани зиёда аз як соат он бекор мегардад. Вақте, ки касе кӯшиши "
+#~ "пайвастшавиро ба компютери шумо мекунад, мокалома пайдо мешавад, ки аз "
+#~ "ушмо имтиёзҳоро пурсон мешавад. То он даме, ки онро қабул накунед, "
+#~ "пайвастшавӣ барқарор намегардад. Дар ин муколама инчунин шумо дигар "
+#~ "шухсонро барои азназаргузаронии Мизи Кории худ маҳдуд карда метавонед бе "
+#~ "имконияти ҳаракатдиҳии нишонагари муш ё пахши калид.</p><p>Агар хоҳед, ки "
+#~ "гузарвожаи доимиро барои Мизи Кории Муштарак офаред, дар танзимот "
+#~ "'Пайвастшавиҳо бе Таклифот'-ро фаъол созед.\">Муфассалтар дар бораи "
+#~ "таклифот...</a>"
+
+#, fuzzy
+#~ msgid ""
+#~ "When sending an invitation by email, note that everybody who reads this "
+#~ "email will be able to connect to your computer for one hour, or until the "
+#~ "first successful connection took place, whichever comes first. \n"
+#~ "You should either encrypt the email or at least send it only in a secure "
+#~ "network, but not over the Internet."
+#~ msgstr ""
+#~ "Дар хотир доред, ки ҳангоми фиристодани таклифот бо пости электронӣ ҳар "
+#~ "кесе, ки ин пайёмро мехонад дар давоми як соат ё пештар аз пайвастшавии "
+#~ "бомуваффақияти якум ба компютери шумо пайваст шуда метавонад. \n"
+#~ "Ба шумо лозим аст, ки пайёмро рамз гузоред ё аққалан онро бо шабакаи "
+#~ "бехатар фиристед, на ба воситаи Интернет."
+
+#~ msgid "Send Invitation via Email"
+#~ msgstr "Фиристодани Таклифот бо ёрии Пости Электронӣ"
+
+#~ msgid "Desktop Sharing (VNC) invitation"
+#~ msgstr "Таклифоти Дастрасии муштарак ба Мизи Корӣ (VNC)"
+
+#, fuzzy
+#~| msgid ""
+#~| "You have been invited to a VNC session. If you have the KDE Remote "
+#~| "Desktop Connection installed, just click on the link below.\n"
+#~| "\n"
+#~| "vnc://invitation:%1@%2:%3\n"
+#~| "\n"
+#~| "Otherwise you can use any VNC client with the following parameters:\n"
+#~| "\n"
+#~| "Host: %4:%5\n"
+#~| "Password: %6\n"
+#~| "\n"
+#~| "Alternatively you can click on the link below to start the VNC session\n"
+#~| "within your web browser.\n"
+#~| "\n"
+#~| "\thttp://%7:%8/\n"
+#~| "\n"
+#~| "For security reasons this invitation will expire at %9."
+#~ msgid ""
+#~ "You have been invited to a VNC session. If you have the KDE Remote "
+#~ "Desktop Connection installed, just click on the link below.\n"
+#~ "\n"
+#~ "%1\n"
+#~ "\n"
+#~ "Otherwise you can use any VNC client with the following parameters:\n"
+#~ "\n"
+#~ "Host: %2:%3\n"
+#~ "Password: %4\n"
+#~ "\n"
+#~ "For security reasons this invitation will expire at %5 (%6)."
+#~ msgstr ""
+#~ "Шуморо ба сеанси VNC даъват намуданд. Агар шумо  KDE Пайвастшавии "
+#~ "Дурдасти Мизи Кориро коргузорӣ карда бошед, пас ба пайванди дар поён буда "
+#~ "ангушт занед.\n"
+#~ "\n"
+#~ "vnc://invitation:%1@%2:%3\n"
+#~ "\n"
+#~ "Дар дигар ҳолат шумо дилхоҳ мизоҷи VNC бо параметрҳои зерин истифода "
+#~ "бурда метавонед:\n"
+#~ "\n"
+#~ "Соҳиб: %4:%5\n"
+#~ "Гузарвожа: %6\n"
+#~ "\n"
+#~ "Ҳамин тавр шумо ба пайванди дар поён буда барои оғози сеанси VNC\n"
+#~ "бо web барраси худ ангушт зада метавонед.\n"
+#~ "\n"
+#~ "\thttp://%7:%8/\n"
+#~ "\n"
+#~ "For security reasons this invitation will expire at %9."
+
+#, fuzzy
+#~| msgid "Delete all invitations"
+#~ msgid "Confirm delete Invitations"
+#~ msgstr "Нобуд кардани ҳамаи таклифотҳо"
+
+#, fuzzy
+#~ msgid "Personal Invitation"
+#~ msgstr "Таклифоти Нави &Шахсӣ..."
+
+#, fuzzy
+#~ msgid ""
+#~ "Desktop Sharing uses the VNC protocol. You can use any VNC client to "
+#~ "connect. \n"
+#~ "In KDE the client is called 'Remote Desktop Connection'. Enter the host "
+#~ "information\n"
+#~ "into the client and it will connect.."
+#~ msgstr ""
+#~ "<h2>Даъвати Шахсӣ</h2><br>\n"
+#~ "Ахбороти дар поён бударо ба шахсе, ки даъват кардан мехоҳед, интиқол "
+#~ "диҳед (<a href=\"whatsthis:Истифодаи Муштараки Мизи Корӣ қарордоди VNC-ро "
+#~ "истифода мебарад. Шумо дилхоҳ мизоҷи VNC-ро барои пайвастшавӣ истифода "
+#~ "бурда метавонед. Дар KDE он пайвастшавии 'Пайвастшавии Мизи Кории "
+#~ "Дурдаст' номида мешавад. Маълумотро оиди соҳиб ворид кунед ва пайваст "
+#~ "шавед..\">чӣ тарз пайваст шудан</a>). Дар хотир доред, ки ҳар касе, ки "
+#~ "гузарвожаи шуморо дастрас мекунад, пайваст шуда метавонад, бинобар ин "
+#~ "эҳтиёт бошед."
+
+#, fuzzy
+#~| msgid "Accepted uninvited connection from %1"
+#~ msgid "Ask before accepting connections"
+#~ msgstr "Пайвастшавӣ бе таклифот аз %1 қабул гардид"
+
+#, fuzzy
+#~| msgid "Accepted uninvited connection from %1"
+#~ msgid "Allow uninvited connections"
+#~ msgstr "Пайвастшавӣ бе таклифот аз %1 қабул гардид"
+
+#, fuzzy
+#~| msgid "Accepted uninvited connection from %1"
+#~ msgid "Uninvited connections password:"
+#~ msgstr "Пайвастшавӣ бе таклифот аз %1 қабул гардид"
+
+#, fuzzy
+#~| msgid "Created"
+#~ msgid "Creation Time"
+#~ msgstr "Офарида шуд"
+
+#~ msgid "Create a new personal invitation..."
+#~ msgstr "Офаридани таклифоти нави шахсӣ..."
+
+#~ msgid "Click this button to create a new personal invitation."
+#~ msgstr "Барои офаридани таклифоти нави шахсӣ ба ин тугма ангушт занед."
+
+#~ msgid "New &Personal Invitation..."
+#~ msgstr "Таклифоти Нави &Шахсӣ..."
+
+#~ msgid "Send a new invitation via email..."
+#~ msgstr "Фиристодани таклифоти нав бо ёрии пости электронӣ..."
+
+#~ msgid "Click this button to send a new invitation via email."
+#~ msgstr ""
+#~ "Барои фиристодани таклифоти нав бо ёрии пости электронӣ ба ин тугма "
+#~ "ангушт занед."
+
+#~ msgid "&New Email Invitation..."
+#~ msgstr "Таклифоти &Нави Пости Электронӣ..."
+
+#~ msgid "Delete all invitations"
+#~ msgstr "Нобуд кардани ҳамаи таклифотҳо"
+
+#~ msgid "Deletes all open invitations."
+#~ msgstr "Нобуд кардани ҳамаи таклифотҳои фаъол."
+
+#~ msgid "Delete the selected invitation"
+#~ msgstr "Нобуд кардани таклифотҳои интихобшуда."
+
+#~ msgid ""
+#~ "Delete the selected invitation. The invited person will not be able to "
+#~ "connect using this invitation anymore."
+#~ msgstr ""
+#~ "Нобуд кардани ҳамаи таклифотҳои интихобшуда. Шахсони таклифшуда дигар бо "
+#~ "воситаи ин таклифот пайваст шуда наметавонанд."
+
+#~ msgid "<b>Host:</b>"
+#~ msgstr "<b>Даргоҳ:</b>"
+
+#~ msgid "<b>Expiration time:</b>"
+#~ msgstr "<b>Мӯҳлати кор:</b>"
+
+#~ msgid "X11 update scanner, original code base"
+#~ msgstr "сканери навсозии намоишгари X11, манбаи рамзи ибтидоӣ"
+
+#~ msgid "KDesktop background deactivation"
+#~ msgstr "Нофаъолгардонии паснамои KDesktop"
+
+#~ msgid "Disable Remote Control"
+#~ msgstr "Хомӯш сохтани Идоракунии Дурдаст"
+
+#~ msgid "The remote user has closed the connection."
+#~ msgstr "Корванди дурдаст пайвастагиро хомӯш сохт."
+
+#~ msgid "The remote user has been authenticated and is now connected."
+#~ msgstr "Корванди дурдаст аслшиносӣ гардидааст ва ҳоло пайваст шудааст."
+
+#, fuzzy
+#~| msgid "Accepted uninvited connection from %1"
+#~ msgid "Attepted uninvited connection from %1: connection refused"
+#~ msgstr "Пайвастшавӣ бе таклифот аз %1 қабул гардид"
+
+#~ msgid "User accepts connection from %1"
+#~ msgstr "Корванд пайвастшавиро аз %1 қабул мекунад"
+
+#~ msgid "User refuses connection from %1"
+#~ msgstr "Корванд пайвастшавиро аз %1 рад мекунад"
+
+#~ msgid "Closed connection: %1."
+#~ msgstr "Пайвастшавии хомӯш гардида: %1."
+
+#~ msgid "Connection refused from %1, already connected."
+#~ msgstr "Аз %1 пайвастшавӣ рад гардид, аллакай пайваст аст."
+
+#, fuzzy
+#~ msgid ""
+#~ "KDE Desktop Sharing allows you to invite somebody at a remote location to "
+#~ "watch and possibly control your desktop.\n"
+#~ "<a href=\"whatsthis:<p>An invitation creates a one-time password that "
+#~ "allows the receiver to connect to your desktop. It is valid for only one "
+#~ "successful connection and will expire after an hour if it has not been "
+#~ "used. When somebody connects to your computer a dialog will appear and "
+#~ "ask you for permission. The connection will not be established before you "
+#~ "accept it. In this dialog you can also restrict the other person to view "
+#~ "your desktop only, without the ability to move your mouse pointer or "
+#~ "press keys.</p><p>If you want to create a permanent password for Desktop "
+#~ "Sharing, allow 'Uninvited Connections' in the configuration.</p>\">More "
+#~ "about invitations...</a>"
+#~ msgstr ""
+#~ "Мизи Кории Муштараки KDE ба шумо имконияти даъвати касе барои назорат "
+#~ "кардан ва эҳтимолан идора кардани мази кории шумо, медиҳад.\n"
+#~ "<a href=\"whatsthis:<p>Таклифот гузарвожаи якбор истифодашавандаро "
+#~ "меофарад, ки ба шахси гирандаи он имконияти пайвастшвиро ба мизи кории "
+#~ "шумо медиҳад. Он танҳо барои як пайвастшавӣ дуруст аст ва  баъди "
+#~ "гузаштани зиёда аз як соат он бекор мегардад. Вақте, ки касе кӯшиши "
+#~ "пайвастшавиро ба компютери шумо мекунад, мокалома пайдо мешавад, ки аз "
+#~ "ушмо имтиёзҳоро пурсон мешавад. То он даме, ки онро қабул накунед, "
+#~ "пайвастшавӣ барқарор намегардад. Дар ин муколама инчунин шумо дигар "
+#~ "шухсонро барои азназаргузаронии Мизи Кории худ маҳдуд карда метавонед бе "
+#~ "имконияти ҳаракатдиҳии нишонагари муш ё пахши калид.</p><p>Агар хоҳед, ки "
+#~ "гузарвожаи доимиро барои Мизи Кории Муштарак офаред, дар танзимот "
+#~ "'Пайвастшавиҳо бе Таклифот'-ро фаъол созед.\">Муфассалтар дар бораи "
+#~ "таклифот...</a>"
+
+#~ msgid "Expiration"
+#~ msgstr "Мӯҳлати кор"
+
+#~ msgid ""
+#~ "Displays the open invitations. Use the buttons on the right to delete "
+#~ "them or create a new invitation."
+#~ msgstr ""
+#~ "Таклифотҳои фаъолро намоиш медиҳад. Ба воситаи тугмаҳои аз рост буда "
+#~ "онҳоро нобуд сохта ё таклифотҳои навро офарида мешавад."
+
+#~ msgid "Closes this window."
+#~ msgstr "Пӯшидани ин тиреза."
+
+#, fuzzy
+#~ msgid ""
+#~ "<h2>Personal Invitation</h2>\n"
+#~ "Give the information below to the person that you want to invite (<a href="
+#~ "\"whatsthis:Desktop Sharing uses the VNC protocol. You can use any VNC "
+#~ "client to connect. In KDE the client is called 'Remote Desktop "
+#~ "Connection'. Enter the host information into the client and it will "
+#~ "connect..\">how to connect</a>). Note that everybody who gets the "
+#~ "password can connect, so be careful."
+#~ msgstr ""
+#~ "<h2>Даъвати Шахсӣ</h2><br>\n"
+#~ "Ахбороти дар поён бударо ба шахсе, ки даъват кардан мехоҳед, интиқол "
+#~ "диҳед (<a href=\"whatsthis:Истифодаи Муштараки Мизи Корӣ қарордоди VNC-ро "
+#~ "истифода мебарад. Шумо дилхоҳ мизоҷи VNC-ро барои пайвастшавӣ истифода "
+#~ "бурда метавонед. Дар KDE он пайвастшавии 'Пайвастшавии Мизи Кории "
+#~ "Дурдаст' номида мешавад. Маълумотро оиди соҳиб ворид кунед ва пайваст "
+#~ "шавед..\">чӣ тарз пайваст шудан</a>). Дар хотир доред, ки ҳар касе, ки "
+#~ "гузарвожаи шуморо дастрас мекунад, пайваст шуда метавонад, бинобар ин "
+#~ "эҳтиёт бошед."
+
+#~ msgid "cookie.tjansen.de:0"
+#~ msgstr "cookie.tjansen.de:0"
+
+#~ msgid "12345"
+#~ msgstr "12345"
+
+#~ msgid "17:12"
+#~ msgstr "17:12"
+
+#~ msgid ""
+#~ "(<a href=\"whatsthis:This field contains the address of your computer and "
+#~ "the display number, separated by a colon. The address is just a hint - "
+#~ "you can use any address that can reach your computer. Desktop Sharing "
+#~ "tries to guess your address from your network configuration, but does not "
+#~ "always succeed in doing so. If your computer is behind a firewall it may "
+#~ "have a different address or be unreachable for other computers.\">Help</"
+#~ "a>)"
+#~ msgstr ""
+#~ "(<a href=\"whatsthis:Ин майдон суроға ва рақами дидабони компютери "
+#~ "шуморо, ки бо ҳам бо ду нуқта ҷудоанд, дар бар мегирад. Суроға ин танҳо "
+#~ "ишора аст - шумо дилхоҳ суроғаи компютери худро истифода бурда метавонед. "
+#~ "Барномаи дастрасии Муштараки Мизи Корӣ кӯшиши пайдо кардани суроғаи "
+#~ "шуморо аз танзимоти шабакавӣ мекунад, лекин на дар ҳамаи ҳолат он "
+#~ "самарабахш аст. Агар компютери шумо дар паси экрани байни шабакавӣ бошад, "
+#~ "он дигар суроғаро дошта метавонад ё ни, ки барои дигар компютерҳо "
+#~ "дастнорас мегардад.\">Ёрӣ</a>)"
+
+#~ msgid "Desktop Sharing - connecting"
+#~ msgstr "Дастрасии муштарак ба Мизи Корӣ - пайвастшавӣ"
+
+#~ msgid "Manage &Invitations"
+#~ msgstr "Идоракунии &Таклифотҳо"
+
+#~ msgid "Used for calling from kinetd"
+#~ msgstr "Барои дархост аз kinetd истифода мешавад"
+
+#~ msgid ""
+#~ "Cannot find KInetD. The KDE daemon (kded) may have crashed or has not "
+#~ "been started at all, or the installation failed."
+#~ msgstr ""
+#~ "KInetD пайдо нагардид. Эҳтимолан азозили KDE (kded) осеб дидааст ё оғоз "
+#~ "наёфтааст ё коргузорӣ нашудааст."
+
+#~ msgid ""
+#~ "Cannot find KInetD service for Desktop Sharing (krfb). The installation "
+#~ "is incomplete or failed."
+#~ msgstr ""
+#~ "Хизмати KInetD барои Истифодаи Муштараки Мизи Корӣ пайдо нагардид. "
+#~ "Коргузорӣ нопурра аст ё хатогӣ рух додааст."
