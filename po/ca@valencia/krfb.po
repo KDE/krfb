@@ -85,7 +85,7 @@ msgstr "Este és el port que escoltarà el krfb."
 #: krfb.kcfg:23 ui/configtcp.ui:16
 #, kde-format
 msgid "Announce the service on the local network"
-msgstr "Anuncia el servei a la xarxa local"
+msgstr "Anuncia el servei en la xarxa local"
 
 #. i18n: ectx: label, entry (noWallet), group (Security)
 #: krfb.kcfg:29
@@ -339,7 +339,7 @@ msgid ""
 "another port in the settings and restart krfb."
 msgstr ""
 "No s'ha pogut iniciar el servidor krfb. La compartició d'escriptori no "
-"funcionarà. Intenteu definir un altre port a la configuració i torneu a "
+"funcionarà. Intenteu definir un altre port en la configuració i torneu a "
 "iniciar el krfb."
 
 #. i18n: ectx: property (whatsThis), widget (QLabel, titleLabel)
