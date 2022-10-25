@@ -91,7 +91,7 @@ msgstr "Anuncia el servei en la xarxa local"
 #: krfb.kcfg:29
 #, kde-format
 msgid "Do not store passwords in KWallet"
-msgstr "No emmagatzemar les contrasenyes a KWallet"
+msgstr "No emmagatzemar les contrasenyes en KWallet"
 
 #. i18n: ectx: label, entry (allowDesktopControl), group (Security)
 #: krfb.kcfg:33
