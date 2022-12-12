@@ -50,10 +50,10 @@ public:
     bool isValid() const;
 
 private Q_SLOTS:
-    void handleXdpSessionCreated(quint32 code, QVariantMap results);
-    void handleXdpDevicesSelected(quint32 code, QVariantMap results);
-    void handleXdpSourcesSelected(quint32 code, QVariantMap results);
-    void handleXdpRemoteDesktopStarted(quint32 code, QVariantMap results);
+    void handleXdpSessionCreated(quint32 code, const QVariantMap &results);
+    void handleXdpDevicesSelected(quint32 code, const QVariantMap &results);
+    void handleXdpSourcesSelected(quint32 code, const QVariantMap &results);
+    void handleXdpRemoteDesktopStarted(quint32 code, const QVariantMap &results);
 
 private:
     class Private;

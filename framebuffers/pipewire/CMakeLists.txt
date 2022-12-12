@@ -49,6 +49,8 @@ target_link_libraries(krfb_framebuffer_pw
                       Wayland::Client
                       krfbprivate
                       PkgConfig::PipeWire
+                      K::KPipeWire
+                      K::KPipeWireDmaBuf
 )
 
 if (HAVE_DMA_BUF)

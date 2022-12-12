@@ -73,6 +73,7 @@ find_package(LibVNCServer REQUIRED)
 
 option(DISABLE_PIPEWIRE "Disable PipeWire support." OFF)
 if(NOT DISABLE_PIPEWIRE)
+    find_package(KPipeWire REQUIRED)
     pkg_check_modules(PipeWire IMPORTED_TARGET libpipewire-0.3)
 endif()
 add_feature_info(PipeWire PipeWire_FOUND "Required for pipewire screencast plugin")
