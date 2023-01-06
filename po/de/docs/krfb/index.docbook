@@ -1,322 +1,313 @@
 <?xml version="1.0" ?>
 <!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
   <!ENTITY % addindex "IGNORE">
-  <!ENTITY % German "INCLUDE">
+  <!ENTITY % English "INCLUDE">
 ]>
 
 <book id="krfb" lang="&language;">
 
 <bookinfo>
-<title
->Das Handbuch zu &krfb;</title>
+<title>The &krfb; Handbook</title>
 
 <authorgroup>
-<author
->&Brad.Hards; &Brad.Hards.mail; </author>
-<othercredit role="translator"
-><firstname
->Frank</firstname
-><surname
->Schütte</surname
-><affiliation
-><address
-><email
->F.Schuette@t-online.de</email
-></address
-></affiliation
-><contrib
->Übersetzung</contrib
-></othercredit
-> 
+<author>
+&Brad.Hards;
+&Brad.Hards.mail;
+</author>
+<!-- TRANS:ROLES_OF_TRANSLATORS -->
 </authorgroup>
 
 <copyright>
-<year
->2003</year>
-<holder
->&Brad.Hards;</holder>
+<year>2003</year>
+<holder>&Brad.Hards;</holder>
 </copyright>
 
-<legalnotice
->&FDLNotice;</legalnotice>
+<legalnotice>&FDLNotice;</legalnotice>
 
-<date
->2016-07-25</date>
-<releaseinfo
->5.0 (Anwendungen 16.08)</releaseinfo>
+<date>2016-07-25</date>
+<releaseinfo>5.0 (Applications 16.08)</releaseinfo>
 
 <abstract>
-<para
->&krfb; ist eine Serveranwendung, welche die gemeinsame Benutzung der aktuellen Sitzung mit einem Benutzer auf einem anderen Rechner ermöglicht, der mit Hilfe eines <acronym
->VNC</acronym
->-Programms den Bildschirminhalt sehen oder sogar die Arbeitsfläche bedienen kann. </para>
+<para>
+&krfb; is a server application that allows you to share your current
+session with a user on another machine, who can use a <acronym>VNC</acronym> client to
+view or even control the desktop.
+</para>
 </abstract>
 
 <keywordset>
-<keyword
->KDE</keyword>
-<keyword
->kdenetwork</keyword>
-<keyword
->krfb</keyword>
-<keyword
->VNC</keyword>
-<keyword
->RFB</keyword>
-<keyword
->krdc</keyword>
-<keyword
->Freigabe der Arbeitsfläche</keyword>
-<keyword
->Fernsteuerung</keyword>
-<keyword
->Fernunterstützung</keyword>
-<keyword
->Arbeitsfläche des Fremdgeräts</keyword>
+<keyword>KDE</keyword>
+<keyword>kdenetwork</keyword>
+<keyword>krfb</keyword>
+<keyword>VNC</keyword>
+<keyword>RFB</keyword>
+<keyword>krdc</keyword>
+<keyword>Desktop Sharing</keyword>
+<keyword>Remote Control</keyword>
+<keyword>Remote Assistance</keyword>
+<keyword>Remote Desktop</keyword>
 </keywordset>
 
 </bookinfo>
 
 <chapter id="introduction">
-<title
->Einleitung</title>
+<title>Introduction</title>
 
-<para
->&krfb; ist eine Serveranwendung, welche die gemeinsame Benutzung der aktuellen Sitzung mit einem Benutzer auf einem anderen Rechner ermöglicht, der mit Hilfe eines <acronym
->VNC</acronym
->-Programms den Bildschirminhalt sehen oder sogar die Arbeitsfläche bedienen kann. </para>
+<para>
+&krfb; is a server application that allows you to share your current
+session with a user on another machine, who can use a <acronym>VNC</acronym> client to
+view or even control the desktop.
+</para>
 
-<para
->Üblicherweise wird &krfb; zusammen mit dem &kde; <acronym
->VNC</acronym
->-Programm &krdc; verwendet, da dessen Funktionsumfang am besten auf die Funktionen von &krfb; abgestimmt ist. </para>
+<para>
+You would typically use &krfb; with the &kde;  <acronym>VNC</acronym> client, which is
+&krdc;, since it closely matches the special features of &krfb;.
+</para>
 
-<para
->Für &krfb; ist keine eigene X-Sitzung erforderlich. Das Programm kann die aktuelle Sitzung verwenden. Damit können sie sich unkompliziert bei einer Aufgabe helfen lassen. </para>
+<para>
+&krfb; doesn't require you to start a new X session - it can share
+the current session. This makes it very useful when you want someone
+to help you perform a task.
+</para>
 
-<para
->Bitte berichten Sie alle Probleme oder Wünsche in den &kde;-Mailinglisten oder unter <ulink url="https://bugs.kde.org"
->https://bugs.kde.org</ulink
->. </para>
+<para>
+Please report any problems or feature requests to the &kde; mailing
+lists or file a bug at <ulink
+url="https://bugs.kde.org">https://bugs.kde.org</ulink>.
+</para>
 </chapter>
 
 <chapter id="what-is-RFB">
-<title
->Das <quote
->Remote Frame Buffer</quote
->-Protokoll</title>
+<title>The Remote Frame Buffer protocol</title>
 
-<para
->In diesem Kapitel wird das von &krfb; und kompatiblen Systemen verwendete Übertragungsprotokoll (<quote
->Remote Frame Buffer</quote
->-Protokoll) kurz beschrieben. Falls sie dieses Protokoll bereits kennen, können Sie dieses Kapitel überspringen. </para>
+<para>
+This chapter provides a brief description of the Remote Frame Buffer
+protocol used by &krfb; and by other compatible systems. If you are
+already familiar with Remote Frame Buffer, you can safely skip this
+chapter.
+</para>
 
-<para
->Es gibt eine umfangreiche Implementierung des <quote
->Remote Frame Buffer</quote
->-Protokolls, bekannt unter dem Namen <acronym
->VNC</acronym
-> (<quote
->Virtual Network Computer</quote
->). </para>
+<para>
+The high level implementation of a system using the Remote Frame
+Buffer protocol is known as Virtual Network Computer, or more often
+just as <acronym>VNC</acronym>. 
+</para>
 
-<para
-><quote
->Remote Frame Buffer</quote
-> (<acronym
->RFB</acronym
->) ist ein einfaches Protokoll für den entfernten Zugriff auf eine grafische Benutzeroberfläche. Es arbeitet auf der Ebene des <quote
->Frame-buffers</quote
->, der grob der gerasterten Bildschirmdarstellung entspricht. Daher kann das Protokoll für alle Fenstersysteme (einschließlich X11, &MacOS; und &Microsoft; &Windows;) verwendet werden. <quote
->Remote Frame Buffer</quote
->-Programme finden sich für viele Plattformen und können meistens frei verteilt werden. </para>
+<para>
+Remote Frame Buffer (or <acronym>RFB</acronym> for short) is a simple
+protocol for remote access to graphical user interfaces. It works at
+the frame-buffer level, which roughly corresponds to the rendered
+screen image, which means that it can be applied to all windowing
+systems (including X11, &MacOS; and &Microsoft; &Windows;). Remote
+Frame Buffer applications exist for many platforms, and can often be
+freely re-distributed.
+</para>
 
-<para
->Das Programm auf dem Rechner, an dem der Benutzer sitzt (der also Bildschirm, Tastatur und Maus besitzt), wird im <quote
->Remote Frame Buffer</quote
->-Protokoll als Client bezeichnet. Das Programm auf dem Rechner mit dem <quote
->Frame buffer</quote
-> (der Rechner mit Fenstersystem, der von einem Fremdgerät gesteuert wird) wird als Server bezeichnet. Der &kde;-Server mit dem <quote
->Remote Frame Buffer</quote
->-Protokoll ist &krfb;. Der &kde;-Client für das <quote
->Remote Frame Buffer</quote
->-Protokoll ist &krdc;. </para>
+<para>
+In the Remote Frame Buffer protocol, the application that runs on the
+machine where the user sits (containing the display, keyboard and
+pointer) is called the client. The application that runs on the
+machine where the framebuffer is located (which is running the
+windowing system and applications that the user is remotely
+controlling) is called the server. &krfb; is the &kde; server for the
+Remote Frame Buffer protocol. &krdc; is the &kde; client for the
+Remote Frame Buffer protocol.
+</para>
 
-<para
->Für die Übertragung eines Bildes des <quote
->Frame buffers</quote
-> benötigt man eine erhebliche Übertragungsrate, daher sollte <quote
->Remote Frame Buffer</quote
-> nur in Netzwerken ausreichender Bandbreite &eg; in lokalen Netzwerken eingesetzt werden. Bei Verwendung von &krfb; über langsamere Verbindungen ist die Arbeitsgeschwindigkeit zu langsam. </para>
+<para>
+It takes a reasonable amount of network traffic to send an image of
+the framebuffer, so Remote Frame Buffer works best over high
+bandwidth links, such as a local area network. It is still possible to
+use &krfb; over other links, but performance is unlikely to be as good.
+</para>
 
 </chapter>
 
 <chapter id="using-krfb">
-<title
->Verwendung von &krfb;</title>
+<title>Using &krfb;</title>
 
 <sect1 id="main-windw">
-<title
->Das Hauptfenster von &krfb;</title>
-<para
->Die Verwendung von &krfb; ist leicht - die einfache Oberfläche ist im Bildschirmfoto unten zu sehen. </para>
+<title>&krfb; Main Window</title>
+<para>
+It is very easy to use &krfb; - it has a simple interface, as shown in
+the screenshot below.
+</para>
 
 <para>
 <screenshot>
-<screeninfo
->Bildschirmfoto von &krfb;</screeninfo>
+<screeninfo>Here's a screenshot of &krfb;</screeninfo>
 	<mediaobject>
 	  <imageobject>
 	    <imagedata fileref="screenshot.png" format="PNG"/>
 	  </imageobject>
 	  <textobject>
-	    <phrase
->Das Hauptfenster von &krfb;</phrase>
+	    <phrase>&krfb; main window</phrase>
 	  </textobject>
 	</mediaobject>
 </screenshot>
 </para>
 
-<para
->Wenn Sie jemandem Zugriff auf Ihre Arbeitsfläche geben möchten, müssen Sie das Ankreuzfeld <guilabel
->Freigabe der Arbeitsfläche aktivieren</guilabel
-> auswählen. Damit wird dann der Server gestartet. </para>
+<para>
+When you want to allow someone to access your desktop, you have to
+enable the checkbox <guilabel>Enable Desktop Sharing</guilabel>,
+which will start the server.
+</para>
 
 <sect2 id="connection-details">
-<title
->Verbindungsdetails</title>
+<title>Connection Details</title>
 
-<para
->Das Feld <guilabel
->Adresse</guilabel
-> enthält die Rechneradresse und dahinter getrennt durch einen Doppelpunkt die Portnummer. Die Adresse ist nur ein Beispiel – jede Adresse, unter der der eigene Rechner erreichbar ist, kann verwendet werden. &krfb; versucht, die Adresse aus der Netzwerkkonfiguration zu ermitteln. Das gelingt nicht in allen Fällen. Falls sich der Rechner hinter einer Firewall befindet, kann sich die Adresse unterscheiden oder für andere Rechner unerreichbar sein. </para>
-<para
->Sie können den Port auf der Seite <guilabel
->Netzwerk</guilabel
-> im Einrichtungsdialog ändern. </para>
-<para
->Im nächsten Feld wird ein automatisch generiertes Passwort eingetragen. Klicken Sie auf das Symbol rechts neben dem Eingabefeld um das Passwort zu ändern. </para>
+<para>
+The <guilabel>Address</guilabel> contains the address of your
+computer and the port number, separated by a colon.
+The address is just a hint - you can use any address that can
+reach your computer. &krfb; tries to guess your address from your
+network configuration, but does not always succeed in doing so.
+If your computer is behind a firewall it may have a different
+address or be unreachable for other computers.
+</para>
+<para>
+You can change the port on the <guilabel>Network</guilabel>
+page in the configuration dialog.
+</para>
+<para>
+The next field is prefilled with an automatically generated password.
+Click in the icon at the right of the field to change the password.
+</para>
 </sect2>
 
 <sect2 id="unattended-access">
-<title
->Unbeaufsichtigter Zugriff</title>
+<title>Unattended Access</title>
 
-<para
->Jeder entfernte Benutzer mit dem Passwort für die Freigabe der Arbeitsfläche muss authentifiziert werden. Wenn der unbeaufsichtigten Zugriff aktiviert ist und der entfernte Benutzer dass Passwort für den unbeaufsichtigten Zugriff angibt, wird der Zugriff auf die freigegebene Arbeitsfläche ohne ausdrückliche Bestätigung gewährt. </para>
-<para
->In der Voreinstellung wird für diesen Modus kein Passwort verwendet. Um das zu ändern, klicken Sie auf den Knopf und geben ein Passwort ein. </para>
-<para
->Wenn Sie den unbeaufsichtigter Zugriff zulassen, sollten Sie besser ein Passwort angeben. </para>
+<para>
+Any remote user with the desktop sharing password will have to be authenticated.
+If unattended access is activated, and the remote user provides the password
+for unattended mode, desktop sharing access will be granted without explicit
+confirmation.
+</para>
+<para>
+By default the password for this mode is empty, to change that click on
+the button and enter a password.
+</para>
+<para>
+If unattended access is allowed, then you should probably specify a
+password.
+</para>
 
-<para
->Verwenden Sie &krfb;für die Fernverwaltung eines Servers, dann sollten Sie den unbeaufsichtigter Zugriff benutzen. </para>
+<para>
+If the machine is a server and you are using &krfb; for remote
+administration, you probably want to use unattended access.
+</para>
 
 </sect2>
 
 <sect2 id="transfer-login-information">
-<title
->Anmeldungs-Information übertragen</title>
+<title>Transfer Login Information</title>
 
-<para
->Die Einladungsfunktion aus früheren Versionen gibt es in &krfb; jetzt nicht mehr. Daher müssen Sie die Anmeldungsdaten selbst über E-Mail oder persönlich übertragen. </para>
-<para
->Falls die E-Mail nicht verschlüsselt oder alternativ eine sichere Verbindung verwendet wird, stellt die Senden der E-Mail ein hohes Sicherheitsrisiko dar, da jeder auf dem Weg der E-Mail gelegene Rechner die E-Mail mitlesen und das Passwort verwenden kann, um so möglicherweise die Kontrolle über ihren Rechner übernehmen zu können. </para>
-<para
->In diesem Fall sollte man lieber zu einer persönlichen Einladung per Telefon greifen. So kann man sich von der Identität der anderen Person überzeugen und dann die relevanten Daten per Telefon weiter geben. </para>
+<para>
+&krfb; has no invitation feature any more as in previous versions.
+So you have to transfer the login information yourself using email
+or a personal invitation.
+</para>
+<para>
+If you cannot encrypt the email (or otherwise secure the link),
+sending a password by email is a very serious security risk, since
+anyone can read the password and address from the email as it passes
+over the network. This means that they can potentially take control of
+your machine.
+</para>
+<para>
+If you cannot encrypt the email message, it may be better to use a
+personal invitation, telephone the person you are giving access to,
+verify the identity of that person, and provide the required
+information that way.
+</para>
 
 <note>
-<para
->&krfb; verwendet für Passwörter das <acronym
->RFB</acronym
->-System, das keine unverschlüsselten Passwörter über das Netzwerk überträgt. Stattdess wird ein Frage-Antwort-System (<quote
->Challenge Response</quote
->) verwendet. Das ist normalerweise sicher, solange das Passwort geheim gehalten wird. </para>
+<para>
+&krfb; uses the normal <acronym>RFB</acronym> password system, which does not transfer
+your password in the clear across the network. Instead, it uses a
+challenge-response system. This is reasonably secure, as long as the
+password is securely guarded.
+</para>
 </note>
 
 </sect2>
 
 <sect2 id="krfb-qqit">
-<title
->&krfb; beenden</title>
+<title>Quit &krfb;</title>
 
-<para
->Wird das Hauptfenster von &krfb; durch Klicken auf das Symbol in der Fensterleiste oder mit dem Kurzbefehl <keycombo action="simul"
->&Alt;<keycap
->F4</keycap
-></keycombo
-> geschlossen, läuft der Server weiter. Dies wird durch ein Symbol im Systemabschnitt der Kontrollleiste angezeigt. Um &krfb; zu beenden, klicken Sie mit der &RMBn; auf dieses Symbol und wählen dann <guimenuitem
->Beenden</guimenuitem
-> oder benutzen Sie <menuchoice
-><guimenu
->Datei</guimenu
-><guimenuitem
->Beenden</guimenuitem
-></menuchoice
-> im Hauptfenster. </para>
+<para>
+If you close the &krfb; main window by clicking on the window close icon or using the
+shortcut <keycombo action="simul">&Alt;<keycap>F4</keycap></keycombo> the server
+keeps running, which is indicated by an icon in the system tray.
+To stop &krfb; either use <menuchoice><guimenu>File</guimenu><guimenuitem>Quit</guimenuitem></menuchoice>
+in the main window or right click on the icon in the system tray and select
+<guimenuitem>Quit</guimenuitem>.
+</para>
 </sect2>
 
 </sect1>
 
 <sect1 id="krfb-configuration">
-<title
->Einrichtung von &krfb;</title>
-<para
->Außer im Hauptfenster kann man &krfb; auch durch Klicken auf den Knopf <guimenuitem
->Einrichten ...</guimenuitem
-> aus dem &krfb;-Hauptfenster den Einstellungsdialog öffnen. Dieser Dialog besteht aus zwei Seiten wie im unten angezeigten Bildschirmfoto: </para>
+<title>Configuring &krfb;</title>
+<para>
+In addition to the main &krfb; interface shown and described above, 
+you can also control &krfb;  using the
+<guimenuitem>Configure...</guimenuitem> on the &krfb; main window. The &krfb;
+configuration has two pages, as shown in the screenshot below: 
+</para>
 
-<para
->Auf der Seite <guilabel
->Netzwerk</guilabel
-> kann man den von &krfb; verwendeten Port einstellen (siehe unten). </para>
+<para>
+The <guilabel>Network</guilabel> page allows control over the port that
+&krfb; uses, as shown below.
+</para>
 
 <para>
 <screenshot>
-<screeninfo
->Einrichtung von &krfb; (Netzwerk)</screeninfo>
+<screeninfo>&krfb; Configuration (Network page)</screeninfo>
 	<mediaobject>
 	  <imageobject>
 	    <imagedata fileref="configuration_network.png" format="PNG"/>
 	  </imageobject>
 	  <textobject>
-	    <phrase
->Einrichtung von &krfb; (Netzwerk)</phrase>
+	    <phrase>&krfb; Configuration (Network page)</phrase>
 	  </textobject>
 	</mediaobject>
 </screenshot>
 </para>
 
-<para
->Wenn das Ankreuzfeld <guilabel
->Dienst im lokalen Netzwerk veröffentlichen</guilabel
-> markiert ist, dann kündigt &krfb; den Dienst über das lokale Netzwerk mithilfe des <quote
->Service Location</quote
->-Protokolls an. Diese Funktion arbeitet nur mit einem Programm wie &krdc; einwandfrei. </para>
+<para>
+The <guilabel>Announce service on the local network</guilabel> checkbox
+controls whether &krfb; announces the service over the local network using
+Service Location Protocol. This is normally a good idea, but only
+works really well with a Service Location Protocol aware client, such
+as &krdc;.
+</para>
 
-<para
->Falls <guilabel
->Standardport verwenden</guilabel
-> aktiviert ist, wählt &krfb; einen geeigneten Port aus. Falls diese Einstellung nicht markiert ist, kann man einen festen Port zuweisen. Das ist nützlich, falls man sich hinter einem Firewall befindet. Falls das <quote
->Service Location</quote
->-Protokoll aktiviert ist, identifiziert es den richtigen Port automatisch. </para>
+<para>
+If you select the <guilabel>Use default port</guilabel> checkbox, 
+then &krfb; will locate a suitable port.
+If you deselect this checkbox, you can specify a particular
+port. Specifying a particular port may be useful if you are using
+port-forwarding on the firewall. Note that if Service Location
+Protocol is turned on, this will automatically deal with identifying
+the correct port.
+</para>
 
-<para
->Auf der Seite <guilabel
->Sicherheit</guilabel
-> können Sie einstellen, ob die Person, die sich mit dem &krfb;-Server verbindet, die Arbeitsfläche steuern oder nur ansehen kann. </para>
+<para>
+The <guilabel>Security</guilabel> page allows you to configure whether the
+person connecting to the &krfb; server can control the desktop, or only view.
+</para>
 
 <para>
 <screenshot>
-<screeninfo
->Einrichtung von &krfb; (Sicherheit)</screeninfo>
+<screeninfo>&krfb; Configuration (Security page)</screeninfo>
 	<mediaobject>
 	  <imageobject>
 	    <imagedata fileref="configuration_security.png" format="PNG"/>
 	  </imageobject>
 	  <textobject>
-	    <phrase
->Einrichtung von &krfb; (Sicherheit)</phrase>
+	    <phrase>&krfb; Configuration (Security page)</phrase>
 	  </textobject>
 	</mediaobject>
 </screenshot>
@@ -325,72 +316,72 @@
 </sect1>
 
 <sect1 id="krfb-connection">
-<title
->Verbindung zu &krfb;</title>
+<title>Connecting to &krfb;</title>
 
-<para
->Sobald jemand eine Verbindungsanfrage an &krfb; auf ihrem Rechner stellt, erscheint ein Benachrichtigungsfenster wie im folgenden Bildschirmfoto, falls Sie nicht unbeaufsichtigten Zugriff ohne Bestätigung aktiviert haben. </para>
+<para>
+When someone connects to &krfb; on your machine, you will get a pop-up
+notification that looks like the following screenshot, unless you are
+accepting unattended access without confirmation.
+</para>
 <para>
 <screenshot>
-<screeninfo
->Verbindungsfenster von &krfb;</screeninfo>
+<screeninfo>&krfb; Connection Window</screeninfo>
 	<mediaobject>
 	  <imageobject>
 	    <imagedata fileref="connection.png" format="PNG"/>
 	  </imageobject>
 	  <textobject>
-	    <phrase
->Verbindungsfenster von &krfb;</phrase>
+	    <phrase>&krfb; Connection Window</phrase>
 	  </textobject>
 	</mediaobject>
 </screenshot>
 </para>
 
-<para
->Klickt man auf <guibutton
->Verbindung akzeptieren</guibutton
->, so kann sich der Client authentifizieren. Dies erfordert die korrekte Eingabe des Passworts für die Anmeldung. Klickt man auf <guibutton
->Verbindung verweigern</guibutton
->, so wird der Verbindungsversuch abgebrochen. </para>
+<para>
+If you <guibutton>Accept Connection</guibutton>, the client can
+proceed to authenticate, which requires the correct password for a
+login. If you <guibutton>Refuse
+Connection</guibutton>, then the attempt to connect will be terminated.
+</para>
 
-<para
->Über das Ankreuzfeld <guilabel
->Steuerung von Tastatur und Maus durch die Gegenstelle erlauben</guilabel
-> wird festgelegt, ob der Client lediglich die Arbeitsfläche einsehen oder sogar steuern kann. </para>
+<para>
+The <guilabel>Allow remote user to control keyboard and
+mouse</guilabel> check box determines whether this client can only
+observe, or can take control of your machine. 
+</para>
 
 </sect1>
 </chapter>
 
 <chapter id="credits">
 
-<title
->Danksagungen und Lizenz</title>
+<title>Credits and License</title>
 
-<para
->&krfb; </para>
-<para
->Programn Copyright 2002 Tim Jansen <email
->tim@tjansen.de</email
-> </para>
-<para
->Mitwirkende: <itemizedlist
-> <listitem
-><para
->Ian Reinhart Geiser <email
->geiseri@kde.org</email
-></para>
+<para>
+&krfb;
+</para>
+<para>
+Program copyright 2002 Tim Jansen <email>tim@tjansen.de</email>
+</para>
+<para>
+Contributors:
+<itemizedlist>
+<listitem><para>Ian Reinhart Geiser <email>geiseri@kde.org</email></para>
 </listitem>
 </itemizedlist>
 </para>
 
-<para
->Dokumentation Copyright&copy; 2003 &Brad.Hards; &Brad.Hards.mail; </para>
+<para>
+Documentation Copyright &copy; 2003 &Brad.Hards; &Brad.Hards.mail;
+</para>
 
-<para
->Deutsche Übersetzung: Frank Schütte <email
->F.Schuette@t-online.de</email
-></para
-> &underFDL; &underGPL; </chapter>
+<!-- TRANS:CREDIT_FOR_TRANSLATORS -->
+
+&underFDL;               <!-- FDL: do not remove -->
+
+&underGPL;        	 <!-- GPL License -->
+
+</chapter>
 
 &documentation.index;
 </book>
