@@ -18,14 +18,15 @@
 #
 # invite, 2008.
 # amine say, 2011.
+# Xavier BESNARD <xavier.besnard]neuf.fr>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: krfb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-07-18 00:45+0000\n"
-"PO-Revision-Date: 2021-11-01 08:30+0100\n"
-"Last-Translator: Xavier Besnard <xavier.besnard@neuf.fr>\n"
-"Language-Team: French <kde-francophone@kde.org>\n"
+"PO-Revision-Date: 2023-01-09 16:44+0100\n"
+"Last-Translator: Xavier BESNARD <xavier.besnard]neuf.fr>\n"
+"Language-Team: fr\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -34,7 +35,7 @@ msgstr ""
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
-"X-Generator: Lokalize 21.08.1\n"
+"X-Generator: Lokalize 22.12.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -166,7 +167,7 @@ msgstr ""
 "(c) 2001, Johannes E. Schindelin\n"
 "(c) 2000-2001, Const Kaplinsky\n"
 "(c) 2000, Tridia Corporation\n"
-"(c) 1999, AT&T Laboratories Boston\n"
+"(c) 1999, Laboratoires AT&T Boston\n"
 
 #: main-virtualmonitor.cpp:91
 #, kde-format
@@ -231,7 +232,7 @@ msgstr "Encodeur « ZLib »"
 #: main-virtualmonitor.cpp:101 main.cpp:119
 #, kde-format
 msgid "AT&T Laboratories Boston"
-msgstr "AT&T Laboratories Boston"
+msgstr "Laboratoires AT&T Boston"
 
 #: main-virtualmonitor.cpp:102 main.cpp:120
 #, kde-format
