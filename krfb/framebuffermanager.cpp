@@ -76,17 +76,21 @@ QSharedPointer<FrameBuffer> FrameBufferManager::frameBuffer(WId id, const QVaria
         }
     }
 
+    if (auto preferredPlugin = m_plugins[ KrfbConfig::preferredFrameBufferPlugin() ]) {
+        if (auto frameBuffer = QSharedPointer<FrameBuffer>(preferredPlugin->frameBuffer(args))) {
+            qCDebug(KRFB) << "Using FrameBuffer:" << KrfbConfig::preferredFrameBufferPlugin();
+            m_frameBuffers.insert(id, frameBuffer.toWeakRef());
+            return frameBuffer;
+        }
+    }
+
     // We don't already have that frame buffer.
     for (auto it = m_plugins.cbegin(); it != m_plugins.constEnd(); it++) {
-        if (it.key() == KrfbConfig::preferredFrameBufferPlugin()) {
-            qCDebug(KRFB) << "Using FrameBuffer:" << KrfbConfig::preferredFrameBufferPlugin();
-
-            QSharedPointer<FrameBuffer> frameBuffer(it.value()->frameBuffer(args));
-            if (frameBuffer) {
-                m_frameBuffers.insert(id, frameBuffer.toWeakRef());
-
-                return frameBuffer;
-            }
+        QSharedPointer<FrameBuffer> frameBuffer(it.value()->frameBuffer(args));
+        if (frameBuffer) {
+            qCDebug(KRFB) << "Using FrameBuffer:" << it.key();
+            m_frameBuffers.insert(id, frameBuffer.toWeakRef());
+            return frameBuffer;
         }
     }
 
