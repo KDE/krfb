@@ -1,0 +1,6 @@
+{
+    "X-KDE-OnlyShowOnQtPlatforms": [
+        "xcb"
+    ]
+}
+

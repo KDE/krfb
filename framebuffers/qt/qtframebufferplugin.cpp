@@ -24,7 +24,7 @@
 
 #include <KPluginFactory>
 
-K_PLUGIN_CLASS(QtFrameBufferPlugin)
+K_PLUGIN_CLASS_WITH_JSON(QtFrameBufferPlugin, "qt.json")
 
 QtFrameBufferPlugin::QtFrameBufferPlugin(QObject *parent, const QVariantList &args)
     : FrameBufferPlugin(parent, args)

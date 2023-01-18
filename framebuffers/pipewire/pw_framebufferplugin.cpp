@@ -22,7 +22,7 @@
 #include "pw_framebuffer.h"
 #include <KPluginFactory>
 
-K_PLUGIN_CLASS(PWFrameBufferPlugin)
+K_PLUGIN_CLASS_WITH_JSON(PWFrameBufferPlugin, "pipewire.json")
 
 PWFrameBufferPlugin::PWFrameBufferPlugin(QObject *parent, const QVariantList &args)
     : FrameBufferPlugin(parent, args)
