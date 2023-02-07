@@ -61,10 +61,8 @@ void EventData::init()
 
 void XdpEventHandler::handleKeyboard(bool down, rfbKeySym keySym)
 {
-    // TODO: implement button handling
-    // both in FakeInput interface and here
-    Q_UNUSED(down)
-    Q_UNUSED(keySym)
+    const QDBusObjectPath sessionHandle = frameBuffer()->customProperty(QStringLiteral("session_handle")).value<QDBusObjectPath>();
+    data->dbusXdpRemoteDesktopService->NotifyKeyboardKeysym(sessionHandle, {}, keySym, down);
 }
 
 void XdpEventHandler::handlePointer(int buttonMask, int x, int y)
