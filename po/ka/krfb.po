@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: krfb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-07-18 00:45+0000\n"
-"PO-Revision-Date: 2023-01-14 04:04+0100\n"
+"PO-Revision-Date: 2023-02-13 09:12+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -359,6 +359,17 @@ msgid ""
 "If your computer is behind a firewall it may have a different address or be "
 "unreachable for other computers."
 msgstr ""
+"ეს ფაილი ერთმანეთისგან ორი წერტილით გამოყოფილ თქვენი კომპიუტერის მისამართს "
+"და პორტს შეიცავს.\n"
+"\n"
+"მისამართი უბრალოდ მინიშნებაა - შეგიძლიათ გამოიყენოთ ნებისმიერი მისამართი, "
+"რომელიც თქვენს კომპიუტერამდე მიდის.\n"
+"\n"
+"სამუშაო მაგიდის გაზიარება ეცდება აღმოაჩინოს თქვენი მისამართი ქსელის "
+"კონფიგურაციიდან, მაგრამ ეს ყოველთვის არ გამოსდის.\n"
+"\n"
+"თუ თქვენი კომპიუტერი ბრანდმაუერის უკან იმალება, მისამართი შეიძლება "
+"განსხვავდებოდეს ან მიუწვდომელი იყოს სხვა კომპიუტერებისთვის."
 
 #: mainwindow.cpp:231
 #, kde-format
@@ -370,6 +381,11 @@ msgid ""
 "password, desktop sharing access will be granted without explicit "
 "confirmation."
 msgstr ""
+"ყველა დაშორებულ მომხმარებელს, რომელსაც ნორმალური სამუშაო მაგიდა გააჩნია, "
+"ვალდებულია, ავთენტიკაცია გაიაროს.\n"
+"\n"
+"თუ ჩართულია დაუსწრებელი წვდომა, დაშორებულ მომხმარებელს უპაროლო წვდომა "
+"გააჩნია, წვდომა დადასტურების გარეშე ექნება."
 
 #: mainwindow.cpp:249
 #, kde-format
@@ -449,6 +465,11 @@ msgid ""
 "style=\" font-weight:600;\">qt</span> plugin is a safe fallback, if for some "
 "reason others don't work. But also it is very slow.</p></body></html>"
 msgstr ""
+"<html><head/><body><p>თუ x11-ს იყენებთ, სჯობს გამოიყენოთ <span style=\" font-"
+"weight:600;\">xcb</span> დამატება, რადგან ის საუკეთესო წარმადობას გთავაზობთ."
+"<br/><span style=\" font-weight:600;\">qt</span>-ის დამატება უსაფრთხოა "
+"გამოსაყენებლად, თუ სხვა არაფერი იმუშავებს, მაგრამ ის ასევე ძალიან ნელიცაა</"
+"p></body></html>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_allowDesktopControl)
 #: ui/configsecurity.ui:17
@@ -511,6 +532,10 @@ msgid ""
 "careful. When the option is disabled the remote user can only watch your "
 "screen."
 msgstr ""
+"თუ ამ პარამეტრს ჩართავთ, დაშორებულ მომხმარებლებს შეუძლია თქვენი თაგუნა "
+"გაამოძრაოს და თქვენი კლავიატურით ისარგებლოს. ეს მათ თქვენს კომპიუტერზე სრულ "
+"უფლებებს აძლევთ, ასე რომ, ფრთხილად იყავით. როცა ეს პარამეტრი გამორთულია, "
+"დაშორებულ მომხმარებელს თქვენი ეკრანის უბრალოდ ყურება შეუძლია."
 
 #. i18n: ectx: property (text), widget (QCheckBox, cbAllowRemoteControl)
 #: ui/connectionwidget.ui:139
@@ -526,6 +551,9 @@ msgid ""
 "KDE Desktop Sharing allows you to grant permission to someone at a remote "
 "location for viewing and possibly controlling your desktop."
 msgstr ""
+"KDE-ის სამუშაო მაგიდის გაზიარება საშუალებას გაძლევთ ვინმეს, ვინც ამას "
+"დაშორებული მდებარეობიდან ცდილობს, თქვენი სამუშაო მაგიდის დათვალიერების და "
+"საჭიროების შემთხვევაში კონტროლის საშუალება მისცეთ."
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, enableSharingCheckBox)
 #: ui/mainwidget.ui:145
@@ -571,6 +599,8 @@ msgid ""
 "Address required by remote users to connect to your desktop. Click about "
 "button on the right for more info."
 msgstr ""
+"დაშორებულ მომხმარებლებს თქვენს სამუშაო მაგიდასთან მისაერთებლად მისამართი "
+"ესაჭიროებათ. მეტი ინფორმაციის მისაღებად \"შესახებ\" ღილაკს დააჭირეთ."
 
 #. i18n: ectx: property (text), widget (QLabel, addressDisplayLabel)
 #: ui/mainwidget.ui:238
@@ -603,6 +633,8 @@ msgid ""
 "Password required by remote users to connect to your desktop. Click the edit "
 "button on the right to change password."
 msgstr ""
+"დაშორებულ მომხმარებლებს თქვენს სამუშაო მაგიდასთან მისაერთებლად პაროლი "
+"ესაჭიროება.პაროლის შესაცვლელად მარჯვენა მხარეს ჩასწორების ღილაკს დააჭირეთ."
 
 #. i18n: ectx: property (text), widget (QLabel, passwordDisplayLabel)
 #: ui/mainwidget.ui:314
@@ -618,6 +650,8 @@ msgid ""
 "Unattended Access allows a remote user with the password to gain control to "
 "your desktop without your explicit confirmation."
 msgstr ""
+"მოუწვეველი წვდომა საშუალებას აძლევს დაშორებულ მომხმარებელს, რომელსაც პაროლი "
+"გააჩნია, თქვენს კომპიუტერთან წვდომა თქვენი დადასტურების გარეშე მიიღოს."
 
 #. i18n: ectx: property (title), widget (QGroupBox, unattendedGroupBox)
 #: ui/mainwidget.ui:343
@@ -633,6 +667,9 @@ msgid ""
 "your desktop without your explicit confirmation. Click \"About\" button on "
 "right to know more."
 msgstr ""
+"მოუწვეველი წვდომა საშუალებას აძლევს დაშორებულ მომხმარებელს, რომელსაც პაროლი "
+"გააჩნია, თქვენს სამუშაო მაგიდასთან წვდომა თქვენი დადასტურების გარეშე აიღოს. "
+"მეტის გასაგებად მარჯვენა მხარეს მდებარე ღილაკ \"შესახებ\"-ს დააწექით."
 
 #. i18n: ectx: property (whatsThis), widget (QToolButton, unattendedAboutButton)
 #: ui/mainwidget.ui:394
@@ -647,6 +684,8 @@ msgid ""
 "Starts/Stops unattended access to your desktop. Click on button on right to "
 "change password, and \"About\" button to know more."
 msgstr ""
+"თქვენს სამუშაო მაგიდასთან მოუწვეველი წვდომის შეჩერება/გაშვება. პაროლის "
+"შესაცვლელად დააწექით ღილაკს მარჯვნივ, მეტის გასაგებად კი ღილაკს \"შესახებ\"."
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableUnattendedCheckBox)
 #: ui/mainwidget.ui:440
