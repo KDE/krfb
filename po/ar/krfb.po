@@ -174,7 +174,7 @@ msgstr "Alessandro Praduroux"
 #: main-virtualmonitor.cpp:93 main.cpp:111
 #, kde-format
 msgid "KDE4 porting"
-msgstr "النقل إلى كيدي4"
+msgstr "النقل إلى كِيدِي4"
 
 #: main-virtualmonitor.cpp:94 main.cpp:112
 #, kde-format
@@ -544,7 +544,7 @@ msgid ""
 "KDE Desktop Sharing allows you to grant permission to someone at a remote "
 "location for viewing and possibly controlling your desktop."
 msgstr ""
-"تشارك سطح المكتب للكيدي يسمح لك بدعوة شخص بعيد لمشاهدةأو التحكم بسطح مكتبك . "
+"تشارك سطح المكتب للكِيدِي يسمح لك بدعوة شخص بعيد لمشاهدةأو التحكم بسطح مكتبك . "
 "<a href=\"whatsthis\">المزيد عند  الدعوات...</a>"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, enableSharingCheckBox)
@@ -699,7 +699,7 @@ msgstr ""
 #~ "watch and possibly control your desktop. <a href=\"whatsthis\">More about "
 #~ "invitations...</a>"
 #~ msgstr ""
-#~ "تشارك سطح المكتب للكيدي يسمح لك بدعوة شخص بعيد لمشاهدةأو التحكم بسطح "
+#~ "تشارك سطح المكتب للكِيدِي يسمح لك بدعوة شخص بعيد لمشاهدةأو التحكم بسطح "
 #~ "مكتبك . <a href=\"whatsthis\">المزيد عند  الدعوات...</a>"
 
 #~ msgid ""
@@ -836,8 +836,8 @@ msgstr ""
 #~ "\n"
 #~ "For security reasons this invitation will expire at %5 (%6)."
 #~ msgstr ""
-#~ "لقد دعيت إلى جلسة VNC ، إذا كان لديك برنامج كدي للأسطح البعيدةما عليك إلا "
-#~ "أن تنقر على الرابط الذي بالأسفل.\n"
+#~ "لقد دعيت إلى جلسة VNC ، إذا كان لديك برنامج كِيدِي للأسطح البعيدةما عليك "
+#~ "إلا أن تنقر على الرابط الذي بالأسفل.\n"
 #~ "\n"
 #~ "%1\n"
 #~ "\n"
@@ -869,7 +869,7 @@ msgstr ""
 #~ msgstr ""
 #~ "مشاركة سطح المكتب باستخدام برتوكول VNC . يمكنك استعمال أي عميل VNC "
 #~ "للاتصال.\n"
-#~ "في الكيدي يسمى العميل بـ  'اتصال بسطح مكتب بعيد' . ادخل معلومات المضيف\n"
+#~ "في الكِيدِي يسمى العميل بـ  'اتصال بسطح مكتب بعيد' . ادخل معلومات المضيف\n"
 #~ "في العميل و هو سيقوم بالاتصال.."
 
 #, fuzzy
@@ -901,7 +901,7 @@ msgstr ""
 #~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
 #~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 #~ "right:0px; -qt-block-indent:0; text-indent:0px;\">يسمح عميل مشاركة سطح "
-#~ "المكتب للكيديبدعوة شخص في مكان بعيد لمشاهدة سطح مكتب و بالإمكان التحكم "
+#~ "المكتب للكِيدِيبدعوة شخص في مكان بعيد لمشاهدة سطح مكتب و بالإمكان التحكم "
 #~ "به . <a href=\"whatsthis\">المزيد عن الدعوات...</a></p></body></html>"
 
 #~ msgid "Creation Time"
