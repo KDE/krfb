@@ -6,8 +6,8 @@ msgstr ""
 "Project-Id-Version: krfb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-07-18 00:45+0000\n"
-"PO-Revision-Date: 2009-11-15 12:06+0100\n"
-"Last-Translator: Axel Rousseau <axel@esperanto-jeunes.org>\n"
+"PO-Revision-Date: 2023-03-25 16:19+0100\n"
+"Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
 "MIME-Version: 1.0\n"
@@ -645,25 +645,3 @@ msgstr ""
 #, kde-format
 msgid "&Change Unattended Password"
 msgstr ""
-
-#~ msgid "Confirmation"
-#~ msgstr "Konfirmo"
-
-#, fuzzy
-#~ msgid "Delete All"
-#~ msgstr "Forigu arĥivon"
-
-#~ msgid "&Delete"
-#~ msgstr "&Forigi"
-
-#~ msgid "Ian Reinhart Geiser"
-#~ msgstr "Ian Reinhart Geiser"
-
-#~ msgid "DCOP interface"
-#~ msgstr "DCOP-interfaco"
-
-#~ msgid "Jason Spisak"
-#~ msgstr "Jason Spisak"
-
-#~ msgid "Karl Vogel"
-#~ msgstr "Karl Vogel"
