@@ -12,8 +12,4 @@ x0rfbserver left. Since version 0.6 it uses libvncserver
 
 Guide to documentation:
 TODO - things to be done
-INSTALL - Very short installation instructions
 NOTES - reasons for various decisions
-DCOP-INTERFACE - short documentation of the DCOP interface
-
-
