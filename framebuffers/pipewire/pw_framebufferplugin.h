@@ -22,8 +22,6 @@
 
 
 #include "framebufferplugin.h"
-#include <QWidget>
-
 
 class FrameBuffer;
 

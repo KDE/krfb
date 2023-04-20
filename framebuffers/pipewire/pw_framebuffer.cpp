@@ -26,15 +26,6 @@
 #include <KWayland/Client/registry.h>
 
 // pipewire
-#include <sys/ioctl.h>
-
-#include <spa/param/format-utils.h>
-#include <spa/param/video/format-utils.h>
-#include <spa/param/props.h>
-#include <spa/utils/result.h>
-
-#include <pipewire/pipewire.h>
-
 #include <climits>
 
 #include "pw_framebuffer.h"
@@ -44,14 +35,6 @@
 #include "screencasting.h"
 #include <KPipeWire/PipeWireSourceStream>
 #include <KPipeWire/DmaBufHandler>
-
-#if HAVE_DMA_BUF
-#include <unistd.h>
-
-#include <gbm.h>
-#include <epoxy/egl.h>
-#include <epoxy/gl.h>
-#endif /* HAVE_DMA_BUF */
 
 static const int BYTES_PER_PIXEL = 4;
 static const uint MIN_SUPPORTED_XDP_KDE_SC_VERSION = 1;
@@ -78,30 +61,6 @@ const QDBusArgument &operator >> (const QDBusArgument &arg, PWFrameBuffer::Strea
 
     return arg;
 }
-
-#if HAVE_DMA_BUF
-const char * formatGLError(GLenum err)
-{
-    switch(err) {
-    case GL_NO_ERROR:
-        return "GL_NO_ERROR";
-    case GL_INVALID_ENUM:
-        return "GL_INVALID_ENUM";
-    case GL_INVALID_VALUE:
-        return "GL_INVALID_VALUE";
-    case GL_INVALID_OPERATION:
-        return "GL_INVALID_OPERATION";
-    case GL_STACK_OVERFLOW:
-        return "GL_STACK_OVERFLOW";
-    case GL_STACK_UNDERFLOW:
-        return "GL_STACK_UNDERFLOW";
-    case GL_OUT_OF_MEMORY:
-        return "GL_OUT_OF_MEMORY";
-    default:
-        return (QLatin1String("0x") + QString::number(err, 16)).toLocal8Bit().constData();
-    }
-}
-#endif /* HAVE_DMA_BUF */
 
 /**
  * @brief The PWFrameBuffer::Private class - private counterpart of PWFramebuffer class. This is the entity where
@@ -392,7 +351,6 @@ void PWFrameBuffer::Private::handleFrame(const PipeWireFrame &frame)
         memcpy(q->fb, frame.image->constBits(), frame.image->sizeInBytes());
         setVideoSize(frame.image->size());
     }
-#if HAVE_DMA_BUF
     else if (frame.dmabuf) {
         QImage src((uchar*) q->fb, videoSize.width(), videoSize.height(), QImage::Format_RGB32);
         if (!m_dmabufHandler.downloadFrame(src, frame)) {
@@ -401,9 +359,7 @@ void PWFrameBuffer::Private::handleFrame(const PipeWireFrame &frame)
             return;
         }
         setVideoSize(src.size());
-    }
-#endif /* HAVE_DMA_BUF */
-    else {
+    } else {
         qCDebug(KRFB_FB_PIPEWIRE) << "Unknown kind of frame";
     }
 

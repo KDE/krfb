@@ -48,17 +48,9 @@ target_link_libraries(krfb_framebuffer_pw
                       KF5::WaylandClient
                       Wayland::Client
                       krfbprivate
-                      PkgConfig::PipeWire
                       K::KPipeWire
                       K::KPipeWireDmaBuf
 )
-
-if (HAVE_DMA_BUF)
-    target_link_libraries(krfb_framebuffer_pw
-                          ${epoxy_LIBRARIES}
-                          gbm::gbm
-    )
-endif()
 
 set_target_properties(krfb_framebuffer_pw PROPERTIES OUTPUT_NAME pw)
 install (TARGETS krfb_framebuffer_pw

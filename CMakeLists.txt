@@ -74,42 +74,16 @@ find_package(LibVNCServer REQUIRED)
 option(DISABLE_PIPEWIRE "Disable PipeWire support." OFF)
 if(NOT DISABLE_PIPEWIRE)
     find_package(KPipeWire REQUIRED)
-    pkg_check_modules(PipeWire IMPORTED_TARGET libpipewire-0.3)
 endif()
-add_feature_info(PipeWire PipeWire_FOUND "Required for pipewire screencast plugin")
+add_feature_info(PipeWire KPipeWire_FOUND "Required for pipewire screencast plugin")
 find_package(PlasmaWaylandProtocols 1.5.0)
 
-if(PipeWire_FOUND AND PlasmaWaylandProtocols_FOUND)
+if(KPipeWire_FOUND AND PlasmaWaylandProtocols_FOUND)
     find_package(KF5Wayland ${KF5_MIN_VERSION})
     find_package(QtWaylandScanner REQUIRED)
     find_package(Qt5WaylandClient)
     find_package(Qt5XkbCommonSupport)
     find_package(Wayland REQUIRED COMPONENTS Client)
-endif()
-
-find_package(gbm)
-set_package_properties(gbm PROPERTIES
-    TYPE OPTIONAL
-    PURPOSE "Required for dma-buf support in pipewire screencast plugin."
-)
-
-find_package(EGL)
-set_package_properties(EGL PROPERTIES
-    TYPE OPTIONAL
-    PURPOSE "Required for dma-buf support in pipewire screencast plugin."
-)
-
-find_package(epoxy)
-set_package_properties(epoxy PROPERTIES DESCRIPTION "libepoxy"
-    URL "https://github.com/anholt/libepoxy"
-    TYPE OPTIONAL
-    PURPOSE "Required for dma-buf support in pipewire screencast plugin."
-)
-
-if(EGL_FOUND AND gbm_FOUND AND epoxy_FOUND)
-  set (HAVE_DMA_BUF TRUE)
-else()
-  set (HAVE_DMA_BUF FALSE)
 endif()
 
 ecm_setup_version(PROJECT
