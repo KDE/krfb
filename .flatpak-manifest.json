@@ -1,0 +1,90 @@
+{
+    "id": "org.kde.krfb",
+    "branch": "master",
+    "runtime": "org.kde.Platform",
+    "runtime-version": "5.15-22.08",
+    "sdk": "org.kde.Sdk",
+    "command": "krfb",
+    "tags": ["nightly"],
+    "desktop-file-name-suffix": " (Nightly)",
+    "finish-args": ["--share=ipc", "--socket=x11", "--socket=wayland" ],
+
+    "modules": [
+        {
+            "name": "libgpg-error",
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "http://mirrors.dotsrc.org/gnupg/libgpg-error/libgpg-error-1.47.tar.bz2",
+                    "sha256": "9e3c670966b96ecc746c28c2c419541e3bcb787d1a73930f5e5f5e1bcbbb9bdb",
+                    "x-checker-data": {
+                        "type": "anitya",
+                        "project-id": 1628,
+                        "stable-only": true,
+                        "url-template": "http://mirrors.dotsrc.org/gnupg/libgpg-error/libgpg-error-${version}.tar.bz2"
+                    }
+                }
+            ],
+            "cleanup": [ "/lib/libgpg-error.la" ]
+        },
+        {
+            "name": "fig2dev",
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://sourceforge.net/projects/mcj/files/xfig%2Bfig2dev-3.2.8b.tar.xz",
+                    "sha256": "5f44c680686d9f5a5ad8ab8decabff1633f5b932fe7a5598c650c034553c69ec",
+                    "x-checker-data": {
+                        "type": "anitya",
+                        "project-id": 11462,
+                        "stable-only": true,
+                        "url-template": "https://downloads.sourceforge.net/mcj/fig2dv-${version}.tar.xz"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "libgcrypt",
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "https://dev.gnupg.org/source/libgcrypt.git",
+                    "tag": "libgcrypt-1.10.2",
+                    "commit": "1c5cbacf3d88dded5063e959ee68678ff7d0fa56",
+                    "x-checker-data": {
+                        "type": "anitya",
+                        "project-id": 1623,
+                        "stable-only": true,
+                        "tag-template": "libgcrypt-$version"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "libvncserver",
+            "buildsystem": "cmake-ninja",
+            "sources": [
+                { "type": "archive", "url": "https://github.com/LibVNC/libvncserver/archive/refs/tags/LibVNCServer-0.9.14.tar.gz", "sha256": "83104e4f7e28b02f8bf6b010d69b626fae591f887e949816305daebae527c9a5" }
+            ]
+        },
+        {
+            "name": "icon",
+            "buildsystem": "simple",
+            "build-commands": [
+                "mkdir -p /app/share/icons/hicolor/32x32/apps/",
+                "install -D /usr/share/icons/breeze/apps/48/krfb.svg /app/share/icons/hicolor/32x32/apps/"
+            ]
+        },
+        {
+            "name": "krfb",
+            "buildsystem": "cmake-ninja",
+            "sources": [
+                {
+                    "type": "dir",
+                    "path": "."
+                }
+            ]
+        }
+
+    ]
+}
