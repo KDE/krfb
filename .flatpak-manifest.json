@@ -80,8 +80,8 @@
             "buildsystem": "cmake-ninja",
             "sources": [
                 {
-                    "type": "dir",
-                    "path": "."
+                    "type": "git",
+                    "url": "https://invent.kde.org/network/krfb.git"
                 }
             ]
         }
