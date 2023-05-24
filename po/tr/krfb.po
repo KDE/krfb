@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: kdenetwork-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-07-18 00:45+0000\n"
-"PO-Revision-Date: 2023-01-21 15:31+0300\n"
+"PO-Revision-Date: 2023-05-24 01:01+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -25,7 +25,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 22.12.1\n"
+"X-Generator: Lokalize 23.07.70\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -90,7 +90,7 @@ msgstr "Bu, krfb uygulamasının dinleyeceği kapı numarasıdır."
 #: krfb.kcfg:23 ui/configtcp.ui:16
 #, kde-format
 msgid "Announce the service on the local network"
-msgstr "Servisi yerel ağa duyur"
+msgstr "Hizmeti yerel ağa duyur"
 
 #. i18n: ectx: label, entry (noWallet), group (Security)
 #: krfb.kcfg:29
