@@ -74,7 +74,7 @@ msgstr "Iniciar minimizado."
 #: krfb.kcfg:15
 #, kde-format
 msgid "Use the default port for VNC (5900)"
-msgstr "Empregar o porto predeterminado para VNC (5900)"
+msgstr "Usar o porto predeterminado para VNC (5900)"
 
 #. i18n: ectx: label, entry (port), group (TCP)
 #: krfb.kcfg:19
@@ -311,7 +311,7 @@ msgstr "Compatibilidade cos tubos de Telepathy."
 #: main.cpp:126
 #, kde-format
 msgid "Do not show the invitations management dialog at startup"
-msgstr "Non mostrar o diálogo de xestión dos convites ao comezo"
+msgstr "Non amosar o diálogo de xestión dos convites ao comezo"
 
 #: main.cpp:148
 #, kde-format
@@ -403,7 +403,7 @@ msgstr "Rede"
 #: mainwindow.cpp:250
 #, kde-format
 msgid "Security"
-msgstr "Seguranza"
+msgstr "Seguridade"
 
 #: mainwindow.cpp:251
 #, kde-format
@@ -476,7 +476,7 @@ msgstr ""
 "<html><head/><body> <p>Ao usar x11 debería preferirse o complemento <span "
 "style=\" font-weight:600;\">xcb</span>, porque ten un mellor rendemento.<br/"
 "> O complemento <span style=\" font-weight:600;\">qt</span> é unha "
-"alternativa de seguranza, se por algún motivo non funcionan outros "
+"alternativa de seguridade, se por algún motivo non funcionan outros "
 "complementos. Pero é moi lento.</p> </body></html>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_allowDesktopControl)
@@ -495,7 +495,7 @@ msgstr "Non almacenar os contrasinais usando a carteira de KDE"
 #: ui/configtcp.ui:26
 #, kde-format
 msgid "Use default port"
-msgstr "Empregar o porto predeterminado"
+msgstr "Usar o porto predeterminado"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: ui/configtcp.ui:50
