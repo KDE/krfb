@@ -6,11 +6,10 @@
 
 #include "screencasting.h"
 #include "qwayland-zkde-screencast-unstable-v1.h"
-#include <KWayland/Client/output.h>
-#include <KWayland/Client/plasmawindowmanagement.h>
 #include <KWayland/Client/registry.h>
 #include <QDebug>
 #include <QRect>
+#include <QPointer>
 
 using namespace KWayland::Client;
 
@@ -95,28 +94,6 @@ Screencasting::Screencasting(Registry *registry, int id, int version, QObject *p
 }
 
 Screencasting::~Screencasting() = default;
-
-ScreencastingStream *Screencasting::createOutputStream(Output *output, CursorMode mode)
-{
-    auto stream = new ScreencastingStream(this);
-    stream->setObjectName(output->model());
-    stream->d->init(d->stream_output(*output, mode));
-    return stream;
-}
-
-ScreencastingStream *Screencasting::createWindowStream(PlasmaWindow *window, CursorMode mode)
-{
-    auto stream = createWindowStream(QString::fromUtf8(window->uuid()), mode);
-    stream->setObjectName(window->appId());
-    return stream;
-}
-
-ScreencastingStream *Screencasting::createWindowStream(const QString &uuid, CursorMode mode)
-{
-    auto stream = new ScreencastingStream(this);
-    stream->d->init(d->stream_window(uuid, mode));
-    return stream;
-}
 
 ScreencastingStream * Screencasting::createVirtualMonitorStream(const QString& name, const QSize& resolution, qreal dpr, Screencasting::CursorMode mode)
 {
