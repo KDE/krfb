@@ -404,7 +404,7 @@ msgstr "화면 캡처"
 #: mainwindow.cpp:256
 #, kde-format
 msgid "To apply framebuffer plugin setting, you need to restart the program."
-msgstr "프레임버퍼 플러그인 설정을 적용하려면 프로그램을 다시 시작해야 합니다."
+msgstr "프레임버퍼 플러그인 설정을 적용하려면 앱을 다시 시작해야 합니다."
 
 #: rfbservermanager.cpp:229
 #, kde-format
