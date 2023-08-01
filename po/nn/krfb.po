@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: krfb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-07-18 00:45+0000\n"
-"PO-Revision-Date: 2023-07-30 21:54+0200\n"
+"PO-Revision-Date: 2023-07-31 21:03+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
 "Language: nn\n"
@@ -119,17 +119,17 @@ msgstr "Føretrekt programtillegg for biletbuffer"
 #: main-virtualmonitor.cpp:49
 #, kde-format
 msgid "Creating a Virtual Monitor from %1"
-msgstr ""
+msgstr "Lagar virtuell avlyttar frå %1"
 
 #: main-virtualmonitor.cpp:80
 #, kde-format
 msgid "Remote Virtual Monitor"
-msgstr ""
+msgstr "Virtuell skjerm for ekstern ressurs"
 
 #: main-virtualmonitor.cpp:82
 #, kde-format
 msgid "Offer a Virtual Monitor that can be accessed remotely"
-msgstr ""
+msgstr "Tilbyr ein virtuell skjerm ein kan få tilgang til eksternt"
 
 #: main-virtualmonitor.cpp:84 main.cpp:98
 #, kde-format
@@ -153,7 +153,7 @@ msgstr ""
 #: main-virtualmonitor.cpp:91
 #, kde-format
 msgid "Virtual Monitor implementation"
-msgstr ""
+msgstr "Implementasjon av virtuell skjerm"
 
 #: main-virtualmonitor.cpp:92 main.cpp:108
 #, kde-format
@@ -223,7 +223,7 @@ msgstr "Opphavlege VNC-kodarar og protokollutforming"
 #: main-virtualmonitor.cpp:108
 #, kde-format
 msgid "Logical resolution of the new monitor"
-msgstr ""
+msgstr "Logisk oppløysing på ny skjerm"
 
 #: main-virtualmonitor.cpp:108
 #, kde-format
@@ -233,7 +233,7 @@ msgstr "oppløysing"
 #: main-virtualmonitor.cpp:110
 #, kde-format
 msgid "Name of the monitor"
-msgstr "Namnet på skjemaet"
+msgstr "Namnet på skjermen"
 
 #: main-virtualmonitor.cpp:110
 #, kde-format
@@ -243,7 +243,7 @@ msgstr "namn"
 #: main-virtualmonitor.cpp:112
 #, kde-format
 msgid "Password for the client to connect to it"
-msgstr ""
+msgstr "Passord for tilkopling frå klienten"
 
 #: main-virtualmonitor.cpp:112
 #, kde-format
@@ -253,22 +253,22 @@ msgstr "passord"
 #: main-virtualmonitor.cpp:114
 #, kde-format
 msgid "The device-pixel-ratio of the device, the scaling factor"
-msgstr ""
+msgstr "Einingspiksel-forholdet til eininga – skaleringsfaktor"
 
 #: main-virtualmonitor.cpp:114
 #, kde-format
 msgid "dpr"
-msgstr ""
+msgstr "dpr"
 
 #: main-virtualmonitor.cpp:116
 #, kde-format
 msgid "The port we will be listening to"
-msgstr ""
+msgstr "Porten me skal lytta til"
 
 #: main-virtualmonitor.cpp:116
 #, kde-format
 msgid "number"
-msgstr ""
+msgstr "tal"
 
 #: main.cpp:49
 #, kde-format
