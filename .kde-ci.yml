@@ -17,6 +17,6 @@ Dependencies:
     'frameworks/kwidgetsaddons': '@stable'
     'frameworks/kwindowsystem': '@stable'
     'frameworks/kxmlgui': '@stable'
-    'frameworks/kwayland': '@stable'
     'libraries/plasma-wayland-protocols': '@latest' # can be switched to @stable when 1.5.0 is released
+    'plasma/kwayland': '@stable'
     'plasma/kpipewire': '@latest'
