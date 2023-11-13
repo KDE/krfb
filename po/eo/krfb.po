@@ -1,12 +1,15 @@
 # Translation of krfb into esperanto.
+# Copyright (C) 2009 Free Software Foundation, Inc.
+# This file is distributed under the same license as the krfb package.
 # Axel Rousseau <axel@esperanto-jeunes.org>, 2009.
+# Oliver Kellogg <okellogg@users.sourceforge.net>, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: krfb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-05 12:32+0000\n"
-"PO-Revision-Date: 2023-03-25 16:19+0100\n"
+"PO-Revision-Date: 2023-11-12 22:59+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -19,113 +22,113 @@ msgstr ""
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Axel Rousseau"
+msgstr "Axel Rousseau,Oliver Kellogg"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "axel@esperanto-jeunes.org"
+msgstr "axel@esperanto-jeunes.org,okellogg@users.sourceforge.net"
 
 #: connectiondialog.cpp:39
 #, kde-format
 msgid "New Connection"
-msgstr ""
+msgstr "Nova Konekto"
 
 #: connectiondialog.cpp:61
 #, kde-format
 msgid "Accept Connection"
-msgstr ""
+msgstr "Akcepti Konekton"
 
 #: connectiondialog.cpp:65
 #, kde-format
 msgid "Refuse Connection"
-msgstr ""
+msgstr "Rifuzi Konekton"
 
 #: invitationsrfbclient.cpp:69
 #, kde-format
 msgid "Accepted connection from %1"
-msgstr ""
+msgstr "Akceptita konekto de %1"
 
 #: invitationsrfbclient.cpp:75
 #, kde-format
 msgid "Received connection from %1, on hold (waiting for confirmation)"
-msgstr ""
+msgstr "Ricevita konekto de %1, en atendo (atendante konfirmon)"
 
 #: invitationsrfbserver.cpp:55
 #, kde-format
 msgid "%1@%2 (shared desktop)"
-msgstr ""
+msgstr "%1@%2 (komunata labortablo)"
 
 #. i18n: ectx: label, entry (startMinimized), group (MainWindow)
 #: krfb.kcfg:9
 #, kde-format
 msgid "Start minimized"
-msgstr ""
+msgstr "Komenci minimumigite"
 
 #. i18n: ectx: label, entry (useDefaultPort), group (TCP)
 #: krfb.kcfg:15
 #, kde-format
 msgid "Use the default port for VNC (5900)"
-msgstr ""
+msgstr "Uzi la defaŭltan pordon por VNC (5900)"
 
 #. i18n: ectx: label, entry (port), group (TCP)
 #: krfb.kcfg:19
 #, kde-format
 msgid "This is the port on which krfb will listen."
-msgstr ""
+msgstr "Ĉi tiu estas la pordo sur kiu krfb aŭskultos."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_publishService)
 #. i18n: ectx: label, entry (publishService), group (TCP)
 #: krfb.kcfg:23 ui/configtcp.ui:16
 #, kde-format
 msgid "Announce the service on the local network"
-msgstr ""
+msgstr "Anonci la servon en la loka reto"
 
 #. i18n: ectx: label, entry (noWallet), group (Security)
 #: krfb.kcfg:29
 #, kde-format
 msgid "Do not store passwords in KWallet"
-msgstr ""
+msgstr "Ne konservi pasvortojn en KWallet"
 
 #. i18n: ectx: label, entry (allowDesktopControl), group (Security)
 #: krfb.kcfg:33
 #, kde-format
 msgid "Allow remote connections to manage the desktop."
-msgstr ""
+msgstr "Permesi forajn konektojn administri la labortablon."
 
 #. i18n: ectx: label, entry (allowUnattendedAccess), group (Security)
 #: krfb.kcfg:37
 #, kde-format
 msgid "Allow connections without an invitation."
-msgstr ""
+msgstr "Permesi konektojn sen invito."
 
 #. i18n: ectx: label, entry (unattendedAccessPassword), group (Security)
 #. i18n: ectx: label, entry (desktopSharingPassword), group (Security)
 #: krfb.kcfg:41 krfb.kcfg:44
 #, kde-format
 msgid "Password for uninvited connections."
-msgstr ""
+msgstr "Pasvorto por neinvititaj konektoj."
 
 #. i18n: ectx: label, entry (preferredFrameBufferPlugin), group (FrameBuffer)
 #: krfb.kcfg:49
 #, kde-format
 msgid "Preferred Frame Buffer Plugin"
-msgstr ""
+msgstr "Preferata Frame Buffer Kromaĵo"
 
 #: main-virtualmonitor.cpp:49
 #, kde-format
 msgid "Creating a Virtual Monitor from %1"
-msgstr ""
+msgstr "Kreante Virtualan Monitoron de %1"
 
 #: main-virtualmonitor.cpp:80
 #, kde-format
 msgid "Remote Virtual Monitor"
-msgstr ""
+msgstr "Fora Virtuala Monitoro"
 
 #: main-virtualmonitor.cpp:82
 #, kde-format
 msgid "Offer a Virtual Monitor that can be accessed remotely"
-msgstr ""
+msgstr "Proponi Virtualan Monitoron alireblan malproksime"
 
 #: main-virtualmonitor.cpp:84 main.cpp:98
 #, kde-format
@@ -138,11 +141,18 @@ msgid ""
 "(c) 2000, Tridia Corporation\n"
 "(c) 1999, AT&T Laboratories Boston\n"
 msgstr ""
+"(c) 2009-2010, Collabora Ltd.\n"
+"(c) 2007, Alessandro Praduroux\n"
+"(c) 2001-2003, Tim Jansen\n"
+"(c) 2001, Johannes E. Schindelin\n"
+"(c) 2000-2001, Const Kaplinsky\n"
+"(c) 2000, Tridia Corporation\n"
+"(c) 1999, AT&T Laboratories Boston\n"
 
 #: main-virtualmonitor.cpp:91
 #, kde-format
 msgid "Virtual Monitor implementation"
-msgstr ""
+msgstr "Realigo de Virtuala Monitoro"
 
 #: main-virtualmonitor.cpp:92 main.cpp:108
 #, kde-format
@@ -157,7 +167,7 @@ msgstr "Alessandro Praduroux"
 #: main-virtualmonitor.cpp:93 main.cpp:111
 #, kde-format
 msgid "KDE4 porting"
-msgstr ""
+msgstr "KDE4-portado"
 
 #: main-virtualmonitor.cpp:94 main.cpp:112
 #, kde-format
@@ -187,77 +197,77 @@ msgstr "Const Kaplinsky"
 #: main-virtualmonitor.cpp:98 main.cpp:116
 #, kde-format
 msgid "TightVNC encoder"
-msgstr ""
+msgstr "TightVNC-kodilo"
 
 #: main-virtualmonitor.cpp:99 main.cpp:117
 #, kde-format
 msgid "Tridia Corporation"
-msgstr ""
+msgstr "Tridia Corporation"
 
 #: main-virtualmonitor.cpp:100 main.cpp:118
 #, kde-format
 msgid "ZLib encoder"
-msgstr ""
+msgstr "ZLib-kodilo"
 
 #: main-virtualmonitor.cpp:101 main.cpp:119
 #, kde-format
 msgid "AT&T Laboratories Boston"
-msgstr ""
+msgstr "AT&T Laboratorioj Boston"
 
 #: main-virtualmonitor.cpp:102 main.cpp:120
 #, kde-format
 msgid "original VNC encoders and protocol design"
-msgstr ""
+msgstr "originalaj VNC-kodigiloj kaj protokolo-dezajno"
 
 #: main-virtualmonitor.cpp:108
 #, kde-format
 msgid "Logical resolution of the new monitor"
-msgstr ""
+msgstr "Logika rezolucio de la nova monitoro"
 
 #: main-virtualmonitor.cpp:108
 #, kde-format
 msgid "resolution"
-msgstr ""
+msgstr "rezolucio"
 
 #: main-virtualmonitor.cpp:110
 #, kde-format
 msgid "Name of the monitor"
-msgstr ""
+msgstr "Nomo de la monitoro"
 
 #: main-virtualmonitor.cpp:110
 #, kde-format
 msgid "name"
-msgstr ""
+msgstr "nomo"
 
 #: main-virtualmonitor.cpp:112
 #, kde-format
 msgid "Password for the client to connect to it"
-msgstr ""
+msgstr "Pasvorto por la kliento por konekti al ĝi"
 
 #: main-virtualmonitor.cpp:112
 #, kde-format
 msgid "password"
-msgstr ""
+msgstr "Pasvorto"
 
 #: main-virtualmonitor.cpp:114
 #, kde-format
 msgid "The device-pixel-ratio of the device, the scaling factor"
-msgstr ""
+msgstr "La aparato-piksela-proporcio de la aparato, la skala faktoro"
 
 #: main-virtualmonitor.cpp:114
 #, kde-format
 msgid "dpr"
-msgstr ""
+msgstr "dpr"
 
 #: main-virtualmonitor.cpp:116
 #, kde-format
 msgid "The port we will be listening to"
-msgstr ""
+msgstr "La pordo, kiun ni aŭskultos"
 
 #: main-virtualmonitor.cpp:116
 #, kde-format
 msgid "number"
-msgstr ""
+msgstr "nombro"
 
 #: main.cpp:49
 #, kde-format
@@ -265,11 +275,13 @@ msgid ""
 "Your X11 Server does not support the required XTest extension version 2.2. "
 "Sharing your desktop is not possible."
 msgstr ""
+"Via X11 Servilo ne subtenas la bezonatan XTest-etendan version 2.2. "
+"Kunhavigi vian labortablon ne eblas."
 
 #: main.cpp:51 main.cpp:150
 #, kde-format
 msgid "Desktop Sharing Error"
-msgstr ""
+msgstr "Eraro pri Labortabla Kundivido"
 
 #: main.cpp:94
 #, kde-format
@@ -279,22 +291,22 @@ msgstr "Tabula komunigado"
 #: main.cpp:96
 #, kde-format
 msgid "VNC-compatible server to share desktops"
-msgstr ""
+msgstr "VNC-kongrua servilo por kunhavi labortablojn"
 
 #: main.cpp:105
 #, kde-format
 msgid "George Goldberg"
-msgstr ""
+msgstr "Georgo Goldberg"
 
 #: main.cpp:106
 #, kde-format
 msgid "Telepathy tubes support"
-msgstr ""
+msgstr "Telepatiaj tuboj subtenas"
 
 #: main.cpp:126
 #, kde-format
 msgid "Do not show the invitations management dialog at startup"
-msgstr ""
+msgstr "Ne montri la invit-administran dialogon ĉe ekfunkciigo"
 
 #: main.cpp:148
 #, kde-format
@@ -302,16 +314,18 @@ msgid ""
 "Desktop Sharing is not running under an X11 Server or Wayland.\n"
 "Other display servers are currently not supported."
 msgstr ""
+"Labortabla Kundivido ne funkcias sub X11-Servilo aŭ Wayland.\n"
+"Aliaj ekranserviloj nuntempe ne estas subtenataj."
 
 #: mainwindow.cpp:52
 #, kde-format
 msgid "Storing passwords in config file is insecure!"
-msgstr ""
+msgstr "Konservi pasvortojn en agorda dosiero estas nesekura!"
 
 #: mainwindow.cpp:189
 #, kde-format
 msgid "Enter a new password for Unattended Access"
-msgstr ""
+msgstr "Enigi novan pasvorton por Senasista Aliro"
 
 #: mainwindow.cpp:200
 #, kde-format
@@ -319,6 +333,8 @@ msgid ""
 "Failed to start the krfb server. Desktop sharing will not work. Try setting "
 "another port in the settings and restart krfb."
 msgstr ""
+"Malsukcesis lanĉi la krfb-servilon. Labortabla kunhavigo ne funkcios. Provu "
+"agordi alian pordon en la agordoj kaj rekomencu krfb."
 
 #. i18n: ectx: property (whatsThis), widget (QLabel, titleLabel)
 #. i18n: ectx: property (text), widget (QLabel, titleLabel)
@@ -327,7 +343,7 @@ msgstr ""
 #: ui/mainwidget.ui:86 ui/mainwidget.ui:114
 #, kde-format
 msgid "KDE Desktop Sharing"
-msgstr ""
+msgstr "KDE Labortabla Kunhavigo"
 
 #: mainwindow.cpp:224
 #, kde-format
@@ -344,6 +360,17 @@ msgid ""
 "If your computer is behind a firewall it may have a different address or be "
 "unreachable for other computers."
 msgstr ""
+"Ĉi tiu kampo enhavas la adreson de via komputilo kaj la pordnumeron, "
+"apartigitajn per dupunkto.\n"
+"\n"
+"La adreso estas nur sugesto - vi povas uzi ajnan adreson kiu povas atingi "
+"vian komputilon.\n"
+"\n"
+"La labortabla kundivido provas diveni vian adreson de via reto-agordo, sed "
+"ne ĉiam sukcesas fari tion.\n"
+"\n"
+"Se via komputilo estas malantaŭ fajroŝirmilo ĝi povas havi malsaman adreson "
+"aŭ esti neatingebla por aliaj komputiloj."
 
 #: mainwindow.cpp:231
 #, kde-format
@@ -355,6 +382,12 @@ msgid ""
 "password, desktop sharing access will be granted without explicit "
 "confirmation."
 msgstr ""
+"Ĉiu fora uzanto kun normala labortabla kundivida pasvorto devos esti "
+"aŭtentikigita.\n"
+"\n"
+"Se neakompanata aliro estas ŝaltita, kaj la fora uzanto provizas neatentan "
+"reĝiman pasvorton, labortabla kunhava aliro estos donita sen eksplicita "
+"konfirmo."
 
 #: mainwindow.cpp:249
 #, kde-format
@@ -369,22 +402,22 @@ msgstr "Sekureco"
 #: mainwindow.cpp:251
 #, kde-format
 msgid "Screen capture"
-msgstr ""
+msgstr "Ekrankapto"
 
 #: mainwindow.cpp:256
 #, kde-format
 msgid "To apply framebuffer plugin setting, you need to restart the program."
-msgstr ""
+msgstr "Por apliki framebuffer kromprogramon, vi devas rekomenci la programon."
 
 #: rfbservermanager.cpp:229
 #, kde-format
 msgid "The remote user %1 is now connected."
-msgstr ""
+msgstr "La fora uzanto %1 nun estas konektita."
 
 #: rfbservermanager.cpp:243
 #, kde-format
 msgid "The remote user %1 disconnected."
-msgstr ""
+msgstr "La fora uzanto %1 malkonektis."
 
 #: trayicon.cpp:56
 #, kde-format
@@ -394,34 +427,34 @@ msgstr "Malkonekti"
 #: trayicon.cpp:62
 #, kde-format
 msgid "Enable Remote Control"
-msgstr ""
+msgstr "Ebligi Teleregilon"
 
 #: trayicon.cpp:101 trayicon.cpp:133
 #, kde-format
 msgid "Desktop Sharing - disconnected"
-msgstr ""
+msgstr "Labortabla Kunhavigo - malkonektita"
 
 #: trayicon.cpp:117 trayicon.cpp:137
 #, kde-format
 msgid "Desktop Sharing - connected with %1"
-msgstr ""
+msgstr "Kunhavigo de labortablo - konektita kun %1"
 
 #: trayicon.cpp:120
 #, kde-format
 msgid "Desktop Sharing - connected"
-msgstr ""
+msgstr "Labortabla Kundivido - konektita"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, Framebuffer)
 #: ui/configframebuffer.ui:14
 #, kde-format
 msgid "Framebuffer"
-msgstr ""
+msgstr "Framebuffer"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: ui/configframebuffer.ui:22
 #, kde-format
 msgid "Preferred frameb&uffer plugin:"
-msgstr ""
+msgstr "Preferata aldonaĵo Frameb&ofer:"
 
 #. i18n: ectx: property (text), widget (QLabel, helpText)
 #: ui/configframebuffer.ui:47
@@ -432,30 +465,34 @@ msgid ""
 "style=\" font-weight:600;\">qt</span> plugin is a safe fallback, if for some "
 "reason others don't work. But also it is very slow.</p></body></html>"
 msgstr ""
+"<html><head/><body><p>Kiam oni uzas x11, la kromprogramo <span style=\" font-"
+"weight:600;\">xcb</span> estu preferinda, ĉar ĝi estas pli efika.<br /><span "
+"style=\" font-weight:600;\">qt</span> kromaĵo estas sekura rezervilo, se ial "
+"aliaj ne funkcias. Sed ankaŭ ĝi estas tre malrapida.</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_allowDesktopControl)
 #: ui/configsecurity.ui:17
 #, kde-format
 msgid "Allow remote connections to control your desktop"
-msgstr ""
+msgstr "Permesi forajn konektojn regi vian labortablon"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_noWallet)
 #: ui/configsecurity.ui:27
 #, kde-format
 msgid "Do not store passwords using KDE wallet"
-msgstr ""
+msgstr "Ne konservi pasvortojn per KDE-monujo"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_useDefaultPort)
 #: ui/configtcp.ui:26
 #, kde-format
 msgid "Use default port"
-msgstr ""
+msgstr "Uzi defaŭltan pordon"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: ui/configtcp.ui:50
 #, kde-format
 msgid "Listening port:"
-msgstr ""
+msgstr "Aŭskultanta pordo:"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel5)
 #: ui/connectionwidget.ui:47
@@ -470,12 +507,14 @@ msgid ""
 "Somebody is requesting a connection to your computer. Granting this will "
 "allow the remote user to watch your desktop. "
 msgstr ""
+"Iu petas konekton al via komputilo. Doni ĉi tion permesos al la fora uzanto "
+"rigardi vian labortablon."
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel1)
 #: ui/connectionwidget.ui:102
 #, kde-format
 msgid "Remote system:"
-msgstr ""
+msgstr "Fora sistemo:"
 
 #. i18n: ectx: property (text), widget (QLabel, remoteHost)
 #: ui/connectionwidget.ui:118
@@ -492,12 +531,16 @@ msgid ""
 "careful. When the option is disabled the remote user can only watch your "
 "screen."
 msgstr ""
+"Se vi ŝaltas ĉi tiun opcion, la fora uzanto povas enigi klavopremojn kaj uzi "
+"vian musmontrilon. Ĉi tio donas al ili plenan kontrolon super via komputilo, "
+"do atentu. Kiam la opcio estas malŝaltita, la fora uzanto povas nur rigardi "
+"vian ekranon."
 
 #. i18n: ectx: property (text), widget (QCheckBox, cbAllowRemoteControl)
 #: ui/connectionwidget.ui:139
 #, kde-format
 msgid "Allow remote user to &control keyboard and mouse"
-msgstr ""
+msgstr "Permesi al fora uzanto &regi klavaron kaj muson"
 
 #. i18n: ectx: property (text), widget (QLabel, aboutLabel)
 #: ui/mainwidget.ui:117
@@ -506,36 +549,38 @@ msgid ""
 "KDE Desktop Sharing allows you to grant permission to someone at a remote "
 "location for viewing and possibly controlling your desktop."
 msgstr ""
+"KDE Labortabla Kundivido permesas al vi doni permeson al iu en fora loko por "
+"vidi kaj eble kontroli vian labortablon."
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, enableSharingCheckBox)
 #: ui/mainwidget.ui:145
 #, kde-format
 msgid "Starts/Stops Remote Desktop Sharing"
-msgstr ""
+msgstr "Lanĉas/Ĉesigas Malproksiman Labortablan Kunhavigon"
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableSharingCheckBox)
 #: ui/mainwidget.ui:148
 #, kde-format
 msgid "&Enable Desktop Sharing"
-msgstr ""
+msgstr "&Ebligi Labortablan Kundividon"
 
 #. i18n: ectx: property (title), widget (QGroupBox, detailsGroupBox)
 #: ui/mainwidget.ui:170
 #, kde-format
 msgid "Connection Details"
-msgstr ""
+msgstr "Detaloj pri Konekto"
 
 #. i18n: ectx: property (text), widget (QLabel, addressLabel)
 #: ui/mainwidget.ui:193
 #, kde-format
 msgid "&Address"
-msgstr ""
+msgstr "&Adreso"
 
 #. i18n: ectx: property (whatsThis), widget (QToolButton, addressAboutButton)
 #: ui/mainwidget.ui:214
 #, kde-format
 msgid "More about this address"
-msgstr ""
+msgstr "Pli pri ĉi tiu adreso"
 
 #. i18n: ectx: property (text), widget (QToolButton, addressAboutButton)
 #. i18n: ectx: property (text), widget (QToolButton, unattendedAboutButton)
@@ -551,6 +596,8 @@ msgid ""
 "Address required by remote users to connect to your desktop. Click about "
 "button on the right for more info."
 msgstr ""
+"Adreso postulata de foraj uzantoj por konekti al via labortablo. Alklaku pri "
+"la butono dekstre por pliaj informoj."
 
 #. i18n: ectx: property (text), widget (QLabel, addressDisplayLabel)
 #: ui/mainwidget.ui:238
@@ -562,13 +609,13 @@ msgstr "127.0.0.1 : 5900"
 #: ui/mainwidget.ui:269
 #, kde-format
 msgid "&Password"
-msgstr ""
+msgstr "&Pasvorto"
 
 #. i18n: ectx: property (whatsThis), widget (QToolButton, passwordEditButton)
 #: ui/mainwidget.ui:290
 #, kde-format
 msgid "Edit/Save Desktop Sharing Password"
-msgstr ""
+msgstr "Redakti/Konservi labortablan kundividan pasvorton"
 
 #. i18n: ectx: property (text), widget (QToolButton, passwordEditButton)
 #: ui/mainwidget.ui:293
@@ -583,12 +630,14 @@ msgid ""
 "Password required by remote users to connect to your desktop. Click the edit "
 "button on the right to change password."
 msgstr ""
+"Pasvorto postulata de foraj uzantoj por konekti al via labortablo. Alklaku "
+"la redaktan butonon dekstre por ŝanĝi pasvorton."
 
 #. i18n: ectx: property (text), widget (QLabel, passwordDisplayLabel)
 #: ui/mainwidget.ui:314
 #, kde-format
 msgid "TemporaryPassword"
-msgstr ""
+msgstr "Provizora Pasvorto"
 
 #. i18n: ectx: property (whatsThis), widget (QGroupBox, unattendedGroupBox)
 #. i18n: ectx: property (text), widget (QLabel, unattendedAboutLabel)
@@ -598,12 +647,14 @@ msgid ""
 "Unattended Access allows a remote user with the password to gain control to "
 "your desktop without your explicit confirmation."
 msgstr ""
+"Senatenata Aliro permesas al fora uzanto kun la pasvorto akiri kontrolon al "
+"via labortablo sen via eksplicita konfirmo."
 
 #. i18n: ectx: property (title), widget (QGroupBox, unattendedGroupBox)
 #: ui/mainwidget.ui:343
 #, kde-format
 msgid "Unattended Access"
-msgstr ""
+msgstr "Senatenata Aliro"
 
 #. i18n: ectx: property (whatsThis), widget (QLabel, unattendedAboutLabel)
 #: ui/mainwidget.ui:375
@@ -613,12 +664,15 @@ msgid ""
 "your desktop without your explicit confirmation. Click \"About\" button on "
 "right to know more."
 msgstr ""
+"Senatenata Aliro permesas al fora uzanto kun la pasvorto akiri kontrolon al "
+"via labortablo sen via eksplicita konfirmo. Alklaku la butonon \"Pri\" "
+"dekstre por scii pli."
 
 #. i18n: ectx: property (whatsThis), widget (QToolButton, unattendedAboutButton)
 #: ui/mainwidget.ui:394
 #, kde-format
 msgid "Know more about Unattended Access"
-msgstr ""
+msgstr "Ekscii pli pri Senasista Aliro"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, enableUnattendedCheckBox)
 #: ui/mainwidget.ui:437
@@ -627,21 +681,23 @@ msgid ""
 "Starts/Stops unattended access to your desktop. Click on button on right to "
 "change password, and \"About\" button to know more."
 msgstr ""
+"Lanĉas/Ĉesigas neatenditan aliron al via labortablo. Alklaku la butonon "
+"dekstre por ŝanĝi pasvorton, kaj la butonon \"Pri\" por scii pli."
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableUnattendedCheckBox)
 #: ui/mainwidget.ui:440
 #, kde-format
 msgid "Enable &Unattended Access"
-msgstr ""
+msgstr "Ebligi Senasistan Alir&on"
 
 #. i18n: ectx: property (whatsThis), widget (QPushButton, unattendedPasswordButton)
 #: ui/mainwidget.ui:465
 #, kde-format
 msgid "Change password for Unattended Access"
-msgstr ""
+msgstr "Ŝanĝi pasvorton por Senasista Aliro"
 
 #. i18n: ectx: property (text), widget (QPushButton, unattendedPasswordButton)
 #: ui/mainwidget.ui:468
 #, kde-format
 msgid "&Change Unattended Password"
-msgstr ""
+msgstr "&Ŝanĝi Senasistan Pasvorton"
