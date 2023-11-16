@@ -540,10 +540,10 @@ msgid ""
 "careful. When the option is disabled the remote user can only watch your "
 "screen."
 msgstr ""
-"Si activeu esta opció, l'usuari remot podrà utilitzar el teclat i el ratolí. "
-"Açò li donarà el control absolut sobre el vostre ordinador, utilitzeu-ho amb "
-"cura. Quan esta opció està desactivada, l'usuari remot només podrà veure la "
-"vostra pantalla."
+"Si seleccioneu esta opció, l'usuari remot podrà utilitzar el teclat i el "
+"ratolí. Açò li donarà el control absolut sobre el vostre ordinador, "
+"utilitzeu-ho amb cura. Quan esta opció està desseleccionada, l'usuari remot "
+"només podrà veure la vostra pantalla."
 
 #. i18n: ectx: property (text), widget (QCheckBox, cbAllowRemoteControl)
 #: ui/connectionwidget.ui:139
