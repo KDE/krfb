@@ -26,13 +26,14 @@
 #include "krfbdebug.h"
 #include <QTimer>
 #include <QApplication>
-#include <QDesktopWidget>
 #include <QGlobalStatic>
 #include <QHostInfo>
+#include <qpa/qplatformnativeinterface.h>
 
 #include <KLocalizedString>
 #include <KUser>
 #include <KNotification>
+#include <KWindowSystem>
 #include <chrono>
 
 using namespace std::chrono_literals;
@@ -124,7 +125,14 @@ QVariantMap RfbServerManager::s_pluginArgs;
 void RfbServerManager::init()
 {
     //qDebug();
-    d->fb = FrameBufferManager::instance()->frameBuffer(QApplication::desktop()->winId(), s_pluginArgs);
+    WId rootWindow = 0;
+
+    if (KWindowSystem::isPlatformX11()) {
+        QPlatformNativeInterface* native = qApp->platformNativeInterface();
+        rootWindow = reinterpret_cast<WId>(native->nativeResourceForScreen(QByteArrayLiteral("rootwindow"), QGuiApplication::primaryScreen()));
+    }
+
+    d->fb = FrameBufferManager::instance()->frameBuffer(rootWindow, s_pluginArgs);
     d->myCursor = rfbMakeXCursor(19, 19, (char *) cur, (char *) mask);
     d->myCursor->cleanup = false;
     d->desktopName = QStringLiteral("%1@%2 (shared desktop)") //FIXME check if we can use utf8
