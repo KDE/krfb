@@ -22,7 +22,6 @@
 #include "x11events.h"
 
 #include <QApplication>
-#include <QDesktopWidget>
 #include <QGlobalStatic>
 #include <QtGui/private/qtx11extras_p.h>
 
@@ -184,15 +183,7 @@ void X11EventHandler::handleKeyboard(bool down, rfbKeySym keySym)
 void X11EventHandler::handlePointer(int buttonMask, int x, int y)
 {
     if (QX11Info::isPlatformX11()) {
-        QDesktopWidget *desktopWidget = QApplication::desktop();
-
-        int screen = desktopWidget->screenNumber();
-
-        if (screen < 0) {
-            screen = 0;
-        }
-
-        XTestFakeMotionEvent(data->dpy, screen, x, y, CurrentTime);
+        XTestFakeMotionEvent(data->dpy, 0, x, y, CurrentTime);
 
         for (int i = 0; i < 5; i++) {
             if ((data->buttonMask&(1 << i)) != (buttonMask&(1 << i))) {
