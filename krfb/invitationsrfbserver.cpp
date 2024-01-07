@@ -129,7 +129,7 @@ InvitationsRfbServer::InvitationsRfbServer()
 {
     m_desktopPassword = readableRandomString(4) + QLatin1Char('-') + readableRandomString(3);
     m_unattendedPassword = readableRandomString(4) + QLatin1Char('-') + readableRandomString(3);
-    KConfigGroup krfbConfig(KSharedConfig::openConfig(),"Security");
+    KConfigGroup krfbConfig(KSharedConfig::openConfig(),QStringLiteral("Security"));
     m_allowUnattendedAccess = krfbConfig.readEntry(
             "allowUnattendedAccess", QVariant(false)).toBool();
 }
@@ -188,7 +188,7 @@ void InvitationsRfbServer::walletOpened(bool opened)
     } else {
 
         qCDebug(KRFB) << "Could not open KWallet, Falling back to config file";
-        KConfigGroup krfbConfig(KSharedConfig::openConfig(),"Security");
+        KConfigGroup krfbConfig(KSharedConfig::openConfig(),QStringLiteral("Security"));
 
         desktopPassword = KStringHandler::obscure(krfbConfig.readEntry(
                 "desktopPassword", QString()));
@@ -239,7 +239,7 @@ QString InvitationsRfbServer::readableRandomString(int length)
 // one place to deal with all security configuration
 void InvitationsRfbServer::saveSecuritySettings()
 {
-    KConfigGroup secConfigGroup(KSharedConfig::openConfig(), "Security");
+    KConfigGroup secConfigGroup(KSharedConfig::openConfig(), QStringLiteral("Security"));
     secConfigGroup.writeEntry("allowUnattendedAccess", m_allowUnattendedAccess);
     if (KrfbConfig::noWallet()) {
         // save passwords in config file only if not using kwallet integration

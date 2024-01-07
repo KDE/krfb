@@ -264,7 +264,7 @@ void MainWindow::showConfiguration()
             } else {
                 InvitationsRfbServer::instance->openKWallet();
                 // erase stored passwords from krfbconfig file
-                KConfigGroup securityConfigGroup(KSharedConfig::openConfig(), "Security");
+                KConfigGroup securityConfigGroup(KSharedConfig::openConfig(), QStringLiteral("Security"));
                 securityConfigGroup.deleteEntry("desktopPassword");
                 securityConfigGroup.deleteEntry("unattendedPassword");
             }
