@@ -33,8 +33,8 @@
 #include "xdp_dbus_remotedesktop_interface.h"
 #include "krfb_fb_pipewire_debug.h"
 #include "screencasting.h"
-#include <KPipeWire/PipeWireSourceStream>
-#include <KPipeWire/DmaBufHandler>
+#include <PipeWireSourceStream>
+#include <DmaBufHandler>
 
 static const int BYTES_PER_PIXEL = 4;
 static const uint MIN_SUPPORTED_XDP_KDE_SC_VERSION = 1;
