@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krfb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-05 12:32+0000\n"
+"POT-Creation-Date: 2024-01-09 01:32+0000\n"
 "PO-Revision-Date: 2007-09-13 13:45+0545\n"
 "Last-Translator: Ishwor Sharma <sharmabeeshwar@gmail.com>\n"
 "Language-Team: Nepali <info@mpp.org.np>\n"
@@ -420,13 +420,13 @@ msgstr ""
 msgid "To apply framebuffer plugin setting, you need to restart the program."
 msgstr ""
 
-#: rfbservermanager.cpp:229
+#: rfbservermanager.cpp:237
 #, fuzzy, kde-format
 #| msgid "The remote user has closed the connection."
 msgid "The remote user %1 is now connected."
 msgstr "टाढाको प्रयोगकर्ताले जडान बन्द गर्यो ।"
 
-#: rfbservermanager.cpp:243
+#: rfbservermanager.cpp:251
 #, fuzzy, kde-format
 #| msgid "The remote user has closed the connection."
 msgid "The remote user %1 disconnected."

@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krfb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-05 12:32+0000\n"
+"POT-Creation-Date: 2024-01-09 01:32+0000\n"
 "PO-Revision-Date: 2010-05-31 12:11+0000\n"
 "Last-Translator: Sveinn í Felli <sveinki@nett.is>\n"
 "Language-Team: Icelandic <kde-isl@molar.is>\n"
@@ -414,13 +414,13 @@ msgstr ""
 msgid "To apply framebuffer plugin setting, you need to restart the program."
 msgstr ""
 
-#: rfbservermanager.cpp:229
+#: rfbservermanager.cpp:237
 #, fuzzy, kde-format
 #| msgid "The remote user has closed the connection."
 msgid "The remote user %1 is now connected."
 msgstr "Fjarnotandi hefur lokað tengingunni."
 
-#: rfbservermanager.cpp:243
+#: rfbservermanager.cpp:251
 #, fuzzy, kde-format
 #| msgid "The remote user has closed the connection."
 msgid "The remote user %1 disconnected."

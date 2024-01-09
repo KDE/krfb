@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krfb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-05 12:32+0000\n"
+"POT-Creation-Date: 2024-01-09 01:32+0000\n"
 "PO-Revision-Date: 2022-07-05 10:21+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
@@ -429,12 +429,12 @@ msgstr ""
 "Чтобы изменённые параметры модуля буфера экрана вступили в силу, необходимо "
 "перезапустить программу."
 
-#: rfbservermanager.cpp:229
+#: rfbservermanager.cpp:237
 #, kde-format
 msgid "The remote user %1 is now connected."
 msgstr "Удалённый пользователь %1 сейчас подключен."
 
-#: rfbservermanager.cpp:243
+#: rfbservermanager.cpp:251
 #, kde-format
 msgid "The remote user %1 disconnected."
 msgstr "Удалённый пользователь %1 отключен."

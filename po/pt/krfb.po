@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krfb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-05 12:32+0000\n"
+"POT-Creation-Date: 2024-01-09 01:32+0000\n"
 "PO-Revision-Date: 2021-11-08 18:24+0000\n"
 "Last-Translator: José Nuno Pires <zepires@gmail.com>\n"
 "Language-Team: pt <kde-i18n-pt@kde.org>\n"
@@ -412,12 +412,12 @@ msgstr ""
 "Para aplicar a configuração do 'plugin' do 'framebuffer', tem de reiniciar o "
 "programa."
 
-#: rfbservermanager.cpp:229
+#: rfbservermanager.cpp:237
 #, kde-format
 msgid "The remote user %1 is now connected."
 msgstr "O utilizador remoto '%1' está agora ligado."
 
-#: rfbservermanager.cpp:243
+#: rfbservermanager.cpp:251
 #, kde-format
 msgid "The remote user %1 disconnected."
 msgstr "O utilizador remoto '%1' desligou-se."

@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdenetwork-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-05 12:32+0000\n"
+"POT-Creation-Date: 2024-01-09 01:32+0000\n"
 "PO-Revision-Date: 2023-05-24 01:01+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -417,12 +417,12 @@ msgstr ""
 "Framebuffer eklentisi ayarını uygulamak için, programı yeniden başlatmanız "
 "gerekir."
 
-#: rfbservermanager.cpp:229
+#: rfbservermanager.cpp:237
 #, kde-format
 msgid "The remote user %1 is now connected."
 msgstr "Uzaktaki kullanıcı %1 şimdi bağlandı."
 
-#: rfbservermanager.cpp:243
+#: rfbservermanager.cpp:251
 #, kde-format
 msgid "The remote user %1 disconnected."
 msgstr "Uzaktaki kullanıcı %1 ile bağlantı kesildi."

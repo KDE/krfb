@@ -1,6 +1,6 @@
 # translation of krfb.po to Polish
 # translation of krfb.po to
-# Version: $Revision: 1664120 $
+# Version: $Revision: 1669422 $
 # Copyright (C) 2002, 2004, 2005, 2008, 2009 Free Software Foundation, Inc.
 #
 # Krzysztof Lichota <lichota@mimuw.edu.pl>, 2002, 2005.
@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krfb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-05 12:32+0000\n"
+"POT-Creation-Date: 2024-01-09 01:32+0000\n"
 "PO-Revision-Date: 2021-11-13 08:57+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -416,12 +416,12 @@ msgstr ""
 "Aby zastosować ustawienia wtyczki bufora klatek, musisz ponownie uruchomić "
 "program."
 
-#: rfbservermanager.cpp:229
+#: rfbservermanager.cpp:237
 #, kde-format
 msgid "The remote user %1 is now connected."
 msgstr "Od teraz użytkownik zdalny użytkownik %1 jest podłączony."
 
-#: rfbservermanager.cpp:243
+#: rfbservermanager.cpp:251
 #, kde-format
 msgid "The remote user %1 disconnected."
 msgstr "Zdalny użytkownik %1 jest rozłączony."

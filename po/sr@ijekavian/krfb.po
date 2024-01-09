@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krfb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2019-08-11 02:53+0200\n"
+"POT-Creation-Date: 2024-01-09 01:32+0000\n"
 "PO-Revision-Date: 2017-08-21 22:34+0200\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -48,17 +48,17 @@ msgstr "Прихвати везу"
 msgid "Refuse Connection"
 msgstr "Одбиј везу"
 
-#: invitationsrfbclient.cpp:73
+#: invitationsrfbclient.cpp:69
 #, kde-format
 msgid "Accepted connection from %1"
 msgstr "Прихваћена веза са %1"
 
-#: invitationsrfbclient.cpp:79
+#: invitationsrfbclient.cpp:75
 #, kde-format
 msgid "Received connection from %1, on hold (waiting for confirmation)"
 msgstr "Примљена веза са %1, на чекању (чека потврду)"
 
-#: invitationsrfbserver.cpp:47
+#: invitationsrfbserver.cpp:55
 #, kde-format
 msgid "%1@%2 (shared desktop)"
 msgstr "%1@%2 (дијељена површ)"
@@ -119,32 +119,23 @@ msgstr "Лозинка за непозване везе."
 msgid "Preferred Frame Buffer Plugin"
 msgstr "Прикључак жељеног кадробафера"
 
-#: main.cpp:41
+#: main-virtualmonitor.cpp:49
 #, kde-format
-msgid "VNC-compatible server to share desktops"
-msgstr "ВНЦ‑у сагласан сервер за дијељење површи"
-
-#: main.cpp:51
-#, kde-format
-msgid ""
-"Your X11 Server does not support the required XTest extension version 2.2. "
-"Sharing your desktop is not possible."
+msgid "Creating a Virtual Monitor from %1"
 msgstr ""
-"Ваш икс сервер не подржава неопходно проширење Икс‑тест, верзије 2.2. Није "
-"могуће дијелити површ."
 
-#: main.cpp:53 main.cpp:152
+#: main-virtualmonitor.cpp:80
 #, kde-format
-msgid "Desktop Sharing Error"
-msgstr "Грешка у дељењу површи"
+msgid "Remote Virtual Monitor"
+msgstr ""
 
-#: main.cpp:96
+#: main-virtualmonitor.cpp:82
 #, kde-format
-msgid "Desktop Sharing"
-msgstr "Дијељење површи"
+msgid "Offer a Virtual Monitor that can be accessed remotely"
+msgstr ""
 
 # well-spelled: Бостон
-#: main.cpp:100
+#: main-virtualmonitor.cpp:84 main.cpp:98
 #, kde-format
 msgid ""
 "(c) 2009-2010, Collabora Ltd.\n"
@@ -163,106 +154,187 @@ msgstr ""
 "© 2000, компанија Тридија\n"
 "© 1999, лабораторије АТ&Т‑а Бостон\n"
 
-#: main.cpp:107
+#: main-virtualmonitor.cpp:91
 #, kde-format
-msgid "George Goldberg"
-msgstr "Џорџ Голдберг"
+msgid "Virtual Monitor implementation"
+msgstr ""
 
-#: main.cpp:108
-#, kde-format
-msgid "Telepathy tubes support"
-msgstr "Подршка за Телепатијине цеви"
-
-#: main.cpp:110
+#: main-virtualmonitor.cpp:92 main.cpp:108
 #, kde-format
 msgid "George Kiagiadakis"
 msgstr "Георгиос Кјајадакис"
 
-#: main.cpp:113
+#: main-virtualmonitor.cpp:93 main.cpp:111
 #, kde-format
 msgid "Alessandro Praduroux"
 msgstr "Алесандро Прадуру"
 
-#: main.cpp:113
+#: main-virtualmonitor.cpp:93 main.cpp:111
 #, kde-format
 msgid "KDE4 porting"
 msgstr "Пребацивање на КДЕ‑4"
 
-#: main.cpp:114
+#: main-virtualmonitor.cpp:94 main.cpp:112
 #, kde-format
 msgid "Tim Jansen"
 msgstr "Тим Јансен"
 
-#: main.cpp:114
+#: main-virtualmonitor.cpp:94 main.cpp:112
 #, kde-format
 msgid "Original author"
 msgstr "Првобитни аутор"
 
-#: main.cpp:115
+#: main-virtualmonitor.cpp:95 main.cpp:113
 #, kde-format
 msgid "Johannes E. Schindelin"
 msgstr "Јоханес Шинделин"
 
-#: main.cpp:116
+#: main-virtualmonitor.cpp:96 main.cpp:114
 #, kde-format
 msgid "libvncserver"
 msgstr "libvncserver"
 
-#: main.cpp:117
+#: main-virtualmonitor.cpp:97 main.cpp:115
 #, kde-format
 msgid "Const Kaplinsky"
 msgstr "Константин Каплински"
 
-#: main.cpp:118
+#: main-virtualmonitor.cpp:98 main.cpp:116
 #, kde-format
 msgid "TightVNC encoder"
 msgstr "Кодер ТајтВНЦ"
 
-#: main.cpp:119
+#: main-virtualmonitor.cpp:99 main.cpp:117
 #, kde-format
 msgid "Tridia Corporation"
 msgstr "Тридија"
 
-#: main.cpp:120
+#: main-virtualmonitor.cpp:100 main.cpp:118
 #, kde-format
 msgid "ZLib encoder"
 msgstr "Кодер Злиб"
 
 # well-spelled: Бостон
-#: main.cpp:121
+#: main-virtualmonitor.cpp:101 main.cpp:119
 #, kde-format
 msgid "AT&T Laboratories Boston"
 msgstr "АТ&Т Бостон"
 
-#: main.cpp:122
+#: main-virtualmonitor.cpp:102 main.cpp:120
 #, kde-format
 msgid "original VNC encoders and protocol design"
 msgstr "првобитни пројекат ВНЦ кодерâ и протокола"
 
-#: main.cpp:128
+#: main-virtualmonitor.cpp:108
+#, kde-format
+msgid "Logical resolution of the new monitor"
+msgstr ""
+
+#: main-virtualmonitor.cpp:108
+#, kde-format
+msgid "resolution"
+msgstr ""
+
+#: main-virtualmonitor.cpp:110
+#, kde-format
+msgid "Name of the monitor"
+msgstr ""
+
+#: main-virtualmonitor.cpp:110
+#, kde-format
+msgid "name"
+msgstr ""
+
+#: main-virtualmonitor.cpp:112
+#, fuzzy, kde-format
+#| msgid "Password for uninvited connections."
+msgid "Password for the client to connect to it"
+msgstr "Лозинка за непозване везе."
+
+#: main-virtualmonitor.cpp:112
+#, fuzzy, kde-format
+#| msgid "&Password"
+msgid "password"
+msgstr "&Лозинка"
+
+#: main-virtualmonitor.cpp:114
+#, kde-format
+msgid "The device-pixel-ratio of the device, the scaling factor"
+msgstr ""
+
+#: main-virtualmonitor.cpp:114
+#, kde-format
+msgid "dpr"
+msgstr ""
+
+#: main-virtualmonitor.cpp:116
+#, kde-format
+msgid "The port we will be listening to"
+msgstr ""
+
+#: main-virtualmonitor.cpp:116
+#, kde-format
+msgid "number"
+msgstr ""
+
+#: main.cpp:49
+#, kde-format
+msgid ""
+"Your X11 Server does not support the required XTest extension version 2.2. "
+"Sharing your desktop is not possible."
+msgstr ""
+"Ваш икс сервер не подржава неопходно проширење Икс‑тест, верзије 2.2. Није "
+"могуће дијелити површ."
+
+#: main.cpp:51 main.cpp:150
+#, kde-format
+msgid "Desktop Sharing Error"
+msgstr "Грешка у дељењу површи"
+
+#: main.cpp:94
+#, kde-format
+msgid "Desktop Sharing"
+msgstr "Дијељење површи"
+
+#: main.cpp:96
+#, kde-format
+msgid "VNC-compatible server to share desktops"
+msgstr "ВНЦ‑у сагласан сервер за дијељење површи"
+
+#: main.cpp:105
+#, kde-format
+msgid "George Goldberg"
+msgstr "Џорџ Голдберг"
+
+#: main.cpp:106
+#, kde-format
+msgid "Telepathy tubes support"
+msgstr "Подршка за Телепатијине цеви"
+
+#: main.cpp:126
 #, kde-format
 msgid "Do not show the invitations management dialog at startup"
 msgstr "Без дијалога за управљање позивницама при покретању"
 
-#: main.cpp:150
+#: main.cpp:148
 #, kde-format
 msgid ""
 "Desktop Sharing is not running under an X11 Server or Wayland.\n"
 "Other display servers are currently not supported."
 msgstr ""
 
-#: mainwindow.cpp:54
+#: mainwindow.cpp:52
 #, kde-format
 msgid "Storing passwords in config file is insecure!"
 msgstr ""
 
 # >> @title:window
-#: mainwindow.cpp:200
+#: mainwindow.cpp:189
 #, kde-format
 msgid "Enter a new password for Unattended Access"
 msgstr "Нова лозинка за ненадзирани приступ"
 
-#: mainwindow.cpp:211
+#: mainwindow.cpp:200
 #, kde-format
 msgid ""
 "Failed to start the krfb server. Desktop sharing will not work. Try setting "
@@ -271,7 +343,16 @@ msgstr ""
 "Сервер КРФБ‑а не може да се покрене. Дијељење површи неће радити. Покушајте "
 "да промијените порт у поставкама и поново покренете КРФБ."
 
-#: mainwindow.cpp:234
+#. i18n: ectx: property (whatsThis), widget (QLabel, titleLabel)
+#. i18n: ectx: property (text), widget (QLabel, titleLabel)
+#. i18n: ectx: property (whatsThis), widget (QLabel, aboutLabel)
+#: mainwindow.cpp:223 mainwindow.cpp:230 ui/mainwidget.ui:83
+#: ui/mainwidget.ui:86 ui/mainwidget.ui:114
+#, kde-format
+msgid "KDE Desktop Sharing"
+msgstr "КДЕ дијељење површи"
+
+#: mainwindow.cpp:224
 #, kde-format
 msgid ""
 "This field contains the address of your computer and the port number, "
@@ -293,16 +374,7 @@ msgstr ""
 "иза заштитног зида, може имати другачију адресу или бити недоступан другим "
 "рачунарима.</p>"
 
-#. i18n: ectx: property (whatsThis), widget (QLabel, titleLabel)
-#. i18n: ectx: property (text), widget (QLabel, titleLabel)
-#. i18n: ectx: property (whatsThis), widget (QLabel, aboutLabel)
-#: mainwindow.cpp:235 mainwindow.cpp:242 ui/mainwidget.ui:83
-#: ui/mainwidget.ui:86 ui/mainwidget.ui:114
-#, kde-format
-msgid "KDE Desktop Sharing"
-msgstr "КДЕ дијељење површи"
-
-#: mainwindow.cpp:241
+#: mainwindow.cpp:231
 #, kde-format
 msgid ""
 "Any remote user with normal desktop sharing password will have to be "
@@ -319,34 +391,34 @@ msgstr ""
 "ненадзирани режим, приступ за дељење површи биће допуштен без изричите "
 "потврде."
 
-#: mainwindow.cpp:260
+#: mainwindow.cpp:249
 #, kde-format
 msgid "Network"
 msgstr "Мрежа"
 
-#: mainwindow.cpp:261
+#: mainwindow.cpp:250
 #, kde-format
 msgid "Security"
 msgstr "Безбједност"
 
-#: mainwindow.cpp:262
+#: mainwindow.cpp:251
 #, kde-format
 msgid "Screen capture"
 msgstr "Снимање екрана"
 
-#: mainwindow.cpp:267
+#: mainwindow.cpp:256
 #, kde-format
 msgid "To apply framebuffer plugin setting, you need to restart the program."
 msgstr ""
 "Мораћете поново да покренете програм да би се примениле поставке прикључка "
 "кадробафера."
 
-#: rfbservermanager.cpp:226
+#: rfbservermanager.cpp:237
 #, kde-format
 msgid "The remote user %1 is now connected."
 msgstr "Удаљени корисник %1 је сада повезан."
 
-#: rfbservermanager.cpp:240
+#: rfbservermanager.cpp:251
 #, kde-format
 msgid "The remote user %1 disconnected."
 msgstr "Удаљени корисник %1 прекинуо је везу."
