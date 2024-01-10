@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krfb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-09 01:32+0000\n"
+"POT-Creation-Date: 2024-01-10 01:34+0000\n"
 "PO-Revision-Date: 2021-10-31 09:59+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -58,7 +58,7 @@ msgstr "Прийнято з'єднання від %1"
 msgid "Received connection from %1, on hold (waiting for confirmation)"
 msgstr "Отримано з'єднання з %1, очікує на підтвердження"
 
-#: invitationsrfbserver.cpp:55
+#: invitationsrfbserver.cpp:50
 #, kde-format
 msgid "%1@%2 (shared desktop)"
 msgstr "%1@%2 (спільна стільниця)"

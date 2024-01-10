@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krfb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-09 01:32+0000\n"
+"POT-Creation-Date: 2024-01-10 01:34+0000\n"
 "PO-Revision-Date: 2023-02-12 06:06+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -53,7 +53,7 @@ msgstr "%1-დან კავშირი მიღებულია"
 msgid "Received connection from %1, on hold (waiting for confirmation)"
 msgstr "%1-დან მიერთება დაყოვნების რეჟიმშია (ველოდები დასტურს)"
 
-#: invitationsrfbserver.cpp:55
+#: invitationsrfbserver.cpp:50
 #, kde-format
 msgid "%1@%2 (shared desktop)"
 msgstr "%1@%2 (გაზიარებული სამუშაო მაგიდა)"

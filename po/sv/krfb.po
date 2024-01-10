@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krfb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-09 01:32+0000\n"
+"POT-Creation-Date: 2024-01-10 01:34+0000\n"
 "PO-Revision-Date: 2021-10-31 09:18+0100\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -56,7 +56,7 @@ msgstr "Accepterade anslutning från %1"
 msgid "Received connection from %1, on hold (waiting for confirmation)"
 msgstr "Tog emot anslutning från %1, som vilar (i väntan på bekräftelse)"
 
-#: invitationsrfbserver.cpp:55
+#: invitationsrfbserver.cpp:50
 #, kde-format
 msgid "%1@%2 (shared desktop)"
 msgstr "%1@%2 (delat skrivbord)"

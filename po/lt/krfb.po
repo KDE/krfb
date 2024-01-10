@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krfb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-09 01:32+0000\n"
+"POT-Creation-Date: 2024-01-10 01:34+0000\n"
 "PO-Revision-Date: 2015-12-29 21:20+0200\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: lt <kde-i18n-lt@kde.org>\n"
@@ -55,7 +55,7 @@ msgstr "Priimtas ryšys iš %1"
 msgid "Received connection from %1, on hold (waiting for confirmation)"
 msgstr "Gautas prašymas ryšiui iš %1, sulaikyta (laukiama patvirtinimo)"
 
-#: invitationsrfbserver.cpp:55
+#: invitationsrfbserver.cpp:50
 #, kde-format
 msgid "%1@%2 (shared desktop)"
 msgstr "%1@%2 (dalinamas darbalaukis)"

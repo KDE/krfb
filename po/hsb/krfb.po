@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: desktop_kdebase\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-09 01:32+0000\n"
+"POT-Creation-Date: 2024-01-10 01:34+0000\n"
 "PO-Revision-Date: 2008-11-06 22:08+0100\n"
 "Last-Translator: Eduard Werner <edi.werner@gmx.de>\n"
 "Language-Team: en_US <kde-i18n-doc@lists.kde.org>\n"
@@ -53,7 +53,7 @@ msgstr "Zwjazam so ze serverom %1"
 msgid "Received connection from %1, on hold (waiting for confirmation)"
 msgstr ""
 
-#: invitationsrfbserver.cpp:55
+#: invitationsrfbserver.cpp:50
 #, kde-format
 msgid "%1@%2 (shared desktop)"
 msgstr ""

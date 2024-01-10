@@ -73,12 +73,12 @@
 > per a veure o controlar l'escriptori. </para>
 
 <para
->Típicament emprareu el &krfb; junt amb el client <acronym
+>Típicament, emprareu el &krfb; junt amb el client <acronym
 >VNC</acronym
 > del &kde;, el qual és la &krdc;, atès que comparteix moltes de les característiques especials del &krfb;. </para>
 
 <para
->El &krfb; no requereix que inicieu una nova sessió de X -podrà compartir la sessió actual-. Això fa que sigui realment útil quan algú vol ajudar-vos a realitzar alguna tasca. </para>
+>El &krfb; no requereix que inicieu una nova sessió de X -podrà compartir la sessió actual-. Això fa que sigui realment útil quan algú vol ajudar-vos a dur a terme alguna tasca. </para>
 
 <para
 >Si us plau, informeu de qualsevol problema o petició d'una nova característica a la llista de correu del &kde; o d'un error a <ulink url="https://bugs.kde.org"
@@ -107,7 +107,7 @@
 >En el protocol de Frame Buffer remot, l'aplicació que s'executa a la màquina a on l'usuari es troba assegut (que conté la pantalla, el teclat i el punter), s'anomena el client. L'aplicació que s'executa a la màquina a on està localitzat el frame-buffer (en la qual s'executa el sistema de finestres i les aplicacions que l'usuari està controlant en mode remot) s'anomena el servidor. El &krfb; és el servidor del &kde; per al protocol de Frame Buffer remot. La &krdc; és el client del &kde; per al protocol de Frame Buffer remot. </para>
 
 <para
->Aquest ús comporta una raonable quantitat de trànsit en xarxa atès que s'envia una imatge del framebuffer, de manera que el Frame Buffer remot funciona millor sobre enllaços de banda ampla, així com una xarxa d'àrea local. Tot i això és possible utilitzar el &krfb; sobre d'altres enllaços, però el rendiment no serà tan bo. </para>
+>Aquest ús comporta una raonable quantitat de trànsit en xarxa atès que s'envia una imatge del framebuffer, de manera que el Frame Buffer remot funciona millor sobre enllaços de banda ampla, així com una xarxa d'àrea local. Tot i això, és possible utilitzar el &krfb; sobre d'altres enllaços, però el rendiment no serà tan bo. </para>
 
 </chapter>
 
@@ -203,7 +203,7 @@
 >&Alt;<keycap
 >F4</keycap
 ></keycombo
-> el servidor continuarà funcionant, el qual és indicat per una icona a la safata del sistema. Per aturar-lo, utilitzeu <menuchoice
+> el servidor continuarà funcionant, el qual és indicat per una icona a la safata del sistema. Per a aturar-lo, utilitzeu <menuchoice
 ><guimenu
 >Fitxer</guimenu
 ><guimenuitem

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krfb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-09 01:32+0000\n"
+"POT-Creation-Date: 2024-01-10 01:34+0000\n"
 "PO-Revision-Date: 2004-11-23 02:59-0800\n"
 "Last-Translator: Tamil PC <tamilpc@ambalam.com>\n"
 "Language-Team:  <tamilpc@ambalam.com>\n"
@@ -52,7 +52,7 @@ msgstr "%1லிருந்து ஏற்றுக்கொள்ளப்ப
 msgid "Received connection from %1, on hold (waiting for confirmation)"
 msgstr "%1லிருந்து இணைப்பு கிடைத்துள்ளது, உறுதி செய்வதற்காக காத்திருக்கிறீர்கள்"
 
-#: invitationsrfbserver.cpp:55
+#: invitationsrfbserver.cpp:50
 #, kde-format
 msgid "%1@%2 (shared desktop)"
 msgstr "%1@%2 (பணிமேடை பகிர்தல்)"

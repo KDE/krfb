@@ -1,6 +1,6 @@
 # translation of krfb.po to Polish
 # translation of krfb.po to
-# Version: $Revision: 1669422 $
+# Version: $Revision: 1669497 $
 # Copyright (C) 2002, 2004, 2005, 2008, 2009 Free Software Foundation, Inc.
 #
 # Krzysztof Lichota <lichota@mimuw.edu.pl>, 2002, 2005.
@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krfb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-09 01:32+0000\n"
+"POT-Creation-Date: 2024-01-10 01:34+0000\n"
 "PO-Revision-Date: 2021-11-13 08:57+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -59,7 +59,7 @@ msgstr "Zaakceptowano połączenie od %1"
 msgid "Received connection from %1, on hold (waiting for confirmation)"
 msgstr "Otrzymano połączenie z %1, jest wstrzymane (czeka na zatwierdzenie)"
 
-#: invitationsrfbserver.cpp:55
+#: invitationsrfbserver.cpp:50
 #, kde-format
 msgid "%1@%2 (shared desktop)"
 msgstr "%1@%2 (współdzielony pulpit)"

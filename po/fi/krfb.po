@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krfb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-09 01:32+0000\n"
+"POT-Creation-Date: 2024-01-10 01:34+0000\n"
 "PO-Revision-Date: 2021-11-23 16:45+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -63,7 +63,7 @@ msgstr "Hyväksyttiin yhteys osoitteesta %1"
 msgid "Received connection from %1, on hold (waiting for confirmation)"
 msgstr "Saatiin yhteys osoitteesta %1, pidossa (odottaa varmistusta)"
 
-#: invitationsrfbserver.cpp:55
+#: invitationsrfbserver.cpp:50
 #, kde-format
 msgid "%1@%2 (shared desktop)"
 msgstr "%1@%2 (jaettu työpöytä)"

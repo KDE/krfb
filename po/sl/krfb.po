@@ -1,6 +1,6 @@
 # Translation of krfb.po to Slovenian
 # Copyright (C) 2002, 2003, 2004, 2005 Free Software Foundation, Inc.
-# $Id: krfb.po 1669422 2024-01-09 01:59:52Z scripty $
+# $Id: krfb.po 1669497 2024-01-10 02:02:06Z scripty $
 # $Source$
 #
 # Andrej Vernekar <andrej.vernekar@moj.net>, 2002, 2008.
@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krfb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-09 01:32+0000\n"
+"POT-Creation-Date: 2024-01-10 01:34+0000\n"
 "PO-Revision-Date: 2021-10-31 20:21+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -61,7 +61,7 @@ msgstr "Sprejeta povezava od %1"
 msgid "Received connection from %1, on hold (waiting for confirmation)"
 msgstr "Prejeta povezava iz %1, na čakanju (čakanje potrditve)"
 
-#: invitationsrfbserver.cpp:55
+#: invitationsrfbserver.cpp:50
 #, kde-format
 msgid "%1@%2 (shared desktop)"
 msgstr "%1@%2 (namizje v souporabi)"

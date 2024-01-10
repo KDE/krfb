@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krfb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-09 01:32+0000\n"
+"POT-Creation-Date: 2024-01-10 01:34+0000\n"
 "PO-Revision-Date: 2007-08-19 12:41+0330\n"
 "Last-Translator: Nazanin Kazemi <kazemi@itland.ir>\n"
 "Language-Team: Persian <kde-i18n-fa@kde.org>\n"
@@ -53,7 +53,7 @@ msgstr "اتصال ناخوانده از %1 پذیرفته شد."
 msgid "Received connection from %1, on hold (waiting for confirmation)"
 msgstr "اتصال از %1 دریافت شد، منتظر بمانید )در حال انتظار برای تأیید("
 
-#: invitationsrfbserver.cpp:55
+#: invitationsrfbserver.cpp:50
 #, kde-format
 msgid "%1@%2 (shared desktop)"
 msgstr "%1@%2 ) رومیزی مشترک("
