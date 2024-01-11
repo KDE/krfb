@@ -85,7 +85,6 @@ if(KPipeWire_FOUND AND PipeWire_FOUND AND PlasmaWaylandProtocols_FOUND)
     find_package(KWayland REQUIRED)
     find_package(QtWaylandScanner REQUIRED)
     find_package(Qt6WaylandClient)
-    find_package(Qt6XkbCommonSupport)
     find_package(Wayland REQUIRED COMPONENTS Client)
 endif()
 
