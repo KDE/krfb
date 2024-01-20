@@ -74,12 +74,14 @@ find_package(LibVNCServer REQUIRED)
 
 option(DISABLE_PIPEWIRE "Disable PipeWire support." OFF)
 if(NOT DISABLE_PIPEWIRE)
-    find_package(KPipeWire REQUIRED)
+    find_package(KPipeWire CONFIG REQUIRED)
+    pkg_check_modules(PipeWire IMPORTED_TARGET libpipewire-0.3)
+    add_feature_info(PipeWire PipeWire_FOUND "Required for pipewire screencast plugin")
 endif()
-add_feature_info(PipeWire KPipeWire_FOUND "Required for pipewire screencast plugin")
+
 find_package(PlasmaWaylandProtocols 1.5.0)
 
-if(KPipeWire_FOUND AND PlasmaWaylandProtocols_FOUND)
+if(KPipeWire_FOUND AND PipeWire_FOUND AND PlasmaWaylandProtocols_FOUND)
     find_package(KWayland REQUIRED)
     find_package(QtWaylandScanner REQUIRED)
     find_package(Qt6WaylandClient)
