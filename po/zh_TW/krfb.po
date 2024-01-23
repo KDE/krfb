@@ -5,30 +5,31 @@
 # Franklin Weng <franklin@mail.everfocus.com.tw>, 2010, 2013, 2014.
 # Jeff Huang <s8321414@gmail.com>, 2016, 2017.
 # pan93412 <pan93412@gmail.com>, 2019.
+# SPDX-FileCopyrightText: 2024 Kisaragi Hiu <mail@kisaragi-hiu.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: krfb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-10 01:34+0000\n"
-"PO-Revision-Date: 2019-07-09 14:11+0800\n"
-"Last-Translator: pan93412 <pan93412@gmail.com>\n"
-"Language-Team: Chinese <zh-l10n@lists.linux.org.tw>\n"
+"PO-Revision-Date: 2024-01-22 17:25+0900\n"
+"Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
+"Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 19.04.2\n"
+"X-Generator: Lokalize 23.08.4\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Frank Weng (a.k.a. Franklin), Jeff Huang"
+msgstr "Frank Weng (a.k.a. Franklin), Jeff Huang, Kisaragi Hiu"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "franklin@goodhorse.idv.tw, s8321414@gmail.com"
+msgstr "franklin@goodhorse.idv.tw, s8321414@gmail.com, mail@kisaragi-hiu.com"
 
 #: connectiondialog.cpp:39
 #, kde-format
@@ -119,17 +120,17 @@ msgstr "預設的 Frame Buffer 外掛程式"
 #: main-virtualmonitor.cpp:49
 #, kde-format
 msgid "Creating a Virtual Monitor from %1"
-msgstr ""
+msgstr "正在建立來自 %1 的虛擬螢幕"
 
 #: main-virtualmonitor.cpp:80
 #, kde-format
 msgid "Remote Virtual Monitor"
-msgstr ""
+msgstr "遠端虛擬螢幕"
 
 #: main-virtualmonitor.cpp:82
 #, kde-format
 msgid "Offer a Virtual Monitor that can be accessed remotely"
-msgstr ""
+msgstr "提供可以遠端存取的虛擬螢幕"
 
 #: main-virtualmonitor.cpp:84 main.cpp:98
 #, kde-format
@@ -154,7 +155,7 @@ msgstr ""
 #: main-virtualmonitor.cpp:91
 #, kde-format
 msgid "Virtual Monitor implementation"
-msgstr ""
+msgstr "虛擬螢幕實作"
 
 #: main-virtualmonitor.cpp:92 main.cpp:108
 #, kde-format
@@ -224,54 +225,52 @@ msgstr "原始 VNC 編碼器與協定設計"
 #: main-virtualmonitor.cpp:108
 #, kde-format
 msgid "Logical resolution of the new monitor"
-msgstr ""
+msgstr "新螢幕的邏輯解析度"
 
 #: main-virtualmonitor.cpp:108
 #, kde-format
 msgid "resolution"
-msgstr ""
+msgstr "解析度"
 
 #: main-virtualmonitor.cpp:110
 #, kde-format
 msgid "Name of the monitor"
-msgstr ""
+msgstr "螢幕名稱"
 
 #: main-virtualmonitor.cpp:110
 #, kde-format
 msgid "name"
-msgstr ""
+msgstr "名稱"
 
 #: main-virtualmonitor.cpp:112
-#, fuzzy, kde-format
-#| msgid "Password for uninvited connections."
+#, kde-format
 msgid "Password for the client to connect to it"
-msgstr "未被邀請的連線使用的密碼。"
+msgstr "用戶端連線用的密碼"
 
 #: main-virtualmonitor.cpp:112
-#, fuzzy, kde-format
-#| msgid "&Password"
+#, kde-format
 msgid "password"
-msgstr "密碼(&P)"
+msgstr "密碼"
 
 #: main-virtualmonitor.cpp:114
 #, kde-format
 msgid "The device-pixel-ratio of the device, the scaling factor"
-msgstr ""
+msgstr "裝置的像素比例，即縮放比例"
 
 #: main-virtualmonitor.cpp:114
 #, kde-format
 msgid "dpr"
-msgstr ""
+msgstr "dpr"
 
 #: main-virtualmonitor.cpp:116
 #, kde-format
 msgid "The port we will be listening to"
-msgstr ""
+msgstr "我們要監聽的連接埠"
 
 #: main-virtualmonitor.cpp:116
 #, kde-format
 msgid "number"
-msgstr ""
+msgstr "編號"
 
 #: main.cpp:49
 #, kde-format
