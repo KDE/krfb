@@ -76,6 +76,7 @@
   <summary xml:lang="uk">Надайте вашу стільницю у спільне користування з іншим комп'ютером за допомогою VNC</summary>
   <summary xml:lang="x-test">xxShare your desktop to another computer via VNCxx</summary>
   <summary xml:lang="zh-CN">通过 VNC 分享您的桌面到另一台电脑</summary>
+  <summary xml:lang="zh-TW">透過 VNC 將您的桌面分享給另一台電腦</summary>
   <description>
     <p>Krfb Desktop Sharing is a server application that allows you to share your current session with a user on another machine, who can use a VNC client to view or even control the desktop.</p>
     <p xml:lang="ca">El Krfb és una aplicació de servidor que permet compartir la vostra sessió actual amb un usuari en una altra màquina, la qual pot emprar un client VNC per a veure o controlar l'escriptori.</p>
