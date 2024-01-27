@@ -11,31 +11,32 @@
 #
 # tahmar1900 <tahmar1900@gmail.com>, 2006.
 # Elkana Bardugo <ttv200@gmail.com>, 2017. #zanata
+# SPDX-FileCopyrightText: 2024 Yaron Shahrabani <sh.yaron@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: krfb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-10 01:34+0000\n"
-"PO-Revision-Date: 2017-05-16 07:03-0400\n"
-"Last-Translator: Copied by Zanata <copied-by-zanata@zanata.org>\n"
-"Language-Team: hebrew <kde-l10n-he@kde.org>\n"
+"PO-Revision-Date: 2024-01-26 15:27+0200\n"
+"Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
+"Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Zanata 3.9.6\n"
+"X-Generator: Lokalize 23.08.4\n"
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Yoav Bagno"
+msgstr "Yoav Bagno,צוות התרגום של KDE ישראל"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "yoavb@zavit.net.il"
+msgstr "yoavb@zavit.net.il,kde-l10n-he@kde.org"
 
 #: connectiondialog.cpp:39
 #, kde-format
@@ -45,22 +46,22 @@ msgstr "חיבור חדש"
 #: connectiondialog.cpp:61
 #, kde-format
 msgid "Accept Connection"
-msgstr "אשר חיבור"
+msgstr "אישור החיבור"
 
 #: connectiondialog.cpp:65
 #, kde-format
 msgid "Refuse Connection"
-msgstr "סרב לחיבור"
+msgstr "סירוב לחיבור"
 
 #: invitationsrfbclient.cpp:69
-#, fuzzy, kde-format
+#, kde-format
 msgid "Accepted connection from %1"
-msgstr "ההתחברות ללא הזמנה מ-%1 אושרה"
+msgstr "אושר חיבור מצד %1"
 
 #: invitationsrfbclient.cpp:75
 #, kde-format
 msgid "Received connection from %1, on hold (waiting for confirmation)"
-msgstr "נתקבלה התחברות מ-%1, בהמתנה (ממתין לאישור)"
+msgstr "התקבלה התחברות מ־-%1, בהמתנה (לאישור)"
 
 #: invitationsrfbserver.cpp:50
 #, kde-format
@@ -100,9 +101,9 @@ msgstr ""
 
 #. i18n: ectx: label, entry (allowDesktopControl), group (Security)
 #: krfb.kcfg:33
-#, fuzzy, kde-format
+#, kde-format
 msgid "Allow remote connections to manage the desktop."
-msgstr "א&פשר למשתמש המרוחק לשלוט במקלדת ובעכבר"
+msgstr "לאפשר לחיבורים מרוחקים לנהל את שולחן העבודה."
 
 #. i18n: ectx: label, entry (allowUnattendedAccess), group (Security)
 #: krfb.kcfg:37
@@ -113,9 +114,9 @@ msgstr ""
 #. i18n: ectx: label, entry (unattendedAccessPassword), group (Security)
 #. i18n: ectx: label, entry (desktopSharingPassword), group (Security)
 #: krfb.kcfg:41 krfb.kcfg:44
-#, fuzzy, kde-format
+#, kde-format
 msgid "Password for uninvited connections."
-msgstr "ההתחברות ללא הזמנה מ-%1 אושרה"
+msgstr "סיסמה לחיבורים ללא הזמנה."
 
 #. i18n: ectx: label, entry (preferredFrameBufferPlugin), group (FrameBuffer)
 #: krfb.kcfg:49
@@ -158,32 +159,32 @@ msgstr ""
 #: main-virtualmonitor.cpp:92 main.cpp:108
 #, kde-format
 msgid "George Kiagiadakis"
-msgstr ""
+msgstr "ג׳ורג׳ קיאגיאדקיס"
 
 #: main-virtualmonitor.cpp:93 main.cpp:111
 #, kde-format
 msgid "Alessandro Praduroux"
-msgstr ""
+msgstr "אלסנדרו פרדורו"
 
 #: main-virtualmonitor.cpp:93 main.cpp:111
 #, kde-format
 msgid "KDE4 porting"
-msgstr ""
+msgstr "הסבה ל־KDE4"
 
 #: main-virtualmonitor.cpp:94 main.cpp:112
 #, kde-format
 msgid "Tim Jansen"
-msgstr ""
+msgstr "טים ג׳נסן"
 
 #: main-virtualmonitor.cpp:94 main.cpp:112
 #, kde-format
 msgid "Original author"
-msgstr ""
+msgstr "יוצר מקורי"
 
 #: main-virtualmonitor.cpp:95 main.cpp:113
 #, kde-format
 msgid "Johannes E. Schindelin"
-msgstr ""
+msgstr "יוהאן א. שינדלין"
 
 #: main-virtualmonitor.cpp:96 main.cpp:114
 #, kde-format
@@ -193,7 +194,7 @@ msgstr "libvncserver"
 #: main-virtualmonitor.cpp:97 main.cpp:115
 #, kde-format
 msgid "Const Kaplinsky"
-msgstr ""
+msgstr "קונסט קפלינסקי"
 
 #: main-virtualmonitor.cpp:98 main.cpp:116
 #, kde-format
@@ -203,7 +204,7 @@ msgstr "מקודד TightVNC"
 #: main-virtualmonitor.cpp:99 main.cpp:117
 #, kde-format
 msgid "Tridia Corporation"
-msgstr ""
+msgstr "חברת Tridia"
 
 #: main-virtualmonitor.cpp:100 main.cpp:118
 #, kde-format
@@ -213,7 +214,7 @@ msgstr "מקודד ZLib"
 #: main-virtualmonitor.cpp:101 main.cpp:119
 #, kde-format
 msgid "AT&T Laboratories Boston"
-msgstr ""
+msgstr "מעבדות AT&T בוסטון"
 
 #: main-virtualmonitor.cpp:102 main.cpp:120
 #, kde-format
@@ -223,52 +224,52 @@ msgstr "מקודדי VNC מקוריים ועיצוב פרוטוקולים"
 #: main-virtualmonitor.cpp:108
 #, kde-format
 msgid "Logical resolution of the new monitor"
-msgstr ""
+msgstr "רזולוציה לוגית של הצג החדש"
 
 #: main-virtualmonitor.cpp:108
 #, kde-format
 msgid "resolution"
-msgstr ""
+msgstr "רזולוציה"
 
 #: main-virtualmonitor.cpp:110
 #, kde-format
 msgid "Name of the monitor"
-msgstr ""
+msgstr "שם הצד"
 
 #: main-virtualmonitor.cpp:110
 #, kde-format
 msgid "name"
-msgstr ""
+msgstr "שם"
 
 #: main-virtualmonitor.cpp:112
-#, fuzzy, kde-format
+#, kde-format
 msgid "Password for the client to connect to it"
-msgstr "ההתחברות ללא הזמנה מ-%1 אושרה"
+msgstr "סיסמה ללקוח כדי להתחבר אליו"
 
 #: main-virtualmonitor.cpp:112
-#, fuzzy, kde-format
+#, kde-format
 msgid "password"
-msgstr "<b>סיסמה:</b>"
+msgstr "סיסמה"
 
 #: main-virtualmonitor.cpp:114
 #, kde-format
 msgid "The device-pixel-ratio of the device, the scaling factor"
-msgstr ""
+msgstr "יחס פיקסלים למכשיר של המכשיר, מקדם קנה־מידה"
 
 #: main-virtualmonitor.cpp:114
 #, kde-format
 msgid "dpr"
-msgstr ""
+msgstr "יפמ"
 
 #: main-virtualmonitor.cpp:116
 #, kde-format
 msgid "The port we will be listening to"
-msgstr ""
+msgstr "הפתחה שנאזין לה"
 
 #: main-virtualmonitor.cpp:116
 #, kde-format
 msgid "number"
-msgstr ""
+msgstr "מספר"
 
 #: main.cpp:49
 #, kde-format
@@ -276,8 +277,8 @@ msgid ""
 "Your X11 Server does not support the required XTest extension version 2.2. "
 "Sharing your desktop is not possible."
 msgstr ""
-"שרת ה-X11 שלך אינו תומך בגירסה 2.2 של ההרחבה הנדרשת XTest. אין אפשרות לשתף "
-"את שולחן העבודה שלך."
+"שרת ה־X11 שלך לא תומך בגרסה 2.2 של ההרחבה הנדרשת XTest. אין אפשרות לשתף את "
+"שולחן העבודה שלך."
 
 #: main.cpp:51 main.cpp:150
 #, kde-format
@@ -290,24 +291,24 @@ msgid "Desktop Sharing"
 msgstr "שיתוף שולחן עבודה"
 
 #: main.cpp:96
-#, fuzzy, kde-format
+#, kde-format
 msgid "VNC-compatible server to share desktops"
-msgstr "שרת תואם VNC לשיתוף שולחנות עבודה של KDE"
+msgstr "שרת תואם VNC לשיתוף שולחנות עבודה"
 
 #: main.cpp:105
 #, kde-format
 msgid "George Goldberg"
-msgstr ""
+msgstr "ג׳ורג׳ גולדברג"
 
 #: main.cpp:106
 #, kde-format
 msgid "Telepathy tubes support"
-msgstr ""
+msgstr "תמיכה בצינורות טלפתיים (Telepathy Tubes)"
 
 #: main.cpp:126
 #, kde-format
 msgid "Do not show the invitations management dialog at startup"
-msgstr ""
+msgstr "לא להציג את חלונית ניהול ההזמנות בהתחלה"
 
 #: main.cpp:148
 #, kde-format
@@ -315,16 +316,18 @@ msgid ""
 "Desktop Sharing is not running under an X11 Server or Wayland.\n"
 "Other display servers are currently not supported."
 msgstr ""
+"שיתוף שולחן העבודה לא פועל כרגע תחת שרת X11 או Wayland.\n"
+"אין תמיכה כרגע בשרתי תצוגה אחרים."
 
 #: mainwindow.cpp:52
 #, kde-format
 msgid "Storing passwords in config file is insecure!"
-msgstr ""
+msgstr "אחסון סיסמאות בקובץ ההגדרות אינו מאובטח!"
 
 #: mainwindow.cpp:189
 #, kde-format
 msgid "Enter a new password for Unattended Access"
-msgstr ""
+msgstr "נא למלא סיסמה לגישה ללא התערבות"
 
 #: mainwindow.cpp:200
 #, kde-format
@@ -338,9 +341,9 @@ msgstr ""
 #. i18n: ectx: property (whatsThis), widget (QLabel, aboutLabel)
 #: mainwindow.cpp:223 mainwindow.cpp:230 ui/mainwidget.ui:83
 #: ui/mainwidget.ui:86 ui/mainwidget.ui:114
-#, fuzzy, kde-format
+#, kde-format
 msgid "KDE Desktop Sharing"
-msgstr "שיתוף שולחן עבודה"
+msgstr "שיתוף שולחן עבודה של KDE"
 
 #: mainwindow.cpp:224
 #, kde-format
@@ -372,42 +375,42 @@ msgstr ""
 #: mainwindow.cpp:249
 #, kde-format
 msgid "Network"
-msgstr ""
+msgstr "רשת"
 
 #: mainwindow.cpp:250
 #, kde-format
 msgid "Security"
-msgstr ""
+msgstr "אבטחה"
 
 #: mainwindow.cpp:251
 #, kde-format
 msgid "Screen capture"
-msgstr ""
+msgstr "לכידת מסך"
 
 #: mainwindow.cpp:256
 #, kde-format
 msgid "To apply framebuffer plugin setting, you need to restart the program."
-msgstr ""
+msgstr "כדי להחיל הגדרות מכלא חוזי (framebuffer)"
 
 #: rfbservermanager.cpp:237
-#, fuzzy, kde-format
+#, kde-format
 msgid "The remote user %1 is now connected."
-msgstr "המשתמש המרוחק סגר את החיבור."
+msgstr "המשתמש המרוחק %1 מחובר כרגע."
 
 #: rfbservermanager.cpp:251
-#, fuzzy, kde-format
+#, kde-format
 msgid "The remote user %1 disconnected."
-msgstr "המשתמש המרוחק סגר את החיבור."
+msgstr "המשתמש המרוחק %1 נותק."
 
 #: trayicon.cpp:56
 #, kde-format
 msgid "Disconnect"
-msgstr ""
+msgstr "ניתוק"
 
 #: trayicon.cpp:62
 #, kde-format
 msgid "Enable Remote Control"
-msgstr "אפשר שליטה מרחוק"
+msgstr "לאפשר שליטה מרחוק"
 
 #: trayicon.cpp:101 trayicon.cpp:133
 #, kde-format
@@ -417,24 +420,24 @@ msgstr "שיתוף שולחן עבודה - מתנתק"
 #: trayicon.cpp:117 trayicon.cpp:137
 #, kde-format
 msgid "Desktop Sharing - connected with %1"
-msgstr "שיתוף שולחן עבודה - מתחבר עם %1"
+msgstr "שיתוף שולחן עבודה - מתחבר מול %1"
 
 #: trayicon.cpp:120
-#, fuzzy, kde-format
+#, kde-format
 msgid "Desktop Sharing - connected"
-msgstr "שיתוף שולחן עבודה - מתנתק"
+msgstr "שיתוף שולחן עבודה - מחובר"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, Framebuffer)
 #: ui/configframebuffer.ui:14
 #, kde-format
 msgid "Framebuffer"
-msgstr ""
+msgstr "מכלא חוזי (Framebuffer)"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: ui/configframebuffer.ui:22
 #, kde-format
 msgid "Preferred frameb&uffer plugin:"
-msgstr ""
+msgstr "תוסף מ&כלא חוזי מועדף:"
 
 #. i18n: ectx: property (text), widget (QLabel, helpText)
 #: ui/configframebuffer.ui:47
@@ -448,33 +451,33 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_allowDesktopControl)
 #: ui/configsecurity.ui:17
-#, fuzzy, kde-format
+#, kde-format
 msgid "Allow remote connections to control your desktop"
-msgstr "א&פשר למשתמש המרוחק לשלוט במקלדת ובעכבר"
+msgstr "לאפשר חיבורים מרחוק לשליטה בשולחן העבודה שלך"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_noWallet)
 #: ui/configsecurity.ui:27
 #, kde-format
 msgid "Do not store passwords using KDE wallet"
-msgstr ""
+msgstr "לא לאחסן סיסמאות באמצעות ארנק KDE"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_useDefaultPort)
 #: ui/configtcp.ui:26
 #, kde-format
 msgid "Use default port"
-msgstr ""
+msgstr "להשתמש בפתחת ברירת המחדל"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: ui/configtcp.ui:50
 #, kde-format
 msgid "Listening port:"
-msgstr ""
+msgstr "פתחה להאזנה:"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel5)
 #: ui/connectionwidget.ui:47
 #, kde-format
 msgid "Attention"
-msgstr "שים לב"
+msgstr "נא לשים לב"
 
 #. i18n: ectx: property (text), widget (QLabel, mainTextLabel)
 #: ui/connectionwidget.ui:72
@@ -483,8 +486,8 @@ msgid ""
 "Somebody is requesting a connection to your computer. Granting this will "
 "allow the remote user to watch your desktop. "
 msgstr ""
-"מישהו מבקש חיבור למחשב שלך. אישור בקשה זו יאפשר לו לראות את כל מה שיש על "
-"המסך שלך, "
+"מישהו או מישהי מבקשים להתחבר למחשב שלך. אישור בקשה זו יאפשר להם לראות את כל "
+"מה שיש על שולחן העבודה שלך."
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel1)
 #: ui/connectionwidget.ui:102
@@ -507,15 +510,15 @@ msgid ""
 "careful. When the option is disabled the remote user can only watch your "
 "screen."
 msgstr ""
-"אם אפשרות זו נבחרת, המשתמש המרוחק יוכל להקליד ולהשתמש במצביע העכבר שלך. דבר "
-"זה ייתן לו שליטה מלאה על המחשב שלך, כך שיש להשתמש באפשרות זו בזהירות. אם "
-"אפשרות זו אינה נבחרת, המשתמש המרוחק יוכל רק לצפות במה שיש על המסך שלך."
+"הפעלת האפשרות הזאת תאפשר למשתמש או למשתמשת המרוחקים להקליד ולהשתמש בסמן "
+"העכבר שלך. בכך הם למעשה מקבלים שליטה מלאה על המחשב שלך, לכן כדאי לנקוט במשנה "
+"זהירות. כאשר האפשרות הזאת מושבתת הם יוכלו רק לצפות במסך."
 
 #. i18n: ectx: property (text), widget (QCheckBox, cbAllowRemoteControl)
 #: ui/connectionwidget.ui:139
 #, kde-format
 msgid "Allow remote user to &control keyboard and mouse"
-msgstr "א&פשר למשתמש המרוחק לשלוט במקלדת ובעכבר"
+msgstr "לא&פשר למשתמש המרוחק לשלוט במקלדת ובעכבר"
 
 #. i18n: ectx: property (text), widget (QLabel, aboutLabel)
 #: ui/mainwidget.ui:117
@@ -524,43 +527,45 @@ msgid ""
 "KDE Desktop Sharing allows you to grant permission to someone at a remote "
 "location for viewing and possibly controlling your desktop."
 msgstr ""
+"שיתוף שולחן עבודה של KDE מאפשר לך לך להעניק הרשאה לגורם מרוחק לצפייה ואפילו "
+"שליטה בשולחן העבודה שלך."
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, enableSharingCheckBox)
 #: ui/mainwidget.ui:145
-#, fuzzy, kde-format
+#, kde-format
 msgid "Starts/Stops Remote Desktop Sharing"
-msgstr "ניהול הזמנות - שיתוף שולחן עבודה"
+msgstr "מפעיל/עוצר שיתוף שולחן עבודה"
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableSharingCheckBox)
 #: ui/mainwidget.ui:148
-#, fuzzy, kde-format
+#, kde-format
 msgid "&Enable Desktop Sharing"
-msgstr "שיתוף שולחן עבודה"
+msgstr "ה&פעלת שיתוף שולחן עבודה"
 
 #. i18n: ectx: property (title), widget (QGroupBox, detailsGroupBox)
 #: ui/mainwidget.ui:170
-#, fuzzy, kde-format
+#, kde-format
 msgid "Connection Details"
-msgstr "התמונה הצדדית בחלון החיבור"
+msgstr "פרטי החיבור"
 
 #. i18n: ectx: property (text), widget (QLabel, addressLabel)
 #: ui/mainwidget.ui:193
 #, kde-format
 msgid "&Address"
-msgstr ""
+msgstr "&כתובת"
 
 #. i18n: ectx: property (whatsThis), widget (QToolButton, addressAboutButton)
 #: ui/mainwidget.ui:214
 #, kde-format
 msgid "More about this address"
-msgstr ""
+msgstr "עוד על הכתובת הזאת"
 
 #. i18n: ectx: property (text), widget (QToolButton, addressAboutButton)
 #. i18n: ectx: property (text), widget (QToolButton, unattendedAboutButton)
 #: ui/mainwidget.ui:217 ui/mainwidget.ui:397
 #, kde-format
 msgid "About"
-msgstr ""
+msgstr "על אודות"
 
 #. i18n: ectx: property (whatsThis), widget (QLabel, addressDisplayLabel)
 #: ui/mainwidget.ui:235
@@ -569,30 +574,32 @@ msgid ""
 "Address required by remote users to connect to your desktop. Click about "
 "button on the right for more info."
 msgstr ""
+"משתמשים מרוחקים צריכים כתובת כדי להתחבר לשולחן העבודה שלך. יש ללחוץ על כפתור "
+"„על אודות” משמאל כדי לקבל מידע נוסף."
 
 #. i18n: ectx: property (text), widget (QLabel, addressDisplayLabel)
 #: ui/mainwidget.ui:238
 #, kde-format
 msgid "127.0.0.1 : 5900"
-msgstr ""
+msgstr "127.0.0.1 : 5900"
 
 #. i18n: ectx: property (text), widget (QLabel, passwordLabel)
 #: ui/mainwidget.ui:269
-#, fuzzy, kde-format
+#, kde-format
 msgid "&Password"
-msgstr "<b>סיסמה:</b>"
+msgstr "&סיסמה"
 
 #. i18n: ectx: property (whatsThis), widget (QToolButton, passwordEditButton)
 #: ui/mainwidget.ui:290
-#, fuzzy, kde-format
+#, kde-format
 msgid "Edit/Save Desktop Sharing Password"
-msgstr "שגיאת שיתוף שולחן עבודה"
+msgstr "עריכת/שמירה סיסמת שיתוף שולחן עבודה"
 
 #. i18n: ectx: property (text), widget (QToolButton, passwordEditButton)
 #: ui/mainwidget.ui:293
 #, kde-format
 msgid "Edit"
-msgstr ""
+msgstr "עריכה"
 
 #. i18n: ectx: property (whatsThis), widget (QLabel, passwordDisplayLabel)
 #: ui/mainwidget.ui:311
@@ -601,12 +608,14 @@ msgid ""
 "Password required by remote users to connect to your desktop. Click the edit "
 "button on the right to change password."
 msgstr ""
+"משתמשים מרוחקים צריכים סיסמה כדי להתחבר לשולחן העבודה שלך. יש ללחוץ על כפתור "
+"העריכה משמאל כדי להחליף סיסמה."
 
 #. i18n: ectx: property (text), widget (QLabel, passwordDisplayLabel)
 #: ui/mainwidget.ui:314
 #, kde-format
 msgid "TemporaryPassword"
-msgstr ""
+msgstr "סיסמה_זמנית"
 
 #. i18n: ectx: property (whatsThis), widget (QGroupBox, unattendedGroupBox)
 #. i18n: ectx: property (text), widget (QLabel, unattendedAboutLabel)
@@ -616,12 +625,14 @@ msgid ""
 "Unattended Access allows a remote user with the password to gain control to "
 "your desktop without your explicit confirmation."
 msgstr ""
+"גישה ללא התערבות מאפשרת למשתמש מרוחק שיש לו סיסמה לקבלת שליטה בשולחן העבודה "
+"שלך ללא הסכמה מפורשת."
 
 #. i18n: ectx: property (title), widget (QGroupBox, unattendedGroupBox)
 #: ui/mainwidget.ui:343
 #, kde-format
 msgid "Unattended Access"
-msgstr ""
+msgstr "גישה ללא התערבות"
 
 #. i18n: ectx: property (whatsThis), widget (QLabel, unattendedAboutLabel)
 #: ui/mainwidget.ui:375
@@ -631,12 +642,14 @@ msgid ""
 "your desktop without your explicit confirmation. Click \"About\" button on "
 "right to know more."
 msgstr ""
+"גישה ללא התערבות מאפשרת למשתמש מרוחק שיש לו סיסמה לקבלת שליטה בשולחן העבודה "
+"שלך ללא הסכמה מפורשת. לחיצה על כפתור „על אודות” משמאל תציג הסברים נוספים."
 
 #. i18n: ectx: property (whatsThis), widget (QToolButton, unattendedAboutButton)
 #: ui/mainwidget.ui:394
 #, kde-format
 msgid "Know more about Unattended Access"
-msgstr ""
+msgstr "מידע נוסף על גישה ללא התערבות"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, enableUnattendedCheckBox)
 #: ui/mainwidget.ui:437
@@ -645,21 +658,23 @@ msgid ""
 "Starts/Stops unattended access to your desktop. Click on button on right to "
 "change password, and \"About\" button to know more."
 msgstr ""
+"מפעיל/עוצר גישה ללא התערבות לשולחן העבודה שלך. יש ללחוץ על הכפתור משמאל כדי "
+"להחליף סיסמה ועל כפתור„על אודות” כדי ללמוד עוד."
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableUnattendedCheckBox)
 #: ui/mainwidget.ui:440
 #, kde-format
 msgid "Enable &Unattended Access"
-msgstr ""
+msgstr "הפעלת גישה ללא הת&ערבות"
 
 #. i18n: ectx: property (whatsThis), widget (QPushButton, unattendedPasswordButton)
 #: ui/mainwidget.ui:465
 #, kde-format
 msgid "Change password for Unattended Access"
-msgstr ""
+msgstr "החלפת סיסמה לגישה ללא התערבות"
 
 #. i18n: ectx: property (text), widget (QPushButton, unattendedPasswordButton)
 #: ui/mainwidget.ui:468
 #, kde-format
 msgid "&Change Unattended Password"
-msgstr ""
+msgstr "ה&חלפת סיסמה ללא התערבות"
