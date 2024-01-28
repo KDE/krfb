@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: krfb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-10 01:34+0000\n"
-"PO-Revision-Date: 2024-01-26 15:27+0200\n"
+"PO-Revision-Date: 2024-01-27 21:55+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -72,32 +72,32 @@ msgstr "%1@%2 (שולחנות עבודה משותפים)"
 #: krfb.kcfg:9
 #, kde-format
 msgid "Start minimized"
-msgstr ""
+msgstr "התחלה במצב ממוזער"
 
 #. i18n: ectx: label, entry (useDefaultPort), group (TCP)
 #: krfb.kcfg:15
 #, kde-format
 msgid "Use the default port for VNC (5900)"
-msgstr ""
+msgstr "להשתמש בפתחת ברירת המחדל ל־VNC‏ (5900)"
 
 #. i18n: ectx: label, entry (port), group (TCP)
 #: krfb.kcfg:19
 #, kde-format
 msgid "This is the port on which krfb will listen."
-msgstr ""
+msgstr "זאת הפתחה לה יאזין krfb."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_publishService)
 #. i18n: ectx: label, entry (publishService), group (TCP)
 #: krfb.kcfg:23 ui/configtcp.ui:16
 #, kde-format
 msgid "Announce the service on the local network"
-msgstr ""
+msgstr "להכריז על השירות ברשת המקומית."
 
 #. i18n: ectx: label, entry (noWallet), group (Security)
 #: krfb.kcfg:29
 #, kde-format
 msgid "Do not store passwords in KWallet"
-msgstr ""
+msgstr "לא לאחסן סיסמאות ב־KWallet"
 
 #. i18n: ectx: label, entry (allowDesktopControl), group (Security)
 #: krfb.kcfg:33
@@ -109,7 +109,7 @@ msgstr "לאפשר לחיבורים מרוחקים לנהל את שולחן הע
 #: krfb.kcfg:37
 #, kde-format
 msgid "Allow connections without an invitation."
-msgstr ""
+msgstr "לאפשר חיבורים ללא הזמנה."
 
 #. i18n: ectx: label, entry (unattendedAccessPassword), group (Security)
 #. i18n: ectx: label, entry (desktopSharingPassword), group (Security)
@@ -122,22 +122,22 @@ msgstr "סיסמה לחיבורים ללא הזמנה."
 #: krfb.kcfg:49
 #, kde-format
 msgid "Preferred Frame Buffer Plugin"
-msgstr ""
+msgstr "תוסף מכלא חוזי מועדף"
 
 #: main-virtualmonitor.cpp:49
 #, kde-format
 msgid "Creating a Virtual Monitor from %1"
-msgstr ""
+msgstr "נוצר צג וירטואלי מתוך %1"
 
 #: main-virtualmonitor.cpp:80
 #, kde-format
 msgid "Remote Virtual Monitor"
-msgstr ""
+msgstr "הסרת צד וירטואלי"
 
 #: main-virtualmonitor.cpp:82
 #, kde-format
 msgid "Offer a Virtual Monitor that can be accessed remotely"
-msgstr ""
+msgstr "הצעת מסך וירטואלי שאפשר לגשת אליו מרחוק."
 
 #: main-virtualmonitor.cpp:84 main.cpp:98
 #, kde-format
@@ -150,11 +150,18 @@ msgid ""
 "(c) 2000, Tridia Corporation\n"
 "(c) 1999, AT&T Laboratories Boston\n"
 msgstr ""
+"(c) 2009‏-2010, Collabora בע״מ.\n"
+"(c) 2007, אלסנדרו פרדורו\n"
+"(c) 2001‏-2003, טים ג׳נסן\n"
+"(c) 2001, יוהאנס א. שינדלין\n"
+"(c) 2000‏-2001, קונסט קפלינסקי\n"
+"(c) 2000, תאגיד Tridia\n"
+"(c) 1999, מעבדות AT&T בוסטון\n"
 
 #: main-virtualmonitor.cpp:91
 #, kde-format
 msgid "Virtual Monitor implementation"
-msgstr ""
+msgstr "הטמעת צג וירטואלי"
 
 #: main-virtualmonitor.cpp:92 main.cpp:108
 #, kde-format
@@ -335,6 +342,8 @@ msgid ""
 "Failed to start the krfb server. Desktop sharing will not work. Try setting "
 "another port in the settings and restart krfb."
 msgstr ""
+"הפעלת שרת krfb נכשלה. שיתוף שולחן העבודה לא יעבוד. כדאי לנסות להגדיר פתחה "
+"שונה בהגדרות ולהפעיל את krfb מחדש."
 
 #. i18n: ectx: property (whatsThis), widget (QLabel, titleLabel)
 #. i18n: ectx: property (text), widget (QLabel, titleLabel)
@@ -360,6 +369,15 @@ msgid ""
 "If your computer is behind a firewall it may have a different address or be "
 "unreachable for other computers."
 msgstr ""
+"השדה הזה מכיל את כתובת המחשב והפתחה שלך, עם נקודתיים ביניהם.\n"
+"\n"
+"הכתובת היא בגדר רמז - אפשר להשתמש באיזו כתובת שפונה למחשב שלך.\n"
+"\n"
+"שיתוף שולחן העבודה מנסה לנחש את הכתובת שלך מהגדרות הרשת שלך, אך יש טעויות "
+"לכאן או לכאן.\n"
+"\n"
+"אם המחשב שלך מוגן בחומת אש יכול להיות שיש לו כתובת אחרת או שמחשבים אחרים "
+"בכלל לא יכולים לגשת אליו."
 
 #: mainwindow.cpp:231
 #, kde-format
@@ -371,6 +389,10 @@ msgid ""
 "password, desktop sharing access will be granted without explicit "
 "confirmation."
 msgstr ""
+"כל משתמש מרוחק עם סיסמת שיתוף שולחן עבודה רגילה דורש אימות.\n"
+"\n"
+"אם גישה ללא התערבות פעילה, והמשתמש המרוחק סיפק סיסמה למצב ללא התערבות, גישה "
+"לשיתוף שולחן עבודה תוענק ללא אישור מפורש."
 
 #: mainwindow.cpp:249
 #, kde-format
@@ -448,6 +470,10 @@ msgid ""
 "style=\" font-weight:600;\">qt</span> plugin is a safe fallback, if for some "
 "reason others don't work. But also it is very slow.</p></body></html>"
 msgstr ""
+"<html><head/><body><p>עם x11, תוסף <span style=\" font-weight:600;\">xcb</"
+"span> אמור להיות מועדף, כי הביצועים שלו יותר טובים.<br/>תוסף <span style=\" "
+"font-weight:600;\">qt</span> הוא נסיגה בטוחה, אם מסיבה כלשהי האחרים לא עבדו. "
+"אבל הוא גם מאוד איטי.</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_allowDesktopControl)
 #: ui/configsecurity.ui:17
