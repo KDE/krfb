@@ -34,6 +34,7 @@
 #include "krfb_fb_pipewire_debug.h"
 #include "screencasting.h"
 #include <PipeWireSourceStream>
+#include <kpipewire_version.h>
 #include <DmaBufHandler>
 
 static const int BYTES_PER_PIXEL = 4;
@@ -341,16 +342,27 @@ void PWFrameBuffer::Private::handleFrame(const PipeWireFrame &frame)
 {
     cursor = frame.cursor;
 
+#if KPIPEWIRE_VERSION < QT_VERSION_CHECK(6, 0, 70)
     if (!frame.dmabuf && !frame.image) {
+#else
+    if (!frame.dmabuf && !frame.dataFrame) {
+#endif
         qCDebug(KRFB_FB_PIPEWIRE) << "Got empty buffer. The buffer possibly carried only "
                                      "information about the mouse cursor.";
         return;
     }
 
+#if KPIPEWIRE_VERSION < QT_VERSION_CHECK(6, 0, 70)
     if (frame.image) {
         memcpy(q->fb, frame.image->constBits(), frame.image->sizeInBytes());
         setVideoSize(frame.image->size());
     }
+#else
+    if (frame.dataFrame) {
+        memcpy(q->fb, frame.dataFrame->data, frame.dataFrame->size.width() * frame.dataFrame->stride);
+        setVideoSize(frame.dataFrame->size);
+    }
+#endif
     else if (frame.dmabuf) {
         QImage src((uchar*) q->fb, videoSize.width(), videoSize.height(), QImage::Format_RGB32);
         if (!m_dmabufHandler.downloadFrame(src, frame)) {
