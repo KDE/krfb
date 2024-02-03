@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: krfb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-10 01:34+0000\n"
-"PO-Revision-Date: 2015-12-29 21:20+0200\n"
+"PO-Revision-Date: 2024-02-02 23:16+0200\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: lt <kde-i18n-lt@kde.org>\n"
 "Language: lt\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n%10>=2 && (n%100<10 || n"
 "%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
-"X-Generator: Lokalize 1.5\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -114,7 +114,7 @@ msgstr "Nekviestų ryšių slaptažodis."
 #: krfb.kcfg:49
 #, kde-format
 msgid "Preferred Frame Buffer Plugin"
-msgstr "Pageidaujamas \"Frame Buffer\" papildinys"
+msgstr "Pageidaujamas \"Frame Buffer\" įskiepis"
 
 #: main-virtualmonitor.cpp:49
 #, kde-format
@@ -455,9 +455,8 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: ui/configframebuffer.ui:22
 #, fuzzy, kde-format
-#| msgid "Preferred Frame Buffer Plugin"
 msgid "Preferred frameb&uffer plugin:"
-msgstr "Pageidaujamas \"Frame Buffer\" papildinys"
+msgstr "Pageidaujamas \"Frame Buffer\" įskiepis"
 
 #. i18n: ectx: property (text), widget (QLabel, helpText)
 #: ui/configframebuffer.ui:47
