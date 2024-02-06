@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: krfb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-10 01:34+0000\n"
-"PO-Revision-Date: 2023-11-12 22:59+0100\n"
+"PO-Revision-Date: 2024-02-05 22:05+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -222,12 +222,12 @@ msgstr "originalaj VNC-kodigiloj kaj protokolo-dezajno"
 #: main-virtualmonitor.cpp:108
 #, kde-format
 msgid "Logical resolution of the new monitor"
-msgstr "Logika rezolucio de la nova monitoro"
+msgstr "Logika distingivo de la nova monitoro"
 
 #: main-virtualmonitor.cpp:108
 #, kde-format
 msgid "resolution"
-msgstr "rezolucio"
+msgstr "distingivo"
 
 #: main-virtualmonitor.cpp:110
 #, kde-format
