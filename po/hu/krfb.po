@@ -2,30 +2,31 @@
 # Tamas Szanto <taszanto@gmail.com>, 2002.
 # Kristóf Kiszel <ulysses@kubuntu.org>, 2012.
 # Balázs Úr <urbalazs@gmail.com>, 2013, 2014.
+# SPDX-FileCopyrightText: 2024 Kristof Kiszel <ulysses@fsf.hu>
 msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-10 01:34+0000\n"
-"PO-Revision-Date: 2014-06-15 15:24+0200\n"
-"Last-Translator: Balázs Úr <urbalazs@gmail.com>\n"
+"PO-Revision-Date: 2024-02-13 11:40+0100\n"
+"Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 1.5\n"
+"X-Generator: Lokalize 24.01.95\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Kiszel Kristóf,Szántó Tamás"
+msgstr "Kiszel Kristóf"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "ulysses@kubuntu.org,taszanto@gmail.com"
+msgstr "ulysses@fsf.hu"
 
 #: connectiondialog.cpp:39
 #, kde-format
@@ -240,16 +241,14 @@ msgid "name"
 msgstr ""
 
 #: main-virtualmonitor.cpp:112
-#, fuzzy, kde-format
-#| msgid "Password for uninvited connections."
+#, kde-format
 msgid "Password for the client to connect to it"
-msgstr "Meghívó nélküli kapcsolat jelszava."
+msgstr "Jelszó a klienshez, amelyhez csatlakozni kíván"
 
 #: main-virtualmonitor.cpp:112
-#, fuzzy, kde-format
-#| msgid "&Password"
+#, kde-format
 msgid "password"
-msgstr "&Jelszó"
+msgstr "jelszó"
 
 #: main-virtualmonitor.cpp:114
 #, kde-format
@@ -291,10 +290,9 @@ msgid "Desktop Sharing"
 msgstr "Asztalmegosztó"
 
 #: main.cpp:96
-#, fuzzy, kde-format
-#| msgid "VNC-compatible server to share KDE desktops"
+#, kde-format
 msgid "VNC-compatible server to share desktops"
-msgstr "VNC-kompatibilis szolgáltatás a KDE asztal megosztásához"
+msgstr "VNC-kompatibilis kiszolgáló asztalmegosztáshoz"
 
 #: main.cpp:105
 #, kde-format
@@ -448,10 +446,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: ui/configframebuffer.ui:22
-#, fuzzy, kde-format
-#| msgid "Preferred Frame Buffer Plugin"
+#, kde-format
 msgid "Preferred frameb&uffer plugin:"
-msgstr "Elsődleges keretpuffer-modul"
+msgstr "Elsődleges frameb&uffer bővítmény:"
 
 #. i18n: ectx: property (text), widget (QLabel, helpText)
 #: ui/configframebuffer.ui:47
