@@ -364,6 +364,7 @@ void PWFrameBuffer::Private::handleFrame(const PipeWireFrame &frame)
     }
 #endif
     else if (frame.dmabuf) {
+        setVideoSize({frame.dmabuf->width, frame.dmabuf->height});
         QImage src((uchar*) q->fb, videoSize.width(), videoSize.height(), QImage::Format_RGB32);
         if (!m_dmabufHandler.downloadFrame(src, frame)) {
             stream->renegotiateModifierFailed(frame.format, frame.dmabuf->modifier);
