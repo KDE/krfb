@@ -334,7 +334,6 @@ void PWFrameBuffer::Private::handleRemoteDesktopStarted(quint32 code, const QVar
         isValid = false;
         return;
     }
-    setVideoSize(qdbus_cast<QSize>(streams.first().map[QStringLiteral("size")].value<QDBusArgument>()));
 }
 
 void PWFrameBuffer::Private::handleFrame(const PipeWireFrame &frame)
@@ -348,17 +347,20 @@ void PWFrameBuffer::Private::handleFrame(const PipeWireFrame &frame)
     }
 
     if (frame.dataFrame) {
-        memcpy(q->fb, frame.dataFrame->data, frame.dataFrame->size.width() * frame.dataFrame->stride);
+        // FIXME: Assuming stride == width * 4, not sure to which extent this holds
         setVideoSize(frame.dataFrame->size);
+        memcpy(q->fb, frame.dataFrame->data, frame.dataFrame->size.width() * frame.dataFrame->stride);
     }
     else if (frame.dmabuf) {
-        QImage src((uchar*) q->fb, videoSize.width(), videoSize.height(), QImage::Format_RGB32);
+        // FIXME: Assuming stride == width * 4, not sure to which extent this holds
+        const QSize size = { frame.dmabuf->width, frame.dmabuf->height };
+        setVideoSize(size);
+        QImage src(reinterpret_cast<uchar*>(q->fb), size.width(), size.height(), QImage::Format_RGB32);
         if (!m_dmabufHandler.downloadFrame(src, frame)) {
             stream->renegotiateModifierFailed(frame.format, frame.dmabuf->modifier);
             qCDebug(KRFB_FB_PIPEWIRE) << "Failed to download frame.";
             return;
         }
-        setVideoSize(src.size());
     } else {
         qCDebug(KRFB_FB_PIPEWIRE) << "Unknown kind of frame";
     }
