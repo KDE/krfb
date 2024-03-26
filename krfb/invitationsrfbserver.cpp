@@ -58,7 +58,7 @@ void InvitationsRfbServer::init()
 
     instance->m_wallet = nullptr;
     if (KrfbConfig::noWallet()) {
-        instance->walletOpened(false);
+        instance->readPasswordFromConfig();
     } else {
         instance->openKWallet();
     }
@@ -181,23 +181,8 @@ void InvitationsRfbServer::walletOpened(bool opened)
         }
 
     } else {
-
         qCDebug(KRFB) << "Could not open KWallet, Falling back to config file";
-        KConfigGroup krfbConfig(KSharedConfig::openConfig(),QStringLiteral("Security"));
-
-        desktopPassword = KStringHandler::obscure(krfbConfig.readEntry(
-                "desktopPassword", QString()));
-        if(!desktopPassword.isEmpty()) {
-            m_desktopPassword = desktopPassword;
-            Q_EMIT passwordChanged(m_desktopPassword);
-        }
-
-        unattendedPassword = KStringHandler::obscure(krfbConfig.readEntry(
-                "unattendedPassword", QString()));
-        if(!unattendedPassword.isEmpty()) {
-            m_unattendedPassword = unattendedPassword;
-        }
-
+        readPasswordFromConfig();
     }
 }
 
@@ -257,4 +242,24 @@ void InvitationsRfbServer::saveSecuritySettings()
         }
     }
     KrfbConfig::self()->save();
+}
+
+void InvitationsRfbServer::readPasswordFromConfig()
+{
+        QString desktopPassword;
+        QString unattendedPassword;
+        KConfigGroup krfbConfig(KSharedConfig::openConfig(),QStringLiteral("Security"));
+
+        desktopPassword = KStringHandler::obscure(krfbConfig.readEntry(
+                "desktopPassword", QString()));
+        if(!desktopPassword.isEmpty()) {
+            m_desktopPassword = desktopPassword;
+            Q_EMIT passwordChanged(m_desktopPassword);
+        }
+
+        unattendedPassword = KStringHandler::obscure(krfbConfig.readEntry(
+                "unattendedPassword", QString()));
+        if(!unattendedPassword.isEmpty()) {
+            m_unattendedPassword = unattendedPassword;
+        }
 }

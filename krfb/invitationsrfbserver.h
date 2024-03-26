@@ -70,6 +70,7 @@ private:
     KWallet::Wallet *m_wallet = nullptr;
 
     QString readableRandomString(int);
+    void readPasswordFromConfig();
     Q_DISABLE_COPY(InvitationsRfbServer)
 };
 
