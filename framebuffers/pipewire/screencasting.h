@@ -8,7 +8,7 @@
 
 #include <QObject>
 #include <QSharedPointer>
-#include <QVector>
+#include <QList>
 #include <optional>
 
 struct zkde_screencast_unstable_v1;

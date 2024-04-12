@@ -44,7 +44,7 @@ FrameBufferManager::FrameBufferManager()
     const auto platformFilter = [] (const KPluginMetaData &pluginData) {
         return pluginData.value(QStringLiteral("X-KDE-OnlyShowOnQtPlatforms"), QStringList()).contains(QGuiApplication::platformName());
     };
-    const QVector<KPluginMetaData> plugins = KPluginMetaData::findPlugins(QStringLiteral("krfb/framebuffer"), platformFilter, KPluginMetaData::AllowEmptyMetaData);
+    const QList<KPluginMetaData> plugins = KPluginMetaData::findPlugins(QStringLiteral("krfb/framebuffer"), platformFilter, KPluginMetaData::AllowEmptyMetaData);
     for (const KPluginMetaData &data : plugins) {
         const KPluginFactory::Result<FrameBufferPlugin> result = KPluginFactory::instantiatePlugin<FrameBufferPlugin>(data);
         if (result.plugin) {

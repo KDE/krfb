@@ -29,7 +29,7 @@
 #include <QLineEdit>
 #include <QComboBox>
 #include <QSizePolicy>
-#include <QVector>
+#include <QList>
 #include <QSet>
 #include <QNetworkInterface>
 #include <QHostInfo>
@@ -82,7 +82,7 @@ public:
     }
 
     void fillFrameBuffersCombo() {
-        const QVector<KPluginMetaData> plugins = KPluginMetaData::findPlugins(QStringLiteral("krfb/framebuffer"), {}, KPluginMetaData::AllowEmptyMetaData);
+        const QList<KPluginMetaData> plugins = KPluginMetaData::findPlugins(QStringLiteral("krfb/framebuffer"), {}, KPluginMetaData::AllowEmptyMetaData);
         for (const KPluginMetaData &metadata : plugins) {
             cb_preferredFrameBufferPlugin->addItem(metadata.pluginId());
         }

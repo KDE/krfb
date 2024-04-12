@@ -81,7 +81,7 @@ void XdpEventHandler::handlePointer(int buttonMask, int x, int y)
 
     if (buttonMask != data->buttonMask) {
         int i = 0;
-        QVector<int> buttons = { BTN_LEFT, BTN_MIDDLE, BTN_RIGHT, 0, 0, 0, 0, BTN_SIDE, BTN_EXTRA };
+        QList<int> buttons = { BTN_LEFT, BTN_MIDDLE, BTN_RIGHT, 0, 0, 0, 0, BTN_SIDE, BTN_EXTRA };
         for (auto it = buttons.constBegin(); it != buttons.constEnd(); ++it) {
             int prevButtonState = (data->buttonMask >> i) & 0x01;
             int currentButtonState = (buttonMask >> i) & 0x01;
