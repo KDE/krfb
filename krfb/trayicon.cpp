@@ -106,7 +106,7 @@ TrayIcon::TrayIcon(QWidget *mainWindow)
     connect(RfbServerManager::instance(), &RfbServerManager::clientDisconnected,
             this, &TrayIcon::onClientDisconnected);
 
-    m_aboutAction = KStandardAction::aboutApp(this, SLOT(showAbout()), this);
+    m_aboutAction = KStandardAction::aboutApp(this, &TrayIcon::showAbout, this);
     contextMenu()->addAction(m_aboutAction);
 }
 

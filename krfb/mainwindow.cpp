@@ -145,8 +145,8 @@ MainWindow::MainWindow(QWidget *parent)
     m_ui.passwordDisplayLabel->setText(
             InvitationsRfbServer::instance->desktopPassword());
 
-    KStandardAction::quit(QCoreApplication::instance(), SLOT(quit()), actionCollection());
-    KStandardAction::preferences(this, SLOT(showConfiguration()), actionCollection());
+    KStandardAction::quit(QCoreApplication::instance(), &QCoreApplication::quit, actionCollection());
+    KStandardAction::preferences(this, &MainWindow::showConfiguration, actionCollection());
 
     setupGUI();
 
