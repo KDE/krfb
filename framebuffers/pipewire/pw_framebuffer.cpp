@@ -501,5 +501,10 @@ bool PWFrameBuffer::isValid() const
 
 QPoint PWFrameBuffer::cursorPosition()
 {
-    return d->cursor->position;
+    const auto cursor = d->cursor;
+    if (cursor) {
+        return cursor->position;
+    } else {
+        return {};
+    }
 }
