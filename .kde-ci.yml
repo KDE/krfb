@@ -20,3 +20,6 @@ Dependencies:
     'libraries/plasma-wayland-protocols': '@latest-kf6'
     'plasma/kwayland': '@latest-kf6'
     'plasma/kpipewire': '@latest-kf6'
+
+Options:
+  require-passing-tests-on: ['Linux', 'FreeBSD', 'Windows']
