@@ -340,17 +340,28 @@ void PWFrameBuffer::Private::handleFrame(const PipeWireFrame &frame)
 {
     cursor = frame.cursor;
 
+#if KPIPEWIRE60
+    if (!frame.dmabuf && !frame.image) {
+#else
     if (!frame.dmabuf && !frame.dataFrame) {
+#endif
         qCDebug(KRFB_FB_PIPEWIRE) << "Got empty buffer. The buffer possibly carried only "
                                      "information about the mouse cursor.";
         return;
     }
 
+#if KPIPEWIRE60
+    if (frame.image) {
+        memcpy(q->fb, frame.image->constBits(), frame.image->sizeInBytes());
+        setVideoSize(frame.image->size());
+    }
+#else
     if (frame.dataFrame) {
         // FIXME: Assuming stride == width * 4, not sure to which extent this holds
         setVideoSize(frame.dataFrame->size);
         memcpy(q->fb, frame.dataFrame->data, frame.dataFrame->size.width() * frame.dataFrame->stride);
     }
+#endif
     else if (frame.dmabuf) {
         // FIXME: Assuming stride == width * 4, not sure to which extent this holds
         const QSize size = { frame.dmabuf->width, frame.dmabuf->height };
