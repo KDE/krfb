@@ -440,17 +440,17 @@ msgstr "Activa el control remot"
 #: trayicon.cpp:101 trayicon.cpp:133
 #, kde-format
 msgid "Desktop Sharing - disconnected"
-msgstr "Compartició de l'escriptori - desconnectat"
+msgstr "Compartiu l'escriptori - desconnectat"
 
 #: trayicon.cpp:117 trayicon.cpp:137
 #, kde-format
 msgid "Desktop Sharing - connected with %1"
-msgstr "Compartició de l'escriptori - connectat amb %1"
+msgstr "Compartiu l'escriptori - connectat amb %1"
 
 #: trayicon.cpp:120
 #, kde-format
 msgid "Desktop Sharing - connected"
-msgstr "Compartició de l'escriptori - connectat"
+msgstr "Compartiu l'escriptori - connectat"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, Framebuffer)
 #: ui/configframebuffer.ui:14
@@ -540,10 +540,10 @@ msgid ""
 "careful. When the option is disabled the remote user can only watch your "
 "screen."
 msgstr ""
-"Si seleccioneu esta opció, l'usuari remot podrà utilitzar el teclat i el "
-"punter del ratolí. Açò li donarà el control absolut sobre el vostre "
-"ordinador, utilitzeu-ho amb cura. Quan esta opció està desseleccionada, "
-"l'usuari remot només podrà veure la vostra pantalla."
+"Si marqueu esta opció, l'usuari remot podrà utilitzar el teclat i el punter "
+"del ratolí. Açò li donarà el control absolut sobre el vostre ordinador, "
+"utilitzeu-ho amb cura. Quan esta opció està desmarcada, l'usuari remot només "
+"podrà veure la vostra pantalla."
 
 #. i18n: ectx: property (text), widget (QCheckBox, cbAllowRemoteControl)
 #: ui/connectionwidget.ui:139
