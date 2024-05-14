@@ -6,6 +6,7 @@
   <name>Krfb</name>
   <name xml:lang="ar">كرفب</name>
   <name xml:lang="ast">Krfb</name>
+  <name xml:lang="bg">Krfb</name>
   <name xml:lang="ca">Krfb</name>
   <name xml:lang="ca-valencia">Krfb</name>
   <name xml:lang="cs">Krfb</name>
@@ -47,6 +48,7 @@
   <name xml:lang="zh-TW">Krfb</name>
   <summary>Share your desktop to another computer via VNC</summary>
   <summary xml:lang="ar">مشاركة سطح مكتبك مع حاسوب آخر بواسطة VNC</summary>
+  <summary xml:lang="bg">Споделяне на работния плот на друг компютър чрез VNC</summary>
   <summary xml:lang="ca">Comparteix l'escriptori amb un altre ordinador a través de VNC</summary>
   <summary xml:lang="ca-valencia">Compartix l'escriptori amb un altre ordinador a través de VNC</summary>
   <summary xml:lang="cs">Sdílejte své pracovní prostředí na jiný počítač pomocí VNC</summary>
@@ -85,6 +87,7 @@
   <description>
     <p>Krfb Desktop Sharing is a server application that allows you to share your current session with a user on another machine, who can use a VNC client to view or even control the desktop.</p>
     <p xml:lang="ar">مشاركة سطح المكتب كرْفب هو تطبيق خادم يسمح لك بمشاركة جلستك الحالية مع مستخدم على جهاز آخر، والذي يمكنه استخدام عميل VNC لعرض سطح المكتب أو حتى التحكم فيه.</p>
+    <p xml:lang="bg">Krfb Desktop Sharing е сървърно приложение, което ви позволява да споделяте текущата си сесия с потребител на друга машина, който може да използва VNC клиент, за да преглежда или дори да управлява работния плот.</p>
     <p xml:lang="ca">El Krfb és una aplicació de servidor que permet compartir la vostra sessió actual amb un usuari en una altra màquina, la qual pot emprar un client VNC per a veure o controlar l'escriptori.</p>
     <p xml:lang="ca-valencia">Krfb és una aplicació de servidor que permet compartir la vostra sessió actual amb un usuari en una altra màquina, la qual pot emprar un client VNC per a veure o controlar l'escriptori.</p>
     <p xml:lang="da">Krfb-skrivebordsdeling er et serverprogram der giver dig mulighed for at dele din nuværende session med en bruger på en anden maskine som kan bruge en VNC-klient til at vise eller endda styrer skrivebordet.</p>
@@ -132,6 +135,7 @@
     <screenshot type="default">
       <caption>Sharing desktop with Krfb</caption>
       <caption xml:lang="ar">مشاركة سطح المكتب باستخدام كرفب</caption>
+      <caption xml:lang="bg">Споделяне на работното място с 1Krfb</caption>
       <caption xml:lang="ca">Compartint l'escriptori amb el Krfb</caption>
       <caption xml:lang="ca-valencia">Compartint l'escriptori amb Krfb</caption>
       <caption xml:lang="cs">Sdílím pracovní plochu pomocí Krfb</caption>
