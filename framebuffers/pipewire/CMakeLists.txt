@@ -9,11 +9,6 @@ set (krfb_framebuffer_pw_SRCS
      screencasting.cpp
 )
 
-ecm_add_qtwayland_client_protocol(krfb_framebuffer_pw_SRCS
-    PROTOCOL ${PLASMA_WAYLAND_PROTOCOLS_DIR}/screencast.xml
-    BASENAME zkde-screencast-unstable-v1
-)
-
 ecm_qt_declare_logging_category(krfb_framebuffer_pw_SRCS
     HEADER krfb_fb_pipewire_debug.h
     IDENTIFIER KRFB_FB_PIPEWIRE
@@ -38,6 +33,17 @@ add_library(krfb_framebuffer_pw
     MODULE
     ${krfb_framebuffer_pw_SRCS}
 )
+
+if (Qt6_VERSION VERSION_LESS "6.7.1")
+    ecm_add_qtwayland_client_protocol(krfb_framebuffer_pw
+        PROTOCOL ${PLASMA_WAYLAND_PROTOCOLS_DIR}/screencast.xml
+        BASENAME zkde-screencast-unstable-v1
+    )
+else()
+    qt6_generate_wayland_protocol_client_sources(krfb_framebuffer_pw
+        FILES ${PLASMA_WAYLAND_PROTOCOLS_DIR}/screencast.xml
+    )
+endif()
 
 if (KPipeWire_VERSION VERSION_LESS "6.0.80")
     target_compile_definitions(krfb_framebuffer_pw PRIVATE -DKPIPEWIRE60=1)
