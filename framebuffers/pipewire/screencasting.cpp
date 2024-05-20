@@ -5,7 +5,11 @@
 */
 
 #include "screencasting.h"
+#if QT_VERSION < QT_VERSION_CHECK(6, 7, 1)
 #include "qwayland-zkde-screencast-unstable-v1.h"
+#else
+#include "qwayland-screencast.h"
+#endif
 #include <KWayland/Client/registry.h>
 #include <QDebug>
 #include <QRect>
