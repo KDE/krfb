@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: KDE 4.3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-10 01:34+0000\n"
-"PO-Revision-Date: 2024-02-13 11:40+0100\n"
+"PO-Revision-Date: 2024-05-20 16:13+0200\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
 "Language: hu\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.01.95\n"
+"X-Generator: Lokalize 24.02.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -64,7 +64,7 @@ msgstr "%1@%2 (megosztott asztal)"
 #: krfb.kcfg:9
 #, kde-format
 msgid "Start minimized"
-msgstr ""
+msgstr "Indítás minimalizálva"
 
 #. i18n: ectx: label, entry (useDefaultPort), group (TCP)
 #: krfb.kcfg:15
@@ -89,7 +89,7 @@ msgstr "A szolgáltatás bejelentése a helyi hálózaton"
 #: krfb.kcfg:29
 #, kde-format
 msgid "Do not store passwords in KWallet"
-msgstr ""
+msgstr "Ne tárolja a jelszavakat a KWalletben"
 
 #. i18n: ectx: label, entry (allowDesktopControl), group (Security)
 #: krfb.kcfg:33
@@ -119,17 +119,17 @@ msgstr "Elsődleges keretpuffer-modul"
 #: main-virtualmonitor.cpp:49
 #, kde-format
 msgid "Creating a Virtual Monitor from %1"
-msgstr ""
+msgstr "Virtuális monitor létrehozása ebből: %1"
 
 #: main-virtualmonitor.cpp:80
 #, kde-format
 msgid "Remote Virtual Monitor"
-msgstr ""
+msgstr "Távoli virtuális monitor"
 
 #: main-virtualmonitor.cpp:82
 #, kde-format
 msgid "Offer a Virtual Monitor that can be accessed remotely"
-msgstr ""
+msgstr "Távolról is elérhető virtuális monitor biztosítása"
 
 #: main-virtualmonitor.cpp:84 main.cpp:98
 #, kde-format
@@ -153,7 +153,7 @@ msgstr ""
 #: main-virtualmonitor.cpp:91
 #, kde-format
 msgid "Virtual Monitor implementation"
-msgstr ""
+msgstr "Virtuálismonitor-megvalósítás"
 
 #: main-virtualmonitor.cpp:92 main.cpp:108
 #, kde-format
@@ -223,22 +223,22 @@ msgstr "Az eredeti VNC-kódolók és a protokoll megtervezése"
 #: main-virtualmonitor.cpp:108
 #, kde-format
 msgid "Logical resolution of the new monitor"
-msgstr ""
+msgstr "Az új monitor logikai felbontása"
 
 #: main-virtualmonitor.cpp:108
 #, kde-format
 msgid "resolution"
-msgstr ""
+msgstr "felbontás"
 
 #: main-virtualmonitor.cpp:110
 #, kde-format
 msgid "Name of the monitor"
-msgstr ""
+msgstr "A monitor neve"
 
 #: main-virtualmonitor.cpp:110
 #, kde-format
 msgid "name"
-msgstr ""
+msgstr "név"
 
 #: main-virtualmonitor.cpp:112
 #, kde-format
@@ -253,22 +253,22 @@ msgstr "jelszó"
 #: main-virtualmonitor.cpp:114
 #, kde-format
 msgid "The device-pixel-ratio of the device, the scaling factor"
-msgstr ""
+msgstr "Az eszköz eszköz-képpont aránya (dpr), a méretezési tényező"
 
 #: main-virtualmonitor.cpp:114
 #, kde-format
 msgid "dpr"
-msgstr ""
+msgstr "dpr"
 
 #: main-virtualmonitor.cpp:116
 #, kde-format
 msgid "The port we will be listening to"
-msgstr ""
+msgstr "A port, amelyen figyelni fog"
 
 #: main-virtualmonitor.cpp:116
 #, kde-format
 msgid "number"
-msgstr ""
+msgstr "szám"
 
 #: main.cpp:49
 #, kde-format
@@ -315,16 +315,18 @@ msgid ""
 "Desktop Sharing is not running under an X11 Server or Wayland.\n"
 "Other display servers are currently not supported."
 msgstr ""
+"Az asztalmegosztás nem X11 Server vagy Wayland alatt fut.\n"
+"Más kijelzőkiszolgálók jelenleg nem támogatottak."
 
 #: mainwindow.cpp:52
 #, kde-format
 msgid "Storing passwords in config file is insecure!"
-msgstr ""
+msgstr "A jelszavak tárolása konfigurációs fájlban nem biztonságos!"
 
 #: mainwindow.cpp:189
 #, kde-format
 msgid "Enter a new password for Unattended Access"
-msgstr ""
+msgstr "Adjon meg egy új jelszót a felügyelet nélküli hozzáféréshez"
 
 #: mainwindow.cpp:200
 #, kde-format
@@ -382,6 +384,12 @@ msgid ""
 "password, desktop sharing access will be granted without explicit "
 "confirmation."
 msgstr ""
+"Bármely távoli felhasználónak, akinek normál asztali megosztási jelszava "
+"van, hitelesítenie kell magát.\n"
+"\n"
+"Ha a felügyelet nélküli hozzáférés be van kapcsolva, és a távoli felhasználó "
+"felügyelet nélküli módot biztosító jelszót ad meg, az asztalmegosztási "
+"hozzáférés kifejezett megerősítés nélkül is biztosított lesz."
 
 #: mainwindow.cpp:249
 #, kde-format
@@ -396,12 +404,14 @@ msgstr "Biztonság"
 #: mainwindow.cpp:251
 #, kde-format
 msgid "Screen capture"
-msgstr ""
+msgstr "Képernyőrögzítés"
 
 #: mainwindow.cpp:256
 #, kde-format
 msgid "To apply framebuffer plugin setting, you need to restart the program."
 msgstr ""
+"A framebuffer bővítmény beállításainak alkalmazásához újra kell indítania a "
+"programot."
 
 #: rfbservermanager.cpp:237
 #, kde-format
@@ -442,7 +452,7 @@ msgstr "Asztalmegosztás - kapcsolódva"
 #: ui/configframebuffer.ui:14
 #, kde-format
 msgid "Framebuffer"
-msgstr ""
+msgstr "Framebuffer"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: ui/configframebuffer.ui:22
@@ -459,6 +469,11 @@ msgid ""
 "style=\" font-weight:600;\">qt</span> plugin is a safe fallback, if for some "
 "reason others don't work. But also it is very slow.</p></body></html>"
 msgstr ""
+"<html><head/><body><p>Az x11 használatakor az <span style=\" font-weight:600;"
+"\">xcb</span> bővítmény használata javasolt, mivel nagyobb teljesítményt "
+"nyújt.<br/>A <span style=\" font-weight:600;\">qt</span> bővítmény egy "
+"biztonságos tartalék megoldás, ha különböző okokból mások nem működnek. De "
+"nagyon lassú is.</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_allowDesktopControl)
 #: ui/configsecurity.ui:17
@@ -470,7 +485,7 @@ msgstr "A távoli felhasználó átveheti az egér és a billentyűzet irányít
 #: ui/configsecurity.ui:27
 #, kde-format
 msgid "Do not store passwords using KDE wallet"
-msgstr ""
+msgstr "Ne tárolja a jelszavakat a KDE jelszótároló használatával"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_useDefaultPort)
 #: ui/configtcp.ui:26
@@ -587,6 +602,8 @@ msgid ""
 "Address required by remote users to connect to your desktop. Click about "
 "button on the right for more info."
 msgstr ""
+"A távoli felhasználók által az asztalához való csatlakozáshoz szükséges cím. "
+"Kattintson a gombra a jobb oldalon további információkért."
 
 #. i18n: ectx: property (text), widget (QLabel, addressDisplayLabel)
 #: ui/mainwidget.ui:238
@@ -619,6 +636,9 @@ msgid ""
 "Password required by remote users to connect to your desktop. Click the edit "
 "button on the right to change password."
 msgstr ""
+"A távoli felhasználók által az asztalához való csatlakozáshoz szükséges "
+"jelszó. Kattintson a szerkesztés gombra a jobb oldalon a jelszó "
+"módosításához."
 
 #. i18n: ectx: property (text), widget (QLabel, passwordDisplayLabel)
 #: ui/mainwidget.ui:314
@@ -634,6 +654,9 @@ msgid ""
 "Unattended Access allows a remote user with the password to gain control to "
 "your desktop without your explicit confirmation."
 msgstr ""
+"A felügyelet nélküli hozzáférés lehetővé teszi a jelszóval rendelkező távoli "
+"felhasználó számára, hogy átvegye az irányítást az asztala felett az Ön "
+"kifejezett megerősítése nélkül."
 
 #. i18n: ectx: property (title), widget (QGroupBox, unattendedGroupBox)
 #: ui/mainwidget.ui:343
@@ -649,6 +672,10 @@ msgid ""
 "your desktop without your explicit confirmation. Click \"About\" button on "
 "right to know more."
 msgstr ""
+"A felügyelet nélküli hozzáférés lehetővé teszi a jelszóval rendelkező távoli "
+"felhasználó számára, hogy átvegye az irányítást  az asztala felett az Ön "
+"kifejezett megerősítése nélkül. Kattintson a „Névjegy” gombra, ha többet "
+"szeretne megtudni."
 
 #. i18n: ectx: property (whatsThis), widget (QToolButton, unattendedAboutButton)
 #: ui/mainwidget.ui:394
@@ -663,6 +690,9 @@ msgid ""
 "Starts/Stops unattended access to your desktop. Click on button on right to "
 "change password, and \"About\" button to know more."
 msgstr ""
+"Elindítja/leállítja a felügyelet nélküli hozzáférést az asztalához. "
+"Kattintson a jobb oldali gombra a jelszó megváltoztatásához, és a „Névjegy” "
+"gombra, ha többet szeretne megtudni."
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableUnattendedCheckBox)
 #: ui/mainwidget.ui:440
@@ -680,7 +710,7 @@ msgstr "Felügyelet nélküli hozzáférés jelszavának módosítása"
 #: ui/mainwidget.ui:468
 #, kde-format
 msgid "&Change Unattended Password"
-msgstr ""
+msgstr "Felügyelet nélküli jelszó &módosítása"
 
 #~ msgid "Welcome to KDE Desktop Sharing"
 #~ msgstr "Üdvözöljük a KDE asztalmegosztóban!"
