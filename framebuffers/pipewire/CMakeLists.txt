@@ -57,6 +57,7 @@ target_link_libraries(krfb_framebuffer_pw
                       Qt::Gui
                       Qt::DBus
                       KF6::CoreAddons
+                      KF6::ConfigCore
                       PkgConfig::PipeWire
                       Plasma::KWaylandClient
                       Wayland::Client
