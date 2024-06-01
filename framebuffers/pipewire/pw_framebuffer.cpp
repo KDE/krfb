@@ -22,6 +22,9 @@
 #include <QDebug>
 #include <QRandomGenerator>
 
+#include <KConfigGroup>
+#include <KSharedConfig>
+
 #include <KWayland/Client/connection_thread.h>
 #include <KWayland/Client/registry.h>
 
@@ -185,8 +188,16 @@ void PWFrameBuffer::Private::handleSessionCreated(quint32 code, const QVariantMa
     auto selectionOptions = QVariantMap {
         // We have to specify it's an uint, otherwise xdg-desktop-portal will not forward it to backend implementation
         { QStringLiteral("types"), QVariant::fromValue<uint>(7) }, // request all (KeyBoard, Pointer, TouchScreen)
-        { QStringLiteral("handle_token"), QStringLiteral("krfb%1").arg(QRandomGenerator::global()->generate()) }
+        { QStringLiteral("handle_token"), QStringLiteral("krfb%1").arg(QRandomGenerator::global()->generate()) },
+        { QStringLiteral("persist_mode"), QVariant::fromValue<uint>(2) }, // Persist permission until explicitly revoked by user
     };
+
+    KConfigGroup stateConfig = KSharedConfig::openStateConfig()->group(QStringLiteral("XdgPortal"));
+    const QString restoreToken = stateConfig.readEntry(QStringLiteral("RestoreToken"), QString());
+    if (!restoreToken.isEmpty()) {
+        selectionOptions[QStringLiteral("restore_token")] = restoreToken;
+    }
+
     auto selectorReply = dbusXdpRemoteDesktopService->SelectDevices(sessionPath, selectionOptions);
     selectorReply.waitForFinished();
     if (!selectorReply.isValid()) {
@@ -334,6 +345,10 @@ void PWFrameBuffer::Private::handleRemoteDesktopStarted(quint32 code, const QVar
         isValid = false;
         return;
     }
+
+    // save restore token
+    KConfigGroup stateConfig = KSharedConfig::openStateConfig()->group(QStringLiteral("XdgPortal"));
+    stateConfig.writeEntry(QStringLiteral("RestoreToken"), results[QStringLiteral("restore_token")].toString());
 }
 
 void PWFrameBuffer::Private::handleFrame(const PipeWireFrame &frame)
