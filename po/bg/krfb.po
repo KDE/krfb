@@ -3,19 +3,20 @@
 #
 # Zlatko Popov <zlatkopopov@fsa-bg.org>, 2006, 2007, 2008.
 # Yasen Pramatarov <yasen@lindeas.com>, 2011, 2013.
+# SPDX-FileCopyrightText: 2024 Mincho Kondarev <mkondarev@yahoo.de>
 msgid ""
 msgstr ""
 "Project-Id-Version: krfb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-10 01:34+0000\n"
-"PO-Revision-Date: 2013-07-25 15:34+0300\n"
-"Last-Translator: Yasen Pramatarov <yasen@lindeas.com>\n"
-"Language-Team: Bulgarian <dict@ludost.net>\n"
+"PO-Revision-Date: 2024-07-08 23:04+0200\n"
+"Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
+"Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 1.5\n"
+"X-Generator: Lokalize 24.05.1\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #, kde-format
@@ -62,7 +63,7 @@ msgstr "%1@%2 (споделяне на работното място)"
 #: krfb.kcfg:9
 #, kde-format
 msgid "Start minimized"
-msgstr ""
+msgstr "Стартиране в минимизиран режим"
 
 #. i18n: ectx: label, entry (useDefaultPort), group (TCP)
 #: krfb.kcfg:15
@@ -87,7 +88,7 @@ msgstr "Обявяване на услугата в локалната мреж�
 #: krfb.kcfg:29
 #, kde-format
 msgid "Do not store passwords in KWallet"
-msgstr ""
+msgstr "Да не се съхраняват пароли в KWallet"
 
 #. i18n: ectx: label, entry (allowDesktopControl), group (Security)
 #: krfb.kcfg:33
@@ -117,17 +118,18 @@ msgstr "Предпочитана приставка за фреймбуфер"
 #: main-virtualmonitor.cpp:49
 #, kde-format
 msgid "Creating a Virtual Monitor from %1"
-msgstr ""
+msgstr "Създаване на виртуален монитор от %1"
 
 #: main-virtualmonitor.cpp:80
 #, kde-format
 msgid "Remote Virtual Monitor"
-msgstr ""
+msgstr "Отдалечен виртуален монитор"
 
 #: main-virtualmonitor.cpp:82
 #, kde-format
 msgid "Offer a Virtual Monitor that can be accessed remotely"
 msgstr ""
+"Предложете виртуален монитор, който може да бъде достъпен от разстояние"
 
 #: main-virtualmonitor.cpp:84 main.cpp:98
 #, kde-format
@@ -151,7 +153,7 @@ msgstr ""
 #: main-virtualmonitor.cpp:91
 #, kde-format
 msgid "Virtual Monitor implementation"
-msgstr ""
+msgstr "Изпълнение на виртуален монитор"
 
 #: main-virtualmonitor.cpp:92 main.cpp:108
 #, kde-format
@@ -221,52 +223,52 @@ msgstr "оригинални енкодери VNC и дизайн на прот�
 #: main-virtualmonitor.cpp:108
 #, kde-format
 msgid "Logical resolution of the new monitor"
-msgstr ""
+msgstr "Логическа разделителна способност на новия монитор"
 
 #: main-virtualmonitor.cpp:108
 #, kde-format
 msgid "resolution"
-msgstr ""
+msgstr "резолюция"
 
 #: main-virtualmonitor.cpp:110
 #, kde-format
 msgid "Name of the monitor"
-msgstr ""
+msgstr "Име на монитора"
 
 #: main-virtualmonitor.cpp:110
 #, kde-format
 msgid "name"
-msgstr ""
+msgstr "име"
 
 #: main-virtualmonitor.cpp:112
-#, fuzzy, kde-format
+#, kde-format
 msgid "Password for the client to connect to it"
-msgstr "Парола за непоканени връзки."
+msgstr "Парола за клиента, за да се свърже с него"
 
 #: main-virtualmonitor.cpp:112
-#, fuzzy, kde-format
+#, kde-format
 msgid "password"
-msgstr "<b>Парола:</b>"
+msgstr "парола"
 
 #: main-virtualmonitor.cpp:114
 #, kde-format
 msgid "The device-pixel-ratio of the device, the scaling factor"
-msgstr ""
+msgstr "Пикселно съотношение на устройството, коефициент на мащабиране"
 
 #: main-virtualmonitor.cpp:114
 #, kde-format
 msgid "dpr"
-msgstr ""
+msgstr "dpr"
 
 #: main-virtualmonitor.cpp:116
 #, kde-format
 msgid "The port we will be listening to"
-msgstr ""
+msgstr "Портът, който ще се използва"
 
 #: main-virtualmonitor.cpp:116
 #, kde-format
 msgid "number"
-msgstr ""
+msgstr "номер"
 
 #: main.cpp:49
 #, kde-format
@@ -288,9 +290,9 @@ msgid "Desktop Sharing"
 msgstr "Споделяне на работното място"
 
 #: main.cpp:96
-#, fuzzy, kde-format
+#, kde-format
 msgid "VNC-compatible server to share desktops"
-msgstr "Съвместим сървър с протокола VNC за споделяне на работно място"
+msgstr "Сървър, съвместим с протокола VNC за споделяне на работно място"
 
 #: main.cpp:105
 #, kde-format
@@ -300,7 +302,7 @@ msgstr "George Goldberg"
 #: main.cpp:106
 #, kde-format
 msgid "Telepathy tubes support"
-msgstr ""
+msgstr "Поддръжка на Telepathy Tubes"
 
 #: main.cpp:126
 #, kde-format
@@ -313,16 +315,18 @@ msgid ""
 "Desktop Sharing is not running under an X11 Server or Wayland.\n"
 "Other display servers are currently not supported."
 msgstr ""
+"Споделянето на работния плот не се изпълнява под X11 сървър или Wayland.\n"
+"Другите сървъри за показване на информация понастоящем не се поддържат."
 
 #: mainwindow.cpp:52
 #, kde-format
 msgid "Storing passwords in config file is insecure!"
-msgstr ""
+msgstr "Съхраняването на пароли в конфигурационния файл е несигурно!"
 
 #: mainwindow.cpp:189
 #, kde-format
 msgid "Enter a new password for Unattended Access"
-msgstr ""
+msgstr "Въведете нова парола за безконтролен достъп"
 
 #: mainwindow.cpp:200
 #, kde-format
@@ -330,18 +334,20 @@ msgid ""
 "Failed to start the krfb server. Desktop sharing will not work. Try setting "
 "another port in the settings and restart krfb."
 msgstr ""
+"Не успя да се стартира сървърът на krfb. Споделянето на работния плот няма "
+"да работи. Опитайте да зададете друг порт в настройките и рестартирайте krfb."
 
 #. i18n: ectx: property (whatsThis), widget (QLabel, titleLabel)
 #. i18n: ectx: property (text), widget (QLabel, titleLabel)
 #. i18n: ectx: property (whatsThis), widget (QLabel, aboutLabel)
 #: mainwindow.cpp:223 mainwindow.cpp:230 ui/mainwidget.ui:83
 #: ui/mainwidget.ui:86 ui/mainwidget.ui:114
-#, fuzzy, kde-format
+#, kde-format
 msgid "KDE Desktop Sharing"
-msgstr "Споделяне на работното място"
+msgstr "Споделяне на работното място на KDE"
 
 #: mainwindow.cpp:224
-#, fuzzy, kde-format
+#, kde-format
 msgid ""
 "This field contains the address of your computer and the port number, "
 "separated by a colon.\n"
@@ -355,11 +361,17 @@ msgid ""
 "If your computer is behind a firewall it may have a different address or be "
 "unreachable for other computers."
 msgstr ""
-"(<a href=\"whatsthis:Полето съдържа адреса (IP) на вашия компютър и номера "
-"на екрана, разделени с двоеточие. Програмата се опитва да отгатне адреса от "
-"мрежовите настройки, но това не винаги е успешно. Ако компютърът ви се "
-"намира зад защитна стена (firewall), той може да бъде недостъпен за "
-"компютрите отвъд стената.\">помощ</a>)"
+"Полето съдържа адреса (IP) на вашия компютър и номера на екрана, разделени с "
+"двоеточие. \n"
+"\n"
+"Адресът е само насока - можете да използвате всеки адрес,  който може да "
+"достигне до вашия компютър.\n"
+"\n"
+"Програмата се опитва да отгатне адреса от мрежовите настройки, но това не "
+"винаги е успешно. \n"
+"\n"
+"Ако компютърът ви се намира зад защитна стена (firewall), той може да бъде "
+"недостъпен за компютрите отвъд стената."
 
 #: mainwindow.cpp:231
 #, kde-format
@@ -371,6 +383,12 @@ msgid ""
 "password, desktop sharing access will be granted without explicit "
 "confirmation."
 msgstr ""
+"Всеки отдалечен потребител с нормална парола за споделяне на работния плот "
+"ще трябва да бъде удостоверяван.\n"
+"\n"
+"Ако е включен неконтролиран достъп и отдалеченият потребител предостави "
+"парола за неконтролиран режим, достъпът до споделяне на работния плот ще "
+"бъде предоставен без изрично потвърждение."
 
 #: mainwindow.cpp:249
 #, kde-format
@@ -385,12 +403,14 @@ msgstr "Сигурност"
 #: mainwindow.cpp:251
 #, kde-format
 msgid "Screen capture"
-msgstr ""
+msgstr "Заснемане на екрана"
 
 #: mainwindow.cpp:256
 #, kde-format
 msgid "To apply framebuffer plugin setting, you need to restart the program."
 msgstr ""
+"За да приложите настройката на плъгина за фреймбуфер, трябва да рестартирате "
+"програмата."
 
 #: rfbservermanager.cpp:237
 #, kde-format
@@ -431,13 +451,13 @@ msgstr "Споделяне на работното място - свързан"
 #: ui/configframebuffer.ui:14
 #, kde-format
 msgid "Framebuffer"
-msgstr ""
+msgstr "Framebuffer"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: ui/configframebuffer.ui:22
-#, fuzzy, kde-format
+#, kde-format
 msgid "Preferred frameb&uffer plugin:"
-msgstr "Предпочитана приставка за фреймбуфер"
+msgstr "Предпочитана приставка за &фреймбуфер:"
 
 #. i18n: ectx: property (text), widget (QLabel, helpText)
 #: ui/configframebuffer.ui:47
@@ -448,6 +468,11 @@ msgid ""
 "style=\" font-weight:600;\">qt</span> plugin is a safe fallback, if for some "
 "reason others don't work. But also it is very slow.</p></body></html>"
 msgstr ""
+"<html><head/><body><p>Ако използвате x11, препоръчително е да използвате "
+"приставката <span style=\" font-weight:600;\">xcb</span>, защото е по-бърза. "
+"Приставката <br/><span style=\" font-weight:600;\">qt</span> е сигурен "
+"резервен вариант, ако по някаква причина другите приставки не работят, но "
+"също така е много бавна.</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_allowDesktopControl)
 #: ui/configsecurity.ui:17
@@ -459,7 +484,7 @@ msgstr "Разрешаване на отдалечени връзки да уп�
 #: ui/configsecurity.ui:27
 #, kde-format
 msgid "Do not store passwords using KDE wallet"
-msgstr ""
+msgstr "Да не се съхраняват пароли в портфейла KDE wallet"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_useDefaultPort)
 #: ui/configtcp.ui:26
@@ -529,43 +554,46 @@ msgid ""
 "KDE Desktop Sharing allows you to grant permission to someone at a remote "
 "location for viewing and possibly controlling your desktop."
 msgstr ""
+"Споделянето на работния плот в KDE ви позволява да предоставите разрешение "
+"на някой на отдалечено място за разглеждане и евентуално управление на вашия "
+"работен плот."
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, enableSharingCheckBox)
 #: ui/mainwidget.ui:145
-#, fuzzy, kde-format
+#, kde-format
 msgid "Starts/Stops Remote Desktop Sharing"
-msgstr "Управление на поканите"
+msgstr "Стартиране и спиране на споделянето на работния плот"
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableSharingCheckBox)
 #: ui/mainwidget.ui:148
-#, fuzzy, kde-format
+#, kde-format
 msgid "&Enable Desktop Sharing"
-msgstr "Споделяне на работното място"
+msgstr "&Актиивране на споделяне на работното място"
 
 #. i18n: ectx: property (title), widget (QGroupBox, detailsGroupBox)
 #: ui/mainwidget.ui:170
-#, fuzzy, kde-format
+#, kde-format
 msgid "Connection Details"
-msgstr "Connection side image"
+msgstr "Данни за връзката"
 
 #. i18n: ectx: property (text), widget (QLabel, addressLabel)
 #: ui/mainwidget.ui:193
 #, kde-format
 msgid "&Address"
-msgstr ""
+msgstr "&Адрес"
 
 #. i18n: ectx: property (whatsThis), widget (QToolButton, addressAboutButton)
 #: ui/mainwidget.ui:214
 #, kde-format
 msgid "More about this address"
-msgstr ""
+msgstr "Още данни за този адрес"
 
 #. i18n: ectx: property (text), widget (QToolButton, addressAboutButton)
 #. i18n: ectx: property (text), widget (QToolButton, unattendedAboutButton)
 #: ui/mainwidget.ui:217 ui/mainwidget.ui:397
 #, kde-format
 msgid "About"
-msgstr ""
+msgstr "Относно"
 
 #. i18n: ectx: property (whatsThis), widget (QLabel, addressDisplayLabel)
 #: ui/mainwidget.ui:235
@@ -574,30 +602,33 @@ msgid ""
 "Address required by remote users to connect to your desktop. Click about "
 "button on the right for more info."
 msgstr ""
+"Адрес, който се изисква от отдалечените потребители, за да се свържат с "
+"вашия работен плот. Щракнете върху бутона за информация вдясно за повече "
+"информация."
 
 #. i18n: ectx: property (text), widget (QLabel, addressDisplayLabel)
 #: ui/mainwidget.ui:238
 #, kde-format
 msgid "127.0.0.1 : 5900"
-msgstr ""
+msgstr "127.0.0.1 : 5900"
 
 #. i18n: ectx: property (text), widget (QLabel, passwordLabel)
 #: ui/mainwidget.ui:269
-#, fuzzy, kde-format
+#, kde-format
 msgid "&Password"
-msgstr "<b>Парола:</b>"
+msgstr "&Парола"
 
 #. i18n: ectx: property (whatsThis), widget (QToolButton, passwordEditButton)
 #: ui/mainwidget.ui:290
-#, fuzzy, kde-format
+#, kde-format
 msgid "Edit/Save Desktop Sharing Password"
-msgstr "Грешка при опит за споделяне на работното място"
+msgstr "Редактиране/Запазване на паролата за споделяне на работния плот"
 
 #. i18n: ectx: property (text), widget (QToolButton, passwordEditButton)
 #: ui/mainwidget.ui:293
 #, kde-format
 msgid "Edit"
-msgstr ""
+msgstr "Редактиране"
 
 #. i18n: ectx: property (whatsThis), widget (QLabel, passwordDisplayLabel)
 #: ui/mainwidget.ui:311
@@ -606,12 +637,15 @@ msgid ""
 "Password required by remote users to connect to your desktop. Click the edit "
 "button on the right to change password."
 msgstr ""
+"Парола, изисквана от отдалечените потребители, за да се свържат с вашия "
+"десктоп. Щракнете върху бутона за редактиране вдясно, за да промените "
+"паролата."
 
 #. i18n: ectx: property (text), widget (QLabel, passwordDisplayLabel)
 #: ui/mainwidget.ui:314
 #, kde-format
 msgid "TemporaryPassword"
-msgstr ""
+msgstr "Временна парола"
 
 #. i18n: ectx: property (whatsThis), widget (QGroupBox, unattendedGroupBox)
 #. i18n: ectx: property (text), widget (QLabel, unattendedAboutLabel)
@@ -621,12 +655,14 @@ msgid ""
 "Unattended Access allows a remote user with the password to gain control to "
 "your desktop without your explicit confirmation."
 msgstr ""
+"Неконтролиран достъп позволява на отдалечен потребител с парола да получи "
+"контрол върху вашия десктоп без вашето изрично потвърждение."
 
 #. i18n: ectx: property (title), widget (QGroupBox, unattendedGroupBox)
 #: ui/mainwidget.ui:343
 #, kde-format
 msgid "Unattended Access"
-msgstr ""
+msgstr "Неконтролиран достъп"
 
 #. i18n: ectx: property (whatsThis), widget (QLabel, unattendedAboutLabel)
 #: ui/mainwidget.ui:375
@@ -636,12 +672,15 @@ msgid ""
 "your desktop without your explicit confirmation. Click \"About\" button on "
 "right to know more."
 msgstr ""
+"Неконтролираният достъп позволява на отдалечен потребител с парола да получи "
+"контрол върху вашия работен плот без вашето изрично потвърждение. Щракнете "
+"върху бутона \\„Относно\\“ вдясно, за да научите повече."
 
 #. i18n: ectx: property (whatsThis), widget (QToolButton, unattendedAboutButton)
 #: ui/mainwidget.ui:394
 #, kde-format
 msgid "Know more about Unattended Access"
-msgstr ""
+msgstr "Научете повече за неконтролирания достъп"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, enableUnattendedCheckBox)
 #: ui/mainwidget.ui:437
@@ -650,21 +689,24 @@ msgid ""
 "Starts/Stops unattended access to your desktop. Click on button on right to "
 "change password, and \"About\" button to know more."
 msgstr ""
+"Стартира/спира неконтролирания достъп до вашия работен плот. Щракнете върху "
+"бутона вдясно, за да промените паролата, и върху бутона \\„Относно\\“, за да "
+"научите повече."
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableUnattendedCheckBox)
 #: ui/mainwidget.ui:440
 #, kde-format
 msgid "Enable &Unattended Access"
-msgstr ""
+msgstr "Активиране на &Неконтролиран достъп"
 
 #. i18n: ectx: property (whatsThis), widget (QPushButton, unattendedPasswordButton)
 #: ui/mainwidget.ui:465
 #, kde-format
 msgid "Change password for Unattended Access"
-msgstr ""
+msgstr "Промяна на паролата за неконтролиран достъп"
 
 #. i18n: ectx: property (text), widget (QPushButton, unattendedPasswordButton)
 #: ui/mainwidget.ui:468
 #, kde-format
 msgid "&Change Unattended Password"
-msgstr ""
+msgstr "&Смяна на паролата за неконтролиран достъп"
