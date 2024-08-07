@@ -106,6 +106,7 @@ target_link_libraries (krfb
                        KF6::WindowSystem
                        KF6::XmlGui
                        KF6::StatusNotifierItem
+                       KF6::Crash
                        ${LIBVNCSERVER_LIBRARIES}
 )
 
@@ -143,6 +144,7 @@ target_link_libraries(krfb-virtualmonitor
                       KF6::I18n
                       KF6::Notifications
                       KF6::WindowSystem
+                      KF6::Crash
 )
 
 install (TARGETS krfb-virtualmonitor

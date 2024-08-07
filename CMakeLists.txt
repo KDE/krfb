@@ -42,6 +42,7 @@ find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS
     WindowSystem
     XmlGui
     StatusNotifierItem
+    Crash
 )
 
 find_package(X11 REQUIRED)

@@ -12,6 +12,7 @@
 #include <QCommandLineOption>
 #include <QDebug>
 #include <QTimer>
+#include <KCrash>
 #include <KNotification>
 #include <KLocalizedString>
 #include <KWindowSystem>
@@ -102,6 +103,8 @@ int main(int argc, char *argv[])
                         i18n("original VNC encoders and "
                               "protocol design"));
     KAboutData::setApplicationData(aboutData);
+
+    KCrash::initialize();
 
     QCommandLineParser parser;
     aboutData.setupCommandLine(&parser);

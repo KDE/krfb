@@ -23,6 +23,7 @@
 #include "krfbdebug.h"
 
 #include <KAboutData>
+#include <KCrash>
 #include <KDBusService>
 #include <KLocalizedString>
 #include <KMessageBox>
@@ -120,6 +121,8 @@ int main(int argc, char *argv[])
                         i18n("original VNC encoders and "
                               "protocol design"));
     KAboutData::setApplicationData(aboutData);
+
+    KCrash::initialize();
 
     QCommandLineParser parser;
     aboutData.setupCommandLine(&parser);
