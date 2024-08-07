@@ -1,21 +1,10 @@
 /*
-    Copyright (C) 2009-2010 Collabora Ltd <info@collabora.co.uk>
-      @author George Goldberg <george.goldberg@collabora.co.uk>
-      @author George Kiagiadakis <george.kiagiadakis@collabora.co.uk>
-    Copyright (C) 2007 Alessandro Praduroux <pradu@pradu.it>
+    SPDX-FileCopyrightText: 2009-2010 Collabora Ltd <info@collabora.co.uk>
+    SPDX-FileContributor: George Goldberg <george.goldberg@collabora.co.uk>
+    SPDX-FileContributor: George Kiagiadakis <george.kiagiadakis@collabora.co.uk>
+    SPDX-FileCopyrightText: 2007 Alessandro Praduroux <pradu@pradu.it>
 
-    This program is free software; you can redistribute it and/or
-    modify it under the terms of the GNU General Public
-    License as published by the Free Software Foundation; either
-    version 2 of the License, or (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU Lesser General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+    SPDX-License-Identifier: GPL-2.0-or-later
 */
 #include "rfbserver.h"
 #include "rfbservermanager.h"
@@ -190,8 +179,8 @@ void RfbServer::updateScreen(const QList<QRect> & modifiedTiles)
 
 /*
  * Code copied from vino's bundled libvncserver:
- *  Copyright (C) 2000, 2001 Const Kaplinsky.  All Rights Reserved.
- *  Copyright (C) 1999 AT&T Laboratories Cambridge.  All Rights Reserved.
+ *  SPDX-FileCopyrightText: 2000, 2001 Const Kaplinsky. All Rights Reserved.
+ *  SPDX-FileCopyrightText: 1999 AT &T Laboratories Cambridge.  All Rights Reserved.
  *  License: GPL v2 or later
  */
 void krfb_rfbSetCursorPosition(rfbScreenInfoPtr screen, rfbClientPtr client, int x, int y)

@@ -1,11 +1,8 @@
 /* This file is part of the KDE project
-   Copyright (C) 2018 Oleg Chernovskiy <kanedias@xaker.ru>
-   Copyright (C) 2018-2020 Jan Grulich <jgrulich@redhat.com>
+   SPDX-FileCopyrightText: 2018 Oleg Chernovskiy <kanedias@xaker.ru>
+   SPDX-FileCopyrightText: 2018-2020 Jan Grulich <jgrulich@redhat.com>
 
-   This program is free software; you can redistribute it and/or
-   modify it under the terms of the GNU General Public
-   License as published by the Free Software Foundation; either
-   version 3 of the License, or (at your option) any later version.
+   SPDX-License-Identifier: GPL-3.0-or-later
 */
 #ifndef KRFB_FRAMEBUFFER_XCB_XCB_FRAMEBUFFER_H
 #define KRFB_FRAMEBUFFER_XCB_XCB_FRAMEBUFFER_H
