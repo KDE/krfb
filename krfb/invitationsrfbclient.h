@@ -12,10 +12,11 @@
 class InvitationsRfbClient : public RfbClient
 {
 public:
-    explicit InvitationsRfbClient(rfbClientPtr client, QObject* parent = nullptr)
-        : RfbClient(client, parent) {}
+    explicit InvitationsRfbClient(rfbClientPtr client, QObject *parent = nullptr)
+        : RfbClient(client, parent)
+    {
+    }
 };
-
 
 class PendingInvitationsRfbClient : public PendingRfbClient
 {
@@ -26,14 +27,14 @@ public:
 
 protected Q_SLOTS:
     void processNewClient() override;
-    bool checkPassword(const QByteArray & encryptedPassword) override;
+    bool checkPassword(const QByteArray &encryptedPassword) override;
 
 private Q_SLOTS:
     void dialogAccepted();
 
 private:
     struct Private;
-    Private* const d;
+    Private *const d;
 };
 
 #endif // INVITATIONSRFBCLIENT_H

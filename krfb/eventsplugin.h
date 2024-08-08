@@ -10,8 +10,8 @@
 
 #include "krfbprivate_export.h"
 
-#include <QtCore/QVariantList>
 #include <QWidget>
+#include <QtCore/QVariantList>
 
 class EventHandler;
 
@@ -25,5 +25,4 @@ public:
     virtual EventHandler *eventHandler() = 0;
 };
 
-#endif  // Header guard
-
+#endif // Header guard

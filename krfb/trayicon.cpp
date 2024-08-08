@@ -8,20 +8,20 @@
 #include "trayicon.h"
 
 #include "mainwindow.h"
-#include "rfbservermanager.h"
 #include "rfbclient.h"
+#include "rfbservermanager.h"
 
 #include <QIcon>
 #include <QMenu>
 
 #include <KAboutApplicationDialog>
 #include <KActionCollection>
-#include <QDialog>
+#include <KConfigGroup>
 #include <KHelpMenu>
 #include <KLocalizedString>
 #include <KStandardAction>
 #include <KToggleAction>
-#include <KConfigGroup>
+#include <QDialog>
 
 class ClientActions
 {
@@ -37,7 +37,7 @@ private:
     QAction *m_separator = nullptr;
 };
 
-ClientActions::ClientActions(RfbClient* client, QMenu* menu, QAction* before)
+ClientActions::ClientActions(RfbClient *client, QMenu *menu, QAction *before)
     : m_menu(menu)
 {
     m_title = m_menu->insertSection(before, client->name());
@@ -52,10 +52,8 @@ ClientActions::ClientActions(RfbClient* client, QMenu* menu, QAction* before)
         m_enableControlAction->setChecked(client->controlEnabled());
         m_menu->insertAction(before, m_enableControlAction);
 
-        QObject::connect(m_enableControlAction, &KToggleAction::triggered,
-                         client, &RfbClient::setControlEnabled);
-        QObject::connect(client, &RfbClient::controlEnabledChanged,
-                         m_enableControlAction, &KToggleAction::setChecked);
+        QObject::connect(m_enableControlAction, &KToggleAction::triggered, client, &RfbClient::setControlEnabled);
+        QObject::connect(client, &RfbClient::controlEnabledChanged, m_enableControlAction, &KToggleAction::setChecked);
     } else {
         m_enableControlAction = nullptr;
     }
@@ -90,29 +88,27 @@ TrayIcon::TrayIcon(QWidget *mainWindow)
     setToolTipTitle(i18n("Desktop Sharing - disconnected"));
     setCategory(KStatusNotifierItem::ApplicationStatus);
 
-    connect(RfbServerManager::instance(), &RfbServerManager::clientConnected,
-            this, &TrayIcon::onClientConnected);
-    connect(RfbServerManager::instance(), &RfbServerManager::clientDisconnected,
-            this, &TrayIcon::onClientDisconnected);
+    connect(RfbServerManager::instance(), &RfbServerManager::clientConnected, this, &TrayIcon::onClientConnected);
+    connect(RfbServerManager::instance(), &RfbServerManager::clientDisconnected, this, &TrayIcon::onClientDisconnected);
 
     m_aboutAction = KStandardAction::aboutApp(this, &TrayIcon::showAbout, this);
     contextMenu()->addAction(m_aboutAction);
 }
 
-void TrayIcon::onClientConnected(RfbClient* client)
+void TrayIcon::onClientConnected(RfbClient *client)
 {
-    if (m_clientActions.isEmpty()) { //first client connected
+    if (m_clientActions.isEmpty()) { // first client connected
         setIconByName(QStringLiteral("krfb"));
         setToolTipTitle(i18n("Desktop Sharing - connected with %1", client->name()));
         setStatus(KStatusNotifierItem::Active);
-    } else { //Nth client connected, N != 1
+    } else { // Nth client connected, N != 1
         setToolTipTitle(i18n("Desktop Sharing - connected"));
     }
 
     m_clientActions[client] = new ClientActions(client, contextMenu(), m_aboutAction);
 }
 
-void TrayIcon::onClientDisconnected(RfbClient* client)
+void TrayIcon::onClientDisconnected(RfbClient *client)
 {
     ClientActions *actions = m_clientActions.take(client);
     delete actions;
@@ -121,7 +117,7 @@ void TrayIcon::onClientDisconnected(RfbClient* client)
         setIconByPixmap(QIcon::fromTheme(QStringLiteral("krfb")).pixmap(22, 22, QIcon::Disabled));
         setToolTipTitle(i18n("Desktop Sharing - disconnected"));
         setStatus(KStatusNotifierItem::Passive);
-    } else if (m_clientActions.size() == 1) { //clients number dropped back to 1
+    } else if (m_clientActions.size() == 1) { // clients number dropped back to 1
         RfbClient *client = m_clientActions.constBegin().key();
         setToolTipTitle(i18n("Desktop Sharing - connected with %1", client->name()));
     }

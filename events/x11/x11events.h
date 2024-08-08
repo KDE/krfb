@@ -16,13 +16,10 @@ class X11EventHandler : public EventHandler
     Q_OBJECT
 public:
     explicit X11EventHandler(QObject *parent = nullptr)
-        : EventHandler(parent)
-    {
-    };
+        : EventHandler(parent) {};
 
     void handleKeyboard(bool down, rfbKeySym key) override;
     void handlePointer(int buttonMask, int x, int y) override;
 };
 
 #endif
-

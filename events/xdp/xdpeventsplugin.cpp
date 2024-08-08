@@ -26,4 +26,3 @@ EventHandler *XdpEventsPlugin::eventHandler()
 }
 
 #include "xdpeventsplugin.moc"
-

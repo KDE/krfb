@@ -12,8 +12,8 @@
 #endif
 #include <KWayland/Client/registry.h>
 #include <QDebug>
-#include <QRect>
 #include <QPointer>
+#include <QRect>
 
 using namespace KWayland::Client;
 
@@ -99,7 +99,7 @@ Screencasting::Screencasting(Registry *registry, int id, int version, QObject *p
 
 Screencasting::~Screencasting() = default;
 
-ScreencastingStream * Screencasting::createVirtualMonitorStream(const QString& name, const QSize& resolution, qreal dpr, Screencasting::CursorMode mode)
+ScreencastingStream *Screencasting::createVirtualMonitorStream(const QString &name, const QSize &resolution, qreal dpr, Screencasting::CursorMode mode)
 {
     auto stream = new ScreencastingStream(this);
     stream->d->init(d->stream_virtual_output(name, resolution.width(), resolution.height(), wl_fixed_from_double(dpr), mode));

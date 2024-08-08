@@ -22,11 +22,10 @@ X11EventsPlugin::X11EventsPlugin(QObject *parent, const QVariantList &args)
 EventHandler *X11EventsPlugin::eventHandler()
 {
     // works only under X11
-    if(!QX11Info::isPlatformX11())
+    if (!QX11Info::isPlatformX11())
         return nullptr;
 
     return new X11EventHandler();
 }
 
 #include "x11eventsplugin.moc"
-

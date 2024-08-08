@@ -14,9 +14,9 @@ class RfbClient;
 class ClientActions;
 
 /**
-  * Implements the trayicon.
-  * @author Tim Jansen
-  */
+ * Implements the trayicon.
+ * @author Tim Jansen
+ */
 
 class TrayIcon : public KStatusNotifierItem
 {
@@ -31,7 +31,7 @@ public Q_SLOTS:
 
 private:
     QAction *m_aboutAction;
-    QHash<RfbClient*, ClientActions*> m_clientActions;
+    QHash<RfbClient *, ClientActions *> m_clientActions;
 };
 
 #endif

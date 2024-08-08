@@ -11,14 +11,14 @@
 #include "invitationsrfbclient.h"
 #include "krfbconfig.h"
 #include "krfbdebug.h"
-#include <QTimer>
 #include <QApplication>
 #include <QHostInfo>
 #include <QRandomGenerator>
+#include <QTimer>
 
 #include <KLocalizedString>
-#include <KUser>
 #include <KStringHandler>
+#include <KUser>
 #include <KWallet>
 
 #include <KDNSSD/PublicService>
@@ -28,19 +28,16 @@ using KWallet::Wallet;
 // used for KWallet folder name
 static const QString s_krfbFolderName(QStringLiteral("krfb"));
 
-//static
+// static
 InvitationsRfbServer *InvitationsRfbServer::instance;
 
-//static
+// static
 void InvitationsRfbServer::init()
 {
     instance = new InvitationsRfbServer;
-    instance->m_publicService = new KDNSSD::PublicService(
-            i18n("%1@%2 (shared desktop)",
-                KUser().loginName(),
-                QHostInfo::localHostName()),
-            QStringLiteral("_rfb._tcp"),
-            KrfbConfig::port());
+    instance->m_publicService = new KDNSSD::PublicService(i18n("%1@%2 (shared desktop)", KUser().loginName(), QHostInfo::localHostName()),
+                                                          QStringLiteral("_rfb._tcp"),
+                                                          KrfbConfig::port());
     instance->setListeningAddress("0.0.0.0");
     instance->setListeningPort(KrfbConfig::port());
     instance->setPasswordRequired(true);
@@ -53,12 +50,12 @@ void InvitationsRfbServer::init()
     }
 }
 
-const QString& InvitationsRfbServer::desktopPassword() const
+const QString &InvitationsRfbServer::desktopPassword() const
 {
     return m_desktopPassword;
 }
 
-void InvitationsRfbServer::setDesktopPassword(const QString& password)
+void InvitationsRfbServer::setDesktopPassword(const QString &password)
 {
     m_desktopPassword = password;
     // this is called from GUI every time desktop password is edited.
@@ -66,12 +63,12 @@ void InvitationsRfbServer::setDesktopPassword(const QString& password)
     saveSecuritySettings();
 }
 
-const QString& InvitationsRfbServer::unattendedPassword() const
+const QString &InvitationsRfbServer::unattendedPassword() const
 {
     return m_unattendedPassword;
 }
 
-void InvitationsRfbServer::setUnattendedPassword(const QString& password)
+void InvitationsRfbServer::setUnattendedPassword(const QString &password)
 {
     m_unattendedPassword = password;
     // this is called from GUI every time unattended password is edited.
@@ -86,8 +83,8 @@ bool InvitationsRfbServer::allowUnattendedAccess() const
 
 bool InvitationsRfbServer::start()
 {
-    if(RfbServer::start()) {
-        if(KrfbConfig::publishService())
+    if (RfbServer::start()) {
+        if (KrfbConfig::publishService())
             m_publicService->publishAsync();
         return true;
     }
@@ -96,7 +93,7 @@ bool InvitationsRfbServer::start()
 
 void InvitationsRfbServer::stop()
 {
-    if(m_publicService->isPublished())
+    if (m_publicService->isPublished())
         m_publicService->stop();
     RfbServer::stop();
 }
@@ -113,14 +110,13 @@ InvitationsRfbServer::InvitationsRfbServer()
 {
     m_desktopPassword = readableRandomString(4) + QLatin1Char('-') + readableRandomString(3);
     m_unattendedPassword = readableRandomString(4) + QLatin1Char('-') + readableRandomString(3);
-    KConfigGroup krfbConfig(KSharedConfig::openConfig(),QStringLiteral("Security"));
-    m_allowUnattendedAccess = krfbConfig.readEntry(
-            "allowUnattendedAccess", QVariant(false)).toBool();
+    KConfigGroup krfbConfig(KSharedConfig::openConfig(), QStringLiteral("Security"));
+    m_allowUnattendedAccess = krfbConfig.readEntry("allowUnattendedAccess", QVariant(false)).toBool();
 }
 
 InvitationsRfbServer::~InvitationsRfbServer()
 {
-    InvitationsRfbServer::stop();  // calling virtual funcs in destructor is bad
+    InvitationsRfbServer::stop(); // calling virtual funcs in destructor is bad
     saveSecuritySettings();
     // ^^ also saves passwords in kwallet,
     //    do it before closing kwallet
@@ -129,7 +125,7 @@ InvitationsRfbServer::~InvitationsRfbServer()
     }
 }
 
-PendingRfbClient* InvitationsRfbServer::newClient(rfbClientPtr client)
+PendingRfbClient *InvitationsRfbServer::newClient(rfbClientPtr client)
 {
     return new PendingInvitationsRfbClient(client, this);
 }
@@ -138,8 +134,7 @@ void InvitationsRfbServer::openKWallet()
 {
     m_wallet = Wallet::openWallet(Wallet::NetworkWallet(), 0, Wallet::Asynchronous);
     if (m_wallet) {
-        connect(instance->m_wallet, &KWallet::Wallet::walletOpened,
-                this, &InvitationsRfbServer::walletOpened);
+        connect(instance->m_wallet, &KWallet::Wallet::walletOpened, this, &InvitationsRfbServer::walletOpened);
     }
 }
 
@@ -157,15 +152,13 @@ void InvitationsRfbServer::walletOpened(bool opened)
     QString unattendedPassword;
     Q_ASSERT(m_wallet);
 
-    if (opened && m_wallet->hasFolder(s_krfbFolderName) && m_wallet->setFolder(s_krfbFolderName) ) {
-        if (m_wallet->readPassword(QStringLiteral("desktopSharingPassword"), desktopPassword) == 0 &&
-                !desktopPassword.isEmpty()) {
+    if (opened && m_wallet->hasFolder(s_krfbFolderName) && m_wallet->setFolder(s_krfbFolderName)) {
+        if (m_wallet->readPassword(QStringLiteral("desktopSharingPassword"), desktopPassword) == 0 && !desktopPassword.isEmpty()) {
             m_desktopPassword = desktopPassword;
             Q_EMIT passwordChanged(m_desktopPassword);
         }
 
-        if(m_wallet->readPassword(QStringLiteral("unattendedAccessPassword"), unattendedPassword) == 0 &&
-                !unattendedPassword.isEmpty()) {
+        if (m_wallet->readPassword(QStringLiteral("unattendedAccessPassword"), unattendedPassword) == 0 && !unattendedPassword.isEmpty()) {
             m_unattendedPassword = unattendedPassword;
         }
 
@@ -190,13 +183,7 @@ QString InvitationsRfbServer::readableRandomString(int length)
             r += 6;
         }
         char c = char(r);
-        if ((c == 'i') ||
-                (c == 'I') ||
-                (c == '1') ||
-                (c == 'l') ||
-                (c == 'o') ||
-                (c == 'O') ||
-                (c == '0')) {
+        if ((c == 'i') || (c == 'I') || (c == '1') || (c == 'l') || (c == 'o') || (c == 'O') || (c == '0')) {
             continue;
         }
         str += QLatin1Char(c);
@@ -235,20 +222,18 @@ void InvitationsRfbServer::saveSecuritySettings()
 
 void InvitationsRfbServer::readPasswordFromConfig()
 {
-        QString desktopPassword;
-        QString unattendedPassword;
-        KConfigGroup krfbConfig(KSharedConfig::openConfig(),QStringLiteral("Security"));
+    QString desktopPassword;
+    QString unattendedPassword;
+    KConfigGroup krfbConfig(KSharedConfig::openConfig(), QStringLiteral("Security"));
 
-        desktopPassword = KStringHandler::obscure(krfbConfig.readEntry(
-                "desktopPassword", QString()));
-        if(!desktopPassword.isEmpty()) {
-            m_desktopPassword = desktopPassword;
-            Q_EMIT passwordChanged(m_desktopPassword);
-        }
+    desktopPassword = KStringHandler::obscure(krfbConfig.readEntry("desktopPassword", QString()));
+    if (!desktopPassword.isEmpty()) {
+        m_desktopPassword = desktopPassword;
+        Q_EMIT passwordChanged(m_desktopPassword);
+    }
 
-        unattendedPassword = KStringHandler::obscure(krfbConfig.readEntry(
-                "unattendedPassword", QString()));
-        if(!unattendedPassword.isEmpty()) {
-            m_unattendedPassword = unattendedPassword;
-        }
+    unattendedPassword = KStringHandler::obscure(krfbConfig.readEntry("unattendedPassword", QString()));
+    if (!unattendedPassword.isEmpty()) {
+        m_unattendedPassword = unattendedPassword;
+    }
 }

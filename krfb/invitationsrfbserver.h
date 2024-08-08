@@ -11,12 +11,14 @@
 
 #include "rfbserver.h"
 
-namespace KWallet {
-    class Wallet;
+namespace KWallet
+{
+class Wallet;
 }
 
-namespace KDNSSD {
-    class PublicService;
+namespace KDNSSD
+{
+class PublicService;
 }
 
 class InvitationsRfbServer : public RfbServer
@@ -26,14 +28,14 @@ public:
     static InvitationsRfbServer *instance;
     static void init();
 
-    const QString& desktopPassword() const;
-    void setDesktopPassword(const QString&);
-    const QString& unattendedPassword() const;
-    void setUnattendedPassword(const QString&);
+    const QString &desktopPassword() const;
+    void setDesktopPassword(const QString &);
+    const QString &unattendedPassword() const;
+    void setUnattendedPassword(const QString &);
     bool allowUnattendedAccess() const;
 
 Q_SIGNALS:
-    void passwordChanged(const QString&);
+    void passwordChanged(const QString &);
 
 public Q_SLOTS:
     bool start() override;
@@ -46,7 +48,7 @@ public Q_SLOTS:
 protected:
     InvitationsRfbServer();
     ~InvitationsRfbServer() override;
-    PendingRfbClient* newClient(rfbClientPtr client) override;
+    PendingRfbClient *newClient(rfbClientPtr client) override;
 
 private Q_SLOTS:
     void walletOpened(bool);

@@ -8,8 +8,8 @@
 #define KRFB_FRAMEBUFFER_XCB_XCB_FRAMEBUFFER_H
 
 #include "framebuffer.h"
-#include <QWidget>
 #include <QVariantMap>
+#include <QWidget>
 
 /**
  * @brief The PWFrameBuffer class - framebuffer implementation based on XDG Desktop Portal ScreenCast interface.
@@ -17,7 +17,7 @@
  *
  * @author Oleg Chernovskiy <kanedias@xaker.ru>
  */
-class PWFrameBuffer: public FrameBuffer
+class PWFrameBuffer : public FrameBuffer
 {
     Q_OBJECT
 public:
@@ -33,10 +33,10 @@ public:
     void initDBus();
     void startVirtualMonitor(const QString &name, const QSize &resolution, qreal dpr);
 
-    int  depth() override;
-    int  height() override;
-    int  width() override;
-    int  paddedWidth() override;
+    int depth() override;
+    int height() override;
+    int width() override;
+    int paddedWidth() override;
     void getServerFormat(rfbPixelFormat &format) override;
     void startMonitor() override;
     void stopMonitor() override;

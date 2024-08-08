@@ -11,12 +11,11 @@
 
 #include "krfbprivate_export.h"
 
+#include <QList>
 #include <QObject>
 #include <QRect>
-#include <QList>
 #include <QVariant>
 #include <QWidget>
-
 
 class FrameBuffer;
 /**
@@ -54,7 +53,6 @@ protected:
 
 private:
     Q_DISABLE_COPY(FrameBuffer)
-
 };
 
 #endif

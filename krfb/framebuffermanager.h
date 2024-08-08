@@ -40,9 +40,7 @@ private:
     FrameBufferManager();
 
     QMap<QString, FrameBufferPlugin *> m_plugins;
-    QMap<WId, QWeakPointer<FrameBuffer> > m_frameBuffers;
+    QMap<WId, QWeakPointer<FrameBuffer>> m_frameBuffers;
 };
 
-
-#endif  // Header guard
-
+#endif // Header guard

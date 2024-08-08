@@ -40,7 +40,7 @@ Q_SIGNALS:
     void holdStatusChanged(bool onHold);
 
 protected:
-    friend class RfbServer; //the following event handling methods are called by RfbServer
+    friend class RfbServer; // the following event handling methods are called by RfbServer
 
     rfbClientPtr getRfbClientPtr();
     virtual void handleKeyboardEvent(bool down, rfbKeySym keySym);
@@ -50,15 +50,14 @@ private Q_SLOTS:
     void onSocketActivated();
 
 private:
-    ///called by RfbServerManager to send framebuffer updates
-    ///and check for possible disconnection
+    /// called by RfbServerManager to send framebuffer updates
+    /// and check for possible disconnection
     void update();
     friend class RfbServerManager;
 
     struct Private;
     Private *const d;
 };
-
 
 class PendingRfbClient : public QObject
 {
@@ -77,22 +76,21 @@ protected Q_SLOTS:
     void reject();
 
 protected:
-
-    friend class RfbServer; //Following two methods are handled by RfbServer
+    friend class RfbServer; // Following two methods are handled by RfbServer
 
     /** This method is supposed to check if the provided \a encryptedPassword
      * matches the criteria for authenticating the client.
      * The default implementation returns false if a password is required.
      * Reimplement to do more useful stuff.
      */
-    virtual bool checkPassword(const QByteArray & encryptedPassword);
+    virtual bool checkPassword(const QByteArray &encryptedPassword);
 
     /** This method checks if the \a encryptedPassword that was sent from the remote
      * user matches the \a password that you have specified locally to be the password
      * for this connection. This assumes that the standard VNC authentication mechanism
      * is used. Returns true if the password matches or false otherwise.
      */
-    bool vncAuthCheckPassword(const QByteArray & password, const QByteArray & encryptedPassword) const;
+    bool vncAuthCheckPassword(const QByteArray &password, const QByteArray &encryptedPassword) const;
 
     rfbClientPtr m_rfbClient;
 

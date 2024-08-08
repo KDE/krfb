@@ -21,7 +21,7 @@ class EventData
 public:
     EventData();
 
-    //mouse
+    // mouse
     int buttonMask = 0;
     int x = 0;
     int y = 0;
@@ -42,7 +42,8 @@ EventData::EventData()
 void EventData::init()
 {
     dbusXdpRemoteDesktopService.reset(new OrgFreedesktopPortalRemoteDesktopInterface(QStringLiteral("org.freedesktop.portal.Desktop"),
-                                      QStringLiteral("/org/freedesktop/portal/desktop"), QDBusConnection::sessionBus()));
+                                                                                     QStringLiteral("/org/freedesktop/portal/desktop"),
+                                                                                     QDBusConnection::sessionBus()));
 }
 
 void XdpEventHandler::handleKeyboard(bool down, rfbKeySym keySym)
@@ -68,7 +69,7 @@ void XdpEventHandler::handlePointer(int buttonMask, int x, int y)
 
     if (buttonMask != data->buttonMask) {
         int i = 0;
-        QList<int> buttons = { BTN_LEFT, BTN_MIDDLE, BTN_RIGHT, 0, 0, 0, 0, BTN_SIDE, BTN_EXTRA };
+        QList<int> buttons = {BTN_LEFT, BTN_MIDDLE, BTN_RIGHT, 0, 0, 0, 0, BTN_SIDE, BTN_EXTRA};
         for (auto it = buttons.constBegin(); it != buttons.constEnd(); ++it) {
             int prevButtonState = (data->buttonMask >> i) & 0x01;
             int currentButtonState = (buttonMask >> i) & 0x01;
@@ -81,22 +82,22 @@ void XdpEventHandler::handlePointer(int buttonMask, int x, int y)
                     int steps = 0;
                     switch (i) {
                     case 3:
-                        axis = 0;   // Vertical
+                        axis = 0; // Vertical
                         steps = -1;
                         break;
                     case 4:
-                        axis = 0;   // Vertical
+                        axis = 0; // Vertical
                         steps = 1;
                         break;
                     case 5:
-                        axis = 1;   // Horizontal
+                        axis = 1; // Horizontal
                         steps = -1;
                         break;
                     case 6:
-                        axis = 1;   // Horizontal
+                        axis = 1; // Horizontal
                         steps = 1;
                         break;
-                        }
+                    }
 
                     data->dbusXdpRemoteDesktopService->NotifyPointerAxisDiscrete(sessionHandle, QVariantMap(), axis, steps);
                 }

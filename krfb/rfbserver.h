@@ -24,7 +24,7 @@ public:
     int listeningPort() const;
     bool passwordRequired() const;
 
-    void setListeningAddress(const QByteArray & address);
+    void setListeningAddress(const QByteArray &address);
     void setListeningPort(int port);
     void setPasswordRequired(bool passwordRequired);
 
@@ -33,8 +33,8 @@ public Q_SLOTS:
     virtual void stop();
 
     void updateFrameBuffer(char *fb, int width, int height, int depth);
-    void updateScreen(const QList<QRect> & modifiedTiles);
-    void updateCursorPosition(const QPoint & position);
+    void updateScreen(const QList<QRect> &modifiedTiles);
+    void updateCursorPosition(const QPoint &position);
 
 private Q_SLOTS:
     void krfbSendServerCutText();

@@ -18,29 +18,29 @@ class MainWindow : public KXmlGuiWindow
 {
     Q_OBJECT
 
-    public:
-        explicit MainWindow(QWidget *parent = nullptr);
-        ~MainWindow() override;
+public:
+    explicit MainWindow(QWidget *parent = nullptr);
+    ~MainWindow() override;
 
-    public Q_SLOTS:
-        void showConfiguration();
+public Q_SLOTS:
+    void showConfiguration();
 
-    protected:
-        void readProperties(const KConfigGroup & group) override;
-        void saveProperties(KConfigGroup & group) override;
+protected:
+    void readProperties(const KConfigGroup &group) override;
+    void saveProperties(KConfigGroup &group) override;
 
-    private Q_SLOTS:
-        void editPassword();
-        void editUnattendedPassword();
-        void toggleDesktopSharing(bool enable);
-        void passwordChanged(const QString&);
-        void aboutConnectionAddress();
-        void aboutUnattendedMode();
+private Q_SLOTS:
+    void editPassword();
+    void editUnattendedPassword();
+    void toggleDesktopSharing(bool enable);
+    void passwordChanged(const QString &);
+    void aboutConnectionAddress();
+    void aboutUnattendedMode();
 
-    private:
-        Ui::MainWidget m_ui;
-        bool m_passwordEditable;
-        QLineEdit *m_passwordLineEdit = nullptr;
+private:
+    Ui::MainWidget m_ui;
+    bool m_passwordEditable;
+    QLineEdit *m_passwordLineEdit = nullptr;
 };
 
 #endif

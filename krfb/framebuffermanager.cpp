@@ -11,12 +11,11 @@
 #include "krfbconfig.h"
 #include "krfbdebug.h"
 
-#include <QGuiApplication>
 #include <QGlobalStatic>
+#include <QGuiApplication>
 
 #include <KPluginFactory>
 #include <KPluginMetaData>
-
 
 class FrameBufferManagerStatic
 {
@@ -28,10 +27,11 @@ Q_GLOBAL_STATIC(FrameBufferManagerStatic, frameBufferManagerStatic)
 
 FrameBufferManager::FrameBufferManager()
 {
-    const auto platformFilter = [] (const KPluginMetaData &pluginData) {
+    const auto platformFilter = [](const KPluginMetaData &pluginData) {
         return pluginData.value(QStringLiteral("X-KDE-OnlyShowOnQtPlatforms"), QStringList()).contains(QGuiApplication::platformName());
     };
-    const QList<KPluginMetaData> plugins = KPluginMetaData::findPlugins(QStringLiteral("krfb/framebuffer"), platformFilter, KPluginMetaData::AllowEmptyMetaData);
+    const QList<KPluginMetaData> plugins =
+        KPluginMetaData::findPlugins(QStringLiteral("krfb/framebuffer"), platformFilter, KPluginMetaData::AllowEmptyMetaData);
     for (const KPluginMetaData &data : plugins) {
         const KPluginFactory::Result<FrameBufferPlugin> result = KPluginFactory::instantiatePlugin<FrameBufferPlugin>(data);
         if (result.plugin) {
@@ -59,10 +59,10 @@ QSharedPointer<FrameBuffer> FrameBufferManager::frameBuffer(WId id, const QVaria
         QWeakPointer<FrameBuffer> weakFrameBuffer = m_frameBuffers.value(id);
 
         if (weakFrameBuffer) {
-            //qDebug() << "Found cached frame buffer.";
+            // qDebug() << "Found cached frame buffer.";
             return weakFrameBuffer.toStrongRef();
         } else {
-            //qDebug() << "Found deleted cached frame buffer. Don't use.";
+            // qDebug() << "Found deleted cached frame buffer. Don't use.";
             m_frameBuffers.remove(id);
         }
     }

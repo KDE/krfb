@@ -10,12 +10,10 @@
 #include <QWidget>
 #include <xcb/xcb.h>
 
-
-
 /**
     @author Alexey Min <alexey.min@gmail.com>
 */
-class XCBFrameBuffer: public FrameBuffer
+class XCBFrameBuffer : public FrameBuffer
 {
     Q_OBJECT
 public:
@@ -24,10 +22,10 @@ public:
 
 public:
     QList<QRect> modifiedTiles() override;
-    int  depth() override;
-    int  height() override;
-    int  width() override;
-    int  paddedWidth() override;
+    int depth() override;
+    int height() override;
+    int width() override;
+    int paddedWidth() override;
     void getServerFormat(rfbPixelFormat &format) override;
     void startMonitor() override;
     void stopMonitor() override;

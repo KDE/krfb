@@ -25,5 +25,4 @@ private:
     Q_DISABLE_COPY(X11EventsPlugin)
 };
 
-
-#endif  // Header guard
+#endif // Header guard

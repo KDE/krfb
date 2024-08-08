@@ -11,20 +11,20 @@
 #include <QCheckBox>
 #include <QIcon>
 
+#include <KConfigGroup>
+#include <KGuiItem>
 #include <KLocalizedString>
 #include <KStandardGuiItem>
-#include <KConfigGroup>
 #include <QDialogButtonBox>
 #include <QPushButton>
-#include <KGuiItem>
 #include <QVBoxLayout>
 
-template <typename UI>
+template<typename UI>
 ConnectionDialog<UI>::ConnectionDialog(QWidget *parent)
     : QDialog(parent)
 {
     setWindowTitle(i18n("New Connection"));
-    auto buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel);
+    auto buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
     auto mainWidget = new QWidget(this);
     auto mainLayout = new QVBoxLayout;
     setLayout(mainLayout);

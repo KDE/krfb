@@ -13,13 +13,13 @@
 #include <QtGui/private/qtx11extras_p.h>
 
 #include <X11/Xutil.h>
-#include <X11/keysym.h>
 #include <X11/extensions/XTest.h>
+#include <X11/keysym.h>
 
 enum {
     LEFTSHIFT = 1,
     RIGHTSHIFT = 2,
-    ALTGR = 4
+    ALTGR = 4,
 };
 
 class EventData
@@ -27,7 +27,7 @@ class EventData
 public:
     EventData();
 
-    //keyboard
+    // keyboard
     Display *dpy = nullptr;
     signed char modifiers[0x100] = {};
     KeyCode keycodes[0x100] = {};
@@ -36,7 +36,7 @@ public:
     KeyCode altGrCode = 0;
     char modifierState = 0;
 
-    //mouse
+    // mouse
     int buttonMask = 0;
     int x = 0;
     int y = 0;
@@ -57,7 +57,7 @@ void EventData::init()
     buttonMask = 0;
 
     dpy = QX11Info::display();
-    //initialize keycodes
+    // initialize keycodes
     KeySym key, *keymap;
     int i, j, minkey, maxkey, syms_per_keycode;
 
@@ -66,14 +66,12 @@ void EventData::init()
     XDisplayKeycodes(dpy, &minkey, &maxkey);
     Q_ASSERT(minkey >= 8);
     Q_ASSERT(maxkey < 256);
-    keymap = (KeySym *) XGetKeyboardMapping(dpy, minkey,
-                                            (maxkey - minkey + 1),
-                                            &syms_per_keycode);
+    keymap = (KeySym *)XGetKeyboardMapping(dpy, minkey, (maxkey - minkey + 1), &syms_per_keycode);
     Q_ASSERT(keymap);
 
     for (i = minkey; i <= maxkey; i++) {
         for (j = 0; j < syms_per_keycode; j++) {
-            key = keymap[(i-minkey)*syms_per_keycode+j];
+            key = keymap[(i - minkey) * syms_per_keycode + j];
 
             if (key >= ' ' && key < 0x100 && i == XKeysymToKeycode(dpy, key)) {
                 keycodes[key] = i;
@@ -100,36 +98,36 @@ static void tweakModifiers(signed char mod, bool down)
 
     if (isShift && mod != 1) {
         if (data->modifierState & LEFTSHIFT) {
-            XTestFakeKeyEvent(data->dpy, data->leftShiftCode,
-                              down, CurrentTime);
+            XTestFakeKeyEvent(data->dpy, data->leftShiftCode, down, CurrentTime);
         }
 
         if (data->modifierState & RIGHTSHIFT) {
-            XTestFakeKeyEvent(data->dpy, data->rightShiftCode,
-                              down, CurrentTime);
+            XTestFakeKeyEvent(data->dpy, data->rightShiftCode, down, CurrentTime);
         }
     }
 
     if (!isShift && mod == 1) {
-        XTestFakeKeyEvent(data->dpy, data->leftShiftCode,
-                          down, CurrentTime);
+        XTestFakeKeyEvent(data->dpy, data->leftShiftCode, down, CurrentTime);
     }
 
     if ((data->modifierState & ALTGR) && mod != 2) {
-        XTestFakeKeyEvent(data->dpy, data->altGrCode,
-                          !down, CurrentTime);
+        XTestFakeKeyEvent(data->dpy, data->altGrCode, !down, CurrentTime);
     }
 
     if (!(data->modifierState & ALTGR) && mod == 2) {
-        XTestFakeKeyEvent(data->dpy, data->altGrCode,
-                          down, CurrentTime);
+        XTestFakeKeyEvent(data->dpy, data->altGrCode, down, CurrentTime);
     }
 }
 
 void X11EventHandler::handleKeyboard(bool down, rfbKeySym keySym)
 {
-#define ADJUSTMOD(sym,state) \
-    if(keySym==sym) { if(down) data->modifierState|=state; else data->modifierState&=~state; }
+#define ADJUSTMOD(sym, state)                                                                                                                                  \
+    if (keySym == sym) {                                                                                                                                       \
+        if (down)                                                                                                                                              \
+            data->modifierState |= state;                                                                                                                      \
+        else                                                                                                                                                   \
+            data->modifierState &= ~state;                                                                                                                     \
+    }
 
     if (QX11Info::isPlatformX11()) {
         ADJUSTMOD(XK_Shift_L, LEFTSHIFT);
@@ -160,11 +158,11 @@ void X11EventHandler::handleKeyboard(bool down, rfbKeySym keySym)
             }
         }
     }
-/*
-    // Wayland platform and pipweire plugin in use
-    if (KrfbConfig::preferredFrameBufferPlugin() == QStringLiteral("pw")) {
+    /*
+        // Wayland platform and pipweire plugin in use
+        if (KrfbConfig::preferredFrameBufferPlugin() == QStringLiteral("pw")) {
 
-    }*/
+        }*/
 }
 
 void X11EventHandler::handlePointer(int buttonMask, int x, int y)
@@ -173,11 +171,8 @@ void X11EventHandler::handlePointer(int buttonMask, int x, int y)
         XTestFakeMotionEvent(data->dpy, 0, x, y, CurrentTime);
 
         for (int i = 0; i < 5; i++) {
-            if ((data->buttonMask&(1 << i)) != (buttonMask&(1 << i))) {
-                XTestFakeButtonEvent(data->dpy,
-                                        i + 1,
-                                        (buttonMask&(1 << i)) ? True : False,
-                                        CurrentTime);
+            if ((data->buttonMask & (1 << i)) != (buttonMask & (1 << i))) {
+                XTestFakeButtonEvent(data->dpy, i + 1, (buttonMask & (1 << i)) ? True : False, CurrentTime);
             }
         }
 

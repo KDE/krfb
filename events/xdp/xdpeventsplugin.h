@@ -27,6 +27,4 @@ private:
     Q_DISABLE_COPY(XdpEventsPlugin)
 };
 
-
-#endif  // Header guard
-
+#endif // Header guard

@@ -16,4 +16,3 @@
 #undef FALSE
 
 #endif // Header guard
-

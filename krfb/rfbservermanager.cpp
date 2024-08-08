@@ -8,20 +8,20 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 #include "rfbservermanager.h"
-#include "rfbserver.h"
 #include "framebuffermanager.h"
-#include "sockethelpers.h"
 #include "krfbconfig.h"
 #include "krfbdebug.h"
-#include <QTimer>
+#include "rfbserver.h"
+#include "sockethelpers.h"
 #include <QApplication>
 #include <QGlobalStatic>
 #include <QHostInfo>
+#include <QTimer>
 #include <qpa/qplatformnativeinterface.h>
 
 #include <KLocalizedString>
-#include <KUser>
 #include <KNotification>
+#include <KUser>
 #include <KWindowSystem>
 #include <chrono>
 
@@ -69,32 +69,29 @@ static const char *mask =
     "     xxxxx         "
     "      xxx          ";
 
-
-struct RfbServerManagerStatic
-{
+struct RfbServerManagerStatic {
     RfbServerManager server;
 };
 
 Q_GLOBAL_STATIC(RfbServerManagerStatic, s_instance)
 
-RfbServerManager* RfbServerManager::instance()
+RfbServerManager *RfbServerManager::instance()
 {
     return &s_instance->server;
 }
 
-struct RfbServerManager::Private
-{
+struct RfbServerManager::Private {
     QSharedPointer<FrameBuffer> fb;
     rfbCursorPtr myCursor;
     QByteArray desktopName;
     QTimer rfbUpdateTimer;
-    QSet<RfbServer*> servers;
-    QSet<RfbClient*> clients;
+    QSet<RfbServer *> servers;
+    QSet<RfbClient *> clients;
 };
 
-
 RfbServerManager::RfbServerManager()
-    : QObject(), d(new Private)
+    : QObject()
+    , d(new Private)
 {
     init();
 }
@@ -113,19 +110,20 @@ QVariantMap RfbServerManager::s_pluginArgs;
 
 void RfbServerManager::init()
 {
-    //qDebug();
+    // qDebug();
     WId rootWindow = 0;
 
     if (KWindowSystem::isPlatformX11()) {
-        QPlatformNativeInterface* native = qApp->platformNativeInterface();
+        QPlatformNativeInterface *native = qApp->platformNativeInterface();
         rootWindow = reinterpret_cast<WId>(native->nativeResourceForScreen(QByteArrayLiteral("rootwindow"), QGuiApplication::primaryScreen()));
     }
 
     d->fb = FrameBufferManager::instance()->frameBuffer(rootWindow, s_pluginArgs);
-    d->myCursor = rfbMakeXCursor(19, 19, (char *) cur, (char *) mask);
+    d->myCursor = rfbMakeXCursor(19, 19, (char *)cur, (char *)mask);
     d->myCursor->cleanup = false;
-    d->desktopName = QStringLiteral("%1@%2 (shared desktop)") //FIXME check if we can use utf8
-                        .arg(KUser().loginName(),QHostInfo::localHostName()).toLatin1();
+    d->desktopName = QStringLiteral("%1@%2 (shared desktop)") // FIXME check if we can use utf8
+                         .arg(KUser().loginName(), QHostInfo::localHostName())
+                         .toLatin1();
 
     connect(d->fb.data(), &FrameBuffer::frameBufferChanged, this, &RfbServerManager::updateFrameBuffer);
     connect(&d->rfbUpdateTimer, &QTimer::timeout, this, &RfbServerManager::updateScreens);
@@ -144,26 +142,26 @@ void RfbServerManager::updateScreens()
     QList<QRect> rects = d->fb->modifiedTiles();
     const QPoint currentCursorPos = d->fb->cursorPosition();
 
-    for (RfbServer* server : std::as_const(d->servers)) {
+    for (RfbServer *server : std::as_const(d->servers)) {
         server->updateScreen(rects);
         server->updateCursorPosition(currentCursorPos);
     }
 
-    //update() might disconnect some of the clients, which will synchronously
-    //call the removeClient() method and will change d->clients, so we need
-    //to copy the set here to avoid problems.
-    const QSet<RfbClient*> clients = d->clients;
-    for (RfbClient* client : clients) {
+    // update() might disconnect some of the clients, which will synchronously
+    // call the removeClient() method and will change d->clients, so we need
+    // to copy the set here to avoid problems.
+    const QSet<RfbClient *> clients = d->clients;
+    for (RfbClient *client : clients) {
         client->update();
     }
 }
 
 void RfbServerManager::cleanup()
 {
-    //qDebug();
+    // qDebug();
 
-    //copy because d->servers is going to be modified while we delete the servers
-    const QSet<RfbServer*> servers = d->servers;
+    // copy because d->servers is going to be modified while we delete the servers
+    const QSet<RfbServer *> servers = d->servers;
     qDeleteAll(servers);
 
     Q_ASSERT(d->servers.isEmpty());
@@ -174,12 +172,12 @@ void RfbServerManager::cleanup()
     d->fb.clear();
 }
 
-void RfbServerManager::registerServer(RfbServer* server)
+void RfbServerManager::registerServer(RfbServer *server)
 {
     d->servers.insert(server);
 }
 
-void RfbServerManager::unregisterServer(RfbServer* server)
+void RfbServerManager::unregisterServer(RfbServer *server)
 {
     d->servers.remove(server);
 }
@@ -198,7 +196,7 @@ rfbScreenInfoPtr RfbServerManager::newScreen()
             bpp = 4;
         }
 
-        //qDebug() << "bpp: " << bpp;
+        // qDebug() << "bpp: " << bpp;
 
         rfbLogEnable(KRFB().isDebugEnabled());
 
@@ -213,26 +211,25 @@ rfbScreenInfoPtr RfbServerManager::newScreen()
     return screen;
 }
 
-void RfbServerManager::addClient(RfbClient* cc)
+void RfbServerManager::addClient(RfbClient *cc)
 {
     if (d->clients.size() == 0) {
-        //qDebug() << "Starting framebuffer monitor";
+        // qDebug() << "Starting framebuffer monitor";
         d->fb->startMonitor();
         d->rfbUpdateTimer.start(50ms);
     }
     d->clients.insert(cc);
 
-    KNotification::event(QStringLiteral("UserAcceptsConnection"),
-                         i18n("The remote user %1 is now connected.", cc->name()));
+    KNotification::event(QStringLiteral("UserAcceptsConnection"), i18n("The remote user %1 is now connected.", cc->name()));
 
     Q_EMIT clientConnected(cc);
 }
 
-void RfbServerManager::removeClient(RfbClient* cc)
+void RfbServerManager::removeClient(RfbClient *cc)
 {
     d->clients.remove(cc);
     if (d->clients.size() == 0) {
-        //qDebug() << "Stopping framebuffer monitor";
+        // qDebug() << "Stopping framebuffer monitor";
         d->fb->stopMonitor();
         d->rfbUpdateTimer.stop();
     }

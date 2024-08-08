@@ -4,7 +4,6 @@
  SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-
 #include "xcb_framebufferplugin.h"
 #include "xcb_framebuffer.h"
 #include <KPluginFactory>
@@ -23,4 +22,3 @@ FrameBuffer *XCBFrameBufferPlugin::frameBuffer(const QVariantMap &args)
 }
 
 #include "xcb_framebufferplugin.moc"
-

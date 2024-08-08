@@ -7,38 +7,41 @@
 
     SPDX-License-Identifier: GPL-2.0-or-later
 */
-#include "rfb.h"
 #include "invitationsrfbclient.h"
+#include "connectiondialog.h"
 #include "invitationsrfbserver.h"
 #include "krfbconfig.h"
-#include "sockethelpers.h"
-#include "connectiondialog.h"
 #include "krfbdebug.h"
+#include "rfb.h"
+#include "sockethelpers.h"
 
-#include <KNotification>
 #include <KLocalizedString>
+#include <KNotification>
 
+#include <KConfigGroup>
 #include <QSocketNotifier>
 #include <poll.h>
-#include <KConfigGroup>
 
-struct PendingInvitationsRfbClient::Private
-{
-    Private(rfbClientPtr client) :
-        client(client),
-        askOnConnect(true)
-    {}
+struct PendingInvitationsRfbClient::Private {
+    Private(rfbClientPtr client)
+        : client(client)
+        , askOnConnect(true)
+    {
+    }
 
     rfbClientPtr client;
     QSocketNotifier *notifier = nullptr;
     bool askOnConnect;
 };
 
-static void clientGoneHookNoop(rfbClientPtr cl) { Q_UNUSED(cl); }
+static void clientGoneHookNoop(rfbClientPtr cl)
+{
+    Q_UNUSED(cl);
+}
 
-PendingInvitationsRfbClient::PendingInvitationsRfbClient(rfbClientPtr client, QObject *parent) :
-    PendingRfbClient(client, parent),
-    d(new Private(client))
+PendingInvitationsRfbClient::PendingInvitationsRfbClient(rfbClientPtr client, QObject *parent)
+    : PendingRfbClient(client, parent)
+    , d(new Private(client))
 {
     d->client->clientGoneHook = clientGoneHookNoop;
 }
@@ -53,16 +56,11 @@ void PendingInvitationsRfbClient::processNewClient()
     QString host = peerAddress(m_rfbClient->sock) + QLatin1Char(':') + QString::number(peerPort(m_rfbClient->sock));
 
     if (d->askOnConnect == false) {
-
-        KNotification::event(QStringLiteral("NewConnectionAutoAccepted"),
-                             i18n("Accepted connection from %1", host));
+        KNotification::event(QStringLiteral("NewConnectionAutoAccepted"), i18n("Accepted connection from %1", host));
         accept(new InvitationsRfbClient(m_rfbClient, parent()));
 
     } else {
-
-        KNotification::event(QStringLiteral("NewConnectionOnHold"),
-                            i18n("Received connection from %1, on hold (waiting for confirmation)",
-                                host));
+        KNotification::event(QStringLiteral("NewConnectionOnHold"), i18n("Received connection from %1, on hold (waiting for confirmation)", host));
 
         auto dialog = new InvitationsConnectionDialog(nullptr);
         dialog->setRemoteHost(host);
@@ -75,20 +73,17 @@ void PendingInvitationsRfbClient::processNewClient()
     }
 }
 
-bool PendingInvitationsRfbClient::checkPassword(const QByteArray & encryptedPassword)
+bool PendingInvitationsRfbClient::checkPassword(const QByteArray &encryptedPassword)
 {
     qCDebug(KRFB) << "about to start authentication";
 
-    if(InvitationsRfbServer::instance->allowUnattendedAccess() && vncAuthCheckPassword(
-            InvitationsRfbServer::instance->unattendedPassword().toLocal8Bit(),
-            encryptedPassword) ) {
+    if (InvitationsRfbServer::instance->allowUnattendedAccess()
+        && vncAuthCheckPassword(InvitationsRfbServer::instance->unattendedPassword().toLocal8Bit(), encryptedPassword)) {
         d->askOnConnect = false;
         return true;
     }
 
-    return vncAuthCheckPassword(
-            InvitationsRfbServer::instance->desktopPassword().toLocal8Bit(),
-            encryptedPassword);
+    return vncAuthCheckPassword(InvitationsRfbServer::instance->desktopPassword().toLocal8Bit(), encryptedPassword);
 }
 
 void PendingInvitationsRfbClient::dialogAccepted()

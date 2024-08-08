@@ -9,8 +9,8 @@
 #ifndef RFBSERVERMANAGER_H
 #define RFBSERVERMANAGER_H
 
-#include "rfb.h"
 #include "framebuffer.h"
+#include "rfb.h"
 #include <QObject>
 #include <QVariantMap>
 

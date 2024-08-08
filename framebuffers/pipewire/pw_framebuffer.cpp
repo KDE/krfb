@@ -8,16 +8,16 @@
 #include "config-krfb.h"
 
 // system
-#include <sys/mman.h>
 #include <cstring>
+#include <sys/mman.h>
 
 // Qt
 #include <QCoreApplication>
+#include <QDebug>
 #include <QGuiApplication>
+#include <QRandomGenerator>
 #include <QScreen>
 #include <QSocketNotifier>
-#include <QDebug>
-#include <QRandomGenerator>
 
 #include <KConfigGroup>
 #include <KSharedConfig>
@@ -28,13 +28,13 @@
 // pipewire
 #include <climits>
 
-#include "pw_framebuffer.h"
-#include "xdp_dbus_screencast_interface.h"
-#include "xdp_dbus_remotedesktop_interface.h"
 #include "krfb_fb_pipewire_debug.h"
+#include "pw_framebuffer.h"
 #include "screencasting.h"
-#include <PipeWireSourceStream>
+#include "xdp_dbus_remotedesktop_interface.h"
+#include "xdp_dbus_screencast_interface.h"
 #include <DmaBufHandler>
+#include <PipeWireSourceStream>
 
 static const int BYTES_PER_PIXEL = 4;
 static const uint MIN_SUPPORTED_XDP_KDE_SC_VERSION = 1;
@@ -42,7 +42,7 @@ static const uint MIN_SUPPORTED_XDP_KDE_SC_VERSION = 1;
 Q_DECLARE_METATYPE(PWFrameBuffer::Stream);
 Q_DECLARE_METATYPE(PWFrameBuffer::Streams);
 
-const QDBusArgument &operator >> (const QDBusArgument &arg, PWFrameBuffer::Stream &stream)
+const QDBusArgument &operator>>(const QDBusArgument &arg, PWFrameBuffer::Stream &stream)
 {
     arg.beginStructure();
     arg >> stream.nodeId;
@@ -66,7 +66,8 @@ const QDBusArgument &operator >> (const QDBusArgument &arg, PWFrameBuffer::Strea
  * @brief The PWFrameBuffer::Private class - private counterpart of PWFramebuffer class. This is the entity where
  *        whole logic resides, for more info search for "d-pointer pattern" information.
  */
-class PWFrameBuffer::Private {
+class PWFrameBuffer::Private
+{
 public:
     Private(PWFrameBuffer *q);
     ~Private();
@@ -111,7 +112,7 @@ PWFrameBuffer::Private::Private(PWFrameBuffer *q)
     : q(q)
     , stream(new PipeWireSourceStream(q))
 {
-    QObject::connect(stream.get(), &PipeWireSourceStream::frameReceived, q, [this] (const PipeWireFrame &frame) {
+    QObject::connect(stream.get(), &PipeWireSourceStream::frameReceived, q, [this](const PipeWireFrame &frame) {
         handleFrame(frame);
     });
 }
@@ -125,11 +126,11 @@ void PWFrameBuffer::Private::initDbus()
 {
     qInfo() << "Initializing D-Bus connectivity with XDG Desktop Portal";
     dbusXdpScreenCastService.reset(new OrgFreedesktopPortalScreenCastInterface(QStringLiteral("org.freedesktop.portal.Desktop"),
-                                                                     QStringLiteral("/org/freedesktop/portal/desktop"),
-                                                                     QDBusConnection::sessionBus()));
+                                                                               QStringLiteral("/org/freedesktop/portal/desktop"),
+                                                                               QDBusConnection::sessionBus()));
     dbusXdpRemoteDesktopService.reset(new OrgFreedesktopPortalRemoteDesktopInterface(QStringLiteral("org.freedesktop.portal.Desktop"),
-                                                                     QStringLiteral("/org/freedesktop/portal/desktop"),
-                                                                     QDBusConnection::sessionBus()));
+                                                                                     QStringLiteral("/org/freedesktop/portal/desktop"),
+                                                                                     QDBusConnection::sessionBus()));
     auto version = dbusXdpScreenCastService->version();
     if (version < MIN_SUPPORTED_XDP_KDE_SC_VERSION) {
         qCWarning(KRFB_FB_PIPEWIRE) << "Unsupported XDG Portal screencast interface version:" << version;
@@ -138,10 +139,8 @@ void PWFrameBuffer::Private::initDbus()
     }
 
     // create session
-    auto sessionParameters = QVariantMap {
-        { QStringLiteral("session_handle_token"), QStringLiteral("krfb%1").arg(QRandomGenerator::global()->generate()) },
-        { QStringLiteral("handle_token"), QStringLiteral("krfb%1").arg(QRandomGenerator::global()->generate()) }
-    };
+    auto sessionParameters = QVariantMap{{QStringLiteral("session_handle_token"), QStringLiteral("krfb%1").arg(QRandomGenerator::global()->generate())},
+                                         {QStringLiteral("handle_token"), QStringLiteral("krfb%1").arg(QRandomGenerator::global()->generate())}};
     auto sessionReply = dbusXdpRemoteDesktopService->CreateSession(sessionParameters);
     sessionReply.waitForFinished();
     if (!sessionReply.isValid()) {
@@ -182,11 +181,11 @@ void PWFrameBuffer::Private::handleSessionCreated(quint32 code, const QVariantMa
     sessionPath = QDBusObjectPath(results.value(QStringLiteral("session_handle")).toString());
 
     // select sources for the session
-    auto selectionOptions = QVariantMap {
+    auto selectionOptions = QVariantMap{
         // We have to specify it's an uint, otherwise xdg-desktop-portal will not forward it to backend implementation
-        { QStringLiteral("types"), QVariant::fromValue<uint>(7) }, // request all (KeyBoard, Pointer, TouchScreen)
-        { QStringLiteral("handle_token"), QStringLiteral("krfb%1").arg(QRandomGenerator::global()->generate()) },
-        { QStringLiteral("persist_mode"), QVariant::fromValue<uint>(2) }, // Persist permission until explicitly revoked by user
+        {QStringLiteral("types"), QVariant::fromValue<uint>(7)}, // request all (KeyBoard, Pointer, TouchScreen)
+        {QStringLiteral("handle_token"), QStringLiteral("krfb%1").arg(QRandomGenerator::global()->generate())},
+        {QStringLiteral("persist_mode"), QVariant::fromValue<uint>(2)}, // Persist permission until explicitly revoked by user
     };
 
     KConfigGroup stateConfig = KSharedConfig::openStateConfig()->group(QStringLiteral("XdgPortal"));
@@ -231,11 +230,9 @@ void PWFrameBuffer::Private::handleDevicesSelected(quint32 code, const QVariantM
     }
 
     // select sources for the session
-    auto selectionOptions = QVariantMap {
-        { QStringLiteral("types"), QVariant::fromValue<uint>(1) }, // only MONITOR is supported
-        { QStringLiteral("multiple"), false },
-        { QStringLiteral("handle_token"), QStringLiteral("krfb%1").arg(QRandomGenerator::global()->generate()) }
-    };
+    auto selectionOptions = QVariantMap{{QStringLiteral("types"), QVariant::fromValue<uint>(1)}, // only MONITOR is supported
+                                        {QStringLiteral("multiple"), false},
+                                        {QStringLiteral("handle_token"), QStringLiteral("krfb%1").arg(QRandomGenerator::global()->generate())}};
     auto selectorReply = dbusXdpScreenCastService->SelectSources(sessionPath, selectionOptions);
     selectorReply.waitForFinished();
     if (!selectorReply.isValid()) {
@@ -273,9 +270,7 @@ void PWFrameBuffer::Private::handleSourcesSelected(quint32 code, const QVariantM
     }
 
     // start session
-    auto startParameters = QVariantMap {
-        { QStringLiteral("handle_token"), QStringLiteral("krfb%1").arg(QRandomGenerator::global()->generate()) }
-    };
+    auto startParameters = QVariantMap{{QStringLiteral("handle_token"), QStringLiteral("krfb%1").arg(QRandomGenerator::global()->generate())}};
     auto startReply = dbusXdpRemoteDesktopService->Start(sessionPath, QString(), startParameters);
     startReply.waitForFinished();
     QDBusConnection::sessionBus().connect(QString(),
@@ -285,7 +280,6 @@ void PWFrameBuffer::Private::handleSourcesSelected(quint32 code, const QVariantM
                                           this->q,
                                           SLOT(handleXdpRemoteDesktopStarted(uint, QVariantMap)));
 }
-
 
 void PWFrameBuffer::handleXdpRemoteDesktopStarted(quint32 code, const QVariantMap &results)
 {
@@ -376,9 +370,9 @@ void PWFrameBuffer::Private::handleFrame(const PipeWireFrame &frame)
 #endif
     else if (frame.dmabuf) {
         // FIXME: Assuming stride == width * 4, not sure to which extent this holds
-        const QSize size = { frame.dmabuf->width, frame.dmabuf->height };
+        const QSize size = {frame.dmabuf->width, frame.dmabuf->height};
         setVideoSize(size);
-        QImage src(reinterpret_cast<uchar*>(q->fb), size.width(), size.height(), QImage::Format_RGB32);
+        QImage src(reinterpret_cast<uchar *>(q->fb), size.width(), size.height(), QImage::Format_RGB32);
         if (!m_dmabufHandler.downloadFrame(src, frame)) {
             stream->renegotiateModifierFailed(frame.format, frame.dmabuf->modifier);
             qCDebug(KRFB_FB_PIPEWIRE) << "Failed to download frame.";
@@ -404,7 +398,7 @@ void PWFrameBuffer::Private::setVideoSize(const QSize &size)
     }
 
     free(q->fb);
-    q->fb = static_cast<char*>(malloc(size.width() * size.height() * BYTES_PER_PIXEL));
+    q->fb = static_cast<char *>(malloc(size.width() * size.height() * BYTES_PER_PIXEL));
     if (!q->fb) {
         qCWarning(KRFB_FB_PIPEWIRE) << "Failed to allocate buffer";
         isValid = false;
@@ -420,8 +414,8 @@ PWFrameBuffer::Private::~Private()
 }
 
 PWFrameBuffer::PWFrameBuffer(QObject *parent)
-    : FrameBuffer (parent),
-      d(new Private(this))
+    : FrameBuffer(parent)
+    , d(new Private(this))
 {
 }
 
@@ -436,7 +430,7 @@ void PWFrameBuffer::initDBus()
     d->initDbus();
 }
 
-void PWFrameBuffer::startVirtualMonitor(const QString& name, const QSize& resolution, qreal dpr)
+void PWFrameBuffer::startVirtualMonitor(const QString &name, const QSize &resolution, qreal dpr)
 {
     d->videoSize = resolution * dpr;
     using namespace KWayland::Client;
@@ -448,16 +442,19 @@ void PWFrameBuffer::startVirtualMonitor(const QString& name, const QSize& resolu
     }
 
     auto registry = new Registry(this);
-    connect(registry, &KWayland::Client::Registry::interfaceAnnounced, this, [this, registry, name, dpr, resolution] (const QByteArray &interfaceName, quint32 wlname, quint32 version) {
-        if (interfaceName != "zkde_screencast_unstable_v1")
-            return;
+    connect(registry,
+            &KWayland::Client::Registry::interfaceAnnounced,
+            this,
+            [this, registry, name, dpr, resolution](const QByteArray &interfaceName, quint32 wlname, quint32 version) {
+                if (interfaceName != "zkde_screencast_unstable_v1")
+                    return;
 
-        auto screencasting = new Screencasting(registry, wlname, version, this);
-        auto r = screencasting->createVirtualMonitorStream(name, resolution, dpr, Screencasting::Metadata);
-        connect(r, &ScreencastingStream::created, this, [this] (quint32 nodeId) {
-            d->stream->createStream(nodeId, 0);
-        });
-    });
+                auto screencasting = new Screencasting(registry, wlname, version, this);
+                auto r = screencasting->createVirtualMonitorStream(name, resolution, dpr, Screencasting::Metadata);
+                connect(r, &ScreencastingStream::created, this, [this](quint32 nodeId) {
+                    d->stream->createStream(nodeId, 0);
+                });
+            });
     registry->create(connection);
     registry->setup();
 }
@@ -498,19 +495,18 @@ void PWFrameBuffer::getServerFormat(rfbPixelFormat &format)
 
 void PWFrameBuffer::startMonitor()
 {
-
 }
 
 void PWFrameBuffer::stopMonitor()
 {
-
 }
 
 QVariant PWFrameBuffer::customProperty(const QString &property) const
 {
     if (property == QLatin1String("stream_node_id")) {
         return QVariant::fromValue<uint>(d->stream->nodeId());
-    } if (property == QLatin1String("session_handle")) {
+    }
+    if (property == QLatin1String("session_handle")) {
         return QVariant::fromValue<QDBusObjectPath>(d->sessionPath);
     }
 

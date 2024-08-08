@@ -13,8 +13,8 @@
 #define EVENTS_H
 
 #include "framebuffer.h"
-#include "rfb.h"
 #include "krfbprivate_export.h"
+#include "rfb.h"
 
 #include <QObject>
 
@@ -29,6 +29,7 @@ public:
 
     void setFrameBufferPlugin(const QSharedPointer<FrameBuffer> &frameBuffer);
     QSharedPointer<FrameBuffer> frameBuffer();
+
 private:
     // Used to track framebuffer plugin which we need for xdp event plugin
     QSharedPointer<FrameBuffer> fb;
