@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krfb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-10 01:34+0000\n"
+"POT-Creation-Date: 2024-08-09 00:39+0000\n"
 "PO-Revision-Date: 2020-04-08 19:22+0200\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <kde-i18n-doc@kde.org>\n"
@@ -30,32 +30,32 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "erik@binghamton.edu"
 
-#: connectiondialog.cpp:39
+#: connectiondialog.cpp:26
 #, kde-format
 msgid "New Connection"
 msgstr "Ny forbindelse"
 
-#: connectiondialog.cpp:61
+#: connectiondialog.cpp:48
 #, kde-format
 msgid "Accept Connection"
 msgstr "Acceptér forbindelse"
 
-#: connectiondialog.cpp:65
+#: connectiondialog.cpp:52
 #, kde-format
 msgid "Refuse Connection"
 msgstr "Afslå forbindelse"
 
-#: invitationsrfbclient.cpp:69
+#: invitationsrfbclient.cpp:58
 #, kde-format
 msgid "Accepted connection from %1"
 msgstr "Accepterede forbindelse fra %1"
 
-#: invitationsrfbclient.cpp:75
+#: invitationsrfbclient.cpp:64
 #, kde-format
 msgid "Received connection from %1, on hold (waiting for confirmation)"
 msgstr "Modtog forbindelse fra %1, on hold (venter på bekræftelse)"
 
-#: invitationsrfbserver.cpp:50
+#: invitationsrfbserver.cpp:39
 #, kde-format
 msgid "%1@%2 (shared desktop)"
 msgstr "%1@%2 (delt skrivebord)"
@@ -116,22 +116,22 @@ msgstr "Adgangskode for ikke-inviterede forbindelser."
 msgid "Preferred Frame Buffer Plugin"
 msgstr "Foretrukket framebuffer-plugin"
 
-#: main-virtualmonitor.cpp:49
+#: main-virtualmonitor.cpp:47
 #, kde-format
 msgid "Creating a Virtual Monitor from %1"
 msgstr ""
 
-#: main-virtualmonitor.cpp:80
+#: main-virtualmonitor.cpp:78
 #, kde-format
 msgid "Remote Virtual Monitor"
 msgstr ""
 
-#: main-virtualmonitor.cpp:82
+#: main-virtualmonitor.cpp:80
 #, kde-format
 msgid "Offer a Virtual Monitor that can be accessed remotely"
 msgstr ""
 
-#: main-virtualmonitor.cpp:84 main.cpp:98
+#: main-virtualmonitor.cpp:82 main.cpp:87
 #, kde-format
 msgid ""
 "(c) 2009-2010, Collabora Ltd.\n"
@@ -150,72 +150,72 @@ msgstr ""
 "(c) 2000, Tridia Corporation\n"
 "(c) 1999, AT&T Laboratories Boston\n"
 
-#: main-virtualmonitor.cpp:91
+#: main-virtualmonitor.cpp:89
 #, kde-format
 msgid "Virtual Monitor implementation"
 msgstr ""
 
-#: main-virtualmonitor.cpp:92 main.cpp:108
+#: main-virtualmonitor.cpp:90 main.cpp:97
 #, kde-format
 msgid "George Kiagiadakis"
 msgstr "George Kiagiadakis"
 
-#: main-virtualmonitor.cpp:93 main.cpp:111
+#: main-virtualmonitor.cpp:91 main.cpp:100
 #, kde-format
 msgid "Alessandro Praduroux"
 msgstr "Alessandro Praduroux"
 
-#: main-virtualmonitor.cpp:93 main.cpp:111
+#: main-virtualmonitor.cpp:91 main.cpp:100
 #, kde-format
 msgid "KDE4 porting"
 msgstr "KDE4 portering"
 
-#: main-virtualmonitor.cpp:94 main.cpp:112
+#: main-virtualmonitor.cpp:92 main.cpp:101
 #, kde-format
 msgid "Tim Jansen"
 msgstr "Tim Jansen"
 
-#: main-virtualmonitor.cpp:94 main.cpp:112
+#: main-virtualmonitor.cpp:92 main.cpp:101
 #, kde-format
 msgid "Original author"
 msgstr "Oprindelige udvikler"
 
-#: main-virtualmonitor.cpp:95 main.cpp:113
+#: main-virtualmonitor.cpp:93 main.cpp:102
 #, kde-format
 msgid "Johannes E. Schindelin"
 msgstr "Johannes E. Schindelin"
 
-#: main-virtualmonitor.cpp:96 main.cpp:114
+#: main-virtualmonitor.cpp:94 main.cpp:103
 #, kde-format
 msgid "libvncserver"
 msgstr "libvncserver"
 
-#: main-virtualmonitor.cpp:97 main.cpp:115
+#: main-virtualmonitor.cpp:95 main.cpp:104
 #, kde-format
 msgid "Const Kaplinsky"
 msgstr "Const Kaplinsky"
 
-#: main-virtualmonitor.cpp:98 main.cpp:116
+#: main-virtualmonitor.cpp:96 main.cpp:105
 #, kde-format
 msgid "TightVNC encoder"
 msgstr "TightVNC indkoder"
 
-#: main-virtualmonitor.cpp:99 main.cpp:117
+#: main-virtualmonitor.cpp:97 main.cpp:106
 #, kde-format
 msgid "Tridia Corporation"
 msgstr "Tridia Corporation"
 
-#: main-virtualmonitor.cpp:100 main.cpp:118
+#: main-virtualmonitor.cpp:98 main.cpp:107
 #, kde-format
 msgid "ZLib encoder"
 msgstr "ZLib indkoder"
 
-#: main-virtualmonitor.cpp:101 main.cpp:119
+#: main-virtualmonitor.cpp:99 main.cpp:108
 #, kde-format
 msgid "AT&T Laboratories Boston"
 msgstr "AT&T Laboratories Boston"
 
-#: main-virtualmonitor.cpp:102 main.cpp:120
+#: main-virtualmonitor.cpp:100 main.cpp:109
 #, kde-format
 msgid "original VNC encoders and protocol design"
 msgstr "original VNC indkodere og protokol design"
@@ -272,7 +272,7 @@ msgstr ""
 msgid "number"
 msgstr ""
 
-#: main.cpp:49
+#: main.cpp:38
 #, kde-format
 msgid ""
 "Your X11 Server does not support the required XTest extension version 2.2. "
@@ -281,37 +281,37 @@ msgstr ""
 "Din X11-server understøtter ikke den krævede XTest-udvidelse version 2.2. "
 "Deling af dit skrivebord er ikke muligt."
 
-#: main.cpp:51 main.cpp:150
+#: main.cpp:40 main.cpp:141
 #, kde-format
 msgid "Desktop Sharing Error"
 msgstr "Fejl ved skrivebordsdeling"
 
-#: main.cpp:94
+#: main.cpp:83
 #, kde-format
 msgid "Desktop Sharing"
 msgstr "Skrivebordsdeling"
 
-#: main.cpp:96
+#: main.cpp:85
 #, kde-format
 msgid "VNC-compatible server to share desktops"
 msgstr "VNC-kompatible servere til at deles skriveborde"
 
-#: main.cpp:105
+#: main.cpp:94
 #, kde-format
 msgid "George Goldberg"
 msgstr "George Goldberg"
 
-#: main.cpp:106
+#: main.cpp:95
 #, kde-format
 msgid "Telepathy tubes support"
 msgstr "Understøttelse af Telepathy Tubes"
 
-#: main.cpp:126
+#: main.cpp:117
 #, kde-format
 msgid "Do not show the invitations management dialog at startup"
 msgstr "Vis ikke dialogen til invitationshåndtering ved opstart"
 
-#: main.cpp:148
+#: main.cpp:139
 #, kde-format
 msgid ""
 "Desktop Sharing is not running under an X11 Server or Wayland.\n"
@@ -320,18 +320,18 @@ msgstr ""
 "Skrivebordsdeling kører ikke under en X11-server eller Wayland.\n"
 "Andre display-servere er ikke understøttet i øjeblikket."
 
-#: mainwindow.cpp:52
+#: mainwindow.cpp:49
 #, kde-format
 msgid "Storing passwords in config file is insecure!"
 msgstr ""
 "Det udgøre en sikkerhedsrisiko at gemme adgangskoder i en konfigurationsfil!"
 
-#: mainwindow.cpp:189
+#: mainwindow.cpp:186
 #, kde-format
 msgid "Enter a new password for Unattended Access"
 msgstr "Angiv en ny adgangskode til uovervåget adgang"
 
-#: mainwindow.cpp:200
+#: mainwindow.cpp:197
 #, kde-format
 msgid ""
 "Failed to start the krfb server. Desktop sharing will not work. Try setting "
@@ -343,13 +343,13 @@ msgstr ""
 #. i18n: ectx: property (whatsThis), widget (QLabel, titleLabel)
 #. i18n: ectx: property (text), widget (QLabel, titleLabel)
 #. i18n: ectx: property (whatsThis), widget (QLabel, aboutLabel)
-#: mainwindow.cpp:223 mainwindow.cpp:230 ui/mainwidget.ui:83
+#: mainwindow.cpp:220 mainwindow.cpp:227 ui/mainwidget.ui:83
 #: ui/mainwidget.ui:86 ui/mainwidget.ui:114
 #, kde-format
 msgid "KDE Desktop Sharing"
 msgstr "KDE skrivebordsdeling"
 
-#: mainwindow.cpp:224
+#: mainwindow.cpp:221
 #, kde-format
 msgid ""
 "This field contains the address of your computer and the port number, "
@@ -376,7 +376,7 @@ msgstr ""
 "Hvis din computer er bag en firewall vil den måske have en anden adresse "
 "eller ikke kunne nås fra andre computere."
 
-#: mainwindow.cpp:231
+#: mainwindow.cpp:228
 #, kde-format
 msgid ""
 "Any remote user with normal desktop sharing password will have to be "
@@ -393,59 +393,59 @@ msgstr ""
 "adgangskode til uovervåget tilstand, vil adgang til skrivebordsdeling blive "
 "givet uden eksplicit bekræftelse."
 
-#: mainwindow.cpp:249
+#: mainwindow.cpp:246
 #, kde-format
 msgid "Network"
 msgstr "Netværk"
 
-#: mainwindow.cpp:250
+#: mainwindow.cpp:247
 #, kde-format
 msgid "Security"
 msgstr "Sikkerhed"
 
-#: mainwindow.cpp:251
+#: mainwindow.cpp:248
 #, kde-format
 msgid "Screen capture"
 msgstr "Skærmoptagelse"
 
-#: mainwindow.cpp:256
+#: mainwindow.cpp:253
 #, kde-format
 msgid "To apply framebuffer plugin setting, you need to restart the program."
 msgstr ""
 "Du skal genstarte programmet for at anvende indstillinger for framebuffer-"
 "plugin."
 
-#: rfbservermanager.cpp:237
+#: rfbservermanager.cpp:226
 #, kde-format
 msgid "The remote user %1 is now connected."
 msgstr "Den eksterne bruger %1 er nu forbundet."
 
-#: rfbservermanager.cpp:251
+#: rfbservermanager.cpp:240
 #, kde-format
 msgid "The remote user %1 disconnected."
 msgstr "Den eksterne bruger %1 er frakoblet."
 
-#: trayicon.cpp:56
+#: trayicon.cpp:45
 #, kde-format
 msgid "Disconnect"
 msgstr "Afbryd forbindelse"
 
-#: trayicon.cpp:62
+#: trayicon.cpp:51
 #, kde-format
 msgid "Enable Remote Control"
 msgstr "Aktivér ekstern kontrol"
 
-#: trayicon.cpp:101 trayicon.cpp:133
+#: trayicon.cpp:90 trayicon.cpp:122
 #, kde-format
 msgid "Desktop Sharing - disconnected"
 msgstr "Skrivebordsdeling - forbindelse afbrudt"
 
-#: trayicon.cpp:117 trayicon.cpp:137
+#: trayicon.cpp:106 trayicon.cpp:126
 #, kde-format
 msgid "Desktop Sharing - connected with %1"
 msgstr "Skrivebordsdeling - forbundet til %1"
 
-#: trayicon.cpp:120
+#: trayicon.cpp:109
 #, kde-format
 msgid "Desktop Sharing - connected"
 msgstr "Skrivebordsdeling - forbundet"

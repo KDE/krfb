@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krfb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-10 01:34+0000\n"
+"POT-Creation-Date: 2024-08-09 00:39+0000\n"
 "PO-Revision-Date: 2021-10-31 09:10+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -37,32 +37,32 @@ msgstr ""
 "rinsedevries@kde.nl,wbsoft@xs4all.nl,bramschoenmakers@kde.nl,tomalbers@kde."
 "nl,freekdekruijf@kde.nl"
 
-#: connectiondialog.cpp:39
+#: connectiondialog.cpp:26
 #, kde-format
 msgid "New Connection"
 msgstr "Nieuwe verbinding"
 
-#: connectiondialog.cpp:61
+#: connectiondialog.cpp:48
 #, kde-format
 msgid "Accept Connection"
 msgstr "Verbinding accepteren"
 
-#: connectiondialog.cpp:65
+#: connectiondialog.cpp:52
 #, kde-format
 msgid "Refuse Connection"
 msgstr "Verbinding weigeren"
 
-#: invitationsrfbclient.cpp:69
+#: invitationsrfbclient.cpp:58
 #, kde-format
 msgid "Accepted connection from %1"
 msgstr "Verbinding van %1 geaccepteerd"
 
-#: invitationsrfbclient.cpp:75
+#: invitationsrfbclient.cpp:64
 #, kde-format
 msgid "Received connection from %1, on hold (waiting for confirmation)"
 msgstr "Ontving een verbinding van %1. Deze wacht op uw bevestiging."
 
-#: invitationsrfbserver.cpp:50
+#: invitationsrfbserver.cpp:39
 #, kde-format
 msgid "%1@%2 (shared desktop)"
 msgstr "%1@%2 (gedeeld bureaublad)"
@@ -123,22 +123,22 @@ msgstr "Wachtwoord voor niet-uitgenogde verbindingen."
 msgid "Preferred Frame Buffer Plugin"
 msgstr "Plugin voor framebuffervoorkeur"
 
-#: main-virtualmonitor.cpp:49
+#: main-virtualmonitor.cpp:47
 #, kde-format
 msgid "Creating a Virtual Monitor from %1"
 msgstr "Een virtuele monitor wordt aangemaakt vanaf %1"
 
-#: main-virtualmonitor.cpp:80
+#: main-virtualmonitor.cpp:78
 #, kde-format
 msgid "Remote Virtual Monitor"
 msgstr "Virtual Monitor op afstand"
 
-#: main-virtualmonitor.cpp:82
+#: main-virtualmonitor.cpp:80
 #, kde-format
 msgid "Offer a Virtual Monitor that can be accessed remotely"
 msgstr "Een virtuele monitor bieden die toegang geeft aan op afstand"
 
-#: main-virtualmonitor.cpp:84 main.cpp:98
+#: main-virtualmonitor.cpp:82 main.cpp:87
 #, kde-format
 msgid ""
 "(c) 2009-2010, Collabora Ltd.\n"
@@ -157,72 +157,72 @@ msgstr ""
 "(c) 2000, Tridia Corporation\n"
 "(c) 1999, AT&T Laboratories Boston\n"
 
-#: main-virtualmonitor.cpp:91
+#: main-virtualmonitor.cpp:89
 #, kde-format
 msgid "Virtual Monitor implementation"
 msgstr "Implementatie van virtuele monitor"
 
-#: main-virtualmonitor.cpp:92 main.cpp:108
+#: main-virtualmonitor.cpp:90 main.cpp:97
 #, kde-format
 msgid "George Kiagiadakis"
 msgstr "George Kiagiadakis"
 
-#: main-virtualmonitor.cpp:93 main.cpp:111
+#: main-virtualmonitor.cpp:91 main.cpp:100
 #, kde-format
 msgid "Alessandro Praduroux"
 msgstr "Alessandro Praduroux"
 
-#: main-virtualmonitor.cpp:93 main.cpp:111
+#: main-virtualmonitor.cpp:91 main.cpp:100
 #, kde-format
 msgid "KDE4 porting"
 msgstr "Overdracht naar KDE4"
 
-#: main-virtualmonitor.cpp:94 main.cpp:112
+#: main-virtualmonitor.cpp:92 main.cpp:101
 #, kde-format
 msgid "Tim Jansen"
 msgstr "Tim Jansen"
 
-#: main-virtualmonitor.cpp:94 main.cpp:112
+#: main-virtualmonitor.cpp:92 main.cpp:101
 #, kde-format
 msgid "Original author"
 msgstr "Oorspronkelijke auteur"
 
-#: main-virtualmonitor.cpp:95 main.cpp:113
+#: main-virtualmonitor.cpp:93 main.cpp:102
 #, kde-format
 msgid "Johannes E. Schindelin"
 msgstr "Johannes E. Schindelin"
 
-#: main-virtualmonitor.cpp:96 main.cpp:114
+#: main-virtualmonitor.cpp:94 main.cpp:103
 #, kde-format
 msgid "libvncserver"
 msgstr "libvncserver"
 
-#: main-virtualmonitor.cpp:97 main.cpp:115
+#: main-virtualmonitor.cpp:95 main.cpp:104
 #, kde-format
 msgid "Const Kaplinsky"
 msgstr "Const Kaplinsky"
 
-#: main-virtualmonitor.cpp:98 main.cpp:116
+#: main-virtualmonitor.cpp:96 main.cpp:105
 #, kde-format
 msgid "TightVNC encoder"
 msgstr "TightVNC-encoder"
 
-#: main-virtualmonitor.cpp:99 main.cpp:117
+#: main-virtualmonitor.cpp:97 main.cpp:106
 #, kde-format
 msgid "Tridia Corporation"
 msgstr "Tridia Corporation"
 
-#: main-virtualmonitor.cpp:100 main.cpp:118
+#: main-virtualmonitor.cpp:98 main.cpp:107
 #, kde-format
 msgid "ZLib encoder"
 msgstr "ZLib-encoder"
 
-#: main-virtualmonitor.cpp:101 main.cpp:119
+#: main-virtualmonitor.cpp:99 main.cpp:108
 #, kde-format
 msgid "AT&T Laboratories Boston"
 msgstr "AT&T Laboratories Boston"
 
-#: main-virtualmonitor.cpp:102 main.cpp:120
+#: main-virtualmonitor.cpp:100 main.cpp:109
 #, kde-format
 msgid "original VNC encoders and protocol design"
 msgstr "originele VNC-encoders en -protocolontwerp"
@@ -277,7 +277,7 @@ msgstr "De poort waarnaar we zullen luisteren"
 msgid "number"
 msgstr "nummer"
 
-#: main.cpp:49
+#: main.cpp:38
 #, kde-format
 msgid ""
 "Your X11 Server does not support the required XTest extension version 2.2. "
@@ -286,37 +286,37 @@ msgstr ""
 "Uw X11-server ondersteunt niet de vereiste XTest-extensie versie 2.2. Het "
 "delen van uw bureaublad is niet mogelijk."
 
-#: main.cpp:51 main.cpp:150
+#: main.cpp:40 main.cpp:141
 #, kde-format
 msgid "Desktop Sharing Error"
 msgstr "Fout bij delen van bureaublad"
 
-#: main.cpp:94
+#: main.cpp:83
 #, kde-format
 msgid "Desktop Sharing"
 msgstr "Bureaublad delen"
 
-#: main.cpp:96
+#: main.cpp:85
 #, kde-format
 msgid "VNC-compatible server to share desktops"
 msgstr "VNC-compatible server om bureaubladen te delen"
 
-#: main.cpp:105
+#: main.cpp:94
 #, kde-format
 msgid "George Goldberg"
 msgstr "George Goldberg"
 
-#: main.cpp:106
+#: main.cpp:95
 #, kde-format
 msgid "Telepathy tubes support"
 msgstr "Ondersteuning voor Telepathy tubes"
 
-#: main.cpp:126
+#: main.cpp:117
 #, kde-format
 msgid "Do not show the invitations management dialog at startup"
 msgstr "Toon de invitatiebeheerdialoog niet bij het opstarten"
 
-#: main.cpp:148
+#: main.cpp:139
 #, kde-format
 msgid ""
 "Desktop Sharing is not running under an X11 Server or Wayland.\n"
@@ -325,17 +325,17 @@ msgstr ""
 "Bureaublad delen werkt niet onder een X11-server of Wayland.\n"
 "Andere vensterservers worden nu niet ondersteund."
 
-#: mainwindow.cpp:52
+#: mainwindow.cpp:49
 #, kde-format
 msgid "Storing passwords in config file is insecure!"
 msgstr "Wachtwoorden opslaan in configuratiebestand is onveilig!"
 
-#: mainwindow.cpp:189
+#: mainwindow.cpp:186
 #, kde-format
 msgid "Enter a new password for Unattended Access"
 msgstr "Voer een nieuw wachtwoord in voor onbewaakte toegang"
 
-#: mainwindow.cpp:200
+#: mainwindow.cpp:197
 #, kde-format
 msgid ""
 "Failed to start the krfb server. Desktop sharing will not work. Try setting "
@@ -347,13 +347,13 @@ msgstr ""
 #. i18n: ectx: property (whatsThis), widget (QLabel, titleLabel)
 #. i18n: ectx: property (text), widget (QLabel, titleLabel)
 #. i18n: ectx: property (whatsThis), widget (QLabel, aboutLabel)
-#: mainwindow.cpp:223 mainwindow.cpp:230 ui/mainwidget.ui:83
+#: mainwindow.cpp:220 mainwindow.cpp:227 ui/mainwidget.ui:83
 #: ui/mainwidget.ui:86 ui/mainwidget.ui:114
 #, kde-format
 msgid "KDE Desktop Sharing"
 msgstr "KDE Bureaublad delen"
 
-#: mainwindow.cpp:224
+#: mainwindow.cpp:221
 #, kde-format
 msgid ""
 "This field contains the address of your computer and the port number, "
@@ -381,7 +381,7 @@ msgstr ""
 "staat is het belangrijk een adres te gebruiken waaronder uw computer ook "
 "vanaf afstand te bereiken is."
 
-#: mainwindow.cpp:231
+#: mainwindow.cpp:228
 #, kde-format
 msgid ""
 "Any remote user with normal desktop sharing password will have to be "
@@ -398,59 +398,59 @@ msgstr ""
 "wachtwoord voor de modus onbewaakt, zal toegang tot bureaublad delen worden "
 "toegestaan zonder explicite toestemming."
 
-#: mainwindow.cpp:249
+#: mainwindow.cpp:246
 #, kde-format
 msgid "Network"
 msgstr "Netwerk"
 
-#: mainwindow.cpp:250
+#: mainwindow.cpp:247
 #, kde-format
 msgid "Security"
 msgstr "Beveiliging"
 
-#: mainwindow.cpp:251
+#: mainwindow.cpp:248
 #, kde-format
 msgid "Screen capture"
 msgstr "Schermafdruk maken"
 
-#: mainwindow.cpp:256
+#: mainwindow.cpp:253
 #, kde-format
 msgid "To apply framebuffer plugin setting, you need to restart the program."
 msgstr ""
 "Om de instelling van de framebufferplug-in toe te passen, moet u het "
 "programma opnieuw opstarten."
 
-#: rfbservermanager.cpp:237
+#: rfbservermanager.cpp:226
 #, kde-format
 msgid "The remote user %1 is now connected."
 msgstr "De gebruiker op afstand %1 is nu verbonden."
 
-#: rfbservermanager.cpp:251
+#: rfbservermanager.cpp:240
 #, kde-format
 msgid "The remote user %1 disconnected."
 msgstr "De verbinding met de gebruiker op afstand %1 is nu verbroken."
 
-#: trayicon.cpp:56
+#: trayicon.cpp:45
 #, kde-format
 msgid "Disconnect"
 msgstr "Verbinding verbreken"
 
-#: trayicon.cpp:62
+#: trayicon.cpp:51
 #, kde-format
 msgid "Enable Remote Control"
 msgstr "Bediening op afstand inschakelen"
 
-#: trayicon.cpp:101 trayicon.cpp:133
+#: trayicon.cpp:90 trayicon.cpp:122
 #, kde-format
 msgid "Desktop Sharing - disconnected"
 msgstr "Bureaublad delen - niet verbonden"
 
-#: trayicon.cpp:117 trayicon.cpp:137
+#: trayicon.cpp:106 trayicon.cpp:126
 #, kde-format
 msgid "Desktop Sharing - connected with %1"
 msgstr "Bureaublad delen - verbonden met %1"
 
-#: trayicon.cpp:120
+#: trayicon.cpp:109
 #, kde-format
 msgid "Desktop Sharing - connected"
 msgstr "Bureaublad delen - verbonden"

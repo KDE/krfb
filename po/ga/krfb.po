@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdenetwork/krfb.po\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-10 01:34+0000\n"
+"POT-Creation-Date: 2024-08-09 00:39+0000\n"
 "PO-Revision-Date: 2004-12-03 14:52-0500\n"
 "Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
@@ -27,32 +27,32 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "seoc@iolfree.ie,kscanne@gmail.com"
 
-#: connectiondialog.cpp:39
+#: connectiondialog.cpp:26
 #, kde-format
 msgid "New Connection"
 msgstr "Ceangal Nua"
 
-#: connectiondialog.cpp:61
+#: connectiondialog.cpp:48
 #, kde-format
 msgid "Accept Connection"
 msgstr "Glac Leis an gCeangal"
 
-#: connectiondialog.cpp:65
+#: connectiondialog.cpp:52
 #, kde-format
 msgid "Refuse Connection"
 msgstr "Diúltaigh an Ceangal"
 
-#: invitationsrfbclient.cpp:69
+#: invitationsrfbclient.cpp:58
 #, kde-format
 msgid "Accepted connection from %1"
 msgstr "Glacadh le ceangal ó %1"
 
-#: invitationsrfbclient.cpp:75
+#: invitationsrfbclient.cpp:64
 #, kde-format
 msgid "Received connection from %1, on hold (waiting for confirmation)"
 msgstr "Fuarthas ceangal ó %1, ar fanacht (ag feitheamh le cinntiú)"
 
-#: invitationsrfbserver.cpp:50
+#: invitationsrfbserver.cpp:39
 #, kde-format
 msgid "%1@%2 (shared desktop)"
 msgstr "%1@%2 (deasc chomhroinnte)"
@@ -113,22 +113,22 @@ msgstr "Focal faire do cheangail gan chuireadh."
 msgid "Preferred Frame Buffer Plugin"
 msgstr "Breiseán Maoláin Fhráma De Rogha"
 
-#: main-virtualmonitor.cpp:49
+#: main-virtualmonitor.cpp:47
 #, kde-format
 msgid "Creating a Virtual Monitor from %1"
 msgstr ""
 
-#: main-virtualmonitor.cpp:80
+#: main-virtualmonitor.cpp:78
 #, kde-format
 msgid "Remote Virtual Monitor"
 msgstr ""
 
-#: main-virtualmonitor.cpp:82
+#: main-virtualmonitor.cpp:80
 #, kde-format
 msgid "Offer a Virtual Monitor that can be accessed remotely"
 msgstr ""
 
-#: main-virtualmonitor.cpp:84 main.cpp:98
+#: main-virtualmonitor.cpp:82 main.cpp:87
 #, kde-format
 msgid ""
 "(c) 2009-2010, Collabora Ltd.\n"
@@ -147,72 +147,72 @@ msgstr ""
 "© 2000, Tridia Corporation\n"
 "© 1999, AT&T Laboratories Boston\n"
 
-#: main-virtualmonitor.cpp:91
+#: main-virtualmonitor.cpp:89
 #, kde-format
 msgid "Virtual Monitor implementation"
 msgstr ""
 
-#: main-virtualmonitor.cpp:92 main.cpp:108
+#: main-virtualmonitor.cpp:90 main.cpp:97
 #, kde-format
 msgid "George Kiagiadakis"
 msgstr "George Kiagiadakis"
 
-#: main-virtualmonitor.cpp:93 main.cpp:111
+#: main-virtualmonitor.cpp:91 main.cpp:100
 #, kde-format
 msgid "Alessandro Praduroux"
 msgstr "Alessandro Praduroux"
 
-#: main-virtualmonitor.cpp:93 main.cpp:111
+#: main-virtualmonitor.cpp:91 main.cpp:100
 #, kde-format
 msgid "KDE4 porting"
 msgstr "Leagan KDE4"
 
-#: main-virtualmonitor.cpp:94 main.cpp:112
+#: main-virtualmonitor.cpp:92 main.cpp:101
 #, kde-format
 msgid "Tim Jansen"
 msgstr "Tim Jansen"
 
-#: main-virtualmonitor.cpp:94 main.cpp:112
+#: main-virtualmonitor.cpp:92 main.cpp:101
 #, kde-format
 msgid "Original author"
 msgstr "An chéad údar"
 
-#: main-virtualmonitor.cpp:95 main.cpp:113
+#: main-virtualmonitor.cpp:93 main.cpp:102
 #, kde-format
 msgid "Johannes E. Schindelin"
 msgstr "Johannes E. Schindelin"
 
-#: main-virtualmonitor.cpp:96 main.cpp:114
+#: main-virtualmonitor.cpp:94 main.cpp:103
 #, kde-format
 msgid "libvncserver"
 msgstr "libvncserver"
 
-#: main-virtualmonitor.cpp:97 main.cpp:115
+#: main-virtualmonitor.cpp:95 main.cpp:104
 #, kde-format
 msgid "Const Kaplinsky"
 msgstr "Const Kaplinsky"
 
-#: main-virtualmonitor.cpp:98 main.cpp:116
+#: main-virtualmonitor.cpp:96 main.cpp:105
 #, kde-format
 msgid "TightVNC encoder"
 msgstr "Ionchódóir TightVNC"
 
-#: main-virtualmonitor.cpp:99 main.cpp:117
+#: main-virtualmonitor.cpp:97 main.cpp:106
 #, kde-format
 msgid "Tridia Corporation"
 msgstr "Tridia Corporation"
 
-#: main-virtualmonitor.cpp:100 main.cpp:118
+#: main-virtualmonitor.cpp:98 main.cpp:107
 #, kde-format
 msgid "ZLib encoder"
 msgstr "Ionchódóir ZLib"
 
-#: main-virtualmonitor.cpp:101 main.cpp:119
+#: main-virtualmonitor.cpp:99 main.cpp:108
 #, kde-format
 msgid "AT&T Laboratories Boston"
 msgstr "AT&T Laboratories Bostún"
 
-#: main-virtualmonitor.cpp:102 main.cpp:120
+#: main-virtualmonitor.cpp:100 main.cpp:109
 #, kde-format
 msgid "original VNC encoders and protocol design"
 msgstr "bun-ionchódóirí VNC agus dearadh an phrótacail"
@@ -269,7 +269,7 @@ msgstr ""
 msgid "number"
 msgstr ""
 
-#: main.cpp:49
+#: main.cpp:38
 #, kde-format
 msgid ""
 "Your X11 Server does not support the required XTest extension version 2.2. "
@@ -278,55 +278,55 @@ msgstr ""
 "Ní thacaíonn do fhreastalaí X11 leis an eisínteacht riachtanach XTest, "
 "leagan 2.2. Ní bheidh tú in ann do dheasc a chomhroinnt."
 
-#: main.cpp:51 main.cpp:150
+#: main.cpp:40 main.cpp:141
 #, kde-format
 msgid "Desktop Sharing Error"
 msgstr "Earráid le Comhroinnt Deisce"
 
-#: main.cpp:94
+#: main.cpp:83
 #, kde-format
 msgid "Desktop Sharing"
 msgstr "Comhroinnt Deisce"
 
-#: main.cpp:96
+#: main.cpp:85
 #, fuzzy, kde-format
 #| msgid "VNC-compatible server to share KDE desktops"
 msgid "VNC-compatible server to share desktops"
 msgstr "Freastalaí comhoiriúnach le VNC lenar féidir deasca KDE a chomhroinnt"
 
-#: main.cpp:105
+#: main.cpp:94
 #, kde-format
 msgid "George Goldberg"
 msgstr "George Goldberg"
 
-#: main.cpp:106
+#: main.cpp:95
 #, kde-format
 msgid "Telepathy tubes support"
 msgstr "Tacaíocht Tiúba Telepathy"
 
-#: main.cpp:126
+#: main.cpp:117
 #, kde-format
 msgid "Do not show the invitations management dialog at startup"
 msgstr "Ná taispeáin dialóg bhainisteoireacht na gcuirí ag am tosaithe"
 
-#: main.cpp:148
+#: main.cpp:139
 #, kde-format
 msgid ""
 "Desktop Sharing is not running under an X11 Server or Wayland.\n"
 "Other display servers are currently not supported."
 msgstr ""
 
-#: mainwindow.cpp:52
+#: mainwindow.cpp:49
 #, kde-format
 msgid "Storing passwords in config file is insecure!"
 msgstr ""
 
-#: mainwindow.cpp:189
+#: mainwindow.cpp:186
 #, kde-format
 msgid "Enter a new password for Unattended Access"
 msgstr ""
 
-#: mainwindow.cpp:200
+#: mainwindow.cpp:197
 #, fuzzy, kde-format
 #| msgid ""
 #| "Failed to start the krfb server. Invitation-based sharing will not work. "
@@ -342,14 +342,14 @@ msgstr ""
 #. i18n: ectx: property (whatsThis), widget (QLabel, titleLabel)
 #. i18n: ectx: property (text), widget (QLabel, titleLabel)
 #. i18n: ectx: property (whatsThis), widget (QLabel, aboutLabel)
-#: mainwindow.cpp:223 mainwindow.cpp:230 ui/mainwidget.ui:83
+#: mainwindow.cpp:220 mainwindow.cpp:227 ui/mainwidget.ui:83
 #: ui/mainwidget.ui:86 ui/mainwidget.ui:114
 #, fuzzy, kde-format
 #| msgid "Desktop Sharing"
 msgid "KDE Desktop Sharing"
 msgstr "Comhroinnt Deisce"
 
-#: mainwindow.cpp:224
+#: mainwindow.cpp:221
 #, fuzzy, kde-format
 #| msgid ""
 #| "This field contains the address of your computer and the display number, "
@@ -385,7 +385,7 @@ msgstr ""
 "seoladh eile aige, nó nach mbeidh ríomhairí eile in ann é a shroicheadh ar "
 "chor ar bith."
 
-#: mainwindow.cpp:231
+#: mainwindow.cpp:228
 #, kde-format
 msgid ""
 "Any remote user with normal desktop sharing password will have to be "
@@ -396,57 +396,57 @@ msgid ""
 "confirmation."
 msgstr ""
 
-#: mainwindow.cpp:249
+#: mainwindow.cpp:246
 #, kde-format
 msgid "Network"
 msgstr "Líonra"
 
-#: mainwindow.cpp:250
+#: mainwindow.cpp:247
 #, kde-format
 msgid "Security"
 msgstr "Slándáil"
 
-#: mainwindow.cpp:251
+#: mainwindow.cpp:248
 #, kde-format
 msgid "Screen capture"
 msgstr ""
 
-#: mainwindow.cpp:256
+#: mainwindow.cpp:253
 #, kde-format
 msgid "To apply framebuffer plugin setting, you need to restart the program."
 msgstr ""
 
-#: rfbservermanager.cpp:237
+#: rfbservermanager.cpp:226
 #, kde-format
 msgid "The remote user %1 is now connected."
 msgstr "Tá úsáideoir cianda %1 ceangailte anois."
 
-#: rfbservermanager.cpp:251
+#: rfbservermanager.cpp:240
 #, kde-format
 msgid "The remote user %1 disconnected."
 msgstr "Tá úsáideoir cianda %1 dícheangailte anois."
 
-#: trayicon.cpp:56
+#: trayicon.cpp:45
 #, kde-format
 msgid "Disconnect"
 msgstr "Dícheangail"
 
-#: trayicon.cpp:62
+#: trayicon.cpp:51
 #, kde-format
 msgid "Enable Remote Control"
 msgstr "Cumasaigh Cianrialú"
 
-#: trayicon.cpp:101 trayicon.cpp:133
+#: trayicon.cpp:90 trayicon.cpp:122
 #, kde-format
 msgid "Desktop Sharing - disconnected"
 msgstr "Comhroinnt Deisce - dícheangailte"
 
-#: trayicon.cpp:117 trayicon.cpp:137
+#: trayicon.cpp:106 trayicon.cpp:126
 #, kde-format
 msgid "Desktop Sharing - connected with %1"
 msgstr "Comhroinnt Deisce - ceangailte le %1"
 
-#: trayicon.cpp:120
+#: trayicon.cpp:109
 #, kde-format
 msgid "Desktop Sharing - connected"
 msgstr "Comhroinnt Deisce - ceangailte"
