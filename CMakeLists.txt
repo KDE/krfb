@@ -64,7 +64,7 @@ endif(WIN32)
 
 ecm_set_disabled_deprecation_versions(
     QT 6.7.0
-    KF 6.4.0
+    KF 6.5.0
 )
 
 include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} )
