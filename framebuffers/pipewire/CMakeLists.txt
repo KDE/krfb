@@ -40,7 +40,11 @@ if (Qt6_VERSION VERSION_LESS "6.7.1")
         BASENAME zkde-screencast-unstable-v1
     )
 else()
+    if (Qt6_VERSION VERSION_GREATER_EQUAL "6.8.0")
+        set(private_code_option "PRIVATE_CODE")
+    endif()
     qt6_generate_wayland_protocol_client_sources(krfb_framebuffer_pw
+        ${private_code_option}
         FILES ${PLASMA_WAYLAND_PROTOCOLS_DIR}/screencast.xml
     )
 endif()
