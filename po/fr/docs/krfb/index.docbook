@@ -88,10 +88,10 @@
 
 <chapter id="what-is-RFB">
 <title
->Le protocole de mémoire de trame (frame-buffer) distant</title>
+>Le protocole de mémoire de trame (framebuffer) distant</title>
 
 <para
->Ce chapitre procure une description rapide du protocole de mémoire de trame (frame-buffer) distant utilisé par &krfb; et par d'autres systèmes compatibles. Si vous êtes déjà familier avec le protocole de mémoire de trame distant, vous pouvez sauter cette section. </para>
+>Ce chapitre procure une description rapide du protocole de mémoire de trame (framebuffer) distant utilisé par &krfb; et par d'autres systèmes compatibles. Si vous êtes déjà familier avec le protocole de mémoire de trame distant, vous pouvez sauter cette section. </para>
 
 <para
 >L'implémentation de haut niveau d'un système utilisant le protocole de mémoire de trame distant est connu comme Virtual Network Computer, ou plus couramment comme <acronym
