@@ -75,10 +75,10 @@
 <para
 >Typisch gebruik van &krfb; is met de &kde; <acronym
 >VNC</acronym
->-client, hetwelk &krdc; is, omdat het dicht overeenkomt met de speciale mogelijkheden van &krfb;. </para>
+>-client, hetwelk &krdc; is, omdat het erg overeenkomt met de speciale mogelijkheden van &krfb;. </para>
 
 <para
->&krfb; vereist niet om met een nieuwe X-sessie te starten - het kan de huidige sessie delen. Dit maakt het erg bruikbaar wanneer u wilt dat iemand u helpt bij het uitvoeren van een taak. </para>
+>&krfb; vereist niet het starten van een nieuwe X-sessie - het kan de huidige sessie delen. Dit maakt het erg bruikbaar wanneer u wilt dat iemand u helpt bij het uitvoeren van een taak. </para>
 
 <para
 >Rapporteer problemen of verzoeken om extra functies voor &kde; aan e-maillijsten of rapporteer een bug op <ulink url="https://bugs.kde.org"
@@ -163,9 +163,9 @@
 >Onbewaakte toegang</title>
 
 <para
->Elke gebruiker op afstand met een wachtwoord voor bureaublad delen moet geauthenticeerd worden. Als onbewaakte toegang aan is en de gebruiker op afstand biedt een wachtwoord voor de modus onbewaakt, zal toegang tot bureaublad delen worden toegestaan zonder explicite toestemming. </para>
+>Elke gebruiker op afstand met een wachtwoord voor bureaublad delen moet geauthenticeerd worden. Als onbewaakte toegang aan is en de gebruiker op afstand biedt een wachtwoord voor de modus onbewaakt, dan zal toegang tot bureaublad delen worden toegestaan zonder explicite toestemming. </para>
 <para
->Standaard zal het wachwoord voor deze modus leeg zijn, om dat te wijzigen klik op de knop en voer een wachtwoord in. </para>
+>Standaard zal het wachtwoord voor deze modus leeg zijn, om dat te wijzigen klik op de knop en voer een wachtwoord in. </para>
 <para
 >Als onbewaakte toegang is toegestaan, dan zou u waarschijnlijk een wachtwoord moeten specificeren. </para>
 
@@ -218,10 +218,10 @@
 
 <sect1 id="krfb-configuration">
 <title
->&krfb; instellen</title>
+>&krfb; configureren</title>
 <para
 >Naast het boven getoonde en beschreven hoofdinterface van &krfb;, kunt u &krfb; ook besturen met <guimenuitem
->Instellen...</guimenuitem
+>Configureren...</guimenuitem
 > in het hoofdvenster van &krfb;. De instellingen van &krfb; heeft twee pagina's, zoals getoond in de onderstaande schermafdruk: </para>
 
 <para
@@ -232,14 +232,14 @@
 <para>
 <screenshot>
 <screeninfo
->&krfb; instellen (netwerkpagina)</screeninfo>
+>&krfb; configureren (netwerkpagina)</screeninfo>
 	<mediaobject>
 	  <imageobject>
 	    <imagedata fileref="configuration_network.png" format="PNG"/>
 	  </imageobject>
 	  <textobject>
 	    <phrase
->&krfb; instellen (netwerkpagina)</phrase>
+>&krfb; configureren (netwerkpagina)</phrase>
 	  </textobject>
 	</mediaobject>
 </screenshot>
@@ -263,14 +263,14 @@
 <para>
 <screenshot>
 <screeninfo
->&krfb; instellen (beveiligingspagina)</screeninfo>
+>&krfb; configureren (beveiligingspagina)</screeninfo>
 	<mediaobject>
 	  <imageobject>
 	    <imagedata fileref="configuration_security.png" format="PNG"/>
 	  </imageobject>
 	  <textobject>
 	    <phrase
->&krfb; instellen (beveiligingspagina)</phrase>
+>&krfb; configureren (beveiligingspagina)</phrase>
 	  </textobject>
 	</mediaobject>
 </screenshot>
