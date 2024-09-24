@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-09 00:39+0000\n"
+"POT-Creation-Date: 2024-09-24 00:39+0000\n"
 "PO-Revision-Date: 2021-11-03 14:22+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
@@ -444,20 +444,14 @@ msgstr "Compartir de Scriptorio - connectite con %1"
 msgid "Desktop Sharing - connected"
 msgstr "Compartir de Scriptorio - connectite"
 
-#. i18n: ectx: property (windowTitle), widget (QWidget, Framebuffer)
-#: ui/configframebuffer.ui:14
-#, kde-format
-msgid "Framebuffer"
-msgstr "Framebuffer"
-
 #. i18n: ectx: property (text), widget (QLabel, label)
-#: ui/configframebuffer.ui:22
+#: ui/configframebuffer.ui:19
 #, kde-format
 msgid "Preferred frameb&uffer plugin:"
 msgstr "Preferite Plugin Buffer de quadro (frameb&uffer):"
 
 #. i18n: ectx: property (text), widget (QLabel, helpText)
-#: ui/configframebuffer.ui:47
+#: ui/configframebuffer.ui:44
 #, kde-format
 msgid ""
 "<html><head/><body><p>When using x11, <span style=\" font-weight:600;\">xcb</"
@@ -703,6 +697,9 @@ msgstr "Modifica contrasigno pro Accesso Non Assistite"
 #, kde-format
 msgid "&Change Unattended Password"
 msgstr "&Modifica Contrasigno per Non Assistite"
+
+#~ msgid "Framebuffer"
+#~ msgstr "Framebuffer"
 
 #~ msgid "Welcome to KDE Desktop Sharing"
 #~ msgstr "Benvenite al Compartir de scriptorio de KDE"

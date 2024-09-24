@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krfb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-09 00:39+0000\n"
+"POT-Creation-Date: 2024-09-24 00:39+0000\n"
 "PO-Revision-Date: 2021-10-31 21:56+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -450,20 +450,14 @@ msgstr "Compartir escritorio: conectado a %1"
 msgid "Desktop Sharing - connected"
 msgstr "Compartir escritorio: conectado"
 
-#. i18n: ectx: property (windowTitle), widget (QWidget, Framebuffer)
-#: ui/configframebuffer.ui:14
-#, kde-format
-msgid "Framebuffer"
-msgstr "Framebuffer"
-
 #. i18n: ectx: property (text), widget (QLabel, label)
-#: ui/configframebuffer.ui:22
+#: ui/configframebuffer.ui:19
 #, kde-format
 msgid "Preferred frameb&uffer plugin:"
 msgstr "Complemento de «frameb&uffer» preferido:"
 
 #. i18n: ectx: property (text), widget (QLabel, helpText)
-#: ui/configframebuffer.ui:47
+#: ui/configframebuffer.ui:44
 #, kde-format
 msgid ""
 "<html><head/><body><p>When using x11, <span style=\" font-weight:600;\">xcb</"
@@ -711,6 +705,9 @@ msgstr "Cambiar la contraseña para el acceso silencioso"
 #, kde-format
 msgid "&Change Unattended Password"
 msgstr "&Cambiar contraseña de acceso silencioso"
+
+#~ msgid "Framebuffer"
+#~ msgstr "Framebuffer"
 
 #~ msgid "Welcome to KDE Desktop Sharing"
 #~ msgstr "Bienvenido al programa para compartir el escritorio de KDE"

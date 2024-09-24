@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-09 00:39+0000\n"
+"POT-Creation-Date: 2024-09-24 00:39+0000\n"
 "PO-Revision-Date: 2024-05-20 16:13+0200\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -448,20 +448,14 @@ msgstr "Asztalmegosztó: kapcsolat létrejött ezzel: %1"
 msgid "Desktop Sharing - connected"
 msgstr "Asztalmegosztás - kapcsolódva"
 
-#. i18n: ectx: property (windowTitle), widget (QWidget, Framebuffer)
-#: ui/configframebuffer.ui:14
-#, kde-format
-msgid "Framebuffer"
-msgstr "Framebuffer"
-
 #. i18n: ectx: property (text), widget (QLabel, label)
-#: ui/configframebuffer.ui:22
+#: ui/configframebuffer.ui:19
 #, kde-format
 msgid "Preferred frameb&uffer plugin:"
 msgstr "Elsődleges frameb&uffer bővítmény:"
 
 #. i18n: ectx: property (text), widget (QLabel, helpText)
-#: ui/configframebuffer.ui:47
+#: ui/configframebuffer.ui:44
 #, kde-format
 msgid ""
 "<html><head/><body><p>When using x11, <span style=\" font-weight:600;\">xcb</"
@@ -711,6 +705,9 @@ msgstr "Felügyelet nélküli hozzáférés jelszavának módosítása"
 #, kde-format
 msgid "&Change Unattended Password"
 msgstr "Felügyelet nélküli jelszó &módosítása"
+
+#~ msgid "Framebuffer"
+#~ msgstr "Framebuffer"
 
 #~ msgid "Welcome to KDE Desktop Sharing"
 #~ msgstr "Üdvözöljük a KDE asztalmegosztóban!"

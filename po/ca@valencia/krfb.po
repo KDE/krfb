@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krfb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-09 00:39+0000\n"
+"POT-Creation-Date: 2024-09-24 00:39+0000\n"
 "PO-Revision-Date: 2024-01-10 11:33+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -452,20 +452,14 @@ msgstr "Compartiu l'escriptori - connectat amb %1"
 msgid "Desktop Sharing - connected"
 msgstr "Compartiu l'escriptori - connectat"
 
-#. i18n: ectx: property (windowTitle), widget (QWidget, Framebuffer)
-#: ui/configframebuffer.ui:14
-#, kde-format
-msgid "Framebuffer"
-msgstr "Framebuffer"
-
 #. i18n: ectx: property (text), widget (QLabel, label)
-#: ui/configframebuffer.ui:22
+#: ui/configframebuffer.ui:19
 #, kde-format
 msgid "Preferred frameb&uffer plugin:"
 msgstr "Connector de «frameb&uffer» preferit:"
 
 #. i18n: ectx: property (text), widget (QLabel, helpText)
-#: ui/configframebuffer.ui:47
+#: ui/configframebuffer.ui:44
 #, kde-format
 msgid ""
 "<html><head/><body><p>When using x11, <span style=\" font-weight:600;\">xcb</"
@@ -713,3 +707,6 @@ msgstr "Canvia la contrasenya per a l'accés desatés"
 #, kde-format
 msgid "&Change Unattended Password"
 msgstr "&Canvia la contrasenya del desatés"
+
+#~ msgid "Framebuffer"
+#~ msgstr "Framebuffer"

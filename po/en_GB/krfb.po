@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krfb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-09 00:39+0000\n"
+"POT-Creation-Date: 2024-09-24 00:39+0000\n"
 "PO-Revision-Date: 2022-01-01 15:48+0000\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English <kde-l10n-en_gb@kde.org>\n"
@@ -444,20 +444,14 @@ msgstr "Desktop Sharing - connected with %1"
 msgid "Desktop Sharing - connected"
 msgstr "Desktop Sharing - connected"
 
-#. i18n: ectx: property (windowTitle), widget (QWidget, Framebuffer)
-#: ui/configframebuffer.ui:14
-#, kde-format
-msgid "Framebuffer"
-msgstr "Framebuffer"
-
 #. i18n: ectx: property (text), widget (QLabel, label)
-#: ui/configframebuffer.ui:22
+#: ui/configframebuffer.ui:19
 #, kde-format
 msgid "Preferred frameb&uffer plugin:"
 msgstr "Preferred frameb&uffer plugin:"
 
 #. i18n: ectx: property (text), widget (QLabel, helpText)
-#: ui/configframebuffer.ui:47
+#: ui/configframebuffer.ui:44
 #, kde-format
 msgid ""
 "<html><head/><body><p>When using x11, <span style=\" font-weight:600;\">xcb</"
@@ -701,6 +695,9 @@ msgstr "Change password for Unattended Access"
 #, kde-format
 msgid "&Change Unattended Password"
 msgstr "&Change Unattended Password"
+
+#~ msgid "Framebuffer"
+#~ msgstr "Framebuffer"
 
 #~ msgid "Welcome to KDE Desktop Sharing"
 #~ msgstr "Welcome to KDE Desktop Sharing"

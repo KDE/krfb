@@ -1,6 +1,6 @@
 # Translation of krfb.po to Slovenian
 # Copyright (C) 2002, 2003, 2004, 2005 Free Software Foundation, Inc.
-# $Id: krfb.po 1687039 2024-08-09 01:14:27Z scripty $
+# $Id: krfb.po 1691242 2024-09-24 01:14:18Z scripty $
 # $Source$
 #
 # Andrej Vernekar <andrej.vernekar@moj.net>, 2002, 2008.
@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krfb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-09 00:39+0000\n"
+"POT-Creation-Date: 2024-09-24 00:39+0000\n"
 "PO-Revision-Date: 2021-10-31 20:21+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -452,20 +452,14 @@ msgstr "Souporaba namizja – povezan z %1"
 msgid "Desktop Sharing - connected"
 msgstr "Souporaba namizja – povezan"
 
-#. i18n: ectx: property (windowTitle), widget (QWidget, Framebuffer)
-#: ui/configframebuffer.ui:14
-#, kde-format
-msgid "Framebuffer"
-msgstr "Medpomnilnik sličic"
-
 #. i18n: ectx: property (text), widget (QLabel, label)
-#: ui/configframebuffer.ui:22
+#: ui/configframebuffer.ui:19
 #, kde-format
 msgid "Preferred frameb&uffer plugin:"
 msgstr "Prednostni vstavek za medpomnilnik sličic:"
 
 #. i18n: ectx: property (text), widget (QLabel, helpText)
-#: ui/configframebuffer.ui:47
+#: ui/configframebuffer.ui:44
 #, kde-format
 msgid ""
 "<html><head/><body><p>When using x11, <span style=\" font-weight:600;\">xcb</"
@@ -709,6 +703,9 @@ msgstr "Spremeni geslo za dostop brez potrditve"
 #, kde-format
 msgid "&Change Unattended Password"
 msgstr "Spremeni geslo za dostop brez potrditve"
+
+#~ msgid "Framebuffer"
+#~ msgstr "Medpomnilnik sličic"
 
 #~ msgid "Welcome to KDE Desktop Sharing"
 #~ msgstr "Dobrodošli v souporabo namizja KDE"

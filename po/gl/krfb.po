@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krfb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-09 00:39+0000\n"
+"POT-Creation-Date: 2024-09-24 00:39+0000\n"
 "PO-Revision-Date: 2023-04-30 15:46+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
@@ -453,20 +453,14 @@ msgstr "Compartir o escritorio - conectado con %1"
 msgid "Desktop Sharing - connected"
 msgstr "Compartir o escritorio — Conectado"
 
-#. i18n: ectx: property (windowTitle), widget (QWidget, Framebuffer)
-#: ui/configframebuffer.ui:14
-#, kde-format
-msgid "Framebuffer"
-msgstr "Búfer de fotogramas"
-
 #. i18n: ectx: property (text), widget (QLabel, label)
-#: ui/configframebuffer.ui:22
+#: ui/configframebuffer.ui:19
 #, kde-format
 msgid "Preferred frameb&uffer plugin:"
 msgstr "Complemento de búfer de fotogramas preferido:"
 
 #. i18n: ectx: property (text), widget (QLabel, helpText)
-#: ui/configframebuffer.ui:47
+#: ui/configframebuffer.ui:44
 #, kde-format
 msgid ""
 "<html><head/><body><p>When using x11, <span style=\" font-weight:600;\">xcb</"
@@ -715,6 +709,9 @@ msgstr "Cambiar o contrasinal do acceso sen supervisión."
 #, kde-format
 msgid "&Change Unattended Password"
 msgstr "&Cambiar o contrasinal de acceso sen supervisión"
+
+#~ msgid "Framebuffer"
+#~ msgstr "Búfer de fotogramas"
 
 #~ msgid "Welcome to KDE Desktop Sharing"
 #~ msgstr "Benvido á compartición do escritorio de KDE"

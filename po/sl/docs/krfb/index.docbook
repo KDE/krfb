@@ -1,0 +1,376 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY % addindex "IGNORE">
+  <!ENTITY % Slovenian "INCLUDE">
+]>
+
+<book id="krfb" lang="&language;">
+
+<bookinfo>
+<title
+>Priročnik &krfb;</title>
+
+<authorgroup>
+<author
+>&Brad.Hards; &Brad.Hards.mail; </author>
+<othercredit role="translator"
+><firstname
+>Matjaž</firstname
+><surname
+>Jeran</surname
+><affiliation
+><address
+><email
+>matjaz.jeran@amis.net</email
+></address
+></affiliation
+><contrib
+>Prevod</contrib
+></othercredit
+> 
+</authorgroup>
+
+<copyright>
+<year
+>2003</year>
+<holder
+>&Brad.Hards;</holder>
+</copyright>
+
+<legalnotice
+>&FDLNotice;</legalnotice>
+
+<date
+>25.07.2016</date>
+<releaseinfo
+>5.0 (Applications 16.08)</releaseinfo>
+
+<abstract>
+<para
+>&krfb; je strežniška aplikacija, ki vam omogoča skupno rabo trenutne seje z uporabnikom na drugem računalniku, ki lahko uporablja odjemalca <acronym
+>VNC</acronym
+>za ogled ali celo nadzor namizja. </para>
+</abstract>
+
+<keywordset>
+<keyword
+>KDE</keyword>
+<keyword
+>kdenetwork</keyword>
+<keyword
+>krfb</keyword>
+<keyword
+>VNC</keyword>
+<keyword
+>RFB</keyword>
+<keyword
+>krdc</keyword>
+<keyword
+>Deljenje namizja</keyword>
+<keyword
+>Oddaljeni nadzor</keyword>
+<keyword
+>Oddaljena pomoč</keyword>
+<keyword
+>Oddaljeno namizje</keyword>
+</keywordset>
+
+</bookinfo>
+
+<chapter id="introduction">
+<title
+>Uvod</title>
+
+<para
+>&krfb; je strežniška aplikacija, ki vam omogoča skupno rabo trenutne seje z uporabnikom na drugem računalniku, ki lahko uporablja odjemalca <acronym
+>VNC</acronym
+>za ogled ali celo nadzor namizja. </para>
+
+<para
+>Običajno bi uporabili &krfb; z &kde; odjemalcem <acronym
+>VNC</acronym
+>,kar je &krdc;, saj se zelo ujema s posebnimi funkcijami &krfb;. </para>
+
+<para
+>&krfb; ne zahteva, da začnete novo sejo X - lahko si deli trenutno sejo. Zaradi tega je zelo uporaben, kadar želite, da vam nekdo pomaga opraviti nalogo. </para>
+
+<para
+>Morebitne težave ali zahteve po funkcijah sporočite &kde; poštnemu seznamu oz. prijavite napako na <ulink url="https://bugs.kde.org"
+>https://bugs.kde.org</ulink
+>. </para>
+</chapter>
+
+<chapter id="what-is-RFB">
+<title
+>Remote Frame Buffer protokol</title>
+
+<para
+>V tem poglavju je kratek opis Remote Frame Buffer protokola, ki ga uporablja &krfb; in z drugimi združljivimi sistemi. Če ste že poznate Remote Frame Buffer, lahko mirno preskočite to poglavje. </para>
+
+<para
+>Izvedba sistema na visoki ravni z uporabo Remote Frame Buffer protokola je znan kot navidezni omrežni računalnik ali pogosteje kot <acronym
+>VNC</acronym
+>. </para>
+
+<para
+>Remote Frame Buffer (ali na kratko <acronym
+>RFB</acronym
+>) je preprost protokol za oddaljeni dostop do grafičnih uporabniških vmesnikov. Deluje na ravni medpomnilnika okvirja, ki približno ustreza upodobljeni sliki zaslona,kar pomeni, da ga je mogoče uporabiti za vse okenske sisteme (vključno z X11, &MacOS; in &Microsoft; &Windows;). Obstajajo aplikacije Remote Frame Buffer za številne platforme in jih je pogosto mogoče prosto ponovno distribuirati. </para>
+
+<para
+>V protokolu Remote Frame Buffer je aplikacija, ki se izvaja na napravi, kjer sedi uporabnik (vsebuje zaslon, tipkovnico in kazalec)se imenuje odjemalec. Aplikacija, ki se izvaja na računalniku, kjer je se nahaja medpomnilnik okvirjev (ki poganja okenski sistem inaplikacije, ki jih uporabnik nadzoruje na daljavo) se imenuje strežnik. &krfb; je strežnik &kde; za protokol Remote Frame Buffer. &krdc; je odjemalec &kde; za protokol Remote Frame Buffer. </para>
+
+<para
+>Za pošiljanje slike medpomnilnika okvirja je potrebna razumna količina omrežnega prometa, zato Remote Frame Buffer najbolje deluje prek povezav z visoko pasovno širino, kot je lokalno omrežje. Še vedno je mogoče uporabljati &krfb; nad drugimipovezavami, vendar hitrost izvajanja verjetno ne bo tako dobra. </para>
+
+</chapter>
+
+<chapter id="using-krfb">
+<title
+>Uporaba &krfb;</title>
+
+<sect1 id="main-windw">
+<title
+>&krfb; Glavno okno</title>
+<para
+>Uporaba &krfb; je zelo enostavna. - ima preprost vmesnik, kot je prikazano vposnetku zaslona spodaj. </para>
+
+<para>
+<screenshot>
+<screeninfo
+>To je posnetek zaslona &krfb;</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="screenshot.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>&krfb; glavno okno</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Ko želite nekomu dovoliti dostop do vašega namizja, morate omogočiti potrditveno polje <guilabel
+>Omogoči skupno rabo namizja</guilabel
+>, kar bo zagnalo strežnik. </para>
+
+<sect2 id="connection-details">
+<title
+>Podrobnosti o povezavi</title>
+
+<para
+><guilabel
+>Naslov</guilabel
+> vsebuje naslov vašega računalnika in številko vrat, ločeno z dvopičjem. Naslov je le namig - lahkouporabite kateri koli naslov, ki lahko doseže vaš računalnik. &krfb; poskuša uganiti vaš naslov iz vaše omrežne konfiguracije, vendar pri tem ne uspe vedno. Če je vaš računalnik za požarnim zidom, je morda naslov drugačen ali je nedosegljiv za druge računalnike. </para>
+<para
+>Vrata lahko spremenite na strani <guilabel
+>Omrežje</guilabel
+> v konfiguracijskem pogovornem oknu. </para>
+<para
+>Naslednje polje je vnaprej izpolnjeno s samodejno ustvarjenim geslom. Kliknite ikono na desni strani polja, da spremenite geslo. </para>
+</sect2>
+
+<sect2 id="unattended-access">
+<title
+>Nenadzorovan dostop</title>
+
+<para
+>Vsak oddaljeni uporabnik z geslom za skupno rabo namizja bo moral biti avtenticiran. Če je aktiviran nenadzorovan dostop, in oddaljeni uporabnik zagotavlja geslo za nenadzorovani način, bo dostop do skupne rabe namizja podeljen brez izrecne potrditve. </para>
+<para
+>Privzeto je geslo za ta način prazno, če ga želite spremeniti, kliknite na gumb in vnesite geslo. </para>
+<para
+>Če je dovoljen nenadzorovan dostop, bi verjetno morali določiti geslo. </para>
+
+<para
+>Če je naprava strežnik in uporabljate &krfb; za daljinsko administracijo, verjetno želite uporabiti nenadzorovan dostop. </para>
+
+</sect2>
+
+<sect2 id="transfer-login-information">
+<title
+>Prenos podatkov za prijavo</title>
+
+<para
+>&krfb; nima več funkcije povabila kot v prejšnjih različicah. Torej morate podatke za prijavo prenesti sami z uporabo e-pošte ali osebnega vabila. </para>
+<para
+>Če ne morete šifrirati e-pošte (ali kako drugače zaščititi povezave), je pošiljanje gesla po e-pošti je zelo resno varnostno tveganje, saj lahko kdo prebere geslo in naslov iz e-pošte, ko gre po omrežju. To pomeni, da lahko potencialno prevzame nadzor nad vašo napravo. </para>
+<para
+>Če ne morete šifrirati e-poštnega sporočila, je morda bolje uporabiti osebno povabilo, pokličite osebo, ki ji omogočate dostop po telefonu, preverite identiteto te osebe in na ta način zagotovite zahtevane podatke. </para>
+
+<note>
+<para
+>&krfb; uporablja običajni sistem gesel <acronym
+>RFB</acronym
+>, ki ne prenaša vašega gesla kot odprto besedilo v omrežju. Namesto tega uporablja sistem izziv-odziv. To je razmeroma varno, dokler je geslo varno zavarovano. </para>
+</note>
+
+</sect2>
+
+<sect2 id="krfb-qqit">
+<title
+>Zapusti &krfb;</title>
+
+<para
+>Če zaprete glavno okno &krfb; s klikom na ikono za zapiranje okna oz. z uporabo bližnjice <keycombo action="simul"
+>&Alt;<keycap
+>F4</keycap
+></keycombo
+> strežnik še naprej deluje, kar je označeno z ikono vsistemskem pladnju. Če želite ustaviti &krfb; bodisi uporabite meni <menuchoice
+><guimenu
+>Datoteka</guimenu
+><guimenuitem
+>Zapri</guimenuitem
+></menuchoice
+> v glavnem oknu alidesni klik na ikono v sistemski vrstici in izberite <guimenuitem
+>Zapusti</guimenuitem
+>. </para>
+</sect2>
+
+</sect1>
+
+<sect1 id="krfb-configuration">
+<title
+>Konfiguriranje &krfb;</title>
+<para
+>Poleg glavnega vmesnika &krfb; ki je prikazan in opisan zgoraj, lahko nadzirate &krfb; tudi z uporabo <guimenuitem
+>Konfiguriraj...</guimenuitem
+> v Glavnem oknu &krfb;. Konfiguracija &krfb; ima dve strani, kot je prikazano vposnetku zaslona spodaj: </para>
+
+<para
+>Stran <guilabel
+>Omrežje</guilabel
+> omogoča nadzor nad vrati, ki jih uporablja &krfb;, kot je prikazano spodaj. </para>
+
+<para>
+<screenshot>
+<screeninfo
+>&krfb; Konfiguracija (omrežna stran)</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="configuration_network.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>&krfb; Konfiguracija (omrežna stran)</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Potrditveno polje <guilabel
+>Storitev napovedi v lokalnem omrežju</guilabel
+>nadzoruje, ali &krfb; napove storitev prek lokalnega omrežja z uporaboService Location Protokola. To je običajno dobra ideja, a delujezelo dobro z odjemalcem, ki pozna Service Location Protokol, kot je &krdc;. </para>
+
+<para
+>Če izberete potrditveno polje <guilabel
+>Uporabi privzeta vrata</guilabel
+>, potem bo &krfb; našel primerna vrata. Če počistite to potrditveno polje, lahko določite primerna vrata. Določanje primernih vrat je lahko koristno, če uporabljajo vrata za posredovanje  na vdorobranu. Upoštevajte, da če je vklopljen Service Location protokol, bo to samodejno obravnavalo identifikacijo pravilnih vrat. </para>
+
+<para
+>Stran <guilabel
+>Varnost</guilabel
+> vam omogoča, da nastavite, ali oseba, ki se povezuje na strežnik &krfb; lahko nadzoruje namizje ali si ga lahko samo ogleduje. </para>
+
+<para>
+<screenshot>
+<screeninfo
+>&krfb; Konfiguracija (varnostna stran)</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="configuration_security.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>&krfb; Konfiguracija (varnostna stran)</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+</sect1>
+
+<sect1 id="krfb-connection">
+<title
+>Povezovanje na &krfb;</title>
+
+<para
+>Ko se nekdo poveže z &krfb; boste na vašem računalniku dobili pojavno okno z obvestilom, ki je videti kot naslednji posnetek zaslona, razen če sprejemate nenadzorovani dostop brez potrditve. </para>
+<para>
+<screenshot>
+<screeninfo
+>&krfb; Okno povezave</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="connection.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>&krfb; Okno povezave</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Če <guibutton
+>Sprejmete povezavo</guibutton
+>, lahko odjemalec nadaljuje z avtentikacijo, ki zahteva pravilno geslo za prijavo. Če ste<guibutton
+>Zavrnili povezavo</guibutton
+>, potem bo poskus vzpostavitve povezave končan. </para>
+
+<para
+>Potrditveno polje z možnostjo <guilabel
+>Dovoli oddaljenemu uporabniku nadzor tipkovnice in miške</guilabel
+> določa, ali lahko ta odjemalec samo opazuje ali lahko prevzema nadzor vaše naprave. </para>
+
+</sect1>
+</chapter>
+
+<chapter id="credits">
+
+<title
+>Zasluge in licence</title>
+
+<para
+>&krfb; </para>
+<para
+>Avtorske pravice za program 2002 Tim Jansen <email
+>tim@tjansen.de</email
+> </para>
+<para
+>Sodelavci: <itemizedlist
+> <listitem
+><para
+>Ian Reinhart Geiser <email
+>geiseri@kde.org</email
+></para>
+</listitem>
+</itemizedlist>
+</para>
+
+<para
+>Dokumentacija Copyright &copy; 2003 &Brad.Hards; &Brad.Hards.mail; </para>
+
+<para
+>Prevod: Matjaž Jeran<email
+>matjaz.jeran@amis.net</email
+></para
+> &underFDL; &underGPL; </chapter>
+
+&documentation.index;
+</book>
+
+<!--
+Local Variables:
+mode: xml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-indent-step:0
+sgml-indent-data:nil
+End:
+
+vim:tabstop=2:shiftwidth=2:expandtab 
+-->
