@@ -697,6 +697,3 @@ msgstr "Byt passord for tilgang utan tilsyn"
 #, kde-format
 msgid "&Change Unattended Password"
 msgstr "&Byt passord for tilgang utan tilsyn"
-
-#~ msgid "Framebuffer"
-#~ msgstr "Biletbuffer"
