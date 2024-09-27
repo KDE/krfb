@@ -704,6 +704,3 @@ msgstr "Промяна на паролата за неконтролиран д�
 #, kde-format
 msgid "&Change Unattended Password"
 msgstr "&Смяна на паролата за неконтролиран достъп"
-
-#~ msgid "Framebuffer"
-#~ msgstr "Framebuffer"
