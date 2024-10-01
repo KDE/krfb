@@ -673,6 +673,3 @@ msgstr ""
 #, kde-format
 msgid "&Change Unattended Password"
 msgstr ""
-
-#~ msgid "Framebuffer"
-#~ msgstr "Framebuffer"
