@@ -673,6 +673,3 @@ msgstr "更改无管控访问密码"
 #, kde-format
 msgid "&Change Unattended Password"
 msgstr "更改无管控访问密码(&C)"
-
-#~ msgid "Framebuffer"
-#~ msgstr "帧缓冲"
