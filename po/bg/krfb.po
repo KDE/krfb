@@ -9,14 +9,14 @@ msgstr ""
 "Project-Id-Version: krfb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-09-24 00:39+0000\n"
-"PO-Revision-Date: 2024-07-08 22:24+0200\n"
+"PO-Revision-Date: 2024-11-10 11:18+0100\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 24.05.1\n"
+"X-Generator: Lokalize 24.11.70\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #, kde-format
@@ -562,7 +562,7 @@ msgstr "Стартиране и спиране на споделянето на 
 #: ui/mainwidget.ui:148
 #, kde-format
 msgid "&Enable Desktop Sharing"
-msgstr "&Актиивране на споделяне на работното място"
+msgstr "&Активиране на споделяне на работното място"
 
 #. i18n: ectx: property (title), widget (QGroupBox, detailsGroupBox)
 #: ui/mainwidget.ui:170
