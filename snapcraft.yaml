@@ -37,6 +37,35 @@ parts:
     plugin: cmake
     source: .
     source-type: local
+    build-packages:
+      - libxcb-render0-dev
+      - libxcb-shape0-dev
+      - libxcb-xfixes0-dev
+      - libxcb-shm0-dev
+      - libxcb-damage0-dev
+      - libxcb-image0-dev
+      - libvncserver-dev
+      - libpipewire-0.3-dev
+      - libepoxy-dev
+      - libgbm-dev
+      - libwayland-dev
+      - libxdamage-dev
+      - libxtst-dev
+    stage-packages:
+      - libxcb-render0
+      - libxcb-shape0
+      - libxcb-xfixes0
+      - libxcb-shm0-dev
+      - libxcb-damage0-dev
+      - libxcb-image0-dev
+      - libvncserver1
+      - pipewire-bin
+      - pipewire-audio-client-libraries
+      - libepoxy0
+      - libgbm1
+      - libwayland-client0
+      - libxdamage1
+      - libxtst6
     cmake-parameters:
       - -DCMAKE_INSTALL_PREFIX=/usr
       - -DCMAKE_BUILD_TYPE=Release
