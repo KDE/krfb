@@ -3,19 +3,21 @@
 # This file is distributed under the same license as the krfb package.
 # Kali <EMAIL@ADDRESS>, 2024.
 #
+# SPDX-FileCopyrightText: 2024 kali <skkalwar999@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: krfb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-09-24 00:39+0000\n"
-"PO-Revision-Date: 2024-12-13 19:09+0530\n"
-"Last-Translator: Kali <EMAIL@ADDRESS>\n"
-"Language-Team: Sanskrit\n"
+"PO-Revision-Date: 2024-12-20 21:52+0530\n"
+"Last-Translator: kali <skkalwar999@gmail.com>\n"
+"Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
 "Language: sa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n>2);\n"
+"X-Generator: Lokalize 24.08.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -482,7 +484,7 @@ msgstr "पूर्वनिर्धारित पोर्ट् इत्�
 #: ui/configtcp.ui:50
 #, kde-format
 msgid "Listening port:"
-msgstr "श्रवण-बन्दरम् : १."
+msgstr "श्रवण-बन्दरम् :"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel5)
 #: ui/connectionwidget.ui:47
@@ -504,7 +506,7 @@ msgstr ""
 #: ui/connectionwidget.ui:102
 #, kde-format
 msgid "Remote system:"
-msgstr "दूरस्थ प्रणाली : १."
+msgstr "दूरस्थ प्रणाली :"
 
 #. i18n: ectx: property (text), widget (QLabel, remoteHost)
 #: ui/connectionwidget.ui:118
