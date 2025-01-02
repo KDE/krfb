@@ -36,6 +36,7 @@
   <name xml:lang="pt-BR">Krfb</name>
   <name xml:lang="ro">Krfb</name>
   <name xml:lang="ru">Krfb</name>
+  <name xml:lang="sa">Krfb</name>
   <name xml:lang="sk">Krfb</name>
   <name xml:lang="sl">Krfb</name>
   <name xml:lang="sr">КРФБ</name>
@@ -80,6 +81,7 @@
   <summary xml:lang="pt-BR">Compartilhar sua área de trabalho com outro computador via VNC</summary>
   <summary xml:lang="ro">Partajați-vă biroul cu alt calculator prin VNC</summary>
   <summary xml:lang="ru">Предоставление другому компьютеру доступа к рабочему столу с помощью VNC</summary>
+  <summary xml:lang="sa">VNC मार्गेण अन्यसङ्गणके स्वस्य डेस्कटॉप् साझां कुर्वन्तु</summary>
   <summary xml:lang="sk">Zdieľajte vašu plochu s iným počítačom cez VNC</summary>
   <summary xml:lang="sl">Deli namizje z drugim računalnikom prek VNC</summary>
   <summary xml:lang="sv">Dela ditt skrivbord med en annan dator via VNC</summary>
@@ -120,6 +122,7 @@
     <p xml:lang="pt-BR">Krfb Desktop Sharing é um aplicativo de servidor que lhe permite compartilhar a sua sessão atual com um usuário em outra máquina, que poderá usar um cliente de VNC para ver ou mesmo controlar a máquina.</p>
     <p xml:lang="ro">Partajarea Biroului Krfb e o aplicație-server ce vă permite să partajați sesiunea actuală cu un utilizator de pe altă mașină, care poate folosi un client VNC pentru a vedea sau chiar controla biroul.</p>
     <p xml:lang="ru">Krfb является сервером, который позволяет вам предоставлять доступ к своему текущему сеансу пользователю на другом компьютере, который использует клиент VNC для просмотра или управления вашим рабочим столом.</p>
+    <p xml:lang="sa">Krfb Desktop Sharing इति सर्वर-अनुप्रयोगः अस्ति यत् अन्यस्मिन् यन्त्रे उपयोक्त्रेण सह स्वस्य वर्तमान-सत्रं साझां कर्तुं शक्नोति, यः डेस्कटॉप् द्रष्टुं वा नियन्त्रयितुं वा VNC क्लायन्ट्-उपयोगं कर्तुं शक्नोति</p>
     <p xml:lang="sk">Krfb je serverová aplikácia, ktorá vám umožní zdieľať vaše aktuálne sedenie s používateľom na inom stroji, ktorý môže používať VNC klienta na pripojenie alebo ovládanie stanice.</p>
     <p xml:lang="sl">Souporaba namizja Krfb je strežniški program, ki vam dovoli, da delite vašo trenutno sejo z uporabnikom na drugem računalniku, ki ima odjemalec VNC. Uporabnik lahko gleda ali celo nadzira namizje.</p>
     <p xml:lang="sr">КРФБ је серверски програм за дељење површи, којим можете да поделите своју текућу сесију са корисником на другој машини. Удаљени корисник може да употреби неки ВНЦ клијент за гледање површи, па чак и управљање њоме.</p>
@@ -171,6 +174,7 @@
       <caption xml:lang="pt-BR">Compartilhando a área de trabalho com o Krfb</caption>
       <caption xml:lang="ro">Partajarea biroului cu Krfb</caption>
       <caption xml:lang="ru">Общий доступ к рабочему столу с использованием Krfb</caption>
+      <caption xml:lang="sa">Krfb इत्यनेन सह डेस्कटॉप् साझाकरणम्</caption>
       <caption xml:lang="sk">Zdieľanie pracovnej plochy s Krfb</caption>
       <caption xml:lang="sl">Deljenje namizij s Krfb</caption>
       <caption xml:lang="sv">Dela skrivbord med Krfb</caption>
@@ -187,6 +191,8 @@
   </provides>
   <project_group>KDE</project_group>
   <releases>
+    <release version="24.12.1" date="2025-01-09"/>
+    <release version="24.12.0" date="2024-12-12"/>
     <release version="24.08.3" date="2024-11-07"/>
     <release version="24.08.2" date="2024-10-10"/>
     <release version="24.08.1" date="2024-09-12"/>
@@ -199,4 +205,7 @@
     <release version="24.02.0" date="2024-02-28"/>
     <release version="23.08.5" date="2024-02-15"/>
   </releases>
+  <custom>
+    <value key="KDE::supporters">domportera;KjetilS</value>
+  </custom>
 </component>

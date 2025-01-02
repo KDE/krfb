@@ -235,20 +235,20 @@ void InvitationsRfbServer::saveSecuritySettings()
 
 void InvitationsRfbServer::readPasswordFromConfig()
 {
-        QString desktopPassword;
-        QString unattendedPassword;
-        KConfigGroup krfbConfig(KSharedConfig::openConfig(),QStringLiteral("Security"));
+    QString desktopPassword;
+    QString unattendedPassword;
+    KConfigGroup krfbConfig(KSharedConfig::openConfig(),QStringLiteral("Security"));
 
-        desktopPassword = KStringHandler::obscure(krfbConfig.readEntry(
-                "desktopPassword", QString()));
-        if(!desktopPassword.isEmpty()) {
-            m_desktopPassword = desktopPassword;
-            Q_EMIT passwordChanged(m_desktopPassword);
-        }
+    desktopPassword = KStringHandler::obscure(krfbConfig.readEntry(
+            "desktopPassword", QString()));
+    if(!desktopPassword.isEmpty()) {
+        m_desktopPassword = desktopPassword;
+        Q_EMIT passwordChanged(m_desktopPassword);
+    }
 
-        unattendedPassword = KStringHandler::obscure(krfbConfig.readEntry(
-                "unattendedPassword", QString()));
-        if(!unattendedPassword.isEmpty()) {
-            m_unattendedPassword = unattendedPassword;
-        }
+    unattendedPassword = KStringHandler::obscure(krfbConfig.readEntry(
+            "unattendedPassword", QString()));
+    if(!unattendedPassword.isEmpty()) {
+        m_unattendedPassword = unattendedPassword;
+    }
 }
