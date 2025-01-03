@@ -16,6 +16,15 @@ apps:
     command: usr/bin/krfb
     plugs:
       - audio-record
+    environment:
+      LD_LIBRARY_PATH: $SNAP/ffmpeg-platform/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR:${LD_LIBRARY_PATH}
+      PATH: $SNAP/ffmpeg-platform/usr/bin:${PATH}
+      ALSA_CONFIG_PATH: "$SNAP/kf6/etc/asound.conf"
+plugs:
+  ffmpeg-2204:
+    interface: content
+    target: ffmpeg-platform # the folder where this content snap will be mounted
+    default-provider: ffmpeg-2204
 slots:
   session-dbus-interface:
     interface: dbus
@@ -74,6 +83,8 @@ parts:
       - libwayland-dev
       - libxdamage-dev
       - libxtst-dev
+    build-snaps:
+      - ffmpeg-2204
     stage-packages:
       - libxcb-render0
       - libxcb-shape0
