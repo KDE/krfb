@@ -84,7 +84,7 @@ parts:
       - libxdamage-dev
       - libxtst-dev
     build-snaps:
-      - ffmpeg-2204
+      - ffmpeg-2204-sdk
     stage-packages:
       - libxcb-render0
       - libxcb-shape0
@@ -117,6 +117,10 @@ parts:
       - -DCMAKE_INSTALL_LIBDIR=lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR
       - --log-level=STATUS
       - -DCMAKE_LIBRARY_PATH=lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR
+    build-environment:
+      - CMAKE_FIND_ROOT_PATH: "${CMAKE_FIND_ROOT_PATH}:/snap/ffmpeg-2204-sdk/current"
+      - PKG_CONFIG_PATH: "/snap/ffmpeg-2204-sdk/current/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/pkgconfig"
+      - LD_LIBRARY_PATH: "${LD_LIBRARY_PATH}:/snap/ffmpeg-2204-sdk/current/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR"
     prime:
       - -usr/lib/*/cmake/*
       - -usr/include/*
