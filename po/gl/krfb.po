@@ -1,7 +1,7 @@
 # translation of krfb.po to galician
 # translation of krfb.po to
 #
-# SPDX-FileCopyrightText: 2024 Adrián Chaves (Gallaecio)
+# SPDX-FileCopyrightText: 2024, 2025 Adrián Chaves (Gallaecio)
 # Xabi G. Feal <xabigf@gmx.net>, 2006.
 # mvillarino <mvillarino@users.sourceforge.net>, 2007, 2008, 2009.
 # Miguel Branco <bandua83@gmail.com>, 2007.
@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: krfb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-09-24 00:39+0000\n"
-"PO-Revision-Date: 2024-12-17 21:53+0100\n"
+"PO-Revision-Date: 2025-01-06 21:01+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
 "Language: gl\n"
@@ -705,6 +705,7 @@ msgstr "Activar o acceso sen &supervisión."
 msgid "Change password for Unattended Access"
 msgstr "Cambiar o contrasinal do acceso sen supervisión."
 
+# skip-rule: trasno-login1_reverse
 #. i18n: ectx: property (text), widget (QPushButton, unattendedPasswordButton)
 #: ui/mainwidget.ui:468
 #, kde-format
