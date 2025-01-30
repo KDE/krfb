@@ -28,7 +28,9 @@ include(CheckIncludeFile)
 check_include_file("linux/input.h" HAVE_LINUX_INPUT_H)
 
 find_package(Qt6 ${QT_MIN_VERSION} REQUIRED COMPONENTS Core DBus Widgets)
-
+if (Qt6Gui_VERSION VERSION_GREATER_EQUAL "6.10.0")
+    find_package(Qt6GuiPrivate ${REQUIRED_QT_VERSION} REQUIRED NO_MODULE)
+endif()
 find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS
     I18n
     Config
