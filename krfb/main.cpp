@@ -110,6 +110,8 @@ int main(int argc, char *argv[])
                               "protocol design"));
     KAboutData::setApplicationData(aboutData);
 
+    QApplication::setWindowIcon(QIcon::fromTheme(QStringLiteral("krfb")));
+
     KCrash::initialize();
 
     QCommandLineParser parser;
