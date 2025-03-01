@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krfb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-24 00:39+0000\n"
+"POT-Creation-Date: 2025-03-01 00:46+0000\n"
 "PO-Revision-Date: 2021-11-01 16:21-0300\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
 "Language-Team: Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -284,7 +284,7 @@ msgstr ""
 "Seu Servidor X11 não suporta a extensão XTest versão 2.2 requerida. Não é "
 "possível compartilhar o seu ambiente de trabalho."
 
-#: main.cpp:40 main.cpp:141
+#: main.cpp:40 main.cpp:143
 #, kde-format
 msgid "Desktop Sharing Error"
 msgstr "Erro no compartilhamento do ambiente de trabalho"
@@ -309,12 +309,12 @@ msgstr "George Goldberg"
 msgid "Telepathy tubes support"
 msgstr "Suporte para o Telepathy Tubes"
 
-#: main.cpp:117
+#: main.cpp:119
 #, kde-format
 msgid "Do not show the invitations management dialog at startup"
 msgstr "Não mostrar o diálogo de gerenciamento de convites na inicialização"
 
-#: main.cpp:139
+#: main.cpp:141
 #, kde-format
 msgid ""
 "Desktop Sharing is not running under an X11 Server or Wayland.\n"

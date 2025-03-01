@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krfb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-24 00:39+0000\n"
+"POT-Creation-Date: 2025-03-01 00:46+0000\n"
 "PO-Revision-Date: 2021-10-31 09:10+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -286,7 +286,7 @@ msgstr ""
 "Uw X11-server ondersteunt niet de vereiste XTest-extensie versie 2.2. Het "
 "delen van uw bureaublad is niet mogelijk."
 
-#: main.cpp:40 main.cpp:141
+#: main.cpp:40 main.cpp:143
 #, kde-format
 msgid "Desktop Sharing Error"
 msgstr "Fout bij delen van bureaublad"
@@ -311,12 +311,12 @@ msgstr "George Goldberg"
 msgid "Telepathy tubes support"
 msgstr "Ondersteuning voor Telepathy tubes"
 
-#: main.cpp:117
+#: main.cpp:119
 #, kde-format
 msgid "Do not show the invitations management dialog at startup"
 msgstr "Toon de invitatiebeheerdialoog niet bij het opstarten"
 
-#: main.cpp:139
+#: main.cpp:141
 #, kde-format
 msgid ""
 "Desktop Sharing is not running under an X11 Server or Wayland.\n"

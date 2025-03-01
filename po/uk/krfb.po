@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krfb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-24 00:39+0000\n"
+"POT-Creation-Date: 2025-03-01 00:46+0000\n"
 "PO-Revision-Date: 2021-10-31 09:59+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -286,7 +286,7 @@ msgstr ""
 "Ваш сервер X11 не підтримує необхідне розширення XTest версії 2.2. Спільне "
 "використання стільниць неможливе."
 
-#: main.cpp:40 main.cpp:141
+#: main.cpp:40 main.cpp:143
 #, kde-format
 msgid "Desktop Sharing Error"
 msgstr "Помилка спільного використання стільниці"
@@ -311,12 +311,12 @@ msgstr "George Goldberg"
 msgid "Telepathy tubes support"
 msgstr "Підтримка каналів Telepathy"
 
-#: main.cpp:117
+#: main.cpp:119
 #, kde-format
 msgid "Do not show the invitations management dialog at startup"
 msgstr "Не показувати діалогове вікно керування запрошеннями при запуску"
 
-#: main.cpp:139
+#: main.cpp:141
 #, kde-format
 msgid ""
 "Desktop Sharing is not running under an X11 Server or Wayland.\n"

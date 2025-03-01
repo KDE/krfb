@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krfb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-24 00:39+0000\n"
+"POT-Creation-Date: 2025-03-01 00:46+0000\n"
 "PO-Revision-Date: 2010-11-30 10:42+0700\n"
 "Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
 "Language-Team: Khmer <support@khmeros.info>\n"
@@ -277,7 +277,7 @@ msgstr ""
 "ម៉ាស៊ីន​បម្រើ X11 របស់​អ្នក​មិន​គាំទ្រ​ផ្នែក​បន្ថែម XTest កំណែ ២.២ ​ដែល​ទាមទារ​ទេ ។ មិន​អាច​ធ្វើការ​ចែក​"
 "រំលែក​ផ្ទៃតុ​របស់​អ្នក​បាន​ទេ ។"
 
-#: main.cpp:40 main.cpp:141
+#: main.cpp:40 main.cpp:143
 #, kde-format
 msgid "Desktop Sharing Error"
 msgstr "កំហុស​ក្នុងកា​រចែករំលែក​ផ្ទៃតុ"
@@ -303,12 +303,12 @@ msgstr "George Goldberg"
 msgid "Telepathy tubes support"
 msgstr "Telepathy tubes support"
 
-#: main.cpp:117
+#: main.cpp:119
 #, kde-format
 msgid "Do not show the invitations management dialog at startup"
 msgstr "កុំ​បង្ហាញ​ប្រអប់​គ្រប់គ្រង​ការ​អញ្ជើញ​នៅពេល​ចាប់ផ្ដើម"
 
-#: main.cpp:139
+#: main.cpp:141
 #, kde-format
 msgid ""
 "Desktop Sharing is not running under an X11 Server or Wayland.\n"

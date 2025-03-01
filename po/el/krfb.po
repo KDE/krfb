@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krfb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-24 00:39+0000\n"
+"POT-Creation-Date: 2025-03-01 00:46+0000\n"
 "PO-Revision-Date: 2021-11-06 11:12+0200\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -283,7 +283,7 @@ msgstr ""
 "Ο εξυπηρετητής Χ11 δεν υποστηρίζει τη ζητούμενη επέκταση XTest έκδοση 2.2. Η "
 "κοινή χρήση της επιφάνειας εργασίας σας δεν είναι δυνατή."
 
-#: main.cpp:40 main.cpp:141
+#: main.cpp:40 main.cpp:143
 #, kde-format
 msgid "Desktop Sharing Error"
 msgstr "Σφάλμα κοινής χρήσης επιφάνειας εργασίας"
@@ -308,12 +308,12 @@ msgstr "George Goldberg"
 msgid "Telepathy tubes support"
 msgstr "Υποστήριξη telepathy tubes"
 
-#: main.cpp:117
+#: main.cpp:119
 #, kde-format
 msgid "Do not show the invitations management dialog at startup"
 msgstr "Μη εμφάνιση του διαλόγου διαχείρισης προσκλήσεων κατά την εκκίνηση"
 
-#: main.cpp:139
+#: main.cpp:141
 #, kde-format
 msgid ""
 "Desktop Sharing is not running under an X11 Server or Wayland.\n"

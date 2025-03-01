@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krfb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-24 00:39+0000\n"
+"POT-Creation-Date: 2025-03-01 00:46+0000\n"
 "PO-Revision-Date: 2004-11-23 02:59-0800\n"
 "Last-Translator: Tamil PC <tamilpc@ambalam.com>\n"
 "Language-Team:  <tamilpc@ambalam.com>\n"
@@ -273,7 +273,7 @@ msgstr ""
 "உங்கள் X11 சேவையகம் X சோதனையின் நீட்சி பதிப்பு 2.2  விற்கு ஆதரவு தரவில்லை. உங்கள் "
 "பணிமேடையை பகிர்ந்து கொள்ள இயலாது."
 
-#: main.cpp:40 main.cpp:141
+#: main.cpp:40 main.cpp:143
 #, kde-format
 msgid "Desktop Sharing Error"
 msgstr "மேல்மேசை பகிர்தலில் தவறு"
@@ -299,12 +299,12 @@ msgstr ""
 msgid "Telepathy tubes support"
 msgstr ""
 
-#: main.cpp:117
+#: main.cpp:119
 #, kde-format
 msgid "Do not show the invitations management dialog at startup"
 msgstr ""
 
-#: main.cpp:139
+#: main.cpp:141
 #, kde-format
 msgid ""
 "Desktop Sharing is not running under an X11 Server or Wayland.\n"

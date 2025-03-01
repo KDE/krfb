@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krfb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-24 00:39+0000\n"
+"POT-Creation-Date: 2025-03-01 00:46+0000\n"
 "PO-Revision-Date: 2014-04-07 23:20+0200\n"
 "Last-Translator: Sönke Dibbern <s_dibbern@web.de>\n"
 "Language-Team: Low Saxon <kde-i18n-nds@kde.org>\n"
@@ -278,7 +278,7 @@ msgstr ""
 "Dien X11-Server ünnerstütt de nödige XTest-Verwiedern Verschoon 2.2 nich. "
 "Freegeven vun Dien Schriefdisch is nich mööglich."
 
-#: main.cpp:40 main.cpp:141
+#: main.cpp:40 main.cpp:143
 #, kde-format
 msgid "Desktop Sharing Error"
 msgstr "Fehler bi de Schriefdischfreegaav"
@@ -304,12 +304,12 @@ msgstr "George Goldberg"
 msgid "Telepathy tubes support"
 msgstr "Ünnerstütten vun \"Telepathy\"-Kanaals"
 
-#: main.cpp:117
+#: main.cpp:119
 #, kde-format
 msgid "Do not show the invitations management dialog at startup"
 msgstr "Inladenplegerdialoog bi't Starten nich wiesen"
 
-#: main.cpp:139
+#: main.cpp:141
 #, kde-format
 msgid ""
 "Desktop Sharing is not running under an X11 Server or Wayland.\n"

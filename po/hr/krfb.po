@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krfb 0\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-24 00:39+0000\n"
+"POT-Creation-Date: 2025-03-01 00:46+0000\n"
 "PO-Revision-Date: 2010-02-10 22:40+0100\n"
 "Last-Translator: Marko Dimjasevic <marko@dimjasevic.net>\n"
 "Language-Team: Croatian <kde-croatia-list@lists.sourceforge.net>\n"
@@ -295,7 +295,7 @@ msgstr ""
 "Vaš X11 Server ne podržava zahtjevano proširenje XTest inačice 2.2. Nije "
 "moguće izvesti dijeljene vaše radne površine."
 
-#: main.cpp:40 main.cpp:141
+#: main.cpp:40 main.cpp:143
 #, kde-format
 msgid "Desktop Sharing Error"
 msgstr "Greška u dijeljenu radne površine"
@@ -321,12 +321,12 @@ msgstr ""
 msgid "Telepathy tubes support"
 msgstr ""
 
-#: main.cpp:117
+#: main.cpp:119
 #, kde-format
 msgid "Do not show the invitations management dialog at startup"
 msgstr "Ne prikazuj dijalog za upravljanje pozivnicama pri podizanju"
 
-#: main.cpp:139
+#: main.cpp:141
 #, kde-format
 msgid ""
 "Desktop Sharing is not running under an X11 Server or Wayland.\n"

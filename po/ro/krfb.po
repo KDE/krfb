@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krfb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-24 00:39+0000\n"
+"POT-Creation-Date: 2025-03-01 00:46+0000\n"
 "PO-Revision-Date: 2022-04-30 11:39+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -277,7 +277,7 @@ msgstr ""
 "Serverul dumneavoastră X11 nu susține extensia necesară XTest versiunea 2.2. "
 "Partajarea biroului nu e posibilă."
 
-#: main.cpp:40 main.cpp:141
+#: main.cpp:40 main.cpp:143
 #, kde-format
 msgid "Desktop Sharing Error"
 msgstr "Eroare la partajarea biroului"
@@ -302,12 +302,12 @@ msgstr "George Goldberg"
 msgid "Telepathy tubes support"
 msgstr "Suport pentru tuburi Telepathy"
 
-#: main.cpp:117
+#: main.cpp:119
 #, kde-format
 msgid "Do not show the invitations management dialog at startup"
 msgstr "Nu arăta dialogul de gestiune a invitațiilor la pornire"
 
-#: main.cpp:139
+#: main.cpp:141
 #, kde-format
 msgid ""
 "Desktop Sharing is not running under an X11 Server or Wayland.\n"

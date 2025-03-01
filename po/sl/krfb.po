@@ -1,6 +1,6 @@
 # Translation of krfb.po to Slovenian
 # Copyright (C) 2002, 2003, 2004, 2005 Free Software Foundation, Inc.
-# $Id: krfb.po 1691242 2024-09-24 01:14:18Z scripty $
+# $Id: krfb.po 1703972 2025-03-01 01:30:30Z scripty $
 # $Source$
 #
 # Andrej Vernekar <andrej.vernekar@moj.net>, 2002, 2008.
@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krfb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-24 00:39+0000\n"
+"POT-Creation-Date: 2025-03-01 00:46+0000\n"
 "PO-Revision-Date: 2021-10-31 20:21+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -285,7 +285,7 @@ msgstr ""
 "Vaš strežnik X11 ne podpira potrebne razširitve XTest različice 2.2. "
 "Souporaba vašega namizja ni mogoča."
 
-#: main.cpp:40 main.cpp:141
+#: main.cpp:40 main.cpp:143
 #, kde-format
 msgid "Desktop Sharing Error"
 msgstr "Napaka med souporabo namizja"
@@ -310,12 +310,12 @@ msgstr "George Goldberg"
 msgid "Telepathy tubes support"
 msgstr "Podpora za cevi Telepathy"
 
-#: main.cpp:117
+#: main.cpp:119
 #, kde-format
 msgid "Do not show the invitations management dialog at startup"
 msgstr "Ob zagonu ne prikaži okna za upravljanje povabil"
 
-#: main.cpp:139
+#: main.cpp:141
 #, kde-format
 msgid ""
 "Desktop Sharing is not running under an X11 Server or Wayland.\n"

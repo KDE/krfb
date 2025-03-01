@@ -1,6 +1,6 @@
 # translation of krfb.po to Polish
 # translation of krfb.po to
-# Version: $Revision: 1691242 $
+# Version: $Revision: 1703972 $
 # Copyright (C) 2002, 2004, 2005, 2008, 2009 Free Software Foundation, Inc.
 # Krzysztof Lichota <lichota@mimuw.edu.pl>, 2002, 2005.
 # Michal Rudolf <mrudolf@kdewebdev.org>, 2004, 2005.
@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krfb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-24 00:39+0000\n"
+"POT-Creation-Date: 2025-03-01 00:46+0000\n"
 "PO-Revision-Date: 2021-11-13 08:57+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -282,7 +282,7 @@ msgstr ""
 "Twój serwer X11 nie zawiera wymaganego rozszerzenia XTest w wersji 2.2. "
 "Współdzielenie Twojego pulpitu jest niemożliwe."
 
-#: main.cpp:40 main.cpp:141
+#: main.cpp:40 main.cpp:143
 #, kde-format
 msgid "Desktop Sharing Error"
 msgstr "Błąd współdzielenia pulpitu"
@@ -307,12 +307,12 @@ msgstr "George Goldberg"
 msgid "Telepathy tubes support"
 msgstr "Obsługa Telepathy tubes"
 
-#: main.cpp:117
+#: main.cpp:119
 #, kde-format
 msgid "Do not show the invitations management dialog at startup"
 msgstr "Nie pokazuj na starcie okna zarządzania zaproszeniami"
 
-#: main.cpp:139
+#: main.cpp:141
 #, kde-format
 msgid ""
 "Desktop Sharing is not running under an X11 Server or Wayland.\n"

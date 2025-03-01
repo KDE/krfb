@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krfb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-24 00:39+0000\n"
+"POT-Creation-Date: 2025-03-01 00:46+0000\n"
 "PO-Revision-Date: 2024-02-24 12:24+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -284,7 +284,7 @@ msgstr ""
 "إنّ خادمك X11 لا يدعم التمديدXTest  الإصدار 2.2 المطلوب. مشاركة سطح مكتبك غير "
 "ممكنة."
 
-#: main.cpp:40 main.cpp:141
+#: main.cpp:40 main.cpp:143
 #, kde-format
 msgid "Desktop Sharing Error"
 msgstr "خطأ مشاركة سطح المكتب"
@@ -309,12 +309,12 @@ msgstr "جورج جولدبيرج"
 msgid "Telepathy tubes support"
 msgstr "دعم أنابيب التخاطر"
 
-#: main.cpp:117
+#: main.cpp:119
 #, kde-format
 msgid "Do not show the invitations management dialog at startup"
 msgstr "لا تظهر مربع حوار إدارة الدعوات عند بدء التشغيل"
 
-#: main.cpp:139
+#: main.cpp:141
 #, kde-format
 msgid ""
 "Desktop Sharing is not running under an X11 Server or Wayland.\n"

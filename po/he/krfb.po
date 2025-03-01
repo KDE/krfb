@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krfb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-24 00:39+0000\n"
+"POT-Creation-Date: 2025-03-01 00:46+0000\n"
 "PO-Revision-Date: 2024-01-27 21:55+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
@@ -287,7 +287,7 @@ msgstr ""
 "שרת ה־X11 שלך לא תומך בגרסה 2.2 של ההרחבה הנדרשת XTest. אין אפשרות לשתף את "
 "שולחן העבודה שלך."
 
-#: main.cpp:40 main.cpp:141
+#: main.cpp:40 main.cpp:143
 #, kde-format
 msgid "Desktop Sharing Error"
 msgstr "שגיאת שיתוף שולחן עבודה"
@@ -312,12 +312,12 @@ msgstr "ג׳ורג׳ גולדברג"
 msgid "Telepathy tubes support"
 msgstr "תמיכה בצינורות טלפתיים (Telepathy Tubes)"
 
-#: main.cpp:117
+#: main.cpp:119
 #, kde-format
 msgid "Do not show the invitations management dialog at startup"
 msgstr "לא להציג את חלונית ניהול ההזמנות בהתחלה"
 
-#: main.cpp:139
+#: main.cpp:141
 #, kde-format
 msgid ""
 "Desktop Sharing is not running under an X11 Server or Wayland.\n"
