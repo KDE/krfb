@@ -707,6 +707,3 @@ msgstr "Canvia la contrasenya per a l'accés desatés"
 #, kde-format
 msgid "&Change Unattended Password"
 msgstr "&Canvia la contrasenya del desatés"
-
-#~ msgid "Framebuffer"
-#~ msgstr "Framebuffer"
