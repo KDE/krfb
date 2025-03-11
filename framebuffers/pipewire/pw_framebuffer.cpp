@@ -371,7 +371,7 @@ void PWFrameBuffer::Private::handleFrame(const PipeWireFrame &frame)
     if (frame.dataFrame) {
         // FIXME: Assuming stride == width * 4, not sure to which extent this holds
         setVideoSize(frame.dataFrame->size);
-        memcpy(q->fb, frame.dataFrame->data, frame.dataFrame->size.width() * frame.dataFrame->stride);
+        memcpy(q->fb, frame.dataFrame->data, frame.dataFrame->size.height() * frame.dataFrame->stride);
     }
 #endif
     else if (frame.dmabuf) {
