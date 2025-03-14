@@ -11,13 +11,13 @@
 # Rıdvan CAN <ridvancan@linux-sevenler.org>, 2004.
 # obsoleteman <tulliana@gmail.com>, 2008-2009,2011.
 # Volkan Gezer <volkangezer@gmail.com>, 2013.
-# SPDX-FileCopyrightText: 2022, 2023, 2024 Emir SARI <emir_sari@icloud.com>
+# SPDX-FileCopyrightText: 2022, 2023, 2024, 2025 Emir SARI <emir_sari@icloud.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdenetwork-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-03-01 00:46+0000\n"
-"PO-Revision-Date: 2024-09-23 15:20+0300\n"
+"PO-Revision-Date: 2025-03-13 15:54+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -25,7 +25,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 24.11.70\n"
+"X-Generator: Lokalize 25.07.70\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -414,7 +414,7 @@ msgstr "Ekran yakalama"
 #, kde-format
 msgid "To apply framebuffer plugin setting, you need to restart the program."
 msgstr ""
-"Framebuffer eklentisi ayarını uygulamak için, programı yeniden başlatmanız "
+"Framebuffer eklentisi ayarını uygulamak için programı yeniden başlatmanız "
 "gerekir."
 
 #: rfbservermanager.cpp:226
@@ -600,7 +600,7 @@ msgid ""
 "button on the right for more info."
 msgstr ""
 "Uzak kullanıcının masaüstünüze bağlanabilmesi için adres gereklidir. Daha "
-"fazla bilgi için, sağ taraftaki hakkında düğmesine tıklayın."
+"fazla bilgi için sağ taraftaki hakkında düğmesine tıklayın."
 
 #. i18n: ectx: property (text), widget (QLabel, addressDisplayLabel)
 #: ui/mainwidget.ui:238
