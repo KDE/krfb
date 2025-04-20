@@ -2,12 +2,18 @@
     "id": "org.kde.krfb",
     "branch": "master",
     "runtime": "org.kde.Platform",
-    "runtime-version": "6.7",
+    "runtime-version": "6.9",
     "sdk": "org.kde.Sdk",
     "command": "krfb",
-    "tags": ["nightly"],
+    "tags": [
+        "nightly"
+    ],
     "desktop-file-name-suffix": " (Nightly)",
-    "finish-args": ["--share=ipc", "--socket=fallback-x11", "--socket=wayland" ],
+    "finish-args": [
+        "--share=ipc",
+        "--socket=fallback-x11",
+        "--socket=wayland"
+    ],
     "rename-icon": "krfb",
     "modules": [
         {
@@ -15,27 +21,31 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "http://mirrors.dotsrc.org/gnupg/libgpg-error/libgpg-error-1.47.tar.bz2",
-                    "sha256": "9e3c670966b96ecc746c28c2c419541e3bcb787d1a73930f5e5f5e1bcbbb9bdb",
+                    "url": "https://www.gnupg.org/ftp/gcrypt/libgpg-error/libgpg-error-1.54.tar.bz2",
+                    "sha256": "607dcadfd722120188eca5cd07193158b9dd906b578a557817ec779bd5e16d0e",
                     "x-checker-data": {
                         "type": "anitya",
                         "project-id": 1628,
                         "stable-only": true,
-                        "url-template": "http://mirrors.dotsrc.org/gnupg/libgpg-error/libgpg-error-${version}.tar.bz2"
+                        "url-template": "https://www.gnupg.org/ftp/gcrypt/libgpg-error/libgpg-error-${version}.tar.bz2"
                     }
                 }
             ],
-            "cleanup": [ "/lib/libgpg-error.la" ]
+            "cleanup": [
+                "/lib/libgpg-error.la"
+            ]
         },
         {
             "name": "libgcrypt",
-            "config-opts": ["--disable-doc"],
+            "config-opts": [
+                "--disable-doc"
+            ],
             "sources": [
                 {
                     "type": "git",
                     "url": "https://dev.gnupg.org/source/libgcrypt.git",
-                    "tag": "libgcrypt-1.10.2",
-                    "commit": "1c5cbacf3d88dded5063e959ee68678ff7d0fa56",
+                    "tag": "libgcrypt-1.11.0",
+                    "commit": "9d94d7846cde272b8b1519ba96e53967bf0b90d2",
                     "x-checker-data": {
                         "type": "anitya",
                         "project-id": 1623,
@@ -49,19 +59,34 @@
             "name": "libvncserver",
             "buildsystem": "cmake-ninja",
             "sources": [
-                { "type": "git", "url": "https://github.com/LibVNC/libvncserver", "branch": "LibVNCServer-0.9.14" }
+                {
+                    "type": "git",
+                    "url": "https://github.com/LibVNC/libvncserver",
+                    "branch": "LibVNCServer-0.9.14"
+                }
             ]
         },
         {
             "name": "kpipewire",
             "buildsystem": "cmake-ninja",
-            "config-opts": [ "-DBUILD_TESTING=OFF" ],
-            "sources": [ { "type": "git", "url": "https://invent.kde.org/plasma/kpipewire.git", "branch": "master" } ]
+            "config-opts": [
+                "-DBUILD_TESTING=OFF"
+            ],
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "https://invent.kde.org/plasma/kpipewire.git",
+                    "branch": "master"
+                }
+            ]
         },
         {
             "name": "krfb",
             "buildsystem": "cmake-ninja",
-            "config-opts": ["-DCMAKE_BUILD_TYPE=debug", "-DPLASMA_ENABLED=OFF"],
+            "config-opts": [
+                "-DCMAKE_BUILD_TYPE=debug",
+                "-DPLASMA_ENABLED=OFF"
+            ],
             "sources": [
                 {
                     "type": "dir",
