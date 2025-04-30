@@ -71,7 +71,7 @@ ecm_set_disabled_deprecation_versions(
 
 include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} )
 
-find_package(LibVNCServer REQUIRED)
+find_package(LibVNCServer 0.9.14 REQUIRED)
 
 
 option(DISABLE_PIPEWIRE "Disable PipeWire support." OFF)

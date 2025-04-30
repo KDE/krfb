@@ -27,7 +27,7 @@ target_link_libraries (krfbprivate
                        Qt::Widgets
                        Qt::GuiPrivate
                        ${X11_X11_LIB}
-                       ${LIBVNCSERVER_LIBRARIES}
+                       LibVNCServer::vncserver
 )
 
 set_target_properties (krfbprivate PROPERTIES
@@ -107,7 +107,7 @@ target_link_libraries (krfb
                        KF6::XmlGui
                        KF6::StatusNotifierItem
                        KF6::Crash
-                       ${LIBVNCSERVER_LIBRARIES}
+                       LibVNCServer::vncserver
 )
 
 if (X11_XTest_FOUND)
@@ -169,4 +169,3 @@ install(FILES org.kde.krfb.appdata.xml
 install (FILES krfb.notifyrc
          DESTINATION ${KDE_INSTALL_DATADIR}/krfb
 )
-
