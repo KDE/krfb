@@ -52,6 +52,7 @@ private:
     static void keyboardHook(rfbBool down, rfbKeySym keySym, rfbClientPtr cl);
     static void pointerHook(int bm, int x, int y, rfbClientPtr cl);
     static void clipboardHook(char *str, int len, rfbClientPtr cl);
+    static void clipboardHookUtf8(char *str, int len, rfbClientPtr cl);
 
     Q_DISABLE_COPY(RfbServer)
 

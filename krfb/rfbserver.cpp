@@ -92,6 +92,7 @@ bool RfbServer::start()
         d->screen->ptrAddEvent = pointerHook;
         d->screen->passwordCheck = passwordCheck;
         d->screen->setXCutText = clipboardHook;
+        d->screen->setXCutTextUTF8 = clipboardHookUtf8;
     } else {
         //if we already have a screen, stop listening first
         rfbShutdownServer(d->screen, false);
@@ -218,10 +219,12 @@ void RfbServer::updateCursorPosition(const QPoint & position)
 
 void RfbServer::krfbSendServerCutText()
 {
-    if(d->screen) {
+    if (d->screen) {
         QString text = QApplication::clipboard()->text();
-        rfbSendServerCutText(d->screen,
-                text.toLocal8Bit().data(),text.length());
+        QByteArray utf8Bytes = text.toUtf8();
+        QByteArray latin1Bytes = text.toLatin1();
+        // Try to send the clipboard text to the client in UTF-8. Use Latin1 if UTF-8 is not supported.
+        rfbSendServerCutTextUTF8(d->screen, utf8Bytes.data(), utf8Bytes.length(), latin1Bytes.data(), latin1Bytes.length());
     }
 }
 
@@ -287,5 +290,13 @@ void RfbServer::pointerHook(int bm, int x, int y, rfbClientPtr cl)
 //static
 void RfbServer::clipboardHook(char *str, int len, rfbClientPtr /*cl*/)
 {
-    QApplication::clipboard()->setText(QString::fromLocal8Bit(str,len));
+    QString text = QString::fromLatin1(str, len);
+    QApplication::clipboard()->setText(text);
+}
+
+void RfbServer::clipboardHookUtf8(char *str, int len, rfbClientPtr /*cl*/)
+{
+    // The last byte is a null terminator
+    QString text = QString::fromUtf8(str, len - 1);
+    QApplication::clipboard()->setText(text);
 }
