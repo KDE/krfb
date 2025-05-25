@@ -600,8 +600,8 @@ msgid ""
 "button on the right for more info."
 msgstr ""
 "L'adreça requerida pels usuaris remots per a connectar amb el vostre "
-"escriptori. Per a més informació, feu clic en el botó «Quant a» que hi ha a "
-"la dreta."
+"escriptori. Per a més informació, cliqueu damunt del botó «Quant a» que hi "
+"ha a la dreta."
 
 #. i18n: ectx: property (text), widget (QLabel, addressDisplayLabel)
 #: ui/mainwidget.ui:238
@@ -635,8 +635,8 @@ msgid ""
 "button on the right to change password."
 msgstr ""
 "La contrasenya requerida pels usuaris remots per a connectar amb el vostre "
-"escriptori. Feu clic en el botó «Edita» que hi ha a la dreta per a canviar "
-"la contrasenya."
+"escriptori. Cliqueu damunt del botó «Edita» que hi ha a la dreta per a "
+"canviar la contrasenya."
 
 #. i18n: ectx: property (text), widget (QLabel, passwordDisplayLabel)
 #: ui/mainwidget.ui:314
@@ -671,7 +671,7 @@ msgid ""
 msgstr ""
 "L'accés desatés permet que un usuari remot amb contrasenya arribe a "
 "controlar el vostre escriptori sense cap confirmació explícita. Per a "
-"conéixer més, feu clic en el botó «Quant a» que hi ha a la dreta."
+"conéixer més, cliqueu damunt del botó «Quant a» que hi ha a la dreta."
 
 #. i18n: ectx: property (whatsThis), widget (QToolButton, unattendedAboutButton)
 #: ui/mainwidget.ui:394
@@ -686,9 +686,9 @@ msgid ""
 "Starts/Stops unattended access to your desktop. Click on button on right to "
 "change password, and \"About\" button to know more."
 msgstr ""
-"Inicieu/Pareu l'accés desatés al vostre escriptori. Feu clic en el botó que "
-"hi ha a la dreta per a canviar la contrasenya, i en el botó «Quant a» per a "
-"conéixer més."
+"Inicieu/Pareu l'accés desatés al vostre escriptori. Cliqueu damunt del botó "
+"que hi ha a la dreta per a canviar la contrasenya, i en el botó «Quant a» "
+"per a conéixer més."
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableUnattendedCheckBox)
 #: ui/mainwidget.ui:440
