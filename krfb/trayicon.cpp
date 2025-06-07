@@ -15,9 +15,9 @@
 #include <QMenu>
 
 #include <KAboutApplicationDialog>
+#include <KAboutData>
 #include <KActionCollection>
 #include <QDialog>
-#include <KHelpMenu>
 #include <KLocalizedString>
 #include <KStandardAction>
 #include <KToggleAction>
@@ -129,6 +129,7 @@ void TrayIcon::onClientDisconnected(RfbClient* client)
 
 void TrayIcon::showAbout()
 {
-    KHelpMenu menu;
-    menu.aboutApplication();
+    auto *dialog = new KAboutApplicationDialog(KAboutData::applicationData());
+    dialog->setAttribute(Qt::WA_DeleteOnClose);
+    dialog->show();
 }
