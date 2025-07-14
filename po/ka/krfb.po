@@ -68,7 +68,7 @@ msgstr "ჩაკეცილად გაშვება"
 #: krfb.kcfg:15
 #, kde-format
 msgid "Use the default port for VNC (5900)"
-msgstr "VNC-ის ნაგულისხმები პორტის გამოყენება (5900)"
+msgstr "VNC-ის ნაგულისხმევი პორტის გამოყენება (5900)"
 
 #. i18n: ectx: label, entry (port), group (TCP)
 #: krfb.kcfg:19
@@ -481,7 +481,7 @@ msgstr "პაროლები KDE-ის საფულეში არ შ�
 #: ui/configtcp.ui:26
 #, kde-format
 msgid "Use default port"
-msgstr "ნაგულისხმები პორტის გამოყენება"
+msgstr "ნაგულისხმევი პორტის გამოყენება"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: ui/configtcp.ui:50
