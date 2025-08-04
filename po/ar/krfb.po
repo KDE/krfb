@@ -7,13 +7,13 @@
 # Munzir Taha <munzir@kacst.edu.sa>, 2004.
 # محمد سعد  Mohamed SAAD <metehyi@free.fr>, 2006.
 # Youssef Chahibi <chahibi@gmail.com>, 2007.
-# SPDX-FileCopyrightText: 2009, 2024 zayed <zayed.alsaidi@gmail.com>
+# SPDX-FileCopyrightText: 2009, 2024, 2025 zayed <zayed.alsaidi@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: krfb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-03-01 00:46+0000\n"
-"PO-Revision-Date: 2024-02-24 12:24+0400\n"
+"PO-Revision-Date: 2025-08-03 12:03+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -22,6 +22,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -106,7 +107,7 @@ msgstr "اسمح للاتصالات البعيدة بإدارة سطح المك�
 #: krfb.kcfg:37
 #, kde-format
 msgid "Allow connections without an invitation."
-msgstr "اسمح للاتصالات البعيدة بدون دعوة."
+msgstr "اسمح للاتصالات البعيدة دون دعوة."
 
 #. i18n: ectx: label, entry (unattendedAccessPassword), group (Security)
 #. i18n: ectx: label, entry (desktopSharingPassword), group (Security)
@@ -178,7 +179,7 @@ msgstr "النقل إلى كِيدِي4"
 #: main-virtualmonitor.cpp:92 main.cpp:101
 #, kde-format
 msgid "Tim Jansen"
-msgstr "Tim Jansen"
+msgstr "تيم يانسن"
 
 #: main-virtualmonitor.cpp:92 main.cpp:101
 #, kde-format
