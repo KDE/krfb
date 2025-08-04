@@ -496,7 +496,7 @@ Action=Popup
 
 [Event/InvalidPassword]
 Name=Invalid Password
-Name[ar]=كلمة المرور غير صحيحة
+Name[ar]=كلمة السر غير صحيحة
 Name[bg]=Неправилна парола
 Name[bs]=Neispravna šifra
 Name[ca]=Contrasenya no vàlida
@@ -562,7 +562,7 @@ Name[zh_CN]=无效密码
 Name[zh_TW]=不正確的密碼
 Comment=Invalid password
 Comment[af]=Ongeldige wagwoord
-Comment[ar]=كلمة المرور غير صحيحة
+Comment[ar]=كلمة السر غير صحيحة
 Comment[bg]=Неправилна парола
 Comment[bn]=অবৈধ পাসওয়ার্ড
 Comment[br]=Tremenger siek 
@@ -643,7 +643,7 @@ Action=Popup
 
 [Event/InvalidPasswordInvitations]
 Name=Invalid Password Invitations
-Name[ar]=كلمة المرور الدعوات غير صحيحة
+Name[ar]=كلمة السر الدعوات غير صحيحة
 Name[bg]=Неправилна парола за покана
 Name[bs]=Neispravna šifra pozivnice
 Name[ca]=Contrasenya no vàlida de les invitacions
