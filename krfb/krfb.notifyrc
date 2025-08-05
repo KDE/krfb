@@ -915,7 +915,7 @@ Action=Popup
 
 [Event/NewConnectionAutoAccepted]
 Name=New Connection Auto Accepted
-Name[ar]=اتصال جديد مقبول تلقائيا
+Name[ar]=اتصال جديد مقبول آليّا
 Name[bg]=Автоматично приемане на новата връзка
 Name[bs]=Nova veza je automatski prihvaćena
 Name[ca]=Connexió nova acceptada automàticament
@@ -978,7 +978,7 @@ Name[zh_CN]=新连接自动接受
 Name[zh_TW]=新連線自動接受
 Comment=New connection automatically established
 Comment[af]=Nuwe verbinding automaties vasgestel
-Comment[ar]=اتصال جديد مفعل تلقائيا 
+Comment[ar]=اتصال جديد مفعل آليّا 
 Comment[bg]=Новата връзка е автоматично приета
 Comment[bn]=নতুন সংযোগ স্বয়ংক্রীয়ভাবে স্থাপন করা হল
 Comment[bs]=Nova veza je automatski uspostavljena
