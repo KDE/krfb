@@ -47,7 +47,6 @@
   <name xml:lang="sv">Krfb</name>
   <name xml:lang="tr">Krfb</name>
   <name xml:lang="uk">Krfb</name>
-  <name xml:lang="x-test">xxKrfbxx</name>
   <name xml:lang="zh-CN">Krfb</name>
   <name xml:lang="zh-TW">Krfb</name>
   <summary>Share your desktop to another computer via VNC</summary>
@@ -89,7 +88,6 @@
   <summary xml:lang="sv">Dela ditt skrivbord med en annan dator via VNC</summary>
   <summary xml:lang="tr">Masaüstünüzü başka bir bilgisayara VNC aracılığıyla paylaşın</summary>
   <summary xml:lang="uk">Надайте вашу стільницю у спільне користування з іншим комп'ютером за допомогою VNC</summary>
-  <summary xml:lang="x-test">xxShare your desktop to another computer via VNCxx</summary>
   <summary xml:lang="zh-CN">通过 VNC 分享您的桌面到另一台电脑</summary>
   <summary xml:lang="zh-TW">透過 VNC 將您的桌面分享給另一台電腦</summary>
   <description>
@@ -135,7 +133,6 @@
     <p xml:lang="sv">Krfb-skrivbordsdelning är ett serverprogram som gör det möjligt att dela aktuell session med en användare på en annan dator, som kan använda en VNC-klient för att betrakta eller till och med kontrollera skrivbordet.</p>
     <p xml:lang="tr">Krfb Masaüstü Paylaşımı; geçerli oturumunuzu, başka bir makinedeki bir kullanıcıyla paylaşmanıza izin veren bir sunucu uygulamasıdır. Kullanıcılar, bir VNC istemcisi ile masaüstünüzü görüntüleyebilir ve hatta denetleyebilirler.</p>
     <p xml:lang="uk">Програма для спільного використання стільниці Krfb — це серверна програма, яка надає вам змогу розділити ваш поточний сеанс роботи з користувачем, який працює на іншому комп’ютері, так, щоб цей користувач зміг скористатися клієнтом VNC для перегляду або навіть керування вашою стільницею.</p>
-    <p xml:lang="x-test">xxKrfb Desktop Sharing is a server application that allows you to share your current session with a user on another machine, who can use a VNC client to view or even control the desktop.xx</p>
     <p xml:lang="zh-CN">Krfb 桌面共享是一个可以让您与另一个在其他机器上的用户共享当前会话的服务器程序，他可以使用 VNC 客户端来查看甚至控制桌面。</p>
     <p xml:lang="zh-TW">Krfb 桌面分享是款伺服器應用程式，它可以將您目前的桌面階段分享給一位於其他主機上的使用者，以讓他能使用 VNC 用戶端檢視、甚至控制您的桌面。</p>
   </description>
@@ -184,7 +181,6 @@
       <caption xml:lang="sv">Dela skrivbord med Krfb</caption>
       <caption xml:lang="tr">Krfb ile masaüstü paylaşımı</caption>
       <caption xml:lang="uk">Спільне використання стільниці за допомогою Krfb</caption>
-      <caption xml:lang="x-test">xxSharing desktop with Krfbxx</caption>
       <caption xml:lang="zh-CN">使用 Krfb 共享桌面</caption>
       <caption xml:lang="zh-TW">使用 Krfb 分享桌面</caption>
       <image>https://cdn.kde.org/screenshots/krfb/krfb.png</image>
