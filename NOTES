@@ -1,7 +1,7 @@
 Comments on various aspects of KRfb:
 
 - KRfb has been designed for three use cases:
-  * a user who needs help from an administrator or friend. The adminstrator can 
+  * a user who needs help from an administrator or friend. The administrator can 
     connect to the user and change settings and so on while both are talking
     on the telephone or using VoIP.
   * a user who wants to show something to a friend, so he lets his friend
@@ -12,7 +12,7 @@ Comments on various aspects of KRfb:
   so KRfb is pre-configured for them. Case 3 is for advanced users and
   therefore a little bit more difficult to configure.
 - design goal of KRfb is to make it as easy to use as possible. I tried to
-  limit functionality whereever possible.
+  limit functionality wherever possible.
 - the new-connection-dialog is extra large and has the pixmap on the left
   side to capture the attention of the user before allowing a connection.
 - the RFBController class is a mess. The interactions between the threaded, 

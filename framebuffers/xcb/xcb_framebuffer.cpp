@@ -551,7 +551,7 @@ QList<QRect> XCBFrameBuffer::modifiedTiles() {
                 // get image data into shared memory segment
                 // now rects are positioned relative to framebufferImage,
                 // but we need to get image from the whole screen, so
-                // translate whe coordinates
+                // translate the coordinates
                 xcb_shm_get_image_cookie_t sgi_cookie = xcb_shm_get_image(
                             QX11Info::connection(),
                             d->win,
