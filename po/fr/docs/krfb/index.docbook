@@ -153,7 +153,7 @@
 <para
 >Vous pouvez modifier le port sur la page <guilabel
 >Réseau</guilabel
-> dans la boîte de dialogue de configuration. </para>
+> dans la boite de dialogue de configuration. </para>
 <para
 >Le champ suivant est prérempli avec un mot de passe généré automatiquement. Cliquez sur l'icône à la droite du champ pour modifier le mot de passe. </para>
 </sect2>
@@ -209,7 +209,7 @@
 ><guimenuitem
 >Quitter</guimenuitem
 ></menuchoice
-> dans la fenêtre principale ou soit un clic droit sur l'icône de la boîte à miniature du système avec sélection du menu <guimenuitem
+> dans la fenêtre principale ou soit un clic droit sur l'icône de la boite à miniature du système avec sélection du menu <guimenuitem
 >Quitter</guimenuitem
 >. </para>
 </sect2>
