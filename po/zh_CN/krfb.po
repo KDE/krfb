@@ -512,7 +512,7 @@ msgid ""
 "careful. When the option is disabled the remote user can only watch your "
 "screen."
 msgstr ""
-"如果您打开此选项，远程用户就可以输入按键并使用您的鼠标光标。这意味着给予他们"
+"如果您打开此选项，远程用户就可以输入按键并使用您的鼠标指针。这意味着给予他们"
 "对您计算机的完全控制权，所以请格外小心。如果禁用此选项，远程用户将只能观看您"
 "的屏幕。"
 
