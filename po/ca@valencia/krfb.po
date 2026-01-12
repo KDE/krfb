@@ -284,7 +284,7 @@ msgstr ""
 #: main.cpp:40 main.cpp:143
 #, kde-format
 msgid "Desktop Sharing Error"
-msgstr "S'ha produït un error en compartir l'escriptori"
+msgstr "S'ha produït un error mentre es compartia l'escriptori"
 
 #: main.cpp:83
 #, kde-format
@@ -338,7 +338,7 @@ msgid ""
 "Failed to start the krfb server. Desktop sharing will not work. Try setting "
 "another port in the settings and restart krfb."
 msgstr ""
-"No s'ha pogut iniciar el servidor krfb. La compartició d'escriptori no "
+"Ha fallat mentre s'iniciava el servidor krfb. La compartició d'escriptori no "
 "funcionarà. Intenteu definir un altre port en la configuració i torneu a "
 "iniciar el krfb."
 
