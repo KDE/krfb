@@ -238,16 +238,14 @@ msgid "name"
 msgstr ""
 
 #: main-virtualmonitor.cpp:112
-#, fuzzy, kde-format
-#| msgid "Password for uninvited connections."
+#, kde-format
 msgid "Password for the client to connect to it"
-msgstr "Focal faire do cheangail gan chuireadh."
+msgstr ""
 
 #: main-virtualmonitor.cpp:112
-#, fuzzy, kde-format
-#| msgid "<b>Password:</b>"
+#, kde-format
 msgid "password"
-msgstr "<b>Focal Faire:</b>"
+msgstr ""
 
 #: main-virtualmonitor.cpp:114
 #, kde-format
@@ -289,10 +287,9 @@ msgid "Desktop Sharing"
 msgstr "Comhroinnt Deisce"
 
 #: main.cpp:85
-#, fuzzy, kde-format
-#| msgid "VNC-compatible server to share KDE desktops"
+#, kde-format
 msgid "VNC-compatible server to share desktops"
-msgstr "Freastalaí comhoiriúnach le VNC lenar féidir deasca KDE a chomhroinnt"
+msgstr ""
 
 #: main.cpp:94
 #, kde-format
@@ -327,40 +324,23 @@ msgid "Enter a new password for Unattended Access"
 msgstr ""
 
 #: mainwindow.cpp:197
-#, fuzzy, kde-format
-#| msgid ""
-#| "Failed to start the krfb server. Invitation-based sharing will not work. "
-#| "Try setting another port in the settings and restart krfb."
+#, kde-format
 msgid ""
 "Failed to start the krfb server. Desktop sharing will not work. Try setting "
 "another port in the settings and restart krfb."
 msgstr ""
-"Níorbh fhéidir an freastalaí krfb a thosú. Ní oibreoidh comhroinnt bunaithe "
-"ar chuirí. Bain triail as port eile a roghnú sna socruithe agus atosaigh "
-"krfb."
 
 #. i18n: ectx: property (whatsThis), widget (QLabel, titleLabel)
 #. i18n: ectx: property (text), widget (QLabel, titleLabel)
 #. i18n: ectx: property (whatsThis), widget (QLabel, aboutLabel)
 #: mainwindow.cpp:220 mainwindow.cpp:227 ui/mainwidget.ui:83
 #: ui/mainwidget.ui:86 ui/mainwidget.ui:114
-#, fuzzy, kde-format
-#| msgid "Desktop Sharing"
+#, kde-format
 msgid "KDE Desktop Sharing"
-msgstr "Comhroinnt Deisce"
+msgstr ""
 
 #: mainwindow.cpp:221
-#, fuzzy, kde-format
-#| msgid ""
-#| "This field contains the address of your computer and the display number, "
-#| "separated by a colon.\n"
-#| "The address is just a hint - you can use any address that can reach your "
-#| "computer. \n"
-#| "Desktop Sharing tries to guess your address from your network "
-#| "configuration, but does\n"
-#| "not always succeed in doing so. If your computer is behind a firewall it "
-#| "may have a\n"
-#| "different address or be unreachable for other computers."
+#, kde-format
 msgid ""
 "This field contains the address of your computer and the port number, "
 "separated by a colon.\n"
@@ -374,16 +354,6 @@ msgid ""
 "If your computer is behind a firewall it may have a different address or be "
 "unreachable for other computers."
 msgstr ""
-"Tá seoladh do ríomhaire agus an uimhir thaispeána sa réimse seo, scartha ag "
-"camóg.\n"
-"Níl sa seoladh ach leid - is féidir aon seoladh a shainíonn do ríomhaire a "
-"úsáid. \n"
-"Tugann Comhroinnt Deisce buille faoi thuairim cad é do sheoladh bunaithe ar "
-"do chumraíocht líonra,\n"
-"ach ní éiríonn sé leis i gcónaí. Má tá do ríomhaire taobh thiar de bhalla "
-"dóiteáin, seans go bhfuil\n"
-"seoladh eile aige, nó nach mbeidh ríomhairí eile in ann é a shroicheadh ar "
-"chor ar bith."
 
 #: mainwindow.cpp:228
 #, kde-format
@@ -453,10 +423,9 @@ msgstr "Comhroinnt Deisce - ceangailte"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: ui/configframebuffer.ui:19
-#, fuzzy, kde-format
-#| msgid "Preferred Frame Buffer Plugin"
+#, kde-format
 msgid "Preferred frameb&uffer plugin:"
-msgstr "Breiseán Maoláin Fhráma De Rogha"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, helpText)
 #: ui/configframebuffer.ui:44
@@ -543,39 +512,29 @@ msgstr "Ceadaigh don &chianúsáideoir an méarchlár agus an luch a rialú"
 
 #. i18n: ectx: property (text), widget (QLabel, aboutLabel)
 #: ui/mainwidget.ui:117
-#, fuzzy, kde-format
-#| msgid ""
-#| "KDE Desktop Sharing allows you to invite somebody at a remote location to "
-#| "watch and possibly control your desktop. <a href=\"whatsthis\">More about "
-#| "invitations...</a>"
+#, kde-format
 msgid ""
 "KDE Desktop Sharing allows you to grant permission to someone at a remote "
 "location for viewing and possibly controlling your desktop."
 msgstr ""
-"Le Comhroinnt Deisce KDE is féidir cead a thabhairt do dhuine éigin breathnú "
-"ar do dheasc, agus do dheasc a rialú más mian leat. <a href=\"whatsthis"
-"\">Tuilleadh eolais faoi chuirí...</a>"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, enableSharingCheckBox)
 #: ui/mainwidget.ui:145
-#, fuzzy, kde-format
-#| msgid "Manage Invitations - Desktop Sharing"
+#, kde-format
 msgid "Starts/Stops Remote Desktop Sharing"
-msgstr "Bainistigh Cuirí - Comhroinnt Deisce"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableSharingCheckBox)
 #: ui/mainwidget.ui:148
-#, fuzzy, kde-format
-#| msgid "Desktop Sharing"
+#, kde-format
 msgid "&Enable Desktop Sharing"
-msgstr "Comhroinnt Deisce"
+msgstr ""
 
 #. i18n: ectx: property (title), widget (QGroupBox, detailsGroupBox)
 #: ui/mainwidget.ui:170
-#, fuzzy, kde-format
-#| msgid "Connection side image"
+#, kde-format
 msgid "Connection Details"
-msgstr "Íomhá ar thaobh ceangail"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, addressLabel)
 #: ui/mainwidget.ui:193
@@ -612,17 +571,15 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, passwordLabel)
 #: ui/mainwidget.ui:269
-#, fuzzy, kde-format
-#| msgid "<b>Password:</b>"
+#, kde-format
 msgid "&Password"
-msgstr "<b>Focal Faire:</b>"
+msgstr ""
 
 #. i18n: ectx: property (whatsThis), widget (QToolButton, passwordEditButton)
 #: ui/mainwidget.ui:290
-#, fuzzy, kde-format
-#| msgid "Desktop Sharing Error"
+#, kde-format
 msgid "Edit/Save Desktop Sharing Password"
-msgstr "Earráid le Comhroinnt Deisce"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QToolButton, passwordEditButton)
 #: ui/mainwidget.ui:293
@@ -699,404 +656,3 @@ msgstr ""
 #, kde-format
 msgid "&Change Unattended Password"
 msgstr ""
-
-#~ msgid "Welcome to KDE Desktop Sharing"
-#~ msgstr "Fáilte go Comhroinnt Deisce KDE"
-
-#~ msgid ""
-#~ "KDE Desktop Sharing allows you to invite somebody at a remote location to "
-#~ "watch and possibly control your desktop. <a href=\"whatsthis\">More about "
-#~ "invitations...</a>"
-#~ msgstr ""
-#~ "Le Comhroinnt Deisce KDE is féidir cead a thabhairt do dhuine éigin "
-#~ "breathnú ar do dheasc, agus do dheasc a rialú más mian leat. <a href="
-#~ "\"whatsthis\">Tuilleadh eolais faoi chuirí...</a>"
-
-#~ msgid ""
-#~ "Create a new invitation and display the connection data. Use this option "
-#~ "if you want to invite somebody personally, for example, to give the "
-#~ "connection data over the phone."
-#~ msgstr ""
-#~ "Cruthaigh cuireadh nua agus taispeáin sonraí an cheangail. Úsáid an rogha "
-#~ "seo más mian leat cuireadh pearsanta a sheoladh, mar shampla, chun sonraí "
-#~ "an cheangail a thabhairt ar an teileafón."
-
-#~ msgid "Create &Personal Invitation..."
-#~ msgstr "Cruthaigh Cuireadh &Pearsanta..."
-
-#~ msgid ""
-#~ "This button will start your email application with a pre-configured text "
-#~ "that explains to the recipient how to connect to your computer. "
-#~ msgstr ""
-#~ "Tosóidh an cnaipe seo d'fheidhmchlár ríomhphoist le téacs réamhshocraithe "
-#~ "a mhíníonn don fhaighteoir conas is féidir ceangal a bhunú le do "
-#~ "ríomhaire. "
-
-#~ msgid "Invite via &Email..."
-#~ msgstr "Cuireadh trí Ríomh&phost..."
-
-#~ msgid "&Manage Invitations (%1)..."
-#~ msgstr "&Bainistigh Cuirí (%1)..."
-
-#~ msgid ""
-#~ "You have requested to share your desktop with %1. If you proceed, you "
-#~ "will allow the remote user to watch your desktop."
-#~ msgstr ""
-#~ "Rinne tú iarracht do ríomhaire a roinnt le %1. Má théann tú ar aghaidh, "
-#~ "beidh an duine seo in ann do dheasc a fheiceáil. "
-
-#~ msgid "Confirmation"
-#~ msgstr "Deimhniú"
-
-#~ msgid "Form"
-#~ msgstr "Foirm"
-
-#~ msgid "Failed login attempt from %1: wrong password"
-#~ msgstr "Theip ar logáil isteach ó %1: focal faire mícheart"
-
-#~ msgid "Refused uninvited connection attempt from %1"
-#~ msgstr "Diúltaíodh ceangal ó %1 gan chuireadh"
-
-#~ msgid "Invitation"
-#~ msgstr "Cuireadh"
-
-#~ msgid ""
-#~ "An invitation creates a one-time password that allows the receiver to "
-#~ "connect to your desktop.\n"
-#~ "It is valid for only one successful connection and will expire after an "
-#~ "hour if it has not been used. \n"
-#~ "When somebody connects to your computer a dialog will appear and ask you "
-#~ "for permission.\n"
-#~ " The connection will not be established before you accept it. In this "
-#~ "dialog you can also\n"
-#~ " restrict the other person to view your desktop only, without the ability "
-#~ "to move your\n"
-#~ " mouse pointer or press keys.\n"
-#~ "If you want to create a permanent password for Desktop Sharing, allow "
-#~ "'Uninvited Connections' \n"
-#~ "in the configuration."
-#~ msgstr ""
-#~ "Nuair a sheolann tú cuireadh, cruthaíonn sé focal faire aonuaire a "
-#~ "cheadaíonn don duine a fhaigheann an cuireadh ceangal le do dheasc.\n"
-#~ "Níl an focal faire bailí ach le haghaidh ceangal rathúil amháin agus "
-#~ "rachaidh sé in éag tar éis uair an chloig mura mbaintear úsáid as. \n"
-#~ "Nuair a dhéanfaidh duine éigin ceangal le do ríomhaire, taispeánfar "
-#~ "dialóg a iarrann cead ort.\n"
-#~ " Ní bhunófar an ceangal sula nglacfaidh tú leis. Sa dialóg seo, is féidir "
-#~ "freisin\n"
-#~ " srian a chur ar an duine eile sa chaoi nach mbeidh sé in ann pointeoir "
-#~ "do luiche a rialú\n"
-#~ " nó eochracha a bhrú, ach breathnú ar an deasc amháin.\n"
-#~ "Más mian leat focal faire buan a chruthú le haghaidh Comhroinnt Deisce, "
-#~ "ceadaigh 'Ceangail Gan Chuireadh' \n"
-#~ "sa chumraíocht."
-
-#~ msgid "Ask before allowing a remote connection."
-#~ msgstr "Fiafraigh díom sula nglactar le ceangal cianda."
-
-#~ msgid ""
-#~ "An invitation creates a one-time password that allows the receiver to "
-#~ "connect to your desktop.\n"
-#~ "It is valid for only one successful connection and will expire after an "
-#~ "hour if it has not been used. \n"
-#~ "When somebody connects to your computer a dialog will appear and ask you "
-#~ "for permission.\n"
-#~ "The connection will not be established before you accept it. In this "
-#~ "dialog you can also\n"
-#~ "restrict the other person to view your desktop only, without the ability "
-#~ "to move your\n"
-#~ "mouse pointer or press keys.\n"
-#~ "If you want to create a permanent password for Desktop Sharing, allow "
-#~ "'Uninvited Connections' \n"
-#~ "in the configuration."
-#~ msgstr ""
-#~ "Nuair a sheolann tú cuireadh, cruthaíonn sé focal faire aonuaire a "
-#~ "cheadaíonn don duine a fhaigheann an cuireadh ceangal le do dheasc.\n"
-#~ "Níl an focal faire bailí ach le haghaidh ceangal rathúil amháin agus "
-#~ "rachaidh sé in éag tar éis uair an chloig mura mbaintear úsáid as. \n"
-#~ "Nuair a dhéanfaidh duine éigin ceangal le do ríomhaire, taispeánfar "
-#~ "dialóg a iarrann cead ort.\n"
-#~ "Ní bhunófar an ceangal sula nglacfaidh tú leis. Sa dialóg seo, is féidir "
-#~ "freisin\n"
-#~ "srian a chur ar an duine eile sa chaoi nach mbeidh sé in ann pointeoir do "
-#~ "luiche a rialú\n"
-#~ "nó eochracha a bhrú, ach breathnú ar an deasc amháin.\n"
-#~ "Más mian leat focal faire buan a chruthú le haghaidh Comhroinnt Deisce, "
-#~ "ceadaigh 'Ceangail Gan Chuireadh' \n"
-#~ "sa chumraíocht."
-
-#~ msgid ""
-#~ "When sending an invitation by email, note that everybody who reads this "
-#~ "email will be able to connect to your computer for one hour, or until the "
-#~ "first successful connection took place, whichever comes first. \n"
-#~ "You should either encrypt the email or at least send it only in a secure "
-#~ "network, but not over the Internet."
-#~ msgstr ""
-#~ "Nuair a sheolann tú cuireadh trí ríomhphost, tabhair faoi deara go mbeidh "
-#~ "gach duine a léann an teachtaireacht in ann ceangal a dhéanamh le do "
-#~ "ríomhaire ar feadh uair an chloig, nó go dtí go ndéantar an chéad "
-#~ "cheangal, pé acu is túisce a tharlaíonn. \n"
-#~ "Ba chóir duit an teachtaireacht a chriptiú, nó ar a laghad é a sheoladh "
-#~ "trí líonra slán agus nach tríd an Idirlíon."
-
-#~ msgid "Send Invitation via Email"
-#~ msgstr "Seol Cuireadh trí Ríomhphost"
-
-#~ msgid "Desktop Sharing (VNC) invitation"
-#~ msgstr "Cuireadh ar Dheasc a Chomhroinnt (VNC)"
-
-#~ msgid ""
-#~ "You have been invited to a VNC session. If you have the KDE Remote "
-#~ "Desktop Connection installed, just click on the link below.\n"
-#~ "\n"
-#~ "%1\n"
-#~ "\n"
-#~ "Otherwise you can use any VNC client with the following parameters:\n"
-#~ "\n"
-#~ "Host: %2:%3\n"
-#~ "Password: %4\n"
-#~ "\n"
-#~ "For security reasons this invitation will expire at %5 (%6)."
-#~ msgstr ""
-#~ "Tugadh cuireadh duit ar sheisiún VNC. Má tá 'Ceangal Deisce Cianda' KDE "
-#~ "suiteáilte agat, cliceáil ar an nasc thíos.\n"
-#~ "\n"
-#~ "%1\n"
-#~ "\n"
-#~ "Mura bhfuil sé suiteáilte agat, is féidir leat aon chliant VNC eile a "
-#~ "úsáid, leis na paraiméadair seo a leanas:\n"
-#~ "\n"
-#~ "Óstríomhaire: %2:%3\n"
-#~ "Focal Faire: %4\n"
-#~ "\n"
-#~ "De bharr cúrsaí slándála, rachaidh an cuireadh seo in éag ag %5 (%6)."
-
-#~ msgid "<qt>Are you sure you want to delete all invitations?</qt>"
-#~ msgstr ""
-#~ "<qt>An bhfuil tú cinnte gur mian leat gach cuireadh a scriosadh?</qt>"
-
-#~ msgid "Confirm delete Invitations"
-#~ msgstr "Deimhnigh scriosadh na gCuirí"
-
-#~ msgid "<qt>Are you sure you want to delete this invitation?</qt>"
-#~ msgstr ""
-#~ "<qt>An bhfuil tú cinnte gur mian leat an cuireadh seo a scriosadh?</qt>"
-
-#~ msgid "Personal Invitation"
-#~ msgstr "Cuireadh Pearsanta"
-
-#~ msgid ""
-#~ "Desktop Sharing uses the VNC protocol. You can use any VNC client to "
-#~ "connect. \n"
-#~ "In KDE the client is called 'Remote Desktop Connection'. Enter the host "
-#~ "information\n"
-#~ "into the client and it will connect.."
-#~ msgstr ""
-#~ "Baineann Comhroinnt Deisce úsáid as an bprótacal VNC. Is féidir leat aon "
-#~ "chliant VNC a úsáid chun ceangal a dhéanamh. \n"
-#~ "Is é 'Ceangal Deisce Cianda' an cliant in KDE. Tabhair faisnéis an "
-#~ "óstríomhaire\n"
-#~ "don chliant agus déanfaidh sé ceangal."
-
-#~ msgid "Ask before accepting connections"
-#~ msgstr "Fiafraigh díom sula nglactar le ceangal"
-
-#~ msgid "Allow uninvited connections"
-#~ msgstr "Glac le ceangail gan chuireadh"
-
-#~ msgid "Uninvited connections password:"
-#~ msgstr "Focal faire do cheangail gan chuireadh:"
-
-#~ msgid ""
-#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#~ "css\">\n"
-#~ "p, li { white-space: pre-wrap; }\n"
-#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
-#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">KDE Desktop Sharing "
-#~ "allows you to invite somebody at a remote location to watch and possibly "
-#~ "control your desktop. <a href=\"whatsthis\">More about invitations...</"
-#~ "a></p></body></html>"
-#~ msgstr ""
-#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#~ "css\">\n"
-#~ "p, li { white-space: pre-wrap; }\n"
-#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
-#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Le Comhroinnt Deisce "
-#~ "KDE is féidir cead a thabhairt do dhuine éigin breathnú ar do dheasc, "
-#~ "agus do dheasc a rialú más mian leat. <a href=\"whatsthis\">Tuilleadh "
-#~ "eolais faoi chuirí...</a></p></body></html>"
-
-#~ msgid "Creation Time"
-#~ msgstr "Am Cruthaithe"
-
-#~ msgid "Expire Time"
-#~ msgstr "Am Éaga"
-
-#~ msgid "Create a new personal invitation..."
-#~ msgstr "Cruthaigh cuireadh nua pearsanta..."
-
-#~ msgid "Click this button to create a new personal invitation."
-#~ msgstr "Cliceáil an cnaipe seo chun cuireadh nua pearsanta a chruthú."
-
-#~ msgid "New &Personal Invitation..."
-#~ msgstr "Cuireadh Nua &Pearsanta..."
-
-#~ msgid "Send a new invitation via email..."
-#~ msgstr "Seol cuireadh nua trí ríomhphost..."
-
-#~ msgid "Click this button to send a new invitation via email."
-#~ msgstr "Cliceáil an cnaipe seo chun cuireadh nua a sheoladh trí ríomhphost."
-
-#~ msgid "&New Email Invitation..."
-#~ msgstr "Cuireadh &Nua Ríomhphoist..."
-
-#~ msgid "Delete all invitations"
-#~ msgstr "Scrios gach cuireadh"
-
-#~ msgid "Deletes all open invitations."
-#~ msgstr "Scrios gach cuireadh oscailte."
-
-#~ msgid "Delete All"
-#~ msgstr "Scrios Uile"
-
-#~ msgid "Delete the selected invitation"
-#~ msgstr "Scrios an cuireadh roghnaithe."
-
-#~ msgid ""
-#~ "Delete the selected invitation. The invited person will not be able to "
-#~ "connect using this invitation anymore."
-#~ msgstr ""
-#~ "Scrios an cuireadh roghnaithe. Ní bheidh an duine a fuair an cuireadh seo "
-#~ "in ann ceangal a dhéanamh leis an gcuireadh seo a thuilleadh."
-
-#~ msgid "&Delete"
-#~ msgstr "&Scrios"
-
-#~ msgid ""
-#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#~ "css\">\n"
-#~ "p, li { white-space: pre-wrap; }\n"
-#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
-#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-#~ "weight:600;\">Personal Invitation</span></p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Give the information "
-#~ "below to the person that you want to invite (<a href=\"htc\">how to "
-#~ "connect</a>). Note that everybody who gets the password can connect, so "
-#~ "be careful.</p></body></html>"
-#~ msgstr ""
-#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#~ "css\">\n"
-#~ "p, li { white-space: pre-wrap; }\n"
-#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
-#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-#~ "weight:600;\">Cuireadh Pearsanta</span></p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Tabhair an fhaisnéis "
-#~ "thíos don duine ar mian leat cuireadh a thabhairt dó (<a href=\"htc"
-#~ "\">conas is féidir ceangal</a>). Tabhair faoi deara go mbeidh gach duine "
-#~ "a bhfuil an focal faire air in ann ceangal a dhéanamh.  Mar sin, ba chóir "
-#~ "duit a bheith an-chúramach.</p></body></html>"
-
-#~ msgid "<b>Host:</b>"
-#~ msgstr "<b>Óstríomhaire:</b>"
-
-#~ msgid ""
-#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#~ "css\">\n"
-#~ "p, li { white-space: pre-wrap; }\n"
-#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
-#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><a href=\"help\">Help</"
-#~ "a></p></body></html>"
-#~ msgstr ""
-#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#~ "css\">\n"
-#~ "p, li { white-space: pre-wrap; }\n"
-#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
-#~ "font-weight:400; font-style:normal; text-decoration:none;\">\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><a href=\"help"
-#~ "\">Cabhair</a></p></body></html>"
-
-#~ msgid "<b>Expiration time:</b>"
-#~ msgstr "<b>Am éaga:</b>"
-
-#~ msgid "Error"
-#~ msgstr "Earráid"
-
-#~ msgid "Address already in use"
-#~ msgstr "Seoladh in úsáid cheana féin"
-
-#~ msgid "Ian Reinhart Geiser"
-#~ msgstr "Ian Reinhart Geiser"
-
-#~ msgid "DCOP interface"
-#~ msgstr "Comhéadan DCOP"
-
-#~ msgid "Jens Wagner (heXoNet Support GmbH)"
-#~ msgstr "Jens Wagner (heXoNet Support GmbH)"
-
-#~ msgid "X11 update scanner, original code base"
-#~ msgstr "Scanóir nuashonraithe X11, cód bunúsach"
-
-#~ msgid "Jason Spisak"
-#~ msgstr "Jason Spisak"
-
-#~ msgid "Karl Vogel"
-#~ msgstr "Karl Vogel"
-
-#~ msgid "KDesktop background deactivation"
-#~ msgstr "Díghníomhachtú cúlra KDesktop"
-
-#~ msgid "Disable Remote Control"
-#~ msgstr "Díchumasaigh Cianrialú"
-
-#~ msgid "The remote user has closed the connection."
-#~ msgstr "Dún an cianúsáideoir an ceangal."
-
-#~ msgid "The remote user has been authenticated and is now connected."
-#~ msgstr "Fíordheimhníodh an t-úsáideoir cianda agus tá sé ceangailte anois."
-
-#~ msgid "User refuses connection from %1"
-#~ msgstr "Diúltaíonn an t-úsáideoir ceangal le %1"
-
-#~ msgid "Closed connection: %1."
-#~ msgstr "Dúnadh ceangal: %1."
-
-#~ msgid "Connection refused from %1, already connected."
-#~ msgstr "Diúltaíodh ceangal le %1; ceangailte cheana."
-
-#~ msgid "Expiration"
-#~ msgstr "Dul as feidhm"
-
-#~ msgid ""
-#~ "Displays the open invitations. Use the buttons on the right to delete "
-#~ "them or create a new invitation."
-#~ msgstr ""
-#~ "Taispeánann sé seo na cuirí oscailte. Úsáid na cnaipí ar dheis chun iad a "
-#~ "scriosadh nó chun cuireadh nua a chruthú."
-
-#~ msgid "Closes this window."
-#~ msgstr "Dún an fhuinneog seo."
-
-#~ msgid "cookie.tjansen.de:0"
-#~ msgstr "cookie.tjansen.de:0"
-
-#~ msgid "12345"
-#~ msgstr "12345"
-
-#~ msgid "17:12"
-#~ msgstr "17:12"
-
-#~ msgid "Manage &Invitations"
-#~ msgstr "Bainistigh Cu&irí"
