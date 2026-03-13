@@ -6,20 +6,20 @@
 # Stígur Snæsson <stigur@vortex.is>, 2004.
 # Þröstur Svanbergsson <throstur@bylur.net>, 2004.
 # Arnar Leosson <leosson@frisurf.no>, 2005.
-# Sveinn í Felli <sveinki@nett.is>, 2009, 2010.
+# SPDX-FileCopyrightText: 2009, 2010, 2026 Sveinn í Felli <sveinki@nett.is>
 msgid ""
 msgstr ""
 "Project-Id-Version: krfb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:52+0000\n"
-"PO-Revision-Date: 2010-05-31 12:11+0000\n"
-"Last-Translator: Sveinn í Felli <sveinki@nett.is>\n"
-"Language-Team: Icelandic <kde-isl@molar.is>\n"
+"PO-Revision-Date: 2026-03-12 18:35+0000\n"
+"Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
+"Language-Team: Icelandic\n"
 "Language: is\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.4\n"
+"X-Generator: Lokalize 23.08.5\n"
 "Plural-Forms: Plural-Forms: nplurals=2; plural=n != 1;\n"
 "\n"
 "\n"
@@ -28,12 +28,12 @@ msgstr ""
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Pjetur G. Hjaltason, Stígur Snæsson"
+msgstr "Pjetur G. Hjaltason, Stígur Snæsson, Sveinn í Felli"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "pjetur@pjetur.net, stigur@vortex.is"
+msgstr "pjetur@pjetur.net, stigur@vortex.is, sv1@fellsnet.is"
 
 #: connectiondialog.cpp:26
 #, kde-format
@@ -51,15 +51,14 @@ msgid "Refuse Connection"
 msgstr "Hafna tengingu"
 
 #: invitationsrfbclient.cpp:58
-#, fuzzy, kde-format
-#| msgid "Accepted uninvited connection from %1"
+#, kde-format
 msgid "Accepted connection from %1"
-msgstr "Samþykkti óboðna tengingu frá %1"
+msgstr "Samþykkti tengingu frá %1"
 
 #: invitationsrfbclient.cpp:64
 #, kde-format
 msgid "Received connection from %1, on hold (waiting for confirmation)"
-msgstr "Fékk uppkall frá %1, á bið (bíður eftir staðfestingu)"
+msgstr "Tók við tengingu frá %1, á bið (bíður eftir staðfestingu)"
 
 #: invitationsrfbserver.cpp:39
 #, kde-format
@@ -70,24 +69,24 @@ msgstr "%1@%2 (miðlað skjáborð)"
 #: krfb.kcfg:9
 #, kde-format
 msgid "Start minimized"
-msgstr ""
+msgstr "Ræsa lágmarkað"
 
 #. i18n: ectx: label, entry (useDefaultPort), group (TCP)
 #: krfb.kcfg:15
-#, fuzzy, kde-format
+#, kde-format
 msgid "Use the default port for VNC (5900)"
 msgstr "Nota sjálfgefna gátt fyrir VNC (5900)"
 
 #. i18n: ectx: label, entry (port), group (TCP)
 #: krfb.kcfg:19
-#, fuzzy, kde-format
+#, kde-format
 msgid "This is the port on which krfb will listen."
-msgstr "Þetta er gáttin sem KRFB mun hlusta á."
+msgstr "Þetta er gáttin sem KRFB mun vakta."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_publishService)
 #. i18n: ectx: label, entry (publishService), group (TCP)
 #: krfb.kcfg:23 ui/configtcp.ui:16
-#, fuzzy, kde-format
+#, kde-format
 msgid "Announce the service on the local network"
 msgstr "Tilkynna þjónustuna á staðarnetinu"
 
@@ -95,43 +94,42 @@ msgstr "Tilkynna þjónustuna á staðarnetinu"
 #: krfb.kcfg:29
 #, kde-format
 msgid "Do not store passwords in KWallet"
-msgstr ""
+msgstr "Ekki geyma lykilorð í KWallet"
 
 #. i18n: ectx: label, entry (allowDesktopControl), group (Security)
 #: krfb.kcfg:33
-#, fuzzy, kde-format
+#, kde-format
 msgid "Allow remote connections to manage the desktop."
 msgstr "Leyfa fjarlægum tengingum að stýra skjáborðinu."
 
 #. i18n: ectx: label, entry (allowUnattendedAccess), group (Security)
 #: krfb.kcfg:37
-#, fuzzy, kde-format
+#, kde-format
 msgid "Allow connections without an invitation."
 msgstr "Leyfa tengingar frá aðilum sem ekki hefur verið boðið."
 
 #. i18n: ectx: label, entry (unattendedAccessPassword), group (Security)
 #. i18n: ectx: label, entry (desktopSharingPassword), group (Security)
 #: krfb.kcfg:41 krfb.kcfg:44
-#, fuzzy, kde-format
-#| msgid "Accepted uninvited connection from %1"
+#, kde-format
 msgid "Password for uninvited connections."
-msgstr "Samþykkti óboðna tengingu frá %1"
+msgstr "Lykilorð fyrir óboðnar tengingar."
 
 #. i18n: ectx: label, entry (preferredFrameBufferPlugin), group (FrameBuffer)
 #: krfb.kcfg:49
 #, kde-format
 msgid "Preferred Frame Buffer Plugin"
-msgstr ""
+msgstr "Ákjósanleg viðbót fyrir rammabiðminni (frame buffer)"
 
 #: main-virtualmonitor.cpp:47
 #, kde-format
 msgid "Creating a Virtual Monitor from %1"
-msgstr ""
+msgstr "Bý til sýndarskjá frá %1"
 
 #: main-virtualmonitor.cpp:78
 #, kde-format
 msgid "Remote Virtual Monitor"
-msgstr ""
+msgstr "Fjartengdur sýndarskjár"
 
 #: main-virtualmonitor.cpp:80
 #, kde-format
@@ -139,15 +137,7 @@ msgid "Offer a Virtual Monitor that can be accessed remotely"
 msgstr ""
 
 #: main-virtualmonitor.cpp:82 main.cpp:87
-#, fuzzy, kde-format
-#| msgid ""
-#| "(c) 2007, Alessandro Praduroux\n"
-#| "(c) 2001-2003, Tim Jansen\n"
-#| "(c) 2001, Johannes E. Schindelin\n"
-#| "(c) 2000, heXoNet Support GmbH, D-66424 Homburg\n"
-#| "(c) 2000-2001, Const Kaplinsky\n"
-#| "(c) 2000, Tridia Corporation\n"
-#| "(c) 1999, AT&T Laboratories Boston\n"
+#, kde-format
 msgid ""
 "(c) 2009-2010, Collabora Ltd.\n"
 "(c) 2007, Alessandro Praduroux\n"
@@ -157,10 +147,10 @@ msgid ""
 "(c) 2000, Tridia Corporation\n"
 "(c) 1999, AT&T Laboratories Boston\n"
 msgstr ""
+"(c) 2009-2010, Collabora Ltd.\n"
 "(c) 2007, Alessandro Praduroux\n"
 "(c) 2001-2003, Tim Jansen\n"
 "(c) 2001, Johannes E. Schindelin\n"
-"(c) 2000, heXoNet Support GmbH, D-66424 Homburg\n"
 "(c) 2000-2001, Const Kaplinsky\n"
 "(c) 2000, Tridia Corporation\n"
 "(c) 1999, AT&T Laboratories Boston\n"
@@ -173,7 +163,7 @@ msgstr ""
 #: main-virtualmonitor.cpp:90 main.cpp:97
 #, kde-format
 msgid "George Kiagiadakis"
-msgstr ""
+msgstr "George Kiagiadakis"
 
 #: main-virtualmonitor.cpp:91 main.cpp:100
 #, kde-format
@@ -186,14 +176,14 @@ msgid "KDE4 porting"
 msgstr "KDE4 aðlögun"
 
 #: main-virtualmonitor.cpp:92 main.cpp:101
-#, fuzzy, kde-format
+#, kde-format
 msgid "Tim Jansen"
 msgstr "Tim Jansen"
 
 #: main-virtualmonitor.cpp:92 main.cpp:101
 #, kde-format
 msgid "Original author"
-msgstr ""
+msgstr "Upprunalegur höfundur"
 
 #: main-virtualmonitor.cpp:93 main.cpp:102
 #, kde-format
@@ -243,29 +233,27 @@ msgstr ""
 #: main-virtualmonitor.cpp:108
 #, kde-format
 msgid "resolution"
-msgstr ""
+msgstr "upplausn"
 
 #: main-virtualmonitor.cpp:110
 #, kde-format
 msgid "Name of the monitor"
-msgstr ""
+msgstr "Heiti skjásins"
 
 #: main-virtualmonitor.cpp:110
 #, kde-format
 msgid "name"
-msgstr ""
+msgstr "heiti"
 
 #: main-virtualmonitor.cpp:112
-#, fuzzy, kde-format
-#| msgid "Accepted uninvited connection from %1"
+#, kde-format
 msgid "Password for the client to connect to it"
-msgstr "Samþykkti óboðna tengingu frá %1"
+msgstr "Lykilorð sem biðlaraforritið á að tengjast með"
 
 #: main-virtualmonitor.cpp:112
-#, fuzzy, kde-format
-#| msgid "<b>Password:</b>"
+#, kde-format
 msgid "password"
-msgstr "<b>Lykilorð:</b>"
+msgstr "lykilorð"
 
 #: main-virtualmonitor.cpp:114
 #, kde-format
@@ -275,12 +263,12 @@ msgstr ""
 #: main-virtualmonitor.cpp:114
 #, kde-format
 msgid "dpr"
-msgstr ""
+msgstr "dpr"
 
 #: main-virtualmonitor.cpp:116
 #, kde-format
 msgid "The port we will be listening to"
-msgstr ""
+msgstr "Gáttin sem verður vöktuð"
 
 #: main-virtualmonitor.cpp:116
 #, kde-format
@@ -307,15 +295,14 @@ msgid "Desktop Sharing"
 msgstr "Skjáborðsmiðlun"
 
 #: main.cpp:85
-#, fuzzy, kde-format
-#| msgid "VNC-compatible server to share KDE desktops"
+#, kde-format
 msgid "VNC-compatible server to share desktops"
-msgstr "VNC-samhæfður miðlari til að miðla KDE skjáborðum"
+msgstr "VNC-samhæfður miðlari til að miðla skjáborðum"
 
 #: main.cpp:94
 #, kde-format
 msgid "George Goldberg"
-msgstr ""
+msgstr "George Goldberg"
 
 #: main.cpp:95
 #, kde-format
@@ -323,7 +310,7 @@ msgid "Telepathy tubes support"
 msgstr ""
 
 #: main.cpp:119
-#, fuzzy, kde-format
+#, kde-format
 msgid "Do not show the invitations management dialog at startup"
 msgstr "Ekki sýna stjórnglugga fyrir setuboð við ræsingu"
 
@@ -337,7 +324,7 @@ msgstr ""
 #: mainwindow.cpp:49
 #, kde-format
 msgid "Storing passwords in config file is insecure!"
-msgstr ""
+msgstr "Að geyma lykilorð í stillingaskrá er ekki öruggt!"
 
 #: mainwindow.cpp:186
 #, kde-format
@@ -356,13 +343,12 @@ msgstr ""
 #. i18n: ectx: property (whatsThis), widget (QLabel, aboutLabel)
 #: mainwindow.cpp:220 mainwindow.cpp:227 ui/mainwidget.ui:83
 #: ui/mainwidget.ui:86 ui/mainwidget.ui:114
-#, fuzzy, kde-format
-#| msgid "Desktop Sharing"
+#, kde-format
 msgid "KDE Desktop Sharing"
-msgstr "Skjáborðsmiðlun"
+msgstr "KDE skjáborðsmiðlun"
 
 #: mainwindow.cpp:221
-#, fuzzy, kde-format
+#, kde-format
 msgid ""
 "This field contains the address of your computer and the port number, "
 "separated by a colon.\n"
@@ -376,12 +362,14 @@ msgid ""
 "If your computer is behind a firewall it may have a different address or be "
 "unreachable for other computers."
 msgstr ""
-"(<a href=\"whatsthis:Þetta svæði inniheldur netfang tölvunnar þinnar og "
-"skjánúmer hennar, aðskilið með tvípunkti. Netfangið er vísbending - þú getur "
-"notað hvaða netfang sem getur komist að tölvunni þinni. Desktop Sharing "
-"reynir að geta sér til um netfang þitt út frá uppsetningunni á netinu hjá "
-"þér en tekst það ekki alltaf. Ef tölvan þín er á bakvið eldvegg getur verið "
-"að hún sé með annað netfang eða sé ónáanleg fyrir aðrar tölvur.\">Help</a>)"
+"Þetta svæði inniheldur vistfang tölvunnar þinnar og gátt hennar, aðskilið "
+"með tvípunkti.\n"
+"Vistfangið er bara vísbending - þú getur notað hvaða vistfang sem nær til "
+"tölvunnar þinnar.\n"
+"Skjáborðamiðlun reynir að geta sér til um vistfang þitt út frá "
+"uppsetningunni á netinu hjá þér en tekst það ekki alltaf.\n"
+"Ef tölvan þín er á bakvið eldvegg getur verið að hún sé með annað vistfang "
+"eða hún sé óaðgengileg fyrir aðrar tölvur."
 
 #: mainwindow.cpp:228
 #, kde-format
@@ -395,19 +383,19 @@ msgid ""
 msgstr ""
 
 #: mainwindow.cpp:246
-#, fuzzy, kde-format
+#, kde-format
 msgid "Network"
-msgstr "Net"
+msgstr "Netkerfi"
 
 #: mainwindow.cpp:247
-#, fuzzy, kde-format
+#, kde-format
 msgid "Security"
 msgstr "Öryggi"
 
 #: mainwindow.cpp:248
 #, kde-format
 msgid "Screen capture"
-msgstr ""
+msgstr "Skjáupptaka"
 
 #: mainwindow.cpp:253
 #, kde-format
@@ -415,21 +403,19 @@ msgid "To apply framebuffer plugin setting, you need to restart the program."
 msgstr ""
 
 #: rfbservermanager.cpp:226
-#, fuzzy, kde-format
-#| msgid "The remote user has closed the connection."
+#, kde-format
 msgid "The remote user %1 is now connected."
-msgstr "Fjarnotandi hefur lokað tengingunni."
+msgstr "Fjarnotandinn %1 er nú tengdur."
 
 #: rfbservermanager.cpp:240
-#, fuzzy, kde-format
-#| msgid "The remote user has closed the connection."
+#, kde-format
 msgid "The remote user %1 disconnected."
-msgstr "Fjarnotandi hefur lokað tengingunni."
+msgstr "Fjarnotandinn %1 er aftengdur."
 
 #: trayicon.cpp:45
 #, kde-format
 msgid "Disconnect"
-msgstr ""
+msgstr "Aftengjast"
 
 #: trayicon.cpp:51
 #, kde-format
@@ -447,10 +433,9 @@ msgid "Desktop Sharing - connected with %1"
 msgstr "Skjáborðsmiðlun - tengd við %1"
 
 #: trayicon.cpp:109
-#, fuzzy, kde-format
-#| msgid "Desktop Sharing - disconnected"
+#, kde-format
 msgid "Desktop Sharing - connected"
-msgstr "Skjáborðsmiðlun - aftengd"
+msgstr "Skjáborðsmiðlun - tengd"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: ui/configframebuffer.ui:19
@@ -470,10 +455,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_allowDesktopControl)
 #: ui/configsecurity.ui:17
-#, fuzzy, kde-format
-#| msgid "Allow remote user to &control keyboard and mouse"
+#, kde-format
 msgid "Allow remote connections to control your desktop"
-msgstr "Leyfa fjarnotanda að stjórna &mús og lyklaborði"
+msgstr "Leyfa fjarnotanda að stjórna skjáborðinu þínu"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_noWallet)
 #: ui/configsecurity.ui:27
@@ -543,54 +527,50 @@ msgstr "Leyfa fjarnotanda að stjórna &mús og lyklaborði"
 
 #. i18n: ectx: property (text), widget (QLabel, aboutLabel)
 #: ui/mainwidget.ui:117
-#, fuzzy, kde-format
+#, kde-format
 msgid ""
 "KDE Desktop Sharing allows you to grant permission to someone at a remote "
 "location for viewing and possibly controlling your desktop."
 msgstr ""
 "Skjáborðamiðlun í KDE gefur þér kost á að bjóða einhverjum fjarstöddum að "
-"skoða og hugsanlega stjórna skjáborðinu þínu. <a href=\"whatsthis\">Meira um "
-"setuboð...</a>"
+"skoða og hugsanlega stjórna skjáborðinu þínu."
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, enableSharingCheckBox)
 #: ui/mainwidget.ui:145
-#, fuzzy, kde-format
-#| msgid "Manage Invitations - Desktop Sharing"
+#, kde-format
 msgid "Starts/Stops Remote Desktop Sharing"
-msgstr "Sýsla með boð - Skjáborðsmiðlun"
+msgstr "Ræsir/Stöðvar fjartengda skjáborðsmiðlun"
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableSharingCheckBox)
 #: ui/mainwidget.ui:148
-#, fuzzy, kde-format
-#| msgid "Desktop Sharing"
+#, kde-format
 msgid "&Enable Desktop Sharing"
-msgstr "Skjáborðsmiðlun"
+msgstr "Vir&kja skjáborðsmiðlun"
 
 #. i18n: ectx: property (title), widget (QGroupBox, detailsGroupBox)
 #: ui/mainwidget.ui:170
-#, fuzzy, kde-format
-#| msgid "Connection side image"
+#, kde-format
 msgid "Connection Details"
-msgstr "Biðlaramynd"
+msgstr "Nánar um tengingu"
 
 #. i18n: ectx: property (text), widget (QLabel, addressLabel)
 #: ui/mainwidget.ui:193
 #, kde-format
 msgid "&Address"
-msgstr ""
+msgstr "Vistf&ang"
 
 #. i18n: ectx: property (whatsThis), widget (QToolButton, addressAboutButton)
 #: ui/mainwidget.ui:214
 #, kde-format
 msgid "More about this address"
-msgstr ""
+msgstr "Meira um þetta vistfang"
 
 #. i18n: ectx: property (text), widget (QToolButton, addressAboutButton)
 #. i18n: ectx: property (text), widget (QToolButton, unattendedAboutButton)
 #: ui/mainwidget.ui:217 ui/mainwidget.ui:397
 #, kde-format
 msgid "About"
-msgstr ""
+msgstr "Um hugbúnaðinn"
 
 #. i18n: ectx: property (whatsThis), widget (QLabel, addressDisplayLabel)
 #: ui/mainwidget.ui:235
@@ -604,27 +584,25 @@ msgstr ""
 #: ui/mainwidget.ui:238
 #, kde-format
 msgid "127.0.0.1 : 5900"
-msgstr ""
+msgstr "127.0.0.1 : 5900"
 
 #. i18n: ectx: property (text), widget (QLabel, passwordLabel)
 #: ui/mainwidget.ui:269
-#, fuzzy, kde-format
-#| msgid "<b>Password:</b>"
+#, kde-format
 msgid "&Password"
-msgstr "<b>Lykilorð:</b>"
+msgstr "&Lykilorð"
 
 #. i18n: ectx: property (whatsThis), widget (QToolButton, passwordEditButton)
 #: ui/mainwidget.ui:290
-#, fuzzy, kde-format
-#| msgid "Desktop Sharing Error"
+#, kde-format
 msgid "Edit/Save Desktop Sharing Password"
-msgstr "Villa við skjáborðsmiðlun"
+msgstr "Breyta/Vista lykilorð fyrir skjáborðsmiðlun"
 
 #. i18n: ectx: property (text), widget (QToolButton, passwordEditButton)
 #: ui/mainwidget.ui:293
 #, kde-format
 msgid "Edit"
-msgstr ""
+msgstr "Breyta"
 
 #. i18n: ectx: property (whatsThis), widget (QLabel, passwordDisplayLabel)
 #: ui/mainwidget.ui:311
@@ -638,7 +616,7 @@ msgstr ""
 #: ui/mainwidget.ui:314
 #, kde-format
 msgid "TemporaryPassword"
-msgstr ""
+msgstr "BráðabirgðaLykilorð"
 
 #. i18n: ectx: property (whatsThis), widget (QGroupBox, unattendedGroupBox)
 #. i18n: ectx: property (text), widget (QLabel, unattendedAboutLabel)
