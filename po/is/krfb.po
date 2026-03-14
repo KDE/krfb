@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: krfb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:52+0000\n"
-"PO-Revision-Date: 2026-03-12 18:35+0000\n"
+"PO-Revision-Date: 2026-03-13 10:41+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic\n"
 "Language: is\n"
@@ -81,7 +81,7 @@ msgstr "Nota sjálfgefna gátt fyrir VNC (5900)"
 #: krfb.kcfg:19
 #, kde-format
 msgid "This is the port on which krfb will listen."
-msgstr "Þetta er gáttin sem KRFB mun vakta."
+msgstr "Þetta er gáttin sem krfb mun vakta."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_publishService)
 #. i18n: ectx: label, entry (publishService), group (TCP)
@@ -134,7 +134,7 @@ msgstr "Fjartengdur sýndarskjár"
 #: main-virtualmonitor.cpp:80
 #, kde-format
 msgid "Offer a Virtual Monitor that can be accessed remotely"
-msgstr ""
+msgstr "Býður upp á sýndarskjá sem hægt er að skoða fjartengt"
 
 #: main-virtualmonitor.cpp:82 main.cpp:87
 #, kde-format
@@ -158,7 +158,7 @@ msgstr ""
 #: main-virtualmonitor.cpp:89
 #, kde-format
 msgid "Virtual Monitor implementation"
-msgstr ""
+msgstr "Framsetning sýndarskjás"
 
 #: main-virtualmonitor.cpp:90 main.cpp:97
 #, kde-format
@@ -228,7 +228,7 @@ msgstr "Upprunalegir VNC kóðarar og hönnun samskiptareglu"
 #: main-virtualmonitor.cpp:108
 #, kde-format
 msgid "Logical resolution of the new monitor"
-msgstr ""
+msgstr "Rökleg upplausn nýja skjásins"
 
 #: main-virtualmonitor.cpp:108
 #, kde-format
@@ -258,7 +258,7 @@ msgstr "lykilorð"
 #: main-virtualmonitor.cpp:114
 #, kde-format
 msgid "The device-pixel-ratio of the device, the scaling factor"
-msgstr ""
+msgstr "Tækistengt mynddíla-hlutfall tækisins, kvörðunarhlutfall"
 
 #: main-virtualmonitor.cpp:114
 #, kde-format
@@ -273,7 +273,7 @@ msgstr "Gáttin sem verður vöktuð"
 #: main-virtualmonitor.cpp:116
 #, kde-format
 msgid "number"
-msgstr ""
+msgstr "númer"
 
 #: main.cpp:38
 #, kde-format
@@ -281,7 +281,7 @@ msgid ""
 "Your X11 Server does not support the required XTest extension version 2.2. "
 "Sharing your desktop is not possible."
 msgstr ""
-"X11 þjónninn þinn styður ekki við XTest viðbæturnar útgáfa 2.2, Það er ekki "
+"X11-þjónninn þinn styður ekki við XTest-viðbæturnar útgáfu 2.2. Það er ekki "
 "hægt að miðla skjáborðinu þínu."
 
 #: main.cpp:40 main.cpp:143
@@ -307,7 +307,7 @@ msgstr "George Goldberg"
 #: main.cpp:95
 #, kde-format
 msgid "Telepathy tubes support"
-msgstr ""
+msgstr "Stuðningur við Telepathy-túbur"
 
 #: main.cpp:119
 #, kde-format
@@ -320,6 +320,8 @@ msgid ""
 "Desktop Sharing is not running under an X11 Server or Wayland.\n"
 "Other display servers are currently not supported."
 msgstr ""
+"Skjáborðsmiðlun er ekki að keyra á X11-þjóni eða Wayland.\n"
+"Ekki er ennþá stuðningur við aðra skjáþjóna."
 
 #: mainwindow.cpp:49
 #, kde-format
@@ -329,7 +331,7 @@ msgstr "Að geyma lykilorð í stillingaskrá er ekki öruggt!"
 #: mainwindow.cpp:186
 #, kde-format
 msgid "Enter a new password for Unattended Access"
-msgstr ""
+msgstr "Settu inn nýtt lykilorð fyrir óvaktaðan aðgang"
 
 #: mainwindow.cpp:197
 #, kde-format
@@ -337,6 +339,8 @@ msgid ""
 "Failed to start the krfb server. Desktop sharing will not work. Try setting "
 "another port in the settings and restart krfb."
 msgstr ""
+"Mistókst að ræsa krfb-þjóninn. Skjáborðsmiðlun mun ekki virka. Prófaðu að "
+"stilla aðra gátt og endurræsa krfb."
 
 #. i18n: ectx: property (whatsThis), widget (QLabel, titleLabel)
 #. i18n: ectx: property (text), widget (QLabel, titleLabel)
@@ -381,6 +385,12 @@ msgid ""
 "password, desktop sharing access will be granted without explicit "
 "confirmation."
 msgstr ""
+"Allir fjartengdir notendur með lykilorðið fyrir óvaktaðan aðgang munu þurfa "
+"að auðkenna sig.\n"
+"\n"
+"Ef opið er fyrir óvaktaðan aðgang og fjartengdi notandinn gefur upp "
+"viðkomandi lykilorð, þá verður óvaktaður aðgangur veittur án sérstakrar "
+"staðfestingar."
 
 #: mainwindow.cpp:246
 #, kde-format
@@ -401,6 +411,8 @@ msgstr "Skjáupptaka"
 #, kde-format
 msgid "To apply framebuffer plugin setting, you need to restart the program."
 msgstr ""
+"Til að virkja breytingar á stillingum viðbótar fyrir rammabiðminni þarftu að "
+"endurræsa forritið."
 
 #: rfbservermanager.cpp:226
 #, kde-format
@@ -441,7 +453,7 @@ msgstr "Skjáborðsmiðlun - tengd"
 #: ui/configframebuffer.ui:19
 #, kde-format
 msgid "Preferred frameb&uffer plugin:"
-msgstr ""
+msgstr "Ákjósanleg viðbót f&yrir rammabiðminni (frame buffer):"
 
 #. i18n: ectx: property (text), widget (QLabel, helpText)
 #: ui/configframebuffer.ui:44
@@ -452,18 +464,23 @@ msgid ""
 "style=\" font-weight:600;\">qt</span> plugin is a safe fallback, if for some "
 "reason others don't work. But also it is very slow.</p></body></html>"
 msgstr ""
+"<html><head/><body><p>Þegar verið er að nota x11, ætti að velja <span style="
+"\" font-weight:600;\">xcb</span>-viðbótina því hún er afkastameiri.<br/"
+"><span style=\" font-weight:600;\">qt</span>-viðbótin er örugg varaleið, ef "
+"hinar virka ekki af einhverjum ástæðum. En hún er líka mjög hægvirk.</p></"
+"body></html>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_allowDesktopControl)
 #: ui/configsecurity.ui:17
 #, kde-format
 msgid "Allow remote connections to control your desktop"
-msgstr "Leyfa fjarnotanda að stjórna skjáborðinu þínu"
+msgstr "Leyfa fjarnotendum að stjórna skjáborðinu þínu"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_noWallet)
 #: ui/configsecurity.ui:27
 #, kde-format
 msgid "Do not store passwords using KDE wallet"
-msgstr ""
+msgstr "Ekki geyma lykilorð í KDE-veskinu"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_useDefaultPort)
 #: ui/configtcp.ui:26
@@ -579,6 +596,8 @@ msgid ""
 "Address required by remote users to connect to your desktop. Click about "
 "button on the right for more info."
 msgstr ""
+"Vistfang sem krafist er af fjartengdum notendum til að tengjast við "
+"skjáborðið þitt. Ýttu á \"Um hugbúnaðinn\" til að sjá nánari upplýsingar."
 
 #. i18n: ectx: property (text), widget (QLabel, addressDisplayLabel)
 #: ui/mainwidget.ui:238
@@ -611,6 +630,9 @@ msgid ""
 "Password required by remote users to connect to your desktop. Click the edit "
 "button on the right to change password."
 msgstr ""
+"Lykilorð sem krafist er af fjartengdum notendum til að tengjast við "
+"skjáborðið þitt. Ýttu á breytingahnappinn til hægri til að breyta "
+"lykilorðinu."
 
 #. i18n: ectx: property (text), widget (QLabel, passwordDisplayLabel)
 #: ui/mainwidget.ui:314
@@ -626,12 +648,15 @@ msgid ""
 "Unattended Access allows a remote user with the password to gain control to "
 "your desktop without your explicit confirmation."
 msgstr ""
+"Óvaktaður aðgangur gefur fjartengdum notanda sem hefur lykilorðið undir "
+"höndum færi á að ná stjórn á skjáborðinu þínu án þess að þú þurfir að "
+"samþykkja það sérstaklega."
 
 #. i18n: ectx: property (title), widget (QGroupBox, unattendedGroupBox)
 #: ui/mainwidget.ui:343
 #, kde-format
 msgid "Unattended Access"
-msgstr ""
+msgstr "Óvaktaður aðgangur"
 
 #. i18n: ectx: property (whatsThis), widget (QLabel, unattendedAboutLabel)
 #: ui/mainwidget.ui:375
@@ -641,12 +666,16 @@ msgid ""
 "your desktop without your explicit confirmation. Click \"About\" button on "
 "right to know more."
 msgstr ""
+"Óvaktaður aðgangur gefur fjartengdum notanda sem hefur lykilorðið undir "
+"höndum færi á að ná stjórn á skjáborðinu þínu án þess að þú þurfir að "
+"samþykkja það sérstaklega. Smelltu á hnappinn \"Um hugbúnaðinn\" til að fá "
+"frekari upplýsingar."
 
 #. i18n: ectx: property (whatsThis), widget (QToolButton, unattendedAboutButton)
 #: ui/mainwidget.ui:394
 #, kde-format
 msgid "Know more about Unattended Access"
-msgstr ""
+msgstr "Læra meira um óvaktaðan aðgang"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, enableUnattendedCheckBox)
 #: ui/mainwidget.ui:437
@@ -655,24 +684,27 @@ msgid ""
 "Starts/Stops unattended access to your desktop. Click on button on right to "
 "change password, and \"About\" button to know more."
 msgstr ""
+"Ræsir/Stöðvar óvaktaðan aðgang að skjáborðinu þínu. Smelltu á hnappinn til "
+"hægri til að breyta lykilorðinu og á \"Um hugbúnaðinn\" til að fá frekari "
+"upplýsingar."
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableUnattendedCheckBox)
 #: ui/mainwidget.ui:440
 #, kde-format
 msgid "Enable &Unattended Access"
-msgstr ""
+msgstr "Virkja óvaktaðan aðgang"
 
 #. i18n: ectx: property (whatsThis), widget (QPushButton, unattendedPasswordButton)
 #: ui/mainwidget.ui:465
 #, kde-format
 msgid "Change password for Unattended Access"
-msgstr ""
+msgstr "Breyta lykilorði fyrir óvaktaðan aðgang"
 
 #. i18n: ectx: property (text), widget (QPushButton, unattendedPasswordButton)
 #: ui/mainwidget.ui:468
 #, kde-format
 msgid "&Change Unattended Password"
-msgstr ""
+msgstr "&Breyta lykilorði fyrir óvaktaðan aðgang"
 
 #~ msgid "Welcome to KDE Desktop Sharing"
 #~ msgstr "Velkomin að KDE skjáborðsmiðlun"
