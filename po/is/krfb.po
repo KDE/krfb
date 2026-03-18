@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: krfb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:52+0000\n"
-"PO-Revision-Date: 2026-03-13 10:41+0000\n"
+"PO-Revision-Date: 2026-03-17 10:57+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic\n"
 "Language: is\n"
@@ -134,7 +134,7 @@ msgstr "Fjartengdur sýndarskjár"
 #: main-virtualmonitor.cpp:80
 #, kde-format
 msgid "Offer a Virtual Monitor that can be accessed remotely"
-msgstr ""
+msgstr "Býður upp á sýndarskjá sem hægt er að skoða fjartengt"
 
 #: main-virtualmonitor.cpp:82 main.cpp:87
 #, kde-format
@@ -158,7 +158,7 @@ msgstr ""
 #: main-virtualmonitor.cpp:89
 #, kde-format
 msgid "Virtual Monitor implementation"
-msgstr ""
+msgstr "Framsetning sýndarskjás"
 
 #: main-virtualmonitor.cpp:90 main.cpp:97
 #, kde-format
@@ -228,7 +228,7 @@ msgstr "Upprunalegir VNC kóðarar og hönnun samskiptareglu"
 #: main-virtualmonitor.cpp:108
 #, kde-format
 msgid "Logical resolution of the new monitor"
-msgstr ""
+msgstr "Rökleg upplausn nýja skjásins"
 
 #: main-virtualmonitor.cpp:108
 #, kde-format
@@ -258,7 +258,7 @@ msgstr "lykilorð"
 #: main-virtualmonitor.cpp:114
 #, kde-format
 msgid "The device-pixel-ratio of the device, the scaling factor"
-msgstr ""
+msgstr "Tækistengt mynddíla-hlutfall tækisins, kvörðunarhlutfall"
 
 #: main-virtualmonitor.cpp:114
 #, kde-format
@@ -273,7 +273,7 @@ msgstr "Gáttin sem verður vöktuð"
 #: main-virtualmonitor.cpp:116
 #, kde-format
 msgid "number"
-msgstr ""
+msgstr "númer"
 
 #: main.cpp:38
 #, kde-format
@@ -281,7 +281,7 @@ msgid ""
 "Your X11 Server does not support the required XTest extension version 2.2. "
 "Sharing your desktop is not possible."
 msgstr ""
-"X11 þjónninn þinn styður ekki við XTest viðbæturnar útgáfa 2.2, Það er ekki "
+"X11-þjónninn þinn styður ekki við XTest viðbæturnar útgáfu 2.2. Það er ekki "
 "hægt að miðla skjáborðinu þínu."
 
 #: main.cpp:40 main.cpp:143
@@ -307,7 +307,7 @@ msgstr "George Goldberg"
 #: main.cpp:95
 #, kde-format
 msgid "Telepathy tubes support"
-msgstr ""
+msgstr "Stuðningur við Telepathy-túbur"
 
 #: main.cpp:119
 #, kde-format
@@ -320,6 +320,8 @@ msgid ""
 "Desktop Sharing is not running under an X11 Server or Wayland.\n"
 "Other display servers are currently not supported."
 msgstr ""
+"Skjáborðsmiðlun er ekki að keyra á X11-þjóni eða Wayland.\n"
+"Ekki er ennþá stuðningur við aðra skjáþjóna."
 
 #: mainwindow.cpp:49
 #, kde-format
