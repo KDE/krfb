@@ -1,6 +1,6 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# Vít Pelčák <vit@pelcak.org>, 2011, 2013, 2014, 2017, 2019.
+# SPDX-FileCopyrightText: 2011, 2013, 2014, 2017, 2019, 2026 Vít Pelčák <vit@pelcak.org>
 # Tomáš Chvátal <tomas.chvatal@gmail.com>, 2012, 2013.
 # Vit Pelcak <vit@pelcak.org>, 2022.
 #
@@ -9,25 +9,25 @@ msgstr ""
 "Project-Id-Version: krfb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:52+0000\n"
-"PO-Revision-Date: 2022-02-08 14:54+0100\n"
-"Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
+"PO-Revision-Date: 2026-03-30 11:39+0200\n"
+"Last-Translator:  Vít Pelčák <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 21.12.2\n"
+"X-Generator: Lokalize 25.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Lukáš Tinkl"
+msgstr "Lukáš Tinkl,Libor Filípek"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "lukas@kde.org"
+msgstr "lukas@kde.org,libor.filipek@gmail.com"
 
 #: connectiondialog.cpp:26
 #, kde-format
@@ -88,7 +88,7 @@ msgstr "Oznámit službu v místní síti"
 #: krfb.kcfg:29
 #, kde-format
 msgid "Do not store passwords in KWallet"
-msgstr ""
+msgstr "Neukládejte hesla do KWallet"
 
 #. i18n: ectx: label, entry (allowDesktopControl), group (Security)
 #: krfb.kcfg:33
@@ -128,7 +128,7 @@ msgstr "Vzdálený virtuální monitor"
 #: main-virtualmonitor.cpp:80
 #, kde-format
 msgid "Offer a Virtual Monitor that can be accessed remotely"
-msgstr ""
+msgstr "Nabídka virtuálního monitoru, ke kterému lze přistupovat na dálku"
 
 #: main-virtualmonitor.cpp:82 main.cpp:87
 #, kde-format
@@ -252,12 +252,12 @@ msgstr "heslo"
 #: main-virtualmonitor.cpp:114
 #, kde-format
 msgid "The device-pixel-ratio of the device, the scaling factor"
-msgstr ""
+msgstr "Poměr pixelů zařízení, faktor měřítka"
 
 #: main-virtualmonitor.cpp:114
 #, kde-format
 msgid "dpr"
-msgstr ""
+msgstr "dpr"
 
 #: main-virtualmonitor.cpp:116
 #, kde-format
@@ -314,6 +314,8 @@ msgid ""
 "Desktop Sharing is not running under an X11 Server or Wayland.\n"
 "Other display servers are currently not supported."
 msgstr ""
+"Sdílení plochy nefunguje pod serverem X11 nebo Wayland.\n"
+"Ostatní zobrazovací servery nejsou v současné době podporovány."
 
 #: mainwindow.cpp:49
 #, kde-format
@@ -323,7 +325,7 @@ msgstr "Ukládání hesel v konfiguračním souboru není bezpečné."
 #: mainwindow.cpp:186
 #, kde-format
 msgid "Enter a new password for Unattended Access"
-msgstr ""
+msgstr "Zadejte nové heslo pro bezobslužný přístup"
 
 #: mainwindow.cpp:197
 #, kde-format
@@ -381,6 +383,12 @@ msgid ""
 "password, desktop sharing access will be granted without explicit "
 "confirmation."
 msgstr ""
+"Každý vzdálený uživatel s normálním heslem pro sdílení plochy bude muset být "
+"ověřen\n"
+"\n"
+"Pokud je zapnutý bezobslužný přístup a vzdálený uživatel zadá heslo pro "
+"bezobslužný režim, bude mu přístup ke sdílení plochy udělen bez výslovného "
+"potvrzení."
 
 #: mainwindow.cpp:246
 #, kde-format
@@ -401,6 +409,7 @@ msgstr "Nahrávat obrazovku"
 #, kde-format
 msgid "To apply framebuffer plugin setting, you need to restart the program."
 msgstr ""
+"Chcete-li použít nastavení pluginu framebuffer, musíte program restartovat."
 
 #: rfbservermanager.cpp:226
 #, kde-format
@@ -452,6 +461,11 @@ msgid ""
 "style=\" font-weight:600;\">qt</span> plugin is a safe fallback, if for some "
 "reason others don't work. But also it is very slow.</p></body></html>"
 msgstr ""
+"<html><head/><body> <p>Při používání x11 je třeba upřednostnit plugin <span "
+"style=\" font-weight:600;\">xcb</span>, protože je výkonnější.<br/> <span "
+"style=\" font-weight:600;\">qt</span> plugin je bezpečnou záložní variantou, "
+"pokud z nějakého důvodu ostatní nefungují. Je však také velmi pomalý.</p></"
+"body></html>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_allowDesktopControl)
 #: ui/configsecurity.ui:17
@@ -563,7 +577,7 @@ msgstr "&Adresa"
 #: ui/mainwidget.ui:214
 #, kde-format
 msgid "More about this address"
-msgstr ""
+msgstr "Více o této adrese"
 
 #. i18n: ectx: property (text), widget (QToolButton, addressAboutButton)
 #. i18n: ectx: property (text), widget (QToolButton, unattendedAboutButton)
@@ -579,6 +593,8 @@ msgid ""
 "Address required by remote users to connect to your desktop. Click about "
 "button on the right for more info."
 msgstr ""
+"Adresa požadovaná vzdálenými uživateli pro připojení k vaší pracovní ploše. "
+"Klikněte vpravo na tlačítko „O aplikaci“ pro více informací."
 
 #. i18n: ectx: property (text), widget (QLabel, addressDisplayLabel)
 #: ui/mainwidget.ui:238
@@ -611,12 +627,14 @@ msgid ""
 "Password required by remote users to connect to your desktop. Click the edit "
 "button on the right to change password."
 msgstr ""
+"Heslo požadované vzdálenými uživateli pro připojení k vaší pracovní ploše. "
+"Kliknutím na tlačítko Upravit vpravo můžete heslo změnit."
 
 #. i18n: ectx: property (text), widget (QLabel, passwordDisplayLabel)
 #: ui/mainwidget.ui:314
 #, kde-format
 msgid "TemporaryPassword"
-msgstr ""
+msgstr "Dočasné heslo"
 
 #. i18n: ectx: property (whatsThis), widget (QGroupBox, unattendedGroupBox)
 #. i18n: ectx: property (text), widget (QLabel, unattendedAboutLabel)
@@ -626,12 +644,14 @@ msgid ""
 "Unattended Access allows a remote user with the password to gain control to "
 "your desktop without your explicit confirmation."
 msgstr ""
+"Funkce bezobslužného přístupu umožňuje vzdálenému uživateli s heslem získat "
+"kontrolu nad vaším počítačem bez vašeho výslovného potvrzení."
 
 #. i18n: ectx: property (title), widget (QGroupBox, unattendedGroupBox)
 #: ui/mainwidget.ui:343
 #, kde-format
 msgid "Unattended Access"
-msgstr ""
+msgstr "Bezobslužný přístup"
 
 #. i18n: ectx: property (whatsThis), widget (QLabel, unattendedAboutLabel)
 #: ui/mainwidget.ui:375
@@ -641,12 +661,15 @@ msgid ""
 "your desktop without your explicit confirmation. Click \"About\" button on "
 "right to know more."
 msgstr ""
+"Funkce bezobslužného přístupu umožňuje vzdálenému uživateli s heslem získat "
+"kontrolu nad vaším počítačem bez vašeho výslovného potvrzení. Klikněte "
+"vpravo na tlačítko „O aplikaci“ a dozvíte se více."
 
 #. i18n: ectx: property (whatsThis), widget (QToolButton, unattendedAboutButton)
 #: ui/mainwidget.ui:394
 #, kde-format
 msgid "Know more about Unattended Access"
-msgstr ""
+msgstr "Více informací o bezobslužném přístupu"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, enableUnattendedCheckBox)
 #: ui/mainwidget.ui:437
@@ -655,21 +678,24 @@ msgid ""
 "Starts/Stops unattended access to your desktop. Click on button on right to "
 "change password, and \"About\" button to know more."
 msgstr ""
+"Spouští/zastavuje bezobslužný přístup k vaší pracovní ploše. Kliknutím na "
+"tlačítko vpravo změníte heslo a tlačítkem „O aplikaci“ se dozvíte více "
+"informací."
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableUnattendedCheckBox)
 #: ui/mainwidget.ui:440
 #, kde-format
 msgid "Enable &Unattended Access"
-msgstr ""
+msgstr "Povolit bezobsl&užný přístup"
 
 #. i18n: ectx: property (whatsThis), widget (QPushButton, unattendedPasswordButton)
 #: ui/mainwidget.ui:465
 #, kde-format
 msgid "Change password for Unattended Access"
-msgstr ""
+msgstr "Změnit heslo pro bezobslužný přístup"
 
 #. i18n: ectx: property (text), widget (QPushButton, unattendedPasswordButton)
 #: ui/mainwidget.ui:468
 #, kde-format
 msgid "&Change Unattended Password"
-msgstr ""
+msgstr "Změnit be&zobslužné heslo"
