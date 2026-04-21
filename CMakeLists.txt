@@ -25,6 +25,14 @@ include(ECMDeprecationSettings)
 include(FeatureSummary)
 include(CheckIncludeFile)
 
+include(KDEClangFormat)
+include(KDEGitCommitHooks)
+
+# add clang-format target for all our real source files
+file(GLOB_RECURSE ALL_CLANG_FORMAT_SOURCE_FILES *.cpp *.h)
+kde_clang_format(${ALL_CLANG_FORMAT_SOURCE_FILES})
+kde_configure_git_pre_commit_hook(CHECKS CLANG_FORMAT)
+
 check_include_file("linux/input.h" HAVE_LINUX_INPUT_H)
 
 find_package(Qt6 ${QT_MIN_VERSION} REQUIRED COMPONENTS Core DBus Widgets)
