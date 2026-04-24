@@ -1,4 +1,3 @@
-
 /* This file is part of the KDE project
    SPDX-FileCopyrightText: 2016 Oleg Chernovskiy <kanedias@xaker.ru>
 

@@ -8,42 +8,46 @@
 #include "invitationsrfbserver.h"
 
 #include "krfbconfig.h"
-#include "ui_configtcp.h"
-#include "ui_configsecurity.h"
 #include "ui_configframebuffer.h"
+#include "ui_configsecurity.h"
+#include "ui_configtcp.h"
 
+#include <KActionCollection>
 #include <KConfigDialog>
 #include <KLocalizedString>
 #include <KMessageBox>
 #include <KMessageWidget>
-#include <KStandardAction>
-#include <KActionCollection>
 #include <KNewPasswordDialog>
 #include <KPluginMetaData>
+#include <KStandardAction>
 
-#include <QIcon>
-#include <QWidget>
-#include <QLineEdit>
 #include <QComboBox>
-#include <QSizePolicy>
-#include <QList>
-#include <QSet>
-#include <QNetworkInterface>
 #include <QHostInfo>
+#include <QIcon>
+#include <QLineEdit>
+#include <QList>
 #include <QMessageBox>
+#include <QNetworkInterface>
+#include <QSet>
+#include <QSizePolicy>
+#include <QWidget>
 
-class TCP: public QWidget, public Ui::TCP
+class TCP : public QWidget, public Ui::TCP
 {
 public:
-    explicit TCP(QWidget *parent = nullptr) : QWidget(parent) {
+    explicit TCP(QWidget *parent = nullptr)
+        : QWidget(parent)
+    {
         setupUi(this);
     }
 };
 
-class Security: public QWidget, public Ui::Security
+class Security : public QWidget, public Ui::Security
 {
 public:
-    explicit Security(QWidget *parent = nullptr) : QWidget(parent) {
+    explicit Security(QWidget *parent = nullptr)
+        : QWidget(parent)
+    {
         setupUi(this);
         walletWarning = new KMessageWidget(this);
         walletWarning->setText(i18n("Storing passwords in config file is insecure!"));
@@ -53,7 +57,7 @@ public:
         vboxLayout->addWidget(walletWarning);
 
         // show warning when "noWallet" checkbox is checked
-        QObject::connect(kcfg_noWallet, &QCheckBox::toggled, this, [this] (bool checked) {
+        QObject::connect(kcfg_noWallet, &QCheckBox::toggled, this, [this](bool checked) {
             walletWarning->setVisible(checked);
         });
     }
@@ -61,10 +65,12 @@ public:
     KMessageWidget *walletWarning = nullptr;
 };
 
-class ConfigFramebuffer: public QWidget, public Ui::Framebuffer
+class ConfigFramebuffer : public QWidget, public Ui::Framebuffer
 {
 public:
-    ConfigFramebuffer(QWidget *parent = nullptr) : QWidget(parent) {
+    ConfigFramebuffer(QWidget *parent = nullptr)
+        : QWidget(parent)
+    {
         setupUi(this);
         // hide the line edit with framebuffer string
         kcfg_preferredFrameBufferPlugin->hide();
@@ -78,14 +84,14 @@ public:
                          kcfg_preferredFrameBufferPlugin, &QLineEdit::setText);
     }
 
-    void fillFrameBuffersCombo() {
+    void fillFrameBuffersCombo()
+    {
         const QList<KPluginMetaData> plugins = KPluginMetaData::findPlugins(QStringLiteral("krfb/framebuffer"), {}, KPluginMetaData::AllowEmptyMetaData);
         for (const KPluginMetaData &metadata : plugins) {
             cb_preferredFrameBufferPlugin->addItem(metadata.pluginId());
         }
     }
 };
-
 
 MainWindow::MainWindow(QWidget *parent)
     : KXmlGuiWindow(parent)
@@ -101,7 +107,7 @@ MainWindow::MainWindow(QWidget *parent)
     m_ui.setupUi(mainWidget);
     m_ui.krfbIconLabel->setPixmap(QIcon::fromTheme(QStringLiteral("krfb")).pixmap(128));
     m_ui.enableUnattendedCheckBox->setChecked(
-            InvitationsRfbServer::instance->allowUnattendedAccess());
+        InvitationsRfbServer::instance->allowUnattendedAccess());
 
     setCentralWidget(mainWidget);
 
@@ -123,12 +129,12 @@ MainWindow::MainWindow(QWidget *parent)
     // Figure out the address
     int port = KrfbConfig::port();
     const QList<QNetworkInterface> interfaceList = QNetworkInterface::allInterfaces();
-    for (const QNetworkInterface& interface : interfaceList) {
-        if(interface.flags() & QNetworkInterface::IsLoopBack)
+    for (const QNetworkInterface &interface : interfaceList) {
+        if (interface.flags() & QNetworkInterface::IsLoopBack) {
             continue;
+        }
 
-        if(interface.flags() & QNetworkInterface::IsRunning &&
-                !interface.addressEntries().isEmpty()) {
+        if (interface.flags() & QNetworkInterface::IsRunning && !interface.addressEntries().isEmpty()) {
             const QString hostName = QHostInfo::localHostName();
             const QString ipAddress = interface.addressEntries().constFirst().ip().toString();
             const QString addressLabelText = hostName.isEmpty()
@@ -138,9 +144,9 @@ MainWindow::MainWindow(QWidget *parent)
         }
     }
 
-    //Figure out the password
+    // Figure out the password
     m_ui.passwordDisplayLabel->setText(
-            InvitationsRfbServer::instance->desktopPassword());
+        InvitationsRfbServer::instance->desktopPassword());
 
     KStandardAction::quit(QCoreApplication::instance(), &QCoreApplication::quit, actionCollection());
     KStandardAction::preferences(this, &MainWindow::showConfiguration, actionCollection());
@@ -148,7 +154,7 @@ MainWindow::MainWindow(QWidget *parent)
     setupGUI();
 
     if (KrfbConfig::allowDesktopControl()) {
-      m_ui.enableSharingCheckBox->setChecked(true);
+        m_ui.enableSharingCheckBox->setChecked(true);
     }
 
     setAutoSaveSettings();
@@ -160,21 +166,21 @@ MainWindow::~MainWindow()
 
 void MainWindow::editPassword()
 {
-    if(m_passwordEditable) {
+    if (m_passwordEditable) {
         m_passwordEditable = false;
         m_ui.passwordEditButton->setIcon(QIcon::fromTheme(QStringLiteral("document-properties")));
         m_ui.passwordGridLayout->removeWidget(m_passwordLineEdit);
         InvitationsRfbServer::instance->setDesktopPassword(
-                m_passwordLineEdit->text());
+            m_passwordLineEdit->text());
         m_ui.passwordDisplayLabel->setText(
-                InvitationsRfbServer::instance->desktopPassword());
+            InvitationsRfbServer::instance->desktopPassword());
         m_passwordLineEdit->setVisible(false);
     } else {
         m_passwordEditable = true;
         m_ui.passwordEditButton->setIcon(QIcon::fromTheme(QStringLiteral("document-save")));
-        m_ui.passwordGridLayout->addWidget(m_passwordLineEdit,0,0);
+        m_ui.passwordGridLayout->addWidget(m_passwordLineEdit, 0, 0);
         m_passwordLineEdit->setText(
-                InvitationsRfbServer::instance->desktopPassword());
+            InvitationsRfbServer::instance->desktopPassword());
         m_passwordLineEdit->setVisible(true);
         m_passwordLineEdit->setFocus(Qt::MouseFocusReason);
     }
@@ -184,23 +190,23 @@ void MainWindow::editUnattendedPassword()
 {
     KNewPasswordDialog dialog(this);
     dialog.setPrompt(i18n("Enter a new password for Unattended Access"));
-    if(dialog.exec()) {
+    if (dialog.exec()) {
         InvitationsRfbServer::instance->setUnattendedPassword(dialog.password());
     }
 }
 
 void MainWindow::toggleDesktopSharing(bool enable)
 {
-    if(enable) {
-        if(!InvitationsRfbServer::instance->start()) {
+    if (enable) {
+        if (!InvitationsRfbServer::instance->start()) {
             KMessageBox::error(this,
-                    i18n("Failed to start the krfb server. Desktop sharing "
-                        "will not work. Try setting another port in the settings "
-                        "and restart krfb."));
+                               i18n("Failed to start the krfb server. Desktop sharing "
+                                    "will not work. Try setting another port in the settings "
+                                    "and restart krfb."));
         }
     } else {
         InvitationsRfbServer::instance->stop();
-        if(m_passwordEditable) {
+        if (m_passwordEditable) {
             m_passwordEditable = false;
             m_passwordLineEdit->setVisible(false);
             m_ui.passwordEditButton->setIcon(QIcon::fromTheme(QStringLiteral("document-properties")));
@@ -208,7 +214,7 @@ void MainWindow::toggleDesktopSharing(bool enable)
     }
 }
 
-void MainWindow::passwordChanged(const QString& password)
+void MainWindow::passwordChanged(const QString &password)
 {
     m_passwordLineEdit->setText(password);
     m_ui.passwordDisplayLabel->setText(password);
@@ -217,15 +223,15 @@ void MainWindow::passwordChanged(const QString& password)
 void MainWindow::aboutConnectionAddress()
 {
     QMessageBox::about(this,
-            i18n("KDE Desktop Sharing"),
-            i18n("This field contains the address of your computer and the port number, separated by a colon.\n\nThe address is just a hint - you can use any address that can reach your computer.\n\nDesktop Sharing tries to guess your address from your network configuration, but does not always succeed in doing so.\n\nIf your computer is behind a firewall it may have a different address or be unreachable for other computers."));
+                       i18n("KDE Desktop Sharing"),
+                       i18n("This field contains the address of your computer and the port number, separated by a colon.\n\nThe address is just a hint - you can use any address that can reach your computer.\n\nDesktop Sharing tries to guess your address from your network configuration, but does not always succeed in doing so.\n\nIf your computer is behind a firewall it may have a different address or be unreachable for other computers."));
 }
 
 void MainWindow::aboutUnattendedMode()
 {
     QMessageBox::about(this,
-            i18n("KDE Desktop Sharing"),
-            i18n("Any remote user with normal desktop sharing password will have to be authenticated.\n\nIf unattended access is on, and the remote user provides unattended mode password, desktop sharing access will be granted without explicit confirmation."));
+                       i18n("KDE Desktop Sharing"),
+                       i18n("Any remote user with normal desktop sharing password will have to be authenticated.\n\nIf unattended access is on, and the remote user provides unattended mode password, desktop sharing access will be granted without explicit confirmation."));
 }
 
 void MainWindow::showConfiguration()
@@ -247,7 +253,7 @@ void MainWindow::showConfiguration()
     dialog->addPage(new Security, i18n("Security"), QStringLiteral("security-high"));
     dialog->addPage(new ConfigFramebuffer, i18n("Screen capture"), QStringLiteral("video-display"));
     dialog->show();
-    connect(dialog, &KConfigDialog::settingsChanged, this, [this] () {
+    connect(dialog, &KConfigDialog::settingsChanged, this, [this]() {
         // check if framebuffer plugin config has changed
         if (s_prevFramebufferPlugin != KrfbConfig::preferredFrameBufferPlugin()) {
             KMessageBox::information(this, i18n("To apply framebuffer plugin setting, "
@@ -269,7 +275,7 @@ void MainWindow::showConfiguration()
     });
 }
 
-void MainWindow::readProperties(const KConfigGroup& group)
+void MainWindow::readProperties(const KConfigGroup &group)
 {
     if (group.readEntry("Visible", true)) {
         show();
@@ -277,7 +283,7 @@ void MainWindow::readProperties(const KConfigGroup& group)
     KMainWindow::readProperties(group);
 }
 
-void MainWindow::saveProperties(KConfigGroup& group)
+void MainWindow::saveProperties(KConfigGroup &group)
 {
     group.writeEntry("Visible", isVisible());
     KMainWindow::saveProperties(group);

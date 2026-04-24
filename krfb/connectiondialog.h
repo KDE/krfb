@@ -12,12 +12,14 @@
 #include "ui_connectionwidget.h"
 #include <QDialog>
 
-template <typename UI>
+template<typename UI>
 class ConnectionDialog : public QDialog
 {
 public:
     explicit ConnectionDialog(QWidget *parent);
-    ~ConnectionDialog() override {};
+    ~ConnectionDialog() override
+    {
+    }
 
     void setAllowRemoteControl(bool b);
     bool allowRemoteControl();
@@ -27,14 +29,14 @@ protected:
     UI m_ui;
 };
 
-template <typename UI>
+template<typename UI>
 void ConnectionDialog<UI>::setAllowRemoteControl(bool b)
 {
     m_ui.cbAllowRemoteControl->setChecked(b);
     m_ui.cbAllowRemoteControl->setVisible(b);
 }
 
-template <typename UI>
+template<typename UI>
 bool ConnectionDialog<UI>::allowRemoteControl()
 {
     return m_ui.cbAllowRemoteControl->isChecked();
@@ -45,12 +47,12 @@ bool ConnectionDialog<UI>::allowRemoteControl()
 class InvitationsConnectionDialog : public ConnectionDialog<Ui::ConnectionWidget>
 {
     Q_OBJECT
+
 public:
     explicit InvitationsConnectionDialog(QWidget *parent);
-    void setRemoteHost(const QString & host);
+    void setRemoteHost(const QString &host);
 };
 
 //*********
 
 #endif // CONNECTIONDIALOG_H
-

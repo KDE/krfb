@@ -6,9 +6,9 @@
 
 #pragma once
 
+#include <QList>
 #include <QObject>
 #include <QSharedPointer>
-#include <QList>
 #include <optional>
 
 struct zkde_screencast_unstable_v1;
@@ -17,9 +17,11 @@ namespace KWayland
 {
 namespace Client
 {
+
 class PlasmaWindow;
 class Registry;
 class Output;
+
 }
 }
 
@@ -29,6 +31,7 @@ class ScreencastingStreamPrivate;
 class ScreencastingStream : public QObject
 {
     Q_OBJECT
+
 public:
     ScreencastingStream(QObject *parent);
     ~ScreencastingStream() override;
@@ -48,6 +51,7 @@ private:
 class Screencasting : public QObject
 {
     Q_OBJECT
+
 public:
     explicit Screencasting(QObject *parent = nullptr);
     explicit Screencasting(KWayland::Client::Registry *registry, int id, int version, QObject *parent = nullptr);

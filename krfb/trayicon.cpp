@@ -8,8 +8,8 @@
 #include "trayicon.h"
 
 #include "mainwindow.h"
-#include "rfbservermanager.h"
 #include "rfbclient.h"
+#include "rfbservermanager.h"
 
 #include <QIcon>
 #include <QMenu>
@@ -17,11 +17,11 @@
 #include <KAboutApplicationDialog>
 #include <KAboutData>
 #include <KActionCollection>
-#include <QDialog>
+#include <KConfigGroup>
 #include <KLocalizedString>
 #include <KStandardAction>
 #include <KToggleAction>
-#include <KConfigGroup>
+#include <QDialog>
 
 class ClientActions
 {
@@ -37,7 +37,7 @@ private:
     QAction *m_separator = nullptr;
 };
 
-ClientActions::ClientActions(RfbClient* client, QMenu* menu, QAction* before)
+ClientActions::ClientActions(RfbClient *client, QMenu *menu, QAction *before)
     : m_menu(menu)
 {
     m_title = m_menu->insertSection(before, client->name());
@@ -99,20 +99,20 @@ TrayIcon::TrayIcon(QWidget *mainWindow)
     contextMenu()->addAction(m_aboutAction);
 }
 
-void TrayIcon::onClientConnected(RfbClient* client)
+void TrayIcon::onClientConnected(RfbClient *client)
 {
-    if (m_clientActions.isEmpty()) { //first client connected
+    if (m_clientActions.isEmpty()) { // first client connected
         setIconByName(QStringLiteral("krfb-symbolic"));
         setToolTipTitle(i18n("Desktop Sharing - connected with %1", client->name()));
         setStatus(KStatusNotifierItem::Active);
-    } else { //Nth client connected, N != 1
+    } else { // Nth client connected, N != 1
         setToolTipTitle(i18n("Desktop Sharing - connected"));
     }
 
     m_clientActions[client] = new ClientActions(client, contextMenu(), m_aboutAction);
 }
 
-void TrayIcon::onClientDisconnected(RfbClient* client)
+void TrayIcon::onClientDisconnected(RfbClient *client)
 {
     ClientActions *actions = m_clientActions.take(client);
     delete actions;
@@ -121,7 +121,7 @@ void TrayIcon::onClientDisconnected(RfbClient* client)
         setIconByPixmap(QIcon::fromTheme(QStringLiteral("krfb-symbolic")).pixmap(22, 22, QIcon::Disabled));
         setToolTipTitle(i18n("Desktop Sharing - disconnected"));
         setStatus(KStatusNotifierItem::Passive);
-    } else if (m_clientActions.size() == 1) { //clients number dropped back to 1
+    } else if (m_clientActions.size() == 1) { // clients number dropped back to 1
         RfbClient *client = m_clientActions.constBegin().key();
         setToolTipTitle(i18n("Desktop Sharing - connected with %1", client->name()));
     }

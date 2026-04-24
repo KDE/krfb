@@ -40,8 +40,7 @@ private:
     EventsManager();
 
     QMap<QString, EventsPlugin *> m_plugins;
-    QList<QWeakPointer<EventHandler> > m_eventHandlers;
+    QList<QWeakPointer<EventHandler>> m_eventHandlers;
 };
 
-
-#endif  // Header guard
+#endif // Header guard

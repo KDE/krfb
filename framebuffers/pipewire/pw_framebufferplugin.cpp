@@ -4,7 +4,6 @@
    SPDX-License-Identifier: GPL-3.0-or-later
 */
 
-
 #include "pw_framebufferplugin.h"
 #include "pw_framebuffer.h"
 #include <KPluginFactory>
@@ -15,7 +14,6 @@ PWFrameBufferPlugin::PWFrameBufferPlugin(QObject *parent, const QVariantList &ar
     : FrameBufferPlugin(parent, args)
 {
 }
-
 
 FrameBuffer *PWFrameBufferPlugin::frameBuffer(const QVariantMap &args)
 {

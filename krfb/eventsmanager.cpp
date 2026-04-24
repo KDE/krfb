@@ -9,14 +9,13 @@
 
 #include "eventsplugin.h"
 #include "krfbconfig.h"
-#include "rfbservermanager.h"
 #include "krfbdebug.h"
+#include "rfbservermanager.h"
 
 #include <QGlobalStatic>
 
 #include <KPluginFactory>
 #include <KPluginMetaData>
-
 
 class EventsManagerStatic
 {

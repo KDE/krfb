@@ -14,11 +14,10 @@
 class XdpEventHandler : public EventHandler
 {
     Q_OBJECT
+
 public:
     void handleKeyboard(bool down, rfbKeySym key) override;
     void handlePointer(int buttonMask, int x, int y) override;
 };
 
 #endif
-
-

@@ -9,9 +9,9 @@
 
 #include "sockethelpers.h"
 
-#include <sys/socket.h>
-#include <netinet/in.h>
 #include <arpa/inet.h>
+#include <netinet/in.h>
+#include <sys/socket.h>
 
 QString peerAddress(int sock)
 {
@@ -86,4 +86,3 @@ unsigned short localPort(int sock)
 
     return 0;
 }
-

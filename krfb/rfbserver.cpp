@@ -7,12 +7,12 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 #include "rfbserver.h"
-#include "rfbservermanager.h"
 #include "krfbdebug.h"
-#include <QSocketNotifier>
+#include "rfbservermanager.h"
 #include <QApplication>
 #include <QClipboard>
 #include <QPointer>
+#include <QSocketNotifier>
 #include <QtGui/private/qtx11extras_p.h>
 
 struct RfbServer::Private
@@ -27,7 +27,8 @@ struct RfbServer::Private
 };
 
 RfbServer::RfbServer(QObject *parent)
-    : QObject(parent), d(new Private)
+    : QObject(parent)
+    , d(new Private)
 {
     d->listeningAddress = "0.0.0.0";
     d->listeningPort = 0;
@@ -68,7 +69,7 @@ bool RfbServer::passwordSet() const
     return d->passwordSet;
 }
 
-void RfbServer::setListeningAddress(const QByteArray& address)
+void RfbServer::setListeningAddress(const QByteArray &address)
 {
     d->listeningAddress = address;
 }
@@ -106,7 +107,7 @@ bool RfbServer::start()
         d->screen->setXCutText = clipboardHook;
         d->screen->setXCutTextUTF8 = clipboardHookUtf8;
     } else {
-        //if we already have a screen, stop listening first
+        // if we already have a screen, stop listening first
         rfbShutdownServer(d->screen, false);
     }
 
@@ -130,8 +131,8 @@ bool RfbServer::start()
         }
 
         qCDebug(KRFB) << "Starting server. Listen port:" << listeningPort()
-                 << "Listen Address:" << listeningAddress()
-                 << "Password enabled:" << passwordRequired();
+                      << "Listen Address:" << listeningAddress()
+                      << "Password enabled:" << passwordRequired();
 
         rfbInitServer(d->screen);
 
@@ -182,11 +183,11 @@ void RfbServer::updateFrameBuffer(char *fb, int width, int height, int depth)
     rfbNewFramebuffer(d->screen, fb, width, height, 8, 3, bpp);
 }
 
-void RfbServer::updateScreen(const QList<QRect> & modifiedTiles)
+void RfbServer::updateScreen(const QList<QRect> &modifiedTiles)
 {
     if (d->screen) {
         QList<QRect>::const_iterator it = modifiedTiles.constBegin();
-        for(; it != modifiedTiles.constEnd(); ++it) {
+        for (; it != modifiedTiles.constEnd(); ++it) {
             rfbMarkRectAsModified(d->screen, it->x(), it->y(), it->right(), it->bottom());
         }
     }
@@ -203,8 +204,9 @@ void krfb_rfbSetCursorPosition(rfbScreenInfoPtr screen, rfbClientPtr client, int
     rfbClientIteratorPtr iterator;
     rfbClientPtr cl;
 
-    if (x == screen->cursorX || y == screen->cursorY)
+    if (x == screen->cursorX || y == screen->cursorY) {
         return;
+    }
 
     LOCK(screen->cursorMutex);
     screen->cursorX = x;
@@ -224,7 +226,7 @@ void krfb_rfbSetCursorPosition(rfbScreenInfoPtr screen, rfbClientPtr client, int
     }
 }
 
-void RfbServer::updateCursorPosition(const QPoint & position)
+void RfbServer::updateCursorPosition(const QPoint &position)
 {
     if (d->screen) {
         krfb_rfbSetCursorPosition(d->screen, nullptr, position.x(), position.y());
@@ -249,18 +251,18 @@ void RfbServer::onListenSocketActivated()
 
 void RfbServer::pendingClientFinished(RfbClient *client)
 {
-    //qDebug();
+    // qDebug();
     if (client) {
         RfbServerManager::instance()->addClient(client);
         client->getRfbClientPtr()->clientGoneHook = clientGoneHook;
     }
 }
 
-//static
+// static
 rfbNewClientAction RfbServer::newClientHook(rfbClientPtr cl)
 {
-    //qDebug() << "New client";
-    auto server = static_cast<RfbServer*>(cl->screen->screenData);
+    // qDebug() << "New client";
+    auto server = static_cast<RfbServer *>(cl->screen->screenData);
 
     PendingRfbClient *pendingClient = server->newClient(cl);
     connect(pendingClient, &PendingRfbClient::finished,
@@ -269,39 +271,39 @@ rfbNewClientAction RfbServer::newClientHook(rfbClientPtr cl)
     return RFB_CLIENT_ON_HOLD;
 }
 
-//static
+// static
 void RfbServer::clientGoneHook(rfbClientPtr cl)
 {
-    //qDebug() << "client gone";
-    auto client = static_cast<RfbClient*>(cl->clientData);
+    // qDebug() << "client gone";
+    auto client = static_cast<RfbClient *>(cl->clientData);
 
     RfbServerManager::instance()->removeClient(client);
     client->deleteLater();
 }
 
-//static
+// static
 rfbBool RfbServer::passwordCheck(rfbClientPtr cl, const char *encryptedPassword, int len)
 {
-    auto client = static_cast<PendingRfbClient*>(cl->clientData);
+    auto client = static_cast<PendingRfbClient *>(cl->clientData);
     Q_ASSERT(client);
     return client->checkPassword(QByteArray::fromRawData(encryptedPassword, len));
 }
 
-//static
+// static
 void RfbServer::keyboardHook(rfbBool down, rfbKeySym keySym, rfbClientPtr cl)
 {
-    auto client = static_cast<RfbClient*>(cl->clientData);
+    auto client = static_cast<RfbClient *>(cl->clientData);
     client->handleKeyboardEvent(down ? true : false, keySym);
 }
 
-//static
+// static
 void RfbServer::pointerHook(int bm, int x, int y, rfbClientPtr cl)
 {
-    auto client = static_cast<RfbClient*>(cl->clientData);
+    auto client = static_cast<RfbClient *>(cl->clientData);
     client->handleMouseEvent(bm, x, y);
 }
 
-//static
+// static
 void RfbServer::clipboardHook(char *str, int len, rfbClientPtr /*cl*/)
 {
     QString text = QString::fromLatin1(str, len);

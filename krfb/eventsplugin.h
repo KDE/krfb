@@ -10,14 +10,15 @@
 
 #include "krfbprivate_export.h"
 
-#include <QtCore/QVariantList>
 #include <QWidget>
+#include <QtCore/QVariantList>
 
 class EventHandler;
 
 class KRFBPRIVATE_EXPORT EventsPlugin : public QObject
 {
     Q_OBJECT
+
 public:
     EventsPlugin(QObject *parent, const QVariantList &args);
     ~EventsPlugin() override;
@@ -25,5 +26,4 @@ public:
     virtual EventHandler *eventHandler() = 0;
 };
 
-#endif  // Header guard
-
+#endif // Header guard

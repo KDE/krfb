@@ -16,6 +16,7 @@
 class RfbServer : public QObject
 {
     Q_OBJECT
+
 public:
     explicit RfbServer(QObject *parent = nullptr);
     ~RfbServer() override;
@@ -25,7 +26,7 @@ public:
     bool passwordRequired() const;
     bool passwordSet() const;
 
-    void setListeningAddress(const QByteArray & address);
+    void setListeningAddress(const QByteArray &address);
     void setListeningPort(int port);
     void setPasswordRequired(bool passwordRequired);
     void setPasswordSet(bool passwordSet);
@@ -35,8 +36,8 @@ public Q_SLOTS:
     virtual void stop();
 
     void updateFrameBuffer(char *fb, int width, int height, int depth);
-    void updateScreen(const QList<QRect> & modifiedTiles);
-    void updateCursorPosition(const QPoint & position);
+    void updateScreen(const QList<QRect> &modifiedTiles);
+    void updateCursorPosition(const QPoint &position);
 
 private Q_SLOTS:
     void krfbSendServerCutText();

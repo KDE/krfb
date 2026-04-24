@@ -16,6 +16,7 @@ class EventHandler;
 class X11EventsPlugin : public EventsPlugin
 {
     Q_OBJECT
+
 public:
     X11EventsPlugin(QObject *parent, const QVariantList &args);
 
@@ -25,5 +26,4 @@ private:
     Q_DISABLE_COPY(X11EventsPlugin)
 };
 
-
-#endif  // Header guard
+#endif // Header guard

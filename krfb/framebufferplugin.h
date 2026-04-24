@@ -13,7 +13,6 @@
 #include <QVariantList>
 #include <QWidget>
 
-
 class FrameBuffer;
 
 class KRFBPRIVATE_EXPORT FrameBufferPlugin : public QObject
@@ -27,5 +26,4 @@ public:
     virtual FrameBuffer *frameBuffer(const QVariantMap &args) = 0;
 };
 
-#endif  // Header guard
-
+#endif // Header guard

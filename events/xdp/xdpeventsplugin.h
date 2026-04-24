@@ -18,6 +18,7 @@ class EventHandler;
 class XdpEventsPlugin : public EventsPlugin
 {
     Q_OBJECT
+
 public:
     XdpEventsPlugin(QObject *parent, const QVariantList &args);
 
@@ -27,6 +28,4 @@ private:
     Q_DISABLE_COPY(XdpEventsPlugin)
 };
 
-
-#endif  // Header guard
-
+#endif // Header guard

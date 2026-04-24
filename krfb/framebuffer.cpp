@@ -6,11 +6,10 @@
 
 #include "framebuffer.h"
 
-#include <config-krfb.h>
 #include <QCursor>
 #include <QGuiApplication>
 #include <QScreen>
-
+#include <config-krfb.h>
 
 FrameBuffer::FrameBuffer(QObject *parent)
     : QObject(parent)
@@ -27,7 +26,7 @@ char *FrameBuffer::data()
     return fb;
 }
 
-QList< QRect > FrameBuffer::modifiedTiles()
+QList<QRect> FrameBuffer::modifiedTiles()
 {
     QList<QRect> ret = tiles;
     tiles.clear();
