@@ -105,15 +105,39 @@ int main(int argc, char *argv[])
 
     QCommandLineParser parser;
     aboutData.setupCommandLine(&parser);
-    const QCommandLineOption resolutionOption({ QStringLiteral("resolution") }, i18n("Logical resolution of the new monitor"), i18n("resolution"));
+
+    const QCommandLineOption resolutionOption(
+        { QStringLiteral("resolution") },
+        i18n("Logical resolution of the new monitor"),
+        i18n("resolution"),
+        QStringLiteral("1920x1080"));
     parser.addOption(resolutionOption);
-    const QCommandLineOption nameOption({ QStringLiteral("name") }, i18n("Name of the monitor"), i18n("name"));
+
+    const QCommandLineOption nameOption(
+        { QStringLiteral("name") },
+        i18n("Name of the monitor"),
+        i18n("name"),
+        QStringLiteral("Monitor"));
     parser.addOption(nameOption);
-    const QCommandLineOption passwordOption({ QStringLiteral("password") }, i18n("Password for the client to connect to it"), i18n("password"));
+
+    const QCommandLineOption passwordOption(
+        { QStringLiteral("password") },
+        i18n("Password for the client to connect to it"),
+        i18n("password"));
     parser.addOption(passwordOption);
-    const QCommandLineOption scaleOption({ QStringLiteral("scale") }, i18n("The device-pixel-ratio of the device, the scaling factor"), i18n("dpr"), QStringLiteral("1"));
+
+    const QCommandLineOption scaleOption(
+        { QStringLiteral("scale") },
+        i18n("The device-pixel-ratio of the device, the scaling factor"),
+        i18n("dpr"),
+        QStringLiteral("1"));
     parser.addOption(scaleOption);
-    const QCommandLineOption portOption({ QStringLiteral("port") }, i18n("The port we will be listening to"), i18n("number"), QStringLiteral("9999"));
+
+    const QCommandLineOption portOption(
+        { QStringLiteral("port") },
+        i18n("The port we will be listening to"),
+        i18n("number"),
+        QStringLiteral("5900"));
     parser.addOption(portOption);
 
     parser.process(app);
@@ -122,44 +146,26 @@ int main(int argc, char *argv[])
     app.setQuitOnLastWindowClosed(false);
 
     if (!KWindowSystem::isPlatformWayland()) {
-        qCritical() << "Virtual Monitors are only supported on Wayland";
+        qCritical() << "Virtual Monitors are only supported on Wayland.";
         return 1;
-    }
-    if (!parser.isSet(nameOption)) {
-        qCritical() << "error: please define --name";
-        return 2;
-    } else {
-        if (!parser.isSet(passwordOption)) {
-            qCritical() << "error: please define --password";
-            return 3;
-        }
-        if (!parser.isSet(resolutionOption)) {
-            qCritical() << "error: please define --resolution";
-            return 4;
-        }
-    }
-    if (!parser.isSet(portOption)) {
-        qCritical() << "error: please define --port";
-        return 5;
     }
     const QString res = parser.value(resolutionOption);
     const auto resSplit = res.split(QLatin1Char('x'));
-    if (resSplit.size() != 2) {
-        qCritical() << "error: the resolution should be formatted as WIDTHxHEIGHT (e.g. --resolution 1920x1080)";
-        return 6;
+    const QSize size = { resSplit[0].toInt(), resSplit[1].toInt() };
+    if (resSplit.size() != 2 || size.isEmpty()) {
+        qCritical() << "The resolution should be formatted as WIDTHxHEIGHT (e.g. --resolution 1920x1080).";
+        return 2;
     }
 
-
-    if (parser.isSet(nameOption)) {
-        RfbServerManager::s_pluginArgs = {
-            { QStringLiteral("name"), parser.value(nameOption) },
-            { QStringLiteral("resolution"), QSize(resSplit[0].toInt(), resSplit[1].toInt()) },
-            { QStringLiteral("scale"), parser.value(scaleOption).toDouble() },
-        };
-    }
+    RfbServerManager::s_pluginArgs = {
+        { QStringLiteral("name"), parser.value(nameOption) },
+        { QStringLiteral("resolution"), size },
+        { QStringLiteral("scale"), parser.value(scaleOption).toDouble() },
+    };
 
     VirtualMonitorRfbServer server;
     server.setPasswordRequired(true);
+    server.setPasswordSet(!parser.value(passwordOption).isEmpty());
     server.setListeningPort(parser.value(portOption).toInt());
     PendingVirtualMonitorRfbClient::password = parser.value(passwordOption).toUtf8();
 
@@ -168,7 +174,8 @@ int main(int argc, char *argv[])
     sigaddset(&sigs, SIGPIPE);
     sigprocmask(SIG_BLOCK, &sigs, nullptr);
     if (!server.start()) {
-        return 1;
+        qCritical() << "Could not start the VNC server.";
+        return 3;
     }
 
     return app.exec();

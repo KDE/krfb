@@ -23,10 +23,12 @@ public:
     QByteArray listeningAddress() const;
     int listeningPort() const;
     bool passwordRequired() const;
+    bool passwordSet() const;
 
     void setListeningAddress(const QByteArray & address);
     void setListeningPort(int port);
     void setPasswordRequired(bool passwordRequired);
+    void setPasswordSet(bool passwordSet);
 
 public Q_SLOTS:
     virtual bool start();

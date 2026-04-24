@@ -20,6 +20,7 @@ struct RfbServer::Private
     QByteArray listeningAddress;
     int listeningPort;
     bool passwordRequired;
+    bool passwordSet;
     rfbScreenInfoPtr screen;
     QPointer<QSocketNotifier> ipv4notifier;
     QPointer<QSocketNotifier> ipv6notifier;
@@ -31,6 +32,7 @@ RfbServer::RfbServer(QObject *parent)
     d->listeningAddress = "0.0.0.0";
     d->listeningPort = 0;
     d->passwordRequired = true;
+    d->passwordSet = false;
     d->screen = nullptr;
 
     RfbServerManager::instance()->registerServer(this);
@@ -61,6 +63,11 @@ bool RfbServer::passwordRequired() const
     return d->passwordRequired;
 }
 
+bool RfbServer::passwordSet() const
+{
+    return d->passwordSet;
+}
+
 void RfbServer::setListeningAddress(const QByteArray& address)
 {
     d->listeningAddress = address;
@@ -74,6 +81,11 @@ void RfbServer::setListeningPort(int port)
 void RfbServer::setPasswordRequired(bool passwordRequired)
 {
     d->passwordRequired = passwordRequired;
+}
+
+void RfbServer::setPasswordSet(bool passwordSet)
+{
+    d->passwordSet = passwordSet;
 }
 
 bool RfbServer::start()
@@ -98,42 +110,44 @@ bool RfbServer::start()
         rfbShutdownServer(d->screen, false);
     }
 
-    if (listeningAddress() != "0.0.0.0") {
-        strncpy(d->screen->thisHost, listeningAddress().constData(), 254);
-    }
+    if (passwordSet()) {
+        if (listeningAddress() != "0.0.0.0") {
+            strncpy(d->screen->thisHost, listeningAddress().constData(), 254);
+        }
 
-    if (listeningPort() == 0) {
-        d->screen->autoPort = 1;
-    }
+        if (listeningPort() == 0) {
+            d->screen->autoPort = 1;
+        }
 
-    d->screen->port = listeningPort();
-    d->screen->ipv6port = listeningPort();
+        d->screen->port = listeningPort();
+        d->screen->ipv6port = listeningPort();
 
-    // Disable/Enable password checking
-    if (passwordRequired()) {
-        d->screen->authPasswdData = (void *)1;
-    } else {
-        d->screen->authPasswdData = (void *)nullptr;
-    }
+        // Disable/Enable password checking
+        if (passwordRequired()) {
+            d->screen->authPasswdData = (void *)1;
+        } else {
+            d->screen->authPasswdData = (void *)nullptr;
+        }
 
-    qCDebug(KRFB) << "Starting server. Listen port:" << listeningPort()
-             << "Listen Address:" << listeningAddress()
-             << "Password enabled:" << passwordRequired();
+        qCDebug(KRFB) << "Starting server. Listen port:" << listeningPort()
+                 << "Listen Address:" << listeningAddress()
+                 << "Password enabled:" << passwordRequired();
 
-    rfbInitServer(d->screen);
+        rfbInitServer(d->screen);
 
-    if (!rfbIsActive(d->screen)) {
-        qCDebug(KRFB) << "Failed to start server";
-        rfbShutdownServer(d->screen, false);
-        return false;
-    };
+        if (!rfbIsActive(d->screen)) {
+            qCDebug(KRFB) << "Failed to start server";
+            rfbShutdownServer(d->screen, false);
+            return false;
+        };
 
-    d->ipv4notifier = new QSocketNotifier(d->screen->listenSock, QSocketNotifier::Read, this);
-    connect(d->ipv4notifier, &QSocketNotifier::activated, this, &RfbServer::onListenSocketActivated);
-    if (d->screen->listen6Sock > 0) {
-        // we're also listening on additional IPv6 socket, get events from there
-        d->ipv6notifier = new QSocketNotifier(d->screen->listen6Sock, QSocketNotifier::Read, this);
-        connect(d->ipv6notifier, &QSocketNotifier::activated, this, &RfbServer::onListenSocketActivated);
+        d->ipv4notifier = new QSocketNotifier(d->screen->listenSock, QSocketNotifier::Read, this);
+        connect(d->ipv4notifier, &QSocketNotifier::activated, this, &RfbServer::onListenSocketActivated);
+        if (d->screen->listen6Sock > 0) {
+            // we're also listening on additional IPv6 socket, get events from there
+            d->ipv6notifier = new QSocketNotifier(d->screen->listen6Sock, QSocketNotifier::Read, this);
+            connect(d->ipv6notifier, &QSocketNotifier::activated, this, &RfbServer::onListenSocketActivated);
+        }
     }
 
     if (QX11Info::isPlatformX11()) {
