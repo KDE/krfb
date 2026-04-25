@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krfb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:52+0000\n"
+"POT-Creation-Date: 2026-04-25 00:45+0000\n"
 "PO-Revision-Date: 2021-11-06 11:12+0200\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -224,52 +224,52 @@ msgstr "AT&T Laboratories Boston"
 msgid "original VNC encoders and protocol design"
 msgstr "αυθεντικοί κωδικοποιητές VNC και σχεδίαση πρωτοκόλλου"
 
-#: main-virtualmonitor.cpp:108
+#: main-virtualmonitor.cpp:111
 #, kde-format
 msgid "Logical resolution of the new monitor"
 msgstr "Λογική ανάλυση της νέας οθόνης"
 
-#: main-virtualmonitor.cpp:108
+#: main-virtualmonitor.cpp:112
 #, kde-format
 msgid "resolution"
 msgstr "ανάλυση"
 
-#: main-virtualmonitor.cpp:110
+#: main-virtualmonitor.cpp:118
 #, kde-format
 msgid "Name of the monitor"
 msgstr "Όνομα της οθόνης"
 
-#: main-virtualmonitor.cpp:110
+#: main-virtualmonitor.cpp:119
 #, kde-format
 msgid "name"
 msgstr "όνομα"
 
-#: main-virtualmonitor.cpp:112
+#: main-virtualmonitor.cpp:125
 #, kde-format
 msgid "Password for the client to connect to it"
 msgstr "Κωδικός για σύνδεση"
 
-#: main-virtualmonitor.cpp:112
+#: main-virtualmonitor.cpp:126
 #, kde-format
 msgid "password"
 msgstr "κωδικός"
 
-#: main-virtualmonitor.cpp:114
+#: main-virtualmonitor.cpp:131
 #, kde-format
 msgid "The device-pixel-ratio of the device, the scaling factor"
 msgstr "Η αναλογία εικονοστοιχείων της συσκευής, ο παράγοντας κλίμακας"
 
-#: main-virtualmonitor.cpp:114
+#: main-virtualmonitor.cpp:132
 #, kde-format
 msgid "dpr"
 msgstr "dpr"
 
-#: main-virtualmonitor.cpp:116
+#: main-virtualmonitor.cpp:138
 #, kde-format
 msgid "The port we will be listening to"
 msgstr "Η θύρα στην οποία θα ακούμε"
 
-#: main-virtualmonitor.cpp:116
+#: main-virtualmonitor.cpp:139
 #, kde-format
 msgid "number"
 msgstr "αριθμός"

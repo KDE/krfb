@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krfb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:52+0000\n"
+"POT-Creation-Date: 2026-04-25 00:45+0000\n"
 "PO-Revision-Date: 2024-01-22 17:25+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -222,52 +222,52 @@ msgstr "波士頓 AT&T 實驗室"
 msgid "original VNC encoders and protocol design"
 msgstr "原始 VNC 編碼器與協定設計"
 
-#: main-virtualmonitor.cpp:108
+#: main-virtualmonitor.cpp:111
 #, kde-format
 msgid "Logical resolution of the new monitor"
 msgstr "新螢幕的邏輯解析度"
 
-#: main-virtualmonitor.cpp:108
+#: main-virtualmonitor.cpp:112
 #, kde-format
 msgid "resolution"
 msgstr "解析度"
 
-#: main-virtualmonitor.cpp:110
+#: main-virtualmonitor.cpp:118
 #, kde-format
 msgid "Name of the monitor"
 msgstr "螢幕名稱"
 
-#: main-virtualmonitor.cpp:110
+#: main-virtualmonitor.cpp:119
 #, kde-format
 msgid "name"
 msgstr "名稱"
 
-#: main-virtualmonitor.cpp:112
+#: main-virtualmonitor.cpp:125
 #, kde-format
 msgid "Password for the client to connect to it"
 msgstr "用戶端連線用的密碼"
 
-#: main-virtualmonitor.cpp:112
+#: main-virtualmonitor.cpp:126
 #, kde-format
 msgid "password"
 msgstr "密碼"
 
-#: main-virtualmonitor.cpp:114
+#: main-virtualmonitor.cpp:131
 #, kde-format
 msgid "The device-pixel-ratio of the device, the scaling factor"
 msgstr "裝置的像素比例，即縮放比例"
 
-#: main-virtualmonitor.cpp:114
+#: main-virtualmonitor.cpp:132
 #, kde-format
 msgid "dpr"
 msgstr "dpr"
 
-#: main-virtualmonitor.cpp:116
+#: main-virtualmonitor.cpp:138
 #, kde-format
 msgid "The port we will be listening to"
 msgstr "我們要監聽的連接埠"
 
-#: main-virtualmonitor.cpp:116
+#: main-virtualmonitor.cpp:139
 #, kde-format
 msgid "number"
 msgstr "編號"

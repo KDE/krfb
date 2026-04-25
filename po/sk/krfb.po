@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krfb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:52+0000\n"
+"POT-Creation-Date: 2026-04-25 00:45+0000\n"
 "PO-Revision-Date: 2022-04-19 18:31+0200\n"
 "Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
@@ -224,52 +224,52 @@ msgstr "AT&T Laboratories Boston"
 msgid "original VNC encoders and protocol design"
 msgstr "originálne VNC kódery a design protokolu"
 
-#: main-virtualmonitor.cpp:108
+#: main-virtualmonitor.cpp:111
 #, kde-format
 msgid "Logical resolution of the new monitor"
 msgstr "Logické rozlíšenie nového monitora"
 
-#: main-virtualmonitor.cpp:108
+#: main-virtualmonitor.cpp:112
 #, kde-format
 msgid "resolution"
 msgstr "rozlíšenie"
 
-#: main-virtualmonitor.cpp:110
+#: main-virtualmonitor.cpp:118
 #, kde-format
 msgid "Name of the monitor"
 msgstr "Názov monitora"
 
-#: main-virtualmonitor.cpp:110
+#: main-virtualmonitor.cpp:119
 #, kde-format
 msgid "name"
 msgstr "názov"
 
-#: main-virtualmonitor.cpp:112
+#: main-virtualmonitor.cpp:125
 #, kde-format
 msgid "Password for the client to connect to it"
 msgstr "Heslo pre klienta na pripojenie"
 
-#: main-virtualmonitor.cpp:112
+#: main-virtualmonitor.cpp:126
 #, kde-format
 msgid "password"
 msgstr "heslo"
 
-#: main-virtualmonitor.cpp:114
+#: main-virtualmonitor.cpp:131
 #, kde-format
 msgid "The device-pixel-ratio of the device, the scaling factor"
 msgstr "Pomer zariadenia a pixelov zariadenia, faktor mierky"
 
-#: main-virtualmonitor.cpp:114
+#: main-virtualmonitor.cpp:132
 #, kde-format
 msgid "dpr"
 msgstr "dpr"
 
-#: main-virtualmonitor.cpp:116
+#: main-virtualmonitor.cpp:138
 #, kde-format
 msgid "The port we will be listening to"
 msgstr "Port, na ktorom bude počúvať"
 
-#: main-virtualmonitor.cpp:116
+#: main-virtualmonitor.cpp:139
 #, kde-format
 msgid "number"
 msgstr "číslo"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krfb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:52+0000\n"
+"POT-Creation-Date: 2026-04-25 00:45+0000\n"
 "PO-Revision-Date: 2024-11-10 11:18+0100\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
@@ -220,52 +220,52 @@ msgstr "AT&T Laboratories Boston"
 msgid "original VNC encoders and protocol design"
 msgstr "оригинални енкодери VNC и дизайн на протокол"
 
-#: main-virtualmonitor.cpp:108
+#: main-virtualmonitor.cpp:111
 #, kde-format
 msgid "Logical resolution of the new monitor"
 msgstr "Логическа разделителна способност на новия монитор"
 
-#: main-virtualmonitor.cpp:108
+#: main-virtualmonitor.cpp:112
 #, kde-format
 msgid "resolution"
 msgstr "резолюция"
 
-#: main-virtualmonitor.cpp:110
+#: main-virtualmonitor.cpp:118
 #, kde-format
 msgid "Name of the monitor"
 msgstr "Име на монитора"
 
-#: main-virtualmonitor.cpp:110
+#: main-virtualmonitor.cpp:119
 #, kde-format
 msgid "name"
 msgstr "име"
 
-#: main-virtualmonitor.cpp:112
+#: main-virtualmonitor.cpp:125
 #, kde-format
 msgid "Password for the client to connect to it"
 msgstr "Парола за клиента, за да се свърже с него"
 
-#: main-virtualmonitor.cpp:112
+#: main-virtualmonitor.cpp:126
 #, kde-format
 msgid "password"
 msgstr "парола"
 
-#: main-virtualmonitor.cpp:114
+#: main-virtualmonitor.cpp:131
 #, kde-format
 msgid "The device-pixel-ratio of the device, the scaling factor"
 msgstr "Пикселно съотношение на устройството, коефициент на мащабиране"
 
-#: main-virtualmonitor.cpp:114
+#: main-virtualmonitor.cpp:132
 #, kde-format
 msgid "dpr"
 msgstr "dpr"
 
-#: main-virtualmonitor.cpp:116
+#: main-virtualmonitor.cpp:138
 #, kde-format
 msgid "The port we will be listening to"
 msgstr "Портът, който ще се използва"
 
-#: main-virtualmonitor.cpp:116
+#: main-virtualmonitor.cpp:139
 #, kde-format
 msgid "number"
 msgstr "номер"

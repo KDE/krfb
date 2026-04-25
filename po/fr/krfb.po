@@ -23,7 +23,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krfb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:52+0000\n"
+"POT-Creation-Date: 2026-04-25 00:45+0000\n"
 "PO-Revision-Date: 2023-01-09 16:44+0100\n"
 "Last-Translator: Xavier BESNARD <xavier.besnard]neuf.fr>\n"
 "Language-Team: French <kde-francophone@kde.org>\n"
@@ -239,54 +239,54 @@ msgstr "Laboratoires AT&T Boston"
 msgid "original VNC encoders and protocol design"
 msgstr "Conception du protocole et des encodeurs originaux de VNC"
 
-#: main-virtualmonitor.cpp:108
+#: main-virtualmonitor.cpp:111
 #, kde-format
 msgid "Logical resolution of the new monitor"
 msgstr "Résolution logique du nouveau écran"
 
-#: main-virtualmonitor.cpp:108
+#: main-virtualmonitor.cpp:112
 #, kde-format
 msgid "resolution"
 msgstr "résolution"
 
-#: main-virtualmonitor.cpp:110
+#: main-virtualmonitor.cpp:118
 #, kde-format
 msgid "Name of the monitor"
 msgstr "Nom de l'écran"
 
-#: main-virtualmonitor.cpp:110
+#: main-virtualmonitor.cpp:119
 #, kde-format
 msgid "name"
 msgstr "nom"
 
-#: main-virtualmonitor.cpp:112
+#: main-virtualmonitor.cpp:125
 #, kde-format
 msgid "Password for the client to connect to it"
 msgstr "Mot de passe pour le client sur lequel se connecter."
 
 # unreviewed-context
-#: main-virtualmonitor.cpp:112
+#: main-virtualmonitor.cpp:126
 #, kde-format
 msgid "password"
 msgstr "Mot de passe"
 
-#: main-virtualmonitor.cpp:114
+#: main-virtualmonitor.cpp:131
 #, kde-format
 msgid "The device-pixel-ratio of the device, the scaling factor"
 msgstr ""
 "Le rapport de pixels pour le périphérique, le facteur de dimensionnement"
 
-#: main-virtualmonitor.cpp:114
+#: main-virtualmonitor.cpp:132
 #, kde-format
 msgid "dpr"
 msgstr "dpr"
 
-#: main-virtualmonitor.cpp:116
+#: main-virtualmonitor.cpp:138
 #, kde-format
 msgid "The port we will be listening to"
 msgstr "Le port sur lequel écouter"
 
-#: main-virtualmonitor.cpp:116
+#: main-virtualmonitor.cpp:139
 #, kde-format
 msgid "number"
 msgstr "numéro"
