@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krfb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-04-25 00:45+0000\n"
+"POT-Creation-Date: 2026-04-28 00:44+0000\n"
 "PO-Revision-Date: 2021-11-24 23:35+0100\n"
 "Last-Translator: Luigi Toscano <luigi.toscano@tiscali.it>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -46,12 +46,12 @@ msgstr "Accetta connessione"
 msgid "Refuse Connection"
 msgstr "Rifiuta connessione"
 
-#: invitationsrfbclient.cpp:58
+#: invitationsrfbclient.cpp:61
 #, kde-format
 msgid "Accepted connection from %1"
 msgstr "Connessione accettata da %1"
 
-#: invitationsrfbclient.cpp:64
+#: invitationsrfbclient.cpp:66
 #, kde-format
 msgid "Received connection from %1, on hold (waiting for confirmation)"
 msgstr "Ricevuta connessione da %1, fermo (attesa conferma)"
@@ -117,22 +117,22 @@ msgstr "Password per le connessioni non invitate."
 msgid "Preferred Frame Buffer Plugin"
 msgstr "Estensione framebuffer preferita"
 
-#: main-virtualmonitor.cpp:47
+#: main-virtualmonitor.cpp:52
 #, kde-format
 msgid "Creating a Virtual Monitor from %1"
 msgstr "Creazione di un monitor virtuale da %1"
 
-#: main-virtualmonitor.cpp:78
+#: main-virtualmonitor.cpp:85
 #, kde-format
 msgid "Remote Virtual Monitor"
 msgstr "Monitor virtuale remoto"
 
-#: main-virtualmonitor.cpp:80
+#: main-virtualmonitor.cpp:87
 #, kde-format
 msgid "Offer a Virtual Monitor that can be accessed remotely"
 msgstr "Fornisce un monitor virtuale a cui si può accedere facilmente"
 
-#: main-virtualmonitor.cpp:82 main.cpp:87
+#: main-virtualmonitor.cpp:89 main.cpp:87
 #, kde-format
 msgid ""
 "(c) 2009-2010, Collabora Ltd.\n"
@@ -151,129 +151,129 @@ msgstr ""
 "© 2000, Tridia Corporation\n"
 "© 1999, AT&amp;T Laboratories Boston\n"
 
-#: main-virtualmonitor.cpp:89
+#: main-virtualmonitor.cpp:96
 #, kde-format
 msgid "Virtual Monitor implementation"
 msgstr "Implementazione del monitor virtuale"
 
-#: main-virtualmonitor.cpp:90 main.cpp:97
+#: main-virtualmonitor.cpp:97 main.cpp:97
 #, kde-format
 msgid "George Kiagiadakis"
 msgstr "George Kiagiadakis"
 
-#: main-virtualmonitor.cpp:91 main.cpp:100
+#: main-virtualmonitor.cpp:98 main.cpp:100
 #, kde-format
 msgid "Alessandro Praduroux"
 msgstr "Alessandro Praduroux"
 
-#: main-virtualmonitor.cpp:91 main.cpp:100
+#: main-virtualmonitor.cpp:98 main.cpp:100
 #, kde-format
 msgid "KDE4 porting"
 msgstr "Trasferimento a KDE4"
 
-#: main-virtualmonitor.cpp:92 main.cpp:101
+#: main-virtualmonitor.cpp:99 main.cpp:101
 #, kde-format
 msgid "Tim Jansen"
 msgstr "Tim Jansen"
 
-#: main-virtualmonitor.cpp:92 main.cpp:101
+#: main-virtualmonitor.cpp:99 main.cpp:101
 #, kde-format
 msgid "Original author"
 msgstr "Autore originale"
 
-#: main-virtualmonitor.cpp:93 main.cpp:102
+#: main-virtualmonitor.cpp:100 main.cpp:102
 #, kde-format
 msgid "Johannes E. Schindelin"
 msgstr "Johannes E. Schindelin"
 
-#: main-virtualmonitor.cpp:94 main.cpp:103
+#: main-virtualmonitor.cpp:101 main.cpp:103
 #, kde-format
 msgid "libvncserver"
 msgstr "libvncserver"
 
-#: main-virtualmonitor.cpp:95 main.cpp:104
+#: main-virtualmonitor.cpp:102 main.cpp:104
 #, kde-format
 msgid "Const Kaplinsky"
 msgstr "Const Kaplinsky"
 
-#: main-virtualmonitor.cpp:96 main.cpp:105
+#: main-virtualmonitor.cpp:103 main.cpp:105
 #, kde-format
 msgid "TightVNC encoder"
 msgstr "Codificatore TightVNC"
 
-#: main-virtualmonitor.cpp:97 main.cpp:106
+#: main-virtualmonitor.cpp:104 main.cpp:106
 #, kde-format
 msgid "Tridia Corporation"
 msgstr "Tridia Corporation"
 
-#: main-virtualmonitor.cpp:98 main.cpp:107
+#: main-virtualmonitor.cpp:105 main.cpp:107
 #, kde-format
 msgid "ZLib encoder"
 msgstr "Codificatore ZLib"
 
-#: main-virtualmonitor.cpp:99 main.cpp:108
+#: main-virtualmonitor.cpp:106 main.cpp:108
 #, kde-format
 msgid "AT&T Laboratories Boston"
 msgstr "Laboratori AT&amp;T di Boston"
 
-#: main-virtualmonitor.cpp:100 main.cpp:109
+#: main-virtualmonitor.cpp:107 main.cpp:109
 #, kde-format
 msgid "original VNC encoders and protocol design"
 msgstr "codificatori VNC originali e schema del protocollo"
 
-#: main-virtualmonitor.cpp:111
+#: main-virtualmonitor.cpp:118
 #, kde-format
 msgid "Logical resolution of the new monitor"
 msgstr "Risoluzione logica del nuovo monitor"
 
-#: main-virtualmonitor.cpp:112
+#: main-virtualmonitor.cpp:119
 #, kde-format
 msgid "resolution"
 msgstr "risoluzione"
 
-#: main-virtualmonitor.cpp:118
+#: main-virtualmonitor.cpp:125
 #, kde-format
 msgid "Name of the monitor"
 msgstr "Nome del monitor"
 
-#: main-virtualmonitor.cpp:119
+#: main-virtualmonitor.cpp:126
 #, kde-format
 msgid "name"
 msgstr "nome"
 
-#: main-virtualmonitor.cpp:125
+#: main-virtualmonitor.cpp:132
 #, kde-format
 msgid "Password for the client to connect to it"
 msgstr "Password per le connessioni dei client"
 
-#: main-virtualmonitor.cpp:126
+#: main-virtualmonitor.cpp:133
 #, kde-format
 msgid "password"
 msgstr "password"
 
-#: main-virtualmonitor.cpp:131
+#: main-virtualmonitor.cpp:138
 #, kde-format
 msgid "The device-pixel-ratio of the device, the scaling factor"
 msgstr ""
 "Il rapporto dispositivo/pixel (device-pixel-ratio) del dispositivo, il "
 "fattore di scala"
 
-#: main-virtualmonitor.cpp:132
+#: main-virtualmonitor.cpp:139
 #, kde-format
 msgid "dpr"
 msgstr "dpr"
 
-#: main-virtualmonitor.cpp:138
+#: main-virtualmonitor.cpp:145
 #, kde-format
 msgid "The port we will be listening to"
 msgstr "La porta su cui sarà in ascolto"
 
-#: main-virtualmonitor.cpp:139
+#: main-virtualmonitor.cpp:146
 #, kde-format
 msgid "number"
 msgstr "number"
 
-#: main.cpp:38
+#: main.cpp:37
 #, kde-format
 msgid ""
 "Your X11 Server does not support the required XTest extension version 2.2. "
@@ -282,7 +282,7 @@ msgstr ""
 "Il tuo server X11 non supporta l'estensione richiesta XTest versione 2.2. La "
 "condivisione del tuo desktop non è possibile."
 
-#: main.cpp:40 main.cpp:143
+#: main.cpp:39 main.cpp:143
 #, kde-format
 msgid "Desktop Sharing Error"
 msgstr "Errore di condivisione del desktop"
@@ -322,17 +322,17 @@ msgstr ""
 "X11 o Wayland.\n"
 "Altri server di visualizzazione non sono attualmente supportati."
 
-#: mainwindow.cpp:49
+#: mainwindow.cpp:53
 #, kde-format
 msgid "Storing passwords in config file is insecure!"
 msgstr "Salvare le password nei file di configurazione non è sicuro!"
 
-#: mainwindow.cpp:186
+#: mainwindow.cpp:192
 #, kde-format
 msgid "Enter a new password for Unattended Access"
 msgstr "Inserisci una nuova password per l'accesso automatico"
 
-#: mainwindow.cpp:197
+#: mainwindow.cpp:203
 #, kde-format
 msgid ""
 "Failed to start the krfb server. Desktop sharing will not work. Try setting "
@@ -345,13 +345,13 @@ msgstr ""
 #. i18n: ectx: property (whatsThis), widget (QLabel, titleLabel)
 #. i18n: ectx: property (text), widget (QLabel, titleLabel)
 #. i18n: ectx: property (whatsThis), widget (QLabel, aboutLabel)
-#: mainwindow.cpp:220 mainwindow.cpp:227 ui/mainwidget.ui:83
+#: mainwindow.cpp:226 mainwindow.cpp:233 ui/mainwidget.ui:83
 #: ui/mainwidget.ui:86 ui/mainwidget.ui:114
 #, kde-format
 msgid "KDE Desktop Sharing"
 msgstr "Condivisione desktop di KDE"
 
-#: mainwindow.cpp:221
+#: mainwindow.cpp:227
 #, kde-format
 msgid ""
 "This field contains the address of your computer and the port number, "
@@ -377,7 +377,7 @@ msgstr ""
 "Se il tuo computer è dietro a un firewall, potresti avere un indirizzo "
 "differente o non essere rintracciabile dagli altri computer."
 
-#: mainwindow.cpp:228
+#: mainwindow.cpp:234
 #, kde-format
 msgid ""
 "Any remote user with normal desktop sharing password will have to be "
@@ -394,22 +394,22 @@ msgstr ""
 "la modalità di accesso automatico, l'accesso alla condivisione del desktop "
 "verrà accordato senza conferma esplicita."
 
-#: mainwindow.cpp:246
+#: mainwindow.cpp:252
 #, kde-format
 msgid "Network"
 msgstr "Rete"
 
-#: mainwindow.cpp:247
+#: mainwindow.cpp:253
 #, kde-format
 msgid "Security"
 msgstr "Sicurezza"
 
-#: mainwindow.cpp:248
+#: mainwindow.cpp:254
 #, kde-format
 msgid "Screen capture"
 msgstr "Cattura dello schermo"
 
-#: mainwindow.cpp:253
+#: mainwindow.cpp:259
 #, kde-format
 msgid "To apply framebuffer plugin setting, you need to restart the program."
 msgstr ""

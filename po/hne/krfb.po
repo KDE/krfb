@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krfb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-04-25 00:45+0000\n"
+"POT-Creation-Date: 2026-04-28 00:44+0000\n"
 "PO-Revision-Date: 2009-02-26 22:21+0530\n"
 "Last-Translator: Ravishankar Shrivastava <raviratlami@aol.in>\n"
 "Language-Team: Hindi <kde-i18n-doc@lists.kde.org>\n"
@@ -44,13 +44,13 @@ msgstr "कनेक्सन स्वीकारव"
 msgid "Refuse Connection"
 msgstr "कनेक्सन अस्वीकारव"
 
-#: invitationsrfbclient.cpp:58
+#: invitationsrfbclient.cpp:61
 #, fuzzy, kde-format
 #| msgid "Accepted uninvited connection from %1"
 msgid "Accepted connection from %1"
 msgstr "%1 से बिन बुलाए कनेक्सन स्वीकारा"
 
-#: invitationsrfbclient.cpp:64
+#: invitationsrfbclient.cpp:66
 #, kde-format
 msgid "Received connection from %1, on hold (waiting for confirmation)"
 msgstr " %1 से कनेक्सन मिलिस, होल्ड मं रखे (पुस्टि बर इंतजार करत हे)"
@@ -116,22 +116,22 @@ msgstr "अनिमंत्रित कनेक्सनों बर पा
 msgid "Preferred Frame Buffer Plugin"
 msgstr ""
 
-#: main-virtualmonitor.cpp:47
+#: main-virtualmonitor.cpp:52
 #, kde-format
 msgid "Creating a Virtual Monitor from %1"
 msgstr ""
 
-#: main-virtualmonitor.cpp:78
+#: main-virtualmonitor.cpp:85
 #, kde-format
 msgid "Remote Virtual Monitor"
 msgstr ""
 
-#: main-virtualmonitor.cpp:80
+#: main-virtualmonitor.cpp:87
 #, kde-format
 msgid "Offer a Virtual Monitor that can be accessed remotely"
 msgstr ""
 
-#: main-virtualmonitor.cpp:82 main.cpp:87
+#: main-virtualmonitor.cpp:89 main.cpp:87
 #, fuzzy, kde-format
 #| msgid ""
 #| "(c) 2007, Alessandro Praduroux\n"
@@ -158,136 +158,136 @@ msgstr ""
 "(c) 2000, ट्रिडिया कारपोरेसन\n"
 "(c) 1999, एटी&टी लेबोरेटरी बोस्टन\n"
 
-#: main-virtualmonitor.cpp:89
+#: main-virtualmonitor.cpp:96
 #, kde-format
 msgid "Virtual Monitor implementation"
 msgstr ""
 
-#: main-virtualmonitor.cpp:90 main.cpp:97
+#: main-virtualmonitor.cpp:97 main.cpp:97
 #, kde-format
 msgid "George Kiagiadakis"
 msgstr ""
 
-#: main-virtualmonitor.cpp:91 main.cpp:100
+#: main-virtualmonitor.cpp:98 main.cpp:100
 #, kde-format
 msgid "Alessandro Praduroux"
 msgstr "अलियासांद्रो प्रादुरोक्स"
 
-#: main-virtualmonitor.cpp:91 main.cpp:100
+#: main-virtualmonitor.cpp:98 main.cpp:100
 #, kde-format
 msgid "KDE4 porting"
 msgstr "केडीई4 पोर्टिंग"
 
-#: main-virtualmonitor.cpp:92 main.cpp:101
+#: main-virtualmonitor.cpp:99 main.cpp:101
 #, kde-format
 msgid "Tim Jansen"
 msgstr "टिम जानसन"
 
-#: main-virtualmonitor.cpp:92 main.cpp:101
+#: main-virtualmonitor.cpp:99 main.cpp:101
 #, kde-format
 msgid "Original author"
 msgstr ""
 
-#: main-virtualmonitor.cpp:93 main.cpp:102
+#: main-virtualmonitor.cpp:100 main.cpp:102
 #, kde-format
 msgid "Johannes E. Schindelin"
 msgstr "जोहान्स ई. सिंदेलिन"
 
-#: main-virtualmonitor.cpp:94 main.cpp:103
+#: main-virtualmonitor.cpp:101 main.cpp:103
 #, kde-format
 msgid "libvncserver"
 msgstr "लिबवीएनसीसर्वर"
 
-#: main-virtualmonitor.cpp:95 main.cpp:104
+#: main-virtualmonitor.cpp:102 main.cpp:104
 #, kde-format
 msgid "Const Kaplinsky"
 msgstr "कांस्ट कापलिंस्की"
 
-#: main-virtualmonitor.cpp:96 main.cpp:105
+#: main-virtualmonitor.cpp:103 main.cpp:105
 #, kde-format
 msgid "TightVNC encoder"
 msgstr "टाइट-वीएनसी एनकोडर"
 
-#: main-virtualmonitor.cpp:97 main.cpp:106
+#: main-virtualmonitor.cpp:104 main.cpp:106
 #, kde-format
 msgid "Tridia Corporation"
 msgstr "ट्रिडिया कारपोरेसन"
 
-#: main-virtualmonitor.cpp:98 main.cpp:107
+#: main-virtualmonitor.cpp:105 main.cpp:107
 #, kde-format
 msgid "ZLib encoder"
 msgstr "जेड-लिब एनकोडर"
 
-#: main-virtualmonitor.cpp:99 main.cpp:108
+#: main-virtualmonitor.cpp:106 main.cpp:108
 #, kde-format
 msgid "AT&T Laboratories Boston"
 msgstr "एटी&टी लेबोरेटरी बोस्टन"
 
-#: main-virtualmonitor.cpp:100 main.cpp:109
+#: main-virtualmonitor.cpp:107 main.cpp:109
 #, kde-format
 msgid "original VNC encoders and protocol design"
 msgstr "मूल वीएनसी एनकोडर अउ प्रोटोकाल डिजाइन"
 
-#: main-virtualmonitor.cpp:111
+#: main-virtualmonitor.cpp:118
 #, kde-format
 msgid "Logical resolution of the new monitor"
 msgstr ""
 
-#: main-virtualmonitor.cpp:112
+#: main-virtualmonitor.cpp:119
 #, kde-format
 msgid "resolution"
 msgstr ""
 
-#: main-virtualmonitor.cpp:118
+#: main-virtualmonitor.cpp:125
 #, kde-format
 msgid "Name of the monitor"
 msgstr ""
 
-#: main-virtualmonitor.cpp:119
+#: main-virtualmonitor.cpp:126
 #, kde-format
 msgid "name"
 msgstr ""
 
-#: main-virtualmonitor.cpp:125
+#: main-virtualmonitor.cpp:132
 #, fuzzy, kde-format
 #| msgid "Password for uninvited connections."
 msgid "Password for the client to connect to it"
 msgstr "अनिमंत्रित कनेक्सनों बर पासवर्ड."
 
-#: main-virtualmonitor.cpp:126
+#: main-virtualmonitor.cpp:133
 #, fuzzy, kde-format
 #| msgid "<b>Password:</b>"
 msgid "password"
 msgstr "<b>पासवर्ड:</b>"
 
-#: main-virtualmonitor.cpp:131
+#: main-virtualmonitor.cpp:138
 #, kde-format
 msgid "The device-pixel-ratio of the device, the scaling factor"
 msgstr ""
 
-#: main-virtualmonitor.cpp:132
+#: main-virtualmonitor.cpp:139
 #, kde-format
 msgid "dpr"
 msgstr ""
 
-#: main-virtualmonitor.cpp:138
+#: main-virtualmonitor.cpp:145
 #, kde-format
 msgid "The port we will be listening to"
 msgstr ""
 
-#: main-virtualmonitor.cpp:139
+#: main-virtualmonitor.cpp:146
 #, kde-format
 msgid "number"
 msgstr ""
 
-#: main.cpp:38
+#: main.cpp:37
 #, kde-format
 msgid ""
 "Your X11 Server does not support the required XTest extension version 2.2. "
 "Sharing your desktop is not possible."
 msgstr ""
 
-#: main.cpp:40 main.cpp:143
+#: main.cpp:39 main.cpp:143
 #, kde-format
 msgid "Desktop Sharing Error"
 msgstr "डेस्कटाप साझेदारी गलती"
@@ -325,17 +325,17 @@ msgid ""
 "Other display servers are currently not supported."
 msgstr ""
 
-#: mainwindow.cpp:49
+#: mainwindow.cpp:53
 #, kde-format
 msgid "Storing passwords in config file is insecure!"
 msgstr ""
 
-#: mainwindow.cpp:186
+#: mainwindow.cpp:192
 #, kde-format
 msgid "Enter a new password for Unattended Access"
 msgstr ""
 
-#: mainwindow.cpp:197
+#: mainwindow.cpp:203
 #, kde-format
 msgid ""
 "Failed to start the krfb server. Desktop sharing will not work. Try setting "
@@ -345,14 +345,14 @@ msgstr ""
 #. i18n: ectx: property (whatsThis), widget (QLabel, titleLabel)
 #. i18n: ectx: property (text), widget (QLabel, titleLabel)
 #. i18n: ectx: property (whatsThis), widget (QLabel, aboutLabel)
-#: mainwindow.cpp:220 mainwindow.cpp:227 ui/mainwidget.ui:83
+#: mainwindow.cpp:226 mainwindow.cpp:233 ui/mainwidget.ui:83
 #: ui/mainwidget.ui:86 ui/mainwidget.ui:114
 #, fuzzy, kde-format
 #| msgid "Desktop Sharing"
 msgid "KDE Desktop Sharing"
 msgstr "डेस्कटाप साझेदारी"
 
-#: mainwindow.cpp:221
+#: mainwindow.cpp:227
 #, kde-format
 msgid ""
 "This field contains the address of your computer and the port number, "
@@ -368,7 +368,7 @@ msgid ""
 "unreachable for other computers."
 msgstr ""
 
-#: mainwindow.cpp:228
+#: mainwindow.cpp:234
 #, kde-format
 msgid ""
 "Any remote user with normal desktop sharing password will have to be "
@@ -379,22 +379,22 @@ msgid ""
 "confirmation."
 msgstr ""
 
-#: mainwindow.cpp:246
+#: mainwindow.cpp:252
 #, kde-format
 msgid "Network"
 msgstr "नेटवर्क"
 
-#: mainwindow.cpp:247
+#: mainwindow.cpp:253
 #, kde-format
 msgid "Security"
 msgstr "सुरक्छा"
 
-#: mainwindow.cpp:248
+#: mainwindow.cpp:254
 #, kde-format
 msgid "Screen capture"
 msgstr ""
 
-#: mainwindow.cpp:253
+#: mainwindow.cpp:259
 #, kde-format
 msgid "To apply framebuffer plugin setting, you need to restart the program."
 msgstr ""

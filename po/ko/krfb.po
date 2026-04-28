@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krfb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-04-25 00:45+0000\n"
+"POT-Creation-Date: 2026-04-28 00:44+0000\n"
 "PO-Revision-Date: 2021-11-12 00:42+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -43,12 +43,12 @@ msgstr "연결 수락"
 msgid "Refuse Connection"
 msgstr "연결 거부"
 
-#: invitationsrfbclient.cpp:58
+#: invitationsrfbclient.cpp:61
 #, kde-format
 msgid "Accepted connection from %1"
 msgstr "%1의 연결을 수락함"
 
-#: invitationsrfbclient.cpp:64
+#: invitationsrfbclient.cpp:66
 #, kde-format
 msgid "Received connection from %1, on hold (waiting for confirmation)"
 msgstr "%1에서 연결 들어옴, 대기 중 (확인 기다리는 중)"
@@ -114,22 +114,22 @@ msgstr "초대장 없는 연결에 사용할 암호입니다."
 msgid "Preferred Frame Buffer Plugin"
 msgstr "선호하는 프레임버퍼 플러그인"
 
-#: main-virtualmonitor.cpp:47
+#: main-virtualmonitor.cpp:52
 #, kde-format
 msgid "Creating a Virtual Monitor from %1"
 msgstr "%1에서 가상 모니터 만들기"
 
-#: main-virtualmonitor.cpp:78
+#: main-virtualmonitor.cpp:85
 #, kde-format
 msgid "Remote Virtual Monitor"
 msgstr "원격 가상 모니터"
 
-#: main-virtualmonitor.cpp:80
+#: main-virtualmonitor.cpp:87
 #, kde-format
 msgid "Offer a Virtual Monitor that can be accessed remotely"
 msgstr "원격에서 접근할 수 있는 가상 모니터 제공"
 
-#: main-virtualmonitor.cpp:82 main.cpp:87
+#: main-virtualmonitor.cpp:89 main.cpp:87
 #, kde-format
 msgid ""
 "(c) 2009-2010, Collabora Ltd.\n"
@@ -148,127 +148,127 @@ msgstr ""
 "(c) 2000, Tridia Corporation\n"
 "(c) 1999, AT&T Laboratories Boston\n"
 
-#: main-virtualmonitor.cpp:89
+#: main-virtualmonitor.cpp:96
 #, kde-format
 msgid "Virtual Monitor implementation"
 msgstr "가상 모니터 구현"
 
-#: main-virtualmonitor.cpp:90 main.cpp:97
+#: main-virtualmonitor.cpp:97 main.cpp:97
 #, kde-format
 msgid "George Kiagiadakis"
 msgstr "George Kiagiadakis"
 
-#: main-virtualmonitor.cpp:91 main.cpp:100
+#: main-virtualmonitor.cpp:98 main.cpp:100
 #, kde-format
 msgid "Alessandro Praduroux"
 msgstr "Alessandro Praduroux"
 
-#: main-virtualmonitor.cpp:91 main.cpp:100
+#: main-virtualmonitor.cpp:98 main.cpp:100
 #, kde-format
 msgid "KDE4 porting"
 msgstr "KDE4 이식"
 
-#: main-virtualmonitor.cpp:92 main.cpp:101
+#: main-virtualmonitor.cpp:99 main.cpp:101
 #, kde-format
 msgid "Tim Jansen"
 msgstr "Tim Jansen"
 
-#: main-virtualmonitor.cpp:92 main.cpp:101
+#: main-virtualmonitor.cpp:99 main.cpp:101
 #, kde-format
 msgid "Original author"
 msgstr "원 작성자"
 
-#: main-virtualmonitor.cpp:93 main.cpp:102
+#: main-virtualmonitor.cpp:100 main.cpp:102
 #, kde-format
 msgid "Johannes E. Schindelin"
 msgstr "Johannes E. Schindelin"
 
-#: main-virtualmonitor.cpp:94 main.cpp:103
+#: main-virtualmonitor.cpp:101 main.cpp:103
 #, kde-format
 msgid "libvncserver"
 msgstr "libvncserver"
 
-#: main-virtualmonitor.cpp:95 main.cpp:104
+#: main-virtualmonitor.cpp:102 main.cpp:104
 #, kde-format
 msgid "Const Kaplinsky"
 msgstr "Const Kaplinsky"
 
-#: main-virtualmonitor.cpp:96 main.cpp:105
+#: main-virtualmonitor.cpp:103 main.cpp:105
 #, kde-format
 msgid "TightVNC encoder"
 msgstr "TightVNC 인코더"
 
-#: main-virtualmonitor.cpp:97 main.cpp:106
+#: main-virtualmonitor.cpp:104 main.cpp:106
 #, kde-format
 msgid "Tridia Corporation"
 msgstr "Tridia Corporation"
 
-#: main-virtualmonitor.cpp:98 main.cpp:107
+#: main-virtualmonitor.cpp:105 main.cpp:107
 #, kde-format
 msgid "ZLib encoder"
 msgstr "ZLib 인코더"
 
-#: main-virtualmonitor.cpp:99 main.cpp:108
+#: main-virtualmonitor.cpp:106 main.cpp:108
 #, kde-format
 msgid "AT&T Laboratories Boston"
 msgstr "AT&T Laboratories Boston"
 
-#: main-virtualmonitor.cpp:100 main.cpp:109
+#: main-virtualmonitor.cpp:107 main.cpp:109
 #, kde-format
 msgid "original VNC encoders and protocol design"
 msgstr "원본 VNC 인코더와 프로토콜 디자인"
 
-#: main-virtualmonitor.cpp:111
+#: main-virtualmonitor.cpp:118
 #, kde-format
 msgid "Logical resolution of the new monitor"
 msgstr "새 모니터의 논리적 해상도"
 
-#: main-virtualmonitor.cpp:112
+#: main-virtualmonitor.cpp:119
 #, kde-format
 msgid "resolution"
 msgstr "resolution"
 
-#: main-virtualmonitor.cpp:118
+#: main-virtualmonitor.cpp:125
 #, kde-format
 msgid "Name of the monitor"
 msgstr "모니터 이름"
 
-#: main-virtualmonitor.cpp:119
+#: main-virtualmonitor.cpp:126
 #, kde-format
 msgid "name"
 msgstr "name"
 
-#: main-virtualmonitor.cpp:125
+#: main-virtualmonitor.cpp:132
 #, kde-format
 msgid "Password for the client to connect to it"
 msgstr "클라이언트에서 연결할 때 사용할 암호"
 
-#: main-virtualmonitor.cpp:126
+#: main-virtualmonitor.cpp:133
 #, kde-format
 msgid "password"
 msgstr "password"
 
-#: main-virtualmonitor.cpp:131
+#: main-virtualmonitor.cpp:138
 #, kde-format
 msgid "The device-pixel-ratio of the device, the scaling factor"
 msgstr "장치의 크기 조정 배율"
 
-#: main-virtualmonitor.cpp:132
+#: main-virtualmonitor.cpp:139
 #, kde-format
 msgid "dpr"
 msgstr "dpr"
 
-#: main-virtualmonitor.cpp:138
+#: main-virtualmonitor.cpp:145
 #, kde-format
 msgid "The port we will be listening to"
 msgstr "들을 포트"
 
-#: main-virtualmonitor.cpp:139
+#: main-virtualmonitor.cpp:146
 #, kde-format
 msgid "number"
 msgstr "number"
 
-#: main.cpp:38
+#: main.cpp:37
 #, kde-format
 msgid ""
 "Your X11 Server does not support the required XTest extension version 2.2. "
@@ -277,7 +277,7 @@ msgstr ""
 "X11 서버에서 XTest 확장 2.2를 지원하지 않습니다. 데스크톱 공유를 사용할 수 없"
 "습니다."
 
-#: main.cpp:40 main.cpp:143
+#: main.cpp:39 main.cpp:143
 #, kde-format
 msgid "Desktop Sharing Error"
 msgstr "데스크톱 공유 오류"
@@ -316,17 +316,17 @@ msgstr ""
 "데스크톱 공유가 X11이나 Wayland 서버에서 실행 중이 아닙니다.\n"
 "다른 디스플레이 서버는 현재 지원하지 않습니다."
 
-#: mainwindow.cpp:49
+#: mainwindow.cpp:53
 #, kde-format
 msgid "Storing passwords in config file is insecure!"
 msgstr "설정 파일에 암호를 저장하는 것은 안전하지 않습니다!"
 
-#: mainwindow.cpp:186
+#: mainwindow.cpp:192
 #, kde-format
 msgid "Enter a new password for Unattended Access"
 msgstr "새 자동 접근 암호를 입력하십시오"
 
-#: mainwindow.cpp:197
+#: mainwindow.cpp:203
 #, kde-format
 msgid ""
 "Failed to start the krfb server. Desktop sharing will not work. Try setting "
@@ -338,13 +338,13 @@ msgstr ""
 #. i18n: ectx: property (whatsThis), widget (QLabel, titleLabel)
 #. i18n: ectx: property (text), widget (QLabel, titleLabel)
 #. i18n: ectx: property (whatsThis), widget (QLabel, aboutLabel)
-#: mainwindow.cpp:220 mainwindow.cpp:227 ui/mainwidget.ui:83
+#: mainwindow.cpp:226 mainwindow.cpp:233 ui/mainwidget.ui:83
 #: ui/mainwidget.ui:86 ui/mainwidget.ui:114
 #, kde-format
 msgid "KDE Desktop Sharing"
 msgstr "KDE 데스크톱 공유"
 
-#: mainwindow.cpp:221
+#: mainwindow.cpp:227
 #, kde-format
 msgid ""
 "This field contains the address of your computer and the port number, "
@@ -371,7 +371,7 @@ msgstr ""
 "방화벽 뒤에 있는 경우라면 다른 주소를 가지고 있거나 다른 컴퓨터에서 접근하지 "
 "못할 수 있습니다."
 
-#: mainwindow.cpp:228
+#: mainwindow.cpp:234
 #, kde-format
 msgid ""
 "Any remote user with normal desktop sharing password will have to be "
@@ -386,22 +386,22 @@ msgstr ""
 "자동 모드가 켜져 있고 원격 사용자가 자동 모드 암호를 알고 있으면 확인 없이 데"
 "스크톱 접근이 허가됩니다."
 
-#: mainwindow.cpp:246
+#: mainwindow.cpp:252
 #, kde-format
 msgid "Network"
 msgstr "네트워크"
 
-#: mainwindow.cpp:247
+#: mainwindow.cpp:253
 #, kde-format
 msgid "Security"
 msgstr "보안"
 
-#: mainwindow.cpp:248
+#: mainwindow.cpp:254
 #, kde-format
 msgid "Screen capture"
 msgstr "화면 캡처"
 
-#: mainwindow.cpp:253
+#: mainwindow.cpp:259
 #, kde-format
 msgid "To apply framebuffer plugin setting, you need to restart the program."
 msgstr "프레임버퍼 플러그인 설정을 적용하려면 앱을 다시 시작해야 합니다."

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-04-25 00:45+0000\n"
+"POT-Creation-Date: 2026-04-28 00:44+0000\n"
 "PO-Revision-Date: 2024-05-20 16:13+0200\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -43,12 +43,12 @@ msgstr "A kapcsolat elfogadása"
 msgid "Refuse Connection"
 msgstr "A kapcsolat elutasítása"
 
-#: invitationsrfbclient.cpp:58
+#: invitationsrfbclient.cpp:61
 #, kde-format
 msgid "Accepted connection from %1"
 msgstr "Kapcsolat elfogadva a következőtől: %1"
 
-#: invitationsrfbclient.cpp:64
+#: invitationsrfbclient.cpp:66
 #, kde-format
 msgid "Received connection from %1, on hold (waiting for confirmation)"
 msgstr ""
@@ -116,22 +116,22 @@ msgstr "Meghívó nélküli kapcsolat jelszava."
 msgid "Preferred Frame Buffer Plugin"
 msgstr "Elsődleges keretpuffer-modul"
 
-#: main-virtualmonitor.cpp:47
+#: main-virtualmonitor.cpp:52
 #, kde-format
 msgid "Creating a Virtual Monitor from %1"
 msgstr "Virtuális monitor létrehozása ebből: %1"
 
-#: main-virtualmonitor.cpp:78
+#: main-virtualmonitor.cpp:85
 #, kde-format
 msgid "Remote Virtual Monitor"
 msgstr "Távoli virtuális monitor"
 
-#: main-virtualmonitor.cpp:80
+#: main-virtualmonitor.cpp:87
 #, kde-format
 msgid "Offer a Virtual Monitor that can be accessed remotely"
 msgstr "Távolról is elérhető virtuális monitor biztosítása"
 
-#: main-virtualmonitor.cpp:82 main.cpp:87
+#: main-virtualmonitor.cpp:89 main.cpp:87
 #, kde-format
 msgid ""
 "(c) 2009-2010, Collabora Ltd.\n"
@@ -150,127 +150,127 @@ msgstr ""
 "© Tridia Corporation, 2000.\n"
 "© AT&T Laboratories Boston, 1999.\n"
 
-#: main-virtualmonitor.cpp:89
+#: main-virtualmonitor.cpp:96
 #, kde-format
 msgid "Virtual Monitor implementation"
 msgstr "Virtuálismonitor-megvalósítás"
 
-#: main-virtualmonitor.cpp:90 main.cpp:97
+#: main-virtualmonitor.cpp:97 main.cpp:97
 #, kde-format
 msgid "George Kiagiadakis"
 msgstr "George Kiagiadakis"
 
-#: main-virtualmonitor.cpp:91 main.cpp:100
+#: main-virtualmonitor.cpp:98 main.cpp:100
 #, kde-format
 msgid "Alessandro Praduroux"
 msgstr "Alessandro Praduroux"
 
-#: main-virtualmonitor.cpp:91 main.cpp:100
+#: main-virtualmonitor.cpp:98 main.cpp:100
 #, kde-format
 msgid "KDE4 porting"
 msgstr "Portolás a KDE4-re"
 
-#: main-virtualmonitor.cpp:92 main.cpp:101
+#: main-virtualmonitor.cpp:99 main.cpp:101
 #, kde-format
 msgid "Tim Jansen"
 msgstr "Tim Jansen"
 
-#: main-virtualmonitor.cpp:92 main.cpp:101
+#: main-virtualmonitor.cpp:99 main.cpp:101
 #, kde-format
 msgid "Original author"
 msgstr "Eredeti szerző"
 
-#: main-virtualmonitor.cpp:93 main.cpp:102
+#: main-virtualmonitor.cpp:100 main.cpp:102
 #, kde-format
 msgid "Johannes E. Schindelin"
 msgstr "Johannes E. Schindelin"
 
-#: main-virtualmonitor.cpp:94 main.cpp:103
+#: main-virtualmonitor.cpp:101 main.cpp:103
 #, kde-format
 msgid "libvncserver"
 msgstr "libvncserver"
 
-#: main-virtualmonitor.cpp:95 main.cpp:104
+#: main-virtualmonitor.cpp:102 main.cpp:104
 #, kde-format
 msgid "Const Kaplinsky"
 msgstr "Const Kaplinsky"
 
-#: main-virtualmonitor.cpp:96 main.cpp:105
+#: main-virtualmonitor.cpp:103 main.cpp:105
 #, kde-format
 msgid "TightVNC encoder"
 msgstr "TightVNC-enkóder"
 
-#: main-virtualmonitor.cpp:97 main.cpp:106
+#: main-virtualmonitor.cpp:104 main.cpp:106
 #, kde-format
 msgid "Tridia Corporation"
 msgstr "Tridia Corporation"
 
-#: main-virtualmonitor.cpp:98 main.cpp:107
+#: main-virtualmonitor.cpp:105 main.cpp:107
 #, kde-format
 msgid "ZLib encoder"
 msgstr "ZLib-enkóder"
 
-#: main-virtualmonitor.cpp:99 main.cpp:108
+#: main-virtualmonitor.cpp:106 main.cpp:108
 #, kde-format
 msgid "AT&T Laboratories Boston"
 msgstr "AT&T Laboratories Boston"
 
-#: main-virtualmonitor.cpp:100 main.cpp:109
+#: main-virtualmonitor.cpp:107 main.cpp:109
 #, kde-format
 msgid "original VNC encoders and protocol design"
 msgstr "Az eredeti VNC-kódolók és a protokoll megtervezése"
 
-#: main-virtualmonitor.cpp:111
+#: main-virtualmonitor.cpp:118
 #, kde-format
 msgid "Logical resolution of the new monitor"
 msgstr "Az új monitor logikai felbontása"
 
-#: main-virtualmonitor.cpp:112
+#: main-virtualmonitor.cpp:119
 #, kde-format
 msgid "resolution"
 msgstr "felbontás"
 
-#: main-virtualmonitor.cpp:118
+#: main-virtualmonitor.cpp:125
 #, kde-format
 msgid "Name of the monitor"
 msgstr "A monitor neve"
 
-#: main-virtualmonitor.cpp:119
+#: main-virtualmonitor.cpp:126
 #, kde-format
 msgid "name"
 msgstr "név"
 
-#: main-virtualmonitor.cpp:125
+#: main-virtualmonitor.cpp:132
 #, kde-format
 msgid "Password for the client to connect to it"
 msgstr "Jelszó a klienshez, amelyhez csatlakozni kíván"
 
-#: main-virtualmonitor.cpp:126
+#: main-virtualmonitor.cpp:133
 #, kde-format
 msgid "password"
 msgstr "jelszó"
 
-#: main-virtualmonitor.cpp:131
+#: main-virtualmonitor.cpp:138
 #, kde-format
 msgid "The device-pixel-ratio of the device, the scaling factor"
 msgstr "Az eszköz eszköz-képpont aránya (dpr), a méretezési tényező"
 
-#: main-virtualmonitor.cpp:132
+#: main-virtualmonitor.cpp:139
 #, kde-format
 msgid "dpr"
 msgstr "dpr"
 
-#: main-virtualmonitor.cpp:138
+#: main-virtualmonitor.cpp:145
 #, kde-format
 msgid "The port we will be listening to"
 msgstr "A port, amelyen figyelni fog"
 
-#: main-virtualmonitor.cpp:139
+#: main-virtualmonitor.cpp:146
 #, kde-format
 msgid "number"
 msgstr "szám"
 
-#: main.cpp:38
+#: main.cpp:37
 #, kde-format
 msgid ""
 "Your X11 Server does not support the required XTest extension version 2.2. "
@@ -279,7 +279,7 @@ msgstr ""
 "A helyi X-kiszolgáló nem támogatja a kért XTest 2.2-es kiterjesztést. Az "
 "asztal megosztása nem lehetséges."
 
-#: main.cpp:40 main.cpp:143
+#: main.cpp:39 main.cpp:143
 #, kde-format
 msgid "Desktop Sharing Error"
 msgstr "Asztalmegosztási hiba"
@@ -318,17 +318,17 @@ msgstr ""
 "Az asztalmegosztás nem X11 Server vagy Wayland alatt fut.\n"
 "Más kijelzőkiszolgálók jelenleg nem támogatottak."
 
-#: mainwindow.cpp:49
+#: mainwindow.cpp:53
 #, kde-format
 msgid "Storing passwords in config file is insecure!"
 msgstr "A jelszavak tárolása konfigurációs fájlban nem biztonságos!"
 
-#: mainwindow.cpp:186
+#: mainwindow.cpp:192
 #, kde-format
 msgid "Enter a new password for Unattended Access"
 msgstr "Adjon meg egy új jelszót a felügyelet nélküli hozzáféréshez"
 
-#: mainwindow.cpp:197
+#: mainwindow.cpp:203
 #, kde-format
 msgid ""
 "Failed to start the krfb server. Desktop sharing will not work. Try setting "
@@ -341,13 +341,13 @@ msgstr ""
 #. i18n: ectx: property (whatsThis), widget (QLabel, titleLabel)
 #. i18n: ectx: property (text), widget (QLabel, titleLabel)
 #. i18n: ectx: property (whatsThis), widget (QLabel, aboutLabel)
-#: mainwindow.cpp:220 mainwindow.cpp:227 ui/mainwidget.ui:83
+#: mainwindow.cpp:226 mainwindow.cpp:233 ui/mainwidget.ui:83
 #: ui/mainwidget.ui:86 ui/mainwidget.ui:114
 #, kde-format
 msgid "KDE Desktop Sharing"
 msgstr "KDE Asztalmegosztó"
 
-#: mainwindow.cpp:221
+#: mainwindow.cpp:227
 #, kde-format
 msgid ""
 "This field contains the address of your computer and the port number, "
@@ -374,7 +374,7 @@ msgstr ""
 "Ha a két számítógép közötti kapcsolat tűzfallal védett, akkor lehet, hogy "
 "nem tudják érni egymást."
 
-#: mainwindow.cpp:228
+#: mainwindow.cpp:234
 #, kde-format
 msgid ""
 "Any remote user with normal desktop sharing password will have to be "
@@ -391,22 +391,22 @@ msgstr ""
 "felügyelet nélküli módot biztosító jelszót ad meg, az asztalmegosztási "
 "hozzáférés kifejezett megerősítés nélkül is biztosított lesz."
 
-#: mainwindow.cpp:246
+#: mainwindow.cpp:252
 #, kde-format
 msgid "Network"
 msgstr "Hálózat"
 
-#: mainwindow.cpp:247
+#: mainwindow.cpp:253
 #, kde-format
 msgid "Security"
 msgstr "Biztonság"
 
-#: mainwindow.cpp:248
+#: mainwindow.cpp:254
 #, kde-format
 msgid "Screen capture"
 msgstr "Képernyőrögzítés"
 
-#: mainwindow.cpp:253
+#: mainwindow.cpp:259
 #, kde-format
 msgid "To apply framebuffer plugin setting, you need to restart the program."
 msgstr ""

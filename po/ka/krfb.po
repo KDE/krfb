@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krfb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-04-25 00:45+0000\n"
+"POT-Creation-Date: 2026-04-28 00:44+0000\n"
 "PO-Revision-Date: 2023-02-12 06:06+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -43,12 +43,12 @@ msgstr "შეერთების მიღება"
 msgid "Refuse Connection"
 msgstr "შეერთების უარყოფა"
 
-#: invitationsrfbclient.cpp:58
+#: invitationsrfbclient.cpp:61
 #, kde-format
 msgid "Accepted connection from %1"
 msgstr "%1-დან კავშირი მიღებულია"
 
-#: invitationsrfbclient.cpp:64
+#: invitationsrfbclient.cpp:66
 #, kde-format
 msgid "Received connection from %1, on hold (waiting for confirmation)"
 msgstr "%1-დან მიერთება დაყოვნების რეჟიმშია (ველოდები დასტურს)"
@@ -114,22 +114,22 @@ msgstr "პაროლი მოუწვეველი მიერთებ�
 msgid "Preferred Frame Buffer Plugin"
 msgstr "კადრების ბაფერის რჩეული დამატება"
 
-#: main-virtualmonitor.cpp:47
+#: main-virtualmonitor.cpp:52
 #, kde-format
 msgid "Creating a Virtual Monitor from %1"
 msgstr "ვირტუალური მონიტორის შექმნა %1-დან"
 
-#: main-virtualmonitor.cpp:78
+#: main-virtualmonitor.cpp:85
 #, kde-format
 msgid "Remote Virtual Monitor"
 msgstr "დაშორებული ვირტუალური ეკრანი"
 
-#: main-virtualmonitor.cpp:80
+#: main-virtualmonitor.cpp:87
 #, kde-format
 msgid "Offer a Virtual Monitor that can be accessed remotely"
 msgstr "ვირტუალური მონიტორი, რომელიც დაშორებულად შეიძლება, გამოჩნდეს"
 
-#: main-virtualmonitor.cpp:82 main.cpp:87
+#: main-virtualmonitor.cpp:89 main.cpp:87
 #, kde-format
 msgid ""
 "(c) 2009-2010, Collabora Ltd.\n"
@@ -148,127 +148,127 @@ msgstr ""
 "(c) 2000, Tridia Corporation\n"
 "(c) 1999, AT&T Laboratories Boston\n"
 
-#: main-virtualmonitor.cpp:89
+#: main-virtualmonitor.cpp:96
 #, kde-format
 msgid "Virtual Monitor implementation"
 msgstr "ვირტუალური მონიტორის იმპლემენტაცია"
 
-#: main-virtualmonitor.cpp:90 main.cpp:97
+#: main-virtualmonitor.cpp:97 main.cpp:97
 #, kde-format
 msgid "George Kiagiadakis"
 msgstr "George Kiagiadakis"
 
-#: main-virtualmonitor.cpp:91 main.cpp:100
+#: main-virtualmonitor.cpp:98 main.cpp:100
 #, kde-format
 msgid "Alessandro Praduroux"
 msgstr "Alessandro Praduroux"
 
-#: main-virtualmonitor.cpp:91 main.cpp:100
+#: main-virtualmonitor.cpp:98 main.cpp:100
 #, kde-format
 msgid "KDE4 porting"
 msgstr "გადატანა KDE4 -ზე"
 
-#: main-virtualmonitor.cpp:92 main.cpp:101
+#: main-virtualmonitor.cpp:99 main.cpp:101
 #, kde-format
 msgid "Tim Jansen"
 msgstr "Tim Jansen"
 
-#: main-virtualmonitor.cpp:92 main.cpp:101
+#: main-virtualmonitor.cpp:99 main.cpp:101
 #, kde-format
 msgid "Original author"
 msgstr "საწყისი ავტორი"
 
-#: main-virtualmonitor.cpp:93 main.cpp:102
+#: main-virtualmonitor.cpp:100 main.cpp:102
 #, kde-format
 msgid "Johannes E. Schindelin"
 msgstr "Johannes E. Schindelin"
 
-#: main-virtualmonitor.cpp:94 main.cpp:103
+#: main-virtualmonitor.cpp:101 main.cpp:103
 #, kde-format
 msgid "libvncserver"
 msgstr "libvncserver"
 
-#: main-virtualmonitor.cpp:95 main.cpp:104
+#: main-virtualmonitor.cpp:102 main.cpp:104
 #, kde-format
 msgid "Const Kaplinsky"
 msgstr "Const Kaplinsky"
 
-#: main-virtualmonitor.cpp:96 main.cpp:105
+#: main-virtualmonitor.cpp:103 main.cpp:105
 #, kde-format
 msgid "TightVNC encoder"
 msgstr "TightVNC ენკოდერი"
 
-#: main-virtualmonitor.cpp:97 main.cpp:106
+#: main-virtualmonitor.cpp:104 main.cpp:106
 #, kde-format
 msgid "Tridia Corporation"
 msgstr "Tridia Corporation"
 
-#: main-virtualmonitor.cpp:98 main.cpp:107
+#: main-virtualmonitor.cpp:105 main.cpp:107
 #, kde-format
 msgid "ZLib encoder"
 msgstr "ZLib ენკოდერი"
 
-#: main-virtualmonitor.cpp:99 main.cpp:108
+#: main-virtualmonitor.cpp:106 main.cpp:108
 #, kde-format
 msgid "AT&T Laboratories Boston"
 msgstr "AT&T ლაბორატორიები, ბოსტონი"
 
-#: main-virtualmonitor.cpp:100 main.cpp:109
+#: main-virtualmonitor.cpp:107 main.cpp:109
 #, kde-format
 msgid "original VNC encoders and protocol design"
 msgstr "ორიგინალური VNC ენკონდერები და პროტოკოლის დიზაინი"
 
-#: main-virtualmonitor.cpp:111
+#: main-virtualmonitor.cpp:118
 #, kde-format
 msgid "Logical resolution of the new monitor"
 msgstr "ახალი მონიტორის ლოგიკური გაფართოება"
 
-#: main-virtualmonitor.cpp:112
+#: main-virtualmonitor.cpp:119
 #, kde-format
 msgid "resolution"
 msgstr "გარჩევადობა"
 
-#: main-virtualmonitor.cpp:118
+#: main-virtualmonitor.cpp:125
 #, kde-format
 msgid "Name of the monitor"
 msgstr "მონიტორის სახელი"
 
-#: main-virtualmonitor.cpp:119
+#: main-virtualmonitor.cpp:126
 #, kde-format
 msgid "name"
 msgstr "სახელი"
 
-#: main-virtualmonitor.cpp:125
+#: main-virtualmonitor.cpp:132
 #, kde-format
 msgid "Password for the client to connect to it"
 msgstr "პაროლი კლიენტისთვის, რომ შემოუერთდეს"
 
-#: main-virtualmonitor.cpp:126
+#: main-virtualmonitor.cpp:133
 #, kde-format
 msgid "password"
 msgstr "პაროლი"
 
-#: main-virtualmonitor.cpp:131
+#: main-virtualmonitor.cpp:138
 #, kde-format
 msgid "The device-pixel-ratio of the device, the scaling factor"
 msgstr "მოწყობილობის device-pixel-ratio. მასშტაბის კოეფიციენტი"
 
-#: main-virtualmonitor.cpp:132
+#: main-virtualmonitor.cpp:139
 #, kde-format
 msgid "dpr"
 msgstr "dpr"
 
-#: main-virtualmonitor.cpp:138
+#: main-virtualmonitor.cpp:145
 #, kde-format
 msgid "The port we will be listening to"
 msgstr "მოსასმენი პორტი"
 
-#: main-virtualmonitor.cpp:139
+#: main-virtualmonitor.cpp:146
 #, kde-format
 msgid "number"
 msgstr "ნომერი"
 
-#: main.cpp:38
+#: main.cpp:37
 #, kde-format
 msgid ""
 "Your X11 Server does not support the required XTest extension version 2.2. "
@@ -277,7 +277,7 @@ msgstr ""
 "თქვენს X11 სერვერს აუცილებელი XTest (ვერსია 2.2) გაფართოების მხარდაჭერა არ "
 "გააჩნია. სამუშაო მაგიდის გაზიარება შეუძლებელია."
 
-#: main.cpp:40 main.cpp:143
+#: main.cpp:39 main.cpp:143
 #, kde-format
 msgid "Desktop Sharing Error"
 msgstr "სამუშაო მაგიდის გაზიარების შეცდომა"
@@ -316,17 +316,17 @@ msgstr ""
 "სამუშაო მაგიდის გაზიარება X11 სერვერის ან Wayland-ის ქვეშ არაა გაშვებული.\n"
 "სხვა ეკრანის სერვერები ამჟამად მხარდაჭერილი არაა."
 
-#: mainwindow.cpp:49
+#: mainwindow.cpp:53
 #, kde-format
 msgid "Storing passwords in config file is insecure!"
 msgstr "პაროლებს კონფიგურაციის ფაილში შენახვა დაცული არაა!"
 
-#: mainwindow.cpp:186
+#: mainwindow.cpp:192
 #, kde-format
 msgid "Enter a new password for Unattended Access"
 msgstr "შეიყვანეთ ახალი პაროლი დაუსწრებელი წვდომისთვის"
 
-#: mainwindow.cpp:197
+#: mainwindow.cpp:203
 #, kde-format
 msgid ""
 "Failed to start the krfb server. Desktop sharing will not work. Try setting "
@@ -338,13 +338,13 @@ msgstr ""
 #. i18n: ectx: property (whatsThis), widget (QLabel, titleLabel)
 #. i18n: ectx: property (text), widget (QLabel, titleLabel)
 #. i18n: ectx: property (whatsThis), widget (QLabel, aboutLabel)
-#: mainwindow.cpp:220 mainwindow.cpp:227 ui/mainwidget.ui:83
+#: mainwindow.cpp:226 mainwindow.cpp:233 ui/mainwidget.ui:83
 #: ui/mainwidget.ui:86 ui/mainwidget.ui:114
 #, kde-format
 msgid "KDE Desktop Sharing"
 msgstr "KDE სამუშაო მაგიდის გაზიარება"
 
-#: mainwindow.cpp:221
+#: mainwindow.cpp:227
 #, kde-format
 msgid ""
 "This field contains the address of your computer and the port number, "
@@ -371,7 +371,7 @@ msgstr ""
 "თუ თქვენი კომპიუტერი ბრანდმაუერის უკან იმალება, მისამართი შეიძლება "
 "განსხვავდებოდეს ან მიუწვდომელი იყოს სხვა კომპიუტერებისთვის."
 
-#: mainwindow.cpp:228
+#: mainwindow.cpp:234
 #, kde-format
 msgid ""
 "Any remote user with normal desktop sharing password will have to be "
@@ -387,22 +387,22 @@ msgstr ""
 "თუ ჩართულია დაუსწრებელი წვდომა, დაშორებულ მომხმარებელს უპაროლო წვდომა "
 "გააჩნია, წვდომა დადასტურების გარეშე ექნება."
 
-#: mainwindow.cpp:246
+#: mainwindow.cpp:252
 #, kde-format
 msgid "Network"
 msgstr "ქსელი"
 
-#: mainwindow.cpp:247
+#: mainwindow.cpp:253
 #, kde-format
 msgid "Security"
 msgstr "უსაფრთხოება"
 
-#: mainwindow.cpp:248
+#: mainwindow.cpp:254
 #, kde-format
 msgid "Screen capture"
 msgstr "ეკრანის გადაღება"
 
-#: mainwindow.cpp:253
+#: mainwindow.cpp:259
 #, kde-format
 msgid "To apply framebuffer plugin setting, you need to restart the program."
 msgstr ""
