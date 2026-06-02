@@ -8,24 +8,25 @@ msgstr ""
 "Project-Id-Version: krfb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-04-28 00:44+0000\n"
-"PO-Revision-Date: 2013-09-08 07:05+0900\n"
-"Last-Translator: Gheyret Kenji <gheyret@gmail.com>\n"
+"PO-Revision-Date: 2026-05-31 19:35-0400\n"
+"Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
 "Language: ug\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.9\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "ئابدۇقادىر ئابلىز, غەيرەت كەنجى"
+msgstr "ئابدۇقادىر ئابلىز، غەيرەت كەنجى"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "sahran.ug@gmail.com,  gheyret@gmail.com"
+msgstr "sahranbay@gmail.com, gheyret@gmail.com"
 
 #: connectiondialog.cpp:26
 #, kde-format
@@ -61,7 +62,7 @@ msgstr ""
 #: krfb.kcfg:9
 #, kde-format
 msgid "Start minimized"
-msgstr ""
+msgstr "كىچىكلىتىشنى باشلا"
 
 #. i18n: ectx: label, entry (useDefaultPort), group (TCP)
 #: krfb.kcfg:15
@@ -148,7 +149,7 @@ msgstr ""
 #: main-virtualmonitor.cpp:97 main.cpp:97
 #, kde-format
 msgid "George Kiagiadakis"
-msgstr "George Kiagiadakis"
+msgstr ""
 
 #: main-virtualmonitor.cpp:98 main.cpp:100
 #, kde-format
@@ -168,7 +169,7 @@ msgstr "Tim Jansen"
 #: main-virtualmonitor.cpp:99 main.cpp:101
 #, kde-format
 msgid "Original author"
-msgstr "ئەسلى ئاپتور"
+msgstr "ئەسلى يازغۇچى"
 
 #: main-virtualmonitor.cpp:100 main.cpp:102
 #, kde-format
@@ -228,7 +229,7 @@ msgstr ""
 #: main-virtualmonitor.cpp:126
 #, kde-format
 msgid "name"
-msgstr ""
+msgstr "ئاتى"
 
 #: main-virtualmonitor.cpp:132
 #, kde-format
@@ -236,10 +237,9 @@ msgid "Password for the client to connect to it"
 msgstr ""
 
 #: main-virtualmonitor.cpp:133
-#, fuzzy, kde-format
-#| msgid "<b>Password:</b>"
+#, kde-format
 msgid "password"
-msgstr "<b>ئىم:</b>"
+msgstr "ئىم"
 
 #: main-virtualmonitor.cpp:138
 #, kde-format
@@ -259,7 +259,7 @@ msgstr ""
 #: main-virtualmonitor.cpp:146
 #, kde-format
 msgid "number"
-msgstr ""
+msgstr "نومۇر"
 
 #: main.cpp:37
 #, kde-format
@@ -327,10 +327,9 @@ msgstr ""
 #. i18n: ectx: property (whatsThis), widget (QLabel, aboutLabel)
 #: mainwindow.cpp:226 mainwindow.cpp:233 ui/mainwidget.ui:83
 #: ui/mainwidget.ui:86 ui/mainwidget.ui:114
-#, fuzzy, kde-format
-#| msgid "Desktop Sharing"
+#, kde-format
 msgid "KDE Desktop Sharing"
-msgstr "ئۈستەلئۈستىنى ھەمبەھىرلەش"
+msgstr ""
 
 #: mainwindow.cpp:227
 #, kde-format
@@ -372,7 +371,7 @@ msgstr "بىخەتەرلىك"
 #: mainwindow.cpp:254
 #, kde-format
 msgid "Screen capture"
-msgstr ""
+msgstr "ئىكران كەسمىسى"
 
 #: mainwindow.cpp:259
 #, kde-format
@@ -506,24 +505,21 @@ msgstr ""
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, enableSharingCheckBox)
 #: ui/mainwidget.ui:145
-#, fuzzy, kde-format
-#| msgid "Desktop Sharing"
+#, kde-format
 msgid "Starts/Stops Remote Desktop Sharing"
-msgstr "ئۈستەلئۈستىنى ھەمبەھىرلەش"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableSharingCheckBox)
 #: ui/mainwidget.ui:148
-#, fuzzy, kde-format
-#| msgid "Desktop Sharing"
+#, kde-format
 msgid "&Enable Desktop Sharing"
-msgstr "ئۈستەلئۈستىنى ھەمبەھىرلەش"
+msgstr ""
 
 #. i18n: ectx: property (title), widget (QGroupBox, detailsGroupBox)
 #: ui/mainwidget.ui:170
-#, fuzzy, kde-format
-#| msgid "New Connection"
+#, kde-format
 msgid "Connection Details"
-msgstr "يېڭى باغلىنىش"
+msgstr "باغلىنىش تەپسىلاتى"
 
 #. i18n: ectx: property (text), widget (QLabel, addressLabel)
 #: ui/mainwidget.ui:193
@@ -542,7 +538,7 @@ msgstr ""
 #: ui/mainwidget.ui:217 ui/mainwidget.ui:397
 #, kde-format
 msgid "About"
-msgstr ""
+msgstr "ھەققىدە"
 
 #. i18n: ectx: property (whatsThis), widget (QLabel, addressDisplayLabel)
 #: ui/mainwidget.ui:235
@@ -560,23 +556,21 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, passwordLabel)
 #: ui/mainwidget.ui:269
-#, fuzzy, kde-format
-#| msgid "<b>Password:</b>"
+#, kde-format
 msgid "&Password"
-msgstr "<b>ئىم:</b>"
+msgstr ""
 
 #. i18n: ectx: property (whatsThis), widget (QToolButton, passwordEditButton)
 #: ui/mainwidget.ui:290
-#, fuzzy, kde-format
-#| msgid "Desktop Sharing"
+#, kde-format
 msgid "Edit/Save Desktop Sharing Password"
-msgstr "ئۈستەلئۈستىنى ھەمبەھىرلەش"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QToolButton, passwordEditButton)
 #: ui/mainwidget.ui:293
 #, kde-format
 msgid "Edit"
-msgstr ""
+msgstr "تەھرىر"
 
 #. i18n: ectx: property (whatsThis), widget (QLabel, passwordDisplayLabel)
 #: ui/mainwidget.ui:311
