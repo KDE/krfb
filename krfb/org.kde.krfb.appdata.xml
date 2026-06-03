@@ -47,6 +47,7 @@
   <name xml:lang="sr-ijekavianlatin">KRFB</name>
   <name xml:lang="sv">Krfb</name>
   <name xml:lang="tr">Krfb</name>
+  <name xml:lang="ug">Krfb</name>
   <name xml:lang="uk">Krfb</name>
   <name xml:lang="zh-CN">Krfb</name>
   <name xml:lang="zh-TW">Krfb</name>
@@ -185,6 +186,7 @@
       <caption xml:lang="sl">Deljenje namizij s Krfb</caption>
       <caption xml:lang="sv">Dela skrivbord med Krfb</caption>
       <caption xml:lang="tr">Krfb ile masaüstü paylaşımı</caption>
+      <caption xml:lang="ug">Krfb ئارقىلىق ئۈستەلئۈستىنى ھەمبەھىرلەيدۇ</caption>
       <caption xml:lang="uk">Спільне використання стільниці за допомогою Krfb</caption>
       <caption xml:lang="zh-CN">使用 Krfb 共享桌面</caption>
       <caption xml:lang="zh-TW">使用 Krfb 分享桌面</caption>
