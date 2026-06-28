@@ -369,7 +369,7 @@ msgstr ""
 "Este camp conté l'adreça del vostre ordinador i el número de port, separats "
 "per dos punts.\n"
 "\n"
-"L'adreça només és una referència - podeu emprar qualsevol adreça que puga "
+"L'adreça només és una referència – podeu emprar qualsevol adreça que puga "
 "abastar el vostre ordinador.\n"
 "\n"
 "La compartició d'escriptori endevina l'adreça des de la vostra configuració "
@@ -440,17 +440,17 @@ msgstr "Activa el control remot"
 #: trayicon.cpp:90 trayicon.cpp:122
 #, kde-format
 msgid "Desktop Sharing - disconnected"
-msgstr "Compartiu l'escriptori - desconnectat"
+msgstr "Compartiu l'escriptori – desconnectat"
 
 #: trayicon.cpp:106 trayicon.cpp:126
 #, kde-format
 msgid "Desktop Sharing - connected with %1"
-msgstr "Compartiu l'escriptori - connectat amb %1"
+msgstr "Compartiu l'escriptori – connectat amb %1"
 
 #: trayicon.cpp:109
 #, kde-format
 msgid "Desktop Sharing - connected"
-msgstr "Compartiu l'escriptori - connectat"
+msgstr "Compartiu l'escriptori – connectat"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: ui/configframebuffer.ui:19
