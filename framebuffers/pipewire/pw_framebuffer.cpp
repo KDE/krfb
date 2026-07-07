@@ -450,7 +450,7 @@ void PWFrameBuffer::startVirtualMonitor(const QString &name, const QSize &resolu
             return;
         }
 
-        auto screencasting = new Screencasting(registry, wlname, version, this);
+        auto screencasting = new Screencasting(registry, wlname, std::min(version, 5u), this);
         auto r = screencasting->createVirtualMonitorStream(name, resolution, dpr, Screencasting::Metadata);
         connect(r, &ScreencastingStream::created, this, [this](quint32 nodeId) {
             d->stream->createStream(nodeId, 0);
