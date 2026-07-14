@@ -83,6 +83,20 @@
             ]
         },
         {
+            "name": "kwayland",
+            "buildsystem": "cmake-ninja",
+            "config-opts": [
+                "-DBUILD_TESTING=OFF"
+            ],
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "https://invent.kde.org/plasma/kwayland.git",
+                    "branch": "master"
+                }
+            ]
+        },
+        {
             "name": "krfb",
             "buildsystem": "cmake-ninja",
             "config-opts": [
