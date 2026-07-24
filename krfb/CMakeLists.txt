@@ -169,3 +169,5 @@ install(FILES org.kde.krfb.appdata.xml
 install (FILES krfb.notifyrc
          DESTINATION ${KDE_INSTALL_DATADIR}/krfb
 )
+
+install(FILES krfb.kcfg DESTINATION ${KDE_INSTALL_KCFGDIR})
