@@ -210,7 +210,7 @@
 >Wenn Sie den unbeaufsichtigter Zugriff zulassen, sollten Sie besser ein Passwort angeben. </para>
 
 <para
->Verwenden Sie &krfb;für die Fernverwaltung eines Servers, dann sollten Sie den unbeaufsichtigter Zugriff benutzen. </para>
+>Verwenden Sie &krfb;für die Fernverwaltung eines Servers, dann sollten Sie den unbeaufsichtigter Zugriff verwenden. </para>
 
 </sect2>
 
@@ -247,7 +247,7 @@
 ></keycombo
 > geschlossen, läuft der Server weiter. Dies wird durch ein Symbol im Systemabschnitt der Kontrollleiste angezeigt. Um &krfb; zu beenden, klicken Sie mit der &RMBn; auf dieses Symbol und wählen dann <guimenuitem
 >Beenden</guimenuitem
-> oder benutzen Sie <menuchoice
+> oder verwenden Sie <menuchoice
 ><guimenu
 >Datei</guimenu
 ><guimenuitem
