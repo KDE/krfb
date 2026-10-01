@@ -5,20 +5,21 @@
 # SPDX-FileCopyrightText: 2009-2010, 2016, 2022 Frederik Schwarzer <schwarzer@kde.org>
 # SPDX-FileCopyrightText: 2009-2011, 2013-2015, 2017-2019 Burkhard Lück <lueck@hube-lueck.de>
 # SPDX-FileCopyrightText: 2010-2011 Panagiotis Papadopoulos <pano_90@gmx.net>
+# SPDX-FileCopyrightText: 2026 Philipp Kiemle <l10n.daphipz@fastmail.de>
 msgid ""
 msgstr ""
 "Project-Id-Version: krfb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-04-28 00:44+0000\n"
-"PO-Revision-Date: 2022-03-13 10:25+0100\n"
-"Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
-"Language-Team: German <kde-i18n-doc@kde.org>\n"
+"PO-Revision-Date: 2026-09-30 11:11+0200\n"
+"Last-Translator: Philipp Kiemle <l10n.daphipz@fastmail.de>\n"
+"Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 21.12.3\n"
+"X-Generator: Lokalize 26.08.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -38,12 +39,12 @@ msgstr "Neue Verbindung"
 #: connectiondialog.cpp:48
 #, kde-format
 msgid "Accept Connection"
-msgstr "Verbindung &akzeptieren"
+msgstr "Verbindung akzeptieren"
 
 #: connectiondialog.cpp:52
 #, kde-format
 msgid "Refuse Connection"
-msgstr "Verbindung &verweigern"
+msgstr "Verbindung verweigern"
 
 #: invitationsrfbclient.cpp:61
 #, kde-format
@@ -53,7 +54,7 @@ msgstr "Verbindungsanfrage von %1 wurde akzeptiert"
 #: invitationsrfbclient.cpp:66
 #, kde-format
 msgid "Received connection from %1, on hold (waiting for confirmation)"
-msgstr "Uneingeladene Verbindungsanfrage von %1 wartet auf Bestätigung"
+msgstr "Verbindungsanfrage von %1 erhalten, wartet auf Bestätigung"
 
 #: invitationsrfbserver.cpp:39
 #, kde-format
@@ -89,7 +90,7 @@ msgstr "Dienst im lokalen Netzwerk veröffentlichen"
 #: krfb.kcfg:29
 #, kde-format
 msgid "Do not store passwords in KWallet"
-msgstr "Passwort nicht in KWallet speichern"
+msgstr "Passwörter nicht in KWallet speichern"
 
 #. i18n: ectx: label, entry (allowDesktopControl), group (Security)
 #: krfb.kcfg:33
@@ -101,14 +102,14 @@ msgstr "Entfernten Verbindungen erlauben, die Arbeitsfläche zu kontrollieren."
 #: krfb.kcfg:37
 #, kde-format
 msgid "Allow connections without an invitation."
-msgstr "Uneingeladene Verbindungen erlauben."
+msgstr "Verbindungen ohne Einladung erlauben."
 
 #. i18n: ectx: label, entry (unattendedAccessPassword), group (Security)
 #. i18n: ectx: label, entry (desktopSharingPassword), group (Security)
 #: krfb.kcfg:41 krfb.kcfg:44
 #, kde-format
 msgid "Password for uninvited connections."
-msgstr "Passwort für uneingeladene Verbindungen."
+msgstr "Passwort für Verbindungen ohne Einladungen."
 
 #. i18n: ectx: label, entry (preferredFrameBufferPlugin), group (FrameBuffer)
 #: krfb.kcfg:49
@@ -124,12 +125,14 @@ msgstr ""
 #: main-virtualmonitor.cpp:85
 #, kde-format
 msgid "Remote Virtual Monitor"
-msgstr ""
+msgstr "Entfernter virtueller Bildschirm"
 
 #: main-virtualmonitor.cpp:87
 #, kde-format
 msgid "Offer a Virtual Monitor that can be accessed remotely"
 msgstr ""
+"Einen virtuellen Bildschirm anbieten, auf den aus der Ferne zugegriffen "
+"werden kann"
 
 #: main-virtualmonitor.cpp:89 main.cpp:87
 #, kde-format
@@ -142,13 +145,13 @@ msgid ""
 "(c) 2000, Tridia Corporation\n"
 "(c) 1999, AT&T Laboratories Boston\n"
 msgstr ""
-"© 2009-2010, Collabora Ltd.\n"
-"© 2007, Alessandro Praduroux\n"
-"© 2001-2003, Tim Jansen\n"
-"© 2001, Johannes E. Schindelin\n"
-"© 2000-2001, Const Kaplinsky\n"
-"© 2000, Tridia Corporation\n"
-"© 1999, AT&T Laboratories Boston\n"
+"© 2009–2010 Collabora Ltd.\n"
+"© 2007 Alessandro Praduroux\n"
+"© 2001–2003 Tim Jansen\n"
+"© 2001 Johannes E. Schindelin\n"
+"© 2000–2001 Const Kaplinsky\n"
+"© 2000 Tridia Corporation\n"
+"© 1999 AT&T Laboratories Boston\n"
 
 #: main-virtualmonitor.cpp:96
 #, kde-format
@@ -168,7 +171,7 @@ msgstr "Alessandro Praduroux"
 #: main-virtualmonitor.cpp:98 main.cpp:100
 #, kde-format
 msgid "KDE4 porting"
-msgstr "KDE-4-Portierung"
+msgstr "Portierung zu KDE 4"
 
 #: main-virtualmonitor.cpp:99 main.cpp:101
 #, kde-format
@@ -223,7 +226,7 @@ msgstr "Ursprüngliche VNC-Kodierung und Protokollstruktur"
 #: main-virtualmonitor.cpp:118
 #, kde-format
 msgid "Logical resolution of the new monitor"
-msgstr ""
+msgstr "Logische Auflösung des neuen Bildschirms"
 
 #: main-virtualmonitor.cpp:119
 #, kde-format
@@ -233,7 +236,7 @@ msgstr "Auflösung"
 #: main-virtualmonitor.cpp:125
 #, kde-format
 msgid "Name of the monitor"
-msgstr "Name des Monitors"
+msgstr "Name des Bildschirms"
 
 #: main-virtualmonitor.cpp:126
 #, kde-format
@@ -277,8 +280,8 @@ msgid ""
 "Your X11 Server does not support the required XTest extension version 2.2. "
 "Sharing your desktop is not possible."
 msgstr ""
-"Der X11-Server unterstützt nicht die zur Freigabe notwendige XTest-"
-"Erweiterung Version 2.2. Daher ist eine Freigabe der Arbeitsfläche nicht "
+"Ihr X11-Server unterstützt nicht die zur Freigabe notwendige XTest-"
+"Erweiterung Version 2.2. Daher ist eine Freigabe Ihrer Arbeitsfläche nicht "
 "möglich."
 
 #: main.cpp:39 main.cpp:143
@@ -324,7 +327,7 @@ msgstr ""
 #: mainwindow.cpp:53
 #, kde-format
 msgid "Storing passwords in config file is insecure!"
-msgstr "Speichern von Passwörtern in Einrichtungsdateien ist nicht sicher."
+msgstr "Das Speichern von Passwörtern in Einrichtungsdateien ist unsicher!"
 
 #: mainwindow.cpp:192
 #, kde-format
@@ -338,8 +341,8 @@ msgid ""
 "another port in the settings and restart krfb."
 msgstr ""
 "Das Starten des krfb-Servers ist fehlgeschlagen. Freigaben der Arbeitsfläche "
-"werden nicht funktionieren. Versuchen Sie in den Einstellungen einen anderen "
-"Port einzugeben und starten Sie krfb neu."
+"werden nicht funktionieren. Versuchen Sie, in den Einstellungen einen "
+"anderen Port festzulegen und starten Sie krfb neu."
 
 #. i18n: ectx: property (whatsThis), widget (QLabel, titleLabel)
 #. i18n: ectx: property (text), widget (QLabel, titleLabel)
@@ -365,16 +368,16 @@ msgid ""
 "If your computer is behind a firewall it may have a different address or be "
 "unreachable for other computers."
 msgstr ""
-"Dieses Feld enthält die Rechneradresse und dahinter, nach einem Doppelpunkt "
-"die Portnummer.\n"
+"Dieses Feld enthält die Adresse Ihres Rechners und dahinter, nach einem "
+"Doppelpunkt, die Portnummer.\n"
 "\n"
-"Die Adresse ist nur ein Beispiel – jede Adresse, unter der der eigene "
-"Rechner erreichbar ist, kann verwendet werden.\n"
+"Die Adresse ist nur ein Beispiel – jede Adresse, unter der Ihr Rechner "
+"erreichbar ist, kann verwendet werden.\n"
 "\n"
-"Das Programm „Freigabe der Arbeitsfläche“ versucht, die Adresse aus der "
+"Die Freigabe der Arbeitsfläche versucht, Ihre Adresse aus Ihrer "
 "Netzwerkkonfiguration zu ermitteln. Das gelingt nicht in allen Fällen.\n"
 "\n"
-"Falls sich der Rechner hinter einer Firewall befindet, kann sich die "
+"Falls sich Ihr Rechner hinter einer Firewall befindet, kann sich die "
 "Adresse\n"
 "unterscheiden oder für andere Rechner unerreichbar sein."
 
@@ -391,9 +394,9 @@ msgstr ""
 "Jeder entfernte Benutzer mit dem normalen Passwort für die Freigabe der "
 "Arbeitsfläche muss authentifiziert werden.\n"
 "\n"
-"Wenn der unbeaufsichtigten Zugriff aktiviert ist und der entfernte Benutzer "
-"das Passwort für den unbeaufsichtigten Zugriff angibt, wird der Zugriff auf "
-"die freigegebene Arbeitsfläche ohne ausdrückliche Bestätigung gewährt."
+"Wenn der unbeaufsichtigte Zugriff aktiviert ist und der entfernte Benutzer "
+"das Passwort für diesen Modus angibt, wird der Zugriff auf die freigegebene "
+"Arbeitsfläche ohne ausdrückliche Bestätigung gewährt."
 
 #: mainwindow.cpp:252
 #, kde-format
@@ -467,11 +470,11 @@ msgid ""
 "style=\" font-weight:600;\">qt</span> plugin is a safe fallback, if for some "
 "reason others don't work. But also it is very slow.</p></body></html>"
 msgstr ""
-"<html><head/><body><p>Bei Verwendung von x11 sollten Sie das Modul <span "
-"style=\" font-weight:600;\">xcb</span> verwenden, da es performanter ist.<br/"
-">Das Modul <span style=\" font-weight:600;\">qt</span> ist ein sicherer "
-"Ersatz, wenn andere Module nicht funktionieren. Dies Modul ist aber auch "
-"sehr langsam.</p></body></html>"
+"<html><head/><body><p>Bei Verwendung von X11 sollten Sie das Modul <span "
+"style=\" font-weight:600;\">xcb</span> bevorzugt verwenden, da es "
+"performanter ist.<br/>Das Modul <span style=\" font-weight:600;\">qt</span> "
+"ist ein sicherer Ersatz, wenn andere Module nicht funktionieren – es ist "
+"aber auch sehr langsam.</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_allowDesktopControl)
 #: ui/configsecurity.ui:17
@@ -483,7 +486,7 @@ msgstr "Steuerung von Maus und Tastatur durch die Gegenstelle erlauben"
 #: ui/configsecurity.ui:27
 #, kde-format
 msgid "Do not store passwords using KDE wallet"
-msgstr "Passwort nicht im KDE-Passwortspeicher speichern"
+msgstr "Passwörter nicht im KDE-Passwortspeicher speichern"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_useDefaultPort)
 #: ui/configtcp.ui:26
@@ -511,7 +514,7 @@ msgid ""
 "allow the remote user to watch your desktop. "
 msgstr ""
 "Jemand fordert eine Verbindung zu Ihrem Rechner an. Akzeptieren Sie diese "
-"Verbindung, kann dieser Benutzer alles auf Ihrem Bildschirm sehen. "
+"Verbindung, kann dieser Benutzer alles auf Ihrem Bildschirm sehen."
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel1)
 #: ui/connectionwidget.ui:102
@@ -534,10 +537,11 @@ msgid ""
 "careful. When the option is disabled the remote user can only watch your "
 "screen."
 msgstr ""
-"Falls Sie diese Option aktivieren, kann der entfernte Benutzer "
-"Tastatureingaben machen und den Mauszeiger steuern. Damit hat er die volle "
-"Kontrolle über Ihren Rechner. Ist die Option deaktiviert, kann der entfernte "
-"Benutzer lediglich Ihren Bildschirminhalt sehen."
+"Wenn Sie diese Option aktivieren, kann der entfernte Benutzer "
+"Tastatureingaben senden und den Mauszeiger steuern. Seien Sie vorsichtig: "
+"Damit hat er die volle Kontrolle über Ihren Rechner. Ist die Option "
+"deaktiviert, kann der entfernte Benutzer lediglich Ihren Bildschirminhalt "
+"sehen."
 
 #. i18n: ectx: property (text), widget (QCheckBox, cbAllowRemoteControl)
 #: ui/connectionwidget.ui:139
@@ -644,7 +648,7 @@ msgstr ""
 #: ui/mainwidget.ui:314
 #, kde-format
 msgid "TemporaryPassword"
-msgstr "Vorläufiges Passwort"
+msgstr "VorläufigesPasswort"
 
 #. i18n: ectx: property (whatsThis), widget (QGroupBox, unattendedGroupBox)
 #. i18n: ectx: property (text), widget (QLabel, unattendedAboutLabel)
@@ -654,9 +658,9 @@ msgid ""
 "Unattended Access allows a remote user with the password to gain control to "
 "your desktop without your explicit confirmation."
 msgstr ""
-"Mit unbeaufsichtigten Zugriff erhält ein entfernter Benutzer mit dem "
-"Passwort ohne ausdrückliche Bestätigung die Kontrolle über Ihre "
-"Arbeitsfläche."
+"Mit unbeaufsichtigtem Zugriff erhält ein entfernter Benutzer mit dem "
+"Passwort die Kontrolle über Ihre Arbeitsfläche ohne Ihre ausdrückliche "
+"Bestätigung."
 
 #. i18n: ectx: property (title), widget (QGroupBox, unattendedGroupBox)
 #: ui/mainwidget.ui:343
@@ -672,10 +676,10 @@ msgid ""
 "your desktop without your explicit confirmation. Click \"About\" button on "
 "right to know more."
 msgstr ""
-"Mit unbeaufsichtigten Zugriff erhält ein entfernter Benutzer mit dem "
-"Passwort ohne ausdrückliche Bestätigung die Kontrolle über Ihre "
-"Arbeitsfläche. Klicken Sie rechts auf den Knopf „Über“, um mehr "
-"Informationen zu erhalten."
+"Mit unbeaufsichtigtem Zugriff erhält ein entfernter Benutzer mit dem "
+"Passwort die Kontrolle über Ihre Arbeitsfläche ohne Ihre ausdrückliche "
+"Bestätigung. Klicken Sie rechts auf den Knopf „Über“, um mehr Informationen "
+"zu erhalten."
 
 #. i18n: ectx: property (whatsThis), widget (QToolButton, unattendedAboutButton)
 #: ui/mainwidget.ui:394
@@ -690,8 +694,9 @@ msgid ""
 "Starts/Stops unattended access to your desktop. Click on button on right to "
 "change password, and \"About\" button to know more."
 msgstr ""
-"Startet bzw. beendet der unbeaufsichtigten Zugriff auf Ihre Arbeitsfläche. "
-"Klicken Sie rechts auf den Knopf „Über“, um mehr Informationen zu erhalten."
+"Startet bzw. beendet den unbeaufsichtigten Zugriff auf Ihre Arbeitsfläche. "
+"Klicken Sie rechts auf den Knopf, um das Passwort zu ändern und auf „Über“, "
+"um mehr Informationen zu erhalten."
 
 #. i18n: ectx: property (text), widget (QCheckBox, enableUnattendedCheckBox)
 #: ui/mainwidget.ui:440
@@ -709,7 +714,7 @@ msgstr "Passwort für den unbeaufsichtigten Zugriff ändern"
 #: ui/mainwidget.ui:468
 #, kde-format
 msgid "&Change Unattended Password"
-msgstr "Passwort für unbeaufsi&chtigten Zugriff ändern"
+msgstr "Passwort für unbeaufsichtigten Zugriff ä&ndern"
 
 #~ msgid "Framebuffer"
 #~ msgstr "Framebuffer"
