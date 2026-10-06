@@ -5,13 +5,14 @@
 # Slobodan Simic <slsimic@gmail.com>, 2008, 2009.
 # Mladen Pejakovic <pejakm@gmail.com>, 2008.
 # Dalibor Djuric <daliborddjuric@gmail.com>, 2010, 2011.
+# Nemanja Hiršl <nemhirsl@gmail.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: krfb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-04-28 00:44+0000\n"
-"PO-Revision-Date: 2017-08-21 22:34+0200\n"
-"Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
+"PO-Revision-Date: 2026-10-05 12:49+0200\n"
+"Last-Translator: Nemanja Hiršl <nemhirsl@gmail.com>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
 "Language: sr\n"
 "MIME-Version: 1.0\n"
@@ -26,12 +27,12 @@ msgstr ""
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Часлав Илић"
+msgstr "Часлав Илић,Немања Хиршл"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "caslav.ilic@gmx.net"
+msgstr "caslav.ilic@gmx.net,nemhirsl@gmail.com"
 
 #: connectiondialog.cpp:26
 #, kde-format
@@ -122,17 +123,17 @@ msgstr "Прикључак жељеног кадробафера"
 #: main-virtualmonitor.cpp:52
 #, kde-format
 msgid "Creating a Virtual Monitor from %1"
-msgstr ""
+msgstr "Правим виртуелни монитор за %1"
 
 #: main-virtualmonitor.cpp:85
 #, kde-format
 msgid "Remote Virtual Monitor"
-msgstr ""
+msgstr "Удаљени виртуелни монитор"
 
 #: main-virtualmonitor.cpp:87
 #, kde-format
 msgid "Offer a Virtual Monitor that can be accessed remotely"
-msgstr ""
+msgstr "Нуди виртуелни монитор коме се може удаљено приступити"
 
 # well-spelled: Бостон
 #: main-virtualmonitor.cpp:89 main.cpp:87
@@ -157,7 +158,7 @@ msgstr ""
 #: main-virtualmonitor.cpp:96
 #, kde-format
 msgid "Virtual Monitor implementation"
-msgstr ""
+msgstr "Изведба виртуелног монитора"
 
 #: main-virtualmonitor.cpp:97 main.cpp:97
 #, kde-format
@@ -228,54 +229,52 @@ msgstr "првобитни пројекат ВНЦ кодерâ и проток�
 #: main-virtualmonitor.cpp:118
 #, kde-format
 msgid "Logical resolution of the new monitor"
-msgstr ""
+msgstr "Логичка резолуција новог монитора"
 
 #: main-virtualmonitor.cpp:119
 #, kde-format
 msgid "resolution"
-msgstr ""
+msgstr "резолуција"
 
 #: main-virtualmonitor.cpp:125
 #, kde-format
 msgid "Name of the monitor"
-msgstr ""
+msgstr "Име монитора"
 
 #: main-virtualmonitor.cpp:126
 #, kde-format
 msgid "name"
-msgstr ""
+msgstr "име"
 
 #: main-virtualmonitor.cpp:132
-#, fuzzy, kde-format
-#| msgid "Password for uninvited connections."
+#, kde-format
 msgid "Password for the client to connect to it"
-msgstr "Лозинка за непозване везе."
+msgstr "Лозинка помоћу које се клијент повезује"
 
 #: main-virtualmonitor.cpp:133
-#, fuzzy, kde-format
-#| msgid "&Password"
+#, kde-format
 msgid "password"
-msgstr "&Лозинка"
+msgstr "лозинка"
 
 #: main-virtualmonitor.cpp:138
 #, kde-format
 msgid "The device-pixel-ratio of the device, the scaling factor"
-msgstr ""
+msgstr "Однос пиксела уређаја, тј. фактор скалирања"
 
 #: main-virtualmonitor.cpp:139
 #, kde-format
 msgid "dpr"
-msgstr ""
+msgstr "dpr"
 
 #: main-virtualmonitor.cpp:145
 #, kde-format
 msgid "The port we will be listening to"
-msgstr ""
+msgstr "Порт који ће се ослушкивати"
 
 #: main-virtualmonitor.cpp:146
 #, kde-format
 msgid "number"
-msgstr ""
+msgstr "број"
 
 #: main.cpp:37
 #, kde-format
@@ -322,11 +321,13 @@ msgid ""
 "Desktop Sharing is not running under an X11 Server or Wayland.\n"
 "Other display servers are currently not supported."
 msgstr ""
+"Дељење површи не ради под икс11 сервером ни под вејландом.\n"
+"Други сервери приказа тренутно нису подржани."
 
 #: mainwindow.cpp:53
 #, kde-format
 msgid "Storing passwords in config file is insecure!"
-msgstr ""
+msgstr "Складиштење лозинки у поставном фајлу није безбедно!"
 
 # >> @title:window
 #: mainwindow.cpp:192
@@ -476,10 +477,9 @@ msgstr "Дозволи удаљеним везама да контролишу �
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_noWallet)
 #: ui/configsecurity.ui:27
-#, fuzzy, kde-format
-#| msgid "Do not store passwords in KWallet"
+#, kde-format
 msgid "Do not store passwords using KDE wallet"
-msgstr "Не складишти лозинке у К‑новчанику"
+msgstr "Не складишти лозинке у КДЕ новчанику"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_useDefaultPort)
 #: ui/configtcp.ui:26
@@ -701,6 +701,3 @@ msgstr "Измените лозинку за ненадзирани присту
 #, kde-format
 msgid "&Change Unattended Password"
 msgstr "&Измени лозинку ненадзираног приступа"
-
-#~ msgid "Framebuffer"
-#~ msgstr "Кадробафер"
