@@ -87,6 +87,10 @@
   <summary xml:lang="sa">VNC मार्गेण अन्यसङ्गणके स्वस्य डेस्कटॉप् साझां कुर्वन्तु</summary>
   <summary xml:lang="sk">Zdieľajte vašu plochu s iným počítačom cez VNC</summary>
   <summary xml:lang="sl">Deli namizje z drugim računalnikom prek VNC</summary>
+  <summary xml:lang="sr">Поделите своју површ са другим рачунаром преко ВНЦ‑а</summary>
+  <summary xml:lang="sr-Latn">Podelite svoju površ sa drugim računarom preko VNC‑a</summary>
+  <summary xml:lang="sr-ijekavian">Подијелите своју површ са другим рачунаром преко ВНЦ‑а</summary>
+  <summary xml:lang="sr-ijekavianlatin">Podijelite svoju površ sa drugim računarom preko VNC‑a</summary>
   <summary xml:lang="sv">Dela ditt skrivbord med en annan dator via VNC</summary>
   <summary xml:lang="tr">Masaüstünüzü başka bir bilgisayara VNC aracılığıyla paylaşın</summary>
   <summary xml:lang="uk">Надайте вашу стільницю у спільне користування з іншим комп'ютером за допомогою VNC</summary>
@@ -132,8 +136,8 @@
     <p xml:lang="sl">Souporaba namizja Krfb je strežniški program, ki vam dovoli, da delite vašo trenutno sejo z uporabnikom na drugem računalniku, ki ima odjemalec VNC. Uporabnik lahko gleda ali celo nadzira namizje.</p>
     <p xml:lang="sr">КРФБ је серверски програм за дељење површи, којим можете да поделите своју текућу сесију са корисником на другој машини. Удаљени корисник може да употреби неки ВНЦ клијент за гледање површи, па чак и управљање њоме.</p>
     <p xml:lang="sr-Latn">KRFB je serverski program za deljenje površi, kojim možete da podelite svoju tekuću sesiju sa korisnikom na drugoj mašini. Udaljeni korisnik može da upotrebi neki VNC klijent za gledanje površi, pa čak i upravljanje njome.</p>
-    <p xml:lang="sr-ijekavian">КРФБ је серверски програм за дељење површи, којим можете да поделите своју текућу сесију са корисником на другој машини. Удаљени корисник може да употреби неки ВНЦ клијент за гледање површи, па чак и управљање њоме.</p>
-    <p xml:lang="sr-ijekavianlatin">KRFB je serverski program za deljenje površi, kojim možete da podelite svoju tekuću sesiju sa korisnikom na drugoj mašini. Udaljeni korisnik može da upotrebi neki VNC klijent za gledanje površi, pa čak i upravljanje njome.</p>
+    <p xml:lang="sr-ijekavian">КРФБ је серверски програм за дијељење површи, којим можете да подијелите своју текућу сесију са корисником на другој машини. Удаљени корисник може да употријеби неки ВНЦ клијент за гледање површи, па чак и управљање њоме.</p>
+    <p xml:lang="sr-ijekavianlatin">KRFB je serverski program za dijeljenje površi, kojim možete da podijelite svoju tekuću sesiju sa korisnikom na drugoj mašini. Udaljeni korisnik može da upotrijebi neki VNC klijent za gledanje površi, pa čak i upravljanje njome.</p>
     <p xml:lang="sv">Krfb-skrivbordsdelning är ett serverprogram som gör det möjligt att dela aktuell session med en användare på en annan dator, som kan använda en VNC-klient för att betrakta eller till och med kontrollera skrivbordet.</p>
     <p xml:lang="tr">Krfb Masaüstü Paylaşımı; geçerli oturumunuzu, başka bir makinedeki bir kullanıcıyla paylaşmanıza izin veren bir sunucu uygulamasıdır. Kullanıcılar, bir VNC istemcisi ile masaüstünüzü görüntüleyebilir ve hatta denetleyebilirler.</p>
     <p xml:lang="uk">Програма для спільного використання стільниці Krfb — це серверна програма, яка надає вам змогу розділити ваш поточний сеанс роботи з користувачем, який працює на іншому комп’ютері, так, щоб цей користувач зміг скористатися клієнтом VNC для перегляду або навіть керування вашою стільницею.</p>
@@ -183,6 +187,10 @@
       <caption xml:lang="sa">Krfb इत्यनेन सह डेस्कटॉप् साझाकरणम्</caption>
       <caption xml:lang="sk">Zdieľanie pracovnej plochy s Krfb</caption>
       <caption xml:lang="sl">Deljenje namizij s Krfb</caption>
+      <caption xml:lang="sr">Дељење површи КРФБ‑ом</caption>
+      <caption xml:lang="sr-Latn">Deljenje površi KRFB‑om</caption>
+      <caption xml:lang="sr-ijekavian">Дијељење површи КРФБ‑ом</caption>
+      <caption xml:lang="sr-ijekavianlatin">Dijeljenje površi KRFB‑om</caption>
       <caption xml:lang="sv">Dela skrivbord med Krfb</caption>
       <caption xml:lang="tr">Krfb ile masaüstü paylaşımı</caption>
       <caption xml:lang="ug">Krfb ئارقىلىق ئۈستەلئۈستىنى ھەمبەھىرلەيدۇ</caption>
