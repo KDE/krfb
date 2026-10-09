@@ -67,8 +67,6 @@ if(NOT WIN32)
 
     include(FindPackageHandleStandardArgs)
     find_package_handle_standard_args(gbm
-        FOUND_VAR
-            gbm_FOUND
         REQUIRED_VARS
             gbm_LIBRARY
             gbm_INCLUDE_DIR
