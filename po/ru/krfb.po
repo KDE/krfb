@@ -49,17 +49,17 @@ msgstr ""
 #: connectiondialog.cpp:26
 #, kde-format
 msgid "New Connection"
-msgstr "Новое соединение"
+msgstr "Новое подключение"
 
 #: connectiondialog.cpp:48
 #, kde-format
 msgid "Accept Connection"
-msgstr "Принять соединение"
+msgstr "Принять подключение"
 
 #: connectiondialog.cpp:52
 #, kde-format
 msgid "Refuse Connection"
-msgstr "Отказаться от соединения"
+msgstr "Отказаться от подключения"
 
 #: invitationsrfbclient.cpp:61
 #, kde-format
@@ -522,8 +522,8 @@ msgid ""
 "Somebody is requesting a connection to your computer. Granting this will "
 "allow the remote user to watch your desktop. "
 msgstr ""
-"Кто-то пытается установить соединение с вашим компьютером. \n"
-"Подтверждение соединения позволит ему видеть ваш рабочий стол и, если "
+"Кто-то пытается подключиться к вашему компьютеру. \n"
+"Подтверждение подключения позволит ему видеть ваш рабочий стол и, если "
 "установлен соответствующий параметр, управлять компьютером. Откажитесь от "
 "подключения, если вы не доверяете этому человеку."
 
@@ -586,7 +586,7 @@ msgstr "В&ключить доступ к компьютеру"
 #: ui/mainwidget.ui:170
 #, kde-format
 msgid "Connection Details"
-msgstr "Подробности соединения"
+msgstr "Подробности подключения"
 
 # BUGME: please add colon --aspotashev
 #. i18n: ectx: property (text), widget (QLabel, addressLabel)
@@ -616,8 +616,8 @@ msgid ""
 "Address required by remote users to connect to your desktop. Click about "
 "button on the right for more info."
 msgstr ""
-"Адрес необходимо знать удалённому пользователю для соединения с вашим "
-"компьютером. Нажмите кнопку «Информация», чтобы узнать больше."
+"Адрес необходимо знать удалённому пользователю для подключения к вашему "
+"компьютеру. Нажмите кнопку «Информация», чтобы узнать больше."
 
 #. i18n: ectx: property (text), widget (QLabel, addressDisplayLabel)
 #: ui/mainwidget.ui:238
@@ -651,8 +651,8 @@ msgid ""
 "Password required by remote users to connect to your desktop. Click the edit "
 "button on the right to change password."
 msgstr ""
-"Пароль необходим удалённому пользователю для соединения с вашим компьютером. "
-"Нажмите кнопку «Изменить», чтобы поменять пароль."
+"Пароль необходим удалённому пользователю для подключения к вашему "
+"компьютеру. Нажмите кнопку «Изменить», чтобы поменять пароль."
 
 # BUGME:  this should not be translatable --aspotashev
 #. i18n: ectx: property (text), widget (QLabel, passwordDisplayLabel)
