@@ -23,11 +23,13 @@ public:
 
     QByteArray listeningAddress() const;
     int listeningPort() const;
+    bool listenIPv6() const;
     bool passwordRequired() const;
     bool passwordSet() const;
 
     void setListeningAddress(const QByteArray &address);
     void setListeningPort(int port);
+    void setListenIPv6(bool listenIPv6);
     void setPasswordRequired(bool passwordRequired);
     void setPasswordSet(bool passwordSet);
 

@@ -295,6 +295,14 @@ the correct port.
 </para>
 
 <para>
+By default &krfb; accepts connections over both IPv4 and IPv6, which means it
+listens on all interfaces of both address families. If you uncheck
+<guilabel>Also listen for connections over IPv6</guilabel>, &krfb; only listens
+on IPv4. This is useful if IPv6 is not used on your network and you do not want
+the desktop sharing server to be reachable over it.
+</para>
+
+<para>
 The <guilabel>Security</guilabel> page allows you to configure whether the
 person connecting to the &krfb; server can control the desktop, or only view.
 </para>

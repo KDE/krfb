@@ -19,6 +19,10 @@
       <label>This is the port on which krfb will listen.</label>
       <default>5900</default>
     </entry>
+    <entry name="listenIPv6" type="Bool">
+      <label>Accept connections over IPv6 as well as IPv4</label>
+      <default>true</default>
+    </entry>
     <entry name="publishService" type="Bool">
       <label>Announce the service on the local network</label>
       <default>true</default>

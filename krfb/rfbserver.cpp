@@ -19,6 +19,7 @@ struct RfbServer::Private
 {
     QByteArray listeningAddress;
     int listeningPort;
+    bool listenIPv6;
     bool passwordRequired;
     bool passwordSet;
     rfbScreenInfoPtr screen;
@@ -32,6 +33,7 @@ RfbServer::RfbServer(QObject *parent)
 {
     d->listeningAddress = "0.0.0.0";
     d->listeningPort = 0;
+    d->listenIPv6 = true;
     d->passwordRequired = true;
     d->passwordSet = false;
     d->screen = nullptr;
@@ -59,6 +61,11 @@ int RfbServer::listeningPort() const
     return d->listeningPort;
 }
 
+bool RfbServer::listenIPv6() const
+{
+    return d->listenIPv6;
+}
+
 bool RfbServer::passwordRequired() const
 {
     return d->passwordRequired;
@@ -77,6 +84,11 @@ void RfbServer::setListeningAddress(const QByteArray &address)
 void RfbServer::setListeningPort(int port)
 {
     d->listeningPort = port;
+}
+
+void RfbServer::setListenIPv6(bool listenIPv6)
+{
+    d->listenIPv6 = listenIPv6;
 }
 
 void RfbServer::setPasswordRequired(bool passwordRequired)
@@ -130,7 +142,10 @@ bool RfbServer::start()
         }
 
         d->screen->port = listeningPort();
-        d->screen->ipv6port = listeningPort();
+        // libvncserver opens a second listening socket on the IPv6 wildcard
+        // address whenever ipv6port is set, so a zero value keeps the server
+        // reachable over IPv4 only.
+        d->screen->ipv6port = listenIPv6() ? listeningPort() : 0;
 
         // Disable/Enable password checking
         if (passwordRequired()) {
@@ -141,6 +156,7 @@ bool RfbServer::start()
 
         qCDebug(KRFB) << "Starting server. Listen port:" << listeningPort()
                       << "Listen Address:" << listeningAddress()
+                      << "IPv6 enabled:" << listenIPv6()
                       << "Password enabled:" << passwordRequired();
 
         rfbInitServer(d->screen);

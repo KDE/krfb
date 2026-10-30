@@ -67,6 +67,19 @@
     </layout>
    </item>
    <item>
+    <widget class="QCheckBox" name="kcfg_listenIPv6" >
+     <property name="toolTip" >
+      <string>If this is unchecked, krfb only accepts connections over IPv4.</string>
+     </property>
+     <property name="text" >
+      <string>Also listen for connections over IPv6</string>
+     </property>
+     <property name="checked" >
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
     <spacer>
      <property name="orientation">
       <enum>Qt::Vertical</enum>
@@ -82,8 +95,10 @@
   </layout>
  </widget>
  <tabstops>
+  <tabstop>kcfg_publishService</tabstop>
   <tabstop>kcfg_useDefaultPort</tabstop>
   <tabstop>kcfg_port</tabstop>
+  <tabstop>kcfg_listenIPv6</tabstop>
  </tabstops>
  <resources/>
  <connections>
