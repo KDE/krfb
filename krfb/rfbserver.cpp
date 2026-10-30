@@ -109,6 +109,15 @@ bool RfbServer::start()
     } else {
         // if we already have a screen, stop listening first
         rfbShutdownServer(d->screen, false);
+        // the listening sockets are gone, so drop the notifiers watching them
+        for (auto notifier : {d->ipv4notifier, d->ipv6notifier}) {
+            if (notifier) {
+                notifier->setEnabled(false);
+                notifier->deleteLater();
+            }
+        }
+        d->ipv4notifier = nullptr;
+        d->ipv6notifier = nullptr;
     }
 
     if (passwordSet()) {
@@ -169,6 +178,8 @@ void RfbServer::stop()
                 notifier->deleteLater();
             }
         }
+        d->ipv4notifier = nullptr;
+        d->ipv6notifier = nullptr;
     }
 }
 
