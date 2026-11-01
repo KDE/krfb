@@ -44,6 +44,7 @@ void InvitationsRfbServer::init()
     instance->setListeningAddress("0.0.0.0");
     instance->setListeningPort(KrfbConfig::port());
     instance->setPasswordRequired(true);
+    instance->setPasswordSet(true);
 
     instance->m_wallet = nullptr;
     if (KrfbConfig::noWallet()) {
