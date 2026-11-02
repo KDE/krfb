@@ -1,6 +1,6 @@
 # Translation of krfb.po to Slovenian
 # Copyright (C) 2002, 2003, 2004, 2005 Free Software Foundation, Inc.
-# $Id: krfb.po 1735683 2026-04-28 01:29:49Z scripty $
+# $Id: krfb.po 1751793 2026-11-02 01:39:31Z scripty $
 # $Source$
 #
 # Andrej Vernekar <andrej.vernekar@moj.net>, 2002, 2008.
@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krfb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-04-28 00:44+0000\n"
+"POT-Creation-Date: 2026-11-02 00:54+0000\n"
 "PO-Revision-Date: 2021-10-31 20:21+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -84,40 +84,46 @@ msgstr "Uporabi privzeta vrata za VNC (5900)"
 msgid "This is the port on which krfb will listen."
 msgstr "Vrata, na katerih bo poslušal krfb."
 
+#. i18n: ectx: label, entry (listenIPv6), group (TCP)
+#: krfb.kcfg:23
+#, kde-format
+msgid "Accept connections over IPv6 as well as IPv4"
+msgstr ""
+
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_publishService)
 #. i18n: ectx: label, entry (publishService), group (TCP)
-#: krfb.kcfg:23 ui/configtcp.ui:16
+#: krfb.kcfg:27 ui/configtcp.ui:16
 #, kde-format
 msgid "Announce the service on the local network"
 msgstr "Naznani storitev na krajevnem omrežju"
 
 #. i18n: ectx: label, entry (noWallet), group (Security)
-#: krfb.kcfg:29
+#: krfb.kcfg:33
 #, kde-format
 msgid "Do not store passwords in KWallet"
 msgstr "Ne shranjuj gesel v KWallet"
 
 #. i18n: ectx: label, entry (allowDesktopControl), group (Security)
-#: krfb.kcfg:33
+#: krfb.kcfg:37
 #, kde-format
 msgid "Allow remote connections to manage the desktop."
 msgstr "Dovoli oddaljenim povezavam, da upravljajo namizje."
 
 #. i18n: ectx: label, entry (allowUnattendedAccess), group (Security)
-#: krfb.kcfg:37
+#: krfb.kcfg:41
 #, kde-format
 msgid "Allow connections without an invitation."
 msgstr "Dovoli povezave brez povabila."
 
 #. i18n: ectx: label, entry (unattendedAccessPassword), group (Security)
 #. i18n: ectx: label, entry (desktopSharingPassword), group (Security)
-#: krfb.kcfg:41 krfb.kcfg:44
+#: krfb.kcfg:45 krfb.kcfg:48
 #, kde-format
 msgid "Password for uninvited connections."
 msgstr "Geslo za nepovabljene povezave."
 
 #. i18n: ectx: label, entry (preferredFrameBufferPlugin), group (FrameBuffer)
-#: krfb.kcfg:49
+#: krfb.kcfg:53
 #, kde-format
 msgid "Preferred Frame Buffer Plugin"
 msgstr "Prednostni vstavek za slikovni medpomnilnik"
@@ -495,6 +501,18 @@ msgstr "Uporabi privzeta vrata"
 #, kde-format
 msgid "Listening port:"
 msgstr "Vrata na katerih se posluša:"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_listenIPv6)
+#: ui/configtcp.ui:72
+#, kde-format
+msgid "If this is unchecked, krfb only accepts connections over IPv4."
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_listenIPv6)
+#: ui/configtcp.ui:75
+#, kde-format
+msgid "Also listen for connections over IPv6"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel5)
 #: ui/connectionwidget.ui:47

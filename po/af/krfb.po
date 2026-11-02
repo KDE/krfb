@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krfb VERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-04-28 00:44+0000\n"
+"POT-Creation-Date: 2026-11-02 00:54+0000\n"
 "PO-Revision-Date: 2002-11-07 11:35+0200\n"
 "Last-Translator: WEB-Translator <http://kde.af.org.za>\n"
 "Language-Team: AFRIKAANS <AF@lia.org.za>\n"
@@ -74,42 +74,48 @@ msgstr ""
 msgid "This is the port on which krfb will listen."
 msgstr ""
 
+#. i18n: ectx: label, entry (listenIPv6), group (TCP)
+#: krfb.kcfg:23
+#, kde-format
+msgid "Accept connections over IPv6 as well as IPv4"
+msgstr ""
+
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_publishService)
 #. i18n: ectx: label, entry (publishService), group (TCP)
-#: krfb.kcfg:23 ui/configtcp.ui:16
+#: krfb.kcfg:27 ui/configtcp.ui:16
 #, kde-format
 msgid "Announce the service on the local network"
 msgstr ""
 
 #. i18n: ectx: label, entry (noWallet), group (Security)
-#: krfb.kcfg:29
+#: krfb.kcfg:33
 #, kde-format
 msgid "Do not store passwords in KWallet"
 msgstr ""
 
 #. i18n: ectx: label, entry (allowDesktopControl), group (Security)
-#: krfb.kcfg:33
+#: krfb.kcfg:37
 #, fuzzy, kde-format
 #| msgid "Allow remote user to &control keyboard and mouse"
 msgid "Allow remote connections to manage the desktop."
 msgstr "Toelaat afgeleë gebruiker na kontrole sleutelbord en muis"
 
 #. i18n: ectx: label, entry (allowUnattendedAccess), group (Security)
-#: krfb.kcfg:37
+#: krfb.kcfg:41
 #, kde-format
 msgid "Allow connections without an invitation."
 msgstr ""
 
 #. i18n: ectx: label, entry (unattendedAccessPassword), group (Security)
 #. i18n: ectx: label, entry (desktopSharingPassword), group (Security)
-#: krfb.kcfg:41 krfb.kcfg:44
+#: krfb.kcfg:45 krfb.kcfg:48
 #, fuzzy, kde-format
 #| msgid "Closed connection: %1."
 msgid "Password for uninvited connections."
 msgstr "Gesluit verbinding: %1."
 
 #. i18n: ectx: label, entry (preferredFrameBufferPlugin), group (FrameBuffer)
-#: krfb.kcfg:49
+#: krfb.kcfg:53
 #, kde-format
 msgid "Preferred Frame Buffer Plugin"
 msgstr ""
@@ -457,6 +463,18 @@ msgstr ""
 #: ui/configtcp.ui:50
 #, kde-format
 msgid "Listening port:"
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_listenIPv6)
+#: ui/configtcp.ui:72
+#, kde-format
+msgid "If this is unchecked, krfb only accepts connections over IPv4."
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_listenIPv6)
+#: ui/configtcp.ui:75
+#, kde-format
+msgid "Also listen for connections over IPv6"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel5)

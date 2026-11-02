@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krfb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-04-28 00:44+0000\n"
+"POT-Creation-Date: 2026-11-02 00:54+0000\n"
 "PO-Revision-Date: 2024-12-25 19:35+0530\n"
 "Last-Translator: kali <shreekantkalwar@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -77,40 +77,46 @@ msgstr "VNC (5900) कृते पूर्वनिर्धारितं �
 msgid "This is the port on which krfb will listen."
 msgstr "एषः एव पोर्ट् यस्मिन् krfb श्रोष्यति ।"
 
+#. i18n: ectx: label, entry (listenIPv6), group (TCP)
+#: krfb.kcfg:23
+#, kde-format
+msgid "Accept connections over IPv6 as well as IPv4"
+msgstr ""
+
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_publishService)
 #. i18n: ectx: label, entry (publishService), group (TCP)
-#: krfb.kcfg:23 ui/configtcp.ui:16
+#: krfb.kcfg:27 ui/configtcp.ui:16
 #, kde-format
 msgid "Announce the service on the local network"
 msgstr "स्थानीयजालपुटे सेवायाः घोषणां कुर्वन्तु"
 
 #. i18n: ectx: label, entry (noWallet), group (Security)
-#: krfb.kcfg:29
+#: krfb.kcfg:33
 #, kde-format
 msgid "Do not store passwords in KWallet"
 msgstr "KWallet मध्ये गुप्तशब्दान् न संग्रहयन्तु"
 
 #. i18n: ectx: label, entry (allowDesktopControl), group (Security)
-#: krfb.kcfg:33
+#: krfb.kcfg:37
 #, kde-format
 msgid "Allow remote connections to manage the desktop."
 msgstr "डेस्कटॉप् प्रबन्धनार्थं दूरस्थसंयोजनानां अनुमतिं ददातु ।"
 
 #. i18n: ectx: label, entry (allowUnattendedAccess), group (Security)
-#: krfb.kcfg:37
+#: krfb.kcfg:41
 #, kde-format
 msgid "Allow connections without an invitation."
 msgstr "आमन्त्रणं विना संयोजनानि अनुमन्यताम्।"
 
 #. i18n: ectx: label, entry (unattendedAccessPassword), group (Security)
 #. i18n: ectx: label, entry (desktopSharingPassword), group (Security)
-#: krfb.kcfg:41 krfb.kcfg:44
+#: krfb.kcfg:45 krfb.kcfg:48
 #, kde-format
 msgid "Password for uninvited connections."
 msgstr "अनमन्त्रितसंयोजनानां कृते गुप्तशब्दः।"
 
 #. i18n: ectx: label, entry (preferredFrameBufferPlugin), group (FrameBuffer)
-#: krfb.kcfg:49
+#: krfb.kcfg:53
 #, kde-format
 msgid "Preferred Frame Buffer Plugin"
 msgstr "पसंदीदा फ्रेम बफर प्लगिन्"
@@ -485,6 +491,18 @@ msgstr "पूर्वनिर्धारित पोर्ट् इत्�
 #, kde-format
 msgid "Listening port:"
 msgstr "श्रवण-बन्दरम् :"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_listenIPv6)
+#: ui/configtcp.ui:72
+#, kde-format
+msgid "If this is unchecked, krfb only accepts connections over IPv4."
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_listenIPv6)
+#: ui/configtcp.ui:75
+#, kde-format
+msgid "Also listen for connections over IPv6"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel5)
 #: ui/connectionwidget.ui:47
