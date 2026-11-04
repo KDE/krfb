@@ -256,6 +256,11 @@
 > selecteert, dan zal &krfb; een geschikte poort lokaliseren. Als u dit keuzevakje niet selecteert, dan kunt u een specifieke poort kiezen. Een specifieke poort kiezen kan bruikbaar zijn als u 'port-forwarding' op de firewall nodig hebt. Opmerking: als 'Service Location Protocol' aan staat, dan zal deze automatisch rekening houden met de juiste poort. </para>
 
 <para
+>Standaard accepteert &krfb; verbindingen via zowel IPv4 als IPv6, wat betekent dat het programma luistert op alle interfaces van beide adresfamilies. Als u het selectievakje <guilabel
+>Ook luisteren naar verbindingen via IPv6</guilabel
+> uitschakelt, luistert &krfb; alleen via IPv4. Dit is nuttig als IPv6 niet wordt gebruikt in uw netwerk en u niet wilt dat de server voor het delen van het bureaublad via dat protocol bereikbaar is. </para>
+
+<para
 >De pagina <guilabel
 >Beveiliging</guilabel
 > stelt u in staat om in te stellen of de persoon met toegang tot de &krfb;-server het bureaublad kan besturen of alleen kan meekijken. </para>
