@@ -12,7 +12,7 @@
 # Amine Say <aminesay@yahoo.fr>, 2008, 2009.
 # Guillaume Pujol <guill.p@gmail.com>, 2010.
 # Sebastien Renard <renard@kde.org>, 2013, 2014, 2015.
-# Xavier Besnard <xavier.besnard@kde.org>, 2013, 2021.
+# SPDX-FileCopyrightText: 2013, 2021, 2026 Xavier Besnard <xavier.besnard@kde.org>
 # Vincent Pinon <vpinon@kde.org>, 2017.
 # Simon Depiets <sdepiets@gmail.com>, 2019.
 # Xavier Besnard <xavier.besnard@kde.org>, 2023.
@@ -24,18 +24,18 @@ msgstr ""
 "Project-Id-Version: krfb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-02 00:54+0000\n"
-"PO-Revision-Date: 2023-01-09 16:44+0100\n"
-"Last-Translator: Xavier BESNARD <xavier.besnard]neuf.fr>\n"
-"Language-Team: French <kde-francophone@kde.org>\n"
+"PO-Revision-Date: 2026-11-03 07:27+0100\n"
+"Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
+"Language-Team: fr\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
+"X-Environment: kde\n"
+"X-Generator: Lokalize 26.08.1\n"
 "X-Text-Markup: kde4\n"
-"X-Generator: Lokalize 22.12.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -101,7 +101,7 @@ msgstr "Il s'agit du port sur lequel « krfb » sera en écoute."
 #: krfb.kcfg:23
 #, kde-format
 msgid "Accept connections over IPv6 as well as IPv4"
-msgstr ""
+msgstr "Accepter les connexions sur IPv6 ainsi que IPv4"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_publishService)
 #. i18n: ectx: label, entry (publishService), group (TCP)
@@ -528,12 +528,14 @@ msgstr "Port d'écoute :"
 #, kde-format
 msgid "If this is unchecked, krfb only accepts connections over IPv4."
 msgstr ""
+"Si cette option est non sélectionnée, krfb n'accepte que les connexions sur "
+"IPv4."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_listenIPv6)
 #: ui/configtcp.ui:75
 #, kde-format
 msgid "Also listen for connections over IPv6"
-msgstr ""
+msgstr "Écoutez également les connexions sur IPv6"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel5)
 #: ui/connectionwidget.ui:47
