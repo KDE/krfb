@@ -256,6 +256,11 @@
 >, aleshores el &krfb; s'encarregarà de localitzar un port adequat. Si la desmarqueu, podreu especificar un port en particular. Especificar-ne un pot ser útil si esteu emprant l'expedició de ports en un tallafoc. Tingueu en compte que si s'activa el Protocol per a la Localització de Serveis, això s'ocuparà automàticament d'identificar el port correcte. </para>
 
 <para
+>De manera predeterminada el &krfb; accepta connexions tant d'IPv4 com d'IPv6, el que significa que escolta en totes les interfícies de les dues famílies d'adreces. Si desmarqueu <guilabel
+>Escolta també les connexions mitjançant IPv6</guilabel
+>, el &krfb; només escoltarà IPv4. Això és útil si IPv6 no s'utilitza a la vostra xarxa i no voleu que el servidor de compartir l'escriptori sigui accessible a través d'ella. </para>
+
+<para
 >La pestanya <guilabel
 >Seguretat</guilabel
 > permet configurar quines persones connectaran amb el servidor &krfb; per a poder controlar l'escriptori, o només veure'l. </para>
