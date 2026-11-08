@@ -1,24 +1,24 @@
 # Translation of krfb.po to Catalan (Valencian)
-# Copyright (C) 2003-2024 This_file_is_part_of_KDE
+# Copyright (C) 2003-2026 This_file_is_part_of_KDE
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
 # SPDX-FileCopyrightText: 2003, 2012, 2015, 2017, 2020-2021 Antoni Bella Pérez <antonibella5@yahoo.com>
 # SPDX-FileCopyrightText: 2004-2005 Albert Astals Cid <aacid@kde.org>
-# SPDX-FileCopyrightText: 2007-2011, 2013-2016, 2019-2021, 2024 Josep M. Ferrer <txemaq@gmail.com>
+# SPDX-FileCopyrightText: 2007-2011, 2013-2016, 2019-2021, 2024, 2026 Josep M. Ferrer <txemaq@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: krfb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-02 00:54+0000\n"
-"PO-Revision-Date: 2024-01-10 11:33+0100\n"
+"PO-Revision-Date: 2026-11-03 10:12+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 25.04.0\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Accelerator-Marker: &\n"
 
@@ -84,7 +84,7 @@ msgstr "Este és el port que escoltarà el krfb."
 #: krfb.kcfg:23
 #, kde-format
 msgid "Accept connections over IPv6 as well as IPv4"
-msgstr ""
+msgstr "Accepta connexions mitjançant IPv6 així com IPv4"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_publishService)
 #. i18n: ectx: label, entry (publishService), group (TCP)
@@ -507,13 +507,13 @@ msgstr "Port que rep les connexions:"
 #: ui/configtcp.ui:72
 #, kde-format
 msgid "If this is unchecked, krfb only accepts connections over IPv4."
-msgstr ""
+msgstr "Si no està marcada, el krfb només accepta connexions mitjançant IPv4."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_listenIPv6)
 #: ui/configtcp.ui:75
 #, kde-format
 msgid "Also listen for connections over IPv6"
-msgstr ""
+msgstr "Escolta també les connexions mitjançant IPv6"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel5)
 #: ui/connectionwidget.ui:47
