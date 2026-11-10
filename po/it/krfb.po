@@ -4,14 +4,14 @@
 # Daniele Medri <madrid@linuxmeeting.net>, 2003.
 # Federico Zenith <federico.zenith@member.fsf.org>, 2004, 2005, 2007, 2009, 2010.
 # Federico Zenith <zenith@chemeng.ntnu.no>, 2008, 2013.
-# Luigi Toscano <luigi.toscano@tiscali.it>, 2014, 2015, 2017, 2019, 2021.
+# SPDX-FileCopyrightText: 2014-2015, 2017, 2019, 2021, 2026 Luigi Toscano <luigi.toscano@tiscali.it>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: krfb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-02 00:54+0000\n"
-"PO-Revision-Date: 2021-11-24 23:35+0100\n"
+"PO-Revision-Date: 2026-11-04 16:06+0100\n"
 "Last-Translator: Luigi Toscano <luigi.toscano@tiscali.it>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 21.08.0\n"
+"X-Generator: Lokalize 26.08.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -83,7 +83,7 @@ msgstr "Questa è la porta sulla quale krfb rimarrà in ascolto."
 #: krfb.kcfg:23
 #, kde-format
 msgid "Accept connections over IPv6 as well as IPv4"
-msgstr ""
+msgstr "Accetta connessioni via IPv6 così come via IPv4"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_publishService)
 #. i18n: ectx: label, entry (publishService), group (TCP)
@@ -506,13 +506,13 @@ msgstr "Porta di ascolto:"
 #: ui/configtcp.ui:72
 #, kde-format
 msgid "If this is unchecked, krfb only accepts connections over IPv4."
-msgstr ""
+msgstr "Se non è selezionato, krfb accetta solo connessioni via IPv4."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_listenIPv6)
 #: ui/configtcp.ui:75
 #, kde-format
 msgid "Also listen for connections over IPv6"
-msgstr ""
+msgstr "Accetta connessioni anche via IPv6"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel5)
 #: ui/connectionwidget.ui:47

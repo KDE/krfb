@@ -256,6 +256,11 @@
 >, &krfb; recherchera un port utilisable. Si vous dé-cochez cette case, vous pourrez spécifier un port particulier. La définition d'un port spécifique peut être utile si vous utilisez le renvoi de port sur le pare-feu. Veuillez noter que si le protocole de localisation de services (SLP) est activé, il traitera l'identification du port correct automatiquement. </para>
 
 <para
+>Par défaut, &krfb; accepte les connexions sur IPv4 et IPv6, ce qui signifie qu'il écoute toutes les interfaces des deux familles d'adresses. Si vous décochez <guilabel
+>Écouter également les connexions sur IPv6</guilabel
+>, &krfb; n'écoute que sur IPv4. Ceci est utile si IPv6 n'est pas utilisé sur votre réseau et que vous ne souhaitez pas que le serveur de partage de bureau soit accessible grâce à celui-ci. </para>
+
+<para
 >La page <guilabel
 >Sécurité</guilabel
 > vous permet de configurer l'accès pour qu'une personne se connectant au serveur &krfb; puisse contrôler votre bureau ou seulement l'afficher. </para>
