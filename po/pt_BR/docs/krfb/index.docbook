@@ -270,6 +270,11 @@
 >, então o &krfb; irá localizar uma porta. Se desmarcar esta opção, você poderá indicar uma porta em particular. Indicar uma porta personalizada poderá ser útil se você estiver fazendo redirecionamento de portas na 'firewall'. Observe que, se o Protocolo de Localização de Serviço estiver ativo, ele irá tratar automaticamente da identificação da porta correta. </para>
 
 <para
+>Por padrão, o &krfb; aceita conexões tanto via IPv4 quanto via IPv6, o que significa que ele fica à escuta em todas as interfaces de ambas as famílias de endereços. Se você desmarcar a opção <guilabel
+>Ouvir também conexões via IPv6</guilabel
+>, o &krfb; passará a aguardar conexões apenas via IPv4. Isso é útil caso o IPv6 não seja utilizado em sua rede e você não queira que o servidor de compartilhamento de área de trabalho fique acessível por meio dele. </para>
+
+<para
 >A página <guilabel
 >Segurança</guilabel
 > permite configurar se a pessoa que se conecta ao servidor &krfb; pode controlar a área de trabalho ou apenas visualizá-la. </para>
