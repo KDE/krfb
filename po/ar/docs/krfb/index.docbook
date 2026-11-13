@@ -1,0 +1,381 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY % addindex "IGNORE">
+  <!ENTITY % Arabic "INCLUDE">
+]>
+
+<book id="krfb" lang="&language;">
+
+<bookinfo>
+<title
+>دليل كرفب</title>
+
+<authorgroup>
+<author
+>&Brad.Hards; &Brad.Hards.mail; </author>
+<othercredit role="translator"
+><firstname
+>زايد</firstname
+><surname
+>السعيدي</surname
+><affiliation
+><address
+><email
+>zayed.alsaidi@gmail.com</email
+></address
+></affiliation
+><contrib
+>التّرجمة العربيّة</contrib
+></othercredit
+> 
+</authorgroup>
+
+<copyright>
+<year
+>2003</year>
+<holder
+>&Brad.Hards;</holder>
+</copyright>
+
+<legalnotice
+>&FDLNotice;</legalnotice>
+
+<date
+>2016-07-25</date>
+<releaseinfo
+>5.0 (تطبيقات 16.08)</releaseinfo>
+
+<abstract>
+<para
+>كرْفب هو تطبيق خادم يسمح لك بمشاركة جلستك الحالية مع مستخدم على جهاز آخر، والذي يمكنه استخدام عميل <acronym
+>VNC</acronym
+> لعرض سطح المكتب أو حتى التحكم فيه. </para>
+</abstract>
+
+<keywordset>
+<keyword
+>كيدي</keyword>
+<keyword
+>kdenetwork</keyword>
+<keyword
+>كرفب</keyword>
+<keyword
+>VNC</keyword>
+<keyword
+>RFB</keyword>
+<keyword
+>كردس</keyword>
+<keyword
+>مشاركة سطح المكتب</keyword>
+<keyword
+>التحكم عن بعد</keyword>
+<keyword
+>المساعدة عن بُعد</keyword>
+<keyword
+>سطح المكتب بعيد</keyword>
+</keywordset>
+
+</bookinfo>
+
+<chapter id="introduction">
+<title
+>مقدمة</title>
+
+<para
+>كرْفب هو تطبيق خادم يسمح لك بمشاركة جلستك الحالية مع مستخدم على جهاز آخر، والذي يمكنه استخدام عميل <acronym
+>VNC</acronym
+> لعرض سطح المكتب أو حتى التحكم فيه. </para>
+
+<para
+>عادةً ما تستخدم كرفب مع عميل كيدي <acronym
+>VNC</acronym
+>، وهو كردس، لأنه يتطابق بشكل وثيق مع الميزات الخاصة لـ كرفب. </para>
+
+<para
+>لا يتطلب كرفب منك بدء جلسة X جديدة - بل يمكنه مشاركة الجلسة الحالية. وهذا يجعله مفيدًا جدًا عندما تريد من شخص مساعدتك في أداء مهمة. </para>
+
+<para
+>يُرجى الإبلاغ عن أي مشاكل أو طلبات ميزات إلى القوائم البريدية لكيدي أو تسجيل خطأ في <ulink url="https://bugs.kde.org"
+>https://bugs.kde.org</ulink
+>. </para>
+</chapter>
+
+<chapter id="what-is-RFB">
+<title
+>بروتوكول المخزن المؤقت للإطار البعيد</title>
+
+<para
+>يقدم هذا الفصل وصفًا موجزًا لبروتوكول المخزن المؤقت للإطار البعيد المستخدم من قبل كرفب ومن قبل الأنظمة المتوافقة الأخرى. إذا كنت ملمًا بالفعل بالمخزن المؤقت للإطار البعيد، يمكنك تخطي هذا الفصل بأمان. </para>
+
+<para
+>التنفيذ عالي المستوى لنظام يستخدم بروتوكول المخزن المؤقت للإطار البعيد يُعرف باسم Virtual Network Computer، أو في الغالب فقط <acronym
+>VNC</acronym
+>. </para>
+
+<para
+>المخزن المؤقت للإطار البعيد (أو <acronym
+>RFB</acronym
+> اختصارًا) هو بروتوكول بسيط للوصول البعيد لواجهات المستخدم الرسومية. يعمل على مستوى المخزن المؤقت للإطار، والذي يتوافق تقريبًا مع صورة الشاشة المعروضة، مما يعني أنه يمكن تطبيقه على جميع أنظمة النوافذ (بما في ذلك X11 و &MacOS; و &Microsoft; &Windows;). توجد تطبيقات المخزن المؤقت للإطار البعيد لمنصات عديدة، ويمكن غالبًا إعادة توزيعها بحرية. </para>
+
+<para
+>في بروتوكول المخزن المؤقت للإطار البعيد، يُسمى التطبيق الذي يعمل على الجهاز حيث يجلس المستخدم (الذي يحتوي على الشاشة ولوحة المفاتيح والمؤشر) بالعميل. ويُسمى التطبيق الذي يعمل على الجهاز حيث يوجد المخزن المؤقت للإطار (الذي يدير نظام النوافذ والتطبيقات التي يتحكم بها المستخدم عن بعد) بالخادم. كرفب هو خادم كيدي لبروتوكول المخزن المؤقت للإطار البعيد. كردس هو عميل كيدي لبروتوكول المخزن المؤقت للإطار البعيد. </para>
+
+<para
+>يتطلب إرسال صورة المخزن المؤقت للإطار قدرًا معقولًا من حركة مرور الشبكة، لذا يعمل المخزن المؤقت للإطار البعيد بشكل أفضل عبر وصلات عالية النطاق الترددي، مثل شبكة المنطقة المحلية. لا يزال من الممكن استخدام كرفب عبر وصلات أخرى، لكن الأداء لن يكون جيدًا على الأرجح. </para>
+
+</chapter>
+
+<chapter id="using-krfb">
+<title
+>استخدام كرفب</title>
+
+<sect1 id="main-windw">
+<title
+>النافذة الرئيسة لكرفب</title>
+<para
+>من السهل جدًا استخدام كرفب - فهو يحتوي على واجهة بسيطة، كما هو موضح في لقطة الشاشة أدناه. </para>
+
+<para>
+<screenshot>
+<screeninfo
+>إليك لقطة شاشة لكرفب</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="screenshot.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>النافذة الرئيسة لكرفب</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>عندما تريد السماح لشخص ما بالوصول إلى سطح مكتبك، عليك تفعيل خانة الاختيار <guilabel
+>تمكين مشاركة سطح المكتب</guilabel
+>، والتي ستبدأ الخادم. </para>
+
+<sect2 id="connection-details">
+<title
+>تفاصيل الاتصال</title>
+
+<para
+>يحتوي <guilabel
+>العنوان</guilabel
+> على عنوان حاسوبك ورقم المنفذ، مفصولين بنقطتين رأسيتين. العنوان هو مجرد تلميح - يمكنك استخدام أي عنوان يمكنه الوصول إلى حاسوبك. يحاول كرفب تخمين عنوانك من إعدادات شبكتك، لكنه لا ينجح دائمًا في ذلك. إذا كان حاسوبك خلف جدار ناري فقد يكون له عنوان مختلف أو يكون غير قابل للوصول من قبل حواسيب أخرى. </para>
+<para
+>يمكنك تغيير المنفذ في صفحة <guilabel
+>الشبكة</guilabel
+> في حوار الضبط. </para>
+<para
+>الحقل التالي مملوء مسبقًا بكلمة مرور مولّدة آليًا. انقر على الأيقونة على يمين الحقل لتغيير كلمة المرور. </para>
+</sect2>
+
+<sect2 id="unattended-access">
+<title
+>كلمة سر للوصول غير المراقب</title>
+
+<para
+>أي مستخدم بعيد يمتلك كلمة مرور مشاركة سطح المكتب سيتعين استيثاقه. إذا تم تفعيل الوصول غير المراقَب، وقدّم المستخدم البعيد كلمة المرور للوضع غير المراقَب، فسيُمنح وصول مشاركة سطح المكتب دون تأكيد صريح. </para>
+<para
+>مبدئيًا، كلمة المرور لهذا النمط فارغة، لتغيير ذلك انقر على الزر وأدخل كلمة مرور. </para>
+<para
+>إذا كان الوصول غير المراقب مسموحًا به، فينبغي عليك على الأرجح تحديد كلمة مرور. </para>
+
+<para
+>إذا كان الجهاز خادمًا وتستخدم كرفب للإدارة عن بُعد، فربما ترغب في استخدام الوصول غير المراقب. </para>
+
+</sect2>
+
+<sect2 id="transfer-login-information">
+<title
+>انقل معلومات تسجيل الدخول</title>
+
+<para
+>لم يعد لدى كرفب ميزة الدعوة كما في الإصدارات السابقة. لذا عليك نقل معلومات تسجيل الدخول بنفسك باستخدام البريد الإلكتروني أو دعوة شخصية. </para>
+<para
+>إذا لم تتمكن من تعمية البريد الإلكتروني (أو تأمين الرابط بخلاف ذلك)، فإن إرسال كلمة مرور عبر البريد الإلكتروني يُشكّل خطرًا أمنيًا خطيرًا جدًا، إذ يمكن لأي شخص قراءة كلمة المرور والعنوان من البريد الإلكتروني أثناء مروره عبر الشبكة. وهذا يعني أنه يمكنهم السيطرة على جهازك. </para>
+<para
+>إذا لم تتمكن من تعمية رسالة البريد الإلكتروني، فقد يكون من الأفضل استخدام دعوة شخصية، والاتصال هاتفيًا بالشخص الذي تمنحه الوصول، والتحقق من هويته، وتقديم المعلومات المطلوبة بهذه الطريقة. </para>
+
+<note>
+<para
+>يستخدم كرفب نظام كلمات المرور العادي <acronym
+>RFB</acronym
+>، الذي لا ينقل كلمة مرورك بشكل واضح عبر الشبكة. بدلًا من ذلك، يستخدم نظام تحدي واستجابة. هذا آمن بشكل معقول، طالما أن كلمة المرور محمية بشكل آمن. </para>
+</note>
+
+</sect2>
+
+<sect2 id="krfb-qqit">
+<title
+>أنهِ كرفب</title>
+
+<para
+>إذا أغلقت النافذة الرئيسة لـ كرفب بالنقر على أيقونة إغلاق النافذة أو باستخدام الاختصار <keycombo action="simul"
+>&Alt;<keycap
+>F4</keycap
+></keycombo
+>، يظل الخادم قيد التشغيل، ويُشار إلى ذلك بأيقونة في علبة النظام. لإيقاف كرفب، إما استخدم <menuchoice
+><guimenu
+>ملف</guimenu
+><guimenuitem
+>إنهاء</guimenuitem
+></menuchoice
+> في النافذة الرئيسة أو انقر بزر الفأرة الأيمن على الأيقونة في علبة النظام واختر <guimenuitem
+>إنهاء</guimenuitem
+>. </para>
+</sect2>
+
+</sect1>
+
+<sect1 id="krfb-configuration">
+<title
+>ضبط كرفب</title>
+<para
+>بالإضافة إلى واجهة كرفب الرئيسة المعروضة والموصوفة أعلاه، يمكنك أيضًا التحكم في كرفب باستخدام <guimenuitem
+>اضبط...</guimenuitem
+> في النافذة الرئيسة لـ كرفب. يحتوي ضبط كرفب على صفحتين، كما هو موضح في لقطة الشاشة أدناه: </para>
+
+<para
+>تتيح صفحة <guilabel
+>الشبكة</guilabel
+> التحكم في المنفذ الذي يستخدمه كرفب، كما هو موضح أدناه. </para>
+
+<para>
+<screenshot>
+<screeninfo
+>ضبط كرفب (صفحة الشبكة)</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="configuration_network.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>ضبط كرفب (صفحة الشبكة)</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>يتحكم مربع الاختيار <guilabel
+>أعلِن عن الخدمة على الشبكة المحلية</guilabel
+> في ما إذا كان كرفب يُعلن عن الخدمة عبر الشبكة المحلية باستخدام بروتوكول موقع الخدمة. هذا عادةً فكرة جيدة، لكنه يعمل بشكل جيد فقط مع عميل يدعم بروتوكول موقع الخدمة، مثل كردس. </para>
+
+<para
+>إذا حددت مربع الاختيار <guilabel
+>استخدم المنفذ المبدئي</guilabel
+>، فسيحدد كرفب منفذًا مناسبًا. إذا ألغيت تحديد مربع الاختيار هذا، يمكنك تحديد منفذ معين. قد يكون تحديد منفذ معين مفيدًا إذا كنت تستخدم إعادة توجيه المنافذ على جدار الحماية. لاحظ أنه إذا كان بروتوكول موقع الخدمة قيد التشغيل، فسيتولى ذلك تلقائيًا تحديد المنفذ الصحيح. </para>
+
+<para
+>مبدئيًا يقبل كرفب الاتصالات عبر IPv4 وIPv6 معًا، ما يعني أنه يستمع على كل واجهات عائلتي العناوين. إذا أزلت علامة <guilabel
+>استمع أيضًا للاتصالات عبر IPv6</guilabel
+>، فإن كرفب يستمع على IPv4 فقط. هذا مفيد إن لم يكن IPv6 مستخدمًا على شبكتك ولا تريد أن يكون خادوم مشاركة سطح المكتب قابلًا للوصول عبره. </para>
+
+<para
+>تتيح لك صفحة <guilabel
+>الأمان</guilabel
+> ضبط ما إذا كان الشخص المتصل بخادم كرفب يمكنه التحكم في سطح المكتب، أو المشاهدة فقط. </para>
+
+<para>
+<screenshot>
+<screeninfo
+>ضبط كرفب (صفحة الأمان)</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="configuration_security.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>ضبط كرفب (صفحة الأمان)</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+</sect1>
+
+<sect1 id="krfb-connection">
+<title
+>يتّصل بـكرفب</title>
+
+<para
+>عندما يتصل شخص ما بـ كرفب على جهازك، ستتلقى إشعارًا منبثقًا يبدو مثل لقطة الشاشة التالية، إلا إذا كنت تقبل الوصول غير المراقب دون تأكيد. </para>
+<para>
+<screenshot>
+<screeninfo
+>نافذة اتصال كرفب</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="connection.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>نافذة اتصال كرفب</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>إذا <guibutton
+>قبلت الاتصال</guibutton
+>، يمكن للعميل المتابعة للاستيثاق، الأمر الذي يتطلب كلمة المرور الصحيحة لتسجيل الدخول. إذا <guibutton
+>رفضت الاتصال</guibutton
+>، فسيُنهى محاولة الاتصال. </para>
+
+<para
+>يحدد مربع الاختيار <guilabel
+>اسمح للمستخدم البعيد بالتحكم بلوحة المفاتيح والفأرة</guilabel
+> ما إذا كان هذا العميل يمكنه فقط المراقبة، أم يمكنه السيطرة على حاسوبك. </para>
+
+</sect1>
+</chapter>
+
+<chapter id="credits">
+
+<title
+>الحقوق والترخيص</title>
+
+<para
+>كرفب </para>
+<para
+>حقوق نشر البرنامج 2002 تيم يانسن <email
+>tim@tjansen.de</email
+> </para>
+<para
+>المساهمون: <itemizedlist
+> <listitem
+><para
+>Ian Reinhart Geiser <email
+>geiseri@kde.org</email
+></para>
+</listitem>
+</itemizedlist>
+</para>
+
+<para
+>حقوق نشر التوثيق &copy; 2003 &Brad.Hards; &Brad.Hards.mail; </para>
+
+<para
+>الترجمة: زايد السعيدي <email
+>zayed.alsaidi@gmail.com</email
+></para
+> &underFDL; &underGPL; </chapter>
+
+&documentation.index;
+</book>
+
+<!--
+Local Variables:
+mode: xml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-indent-step:0
+sgml-indent-data:nil
+End:
+
+vim:tabstop=2:shiftwidth=2:expandtab 
+-->
