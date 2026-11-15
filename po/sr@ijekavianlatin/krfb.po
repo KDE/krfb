@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: krfb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-02 00:54+0000\n"
-"PO-Revision-Date: 2026-10-05 12:49+0200\n"
+"PO-Revision-Date: 2026-11-14 16:15+0100\n"
 "Last-Translator: Nemanja Hiršl <nemhirsl@gmail.com>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
 "Language: sr@ijekavianlatin\n"
@@ -86,7 +86,7 @@ msgstr "Ovo je port koji će KRFB osluškivati."
 #: krfb.kcfg:23
 #, kde-format
 msgid "Accept connections over IPv6 as well as IPv4"
-msgstr ""
+msgstr "Prihvataj i IPv6 i IPv4 veze"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_publishService)
 #. i18n: ectx: label, entry (publishService), group (TCP)
@@ -503,13 +503,13 @@ msgstr "Port za osluškivanje:"
 #: ui/configtcp.ui:72
 #, kde-format
 msgid "If this is unchecked, krfb only accepts connections over IPv4."
-msgstr ""
+msgstr "Ako je ovo isključeno, KRFB prihvata samo IPv4 veze."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_listenIPv6)
 #: ui/configtcp.ui:75
 #, kde-format
 msgid "Also listen for connections over IPv6"
-msgstr ""
+msgstr "Osluškuj i IPv6 veze"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel5)
 #: ui/connectionwidget.ui:47
