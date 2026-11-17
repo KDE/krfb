@@ -1,6 +1,6 @@
 # translation of krfb.po to Polish
 # translation of krfb.po to
-# Version: $Revision: 1751793 $
+# Version: $Revision$
 # Copyright (C) 2002, 2004, 2005, 2008, 2009 Free Software Foundation, Inc.
 # Krzysztof Lichota <lichota@mimuw.edu.pl>, 2002, 2005.
 # Michal Rudolf <mrudolf@kdewebdev.org>, 2004, 2005.
