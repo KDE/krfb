@@ -1,14 +1,14 @@
 # Translation of krfb to Korean.
 # Copyright (C) 2007-2008 This_file_is_part_of_KDE
 # This file is distributed under the same license as the kdenetwork package.
-# Shinjo Park <kde@peremen.name>, 2007, 2008, 2009, 2011, 2013, 2014, 2015, 2017, 2019, 2020, 2021.
+# SPDX-FileCopyrightText: 2007, 2008, 2009, 2011, 2013, 2014, 2015, 2017, 2019, 2020, 2021, 2026 Shinjo Park <kde@peremen.name>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: krfb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-02 00:54+0000\n"
-"PO-Revision-Date: 2021-11-12 00:42+0100\n"
+"PO-Revision-Date: 2026-11-22 00:30+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 21.08.1\n"
+"X-Generator: Lokalize 25.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -80,7 +80,7 @@ msgstr "krfb가 들을 포트입니다."
 #: krfb.kcfg:23
 #, kde-format
 msgid "Accept connections over IPv6 as well as IPv4"
-msgstr ""
+msgstr "IPv6과 IPv4 연결 모두 수락"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_publishService)
 #. i18n: ectx: label, entry (publishService), group (TCP)
@@ -495,13 +495,13 @@ msgstr "듣는 포트:"
 #: ui/configtcp.ui:72
 #, kde-format
 msgid "If this is unchecked, krfb only accepts connections over IPv4."
-msgstr ""
+msgstr "이 옵션을 선택하지 않으면 krfb에서는 IPv4 연결만 수락합니다."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_listenIPv6)
 #: ui/configtcp.ui:75
 #, kde-format
 msgid "Also listen for connections over IPv6"
-msgstr ""
+msgstr "IPv6으로도 연결 듣기 허용"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel5)
 #: ui/connectionwidget.ui:47
