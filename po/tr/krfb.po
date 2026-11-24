@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: kdenetwork-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-02 00:54+0000\n"
-"PO-Revision-Date: 2026-11-04 22:22+0300\n"
+"PO-Revision-Date: 2026-11-23 18:15+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -77,7 +77,7 @@ msgstr "Küçültülmüş olarak başlat"
 #: krfb.kcfg:15
 #, kde-format
 msgid "Use the default port for VNC (5900)"
-msgstr "VNC için öntanımlı kapıyı kullan (5900)"
+msgstr "VNC için varsayılan kapıyı kullan (5900)"
 
 #. i18n: ectx: label, entry (port), group (TCP)
 #: krfb.kcfg:19
@@ -495,7 +495,7 @@ msgstr "Parolaları KDE Cüzdan içinde saklama"
 #: ui/configtcp.ui:26
 #, kde-format
 msgid "Use default port"
-msgstr "Öntanımlı kapıyı kullan"
+msgstr "Varsayılan kapıyı kullan"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: ui/configtcp.ui:50
